@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv*/
+reels/
+examples/out/
+*.mp4
+!assets/*.mp4
+.DS_Store

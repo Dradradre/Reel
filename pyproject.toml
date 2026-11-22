@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reel"
+version = "0.1.0"
+description = "Turn a film into pages a language model can watch front to back: picture, sound, speech, crowd and memory on one time axis."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["numpy", "opencv-python-headless", "pillow", "librosa", "scipy", "soundfile", "matplotlib"]
+
+[project.optional-dependencies]
+separate = ["demucs", "torch", "torchaudio"]
+crowd = ["audio-separator"]
+mlx = ["mlx-whisper"]
+speech = ["faster-whisper"]
+ocr = ["ocrmac"]
+gaze = ["torch"]
+tags = ["torch", "transformers>=4.40,<4.46"]
+sync = ["torch", "torchvision", "torchaudio", "omegaconf", "einops", "timm", "transformers>=4.40,<4.46", "requests", "scikit-learn"]
+all = ["demucs", "torch", "torchaudio", "audio-separator", "mlx-whisper", "faster-whisper", "ocrmac", "transformers>=4.40,<4.46", "torchvision", "omegaconf", "einops", "timm", "requests", "scikit-learn"]
+
+[project.scripts]
+reel = "reel.cli:main"
+
+[tool.setuptools]
+packages = ["reel"]

@@ -62,7 +62,9 @@ order, with nothing left out.
 
 ## Does it work?
 
-Using this version of Reel on 16 filmed scenes, local Codex GPT matched the human annotations on **36 of 48 questions (75.0%)**. Agreement was 14/16 for the picture, 11/16 for the sound and 11/16 for whether its source was visible. GPT answered 8 questions incorrectly and left 4 unresolved. [Film-by-film results and test conditions](docs/perception-check.md#같은-48문항으로-다시-잰-일치율)
+On 12 previously unused films, signed-in local Codex GPT matched human annotations on **21/36 questions (58.3%)** and **22/36 (61.1%)** in a second independent pass. Picture agreement was 9/12 then 10/12. Sound identity and whether its source was visible each scored 6/12 both times. A reader given only the questions and forced to guess scored 16/36. [Both runs, human references and individual misses](docs/perception-check.md#새-영상-12편에서-두-번-잰-일치율)
+
+On an earlier 16-film panel, local Codex GPT matched the human annotations on **36 of 48 questions (75.0%)**. Agreement was 14/16 for the picture, 11/16 for the sound and 11/16 for whether its source was visible. GPT answered 8 questions incorrectly and left 4 unresolved. [Film-by-film results and test conditions](docs/perception-check.md#같은-48문항으로-다시-잰-일치율)
 
 On 12 other films, GPT chose its own tools to decide which earlier sound belonged to the same category as a later one. It matched the human event labels 4/12 times before the recording comparison was available and 8/12 with it. [Individual responses and trials where neither sound matched](docs/listening-check.md#이름을-모르는-소리를-전에-들은-녹음과-비교)
 

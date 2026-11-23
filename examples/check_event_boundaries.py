@@ -76,20 +76,35 @@ def score(films, tolerance=.5):
                                  for t in marks)}
         results.append({"id": f["id"], "human_f1": human, "human_marks": mean(map(len, people)), "readers": readers})
 
-    def interval(values):
+    def interval(values, reference=None):
         samples = np.asarray(values)
+        baseline = None if reference is None else np.asarray(reference)
+        estimate = float(samples.mean())
+        if baseline is not None:
+            if baseline.mean() <= 0:
+                return {"mean": None, "film_bootstrap_95": None}
+            estimate /= float(baseline.mean())
         rng = np.random.default_rng(11471)
         means = np.empty(10000)
         batch = max(1, 262144 // len(samples))
         for i in range(0, len(means), batch):
             block = means[i:i + batch]
-            block[:] = rng.choice(samples, size=(len(block), len(samples))).mean(axis=1)
-        return {"mean": float(samples.mean()), "film_bootstrap_95": np.percentile(means, [2.5, 97.5]).tolist()}
+            indices = rng.integers(len(samples), size=(len(block), len(samples)))
+            block[:] = samples[indices].mean(axis=1)
+            if baseline is not None:
+                denominator = baseline[indices].mean(axis=1)
+                if np.any(denominator <= 0):
+                    return {"mean": estimate, "film_bootstrap_95": None}
+                block /= denominator
+        return {"mean": estimate, "film_bootstrap_95": np.percentile(means, [2.5, 97.5]).tolist()}
 
-    summary = {"human_f1": interval([r["human_f1"] for r in results]), "readers": {}, "paired": []}
+    human_f1 = [r["human_f1"] for r in results]
+    summary = {"human_f1": interval(human_f1), "readers": {}, "paired": []}
     for name in names:
         rows = [r["readers"][name] for r in results]
-        summary["readers"][name] = {"f1": interval([r["f1"] for r in rows]),
+        reader_f1 = [r["f1"] for r in rows]
+        summary["readers"][name] = {"f1": interval(reader_f1),
+                                    "fraction_of_human_f1": interval(reader_f1, human_f1),
                                     "marks": sum(r["marks"] for r in rows),
                                     "marks_near_majority": sum(r["marks_near_majority"] for r in rows),
                                     "matched_per_film_per_viewer": mean(r["matched_per_viewer"] for r in rows),

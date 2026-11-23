@@ -841,6 +841,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                        full_detail: bool = False, max_frames: int | None = None):
             """See and hear one turn, starting at 1. Request the same number to replay, or the next to advance.
             The pause lists the first measured changes in picture, sound level or frequency bands.
+            In action_over_time, at_s gives the observation times. Each picture_pts_us is the timestamp of
+            the frame then on screen, or null when no picture was displayed.
             Each sound cue gives its film time for a closer listen. The local readers describe the published
             recording and report supported words. native_audio controls attachment of the original WAV.
             Set native_audio=false to omit it, or start with --image-client. Set sound_estimates=false

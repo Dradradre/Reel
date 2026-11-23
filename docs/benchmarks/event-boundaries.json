@@ -1,0 +1,3353 @@
+{
+  "source": "Kinetics-GEBD (Shou et al.), official raw Kinetics-400 validation annotations, CC BY-NC 4.0. Each original annotation range becomes its midpoint. Sorted only for one-to-one matching. The authors\u2019 processed release merges nearby changes; this study keeps individual marks.",
+  "annotations": "https://github.com/StanLei52/GEBD",
+  "raw_sha256": "2ecd5a1f8366b6d86dec56a39d95db96b2adc9fb9badc6d9a26615d5bef92a3b",
+  "recordings": "https://github.com/cvdfoundation/kinetics-dataset",
+  "selection": "Complete mp4 members of the first 52428800 compressed bytes of validation part 0 and the first 50331648 bytes of parts 6, 12, 18. Match the annotated filename, five annotations, duration >=9s, recorded audio, zero picture start, same frame count, video duration within one source frame + 1ms, audio start within 0.1s. Sort stems by SHA256 of reel-change-timing-01/ + stem, accept first 24 distinct Kinetics classes. 124 distinct filenames matched the preliminary archive/annotation filters. No agreement cutoff.",
+  "source_revision": "8af3b62",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "prompts": {
+    "before_next_view": "Watch the activity as it unfolds. Mark the times when one meaningful part of the main activity ends and another begins, one level below the overall activity. Include a change of shot. An ongoing activity may continue across many pictures. It is fine to mark several changes in an interval or none. Use advance with consecutive turn numbers starting at 1. At each call submit your changes in the preceding interval in seconds from the start of the film. Finish when the server returns end_of_view.",
+    "after_viewing": "Watch the activity. Mark the times when one meaningful part of the main activity ends and another begins, one level below the overall activity. Include a change of shot. An ongoing activity may continue across many pictures. It is fine to mark several changes in an interval or none. Watch with view(turn=1,continuous_seconds=2,native_audio=false) then advance with the same settings through end_of_view. You may replay already seen turns. Once you have watched the clip, return a JSON array of change times in seconds from the start of the film, in chronological order.",
+    "before_next_view_with_example": "Watch the activity as it unfolds. Mark the times when one meaningful part of the main activity ends and another begins, one level below the overall activity. Follow the dominant subject. A transition can involve what they do, who or what they engage with, their surroundings, or how an object is now used. For example, a long jump can have a run-up, takeoff and landing; each step in the run-up need not start a new part. Include cuts and camera changes that introduce a new view of the activity. An ongoing activity may continue across many pictures. It is fine to mark several changes in an interval or none. Use advance with consecutive turn numbers starting at 1. At each call submit your changes in the preceding interval in seconds from the start of the film. Finish when the server returns end_of_view."
+  },
+  "conditions": {
+    "both": "First eight seconds, four consecutive two-second Reel views. Fresh session and anonymous film path. Source pictures, recording measurements and available local sound estimates. WAV attachment off. Each advance commits the preceding interval before returning the next. Large waveform reader disabled.",
+    "picture": "Same online task, same original video track, released without the audio track.",
+    "ordered": "Same online audiovisual task, experimental presentation. Each existing overview cell now uses the chronological renderer used by ask_scene, presenting the two observations in reading order with their time marks and per-channel bands. Time rows and PTS are sent with the page. Media and observation clock unchanged.",
+    "guidance": "Same released version, same online audiovisual task and film. Add a general example of movement phases and ask about changes of the dominant subject or objects. Prompt supplied below. The added instruction was tested after sparse marks were seen in the original condition. Its long-jump example is from the study guidelines, outside the 24 film categories.",
+    "clock": "Released version. Same online audiovisual task, returning the observation time and native picture PTS for each overview cell, independent of audio. Ordinary overview images unchanged.",
+    "retrospective": "Same audiovisual four intervals via normal view. The reader submits all marks after end_of_view and may replay published turns. It has seen the same eight seconds."
+  },
+  "scoring": "Fixed scoring clock [0.3,8) s. Each GPT list is compared with all five human lists, each human with the other four. One-to-one temporal matches within 0.5s, F1=2*matches/(marks+reference marks); two empty lists score 1. Equal weight per pair inside film and per film. Human observers annotated the full original clip with their annotation interface; readers see the eight-second prefix, with online decisions irrevocable. The study does not document human audio playback settings. Rotated control preserves within-film relative marks and count on the circular scoring interval. Intervals resample films (10,000 draws). Observers received visual examples and a 100-video qualification exam. GPT received a written request. Each condition has one scored run per film. The film bootstrap does not describe within-reader rerun variability. This is a study-specific all-rater metric, different from the published best-rater benchmark.",
+  "films": [
+    {
+      "id": "-LISB_b8rIw_000049_000059",
+      "category": "making_sushi",
+      "archive_part": 0,
+      "sha256": "6accee65ba4770f19bc081a5159594825898ba224ba7236e41e3676747100cd5",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.857755,
+          5.27317,
+          2.27967,
+          4.31755,
+          6.42452
+        ],
+        [
+          0.998045,
+          4.7544,
+          5.57576
+        ],
+        [
+          0.75092,
+          4.507165,
+          6.83311
+        ],
+        [
+          0.74143,
+          2.36611,
+          5.64481,
+          7.15351,
+          4.51445
+        ],
+        [
+          0.682865,
+          4.89723,
+          5.12638,
+          6.06991,
+          4.12893
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          0.857755
+        ],
+        [
+          0.998045,
+          4.7544
+        ],
+        [
+          0.75092,
+          4.507165
+        ],
+        [
+          0.74143
+        ],
+        [
+          0.682865
+        ]
+      ],
+      "readers": {
+        "both": [
+          5.3
+        ],
+        "picture": [
+          6.9
+        ],
+        "ordered": [],
+        "retrospective": [
+          4.7,
+          6.8
+        ],
+        "clock": [
+          5.3
+        ],
+        "guidance": []
+      }
+    },
+    {
+      "id": "HkYNX9YpVtk_000001_000011",
+      "category": "push_up",
+      "archive_part": 6,
+      "sha256": "6a8563f1973e7c650b58f084795f62818570b4847ac644724b7efba8b7a04e39",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          1.20264,
+          2.5055,
+          3.70814,
+          4.91078,
+          6.0132
+        ],
+        [
+          5.92328
+        ],
+        [
+          2.01803,
+          3.77095,
+          6.02703,
+          6.99006,
+          0.5789
+        ],
+        [
+          5.99751,
+          7.37915
+        ],
+        [
+          1.19318,
+          6.01703,
+          6.99714
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          6.0132
+        ],
+        [
+          5.92328
+        ],
+        [
+          6.02703
+        ],
+        [
+          5.99751
+        ],
+        [
+          6.01703
+        ]
+      ],
+      "readers": {
+        "both": [],
+        "picture": [],
+        "ordered": [],
+        "retrospective": [],
+        "clock": [],
+        "guidance": []
+      }
+    },
+    {
+      "id": "b2Z1JCnVMPY_000081_000091",
+      "category": "counting_money",
+      "archive_part": 12,
+      "sha256": "6966bb3401fa2ad4933a69dbf026a7a6e1d45338b8a5d8b791b992abf15df41d",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          4.56089
+        ],
+        [
+          0.81302,
+          1.94532,
+          4.22881,
+          5.87537,
+          7.5125
+        ],
+        [
+          4.13309
+        ],
+        [
+          4.38589
+        ],
+        [
+          0.52125,
+          2.00601,
+          3.09589,
+          5.41781,
+          6.03383,
+          7.10791,
+          7.37643,
+          4.0752
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [],
+        "picture": [],
+        "ordered": [],
+        "retrospective": [],
+        "clock": [],
+        "guidance": []
+      }
+    },
+    {
+      "id": "culNKOLKAic_000023_000033",
+      "category": "headbutting",
+      "archive_part": 12,
+      "sha256": "c056e3dac3238fc26fcaec9c486c47fb399548c7459dc173047b66e34989f81b",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          3.33558,
+          5.86602,
+          6.3146,
+          7.87887
+        ],
+        [
+          3.00578,
+          5.02978,
+          6.01157,
+          6.8121,
+          7.94494
+        ],
+        [
+          3.78802,
+          4.79864,
+          5.73613,
+          6.41922,
+          7.32904
+        ],
+        [
+          3.57424,
+          5.56466,
+          6.38483,
+          4.85483,
+          7.343
+        ],
+        [
+          2.99802,
+          4.34435,
+          5.97714,
+          6.62644
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          3.2,
+          6.7
+        ],
+        "picture": [
+          3.3,
+          6.8
+        ],
+        "ordered": [
+          3.2,
+          6.2,
+          6.8
+        ],
+        "retrospective": [
+          3.3,
+          6.7
+        ],
+        "clock": [
+          3.2,
+          6.7
+        ],
+        "guidance": [
+          3.3,
+          6.8
+        ]
+      }
+    },
+    {
+      "id": "bNMIsZhrucM_000000_000010",
+      "category": "playing_trumpet",
+      "archive_part": 12,
+      "sha256": "091cac39af18d65117b368488fef7ca9da827fbb6d01d2a57127234644fe4445",
+      "original_duration": 9.392653006651734,
+      "frames": 281,
+      "human": [
+        [
+          0.66289,
+          3.50875,
+          4.57045,
+          6.19531
+        ],
+        [
+          1.156205,
+          4.818085
+        ],
+        [
+          0.9521,
+          4.2051,
+          4.53569,
+          6.73742
+        ],
+        [
+          0.65032,
+          3.69159,
+          6.78749
+        ],
+        [
+          3.76892,
+          6.14304
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [
+          1.156205,
+          4.818085
+        ],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          4.8,
+          6.8
+        ],
+        "picture": [
+          4.8,
+          6.8
+        ],
+        "ordered": [
+          4.8,
+          6.7
+        ],
+        "retrospective": [
+          4.8,
+          6.9
+        ],
+        "clock": [
+          4.8,
+          6.9
+        ],
+        "guidance": [
+          4.8,
+          7
+        ]
+      }
+    },
+    {
+      "id": "vTs8_j-HguU_000224_000234",
+      "category": "stomping_grapes",
+      "archive_part": 18,
+      "sha256": "81f697c5fafbfbd0d24fe70a3861c140977fa71fad61ec82742bb1e4784ca982",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          4.26413,
+          7.16461,
+          4.02604,
+          2.15371,
+          2.72731,
+          1.2879,
+          7.72739,
+          5.09748,
+          6.17975
+        ],
+        [
+          1.21246,
+          2.83569,
+          4.01016,
+          4.23932,
+          7.09431
+        ],
+        [
+          2.783485,
+          4.238485,
+          7.171505
+        ],
+        [
+          4.25331,
+          7.15379
+        ],
+        [
+          4.22235,
+          7.1548
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          4.26413,
+          7.16461
+        ],
+        [
+          4.23932,
+          7.09431
+        ],
+        [
+          4.238485,
+          7.171505
+        ],
+        [
+          4.25331,
+          7.15379
+        ],
+        [
+          4.22235,
+          7.1548
+        ]
+      ],
+      "readers": {
+        "both": [
+          2.9,
+          4.23,
+          7.13
+        ],
+        "picture": [
+          3,
+          4.23,
+          7.13
+        ],
+        "ordered": [
+          2.9,
+          4.23,
+          7.13
+        ],
+        "retrospective": [
+          2.9,
+          4.23,
+          7.13
+        ],
+        "clock": [
+          2.9,
+          4.23,
+          7.13
+        ],
+        "guidance": [
+          3,
+          4.23,
+          7.13
+        ]
+      }
+    },
+    {
+      "id": "ulB6EXqOVxg_000103_000113",
+      "category": "playing_cymbals",
+      "archive_part": 18,
+      "sha256": "3194ac7ceb7ff8fbe057e5bca1ab996ab2eebd6755f687c181d2e175104187d0",
+      "original_duration": 10.01,
+      "frames": 240,
+      "human": [
+        [
+          3.28517,
+          7.35537
+        ],
+        [
+          3.65699,
+          7.60587
+        ],
+        [
+          1.803775,
+          3.32046,
+          7.437185
+        ],
+        [
+          3.49567,
+          7.59787,
+          7.79821
+        ],
+        [
+          3.19592,
+          4.1989,
+          7.20782
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [],
+        "picture": [],
+        "ordered": [],
+        "retrospective": [],
+        "clock": [],
+        "guidance": []
+      }
+    },
+    {
+      "id": "uSYK3tZJYNc_000053_000063",
+      "category": "parkour",
+      "archive_part": 18,
+      "sha256": "fab20161601d886d570fa19488f8496b65eb562361c91f1def371207ac671062",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          1.5495,
+          5.81389,
+          3.48613,
+          3.95359,
+          4.81219,
+          6.45307,
+          7.06363
+        ],
+        [
+          1.02395,
+          1.55299,
+          3.74595,
+          5.11121,
+          5.79384
+        ],
+        [
+          1.52752,
+          5.81758,
+          0.4047,
+          1.28239,
+          3.29533,
+          4.82173
+        ],
+        [
+          0.94694,
+          1.8324,
+          2.80388,
+          3.658,
+          5.24596,
+          5.86558
+        ],
+        [
+          0.39146,
+          1.50827,
+          2.2221,
+          3.6728,
+          4.49026,
+          5.79128
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          1.5495,
+          5.81389
+        ],
+        [
+          1.55299,
+          5.79384
+        ],
+        [
+          1.52752,
+          5.81758
+        ],
+        [
+          1.8324,
+          5.86558
+        ],
+        [
+          1.50827,
+          5.79128
+        ]
+      ],
+      "readers": {
+        "both": [
+          1.535,
+          2.5,
+          5.8
+        ],
+        "picture": [
+          1.535,
+          2.5,
+          5.806
+        ],
+        "ordered": [
+          1.535,
+          2.5,
+          5.8
+        ],
+        "retrospective": [
+          1.53,
+          2.5,
+          5.8,
+          7.6
+        ],
+        "clock": [
+          1.53,
+          2.5,
+          5.8
+        ],
+        "guidance": [
+          1.53,
+          2.6,
+          5.8,
+          6.4,
+          7.5
+        ]
+      }
+    },
+    {
+      "id": "-WZgMWx8Elk_000013_000023",
+      "category": "cooking_on_campfire",
+      "archive_part": 0,
+      "sha256": "1eb64d25bbb95c757a959483993a5e0b08f9799c902d2e17936b33a13a6dd6aa",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          5.49946,
+          6.17783
+        ],
+        [
+          4.97217,
+          5.4237,
+          6.02574
+        ],
+        [
+          5.445875,
+          6.19425,
+          0.35692,
+          0.79443,
+          1.13983,
+          1.68097,
+          2.65961,
+          4.38664,
+          5.08896
+        ],
+        [
+          0.31086,
+          1.07075,
+          4.939285,
+          3.53464,
+          6.9196
+        ],
+        [
+          0.3308,
+          5.53561,
+          1.57657,
+          4.36373,
+          6.53856
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          5.49946
+        ],
+        [
+          4.97217,
+          5.4237,
+          6.02574
+        ],
+        [
+          5.445875
+        ],
+        [
+          4.939285
+        ],
+        [
+          5.53561
+        ]
+      ],
+      "readers": {
+        "both": [
+          5.4
+        ],
+        "picture": [
+          5.4
+        ],
+        "ordered": [
+          5.4
+        ],
+        "retrospective": [
+          5.4
+        ],
+        "clock": [
+          5.4
+        ],
+        "guidance": [
+          5.4,
+          6.9
+        ]
+      }
+    },
+    {
+      "id": "wdEcmPUnNzQ_000275_000285",
+      "category": "answering_questions",
+      "archive_part": 18,
+      "sha256": "9a63b65525ea7853aefd2966c3460ea3716184cc4c9efb9909c1906b8a10eac1",
+      "original_duration": 10.011680293675957,
+      "frames": 300,
+      "human": [
+        [
+          4.28923,
+          2.09018,
+          3.36389,
+          1.34991
+        ],
+        [
+          2.23578,
+          3.432,
+          4.28535,
+          1.49846
+        ],
+        [
+          4.263,
+          2.25501,
+          3.50126
+        ],
+        [
+          4.2855,
+          1.61835
+        ],
+        [
+          2.18836,
+          3.461295,
+          4.28464
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          4.28923
+        ],
+        [
+          4.28535
+        ],
+        [
+          4.263
+        ],
+        [
+          4.2855
+        ],
+        [
+          4.28464
+        ]
+      ],
+      "readers": {
+        "both": [
+          4.37
+        ],
+        "picture": [
+          4.37
+        ],
+        "ordered": [
+          4.47
+        ],
+        "retrospective": [
+          4.37
+        ],
+        "clock": [
+          4.37
+        ],
+        "guidance": [
+          4.37
+        ]
+      }
+    },
+    {
+      "id": "bcGDXZfriMg_000079_000089",
+      "category": "golf_putting",
+      "archive_part": 12,
+      "sha256": "2ccfc308ecf56b1c3eea26bd5c3032c5ae8572494f922e77c267570f90e2e36c",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          0.50386,
+          1.42761,
+          2.477315,
+          3.88692,
+          5.36252,
+          6.56218,
+          7.92981
+        ],
+        [
+          3.64436,
+          4.57517
+        ],
+        [
+          3.66544,
+          4.92476
+        ],
+        [
+          3.51493,
+          4.74515
+        ],
+        [
+          1.09634,
+          2.02245,
+          3.09755,
+          4.11995,
+          5.29485,
+          6.13445,
+          7.15652
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [],
+        "picture": [],
+        "ordered": [],
+        "retrospective": [],
+        "clock": [],
+        "guidance": []
+      }
+    },
+    {
+      "id": "tnwb3XhnvBk_000099_000109",
+      "category": "tapping_guitar",
+      "archive_part": 18,
+      "sha256": "f825d00dc1150dde6c3ace670e2db0d36ffb5464efbfd4993d532138f09c1ea8",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          1.26949,
+          2.47236,
+          3.00697,
+          3.95208,
+          4.5917
+        ],
+        [
+          2.87057,
+          4.67404,
+          1.66707,
+          5.70357,
+          3.63772,
+          6.604,
+          7.36994
+        ],
+        [
+          2.4238,
+          4.62036,
+          2.94318
+        ],
+        [
+          1.69046,
+          2.49544,
+          3.57641,
+          4.43889,
+          5.17487,
+          5.76136,
+          7.21032
+        ],
+        [
+          1.44284,
+          5.44485
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          1.5,
+          2.2,
+          5.6
+        ],
+        "picture": [],
+        "ordered": [
+          1.5,
+          2.2,
+          5.65
+        ],
+        "retrospective": [],
+        "clock": [
+          2.2,
+          5.65
+        ],
+        "guidance": [
+          1.5,
+          2.2,
+          5.6
+        ]
+      }
+    },
+    {
+      "id": "c0cAryEFvHM_000005_000015",
+      "category": "wrestling",
+      "archive_part": 12,
+      "sha256": "2c3e3586ab1f983ddd9825dfa8d263a8d9d7c2286d4e44d6e286836ff15b1f1d",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.43017,
+          1.79954,
+          3.2551,
+          4.33719,
+          6.14706,
+          6.90356
+        ],
+        [
+          1.51145,
+          7.48934
+        ],
+        [
+          1.4317,
+          3.43807,
+          5.59256,
+          7.41042
+        ],
+        [
+          1.95585,
+          3.9357,
+          6.81547
+        ],
+        [
+          1.91086,
+          3.23292,
+          4.20271,
+          6.3369,
+          7.50005
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          7.8
+        ],
+        "picture": [
+          7.8
+        ],
+        "ordered": [
+          7.7
+        ],
+        "retrospective": [],
+        "clock": [
+          7.8
+        ],
+        "guidance": [
+          7.8
+        ]
+      }
+    },
+    {
+      "id": "crfrKqFp0Zg_000044_000054",
+      "category": "playing_flute",
+      "archive_part": 12,
+      "sha256": "9b3cce93e9ae1d61f7dfbe83c004259760e216bed094e35699a271103173dae9",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.32838,
+          2.82787,
+          4.80265
+        ],
+        [
+          0.31437,
+          2.80799,
+          4.77592
+        ],
+        [
+          0.3475,
+          2.84316,
+          4.81758
+        ],
+        [
+          0.30334,
+          2.80587,
+          4.77756
+        ],
+        [
+          0.31672,
+          2.82235,
+          4.77195
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          0.32838,
+          2.82787,
+          4.80265
+        ],
+        [
+          0.31437,
+          2.80799,
+          4.77592
+        ],
+        [
+          0.3475,
+          2.84316,
+          4.81758
+        ],
+        [
+          0.30334,
+          2.80587,
+          4.77756
+        ],
+        [
+          0.31672,
+          2.82235,
+          4.77195
+        ]
+      ],
+      "readers": {
+        "both": [
+          0.3,
+          2.8,
+          4.77
+        ],
+        "picture": [
+          0.3,
+          2.803,
+          4.771
+        ],
+        "ordered": [
+          0.3,
+          2.8,
+          4.77
+        ],
+        "retrospective": [
+          0.3,
+          2.8,
+          4.77
+        ],
+        "clock": [
+          0.3,
+          2.8,
+          4.77
+        ],
+        "guidance": [
+          0.3,
+          2.8,
+          4.77
+        ]
+      }
+    },
+    {
+      "id": "wMKKmjly7JM_000139_000149",
+      "category": "kitesurfing",
+      "archive_part": 18,
+      "sha256": "edbc65b64b4f7647e65c58c8505bc2a4ad0a089b5fc7f0704f65f441fd55f86b",
+      "original_duration": 10.0,
+      "frames": 240,
+      "human": [
+        [
+          1.451725,
+          2.17759,
+          5.47553,
+          6.327625
+        ],
+        [
+          1.656855,
+          5.44397
+        ],
+        [
+          1.51935
+        ],
+        [
+          1.53843
+        ],
+        [
+          1.653805,
+          5.48535
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          1.451725,
+          6.327625
+        ],
+        [
+          1.656855
+        ],
+        [
+          1.51935
+        ],
+        [
+          1.53843
+        ],
+        [
+          1.653805
+        ]
+      ],
+      "readers": {
+        "both": [
+          1.5,
+          5.4
+        ],
+        "picture": [
+          1.4,
+          2.6,
+          5.4
+        ],
+        "ordered": [
+          1.5,
+          2.7,
+          5.4
+        ],
+        "retrospective": [
+          1.5,
+          2.5,
+          5.4
+        ],
+        "clock": [
+          1.5,
+          2.7,
+          5.4
+        ],
+        "guidance": [
+          1.4,
+          2.5,
+          5.4
+        ]
+      }
+    },
+    {
+      "id": "tx1UQx2h0Z8_000018_000028",
+      "category": "carving_pumpkin",
+      "archive_part": 18,
+      "sha256": "c0612ad112b8497e33bbeed6c4219120e8fbb6e1174899b4c2a67908c54062c7",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.5017,
+          1.33008,
+          2.23314,
+          3.33688,
+          4.23979,
+          6.69812,
+          7.35033,
+          7.75169
+        ],
+        [
+          1.32168,
+          4.21422,
+          6.68203,
+          1.95019,
+          7.11133,
+          1.00572
+        ],
+        [
+          1.30368,
+          4.15332,
+          6.69157,
+          0.60543,
+          3.14368,
+          7.24829
+        ],
+        [
+          1.3222,
+          2.03955,
+          3.28015,
+          4.2205,
+          4.41424,
+          6.66807,
+          7.48702
+        ],
+        [
+          1.31254,
+          2.10697,
+          4.21393,
+          6.76417,
+          0.54113,
+          2.79778,
+          7.29955,
+          7.90976
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          1.33008,
+          4.23979,
+          6.69812
+        ],
+        [
+          1.32168,
+          4.21422,
+          6.68203
+        ],
+        [
+          1.30368,
+          4.15332,
+          6.69157
+        ],
+        [
+          1.3222,
+          4.2205,
+          6.66807
+        ],
+        [
+          1.31254,
+          4.21393,
+          6.76417
+        ]
+      ],
+      "readers": {
+        "both": [
+          1.3,
+          2.8,
+          4.2,
+          6.64
+        ],
+        "picture": [
+          1.3,
+          2.6,
+          4.2,
+          6.64
+        ],
+        "ordered": [
+          1.27,
+          2.8,
+          4.23,
+          6.7
+        ],
+        "retrospective": [
+          1.3,
+          2.8,
+          4.3,
+          6.7
+        ],
+        "clock": [
+          1.3,
+          2.7,
+          4.2,
+          6.65
+        ],
+        "guidance": [
+          1.3,
+          2.7,
+          4.2,
+          6.7
+        ]
+      }
+    },
+    {
+      "id": "u3JigZZPHKI_000011_000021",
+      "category": "contact_juggling",
+      "archive_part": 18,
+      "sha256": "bcddd18a85317e1bd5386fb714508c564ce671d956b6f7f8f551f28bb5fcdb7e",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          4.52029,
+          5.50946,
+          1.11569,
+          6.79769
+        ],
+        [
+          0.77382,
+          4.448125,
+          5.33558,
+          6.369145
+        ],
+        [
+          0.99735,
+          4.23663,
+          5.38742,
+          7.84245
+        ],
+        [
+          1.38594,
+          4.83598,
+          5.3411
+        ],
+        [
+          0.78511,
+          4.29351,
+          5.19567,
+          5.69687,
+          7.90215
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          4.4
+        ],
+        "picture": [
+          4.4
+        ],
+        "ordered": [
+          4.4
+        ],
+        "retrospective": [
+          4.5
+        ],
+        "clock": [
+          4.4
+        ],
+        "guidance": [
+          4.5
+        ]
+      }
+    },
+    {
+      "id": "cjv_8awzeyo_000000_000010",
+      "category": "opening_bottle",
+      "archive_part": 12,
+      "sha256": "03e6f8e1f57252569f5ceb77def0536e9966b0661b4069e2f48c0dcc93d4fb79",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          1.81581,
+          5.55242,
+          7.55969
+        ],
+        [
+          1.60384,
+          3.7316,
+          5.576015,
+          7.03551,
+          7.51666
+        ],
+        [
+          5.48126
+        ],
+        [
+          5.438395,
+          7.51094,
+          1.65587,
+          6.01741,
+          3.82041
+        ],
+        [
+          1.66123,
+          3.21763,
+          5.70978,
+          6.97018,
+          7.57173
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          1.81581,
+          5.55242
+        ],
+        [
+          5.576015
+        ],
+        [
+          5.48126
+        ],
+        [
+          5.438395
+        ],
+        []
+      ],
+      "readers": {
+        "both": [
+          2.7
+        ],
+        "picture": [
+          2.7,
+          7.6
+        ],
+        "ordered": [
+          2.2
+        ],
+        "retrospective": [
+          2.5,
+          7.6
+        ],
+        "clock": [
+          2.3,
+          7.6
+        ],
+        "guidance": [
+          2.7
+        ]
+      }
+    },
+    {
+      "id": "018EClOtVTM_000035_000045",
+      "category": "situp",
+      "archive_part": 0,
+      "sha256": "fbcc721855f155d8f61c82fb7486896f6e4d20f10bd5d7f0c5d81899a74d047e",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.37702,
+          2.69773,
+          2.94345,
+          3.48313
+        ],
+        [
+          0.43515,
+          3.32908
+        ],
+        [
+          0.51759,
+          3.28957,
+          2.69147,
+          4.0257
+        ],
+        [
+          0.35035,
+          2.68884,
+          3.44486
+        ],
+        [
+          0.41667,
+          3.01667,
+          3.75205
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          3.2,
+          7.2
+        ],
+        "picture": [
+          3.2,
+          4.2,
+          7.5
+        ],
+        "ordered": [
+          3.8,
+          7.2
+        ],
+        "retrospective": [
+          4.0,
+          7.1
+        ],
+        "clock": [
+          3.3,
+          7.3
+        ],
+        "guidance": [
+          3.3,
+          7.2
+        ]
+      }
+    },
+    {
+      "id": "0dwPQPV3iYQ_000039_000049",
+      "category": "washing_hair",
+      "archive_part": 0,
+      "sha256": "a162ae420b5f322fe4e894f438fb87967ef275362b9579ad0d760414f37775e5",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          1.65116,
+          3.79098,
+          5.47832
+        ],
+        [
+          1.00198,
+          2.70024,
+          3.49842,
+          4.891
+        ],
+        [
+          1.52923,
+          3.35159,
+          4.65341,
+          5.59593
+        ],
+        [
+          1.40197,
+          3.20208,
+          5.5128,
+          6.56597
+        ],
+        [
+          1.23378,
+          3.41997,
+          5.09748,
+          6.33127
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          3.1
+        ],
+        "picture": [
+          3.1
+        ],
+        "ordered": [
+          3.1
+        ],
+        "retrospective": [
+          3.0,
+          5.7
+        ],
+        "clock": [
+          3.1
+        ],
+        "guidance": [
+          3.1
+        ]
+      }
+    },
+    {
+      "id": "ukH4Li1VbbY_000006_000016",
+      "category": "training_dog",
+      "archive_part": 18,
+      "sha256": "2c06ef75a225f1380d9f85620feabe8ca165e6fab5b113034dd079f726dde098",
+      "original_duration": 10.0,
+      "frames": 250,
+      "human": [
+        [
+          0.79364,
+          2.956015,
+          4.79634,
+          6.60215,
+          7.57982
+        ],
+        [
+          0.81526,
+          2.9337,
+          4.50864,
+          5.41036,
+          7.17676,
+          6.32445
+        ],
+        [
+          0.84671,
+          3.02268,
+          4.6754,
+          7.18626,
+          5.37887
+        ],
+        [
+          0.81117,
+          3.14666,
+          4.62475,
+          5.48238,
+          6.78174,
+          7.17737
+        ],
+        [
+          0.73208,
+          2.93788,
+          4.77133,
+          6.67548,
+          7.18451
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [
+          0.79364,
+          2.956015
+        ],
+        [
+          0.81526,
+          2.9337
+        ],
+        [
+          0.84671,
+          3.02268
+        ],
+        [
+          0.81117,
+          3.14666
+        ],
+        [
+          0.73208,
+          2.93788
+        ]
+      ],
+      "readers": {
+        "both": [
+          4.8,
+          6.4,
+          7.5
+        ],
+        "picture": [
+          4.8,
+          6.4,
+          7.5
+        ],
+        "ordered": [
+          4.9,
+          6.3,
+          7.5
+        ],
+        "retrospective": [
+          4.8,
+          6.3,
+          7.5
+        ],
+        "clock": [
+          4.8,
+          6.3,
+          7.5
+        ],
+        "guidance": [
+          4.8,
+          6.4,
+          7.5
+        ]
+      }
+    },
+    {
+      "id": "v4kmfcwoKTQ_000110_000120",
+      "category": "folding_paper",
+      "archive_part": 18,
+      "sha256": "0ef3ac1315c49133ac143c9b9d616cb35d0a00863bfa873f187280cdbaf2e3d9",
+      "original_duration": 10.0,
+      "frames": 250,
+      "human": [
+        [
+          0.66005,
+          1.56529,
+          3.11631,
+          5.08564,
+          6.6438,
+          7.5256
+        ],
+        [
+          0.57508,
+          1.46167,
+          3.32042,
+          4.92014,
+          5.40737,
+          7.6294,
+          6.77319
+        ],
+        [
+          1.06888,
+          2.37657,
+          4.39507,
+          5.57016,
+          6.58387,
+          7.84439
+        ],
+        [
+          0.60364,
+          1.86709,
+          2.99015,
+          3.64995,
+          5.9803
+        ],
+        [
+          3.38351,
+          5.25851,
+          6.64771,
+          4.84942,
+          0.34943,
+          1.5767,
+          2.46306,
+          7.55964
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          3.7,
+          5.3
+        ],
+        "picture": [
+          3.7,
+          5.2
+        ],
+        "ordered": [
+          3.7,
+          5.3
+        ],
+        "retrospective": [
+          3.7,
+          5.3
+        ],
+        "clock": [
+          3.7,
+          5.3
+        ],
+        "guidance": [
+          3.7,
+          5.3
+        ]
+      }
+    },
+    {
+      "id": "031AhY-44lw_000003_000013",
+      "category": "surfing_crowd",
+      "archive_part": 0,
+      "sha256": "23dcaea79ebf51cff621100359d55ef01fe1e75315818e1e46a6e1356e7db68c",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.31055
+        ],
+        [
+          1.87059,
+          6.24255
+        ],
+        [
+          0.35889,
+          2.47784,
+          6.81599
+        ],
+        [
+          0.36314
+        ],
+        [
+          0.47102
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [],
+        "picture": [],
+        "ordered": [],
+        "retrospective": [],
+        "clock": [],
+        "guidance": []
+      }
+    },
+    {
+      "id": "I53n0DUWPOY_000036_000046",
+      "category": "exercising_with_an_exercise_ball",
+      "archive_part": 6,
+      "sha256": "c6efb7be5d99b087af2a9637778f9f6e90bd5b4f8cdad7228a1c45eb7817fd22",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          0.47286,
+          1.81141,
+          2.47127,
+          3.4799,
+          5.3652,
+          6.91114
+        ],
+        [
+          0.47551,
+          1.47749,
+          2.51343,
+          3.29463,
+          4.0079,
+          5.31556,
+          5.97789
+        ],
+        [
+          0.45703,
+          1.17422,
+          3.19922,
+          4.95001,
+          6.38439
+        ],
+        [
+          1.66779,
+          2.38091,
+          4.07171,
+          5.57847,
+          6.561895,
+          6.60215
+        ],
+        [
+          0.74618,
+          1.91446,
+          2.69969,
+          4.12652,
+          6.79823
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "human_shot_times": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readers": {
+        "both": [
+          1.5,
+          2.8
+        ],
+        "picture": [
+          1.5,
+          2.3,
+          2.8,
+          3.3,
+          4.3,
+          7.3
+        ],
+        "ordered": [
+          1.4,
+          2.8
+        ],
+        "retrospective": [
+          1.5,
+          2.8,
+          4.1,
+          7.3
+        ],
+        "clock": [
+          1.5,
+          2.8,
+          4.3
+        ],
+        "guidance": [
+          1.5,
+          2.3,
+          2.8,
+          3.4,
+          4.2
+        ]
+      }
+    }
+  ],
+  "retrospective_replays": 0,
+  "clock_revision": "cf5c478",
+  "door_before_opening": {
+    "until_s": 8.5,
+    "turns_seen": [
+      [
+        0,
+        7
+      ],
+      [
+        7,
+        8.5
+      ]
+    ],
+    "source": "examples/make_door_trial.py, archived presentation-tracks stimuli",
+    "readers": {
+      "A": {
+        "sha256": "8c579053df514036fcfe9c02774069fdc698b14cf0ae5927219cf0722c0aa328",
+        "soundtrack": "key recording",
+        "answer": "A simple illustration of a closed brown door remained unchanged against a beige wall. The audio measurements show a brief increase in sound around 4.6\u20136.5 seconds, but its source is uncertain, and the speech check found no intelligible words."
+      },
+      "B": {
+        "sha256": "799a897554d97491f2b7b737f4067259df185946c4b0ba2665fcfa31ff12846d",
+        "soundtrack": "room tone only",
+        "answer": "A simple illustration shows a closed brown door in a beige wall, with no visible change throughout. The recording has a very low-level signal, but its source is unclear; no speech or intelligible words were detected."
+      }
+    }
+  },
+  "transport_audit": "The screening server forwarded released MCP text and image blocks. Local Codex event logs trim large media payloads. Four early film/condition pairs were rechecked after the log check counted fewer images than the server listed. The subsequent server verifies its full block count before delivery and returns per-turn counts at the end. Scoring used one completed observation per condition per film. Counts describe supplied images, not verified attention.",
+  "held_frame_validation": {
+    "originals": 24,
+    "centre_observations": 576,
+    "conditions": [
+      "picture",
+      "both"
+    ],
+    "reference": "best_effort_timestamp_time of ffprobe-decoded frames, mapped to the picture held at each observation."
+  },
+  "summary": {
+    "human_f1": {
+      "mean": 0.6565258468383469,
+      "film_bootstrap_95": [
+        0.601570032976283,
+        0.7145588693713694
+      ]
+    },
+    "readers": {
+      "both": {
+        "f1": {
+          "mean": 0.3888979076479077,
+          "film_bootstrap_95": [
+            0.27662566137566136,
+            0.4987600108225107
+          ]
+        },
+        "fraction_of_human_f1": {
+          "mean": 0.5923573451384072,
+          "film_bootstrap_95": [
+            0.4380488654708398,
+            0.7347449848150969
+          ]
+        },
+        "marks": 38,
+        "marks_near_majority": 34,
+        "matched_per_film_per_viewer": 1.2666666666666666,
+        "rotated_f1": {
+          "mean": 0.23145498417959356,
+          "film_bootstrap_95": [
+            0.1708024837756283,
+            0.29076660461572573
+          ]
+        },
+        "above_rotation": {
+          "mean": 0.1574429234683141,
+          "film_bootstrap_95": [
+            0.0867381465557735,
+            0.2333984685019841
+          ]
+        },
+        "minus_human": {
+          "mean": -0.2676279391904392,
+          "film_bootstrap_95": [
+            -0.3628151660261035,
+            -0.17597642721861478
+          ]
+        }
+      },
+      "picture": {
+        "f1": {
+          "mean": 0.37400206275206277,
+          "film_bootstrap_95": [
+            0.2652907983220483,
+            0.48415713684463685
+          ]
+        },
+        "fraction_of_human_f1": {
+          "mean": 0.56966845182586,
+          "film_bootstrap_95": [
+            0.42235257272303,
+            0.7050881067777981
+          ]
+        },
+        "marks": 42,
+        "marks_near_majority": 34,
+        "matched_per_film_per_viewer": 1.2833333333333332,
+        "rotated_f1": {
+          "mean": 0.23397259424603176,
+          "film_bootstrap_95": [
+            0.16699252030160236,
+            0.30024835137554867
+          ]
+        },
+        "above_rotation": {
+          "mean": 0.14002946850603099,
+          "film_bootstrap_95": [
+            0.07553626951209957,
+            0.21333352333791783
+          ]
+        },
+        "minus_human": {
+          "mean": -0.2825237840862841,
+          "film_bootstrap_95": [
+            -0.370753806956932,
+            -0.19795187538156286
+          ]
+        }
+      },
+      "ordered": {
+        "f1": {
+          "mean": 0.3771320346320346,
+          "film_bootstrap_95": [
+            0.2657271825396825,
+            0.4916931367243867
+          ]
+        },
+        "fraction_of_human_f1": {
+          "mean": 0.5744359288338787,
+          "film_bootstrap_95": [
+            0.4171402423780891,
+            0.7209311723009338
+          ]
+        },
+        "marks": 39,
+        "marks_near_majority": 34,
+        "matched_per_film_per_viewer": 1.2666666666666666,
+        "rotated_f1": {
+          "mean": 0.2276566257816258,
+          "film_bootstrap_95": [
+            0.16252848307291665,
+            0.2905504559640302
+          ]
+        },
+        "above_rotation": {
+          "mean": 0.14947540885040886,
+          "film_bootstrap_95": [
+            0.08613135869483525,
+            0.22010043386337333
+          ]
+        },
+        "minus_human": {
+          "mean": -0.2793938122063122,
+          "film_bootstrap_95": [
+            -0.37858959876928616,
+            -0.18571632187257198
+          ]
+        }
+      },
+      "retrospective": {
+        "f1": {
+          "mean": 0.36941017316017316,
+          "film_bootstrap_95": [
+            0.25658041726791725,
+            0.485174062049062
+          ]
+        },
+        "fraction_of_human_f1": {
+          "mean": 0.5626742266723448,
+          "film_bootstrap_95": [
+            0.4061376986240975,
+            0.7046055853924541
+          ]
+        },
+        "marks": 41,
+        "marks_near_majority": 33,
+        "matched_per_film_per_viewer": 1.275,
+        "rotated_f1": {
+          "mean": 0.23689650410353535,
+          "film_bootstrap_95": [
+            0.16553976403732262,
+            0.3063290254667207
+          ]
+        },
+        "above_rotation": {
+          "mean": 0.13251366905663778,
+          "film_bootstrap_95": [
+            0.06495063849995492,
+            0.20902924567475348
+          ]
+        },
+        "minus_human": {
+          "mean": -0.28711567367817364,
+          "film_bootstrap_95": [
+            -0.3802262647653273,
+            -0.19842466011997267
+          ]
+        }
+      },
+      "clock": {
+        "f1": {
+          "mean": 0.3922835497835498,
+          "film_bootstrap_95": [
+            0.28890137987012987,
+            0.4958004749879749
+          ]
+        },
+        "fraction_of_human_f1": {
+          "mean": 0.5975142512251156,
+          "film_bootstrap_95": [
+            0.4581564257144449,
+            0.7251387327557424
+          ]
+        },
+        "marks": 40,
+        "marks_near_majority": 35,
+        "matched_per_film_per_viewer": 1.3,
+        "rotated_f1": {
+          "mean": 0.2398843203237734,
+          "film_bootstrap_95": [
+            0.1775424817604993,
+            0.2996544062039667
+          ]
+        },
+        "above_rotation": {
+          "mean": 0.15239922945977633,
+          "film_bootstrap_95": [
+            0.09374085488440957,
+            0.21981571434208147
+          ]
+        },
+        "minus_human": {
+          "mean": -0.264242297054797,
+          "film_bootstrap_95": [
+            -0.35114060794529545,
+            -0.1833539079554704
+          ]
+        }
+      },
+      "guidance": {
+        "f1": {
+          "mean": 0.3758375420875421,
+          "film_bootstrap_95": [
+            0.2620040584415584,
+            0.4895946969696969
+          ]
+        },
+        "fraction_of_human_f1": {
+          "mean": 0.5724641975597385,
+          "film_bootstrap_95": [
+            0.4121562355100778,
+            0.7221297458460212
+          ]
+        },
+        "marks": 44,
+        "marks_near_majority": 36,
+        "matched_per_film_per_viewer": 1.325,
+        "rotated_f1": {
+          "mean": 0.24181552786044969,
+          "film_bootstrap_95": [
+            0.17205333633019182,
+            0.3107981235344517
+          ]
+        },
+        "above_rotation": {
+          "mean": 0.13402201422709234,
+          "film_bootstrap_95": [
+            0.06412631828891593,
+            0.2097407473169192
+          ]
+        },
+        "minus_human": {
+          "mean": -0.28068830475080475,
+          "film_bootstrap_95": [
+            -0.3829392644392644,
+            -0.18485773977180245
+          ]
+        }
+      }
+    },
+    "paired": [
+      {
+        "before": "both",
+        "after": "picture",
+        "change": {
+          "mean": -0.01489584489584489,
+          "film_bootstrap_95": [
+            -0.07003032615532616,
+            0.028571856384356383
+          ]
+        }
+      },
+      {
+        "before": "both",
+        "after": "ordered",
+        "change": {
+          "mean": -0.011765873015873007,
+          "film_bootstrap_95": [
+            -0.04583333333333334,
+            0.016507936507936524
+          ]
+        }
+      },
+      {
+        "before": "both",
+        "after": "retrospective",
+        "change": {
+          "mean": -0.01948773448773448,
+          "film_bootstrap_95": [
+            -0.08468064574314574,
+            0.03884929653679654
+          ]
+        }
+      },
+      {
+        "before": "both",
+        "after": "clock",
+        "change": {
+          "mean": 0.0033856421356421424,
+          "film_bootstrap_95": [
+            -0.02695165945165943,
+            0.0413023088023088
+          ]
+        }
+      },
+      {
+        "before": "both",
+        "after": "guidance",
+        "change": {
+          "mean": -0.013060365560365557,
+          "film_bootstrap_95": [
+            -0.0436557239057239,
+            0.007511123136123135
+          ]
+        }
+      },
+      {
+        "before": "picture",
+        "after": "ordered",
+        "change": {
+          "mean": 0.0031299718799718845,
+          "film_bootstrap_95": [
+            -0.03952325683575684,
+            0.06040473993598992
+          ]
+        }
+      },
+      {
+        "before": "picture",
+        "after": "retrospective",
+        "change": {
+          "mean": -0.00459188959188959,
+          "film_bootstrap_95": [
+            -0.0495991045991046,
+            0.039036796536796536
+          ]
+        }
+      },
+      {
+        "before": "picture",
+        "after": "clock",
+        "change": {
+          "mean": 0.01828148703148703,
+          "film_bootstrap_95": [
+            -0.006956608206608196,
+            0.05558307433307433
+          ]
+        }
+      },
+      {
+        "before": "picture",
+        "after": "guidance",
+        "change": {
+          "mean": 0.0018354793354793328,
+          "film_bootstrap_95": [
+            -0.04432267501017502,
+            0.05965800172050168
+          ]
+        }
+      },
+      {
+        "before": "ordered",
+        "after": "retrospective",
+        "change": {
+          "mean": -0.007721861471861473,
+          "film_bootstrap_95": [
+            -0.07979676226551226,
+            0.06458216089466086
+          ]
+        }
+      },
+      {
+        "before": "ordered",
+        "after": "clock",
+        "change": {
+          "mean": 0.015151515151515147,
+          "film_bootstrap_95": [
+            -0.01908784271284272,
+            0.0541427669552669
+          ]
+        }
+      },
+      {
+        "before": "ordered",
+        "after": "guidance",
+        "change": {
+          "mean": -0.0012944925444925506,
+          "film_bootstrap_95": [
+            -0.016351085257335262,
+            0.012723544973544948
+          ]
+        }
+      },
+      {
+        "before": "retrospective",
+        "after": "clock",
+        "change": {
+          "mean": 0.02287337662337662,
+          "film_bootstrap_95": [
+            -0.023513933982683966,
+            0.07437761544011542
+          ]
+        }
+      },
+      {
+        "before": "retrospective",
+        "after": "guidance",
+        "change": {
+          "mean": 0.006427368927368923,
+          "film_bootstrap_95": [
+            -0.06737515031265032,
+            0.07912845719095714
+          ]
+        }
+      },
+      {
+        "before": "clock",
+        "after": "guidance",
+        "change": {
+          "mean": -0.0164460076960077,
+          "film_bootstrap_95": [
+            -0.05964058742183742,
+            0.01796850949975946
+          ]
+        }
+      }
+    ]
+  },
+  "sensitivity": {
+    "0.25": {
+      "human_f1": {
+        "mean": 0.4957555291930292,
+        "film_bootstrap_95": [
+          0.4272129719239094,
+          0.5693673381017131
+        ]
+      },
+      "readers": {
+        "both": {
+          "f1": {
+            "mean": 0.2908748196248196,
+            "film_bootstrap_95": [
+              0.18485460257335257,
+              0.4051702741702741
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5867303590104055,
+            "film_bootstrap_95": [
+              0.4056694623679538,
+              0.7495898952486234
+            ]
+          },
+          "marks": 38,
+          "marks_near_majority": 22,
+          "matched_per_film_per_viewer": 0.9333333333333333,
+          "rotated_f1": {
+            "mean": 0.1278822779506373,
+            "film_bootstrap_95": [
+              0.09356324017237104,
+              0.1622901499180796
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.1629925416741823,
+            "film_bootstrap_95": [
+              0.07513174034804895,
+              0.2625043385163014
+            ]
+          },
+          "minus_human": {
+            "mean": -0.20488070956820956,
+            "film_bootstrap_95": [
+              -0.2825998284123284,
+              -0.12812598107910614
+            ]
+          }
+        },
+        "picture": {
+          "f1": {
+            "mean": 0.270708226958227,
+            "film_bootstrap_95": [
+              0.17463108534983535,
+              0.37536894124394127
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5460518562422791,
+            "film_bootstrap_95": [
+              0.3879875348247793,
+              0.6892349235755039
+            ]
+          },
+          "marks": 42,
+          "marks_near_majority": 21,
+          "matched_per_film_per_viewer": 0.925,
+          "rotated_f1": {
+            "mean": 0.13057675397519147,
+            "film_bootstrap_95": [
+              0.09188665157903439,
+              0.17093251981850616
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.1401314729830355,
+            "film_bootstrap_95": [
+              0.06422955682916623,
+              0.229224472919297
+            ]
+          },
+          "minus_human": {
+            "mean": -0.2250473022348022,
+            "film_bootstrap_95": [
+              -0.28870181005337253,
+              -0.1607251885845636
+            ]
+          }
+        },
+        "ordered": {
+          "f1": {
+            "mean": 0.28483645983645983,
+            "film_bootstrap_95": [
+              0.17927166005291006,
+              0.3989179142616643
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5745502431412215,
+            "film_bootstrap_95": [
+              0.38490950075107233,
+              0.7490613872178384
+            ]
+          },
+          "marks": 39,
+          "marks_near_majority": 22,
+          "matched_per_film_per_viewer": 0.9416666666666667,
+          "rotated_f1": {
+            "mean": 0.1267101446007696,
+            "film_bootstrap_95": [
+              0.08938741629464285,
+              0.16319890297600256
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.15812631523569023,
+            "film_bootstrap_95": [
+              0.07460441456510793,
+              0.2531232824431066
+            ]
+          },
+          "minus_human": {
+            "mean": -0.21091906935656934,
+            "film_bootstrap_95": [
+              -0.29797366927054425,
+              -0.1261320378117253
+            ]
+          }
+        },
+        "retrospective": {
+          "f1": {
+            "mean": 0.2777753727753728,
+            "film_bootstrap_95": [
+              0.1788142285954786,
+              0.38348553992303974
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5603071603205805,
+            "film_bootstrap_95": [
+              0.39996115753493844,
+              0.7081797186449655
+            ]
+          },
+          "marks": 41,
+          "marks_near_majority": 22,
+          "matched_per_film_per_viewer": 0.925,
+          "rotated_f1": {
+            "mean": 0.1301653580071549,
+            "film_bootstrap_95": [
+              0.09080879643721441,
+              0.16991635864316526
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.1476100147682179,
+            "film_bootstrap_95": [
+              0.06957214478772097,
+              0.23912170122448445
+            ]
+          },
+          "minus_human": {
+            "mean": -0.21798015641765642,
+            "film_bootstrap_95": [
+              -0.2866680076289451,
+              -0.14986075729825735
+            ]
+          }
+        },
+        "clock": {
+          "f1": {
+            "mean": 0.28803751803751804,
+            "film_bootstrap_95": [
+              0.19010449735449733,
+              0.3936419552669552
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5810071720357287,
+            "film_bootstrap_95": [
+              0.4222573237752071,
+              0.7246676440845997
+            ]
+          },
+          "marks": 40,
+          "marks_near_majority": 22,
+          "matched_per_film_per_viewer": 0.9416666666666667,
+          "rotated_f1": {
+            "mean": 0.1320399540419072,
+            "film_bootstrap_95": [
+              0.09699188382147368,
+              0.16633239634533578
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.1559975639956109,
+            "film_bootstrap_95": [
+              0.07646512300272067,
+              0.24695298149839168
+            ]
+          },
+          "minus_human": {
+            "mean": -0.20771801115551114,
+            "film_bootstrap_95": [
+              -0.27466284294409293,
+              -0.1418593362655863
+            ]
+          }
+        },
+        "guidance": {
+          "f1": {
+            "mean": 0.2697907647907648,
+            "film_bootstrap_95": [
+              0.16992263407888406,
+              0.3767323082010582
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5442012219811634,
+            "film_bootstrap_95": [
+              0.3697689012249986,
+              0.702137555091673
+            ]
+          },
+          "marks": 44,
+          "marks_near_majority": 23,
+          "matched_per_film_per_viewer": 0.9583333333333334,
+          "rotated_f1": {
+            "mean": 0.13730200066137566,
+            "film_bootstrap_95": [
+              0.09566994219069415,
+              0.18020145347635577
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.13248876412938912,
+            "film_bootstrap_95": [
+              0.05551155375837994,
+              0.22105057151688004
+            ]
+          },
+          "minus_human": {
+            "mean": -0.22596476440226435,
+            "film_bootstrap_95": [
+              -0.3001388796388796,
+              -0.1516871456090207
+            ]
+          }
+        }
+      },
+      "paired": [
+        {
+          "before": "both",
+          "after": "picture",
+          "change": {
+            "mean": -0.020166592666592667,
+            "film_bootstrap_95": [
+              -0.07633035714285714,
+              0.029599428349428348
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "ordered",
+          "change": {
+            "mean": -0.006038359788359785,
+            "film_bootstrap_95": [
+              -0.039160548941798934,
+              0.02881035052910052
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "retrospective",
+          "change": {
+            "mean": -0.013099446849446847,
+            "film_bootstrap_95": [
+              -0.06852060786435786,
+              0.03902281746031745
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "clock",
+          "change": {
+            "mean": -0.0028373015873015828,
+            "film_bootstrap_95": [
+              -0.030515873015873014,
+              0.028882275132275138
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "guidance",
+          "change": {
+            "mean": -0.02108405483405483,
+            "film_bootstrap_95": [
+              -0.060019901394901376,
+              0.017463428932178882
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "ordered",
+          "change": {
+            "mean": 0.014128232878232875,
+            "film_bootstrap_95": [
+              -0.04295688801938802,
+              0.07649675324675324
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "retrospective",
+          "change": {
+            "mean": 0.0070671458171458175,
+            "film_bootstrap_95": [
+              -0.026614852739852733,
+              0.04407133838383838
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "clock",
+          "change": {
+            "mean": 0.01732929107929108,
+            "film_bootstrap_95": [
+              -0.009611469548969553,
+              0.04947754444629445
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "guidance",
+          "change": {
+            "mean": -0.0009174621674621665,
+            "film_bootstrap_95": [
+              -0.039698382635882636,
+              0.047953766141266084
+            ]
+          }
+        },
+        {
+          "before": "ordered",
+          "after": "retrospective",
+          "change": {
+            "mean": -0.007061087061087057,
+            "film_bootstrap_95": [
+              -0.07314602873977873,
+              0.055565040283790286
+            ]
+          }
+        },
+        {
+          "before": "ordered",
+          "after": "clock",
+          "change": {
+            "mean": 0.003201058201058201,
+            "film_bootstrap_95": [
+              -0.03677496693121692,
+              0.04348015873015871
+            ]
+          }
+        },
+        {
+          "before": "ordered",
+          "after": "guidance",
+          "change": {
+            "mean": -0.015045695045695043,
+            "film_bootstrap_95": [
+              -0.06060787938912939,
+              0.02848593073593073
+            ]
+          }
+        },
+        {
+          "before": "retrospective",
+          "after": "clock",
+          "change": {
+            "mean": 0.010262145262145264,
+            "film_bootstrap_95": [
+              -0.027345538720538715,
+              0.04835903679653677
+            ]
+          }
+        },
+        {
+          "before": "retrospective",
+          "after": "guidance",
+          "change": {
+            "mean": -0.007984607984607981,
+            "film_bootstrap_95": [
+              -0.06550946969696969,
+              0.05316764369889369
+            ]
+          }
+        },
+        {
+          "before": "clock",
+          "after": "guidance",
+          "change": {
+            "mean": -0.018246753246753247,
+            "film_bootstrap_95": [
+              -0.05493330627705629,
+              0.01890047799422797
+            ]
+          }
+        }
+      ]
+    },
+    "1.0": {
+      "human_f1": {
+        "mean": 0.7522939329189328,
+        "film_bootstrap_95": [
+          0.7036079215922967,
+          0.8011192094942094
+        ]
+      },
+      "readers": {
+        "both": {
+          "f1": {
+            "mean": 0.4424759499759499,
+            "film_bootstrap_95": [
+              0.3283039021164021,
+              0.5539287968975469
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5881689730756224,
+            "film_bootstrap_95": [
+              0.45296643619984145,
+              0.7153615448910001
+            ]
+          },
+          "marks": 38,
+          "marks_near_majority": 36,
+          "matched_per_film_per_viewer": 1.4333333333333333,
+          "rotated_f1": {
+            "mean": 0.3509638845674002,
+            "film_bootstrap_95": [
+              0.26287223048941805,
+              0.4353284542786496
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.09151206540854977,
+            "film_bootstrap_95": [
+              0.047078084133748185,
+              0.13790902373812522
+            ]
+          },
+          "minus_human": {
+            "mean": -0.30981798294298296,
+            "film_bootstrap_95": [
+              -0.40201626498501497,
+              -0.21754936672124173
+            ]
+          }
+        },
+        "picture": {
+          "f1": {
+            "mean": 0.42975903725903725,
+            "film_bootstrap_95": [
+              0.3129448387260887,
+              0.5433118825618825
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5712647921957229,
+            "film_bootstrap_95": [
+              0.4324449798282584,
+              0.6960990173675968
+            ]
+          },
+          "marks": 42,
+          "marks_near_majority": 40,
+          "matched_per_film_per_viewer": 1.4833333333333334,
+          "rotated_f1": {
+            "mean": 0.3527860814677221,
+            "film_bootstrap_95": [
+              0.25563828655430215,
+              0.445768801212893
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.07697295579131518,
+            "film_bootstrap_95": [
+              0.03737985574899637,
+              0.11820286171799842
+            ]
+          },
+          "minus_human": {
+            "mean": -0.3225348956598956,
+            "film_bootstrap_95": [
+              -0.41390189035501534,
+              -0.234316872941873
+            ]
+          }
+        },
+        "ordered": {
+          "f1": {
+            "mean": 0.4337854737854738,
+            "film_bootstrap_95": [
+              0.3140265151515152,
+              0.55224280002405
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5766170040776051,
+            "film_bootstrap_95": [
+              0.43262486355755764,
+              0.710209294706454
+            ]
+          },
+          "marks": 39,
+          "marks_near_majority": 37,
+          "matched_per_film_per_viewer": 1.4583333333333333,
+          "rotated_f1": {
+            "mean": 0.3433797799422799,
+            "film_bootstrap_95": [
+              0.2482799251349056,
+              0.4337096038275237
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.09040569384319386,
+            "film_bootstrap_95": [
+              0.052969123315558864,
+              0.13221216783252918
+            ]
+          },
+          "minus_human": {
+            "mean": -0.3185084591334591,
+            "film_bootstrap_95": [
+              -0.41664771975709475,
+              -0.22280270770895777
+            ]
+          }
+        },
+        "retrospective": {
+          "f1": {
+            "mean": 0.43550264550264556,
+            "film_bootstrap_95": [
+              0.3104934313371813,
+              0.5548847703222702
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.578899584917396,
+            "film_bootstrap_95": [
+              0.4296681167539175,
+              0.7110239018571624
+            ]
+          },
+          "marks": 41,
+          "marks_near_majority": 39,
+          "matched_per_film_per_viewer": 1.5083333333333333,
+          "rotated_f1": {
+            "mean": 0.35777979290674605,
+            "film_bootstrap_95": [
+              0.2527369069461355,
+              0.45693515629697273
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.07772285259589946,
+            "film_bootstrap_95": [
+              0.04128921480899019,
+              0.11835635500747801
+            ]
+          },
+          "minus_human": {
+            "mean": -0.3167912874162874,
+            "film_bootstrap_95": [
+              -0.4171287485662486,
+              -0.2226206738862989
+            ]
+          }
+        },
+        "clock": {
+          "f1": {
+            "mean": 0.4533820346320347,
+            "film_bootstrap_95": [
+              0.34275951479076483,
+              0.5600103415103413
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.6026660787664376,
+            "film_bootstrap_95": [
+              0.4709010326206256,
+              0.7223055224068389
+            ]
+          },
+          "marks": 40,
+          "marks_near_majority": 38,
+          "matched_per_film_per_viewer": 1.5,
+          "rotated_f1": {
+            "mean": 0.363189000308141,
+            "film_bootstrap_95": [
+              0.2718630564856151,
+              0.44872213661447047
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.0901930343238937,
+            "film_bootstrap_95": [
+              0.056294518027184035,
+              0.12873952496974958
+            ]
+          },
+          "minus_human": {
+            "mean": -0.2989118982868983,
+            "film_bootstrap_95": [
+              -0.38731922417859915,
+              -0.2127104353979355
+            ]
+          }
+        },
+        "guidance": {
+          "f1": {
+            "mean": 0.43734187109187106,
+            "film_bootstrap_95": [
+              0.3172050865800866,
+              0.5543648839586339
+            ]
+          },
+          "fraction_of_human_f1": {
+            "mean": 0.5813444080227602,
+            "film_bootstrap_95": [
+              0.4344570095213125,
+              0.7157430645308029
+            ]
+          },
+          "marks": 44,
+          "marks_near_majority": 41,
+          "matched_per_film_per_viewer": 1.5333333333333332,
+          "rotated_f1": {
+            "mean": 0.35942111310275376,
+            "film_bootstrap_95": [
+              0.2609322006570542,
+              0.45393031294154335
+            ]
+          },
+          "above_rotation": {
+            "mean": 0.07792075798911735,
+            "film_bootstrap_95": [
+              0.03306543685083723,
+              0.12447738005989956
+            ]
+          },
+          "minus_human": {
+            "mean": -0.3149520618270618,
+            "film_bootstrap_95": [
+              -0.41770297121859623,
+              -0.216734607984608
+            ]
+          }
+        }
+      },
+      "paired": [
+        {
+          "before": "both",
+          "after": "picture",
+          "change": {
+            "mean": -0.012716912716912712,
+            "film_bootstrap_95": [
+              -0.0873245851370851,
+              0.041769896769896765
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "ordered",
+          "change": {
+            "mean": -0.008690476190476184,
+            "film_bootstrap_95": [
+              -0.052440476190476176,
+              0.025694444444444454
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "retrospective",
+          "change": {
+            "mean": -0.006973304473304458,
+            "film_bootstrap_95": [
+              -0.09314560786435785,
+              0.06842888708513707
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "clock",
+          "change": {
+            "mean": 0.010906084656084664,
+            "film_bootstrap_95": [
+              -0.02127017195767195,
+              0.05049603174603176
+            ]
+          }
+        },
+        {
+          "before": "both",
+          "after": "guidance",
+          "change": {
+            "mean": -0.00513407888407888,
+            "film_bootstrap_95": [
+              -0.049917207792207784,
+              0.032112794612794614
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "ordered",
+          "change": {
+            "mean": 0.004026436526436528,
+            "film_bootstrap_95": [
+              -0.0524048174048174,
+              0.0751005591630591
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "retrospective",
+          "change": {
+            "mean": 0.0057436082436082515,
+            "film_bootstrap_95": [
+              -0.04805857683982683,
+              0.055844020562770554
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "clock",
+          "change": {
+            "mean": 0.023622997372997376,
+            "film_bootstrap_95": [
+              -0.013218222749472743,
+              0.07619601232101232
+            ]
+          }
+        },
+        {
+          "before": "picture",
+          "after": "guidance",
+          "change": {
+            "mean": 0.007582833832833831,
+            "film_bootstrap_95": [
+              -0.053277378871128864,
+              0.08536629689754689
+            ]
+          }
+        },
+        {
+          "before": "ordered",
+          "after": "retrospective",
+          "change": {
+            "mean": 0.0017171717171717258,
+            "film_bootstrap_95": [
+              -0.08784253246753244,
+              0.08799932359307358
+            ]
+          }
+        },
+        {
+          "before": "ordered",
+          "after": "clock",
+          "change": {
+            "mean": 0.019596560846560848,
+            "film_bootstrap_95": [
+              -0.018822751322751328,
+              0.0655026455026455
+            ]
+          }
+        },
+        {
+          "before": "ordered",
+          "after": "guidance",
+          "change": {
+            "mean": 0.003556397306397305,
+            "film_bootstrap_95": [
+              -0.025694444444444447,
+              0.03519512085137081
+            ]
+          }
+        },
+        {
+          "before": "retrospective",
+          "after": "clock",
+          "change": {
+            "mean": 0.017879389129389123,
+            "film_bootstrap_95": [
+              -0.036948653198653196,
+              0.08387987012987012
+            ]
+          }
+        },
+        {
+          "before": "retrospective",
+          "after": "guidance",
+          "change": {
+            "mean": 0.001839225589225578,
+            "film_bootstrap_95": [
+              -0.08903028799903802,
+              0.09775323172198168
+            ]
+          }
+        },
+        {
+          "before": "clock",
+          "after": "guidance",
+          "change": {
+            "mean": -0.016040163540163545,
+            "film_bootstrap_95": [
+              -0.06891355519480519,
+              0.030846696127946122
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "human_marks_with_any_response_within_half_second": {
+    "both": {
+      "shot": {
+        "reference_marks": 97,
+        "nearby": 67
+      },
+      "event": {
+        "reference_marks": 392,
+        "nearby": 100
+      }
+    },
+    "picture": {
+      "shot": {
+        "reference_marks": 97,
+        "nearby": 67
+      },
+      "event": {
+        "reference_marks": 392,
+        "nearby": 100
+      }
+    },
+    "ordered": {
+      "shot": {
+        "reference_marks": 97,
+        "nearby": 68
+      },
+      "event": {
+        "reference_marks": 392,
+        "nearby": 98
+      }
+    },
+    "retrospective": {
+      "shot": {
+        "reference_marks": 97,
+        "nearby": 69
+      },
+      "event": {
+        "reference_marks": 392,
+        "nearby": 97
+      }
+    },
+    "clock": {
+      "shot": {
+        "reference_marks": 97,
+        "nearby": 68
+      },
+      "event": {
+        "reference_marks": 392,
+        "nearby": 104
+      }
+    },
+    "guidance": {
+      "shot": {
+        "reference_marks": 97,
+        "nearby": 67
+      },
+      "event": {
+        "reference_marks": 392,
+        "nearby": 106
+      }
+    },
+    "other_viewer": {
+      "shot": {
+        "reference_marks": 388,
+        "nearby": 371
+      },
+      "event": {
+        "reference_marks": 1568,
+        "nearby": 994
+      }
+    }
+  },
+  "verified_turns": {
+    "both": {
+      "count": 96,
+      "images_listed": 419,
+      "source_estimate_turns": 92
+    },
+    "picture": {
+      "count": 96,
+      "images_listed": 233,
+      "source_estimate_turns": 0
+    },
+    "ordered": {
+      "count": 96,
+      "images_listed": 419,
+      "source_estimate_turns": 92
+    },
+    "retrospective": {
+      "count": 96,
+      "images_listed": 419,
+      "source_estimate_turns": 78
+    },
+    "clock": {
+      "count": 96,
+      "images_listed": 419,
+      "source_estimate_turns": 92
+    },
+    "guidance": {
+      "count": 96,
+      "images_listed": 419,
+      "source_estimate_turns": 92
+    }
+  }
+}

@@ -1,0 +1,3344 @@
+{
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "baseline_revision": "b1541d7",
+  "reader_revision": "85586a2",
+  "field_source": "https://zenodo.org/records/5114771",
+  "audio_source": "https://zenodo.org/records/2589280",
+  "human_annotations_sha256": "eabd6ba36abf52a1c3034b96208729346022d7283db583681997729203f44329",
+  "environmental_sounds": "https://github.com/karolpiczak/ESC-50",
+  "annotated_films": "https://github.com/google-deepmind/perception_test",
+  "categories": [
+    "adults_talking",
+    "announcement_jingle",
+    "announcement_speech",
+    "birds_singing",
+    "children_voices",
+    "dog_barking",
+    "footsteps",
+    "music",
+    "siren",
+    "traffic_noise"
+  ],
+  "methods": {
+    "delivery": "One fresh session per recording per condition. The only tool released two consecutive audio-only views and an end marker. Responses were captured from production play and Viewing.advance on the original channels. Both arms received the same spectrograms, measurements, AST estimates and CoNeTTE wide captions, with no raw WAV attachment, ASR or optional large waveform model. The changed arm also received the recent captions when available. No sound filenames, source metadata or keys were shown.",
+    "reference_check": "All 104 delivered turn captions were independently rerun through the original b1541d7 and new waveform workers. The old report equals the new one with the recent_windows field omitted. Three digitally silent second intervals had no local caption. The separate door test exercised the live MCP with speech checks.",
+    "sources": "ESC-50 fold 5, one preexisting recording for each of 50 distinct classes, sorted by SHA256(reel-listening-windows/v1/ + filename). Join two five-second native 44.1 kHz mono recordings, or use five seconds of zero samples as listed. Repeats use the same recording twice. Preserve PCM sample values. Readers could choose the supplied exact names, none of these, silence or unsure. Ground truth is the source label, not listeners re-rating the edits.",
+    "original_events": "Six contiguous seconds of original Perception Test audio, three on either side of an annotated onset. No waveform substitution. Candidate onsets at least one second long, with a different preceding source annotated for at least 0.4 seconds in the first three seconds and absent from the last three. No other named event overlaps the last three seconds for over 0.1 seconds. Use distinct recordings. Order candidate tuples by SHA256(reel-current-sound-013/ + Python str(tuple)), cover distinct target classes first, then allow up to two etc. The two listed alternatives are the earlier and current labels. An annotation identifies an event, not every sound possibly audible. No new human forced choices.",
+    "urban": "The 12 original MACS/TAU field recordings used in the earlier audio-cues/macs collection, unchanged. Two five-second views, stopping at each source end; one is shorter than ten seconds by one sample. The GPT question covers the whole recording. Each human annotated the whole recording. Set overlap is intersection over union, 1 for two empty lists. Average by recording. To reproduce the updated urban score use examples/check_soundscape_agreement.py on this JSON and the authors’ MACS.yaml with --macs.",
+    "caption_rank": "Separate automatic lexical/semantic check, without GPT: embed each local caption and “the sound of ” + each offered source using sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41. Average the caption vectors across active native channels, choose highest dot product. No rejection option. Score only cases with an in-list answer.",
+    "limits": "One GPT response per condition per recording. Interval resampling measures across-recording variation. It does not measure rerun variability. Several synthetic cases reuse sound sources."
+  },
+  "recordings": [
+    {
+      "id": "airport-lyon-1101-40173-a.wav",
+      "sha256": "bc8d1ba0c053e6874c177b60f48d729ae66b11b7125f71b8e70c5207927dd81a",
+      "listener_count": 4,
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "airport-milan-1061-44026-a.wav",
+      "sha256": "3110827d649b437c664a811443e821752f3f3db69f3c5285b61ea65370b98227",
+      "listener_count": 5,
+      "reader_tags": [
+        "adults_talking",
+        "birds_singing",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "airport-paris-7-318-a.wav",
+      "sha256": "7225dff776e02af2fd7510783a3d4081e2a3925ed2e868a46bf8f1e91f816285",
+      "listener_count": 5,
+      "reader_tags": [
+        "adults_talking"
+      ],
+      "previous_tags": [
+        "adults_talking"
+      ]
+    },
+    {
+      "id": "airport-stockholm-11-468-a.wav",
+      "sha256": "89b72f8f507be9b632feef371193590fc383ae36cc63112736713723665de983",
+      "listener_count": 5,
+      "reader_tags": [
+        "adults_talking",
+        "birds_singing"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "birds_singing"
+      ]
+    },
+    {
+      "id": "park-lyon-1144-40742-a.wav",
+      "sha256": "9ff4be7bac07254c936b1124a2058551b081ebb2187728e2cfe94b7b56e5280d",
+      "listener_count": 5,
+      "reader_tags": [
+        "adults_talking",
+        "birds_singing",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "birds_singing",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "park-milan-1164-44883-a.wav",
+      "sha256": "d4af55395ee18b6a984841614aa92388ee9887da3caf55ba6cd9470c12d34e7f",
+      "listener_count": 5,
+      "reader_tags": [
+        "birds_singing",
+        "children_voices",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "park-paris-99-2811-a.wav",
+      "sha256": "c00752a5153423e4ee3c5d1b5d77fd3f5d80e424092113819caf5751cf09f831",
+      "listener_count": 5,
+      "reader_tags": [
+        "adults_talking",
+        "footsteps",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "park-prague-1092-40152-a.wav",
+      "sha256": "8487fdc8b9711012ef728f5ec2aa8768467aa9b68f85690ba7db2847bf8c6daa",
+      "listener_count": 4,
+      "reader_tags": [
+        "birds_singing"
+      ],
+      "previous_tags": [
+        "birds_singing"
+      ]
+    },
+    {
+      "id": "public_square-lisbon-1068-43672-a.wav",
+      "sha256": "4332fc7340d6dde790664b19dc716d19b75774ccaa6af1b06a88d1001eadb4bb",
+      "listener_count": 4,
+      "reader_tags": [
+        "adults_talking"
+      ],
+      "previous_tags": [
+        "adults_talking"
+      ]
+    },
+    {
+      "id": "public_square-lyon-1056-41097-a.wav",
+      "sha256": "f5e5a986ddd4314123c5d9799f57fe6ec78e96f8eeab4101fbcd87cd9a971cef",
+      "listener_count": 4,
+      "reader_tags": [
+        "adults_talking"
+      ],
+      "previous_tags": [
+        "adults_talking"
+      ]
+    },
+    {
+      "id": "public_square-paris-117-3446-a.wav",
+      "sha256": "af643219be8470650abfcd9a220a6eef4d1489e0ee132e08f188ab6836707683",
+      "listener_count": 5,
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ]
+    },
+    {
+      "id": "public_square-stockholm-119-3492-a.wav",
+      "sha256": "c92f9c0d617548592ebf04fbed2f9287d2103d7287553ec6827b3ec156e6bccf",
+      "listener_count": 5,
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    }
+  ],
+  "trials": [
+    {
+      "id": 0,
+      "type": "switch",
+      "prev_id": "5-237795-A-34.wav",
+      "target_id": "5-253534-A-26.wav",
+      "prior": "can opening",
+      "options": [
+        "engine",
+        "sheep",
+        "laughing",
+        "can opening"
+      ],
+      "truth": "laughing",
+      "sha256": "5673b5ece22ab816ee5c5762b175dd818bbd70b192ff5ef9da411787550f6e88",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "laughing"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is using a knife to cut up a piece of wood"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby is laughing and crying and giggling"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "can opening",
+          "scores": [
+            -0.0025,
+            0.0305,
+            0.0232,
+            0.0542
+          ]
+        },
+        "recent": {
+          "choice": "laughing",
+          "scores": [
+            0.1262,
+            0.1524,
+            0.5357,
+            0.1113
+          ]
+        }
+      }
+    },
+    {
+      "id": 1,
+      "type": "switch",
+      "prev_id": "5-254832-B-15.wav",
+      "target_id": "5-200339-A-1.wav",
+      "prior": "water drops",
+      "options": [
+        "rooster",
+        "sheep",
+        "washing machine",
+        "water drops"
+      ],
+      "truth": "rooster",
+      "sha256": "494b91c00dcf31a61a27258c79969383b4f6802cadaeb76ae324e81491bd013f",
+      "answers": {
+        "before": [
+          "rooster"
+        ],
+        "after": [
+          "rooster"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a chicken is clucking while a rooster crows in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a chicken is clucking while a rooster crows in the background"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "rooster",
+          "scores": [
+            0.6194,
+            0.3259,
+            0.2412,
+            0.2065
+          ]
+        },
+        "recent": {
+          "choice": "rooster",
+          "scores": [
+            0.6194,
+            0.3259,
+            0.2412,
+            0.2065
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "switch",
+      "prev_id": "5-178997-A-24.wav",
+      "target_id": "5-215179-A-13.wav",
+      "prior": "coughing",
+      "options": [
+        "wind",
+        "coughing",
+        "washing machine",
+        "crickets"
+      ],
+      "truth": "crickets",
+      "sha256": "d8a24c048a5f56c9bee591cbc42bb6a28ca25b9857ec1ffc16eaf70934906ceb",
+      "answers": {
+        "before": [
+          "coughing"
+        ],
+        "after": [
+          "crickets"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person coughs five times and then coughing again"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "crickets chirp in the background as a car drives by"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "coughing",
+          "scores": [
+            0.1965,
+            0.6007,
+            0.1619,
+            0.1387
+          ]
+        },
+        "recent": {
+          "choice": "crickets",
+          "scores": [
+            0.2468,
+            0.248,
+            0.2249,
+            0.656
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": "switch",
+      "prev_id": "5-263831-A-6.wav",
+      "target_id": "5-251426-B-30.wav",
+      "prior": "hen",
+      "options": [
+        "door wood knock",
+        "hen",
+        "fireworks",
+        "wind"
+      ],
+      "truth": "door wood knock",
+      "sha256": "b20081934107de63da02d4ed79e2391c6c32981afb2184f804da9c62e80bc0b7",
+      "answers": {
+        "before": [
+          "door wood knock"
+        ],
+        "after": [
+          "hen"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a chicken is clucking and flapping its wings"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone is knocking on a door five times at different speeds"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hen",
+          "scores": [
+            0.212,
+            0.3758,
+            0.0934,
+            0.1897
+          ]
+        },
+        "recent": {
+          "choice": "door wood knock",
+          "scores": [
+            0.5162,
+            0.0939,
+            0.1002,
+            0.1251
+          ]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": "switch",
+      "prev_id": "5-261325-A-9.wav",
+      "target_id": "5-219379-A-11.wav",
+      "prior": "crow",
+      "options": [
+        "hand saw",
+        "sea waves",
+        "crow",
+        "fireworks"
+      ],
+      "truth": "sea waves",
+      "sha256": "06bac776914c82510d29af841bfb97614ec0fbbb6f8df1da631bb29b667f67f0",
+      "answers": {
+        "before": [
+          "sea waves"
+        ],
+        "after": [
+          "sea waves"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "waves crash against the shore and a crow caws in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "waves are crashing against the shore and the ocean is splashing"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "crow",
+          "scores": [
+            0.3127,
+            0.5084,
+            0.5328,
+            0.2595
+          ]
+        },
+        "recent": {
+          "choice": "sea waves",
+          "scores": [
+            0.2129,
+            0.5497,
+            0.1473,
+            0.2221
+          ]
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": "switch",
+      "prev_id": "5-182010-A-36.wav",
+      "target_id": "5-151085-A-20.wav",
+      "prior": "vacuum cleaner",
+      "options": [
+        "crying baby",
+        "helicopter",
+        "vacuum cleaner",
+        "hand saw"
+      ],
+      "truth": "crying baby",
+      "sha256": "a3e977f7d607d5bdb16748784ffc09908987f5c4f986b91d86943e75cce12941",
+      "answers": {
+        "before": [
+          "crying baby"
+        ],
+        "after": [
+          "crying baby"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby cries loudly and then starts to cry out"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby is crying and making loud noises"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "crying baby",
+          "scores": [
+            0.7279,
+            0.2345,
+            0.1975,
+            0.1255
+          ]
+        },
+        "recent": {
+          "choice": "crying baby",
+          "scores": [
+            0.7738,
+            0.1899,
+            0.2025,
+            0.1416
+          ]
+        }
+      }
+    },
+    {
+      "id": 6,
+      "type": "switch",
+      "prev_id": "5-235671-A-38.wav",
+      "target_id": "5-220026-A-21.wav",
+      "prior": "clock tick",
+      "options": [
+        "sneezing",
+        "crackling fire",
+        "helicopter",
+        "clock tick"
+      ],
+      "truth": "sneezing",
+      "sha256": "6cb6730c173c23f9b270382ff751b9dca6b046e5786b1a3e889a99b520d67c47",
+      "answers": {
+        "before": [
+          "sneezing"
+        ],
+        "after": [
+          "sneezing"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is breathing heavily and then sneezing twice"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is sneezing twice and then coughs again"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "sneezing",
+          "scores": [
+            0.5709,
+            0.1354,
+            0.17,
+            0.1194
+          ]
+        },
+        "recent": {
+          "choice": "sneezing",
+          "scores": [
+            0.5658,
+            0.1865,
+            0.1522,
+            0.133
+          ]
+        }
+      }
+    },
+    {
+      "id": 7,
+      "type": "switch",
+      "prev_id": "5-197988-A-46.wav",
+      "target_id": "5-215005-A-32.wav",
+      "prior": "church bells",
+      "options": [
+        "crackling fire",
+        "church bells",
+        "keyboard typing",
+        "airplane"
+      ],
+      "truth": "keyboard typing",
+      "sha256": "ad072e3c84891d18ababf7d75166a4a95d0593cde9273a2e266f4b1e7b9c8b37",
+      "answers": {
+        "before": [
+          "keyboard typing"
+        ],
+        "after": [
+          "keyboard typing"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a bell is ringing and a person is typing on a computer keyboard"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is typing on a keyboard and types of paper"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "keyboard typing",
+          "scores": [
+            0.2051,
+            0.4522,
+            0.6155,
+            0.1669
+          ]
+        },
+        "recent": {
+          "choice": "keyboard typing",
+          "scores": [
+            0.0868,
+            0.1033,
+            0.5918,
+            0.0467
+          ]
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": "switch",
+      "prev_id": "5-179866-A-43.wav",
+      "target_id": "5-177034-A-18.wav",
+      "prior": "car horn",
+      "options": [
+        "car horn",
+        "airplane",
+        "chirping birds",
+        "toilet flush"
+      ],
+      "truth": "toilet flush",
+      "sha256": "224c7a9d4359d71fa0696a0a3fcb0685cf72f37850fafc38a5bb4dad83e37a40",
+      "answers": {
+        "before": [
+          "toilet flush"
+        ],
+        "after": [
+          "toilet flush"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone flushes a toilet and then the car honks its horn"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a toilet is flushed and the water is running"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "car horn",
+          "scores": [
+            0.6252,
+            0.2316,
+            0.2983,
+            0.6199
+          ]
+        },
+        "recent": {
+          "choice": "toilet flush",
+          "scores": [
+            0.0007,
+            0.1002,
+            0.069,
+            0.6346
+          ]
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": "switch",
+      "prev_id": "5-233260-A-23.wav",
+      "target_id": "5-103420-A-2.wav",
+      "prior": "breathing",
+      "options": [
+        "pig",
+        "breathing",
+        "chirping birds",
+        "glass breaking"
+      ],
+      "truth": "pig",
+      "sha256": "89b03c0b4321370858ef24852849a015e571b84b85c11af61803230fb993fca6",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby is crying and making noises in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby cries loudly and another bird caws in the background"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "breathing",
+          "scores": [
+            0.2105,
+            0.3197,
+            0.218,
+            0.2878
+          ]
+        },
+        "recent": {
+          "choice": "chirping birds",
+          "scores": [
+            0.2515,
+            0.3592,
+            0.4529,
+            0.2758
+          ]
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": "switch",
+      "prev_id": "5-194899-C-3.wav",
+      "target_id": "5-263490-A-25.wav",
+      "prior": "cow",
+      "options": [
+        "glass breaking",
+        "cow",
+        "footsteps",
+        "train"
+      ],
+      "truth": "footsteps",
+      "sha256": "edd1a0356d58ac318d41a733d1d72ab0739a698b412e94de94efce09bcf6819d",
+      "answers": {
+        "before": [
+          "footsteps"
+        ],
+        "after": [
+          "footsteps"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a cow is mooing and a person is walking in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is walking on a hard surface and a horse walks by"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "cow",
+          "scores": [
+            0.0621,
+            0.5491,
+            0.2522,
+            0.1369
+          ]
+        },
+        "recent": {
+          "choice": "cow",
+          "scores": [
+            0.0031,
+            0.2227,
+            0.1991,
+            0.1381
+          ]
+        }
+      }
+    },
+    {
+      "id": 11,
+      "type": "switch",
+      "prev_id": "5-156999-B-19.wav",
+      "target_id": "5-156026-C-4.wav",
+      "prior": "thunderstorm",
+      "options": [
+        "train",
+        "frog",
+        "can opening",
+        "thunderstorm"
+      ],
+      "truth": "frog",
+      "sha256": "be8149256c1ce09ed861848a55e4ee4c9bca5d9f232cb24355e6f832dd22dbf1",
+      "answers": {
+        "before": [
+          "frog"
+        ],
+        "after": [
+          "frog"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a frog croaks as it is fired in the distance"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a duck is quacking and a frog is croaking in the background"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "frog",
+          "scores": [
+            0.1659,
+            0.6095,
+            0.1489,
+            0.2348
+          ]
+        },
+        "recent": {
+          "choice": "frog",
+          "scores": [
+            0.0966,
+            0.5455,
+            0.1547,
+            0.1797
+          ]
+        }
+      }
+    },
+    {
+      "id": 12,
+      "type": "repeat",
+      "prev_id": "5-253534-A-26.wav",
+      "target_id": "5-253534-A-26.wav",
+      "prior": "laughing",
+      "options": [
+        "water drops",
+        "coughing",
+        "can opening",
+        "laughing"
+      ],
+      "truth": "laughing",
+      "sha256": "f4847af839adcd4db4e932d90c008ae26b6f489593f4616946f1e9a5cf3efabd",
+      "answers": {
+        "before": [
+          "laughing"
+        ],
+        "after": [
+          "laughing"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby is laughing and a person is giggling"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby is laughing and crying and giggling"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "laughing",
+          "scores": [
+            0.2048,
+            0.2846,
+            0.1409,
+            0.5587
+          ]
+        },
+        "recent": {
+          "choice": "laughing",
+          "scores": [
+            0.2194,
+            0.2795,
+            0.1113,
+            0.5357
+          ]
+        }
+      }
+    },
+    {
+      "id": 13,
+      "type": "repeat",
+      "prev_id": "5-200339-A-1.wav",
+      "target_id": "5-200339-A-1.wav",
+      "prior": "rooster",
+      "options": [
+        "water drops",
+        "rooster",
+        "coughing",
+        "hen"
+      ],
+      "truth": "rooster",
+      "sha256": "454a513d355f86898a6fbc9e5e3b92a5b6bb8795aff5125607847ee522c0be29",
+      "answers": {
+        "before": [
+          "rooster"
+        ],
+        "after": [
+          "rooster"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a chicken is clucking while a rooster crows in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a chicken is clucking while a rooster crows in the background"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "rooster",
+          "scores": [
+            0.2065,
+            0.6194,
+            0.2454,
+            0.4719
+          ]
+        },
+        "recent": {
+          "choice": "rooster",
+          "scores": [
+            0.2065,
+            0.6194,
+            0.2454,
+            0.4719
+          ]
+        }
+      }
+    },
+    {
+      "id": 14,
+      "type": "repeat",
+      "prev_id": "5-215179-A-13.wav",
+      "target_id": "5-215179-A-13.wav",
+      "prior": "crickets",
+      "options": [
+        "crickets",
+        "crow",
+        "coughing",
+        "hen"
+      ],
+      "truth": "crickets",
+      "sha256": "8bf8381c460a2254a81e16f27e51367324e8a26ba62f4062a065e81abbcbc629",
+      "answers": {
+        "before": [
+          "crickets"
+        ],
+        "after": [
+          "crickets"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "crickets chirp in the background as a car drives by"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "crickets chirp in the background as a car drives by"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "crickets",
+          "scores": [
+            0.656,
+            0.319,
+            0.248,
+            0.1541
+          ]
+        },
+        "recent": {
+          "choice": "crickets",
+          "scores": [
+            0.656,
+            0.319,
+            0.248,
+            0.1541
+          ]
+        }
+      }
+    },
+    {
+      "id": 15,
+      "type": "repeat",
+      "prev_id": "5-251426-B-30.wav",
+      "target_id": "5-251426-B-30.wav",
+      "prior": "door wood knock",
+      "options": [
+        "crow",
+        "vacuum cleaner",
+        "hen",
+        "door wood knock"
+      ],
+      "truth": "door wood knock",
+      "sha256": "0736d542c3220c1b7586f1aa1358b00fdddd2302b446386a570e90f5966370c9",
+      "answers": {
+        "before": [
+          "door wood knock"
+        ],
+        "after": [
+          "door wood knock"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone is knocking on a door five times at different speeds"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone is knocking on a door five times at different speeds"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "door wood knock",
+          "scores": [
+            0.0816,
+            0.1277,
+            0.0939,
+            0.5162
+          ]
+        },
+        "recent": {
+          "choice": "door wood knock",
+          "scores": [
+            0.0816,
+            0.1277,
+            0.0939,
+            0.5162
+          ]
+        }
+      }
+    },
+    {
+      "id": 16,
+      "type": "repeat",
+      "prev_id": "5-219379-A-11.wav",
+      "target_id": "5-219379-A-11.wav",
+      "prior": "sea waves",
+      "options": [
+        "clock tick",
+        "crow",
+        "sea waves",
+        "vacuum cleaner"
+      ],
+      "truth": "sea waves",
+      "sha256": "4a90e6620bb35454b2af3f7f8cfc23c249636612c607202bd63be15553cd137a",
+      "answers": {
+        "before": [
+          "sea waves"
+        ],
+        "after": [
+          "sea waves"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "waves are crashing against the shore and the ocean is splashing"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "waves are crashing against the shore and the ocean is splashing"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "sea waves",
+          "scores": [
+            0.159,
+            0.1473,
+            0.5497,
+            0.1272
+          ]
+        },
+        "recent": {
+          "choice": "sea waves",
+          "scores": [
+            0.159,
+            0.1473,
+            0.5497,
+            0.1272
+          ]
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": "repeat",
+      "prev_id": "5-151085-A-20.wav",
+      "target_id": "5-151085-A-20.wav",
+      "prior": "crying baby",
+      "options": [
+        "church bells",
+        "vacuum cleaner",
+        "crying baby",
+        "clock tick"
+      ],
+      "truth": "crying baby",
+      "sha256": "0f5af4ac9556eab2fb8c13ce91106c31ad591f5301065424f502c4acfa487699",
+      "answers": {
+        "before": [
+          "crying baby"
+        ],
+        "after": [
+          "crying baby"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby is crying loudly in a small room"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a baby is crying and making loud noises"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "crying baby",
+          "scores": [
+            0.0906,
+            0.1495,
+            0.6011,
+            0.1118
+          ]
+        },
+        "recent": {
+          "choice": "crying baby",
+          "scores": [
+            0.189,
+            0.2025,
+            0.7738,
+            0.205
+          ]
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": "outside",
+      "prev_id": "5-191497-A-33.wav",
+      "target_id": "5-177957-D-40.wav",
+      "prior": "door wood creaks",
+      "options": [
+        "car horn",
+        "church bells",
+        "clock tick",
+        "door wood creaks"
+      ],
+      "truth": "none of these",
+      "sha256": "a9704b39b3997a3d311053bcee2cd45114c0a3be3bea7826932b646f4586f577",
+      "answers": {
+        "before": [
+          "door wood creaks"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a door is creaking as it is opened and closed"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "an airplane is flying in the sky overhead"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "outside",
+      "prev_id": "5-185579-B-41.wav",
+      "target_id": "5-189212-A-12.wav",
+      "prior": "chainsaw",
+      "options": [
+        "chainsaw",
+        "car horn",
+        "church bells",
+        "breathing"
+      ],
+      "truth": "none of these",
+      "sha256": "4374514a02be06d26bbc600ed38ad938d3b85ed2cc8ab3443ad4c306f95ee039",
+      "answers": {
+        "before": [
+          "chainsaw"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone is using a chainsaw to cut wood"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a fire is crackling and popping as it burns"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "type": "outside",
+      "prev_id": "5-216368-A-28.wav",
+      "target_id": "5-251963-A-47.wav",
+      "prior": "snoring",
+      "options": [
+        "cow",
+        "snoring",
+        "breathing",
+        "car horn"
+      ],
+      "truth": "none of these",
+      "sha256": "6f9e8a810dedc2513039006dabce50f9c9c05932c93de7be4bbcebe74cb160b1",
+      "answers": {
+        "before": [
+          "snoring"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is snoring very loudly in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 5.0,
+          "end_s": 10.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a jet flies overhead and then fades into the air"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "type": "silent",
+      "prev_id": "5-195518-A-7.wav",
+      "target_id": null,
+      "prior": "insects",
+      "options": [
+        "thunderstorm",
+        "breathing",
+        "insects",
+        "cow"
+      ],
+      "truth": "silence",
+      "sha256": "f911a00bcfbef17df20cb8783cdd78da170f7a591ee8db17967886fb0609cba8",
+      "answers": {
+        "before": [
+          "silence"
+        ],
+        "after": [
+          "silence"
+        ]
+      },
+      "wide_caption": [],
+      "recent_caption": []
+    },
+    {
+      "id": 22,
+      "type": "silent",
+      "prev_id": "5-220939-A-27.wav",
+      "target_id": null,
+      "prior": "brushing teeth",
+      "options": [
+        "brushing teeth",
+        "thunderstorm",
+        "pouring water",
+        "cow"
+      ],
+      "truth": "silence",
+      "sha256": "29a084c9a6e6dad0f4d114546f5d1fc8157b8f19569ba53e556562dbbed1fd4b",
+      "answers": {
+        "before": [
+          "silence"
+        ],
+        "after": [
+          "silence"
+        ]
+      },
+      "wide_caption": [],
+      "recent_caption": []
+    },
+    {
+      "id": 23,
+      "type": "silent",
+      "prev_id": "5-202898-A-10.wav",
+      "target_id": null,
+      "prior": "rain",
+      "options": [
+        "rain",
+        "pouring water",
+        "clock alarm",
+        "thunderstorm"
+      ],
+      "truth": "silence",
+      "sha256": "6120eb3c2a77c0021444b898b16d495d3856056bc36bdfee98065f8b1b0e6222",
+      "answers": {
+        "before": [
+          "silence"
+        ],
+        "after": [
+          "silence"
+        ]
+      },
+      "wide_caption": [],
+      "recent_caption": []
+    },
+    {
+      "id": 36,
+      "type": "original_transition",
+      "original": "video_10303",
+      "source_sha256": "234a0e694741c1508ec14686a1ab6b79bb8023dec5d4ec9cb7e353b05ea423a7",
+      "sha256": "103c4d9b2bd48be85f085c5105bbc1739a259699593d64b099be7e44864bbfbc",
+      "source_range": [
+        18.163443,
+        24.163443
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 3,
+      "event_id": 5,
+      "options": [
+        "hitting",
+        "liquid movement"
+      ],
+      "prior": "hitting",
+      "truth": "liquid movement",
+      "answers": {
+        "before": [
+          "liquid movement"
+        ],
+        "after": [
+          "liquid movement"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "water is being poured into a glass and then the container is filled with liquid"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "water is being poured into a sink and then a drain is filled with liquid"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "liquid movement",
+          "scores": [
+            0.0417,
+            0.3657
+          ]
+        },
+        "recent": {
+          "choice": "liquid movement",
+          "scores": [
+            0.0815,
+            0.3654
+          ]
+        }
+      }
+    },
+    {
+      "id": 37,
+      "type": "original_transition",
+      "original": "video_2371",
+      "source_sha256": "9ecf6f1550470a0f24f99997a811c1595bbb9982a0d8231181c0ce4c26a202de",
+      "sha256": "a67942ac4f96bc17e87275f02af347c2b6e311f925b3fcc11aadd125d7675050",
+      "source_range": [
+        0.8374160000000002,
+        6.837416
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 1,
+      "event_id": 3,
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "prior": "opening or closing something",
+      "truth": "hitting",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is writing on a piece of paper with a pencil"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is writing on a piece of paper with a marker"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.0403,
+            0.0823
+          ]
+        },
+        "recent": {
+          "choice": "hitting",
+          "scores": [
+            0.0339,
+            0.0804
+          ]
+        }
+      }
+    },
+    {
+      "id": 38,
+      "type": "original_transition",
+      "original": "video_762",
+      "source_sha256": "fa62047c2cbb1930b2a2e0d1d37403a31246ffce5b6fff36f59a0656cfd989af",
+      "sha256": "23fe533d4edf15eca7ccf107fcf657e2d1ef0bf3588a50bbe4b4ae8eee8cabf1",
+      "source_range": [
+        19.604708,
+        25.604708
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 12,
+      "event_id": 20,
+      "options": [
+        "hitting",
+        "speech"
+      ],
+      "prior": "hitting",
+      "truth": "speech",
+      "answers": {
+        "before": [
+          "speech"
+        ],
+        "after": [
+          "speech"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a woman is speaking while dishes are being moved around in the background"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "a woman is speaking while dishes are being moved around in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a woman is speaking and paper is crumpled"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "a woman is speaking and paper is crumpled"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "speech",
+          "scores": [
+            0.1637,
+            0.3099
+          ]
+        },
+        "recent": {
+          "choice": "speech",
+          "scores": [
+            0.0925,
+            0.3645
+          ]
+        }
+      }
+    },
+    {
+      "id": 39,
+      "type": "original_transition",
+      "original": "video_2212",
+      "source_sha256": "e2acf374373d9c8016cb97553089cc3f94611a17d40397809b9f06dcb0024983",
+      "sha256": "390b51d73bcb4bbb1c2678611e2f340e858041e514027ca4af40e7853a1b9fd3",
+      "source_range": [
+        2.9785389999999996,
+        8.978539
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 3,
+      "event_id": 4,
+      "options": [
+        "hitting",
+        "rolling"
+      ],
+      "prior": "hitting",
+      "truth": "rolling",
+      "answers": {
+        "before": [
+          "unsure"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is writing on a piece of paper with a marker"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "a person is writing on a piece of paper with a marker"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone is writing on a piece of paper with a marker"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "someone is writing on a piece of paper with a marker"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.0804,
+            0.04
+          ]
+        },
+        "recent": {
+          "choice": "hitting",
+          "scores": [
+            0.0995,
+            0.0542
+          ]
+        }
+      }
+    },
+    {
+      "id": 40,
+      "type": "original_transition",
+      "original": "video_1857",
+      "source_sha256": "a248f89668e672d41be95bdd7d068b9a63d4217be8a881912190bd30cc6e9d88",
+      "sha256": "56566defe135f220927f60a59dad563ab8fde60369cf1969cd2e79d2cb9e7e2a",
+      "source_range": [
+        23.564816,
+        29.564816
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 15,
+      "event_id": 20,
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "prior": "hitting",
+      "truth": "animal sound",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "animal sound"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1,
+                2
+              ],
+              "impression": "a metal object is being moved across a hard surface and people are talking in the background"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1,
+                2
+              ],
+              "impression": "birds are chirping in the background while a thunderstorm is rumbling in the distance"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.3029,
+            0.3275
+          ]
+        },
+        "recent": {
+          "choice": "animal sound",
+          "scores": [
+            0.3997,
+            0.3096
+          ]
+        }
+      }
+    },
+    {
+      "id": 41,
+      "type": "original_transition",
+      "original": "video_2481",
+      "source_sha256": "d42b3adaa629c61884357f784b35bb0cd15d87f319511eb0fdf0fb7501782ea6",
+      "sha256": "bfc91412ec1083beef0a468bc4336af3e1b857c43e45fee5957313f28826a67a",
+      "source_range": [
+        16.4,
+        22.4
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 10,
+      "event_id": 12,
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "prior": "hitting",
+      "truth": "opening or closing something",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1,
+                2
+              ],
+              "impression": "a person is sweeping the floor with a broom"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1,
+                2
+              ],
+              "impression": "a person is writing on a piece of paper with a marker"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.018,
+            0.0398
+          ]
+        },
+        "recent": {
+          "choice": "hitting",
+          "scores": [
+            0.0339,
+            0.0804
+          ]
+        }
+      }
+    },
+    {
+      "id": 42,
+      "type": "original_transition",
+      "original": "video_4237",
+      "source_sha256": "cd4686e45cc60c08170538c7a26e8cb9ada7202027bf89bd08408219fcf89b04",
+      "sha256": "8ad6dfc7c6d01b657a02e3dc9f709a1a4bdff58aa112f1f809bb17409a075d7a",
+      "source_range": [
+        4.6,
+        10.6
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 1,
+      "event_id": 2,
+      "options": [
+        "dropping",
+        "hitting"
+      ],
+      "prior": "hitting",
+      "truth": "dropping",
+      "answers": {
+        "before": [
+          "dropping"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "dishes are being placed on a table top"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "dishes are being placed on a table and a man speaks"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone is opening and closing a drawer repeatedly"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "someone is opening and closing a door with a lot of dishes and a person coughing in the background"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.0683,
+            0.1321
+          ]
+        },
+        "recent": {
+          "choice": "hitting",
+          "scores": [
+            0.1264,
+            0.142
+          ]
+        }
+      }
+    },
+    {
+      "id": 43,
+      "type": "original_transition",
+      "original": "video_9705",
+      "source_sha256": "01deb2c8dd20bc4a2e97207a69a48438321c1f8b3bbc3e4701b8ede240c1a5ad",
+      "sha256": "1e780d5087e855bf140d4b93760576e96670f28e3d76d260913db61cd104a896",
+      "source_range": [
+        9.108973,
+        15.108973
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 4,
+      "event_id": 5,
+      "options": [
+        "clapping",
+        "opening or closing something"
+      ],
+      "prior": "opening or closing something",
+      "truth": "clapping",
+      "answers": {
+        "before": [
+          "clapping"
+        ],
+        "after": [
+          "clapping"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a group of people are clapping their hands"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a group of people are clapping their hands"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "clapping",
+          "scores": [
+            0.7057,
+            0.1616
+          ]
+        },
+        "recent": {
+          "choice": "clapping",
+          "scores": [
+            0.7057,
+            0.1616
+          ]
+        }
+      }
+    },
+    {
+      "id": 44,
+      "type": "original_transition",
+      "original": "video_5983",
+      "source_sha256": "64306a21768e407e649a43372659387d2e6f31e6c4db2204d06830ecd841b4f0",
+      "sha256": "afc0c96b7839870f59a567589fcb0152ed2ddff1fb53f7608db153c94c72b5b6",
+      "source_range": [
+        4.366523,
+        10.366523
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 4,
+      "event_id": 5,
+      "options": [
+        "breaking of something",
+        "hitting"
+      ],
+      "prior": "hitting",
+      "truth": "breaking of something",
+      "answers": {
+        "before": [
+          "unsure"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is eating food in a glass and then they are placed on a table"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "a person is stirring a bottle cap on a hard surface and then stirs a lid on a table"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is eating food in a container and then they are chewing on the ground"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "someone is opening and closing a container of water"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.0956,
+            0.1194
+          ]
+        },
+        "recent": {
+          "choice": "breaking of something",
+          "scores": [
+            0.1295,
+            0.075
+          ]
+        }
+      }
+    },
+    {
+      "id": 45,
+      "type": "original_transition",
+      "original": "video_6781",
+      "source_sha256": "fccd02b995e3cab0fe99df61f912f46d71fdf5cafab2c550eb7f397d09e27778",
+      "sha256": "9c5e57bd6973fc10e789492f0a8fe6a08cb9c11babe876ee5e980dc2f012e8a6",
+      "source_range": [
+        28.381746,
+        34.381746
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 12,
+      "event_id": 13,
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "prior": "hitting",
+      "truth": "rolling",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "birds chirp in the background as a car drives by"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "birds chirp in the background as a soft wind blows in the distance"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.2007,
+            0.2469
+          ]
+        },
+        "recent": {
+          "choice": "hitting",
+          "scores": [
+            0.2526,
+            0.306
+          ]
+        }
+      }
+    },
+    {
+      "id": 46,
+      "type": "original_transition",
+      "original": "video_8884",
+      "source_sha256": "88175ee71ef19e6ada46fe60c4adc3999e7dde2203d6d7669fe2d3f803a1e835",
+      "sha256": "f5bad6d137cd7fd87aa383bf6f483316a99a667c1851c74e3913910820ea45de",
+      "source_range": [
+        14.933333000000001,
+        20.933333
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 11,
+      "event_id": 8,
+      "options": [
+        "speech",
+        "hitting"
+      ],
+      "prior": "speech",
+      "truth": "hitting",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "hitting"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "dishes are being moved around in a sink and a man is speaking"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "dishes are being moved around in a sink and a man is speaking"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "water is dripping from a faucet into a metal container"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "water is dripping from a faucet into a metal container"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "speech",
+          "scores": [
+            0.2938,
+            0.1854
+          ]
+        },
+        "recent": {
+          "choice": "hitting",
+          "scores": [
+            0.0019,
+            0.022
+          ]
+        }
+      }
+    },
+    {
+      "id": 47,
+      "type": "original_transition",
+      "original": "video_282",
+      "source_sha256": "e4858cfccdd6d8cb22e1c2db72eb06722792328e6d7ea782498917131e88f340",
+      "sha256": "e74b004d23bbe1069f9a090125e713c650793dabcfecff7a10fc5c1772cca1a7",
+      "source_range": [
+        15.084733,
+        21.084733
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 7,
+      "event_id": 8,
+      "options": [
+        "dropping",
+        "opening or closing something"
+      ],
+      "prior": "opening or closing something",
+      "truth": "dropping",
+      "answers": {
+        "before": [
+          "unsure"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is using a tool to dig up some steps"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is walking on a hard surface while cars drive by"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "opening or closing something",
+          "scores": [
+            0.0273,
+            0.1024
+          ]
+        },
+        "recent": {
+          "choice": "dropping",
+          "scores": [
+            0.0698,
+            0.0247
+          ]
+        }
+      }
+    },
+    {
+      "id": 48,
+      "type": "original_transition",
+      "original": "video_9253",
+      "source_sha256": "6dbe9e42d0351220c1e81ade592ad85f8d40f5112fb2744a8205012c41699270",
+      "sha256": "43515adb6f69d9b7dd9b1df31fce5d1161350599cc20799415acd19b23d983c9",
+      "source_range": [
+        12.042517,
+        18.042517
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 3,
+      "event_id": 4,
+      "options": [
+        "liquid movement",
+        "hitting"
+      ],
+      "prior": "hitting",
+      "truth": "liquid movement",
+      "answers": {
+        "before": [
+          "liquid movement"
+        ],
+        "after": [
+          "liquid movement"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is pouring water into a cup"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "water is poured from a faucet into a cup"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "water is being poured into a container at a steady pace"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "water is being poured into a container at a steady pace"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "liquid movement",
+          "scores": [
+            0.3222,
+            0.0951
+          ]
+        },
+        "recent": {
+          "choice": "liquid movement",
+          "scores": [
+            0.4413,
+            0.0494
+          ]
+        }
+      }
+    },
+    {
+      "id": 49,
+      "type": "original_transition",
+      "original": "video_6540",
+      "source_sha256": "e2dbc5c2b09afd8ab86599070c9b3c3731f3a67642640c5e14923f69d6f7e8e1",
+      "sha256": "72e96280f6fc3954b809f0b7b356a2e88bf8c3751c0c980020914c1cc04eabc5",
+      "source_range": [
+        19.416001,
+        25.416001
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 4,
+      "event_id": 6,
+      "options": [
+        "clapping",
+        "hitting"
+      ],
+      "prior": "hitting",
+      "truth": "clapping",
+      "answers": {
+        "before": [
+          "unsure"
+        ],
+        "after": [
+          "clapping"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is clapping their hands against a hard surface"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "someone is clapping their hands at a steady pace"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "clapping",
+          "scores": [
+            0.6978,
+            0.3676
+          ]
+        },
+        "recent": {
+          "choice": "clapping",
+          "scores": [
+            0.7368,
+            0.3327
+          ]
+        }
+      }
+    },
+    {
+      "id": 50,
+      "type": "original_transition",
+      "original": "video_7120",
+      "source_sha256": "848666deba8ac577d5cace913b6fbe393a6934682da26d2a76fe45e5b02161a7",
+      "sha256": "6c015be20bf55a747b349010493e832cf438c4d77e37207ba5329a726d45ab12",
+      "source_range": [
+        2.7769880000000002,
+        8.776988
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 1,
+      "event_id": 12,
+      "options": [
+        "hitting",
+        "animal sound"
+      ],
+      "prior": "hitting",
+      "truth": "animal sound",
+      "answers": {
+        "before": [
+          "none of these"
+        ],
+        "after": [
+          "hitting"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is walking on a hard surface and then opening a door and closing it"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "a person is walking on a hard surface with a wooden object"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is walking on a hard surface with a tool"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "a person is walking on a hard surface with a tool"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "hitting",
+          "scores": [
+            0.1277,
+            0.0383
+          ]
+        },
+        "recent": {
+          "choice": "hitting",
+          "scores": [
+            0.1103,
+            -0.0023
+          ]
+        }
+      }
+    },
+    {
+      "id": 51,
+      "type": "original_transition",
+      "original": "video_2983",
+      "source_sha256": "cc78781e479c2fbe8c152951ae33f454f86fd3a533a5e12436628cfb1ea7223d",
+      "sha256": "d019b7f5c74236b0b7bc1d411e84c3a04c89ac168006b992d4df55efea71b0ea",
+      "source_range": [
+        2.397208,
+        8.397208
+      ],
+      "step": 3,
+      "duration": 6,
+      "prior_event_id": 1,
+      "event_id": 12,
+      "options": [
+        "hitting",
+        "breaking of something"
+      ],
+      "prior": "hitting",
+      "truth": "breaking of something",
+      "answers": {
+        "before": [
+          "hitting"
+        ],
+        "after": [
+          "none of these"
+        ]
+      },
+      "wide_caption": [
+        {
+          "start_s": 0.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "a person is chopping wood with a tool on a hard surface"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "a person is chopping vegetables on a table with a tool"
+            }
+          ]
+        }
+      ],
+      "recent_caption": [
+        {
+          "start_s": 3.0,
+          "end_s": 6.0,
+          "channels": [
+            {
+              "channels": [
+                1
+              ],
+              "impression": "water is being poured from a faucet into a container"
+            },
+            {
+              "channels": [
+                2
+              ],
+              "impression": "someone is opening and closing a container of water with their hands and a person talking in the background"
+            }
+          ]
+        }
+      ],
+      "caption_ranking": {
+        "wide": {
+          "choice": "breaking of something",
+          "scores": [
+            0.1317,
+            0.1496
+          ]
+        },
+        "recent": {
+          "choice": "breaking of something",
+          "scores": [
+            0.0892,
+            0.1441
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "switch": {
+      "before": {
+        "other_response": 2,
+        "correct": 9,
+        "previous_source": 1
+      },
+      "after": {
+        "correct": 10,
+        "previous_source": 1,
+        "other_response": 1
+      },
+      "paired_change": {
+        "mean": 0.08333333333333333,
+        "recording_bootstrap_95": [
+          -0.16666666666666666,
+          0.3333333333333333
+        ]
+      }
+    },
+    "repeat": {
+      "before": {
+        "correct": 6
+      },
+      "after": {
+        "correct": 6
+      },
+      "paired_change": {
+        "mean": 0.0,
+        "recording_bootstrap_95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "outside": {
+      "before": {
+        "previous_source": 3
+      },
+      "after": {
+        "correct": 3
+      },
+      "paired_change": {
+        "mean": 1.0,
+        "recording_bootstrap_95": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "silent": {
+      "before": {
+        "correct": 3
+      },
+      "after": {
+        "correct": 3
+      },
+      "paired_change": {
+        "mean": 0.0,
+        "recording_bootstrap_95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "original_transition": {
+      "before": {
+        "correct": 5,
+        "other_response": 6,
+        "unsure": 4,
+        "previous_source": 1
+      },
+      "after": {
+        "correct": 7,
+        "other_response": 8,
+        "previous_source": 1
+      },
+      "paired_change": {
+        "mean": 0.125,
+        "recording_bootstrap_95": [
+          -0.125,
+          0.375
+        ]
+      }
+    },
+    "caption_only": {
+      "switch": {
+        "wide": 5,
+        "recent": 10
+      },
+      "repeat": {
+        "wide": 6,
+        "recent": 6
+      },
+      "original_transition": {
+        "wide": 7,
+        "recent": 11
+      }
+    },
+    "urban": {
+      "before": {
+        "reader_listener": 0.5656944444444444,
+        "listener_listener": 0.5917129629629629,
+        "different_recording": 0.3159280303030303,
+        "by_recording": [
+          {
+            "id": "airport-lyon-1101-40173-a.wav",
+            "reader_listener": 0.625,
+            "listener_listener": 0.3472222222222222,
+            "different_recording": 0.38636363636363635
+          },
+          {
+            "id": "airport-milan-1061-44026-a.wav",
+            "reader_listener": 0.4666666666666667,
+            "listener_listener": 0.8,
+            "different_recording": 0.48484848484848486
+          },
+          {
+            "id": "airport-paris-7-318-a.wav",
+            "reader_listener": 0.6333333333333333,
+            "listener_listener": 0.445,
+            "different_recording": 0.34454545454545454
+          },
+          {
+            "id": "airport-stockholm-11-468-a.wav",
+            "reader_listener": 0.2833333333333333,
+            "listener_listener": 0.7999999999999999,
+            "different_recording": 0.353030303030303
+          },
+          {
+            "id": "park-lyon-1144-40742-a.wav",
+            "reader_listener": 0.37333333333333335,
+            "listener_listener": 0.5333333333333333,
+            "different_recording": 0.33636363636363636
+          },
+          {
+            "id": "park-milan-1164-44883-a.wav",
+            "reader_listener": 0.04,
+            "listener_listener": 0.4083333333333333,
+            "different_recording": 0.23787878787878788
+          },
+          {
+            "id": "park-paris-99-2811-a.wav",
+            "reader_listener": 0.36666666666666664,
+            "listener_listener": 0.45,
+            "different_recording": 0.19696969696969696
+          },
+          {
+            "id": "park-prague-1092-40152-a.wav",
+            "reader_listener": 0.625,
+            "listener_listener": 0.3333333333333333,
+            "different_recording": 0.16666666666666666
+          },
+          {
+            "id": "public_square-lisbon-1068-43672-a.wav",
+            "reader_listener": 0.875,
+            "listener_listener": 0.75,
+            "different_recording": 0.3958333333333333
+          },
+          {
+            "id": "public_square-lyon-1056-41097-a.wav",
+            "reader_listener": 0.8333333333333334,
+            "listener_listener": 0.6666666666666666,
+            "different_recording": 0.42803030303030304
+          },
+          {
+            "id": "public_square-paris-117-3446-a.wav",
+            "reader_listener": 1.0,
+            "listener_listener": 1.0,
+            "different_recording": 0.12878787878787878
+          },
+          {
+            "id": "public_square-stockholm-119-3492-a.wav",
+            "reader_listener": 0.6666666666666666,
+            "listener_listener": 0.5666666666666667,
+            "different_recording": 0.3318181818181818
+          }
+        ]
+      },
+      "after": {
+        "reader_listener": 0.5654166666666667,
+        "listener_listener": 0.5917129629629629,
+        "different_recording": 0.305719696969697,
+        "by_recording": [
+          {
+            "id": "airport-lyon-1101-40173-a.wav",
+            "reader_listener": 0.625,
+            "listener_listener": 0.3472222222222222,
+            "different_recording": 0.3587121212121212
+          },
+          {
+            "id": "airport-milan-1061-44026-a.wav",
+            "reader_listener": 0.39999999999999997,
+            "listener_listener": 0.8,
+            "different_recording": 0.46969696969696967
+          },
+          {
+            "id": "airport-paris-7-318-a.wav",
+            "reader_listener": 0.6333333333333333,
+            "listener_listener": 0.445,
+            "different_recording": 0.34878787878787876
+          },
+          {
+            "id": "airport-stockholm-11-468-a.wav",
+            "reader_listener": 0.2833333333333333,
+            "listener_listener": 0.7999999999999999,
+            "different_recording": 0.32606060606060605
+          },
+          {
+            "id": "park-lyon-1144-40742-a.wav",
+            "reader_listener": 0.37333333333333335,
+            "listener_listener": 0.5333333333333333,
+            "different_recording": 0.3412121212121212
+          },
+          {
+            "id": "park-milan-1164-44883-a.wav",
+            "reader_listener": 0.22,
+            "listener_listener": 0.4083333333333333,
+            "different_recording": 0.2381818181818182
+          },
+          {
+            "id": "park-paris-99-2811-a.wav",
+            "reader_listener": 0.25,
+            "listener_listener": 0.45,
+            "different_recording": 0.18484848484848485
+          },
+          {
+            "id": "park-prague-1092-40152-a.wav",
+            "reader_listener": 0.625,
+            "listener_listener": 0.3333333333333333,
+            "different_recording": 0.17234848484848483
+          },
+          {
+            "id": "public_square-lisbon-1068-43672-a.wav",
+            "reader_listener": 0.875,
+            "listener_listener": 0.75,
+            "different_recording": 0.3693181818181818
+          },
+          {
+            "id": "public_square-lyon-1056-41097-a.wav",
+            "reader_listener": 0.8333333333333334,
+            "listener_listener": 0.6666666666666666,
+            "different_recording": 0.4034090909090909
+          },
+          {
+            "id": "public_square-paris-117-3446-a.wav",
+            "reader_listener": 1.0,
+            "listener_listener": 1.0,
+            "different_recording": 0.16666666666666666
+          },
+          {
+            "id": "public_square-stockholm-119-3492-a.wav",
+            "reader_listener": 0.6666666666666666,
+            "listener_listener": 0.5666666666666667,
+            "different_recording": 0.28939393939393937
+          }
+        ]
+      },
+      "paired_change": {
+        "mean": -0.00027777777777777957,
+        "recording_bootstrap_95": [
+          -0.03472222222222222,
+          0.03944444444444444
+        ]
+      }
+    }
+  },
+  "door": {
+    "until_s": 8.5,
+    "ends": [
+      6,
+      8.5
+    ],
+    "details": "Live MCP with local ASR and no native audio attachment, old and new caption worker, anonymous clips. B has only room tone; A adds the key recording. See examples/make_door_trial.py.",
+    "answers": {
+      "before": {
+        "A": "A simple illustration of a closed brown door against a beige wall remains essentially unchanged throughout. The audio reader suggests jingling or rattling, possibly keys, with a louder burst near the end; the source is uncertain, and no intelligible words were detected.",
+        "B": "A simple illustration of a closed brown door against a beige wall remained unchanged throughout. The audio reading suggests a steady fan-like sound, though its source is uncertain; no intelligible words were detected."
+      },
+      "after": {
+        "A": "A simple illustration shows a closed brown door in a beige wall, with no obvious visual change. The audio reading suggests jingling or rattling, possibly keys, becoming louder briefly before fading; no intelligible words were detected.",
+        "B": "A simple illustration shows a closed brown door against a pale wall, with no apparent visual change. The audio reading suggests a faint, steady fan-like sound, though its source is uncertain; no intelligible words were detected."
+      }
+    },
+    "different_future": {
+      "until": 8.5,
+      "ends": [
+        6,
+        8.5
+      ],
+      "blocks": [
+        [
+          [
+            "text",
+            "ffdff92aadcb7d62a3686e34511ab1a518d622dac795623bc7754d221b234523"
+          ],
+          [
+            "image",
+            "0cf5b95a4e79d643ec14c52c3f695b32cade92ea107e85ca71d495fcadea6df6"
+          ],
+          [
+            "image",
+            "44f5c9cc6180aaf6026191f9dedb5f99f941d2701ff545556d549a0b53978f9a"
+          ],
+          [
+            "image",
+            "bfcfe1c6228c5092cf52240444a2e44d7232c52efc37b820c898d1501a89dc32"
+          ],
+          [
+            "image",
+            "20e5862906438a09f6d05d407ba8079d7befd944029a38b7ac614486818b62dd"
+          ],
+          [
+            "image",
+            "077888a84d661de7851c6b449fd092161c3aa92ad6d110b52434795ef552e698"
+          ],
+          [
+            "image",
+            "66e0131e89d4cf39bc9768921aa4233bb502e6fe43bbfd2e10f87f070d86e230"
+          ],
+          [
+            "audio",
+            "ac85ecf2448bf607a3f890ccb9cebed9ce6d2a4f83bcd11ea58f43b2d7a41ac1"
+          ]
+        ],
+        [
+          [
+            "text",
+            "e0a146a75b1cda1aff712d2556a5a9f53bb31363b2b7a9a496a7657483478221"
+          ],
+          [
+            "image",
+            "7686b0b4d0073e232b26200eef761a3dc0152e5dfd4602a15c2c3e54fe339d9c"
+          ],
+          [
+            "image",
+            "a9a5470b01eb019b98af2a148916595fd0bfcefbb225fc21bb883301cf5adae2"
+          ],
+          [
+            "image",
+            "72553dcd38c3fc6cb142c3743ee5c6b376bca098758fefb45d1538dc8375ee89"
+          ],
+          [
+            "image",
+            "077888a84d661de7851c6b449fd092161c3aa92ad6d110b52434795ef552e698"
+          ],
+          [
+            "image",
+            "4ace5651be0e503936290201fcb959c7e5115f93fefa0348127d448e254fe258"
+          ],
+          [
+            "audio",
+            "e1ebf4ae3cc1673a0b117efa675ee22bd6ce45e9c611e4ec22a0408ad8a1ade3"
+          ]
+        ],
+        [
+          [
+            "text",
+            "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+          ]
+        ]
+      ],
+      "identical": true
+    }
+  },
+  "waveform_worker_audit": {
+    "clips": 52,
+    "old_windows": 101,
+    "recent_windows": 49,
+    "warm_second_turn_seconds": {
+      "before": {
+        "median": 0.33518275000096764,
+        "sum": 19.880648373014992,
+        "n": 51
+      },
+      "after": {
+        "median": 0.5529863749979995,
+        "sum": 35.66330067101808,
+        "n": 51
+      }
+    }
+  }
+}

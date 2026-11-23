@@ -9,7 +9,7 @@
   reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second] ["sound description" ...]    compare descriptions with the recorded channels
-  reel observe DIR --t0 S --t1 S [--joint] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
+  reel observe DIR --t0 S --t1 S [--joint] [--motion-point X Y] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
   reel speech TURN [--lang CODE] [--verify]               read words from a delivered audio interval
   reel follow TURN --from S --point X Y [--out NEW_DIR]    follow a pictured point through published frames
   reel look TURN --box LEFT TOP RIGHT BOTTOM     inspect a region of the published full-resolution picture
@@ -25,6 +25,14 @@ import argparse, importlib, json, pathlib, re, shutil, subprocess, sys
 from config import HOME, UNISAL, MODELS, GENRES, SEP_PY, CROWD_PY, ASR_PY, HEAR_PY, COMPARE_PY, GAZE_PY, SYNC_PY, SYNCHFORMER, SYNC_CKPT, SYNC_URL
 
 HERE = pathlib.Path(__file__).resolve().parent
+
+
+def observation_options(parser):
+    parser.add_argument("--motion-point", type=float, nargs=2, metavar=("X", "Y"),
+                        help="show the pixels on two fixed lines through this point (0 to 1) over time")
+    parser.add_argument("--joint", action="store_true", help="interpret the matching waveform and pictures together")
+    parser.add_argument("--focus", type=float, nargs=4, metavar=("LEFT", "TOP", "RIGHT", "BOTTOM"),
+                        help="follow this region's motion alongside the recorded sound")
 
 
 def has(py, mod):
@@ -299,6 +307,8 @@ def main():
         ap.add_argument("--max-frames", type=int, help="pause after at most this many displayed pictures (1 to 12)")
         ap.add_argument("--continuous", action="store_true", help="present the full step through changes in the picture and sound")
         x = ap.parse_args(sys.argv[2:])
+        replay_options = argparse.ArgumentParser(add_help=False, exit_on_error=False, allow_abbrev=False)
+        observation_options(replay_options)
         sound_reader = SoundReader()
         waveform = sound_reader if x.describe_sounds or x.joint else None
         playback = play(x.source, x.out, until=x.until, tracks=x.tracks, step=x.step, describe_sounds=x.describe_sounds,
@@ -394,19 +404,17 @@ def main():
                             # Everything after --question belongs to the listener, preserving case and punctuation.
                             parts = re.split(r"\s+--question(?:\s+|$)", line.strip(), maxsplit=1)
                             fields = parts[0].split()
-                            joint = "--joint" in fields[3:]
-                            if joint:
-                                fields.remove("--joint")
+                            options, extra = replay_options.parse_known_args(fields[3:])
+                            if len(fields) < 3 or extra:
+                                raise ValueError("use observe START END [--joint] [--focus LEFT TOP RIGHT BOTTOM] "
+                                                 "[--motion-point X Y] [--question TEXT]")
                             question = parts[1] if len(parts) == 2 else None
-                            if len(fields) not in (3, 8) or len(fields) == 8 and fields[3] != "--focus":
-                                raise ValueError("use observe START END [--joint] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT]")
-                            focus = list(map(float, fields[4:])) if len(fields) == 8 else None
                             with original.reading(), sound_reader.for_replay():
-                                result = observe(path.parent, float(fields[1]), float(fields[2]), focus=focus,
-                                                 playback_source=x.source, question=question,
-                                                 sound_reader=sound_reader, joint=joint)
+                                result = observe(path.parent, float(fields[1]), float(fields[2]), focus=options.focus,
+                                                 playback_source=x.source, question=question, sound_reader=sound_reader,
+                                                 joint=options.joint, motion_point=options.motion_point)
                             print(json.dumps(result, ensure_ascii=False), flush=True)
-                        except (ValueError, OSError, subprocess.CalledProcessError) as error:
+                        except (argparse.ArgumentError, ValueError, OSError, subprocess.CalledProcessError) as error:
                             print(json.dumps({"error": str(error)}), flush=True)
                         continue
                     if command[:1] == ["listen"]:
@@ -480,9 +488,7 @@ def main():
             ap.add_argument("--question", help="ask the local waveform model about the recorded sound")
             ap.add_argument("--compare-sounds", action="store_true", help="also rank sound descriptions with local CLAP")
         else:
-            ap.add_argument("--joint", action="store_true", help="interpret the matching waveform and pictures together")
-            ap.add_argument("--focus", type=float, nargs=4, metavar=("LEFT", "TOP", "RIGHT", "BOTTOM"),
-                            help="follow this region's motion alongside the recorded sound")
+            observation_options(ap)
             ap.add_argument("--question", help="ask the local audio reader about exactly this interval")
             ap.add_argument("--media", action="store_true", help="also deliver a synchronized playable excerpt")
             ap.add_argument("--sync-region", action="append", type=float, nargs=4, default=[],
@@ -493,7 +499,7 @@ def main():
             if cmd == "observe":
                 from observe import observe
                 data = observe(x.out, x.t0, x.t1, sync_regions=x.sync_region, media=x.media,
-                               focus=x.focus, question=x.question, joint=x.joint)
+                               focus=x.focus, question=x.question, joint=x.joint, motion_point=x.motion_point)
             else:
                 from listen import inspect_sound
                 data = inspect_sound(x.out, x.t0, x.t1, compare_sounds=x.compare_sounds, describe_sounds=x.describe_sounds,

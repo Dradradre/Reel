@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 if __package__:
+    from .motion_slice import motion_slices, validate_motion_point
     from .action_view import action_frames, action_views
     from .turn_audio import released_samples
     from .replay import replay
@@ -18,6 +19,7 @@ if __package__:
     from .listen import _slice_audio
     from .region_sync import regional_timing, validate_regions
 else:
+    from motion_slice import motion_slices, validate_motion_point
     from action_view import action_frames, action_views
     from turn_audio import released_samples
     from replay import replay
@@ -32,7 +34,9 @@ else:
 
 
 def observe(out, start, end, *, sync_regions=(), media=False, focus=None, playback_source=None,
-            question=None, sound_reader=None, joint=False):
+            question=None, sound_reader=None, joint=False, motion_point=None):
+    if motion_point is not None:
+        validate_motion_point(motion_point)
     validate_regions(sync_regions)
     if focus is not None:
         validate_regions([focus])
@@ -109,6 +113,11 @@ def observe(out, start, end, *, sync_regions=(), media=False, focus=None, playba
                 event["file"] = str((out / event["file"]).resolve())
     if info["has_video"] and pages:
         size = sheet_size(info)
+        if motion_point is not None:
+            slices = motion_slices(out, frames_from_sheets(pages, size), size, start, end, picture_end, motion_point)
+            for page in slices:
+                page["file"] = str((out / page["file"]).resolve())
+            report["motion_slices"] = slices
         details = pages
         if focus is not None:
             size, frames = action_frames(source, info, start, min(end, picture_end), focus)

@@ -43,6 +43,7 @@ order, with nothing left out.
 | Lane | What it is | What a viewer notices there |
 |---|---|---|
 | frames over time | selected whole frames at their recorded presentation times. A frame can stay up across a long pause between updates. Reel maps tagged PQ and HLG pictures to sRGB with a colour-managed FFmpeg build | See who and what share the screen. During playback, extra timestamped frames can reveal a brief local change. A pair of times and a box let you inspect its original pixels with `look`. [Reading trial](docs/perception-check.md#잠깐-나타난-글자를-다시-읽을-때) |
+| motion point (playback) | the pixels along two fixed lines through a point, from every displayed frame | see how many times something crosses a line and in which direction with `view(motion_point=[x,y])` |
 | follow (playback) | the point you selected in an earlier picture, followed through each released frame | compare the selected detail with the last picture in which the tracker located it |
 | subject | where the person the film is about appears, and whether the eye is predicted to land on them | the film losing its subject |
 | on screen | recognized words and numbers during the frames in which they appear | read a score or sign alongside the sound at that moment |

@@ -1,0 +1,132 @@
+{
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "method": "Two silent seconds, 120 exposures at 60 Hz. Same anonymously named source and question in each pair. A fresh isolated session saw one first-viewing image/text response. No shell, answer key, or later replay. One observed response per condition per film. No human participants in the crossing task.",
+  "baseline_revision": "12b1109",
+  "coordinate": [
+    0.5,
+    0.33
+  ],
+  "prompt": "Watch the two-second interval by calling advance(turn=1, changes=[]). A coral square may move near the upper third of the picture. Count its crossings of the vertical line halfway across the picture. Give the direction of each crossing in time order: R for travel to the right, L for travel to the left. Ignore other shapes. Return just JSON {\"count\":integer or null,\"directions\":[strings]}; use null and [] if you cannot tell how many, and \"?\" for an uncertain direction. Do not advance a second time.",
+  "generator": "examples/make_crossing_trial.py OUTPUT.mkv DIRECTIONS --seed SEED",
+  "trials": [
+    {
+      "seed": 83831,
+      "directions": "",
+      "rgb24_sha256": "33b3c65e2aa487abd719be81b8e13ad2fdcc173401a2e31c316a474c076faaaa",
+      "baseline": {
+        "count": 0,
+        "directions": []
+      },
+      "motion": {
+        "count": 0,
+        "directions": []
+      }
+    },
+    {
+      "seed": 83832,
+      "directions": "L",
+      "rgb24_sha256": "0a818162a05081b25c952ffb9be51c3e76b3015424f6d051ecc8bd4f8eb389ce",
+      "baseline": {
+        "count": 2,
+        "directions": [
+          "R",
+          "L"
+        ]
+      },
+      "motion": {
+        "count": 1,
+        "directions": [
+          "L"
+        ]
+      }
+    },
+    {
+      "seed": 83833,
+      "directions": "RL",
+      "rgb24_sha256": "bb7e45bfcd95c231640b59e0fb1ce6b5ebffcec55995862ede8352a3a8f929d3",
+      "baseline": {
+        "count": 3,
+        "directions": [
+          "R",
+          "L",
+          "R"
+        ]
+      },
+      "motion": {
+        "count": 2,
+        "directions": [
+          "R",
+          "L"
+        ]
+      }
+    },
+    {
+      "seed": 83834,
+      "directions": "RRLR",
+      "rgb24_sha256": "c6fa06ef9d6da3d7fe88d362f239a9928aa9de9364a593afee4123356b294dfc",
+      "baseline": {
+        "count": null,
+        "directions": []
+      },
+      "motion": {
+        "count": 4,
+        "directions": [
+          "R",
+          "R",
+          "L",
+          "R"
+        ]
+      }
+    },
+    {
+      "seed": 83835,
+      "directions": "LRLLRR",
+      "rgb24_sha256": "7c5c9b35c56b4d8e71056f79bb957b9e9ee98fe6dd248d573196ee0c6f9c585a",
+      "baseline": {
+        "count": null,
+        "directions": []
+      },
+      "motion": {
+        "count": 6,
+        "directions": [
+          "L",
+          "R",
+          "L",
+          "L",
+          "R",
+          "R"
+        ]
+      }
+    },
+    {
+      "seed": 83836,
+      "directions": "LLR",
+      "rgb24_sha256": "9ce217945359a4ababbdba1fa9139fbf61652f4f5171e04b6bbefdb6f88e3e98",
+      "baseline": {
+        "count": null,
+        "directions": []
+      },
+      "motion": {
+        "count": 3,
+        "directions": [
+          "L",
+          "L",
+          "R"
+        ]
+      }
+    }
+  ],
+  "exact_count_and_all_directions": {
+    "baseline": 1,
+    "motion": 6
+  },
+  "door_before_opening": {
+    "until_s": 8.5,
+    "mode": "ordinary view with the WAV attachment disabled; same prompt, checked heard_words on the last released turn",
+    "source": "See event-boundaries.json and examples/make_door_trial.py",
+    "answers": {
+      "A": "A simple illustration showed a closed brown door against a beige wall, with no visible change. The audio measurements show a brief increase in sound around the middle, but its source is uncertain, and the speech reader found no intelligible words.",
+      "B": "A simple illustration showed a closed brown door in a beige wall, with no visible change. The audio measurements showed a very faint, steady signal of uncertain origin, and the speech reader found no intelligible words."
+    }
+  }
+}

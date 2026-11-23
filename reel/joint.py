@@ -102,6 +102,20 @@ def visual_input(entries, size, start, end, *, long_context=False):
     return "timed_video", np.stack([np.asarray(frames[i]) for i in order]), grid_times, order
 
 
+def legacy_picture_size(parts, source):
+    """Recover frame-sheet dimensions from playback saved before picture_size was recorded."""
+    for path, packet in reversed(parts):
+        if still := packet.get("current_frame"):
+            with Image.open(path / still["file"]) as image:
+                return sheet_size({"display_aspect": image.width / image.height})
+    if source is not None:
+        source = Path(source)
+        if source.is_dir():
+            source = reel_source(source, json.loads((source / "meta.json").read_text()))
+        return sheet_size(probe(source))
+    raise ValueError("missing picture dimensions for the released frames")
+
+
 def published_scene(directory, seconds=None, source=None, *, interval=None):
     """Collect the released cells and PCM for a single time span, across playback pauses."""
     if seconds is not None and not 0 < seconds <= CONTEXT_SECONDS:
@@ -157,19 +171,7 @@ def published_scene(directory, seconds=None, source=None, *, interval=None):
         page["first_cell"] += skip
         page["pts_us"] = page["pts_us"][skip:]
     if pages and picture_end > start and size is None:
-        # Playback directories created before picture_size still contain the full-resolution still.
-        for path, packet in reversed(parts):
-            if still := packet.get("current_frame"):
-                with Image.open(path / still["file"]) as image:
-                    size = sheet_size({"display_aspect": image.width / image.height})
-                break
-        if size is None and source is not None:
-            source = Path(source)
-            if source.is_dir():
-                source = reel_source(source, json.loads((source / "meta.json").read_text()))
-            size = sheet_size(probe(source))
-        if size is None:
-            raise ValueError("missing picture dimensions for the released frames")
+        size = legacy_picture_size(parts, source)
     scene = {"start": start, "end": end, "pages": pages, "size": size, "picture_end": picture_end}
     if not view["audio"]:
         scene["status"] = "no_audio"

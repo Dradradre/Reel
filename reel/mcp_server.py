@@ -32,8 +32,9 @@ if __package__:
     from .point_reader import PointReader
     from .frames import SHEET_COLUMNS, SHEET_ROWS, frames_from_sheets
     from .hearing import SoundReader, WINDOW_S
-    from .joint import CONTEXT_SECONDS, published_scene, read_published_scene, scene_levels
+    from .joint import CONTEXT_SECONDS, legacy_picture_size, published_scene, read_published_scene, scene_levels
     from .live_speech import SpeechReader
+    from .motion_slice import motion_slices, validate_motion_point
     from .observe import observe as observe_interval
     from .play import PlaybackPace, channel_spectrum, play
     from .region_sync import published_timing, region_views, validate_regions
@@ -56,8 +57,9 @@ else:
     from point_reader import PointReader
     from frames import SHEET_COLUMNS, SHEET_ROWS, frames_from_sheets
     from hearing import SoundReader, WINDOW_S
-    from joint import CONTEXT_SECONDS, published_scene, read_published_scene, scene_levels
+    from joint import CONTEXT_SECONDS, legacy_picture_size, published_scene, read_published_scene, scene_levels
     from live_speech import SpeechReader
+    from motion_slice import motion_slices, validate_motion_point
     from observe import observe as observe_interval
     from play import PlaybackPace, channel_spectrum, play
     from region_sync import published_timing, region_views, validate_regions
@@ -93,6 +95,13 @@ def image_block(path, preview=False):
     else:
         data = path.read_bytes()
     return types.ImageContent(type="image", mimeType="image/png", data=base64.b64encode(data).decode("ascii"))
+
+
+def append_motion_slices(report, blocks, pages, size, start, end, picture_end, point):
+    with TemporaryDirectory() as tmp:
+        for page in motion_slices(tmp, frames_from_sheets(pages, size), size, start, end, picture_end, point):
+            blocks.append(image_block(Path(tmp) / page.pop("file")))
+            report["images_in_order"].append({"motion_slice": page})
 
 
 def audio_block(path):
@@ -207,7 +216,9 @@ class Viewing:
         return joint, scene
 
     def ask_scene(self, start_s, end_s, question=None, native_audio=False, alternatives=None, sync_regions=None,
-                  exposure_detail=False, mark_sound=None):
+                  exposure_detail=False, mark_sound=None, motion_point=None):
+        if motion_point is not None:
+            validate_motion_point(motion_point)
         validate_mark(start_s, end_s, mark_sound)
         if sync_regions:
             validate_regions(sync_regions)
@@ -261,6 +272,9 @@ class Viewing:
                     path = Path(tmp) / detail.pop("file")
                     report["images_in_order"].append({"consecutive_exposures": detail})
                     blocks.append(image_block(path))
+            if motion_point is not None:
+                append_motion_slices(report, blocks, scene["pages"], scene["size"], start_s, end_s,
+                                     scene["picture_end"], motion_point)
         if sync_regions:
             with TemporaryDirectory() as tmp:
                 for page in region_views(Path(tmp), scene, sync_regions):
@@ -347,7 +361,9 @@ class Viewing:
 
     def advance(self, turn, native_audio, sound_estimates=True, focus=None, max_seconds=None, continuous_seconds=None,
                 joint_seconds=None, *, image_hearing=False, follow_from_s=None, question=None, full_detail=True,
-                max_frames=None):
+                max_frames=None, motion_point=None):
+        if motion_point is not None:
+            validate_motion_point(motion_point)
         if question is not None:
             question = question.strip()
             if not question:
@@ -402,6 +418,12 @@ class Viewing:
                 description["additional_frames"] = page["additional_frames"]
             report["images_in_order"].append(description)
             blocks.append(image_block(directory / page["file"]))
+        if motion_point is not None and packet["pages"]:
+            start, end = packet["start_s"], packet["end_s"]
+            size = packet.get("picture_size") or legacy_picture_size([(directory, packet)], self.source)
+            pages = [{**page, "file": directory / page["file"]} for page in packet["pages"]]
+            picture_end = packet.get("picture_end_s", end)
+            append_motion_slices(report, blocks, pages, size, start, end, picture_end, motion_point)
         if detail := packet.get("local_picture_change"):
             report["local_picture_change"] = dict(detail)
             if self.original is not None:
@@ -505,7 +527,9 @@ class Viewing:
         return [text_block({"turn": turn, "page": page, "picture_pts_us": sheet["pts_us"]}),
                 image_block(directory / sheet["file"])]
 
-    def observe(self, start_s, end_s, box, native_audio):
+    def observe(self, start_s, end_s, box, native_audio, motion_point=None):
+        if motion_point is not None:
+            validate_motion_point(motion_point)
         if box is not None:
             validate_regions([box])
         with self.lock:
@@ -527,7 +551,8 @@ class Viewing:
             directory = self.paths[last].parent
             try:
                 with self.original.reading() if self.original else nullcontext():
-                    result = observe_interval(directory, start_s, stop, focus=box, playback_source=self.source)
+                    result = observe_interval(directory, start_s, stop, focus=box, playback_source=self.source,
+                                              motion_point=motion_point)
             except Exception:
                 raise ValueError("could not read that part of the released film") from None
         action = result.get("action_view", {})
@@ -545,6 +570,9 @@ class Viewing:
         for page in action.get("pages", []):
             report["images_in_order"].append({"action_over_time": [page["start_s"], page["end_s"]], "rows": page["rows"]})
             blocks.append(image_block(Path(page["file"])))
+        for page in result.get("motion_slices", []):
+            blocks.append(image_block(Path(page.pop("file"))))
+            report["images_in_order"].append({"motion_slice": page})
         if track := result["audio"]:
             report["audio"] = {k: v for k, v in track.items() if k != "wav"}
             wav = Path(track["wav"])
@@ -838,7 +866,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                        focus: list[float] | None = None, max_seconds: float | None = None,
                        continuous_seconds: float | None = None, joint_seconds: float | None = None,
                        follow_from_s: float | None = None, question: str | None = None,
-                       full_detail: bool = False, max_frames: int | None = None):
+                       full_detail: bool = False, max_frames: int | None = None, motion_point: list[float] | None = None):
             """See and hear one turn, starting at 1. Request the same number to replay, or the next to advance.
             The pause lists the first measured changes in picture, sound level or frequency bands.
             In action_over_time, at_s gives the observation times. Each picture_pts_us is the timestamp of
@@ -853,6 +881,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             the time when you saw that point to follow it across published pictures, up to eight
             seconds through this turn. The ring marks estimated positions and can drift. An
             untracked point has no reliable position. You also receive the whole scene and sound.
+            motion_point=[x,y] (0..1) shows the horizontal and vertical pixel lines at a fixed screen point
+            through every displayed exposure. Read each plot from left to right in film time.
             max_seconds (up to 2) sets how soon to pause on an advance, including the first.
             Choose continuous_seconds (up to 8) to watch through changes for that duration.
             To see fast motion on the first pass, set max_frames (1..12). The first image shows every
@@ -869,7 +899,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             return await asyncio.to_thread(reader.advance, turn, native_audio, sound_estimates, focus, max_seconds,
                                            continuous_seconds, joint_seconds, image_hearing=True,
                                            follow_from_s=follow_from_s, question=question,
-                                           full_detail=full_detail or native_audio or not sound_estimates, max_frames=max_frames)
+                                           full_detail=full_detail or native_audio or not sound_estimates, max_frames=max_frames,
+                                           motion_point=motion_point)
 
         @server.tool(annotations=hints, structured_output=False)
         async def frames(turn: int, page: int):
@@ -879,7 +910,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
         @server.tool(annotations=hints, structured_output=False)
         async def ask_scene(start_s: float, end_s: float, question: str | None = None, native_audio: bool = False,
                             alternatives: list[str] | None = None, sync_regions: list[list[float]] | None = None,
-                            exposure_detail: bool = False, mark_sound: list[float] | None = None):
+                            exposure_detail: bool = False, mark_sound: list[float] | None = None,
+                            motion_point: list[float] | None = None):
             """Ask what happened within an exact span of released film, up to eight seconds across pauses.
             With only start_s and end_s, get pictures, channel levels and times of frequency-band changes
             without starting a model. To hear a moment among nearby sounds, replay the wider interval
@@ -891,20 +923,22 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             independently supported words. Give alternatives to compare descriptions with each second of recorded
             audio, or [] for catalogue neighbours. A match can have an unrelated visible cause. Supply a
             question for a local reading of the waveform alone and with the pictures. A band change marks an acoustic observation. Its source may be unknown.
+            motion_point=[x,y] (0..1) shows the two pixel lines through that fixed point over time.
             For competing visible movements, pass sync_regions as normalized [left,top,right,bottom] boxes.
             The diagram shows changes across each full rectangle above the channel peaks. The optional
             sync reader compares these regions with the same audio. Synchronized motion
             can be incidental and the sound may come from offscreen. native_audio=true attaches the same recording."""
             return await asyncio.to_thread(reader.ask_scene, start_s, end_s, question, native_audio, alternatives,
-                                           sync_regions, exposure_detail, mark_sound)
+                                           sync_regions, exposure_detail, mark_sound, motion_point)
 
         @server.tool(annotations=hints, structured_output=False)
         async def observe(start_s: float, end_s: float, box: list[float] | None = None,
-                          native_audio: bool = not image_client):
+                          native_audio: bool = not image_client, motion_point: list[float] | None = None):
             """Revisit a seen interval in film seconds with successive pictures and their simultaneous sound.
             An optional [left,top,right,bottom] box in 0..1 magnifies the picture. Frame times and WAV sample
-            spans share a clock. If next_start_s is present and non-null, continue there with the same end_s."""
-            return await asyncio.to_thread(reader.observe, start_s, end_s, box, native_audio)
+            spans share a clock. motion_point=[x,y] shows both lines through that point in the whole picture
+            over time, also when a box is magnified. If next_start_s is present and non-null, continue there with the same end_s."""
+            return await asyncio.to_thread(reader.observe, start_s, end_s, box, native_audio, motion_point)
 
         @server.tool(annotations=hints, structured_output=False)
         async def look(turn: int, box: list[float], at_s: float | None = None, read_text: bool = False):

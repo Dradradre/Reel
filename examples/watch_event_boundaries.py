@@ -18,7 +18,7 @@ from mcp.client.stdio import stdio_client
 from mcp.server.fastmcp import FastMCP
 
 
-async def serve(source, until, seconds, tracks):
+async def serve(source, until, seconds, tracks, motion_point=None):
     args = ["-m", "reel.cli", "mcp", str(source.resolve(strict=True)), "--image-client", "--tracks", tracks]
     if until is not None:
         args.extend(["--until", str(until)])
@@ -51,8 +51,10 @@ async def serve(source, until, seconds, tracks):
                     raise ValueError("mark only the interval just viewed, including its start and excluding its end")
                 if changes != sorted(set(changes)):
                     raise ValueError("list distinct times in order")
-                result = await player.call_tool("view", {"turn": turn, "continuous_seconds": seconds,
-                                                         "native_audio": False},
+                options = {"turn": turn, "continuous_seconds": seconds, "native_audio": False}
+                if motion_point is not None:
+                    options["motion_point"] = motion_point
+                result = await player.call_tool("view", options,
                                                 read_timeout_seconds=timedelta(seconds=180))
                 if result.isError:
                     raise ValueError(result.content[0].text)
@@ -84,7 +86,8 @@ if __name__ == "__main__":
     parser.add_argument("--until", type=float)
     parser.add_argument("--seconds", type=float, default=2)
     parser.add_argument("--tracks", choices=("both", "picture", "sound"), default="both")
+    parser.add_argument("--motion-point", type=float, nargs=2, metavar=("X", "Y"))
     args = parser.parse_args()
     if not 0 < args.seconds <= 8 or (args.until is not None and not (math.isfinite(args.until) and args.until > 0)):
         parser.error("use intervals up to eight seconds and a positive finite cutoff")
-    asyncio.run(serve(args.source, args.until, args.seconds, args.tracks))
+    asyncio.run(serve(args.source, args.until, args.seconds, args.tracks, args.motion_point))

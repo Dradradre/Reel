@@ -1497,19 +1497,22 @@ def build(film, out, page_s, lang, title=None, subject=None, genre=None, until=N
         work = pathlib.Path(tmp)
         clip = work / "clip.mkv"
         # Trim decoded frames and samples. Stream copying can carry packets beyond the boundary.
-        end = f"{until:.9f}"
+        stop_us = sample_boundary(until, 1_000_000)
         # trim removes the next presentation, which could be seconds away on a VFR hold.
         # Carry the final retained picture up to the cutoff or the actual end of its track.
         picture_stop = min(until, video_end(film, info))
         frame_clock = work / "frame-times.us"
         duration_filter = f"setts=duration='if(eq(NEXT_PTS,NOPTS),max(1,round({picture_stop:.9f}/TB)-PTS),DURATION)'"
+        # FFV1 also accepts full-range YUV. Without the encoder flag FFmpeg can
+        # remap the samples of a full-range source to television range.
+        picture_opts = ["-color_range:v", "pc"] if info.get("color_range") == "pc" else []
         audio_opts = []
         if info["has_audio"]:
             stop = sample_boundary(until, info["audio_rate"])
             audio_opts = ["-map", f"0:{info['audio_index']}", "-af", f"{audio_timeline(info)},atrim=end_sample={stop}", "-c:a", pcm_codec(info)]
         subprocess.run(["ffmpeg", "-v", "error", "-nostdin", "-i", str(film),
                         "-map", f"0:{info['video_index']}", "-map_metadata", "-1", "-map_chapters", "-1",
-                        "-vf", f"settb=AVTB,trim=end={end}", *audio_opts,
+                        "-vf", f"settb=AVTB,trim=end_pts={stop_us}", *picture_opts, *audio_opts,
                         "-fps_mode", "passthrough", "-enc_time_base:v", "1:1000000", "-c:v", "ffv1",
                         "-stats_enc_pre:v", str(frame_clock), "-stats_enc_pre_fmt:v", "{pts}",
                         "-bsf:v", duration_filter, str(clip)], check=True)

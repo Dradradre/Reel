@@ -178,6 +178,37 @@ class AudioTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'no audio track'):
                 excerpt(out, 0, 0.5)
 
+    def test_bounded_read_cuts_native_samples_before_resampling(self):
+        from fractions import Fraction
+        from reel.common import read_audio, sample_boundary
+        from reel.asr import load as speech_audio
+
+        rate = 44100
+        start, duration = Fraction("1.041791"), Fraction("0.073456")
+        left, right = (sample_boundary(t, rate) for t in (start, start + duration))
+        with tempfile.TemporaryDirectory() as tmp:
+            source, excerpt = (Path(tmp) / name for name in ("mix.wav", "slice.wav"))
+            pcm = np.zeros((rate * 2, 2), np.float32)
+            # These samples are just outside the recording that the transcriber gets.
+            pcm[left - 1] = [.4, .7]
+            pcm[right] = [.8, -.2]
+            sf.write(source, pcm, rate, subtype="FLOAT")
+            self.assertFalse(speech_audio(source, start, duration).any())
+            self.assertEqual(len(read_audio(source, rate, ss=start, t=0)), 0)
+            pcm[left] = [.2, -.6]
+            pcm[right - 1] = [-.5, .1]
+            sf.write(source, pcm, rate, subtype="FLOAT")
+            sf.write(excerpt, pcm[left:right], rate, subtype="FLOAT")
+            for target_rate, channels in [(rate, None), (16000, 1), (48000, 2)]:
+                expected = read_audio(excerpt, target_rate, channels=channels)
+                got = read_audio(source, target_rate, ss=start, t=duration, channels=channels)
+                self.assertGreater(np.max(np.abs(expected)), .01)
+                if channels is None:
+                    np.testing.assert_array_equal(got, expected)
+                else:
+                    np.testing.assert_allclose(got, expected, rtol=0, atol=2e-7)
+            np.testing.assert_array_equal(read_audio(source, rate, ss=start, channels=None), pcm[left:])
+
     def test_snapshot_keeps_high_precision_and_last_sample_before_cutoff(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

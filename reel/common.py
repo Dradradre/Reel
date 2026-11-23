@@ -57,6 +57,7 @@ def _probe(path):
                                                   for flag in ("attached_pic", "timed_thumbnails")))
     a = default_track(audios)
     info = {"path": str(path), "dur": float(j["format"]["duration"]), "has_audio": a is not None, "has_video": v is not None}
+    info["container"] = j["format"].get("format_name")
     info["alternate_streams"] = len(videos) > int(v is not None) or len(audios) > 1
     origin = float(j["format"].get("start_time", 0))
     info["origin"] = origin
@@ -80,7 +81,7 @@ def _probe(path):
             except (TypeError, ValueError):
                 pass
     if a:
-        info.update(audio_index=a["index"], audio_channels=a["channels"], audio_layout=a.get("channel_layout", ""), audio_rate=int(a["sample_rate"]),
+        info.update(audio_index=a["index"], audio_codec=a.get("codec_name", ""), audio_channels=a["channels"], audio_layout=a.get("channel_layout", ""), audio_rate=int(a["sample_rate"]),
                     audio_format=a.get("sample_fmt", ""), audio_time_base=a["time_base"])
     if v:
         # Some VFR streams have no declared average. Frame display times come from the decoder.
@@ -88,7 +89,8 @@ def _probe(path):
         if rate in ("0/0", "0/1", "N/A"):
             rate = v.get("r_frame_rate", "0/0")
         info.update(fps=float(Fraction(rate)) if rate not in ("0/0", "0/1", "N/A") else 1.0,
-                    video_index=v["index"], w=int(v["width"]), h=int(v["height"]), color_transfer=v.get("color_transfer"))
+                    video_index=v["index"], w=int(v["width"]), h=int(v["height"]),
+                    color_transfer=v.get("color_transfer"), color_range=v.get("color_range"))
         aspect = info["w"] / info["h"]
         sar = v.get("sample_aspect_ratio", "").split(":")
         if len(sar) == 2 and all(x.isdigit() and int(x) > 0 for x in sar):
@@ -259,14 +261,27 @@ def recording_levels(recording, first, stop):
 
 
 def _audio_command(path, sr, ss, t, channels):
-    cmd = ["ffmpeg", "-v", "error"]
-    if ss is not None:
-        cmd += ["-ss", f"{max(ss, 0):.6f}"]
-    cmd += ["-i", str(path)]
-    if t is not None:
-        cmd += ["-t", f"{t:.6f}"]
     info = probe(path)
-    cmd += ["-map", f"0:{info['audio_index']}", "-af", audio_timeline(info)]
+    cmd = ["ffmpeg", "-v", "error"]
+    filters = audio_timeline(info)
+    if ss is not None or t is not None:
+        # Select the native samples first. A resampling filter can otherwise bring
+        # energy from the following sound into the last samples of the excerpt.
+        rate = info["audio_rate"]
+        start = max(0, Fraction(str(ss))) if ss is not None else Fraction(0)
+        if start >= 1 and info["container"] == "wav" and info["audio_codec"].startswith("pcm_") and info["origin"] == 0:
+            # Plain PCM WAVs can seek exactly to a whole second without codec preroll.
+            seek = int(start)
+            cmd += ["-ss", str(seek)]
+            start -= seek
+        trim = f"atrim=start_sample={sample_boundary(start, rate)}"
+        if t is not None:
+            duration = Fraction(str(t))
+            if duration < 0:
+                raise ValueError("audio duration must be nonnegative")
+            trim += f":end_sample={sample_boundary(start + duration, rate)}"
+        filters += f":osr={rate},{trim},asetpts=PTS-STARTPTS"
+    cmd += ["-i", str(path), "-map", f"0:{info['audio_index']}", "-af", filters]
     if channels is None:
         channels = info["audio_channels"]
     else:

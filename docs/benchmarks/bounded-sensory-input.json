@@ -1,0 +1,3055 @@
+{
+  "baseline": "f26d95f",
+  "film_source": "https://github.com/google-deepmind/perception_test",
+  "ffmpeg": "9.0.2",
+  "audio_protocol": "32 separate source films. Seeded hash ordering of human annotated sound intervals lasting 60 ms to 2.6 s. One interval per film with category balancing. Same bounds supplied to each revision. Decode the selected channel PCM independently from the beginning, verify the physically cut WAV sample for sample against that slice, then let FFmpeg convert that bounded WAV. Require the same number of output samples and absolute error at most 1e-6 of full scale for every sample. Three configurations in order: original rate and channels, 16 kHz mono (transcription), 44.1 kHz stereo (separation). This is a signal fidelity test. No listener identified the events in this experiment.",
+  "controls_protocol": "Float stereo inputs at six native sample rates and three target sample rates, with a single impulse just before the start, on the first retained sample, on the last retained sample or just after the interval. All controls fed into mono. Positive means strictly nonzero. Values are relative to digital full scale.",
+  "picture_protocol": "16 source films selected in seeded hash order. Choose a changed frame with a non-millisecond presentation time within the first half second. Cut exactly at that display timestamp, then 100 ns later. Compare the final source PTS retained by the production snapshot trim and every byte of its last decoded 48 by 32 RGB image with the original. Source reference uses the ordinary FFmpeg presentation clock in microseconds. Also record the independently demuxed timestamps of the stored frames.",
+  "picture_limitation": "Matroska stores media packets on a millisecond grid. The exported PTS can differ from the original even when the final image and the separately recorded source timestamp are correct. The observed maximum difference was 495 microseconds.",
+  "audio_rows": [
+    {
+      "source": "video_10370",
+      "source_sha256": "1799dd99c79b9c035290d407a44aaeb8b855e25eb958f1ee9eae19a81083576f",
+      "annotation": 5,
+      "label": "Interaction:hitting",
+      "range_us": [
+        10238085,
+        10535320
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        491429,
+        505696
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 14267,
+          "before": {
+            "length": 14267,
+            "peak_error": 0.034222912043333054,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 14267,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 4756,
+          "before": {
+            "length": 4756,
+            "peak_error": 0.020622532814741135,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 4756,
+            "peak_error": 7.450580596923828e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 13108,
+          "before": {
+            "length": 13108,
+            "peak_error": 0.03398066759109497,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 13108,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_8407",
+      "source_sha256": "e6565f64c7f9de4efffd5c9ce4604eee3b3c5c7372c7ee12fd196f1bc6ae1832",
+      "annotation": 2,
+      "label": "Object:opening/closing of something",
+      "range_us": [
+        4033333,
+        4400000
+      ],
+      "native_rate": 44100,
+      "original_samples": [
+        177870,
+        194040
+      ],
+      "outputs": [
+        {
+          "rate": 44100,
+          "channels": null,
+          "expected": 16170,
+          "before": {
+            "length": 16170,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 16170,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 5867,
+          "before": {
+            "length": 5867,
+            "peak_error": 9.336322546005249e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 5867,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 16170,
+          "before": {
+            "length": 16170,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 16170,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_2134",
+      "source_sha256": "0e57c478298ea27bb468033de07390a9fe89da62290294594b56a61c16a8a771",
+      "annotation": 4,
+      "label": "Human:Speech",
+      "range_us": [
+        3412922,
+        3852208
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        163821,
+        184906
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 21085,
+          "before": {
+            "length": 21086,
+            "peak_error": 0.009584132581949234,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 21085,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 7028,
+          "before": {
+            "length": 7029,
+            "peak_error": 0.009374406188726425,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 7028,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 19372,
+          "before": {
+            "length": 19373,
+            "peak_error": 0.006797280162572861,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 19372,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_5989",
+      "source_sha256": "ddbbc466481d5a6f632d6d078d6f9be1d74ef998e09ade7e0ae7eb0e9150611f",
+      "annotation": 2,
+      "label": "Human:Sound(clapping)",
+      "range_us": [
+        7472644,
+        8101185
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        358687,
+        388857
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 30170,
+          "before": {
+            "length": 30170,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 30170,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 10057,
+          "before": {
+            "length": 10057,
+            "peak_error": 0.002992483787238598,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 10057,
+            "peak_error": 1.4901161193847656e-07,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 27719,
+          "before": {
+            "length": 27719,
+            "peak_error": 0.0034733929205685854,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 27719,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_6173",
+      "source_sha256": "1e76f6a1dfe9578e71c719e9a24cd5d7605f8f26d68cca4c5e2c4eecd4d5dcc8",
+      "annotation": 13,
+      "label": "Interaction:rolling",
+      "range_us": [
+        18719214,
+        19878811
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        898523,
+        954183
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 55660,
+          "before": {
+            "length": 55661,
+            "peak_error": 0.003624270437285304,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 55660,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 18553,
+          "before": {
+            "length": 18554,
+            "peak_error": 0.0026079905219376087,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 18553,
+            "peak_error": 1.862645149230957e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 51138,
+          "before": {
+            "length": 51138,
+            "peak_error": 0.0036061941646039486,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 51138,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_1451",
+      "source_sha256": "aaf9a9cac649f4cb4759468f0626b8796e5516b20c15c1860e868b7596eadda6",
+      "annotation": 13,
+      "label": "Interaction:dropping",
+      "range_us": [
+        9740268,
+        10140553
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        467533,
+        486747
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 19214,
+          "before": {
+            "length": 19214,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 19214,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 6405,
+          "before": {
+            "length": 6405,
+            "peak_error": 2.7242873329669237e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 6405,
+            "peak_error": 6.984919309616089e-10,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 17653,
+          "before": {
+            "length": 17653,
+            "peak_error": 2.526940625102725e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 17653,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_6689",
+      "source_sha256": "fbbd0f610801adfccf113f7dcd92b35d5e136b6638b238b96156f893917d0a7b",
+      "annotation": 5,
+      "label": "Animal:sound",
+      "range_us": [
+        4300000,
+        5366667
+      ],
+      "native_rate": 44100,
+      "original_samples": [
+        189630,
+        236671
+      ],
+      "outputs": [
+        {
+          "rate": 44100,
+          "channels": null,
+          "expected": 47041,
+          "before": {
+            "length": 47040,
+            "peak_error": 0.0,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 47041,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 17067,
+          "before": {
+            "length": 17067,
+            "peak_error": 0.000641264021396637,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 17067,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 47041,
+          "before": {
+            "length": 47040,
+            "peak_error": 0.0,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 47041,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_10588",
+      "source_sha256": "3d3b5adcd7394efec9b2df6bdfdfa5fd2181799cd19863100f85f7c7ddb5da45",
+      "annotation": 0,
+      "label": "Object:breaking of something",
+      "range_us": [
+        4198946,
+        4398896
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        201550,
+        211148
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 9598,
+          "before": {
+            "length": 9598,
+            "peak_error": 0.11477965116500854,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 9598,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 3199,
+          "before": {
+            "length": 3199,
+            "peak_error": 0.021590903401374817,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 3199,
+            "peak_error": 2.7939677238464355e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 8819,
+          "before": {
+            "length": 8818,
+            "peak_error": 0.1158052608370781,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 8819,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_1663",
+      "source_sha256": "b4368ef3f5d4c60c0c156b5502bbdb1b620c85ae85d90f72993b1d17244a15dd",
+      "annotation": 4,
+      "label": "Interaction: fluid",
+      "range_us": [
+        17738818,
+        19572718
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        851464,
+        939491
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 88027,
+          "before": {
+            "length": 88027,
+            "peak_error": 0.008343740366399288,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 88027,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 29342,
+          "before": {
+            "length": 29342,
+            "peak_error": 0.004821019247174263,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 29342,
+            "peak_error": 5.587935447692871e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 80875,
+          "before": {
+            "length": 80875,
+            "peak_error": 0.007302052341401577,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 80875,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_10676",
+      "source_sha256": "874899d54ee9bd4ebb569d00482028a9b711ab91a863a6fc227083e38f21e075",
+      "annotation": 4,
+      "label": "Interaction:hitting",
+      "range_us": [
+        7906861,
+        8278552
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        379530,
+        397371
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 17841,
+          "before": {
+            "length": 17841,
+            "peak_error": 0.22786137461662292,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 17841,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 5947,
+          "before": {
+            "length": 5947,
+            "peak_error": 0.23533004522323608,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 5947,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 16392,
+          "before": {
+            "length": 16392,
+            "peak_error": 0.16220034658908844,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 16392,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_9705",
+      "source_sha256": "01deb2c8dd20bc4a2e97207a69a48438321c1f8b3bbc3e4701b8ede240c1a5ad",
+      "annotation": 5,
+      "label": "Human:Sound(clapping)",
+      "range_us": [
+        12108973,
+        13910308
+      ],
+      "native_rate": 44100,
+      "original_samples": [
+        534006,
+        613445
+      ],
+      "outputs": [
+        {
+          "rate": 44100,
+          "channels": null,
+          "expected": 79439,
+          "before": {
+            "length": 79439,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 79439,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 28822,
+          "before": {
+            "length": 28821,
+            "peak_error": 2.3461878299713135e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 28822,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 79439,
+          "before": {
+            "length": 79439,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 79439,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_7730",
+      "source_sha256": "79af080b98aabfa72044294d5a7dad40780c004d6028a279d04ddcae58f2a464",
+      "annotation": 3,
+      "label": "Object:opening/closing of something",
+      "range_us": [
+        21757329,
+        23467073
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        1044352,
+        1126420
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 82068,
+          "before": {
+            "length": 82068,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 82068,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 27356,
+          "before": {
+            "length": 27356,
+            "peak_error": 0.0001401081681251526,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 27356,
+            "peak_error": 8.940696716308594e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 75400,
+          "before": {
+            "length": 75400,
+            "peak_error": 9.542610496282578e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 75400,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_7614",
+      "source_sha256": "3259d86f93af70e09d2e452c4145d5d0a42cbb6d0c488e23bbeef4600635bf54",
+      "annotation": 3,
+      "label": "Interaction:rolling",
+      "range_us": [
+        4309913,
+        4777656
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        206876,
+        229328
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 22452,
+          "before": {
+            "length": 22452,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 22452,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 7484,
+          "before": {
+            "length": 7484,
+            "peak_error": 7.837077646399848e-06,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 7484,
+            "peak_error": 4.656612873077393e-10,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 20628,
+          "before": {
+            "length": 20627,
+            "peak_error": 1.6261401469819248e-07,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 20628,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_665",
+      "source_sha256": "92eae1958b11d8cb34720f6b6c18bb7e3961d272aca18cd7742a5e5c262580c2",
+      "annotation": 15,
+      "label": "Human:Speech",
+      "range_us": [
+        16767672,
+        18034415
+      ],
+      "native_rate": 44100,
+      "original_samples": [
+        739455,
+        795318
+      ],
+      "outputs": [
+        {
+          "rate": 44100,
+          "channels": null,
+          "expected": 55863,
+          "before": {
+            "length": 55863,
+            "peak_error": 0.6782101988792419,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 55863,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 20268,
+          "before": {
+            "length": 20268,
+            "peak_error": 0.13479338586330414,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 20268,
+            "peak_error": 5.960464477539063e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 55863,
+          "before": {
+            "length": 55863,
+            "peak_error": 0.6782101988792419,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 55863,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_6110",
+      "source_sha256": "a32537aff372aca18a38963c75b0a8e648b584ad9b9efb31f66dc869e645951d",
+      "annotation": 1,
+      "label": "Interaction:dropping",
+      "range_us": [
+        5570133,
+        5934844
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        267367,
+        284873
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 17506,
+          "before": {
+            "length": 17506,
+            "peak_error": 0.02321477234363556,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 17506,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 5835,
+          "before": {
+            "length": 5835,
+            "peak_error": 0.02740110084414482,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 5835,
+            "peak_error": 7.450580596923828e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 16084,
+          "before": {
+            "length": 16084,
+            "peak_error": 0.020790623500943184,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 16084,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_9858",
+      "source_sha256": "65aa0e299b1fa92a491502773d06c45ea2510e5649a8d32ca8f832d19977ad74",
+      "annotation": 4,
+      "label": "Object:breaking of something",
+      "range_us": [
+        7897469,
+        9830183
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        379079,
+        471849
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 92770,
+          "before": {
+            "length": 92770,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 92770,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 30923,
+          "before": {
+            "length": 30923,
+            "peak_error": 0.00010212277993559837,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 30923,
+            "peak_error": 2.9802322387695312e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 85233,
+          "before": {
+            "length": 85233,
+            "peak_error": 0.00013730954378843307,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 85233,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_1208",
+      "source_sha256": "1680bc6b0db8d2e3ab08cbf4c6c13e9df61e0e5198a97891b02726726441a813",
+      "annotation": 11,
+      "label": "Animal:sound",
+      "range_us": [
+        22215687,
+        22748597
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        1066353,
+        1091933
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 25580,
+          "before": {
+            "length": 25580,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 25580,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 8527,
+          "before": {
+            "length": 8527,
+            "peak_error": 0.00046018429566174746,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 8527,
+            "peak_error": 8.940696716308594e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 23502,
+          "before": {
+            "length": 23501,
+            "peak_error": 1.353072002530098e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 23502,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_1857",
+      "source_sha256": "a248f89668e672d41be95bdd7d068b9a63d4217be8a881912190bd30cc6e9d88",
+      "annotation": 6,
+      "label": "Interaction: fluid",
+      "range_us": [
+        9656896,
+        11795447
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        463532,
+        566182
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 102650,
+          "before": {
+            "length": 102650,
+            "peak_error": 0.1513347178697586,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 102650,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 34217,
+          "before": {
+            "length": 34217,
+            "peak_error": 0.034186527132987976,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 34217,
+            "peak_error": 2.2351741790771484e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 94310,
+          "before": {
+            "length": 94310,
+            "peak_error": 0.1383558064699173,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 94310,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_6480",
+      "source_sha256": "82531c576080b7f69bdc9d111428272759d0fabc3c8d09e6bb28de1169d5e705",
+      "annotation": 1,
+      "label": "Interaction:hitting",
+      "range_us": [
+        3164379,
+        3702996
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        151891,
+        177744
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 25853,
+          "before": {
+            "length": 25854,
+            "peak_error": 0.05060892924666405,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 25853,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 8618,
+          "before": {
+            "length": 8618,
+            "peak_error": 0.0643557757139206,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 8618,
+            "peak_error": 4.470348358154297e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 23753,
+          "before": {
+            "length": 23753,
+            "peak_error": 0.05066893994808197,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 23753,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_4558",
+      "source_sha256": "c47be41e954e246269b99e00068a6e905ab6fb4cc21d5a16e2d1db82f9258dd8",
+      "annotation": 0,
+      "label": "Human:Sound(clapping)",
+      "range_us": [
+        433279,
+        699912
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        20798,
+        33596
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 12798,
+          "before": {
+            "length": 12798,
+            "peak_error": 0.046139851212501526,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 12798,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 4266,
+          "before": {
+            "length": 4266,
+            "peak_error": 0.02214253507554531,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 4266,
+            "peak_error": 2.2351741790771484e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 11759,
+          "before": {
+            "length": 11759,
+            "peak_error": 0.04563743993639946,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 11759,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_4253",
+      "source_sha256": "f32e51195f924b4bf3443108dad83bd27e0f4f8039f945744f4a8bcb96c7bfaf",
+      "annotation": 8,
+      "label": "Object:opening/closing of something",
+      "range_us": [
+        2366667,
+        3133333
+      ],
+      "native_rate": 44100,
+      "original_samples": [
+        104371,
+        138180
+      ],
+      "outputs": [
+        {
+          "rate": 44100,
+          "channels": null,
+          "expected": 33809,
+          "before": {
+            "length": 33810,
+            "peak_error": 0.05513058602809906,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 33809,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 12266,
+          "before": {
+            "length": 12267,
+            "peak_error": 0.021745730191469193,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 12266,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 33809,
+          "before": {
+            "length": 33810,
+            "peak_error": 0.03898321092128754,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 33809,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_9974",
+      "source_sha256": "269925cd8e8a7d98eda2d47a73f66a01af8e391912563f5f9aafc768698e92cb",
+      "annotation": 6,
+      "label": "Interaction:dropping",
+      "range_us": [
+        9031067,
+        9797541
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        433492,
+        470282
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 36790,
+          "before": {
+            "length": 36791,
+            "peak_error": 0.00162271480076015,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 36790,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 12263,
+          "before": {
+            "length": 12264,
+            "peak_error": 0.0016780942678451538,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 12263,
+            "peak_error": 7.450580596923828e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 33801,
+          "before": {
+            "length": 33802,
+            "peak_error": 0.0016324748285114765,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 33801,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_7359",
+      "source_sha256": "8ede549a8f5ac77f0a8052422ac161732105961316a33609d8a099533553beea",
+      "annotation": 6,
+      "label": "Human:Speech",
+      "range_us": [
+        9000000,
+        9800000
+      ],
+      "native_rate": 44100,
+      "original_samples": [
+        396900,
+        432180
+      ],
+      "outputs": [
+        {
+          "rate": 44100,
+          "channels": null,
+          "expected": 35280,
+          "before": {
+            "length": 35280,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 35280,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 12800,
+          "before": {
+            "length": 12800,
+            "peak_error": 3.9775128243491054e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 12800,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 35280,
+          "before": {
+            "length": 35280,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 35280,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_7267",
+      "source_sha256": "33dc5d06c20c5c65da8fe7f55fbef36bda1919d9331f8558ca774588be2c2599",
+      "annotation": 1,
+      "label": "Interaction:rolling",
+      "range_us": [
+        1219856,
+        1780331
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        58554,
+        85456
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 26902,
+          "before": {
+            "length": 26903,
+            "peak_error": 0.0043944865465164185,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 26902,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 8967,
+          "before": {
+            "length": 8968,
+            "peak_error": 0.004548446275293827,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 8967,
+            "peak_error": 2.3283064365386963e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 24717,
+          "before": {
+            "length": 24717,
+            "peak_error": 0.0043714651837944984,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 24717,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_10368",
+      "source_sha256": "97a9f70b0af75236bfc42bf8ef61f894917e91565487c0d97bc00eb89c52d766",
+      "annotation": 3,
+      "label": "Animal:sound",
+      "range_us": [
+        5715206,
+        8155031
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        274330,
+        391442
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 117112,
+          "before": {
+            "length": 117112,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 117112,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 39037,
+          "before": {
+            "length": 39037,
+            "peak_error": 3.6972342059016228e-06,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 39037,
+            "peak_error": 2.2351741790771484e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 107597,
+          "before": {
+            "length": 107596,
+            "peak_error": 4.83938492834568e-06,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 107597,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_6653",
+      "source_sha256": "dd28f3f02f62aad93663f9d4c0f3b092174b45b1b6ad13cb4080db29018eca37",
+      "annotation": 6,
+      "label": "Interaction: fluid",
+      "range_us": [
+        11533333,
+        13200000
+      ],
+      "native_rate": 44100,
+      "original_samples": [
+        508620,
+        582120
+      ],
+      "outputs": [
+        {
+          "rate": 44100,
+          "channels": null,
+          "expected": 73500,
+          "before": {
+            "length": 73500,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 73500,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 26667,
+          "before": {
+            "length": 26667,
+            "peak_error": 0.00020878110080957413,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 26667,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 73500,
+          "before": {
+            "length": 73500,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 73500,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_1265",
+      "source_sha256": "1b4873e32cd11328a8c73736727481e9ff2301e3fa8f9e4fd0a5e2b92f097eae",
+      "annotation": 0,
+      "label": "Object:breaking of something",
+      "range_us": [
+        3939804,
+        6243588
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        189111,
+        299693
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 110582,
+          "before": {
+            "length": 110582,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 110582,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 36861,
+          "before": {
+            "length": 36861,
+            "peak_error": 0.0003746575675904751,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 36861,
+            "peak_error": 1.862645149230957e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 101598,
+          "before": {
+            "length": 101597,
+            "peak_error": 1.7542392015457153e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 101598,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_3822",
+      "source_sha256": "92eb4a697c9938750d74eeebf379f020adcdabd0515e6bd7729f107a64605cfd",
+      "annotation": 10,
+      "label": "Interaction:hitting",
+      "range_us": [
+        15571204,
+        16138035
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        747418,
+        774626
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 27208,
+          "before": {
+            "length": 27208,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 27208,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 9069,
+          "before": {
+            "length": 9069,
+            "peak_error": 0.0007280714344233274,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 9069,
+            "peak_error": 7.450580596923828e-09,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 24998,
+          "before": {
+            "length": 24997,
+            "peak_error": 7.539475336670876e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 24998,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_2983",
+      "source_sha256": "cc78781e479c2fbe8c152951ae33f454f86fd3a533a5e12436628cfb1ea7223d",
+      "annotation": 7,
+      "label": "Object:opening/closing of something",
+      "range_us": [
+        21554887,
+        21860389
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        1034635,
+        1049299
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 14664,
+          "before": {
+            "length": 14664,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 14664,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 4888,
+          "before": {
+            "length": 4888,
+            "peak_error": 0.0004750321968458593,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 4888,
+            "peak_error": 1.043081283569336e-07,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 13472,
+          "before": {
+            "length": 13473,
+            "peak_error": 2.885062713176012e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 13472,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_3826",
+      "source_sha256": "6d10760d6f879a19e059fb619a1174ab53737de2d2114552c76c356de5490610",
+      "annotation": 6,
+      "label": "Human:Sound(clapping)",
+      "range_us": [
+        16971186,
+        19538536
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        814617,
+        937850
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 123233,
+          "before": {
+            "length": 123233,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 123233,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 41078,
+          "before": {
+            "length": 41078,
+            "peak_error": 9.09535083337687e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 41078,
+            "peak_error": 7.450580596923828e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 113221,
+          "before": {
+            "length": 113220,
+            "peak_error": 4.963180981576443e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 113221,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_2605",
+      "source_sha256": "e6650be277af1970633d93290064b6f75d9c45287bc7d9c2504da1579b755797",
+      "annotation": 16,
+      "label": "Interaction:dropping",
+      "range_us": [
+        25808337,
+        26078582
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        1238801,
+        1251772
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 12971,
+          "before": {
+            "length": 12972,
+            "peak_error": 0.3570709824562073,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 12971,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 4324,
+          "before": {
+            "length": 4324,
+            "peak_error": 0.2581838369369507,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 4324,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 11918,
+          "before": {
+            "length": 11918,
+            "peak_error": 0.24284200370311737,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 11918,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    },
+    {
+      "source": "video_3228",
+      "source_sha256": "c1556f7a3cd092a91355915022f48c592b5b44887234ac3312a8088e118d03e4",
+      "annotation": 4,
+      "label": "Interaction:rolling",
+      "range_us": [
+        16020494,
+        17306089
+      ],
+      "native_rate": 48000,
+      "original_samples": [
+        768984,
+        830693
+      ],
+      "outputs": [
+        {
+          "rate": 48000,
+          "channels": null,
+          "expected": 61709,
+          "before": {
+            "length": 61709,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          },
+          "after": {
+            "length": 61709,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 16000,
+          "channels": 1,
+          "expected": 20570,
+          "before": {
+            "length": 20570,
+            "peak_error": 1.0856310836970806e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 20570,
+            "peak_error": 2.9802322387695312e-08,
+            "within_tolerance": true
+          }
+        },
+        {
+          "rate": 44100,
+          "channels": 2,
+          "expected": 56696,
+          "before": {
+            "length": 56695,
+            "peak_error": 5.2718096412718296e-05,
+            "within_tolerance": false
+          },
+          "after": {
+            "length": 56696,
+            "peak_error": 0.0,
+            "within_tolerance": true
+          }
+        }
+      ]
+    }
+  ],
+  "impulses": [
+    {
+      "native": 8000,
+      "target": 8000,
+      "location": "before",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 8000,
+      "location": "first",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 8000,
+      "location": "last",
+      "before_peak": 0.0,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 8000,
+      "location": "after",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 16000,
+      "location": "before",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 16000,
+      "location": "first",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 16000,
+      "location": "last",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 1.0310825109481812,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 16000,
+      "location": "after",
+      "before_peak": 0.16623249650001526,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 44100,
+      "location": "before",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 44100,
+      "location": "first",
+      "before_peak": 0.8342612981796265,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 44100,
+      "location": "last",
+      "before_peak": 0.8129991292953491,
+      "after_peak": 1.0281636714935303,
+      "matched": true
+    },
+    {
+      "native": 8000,
+      "target": 44100,
+      "location": "after",
+      "before_peak": 0.1684686541557312,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 8000,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 8000,
+      "location": "first",
+      "before_peak": 0.39439108967781067,
+      "after_peak": 0.39439108967781067,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 8000,
+      "location": "last",
+      "before_peak": 0.01199114229530096,
+      "after_peak": 0.6519407033920288,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 8000,
+      "location": "after",
+      "before_peak": 0.08247159421443939,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 16000,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 16000,
+      "location": "first",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 16000,
+      "location": "last",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 16000,
+      "location": "after",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 44100,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 44100,
+      "location": "first",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 44100,
+      "location": "last",
+      "before_peak": 0.812478244304657,
+      "after_peak": 1.0070933103561401,
+      "matched": true
+    },
+    {
+      "native": 16000,
+      "target": 44100,
+      "location": "after",
+      "before_peak": 0.34135159850120544,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 8000,
+      "location": "before",
+      "before_peak": 0.28618088364601135,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 8000,
+      "location": "first",
+      "before_peak": 0.4617508053779602,
+      "after_peak": 0.28618088364601135,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 8000,
+      "location": "last",
+      "before_peak": 0.056003980338573456,
+      "after_peak": 0.5202010273933411,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 8000,
+      "location": "after",
+      "before_peak": 0.04567090794444084,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 16000,
+      "location": "before",
+      "before_peak": 0.572361409664154,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 16000,
+      "location": "first",
+      "before_peak": 0.4185083508491516,
+      "after_peak": 0.5723614692687988,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 16000,
+      "location": "last",
+      "before_peak": 0.223072811961174,
+      "after_peak": 0.06293274462223053,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 16000,
+      "location": "after",
+      "before_peak": 0.11931901425123215,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 44100,
+      "location": "before",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 44100,
+      "location": "first",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 44100,
+      "location": "last",
+      "before_peak": 0.5155412554740906,
+      "after_peak": 1.0310825109481812,
+      "matched": true
+    },
+    {
+      "native": 22050,
+      "target": 44100,
+      "location": "after",
+      "before_peak": 0.16623249650001526,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 8000,
+      "location": "before",
+      "before_peak": 0.14309003949165344,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 8000,
+      "location": "first",
+      "before_peak": 0.2716861069202423,
+      "after_peak": 0.14309003949165344,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 8000,
+      "location": "last",
+      "before_peak": 0.02798464708030224,
+      "after_peak": 0.25374212861061096,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 8000,
+      "location": "after",
+      "before_peak": 0.02950488030910492,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 16000,
+      "location": "before",
+      "before_peak": 0.28618088364601135,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 16000,
+      "location": "first",
+      "before_peak": 0.4617508053779602,
+      "after_peak": 0.28618088364601135,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 16000,
+      "location": "last",
+      "before_peak": 0.11153648048639297,
+      "after_peak": 0.3487389087677002,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 16000,
+      "location": "after",
+      "before_peak": 0.009175324812531471,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 44100,
+      "location": "before",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 44100,
+      "location": "first",
+      "before_peak": 0.8131728172302246,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 44100,
+      "location": "last",
+      "before_peak": 0.0,
+      "after_peak": 0.8131728172302246,
+      "matched": true
+    },
+    {
+      "native": 44100,
+      "target": 44100,
+      "location": "after",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 8000,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 8000,
+      "location": "first",
+      "before_peak": 0.1314639449119568,
+      "after_peak": 0.13146395981311798,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 8000,
+      "location": "last",
+      "before_peak": 0.02506684511899948,
+      "after_peak": 0.19565412402153015,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 8000,
+      "location": "after",
+      "before_peak": 0.027490582317113876,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 16000,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 16000,
+      "location": "first",
+      "before_peak": 0.26292863488197327,
+      "after_peak": 0.26292863488197327,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 16000,
+      "location": "last",
+      "before_peak": 0.11514019966125488,
+      "after_peak": 0.12313682585954666,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 16000,
+      "location": "after",
+      "before_peak": 0.007996616885066032,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 44100,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 44100,
+      "location": "first",
+      "before_peak": 0.7246918082237244,
+      "after_peak": 0.7246918082237244,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 44100,
+      "location": "last",
+      "before_peak": 0.10136744379997253,
+      "after_peak": 0.8865938186645508,
+      "matched": true
+    },
+    {
+      "native": 48000,
+      "target": 44100,
+      "location": "after",
+      "before_peak": 0.08382057398557663,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 8000,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 8000,
+      "location": "first",
+      "before_peak": 0.06573198735713959,
+      "after_peak": 0.06573198735713959,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 8000,
+      "location": "last",
+      "before_peak": 0.012533425353467464,
+      "after_peak": 0.10420850664377213,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 8000,
+      "location": "after",
+      "before_peak": 0.013618383556604385,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 16000,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 16000,
+      "location": "first",
+      "before_peak": 0.1314639449119568,
+      "after_peak": 0.13146395981311798,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 16000,
+      "location": "last",
+      "before_peak": 0.05756199732422829,
+      "after_peak": 0.08656829595565796,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 16000,
+      "location": "after",
+      "before_peak": 0.029006289318203926,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 44100,
+      "location": "before",
+      "before_peak": 0.0,
+      "after_peak": 0.0,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 44100,
+      "location": "first",
+      "before_peak": 0.3623473346233368,
+      "after_peak": 0.3623473346233368,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 44100,
+      "location": "last",
+      "before_peak": 0.05068391561508179,
+      "after_peak": 0.6502607464790344,
+      "matched": true
+    },
+    {
+      "native": 96000,
+      "target": 44100,
+      "location": "after",
+      "before_peak": 0.07156222313642502,
+      "after_peak": 0.0,
+      "matched": true
+    }
+  ],
+  "picture_cuts": [
+    {
+      "id": "video_5603",
+      "source_sha256": "320f768cadb58a61dfd4343c9fffff5d1adef664e4be6743b84995f8c7db6929",
+      "cutoff_ns": 266862000,
+      "expected_pts": 233505,
+      "before": {
+        "selected_pts": 233505,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 233505,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_5603",
+      "source_sha256": "320f768cadb58a61dfd4343c9fffff5d1adef664e4be6743b84995f8c7db6929",
+      "cutoff_ns": 266862100,
+      "expected_pts": 266862,
+      "before": {
+        "selected_pts": 233505,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 266862,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_1580",
+      "source_sha256": "3650937f112216580776780a6b3bf8e11587bfe2bc526c5348128383eaec5cd1",
+      "cutoff_ns": 299910000,
+      "expected_pts": 266587,
+      "before": {
+        "selected_pts": 266587,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 266587,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_1580",
+      "source_sha256": "3650937f112216580776780a6b3bf8e11587bfe2bc526c5348128383eaec5cd1",
+      "cutoff_ns": 299910100,
+      "expected_pts": 299910,
+      "before": {
+        "selected_pts": 266587,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 299910,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 300000
+      }
+    },
+    {
+      "id": "video_8408",
+      "source_sha256": "5d58056833225b30d4095293d63c627f7dd4d7f6595f4a9f56d17684cab297ff",
+      "cutoff_ns": 299960000,
+      "expected_pts": 266631,
+      "before": {
+        "selected_pts": 266631,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 266631,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_8408",
+      "source_sha256": "5d58056833225b30d4095293d63c627f7dd4d7f6595f4a9f56d17684cab297ff",
+      "cutoff_ns": 299960100,
+      "expected_pts": 299960,
+      "before": {
+        "selected_pts": 266631,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 299960,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 300000
+      }
+    },
+    {
+      "id": "video_8768",
+      "source_sha256": "3717357813f882eac21c4f9035deba23019df850f7cd7a2af7ea343a9e004a7d",
+      "cutoff_ns": 270234000,
+      "expected_pts": 236455,
+      "before": {
+        "selected_pts": 236455,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 236455,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 236000
+      }
+    },
+    {
+      "id": "video_8768",
+      "source_sha256": "3717357813f882eac21c4f9035deba23019df850f7cd7a2af7ea343a9e004a7d",
+      "cutoff_ns": 270234100,
+      "expected_pts": 270234,
+      "before": {
+        "selected_pts": 236455,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 270234,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 270000
+      }
+    },
+    {
+      "id": "video_2669",
+      "source_sha256": "ceaaf3701a5c7eb7d565d3485bfe3846c42ef7eabcec0b248a11a6fbf1664a09",
+      "cutoff_ns": 266934000,
+      "expected_pts": 233567,
+      "before": {
+        "selected_pts": 233567,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 233567,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_2669",
+      "source_sha256": "ceaaf3701a5c7eb7d565d3485bfe3846c42ef7eabcec0b248a11a6fbf1664a09",
+      "cutoff_ns": 266934100,
+      "expected_pts": 266934,
+      "before": {
+        "selected_pts": 233567,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 266934,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_5989",
+      "source_sha256": "ddbbc466481d5a6f632d6d078d6f9be1d74ef998e09ade7e0ae7eb0e9150611f",
+      "cutoff_ns": 279349000,
+      "expected_pts": 244430,
+      "before": {
+        "selected_pts": 244430,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 244430,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 244000
+      }
+    },
+    {
+      "id": "video_5989",
+      "source_sha256": "ddbbc466481d5a6f632d6d078d6f9be1d74ef998e09ade7e0ae7eb0e9150611f",
+      "cutoff_ns": 279349100,
+      "expected_pts": 279349,
+      "before": {
+        "selected_pts": 244430,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 279349,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 279000
+      }
+    },
+    {
+      "id": "video_2727",
+      "source_sha256": "f2c6d863233c0f9d4095e2d7588f29d0db003ca8ef6b1dc366d7aca7e743884f",
+      "cutoff_ns": 267406000,
+      "expected_pts": 233981,
+      "before": {
+        "selected_pts": 233981,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 233981,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_2727",
+      "source_sha256": "f2c6d863233c0f9d4095e2d7588f29d0db003ca8ef6b1dc366d7aca7e743884f",
+      "cutoff_ns": 267406100,
+      "expected_pts": 267406,
+      "before": {
+        "selected_pts": 233981,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 267406,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_6720",
+      "source_sha256": "0879b042d0a8631558da252244a8f1f54487cae403c23eced54ae846d8f9281e",
+      "cutoff_ns": 298023000,
+      "expected_pts": 264909,
+      "before": {
+        "selected_pts": 264909,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 264909,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 265000
+      }
+    },
+    {
+      "id": "video_6720",
+      "source_sha256": "0879b042d0a8631558da252244a8f1f54487cae403c23eced54ae846d8f9281e",
+      "cutoff_ns": 298023100,
+      "expected_pts": 298023,
+      "before": {
+        "selected_pts": 264909,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 298023,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 298000
+      }
+    },
+    {
+      "id": "video_3247",
+      "source_sha256": "37777e0ed6b98f02a277829982085cd7202365a30d81680a82eb52edc838b687",
+      "cutoff_ns": 267219000,
+      "expected_pts": 233817,
+      "before": {
+        "selected_pts": 233817,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 233817,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_3247",
+      "source_sha256": "37777e0ed6b98f02a277829982085cd7202365a30d81680a82eb52edc838b687",
+      "cutoff_ns": 267219100,
+      "expected_pts": 267219,
+      "before": {
+        "selected_pts": 233817,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 267219,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_4633",
+      "source_sha256": "9ebc19f29520c848920472dd9cbaaf8496fa04bbe45f2e8b9cdb4441b53583a7",
+      "cutoff_ns": 266684000,
+      "expected_pts": 233349,
+      "before": {
+        "selected_pts": 233349,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 233349,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 233000
+      }
+    },
+    {
+      "id": "video_4633",
+      "source_sha256": "9ebc19f29520c848920472dd9cbaaf8496fa04bbe45f2e8b9cdb4441b53583a7",
+      "cutoff_ns": 266684100,
+      "expected_pts": 266684,
+      "before": {
+        "selected_pts": 233349,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 266684,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_7880",
+      "source_sha256": "34bb0d9944d41516065f450a90fbe6981d15aecc1146a36f1494784284f5a611",
+      "cutoff_ns": 267112000,
+      "expected_pts": 233723,
+      "before": {
+        "selected_pts": 233723,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 233723,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_7880",
+      "source_sha256": "34bb0d9944d41516065f450a90fbe6981d15aecc1146a36f1494784284f5a611",
+      "cutoff_ns": 267112100,
+      "expected_pts": 267112,
+      "before": {
+        "selected_pts": 233723,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 267112,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_6781",
+      "source_sha256": "fccd02b995e3cab0fe99df61f912f46d71fdf5cafab2c550eb7f397d09e27778",
+      "cutoff_ns": 270243000,
+      "expected_pts": 236463,
+      "before": {
+        "selected_pts": 236463,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 236463,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 236000
+      }
+    },
+    {
+      "id": "video_6781",
+      "source_sha256": "fccd02b995e3cab0fe99df61f912f46d71fdf5cafab2c550eb7f397d09e27778",
+      "cutoff_ns": 270243100,
+      "expected_pts": 270243,
+      "before": {
+        "selected_pts": 236463,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 270243,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 270000
+      }
+    },
+    {
+      "id": "video_11355",
+      "source_sha256": "133c5b9caae1cba325231391cb88f77f4eb4f4deaaa4b153ff1b94719d0c5d61",
+      "cutoff_ns": 299990000,
+      "expected_pts": 266658,
+      "before": {
+        "selected_pts": 266658,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 266658,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_11355",
+      "source_sha256": "133c5b9caae1cba325231391cb88f77f4eb4f4deaaa4b153ff1b94719d0c5d61",
+      "cutoff_ns": 299990100,
+      "expected_pts": 299990,
+      "before": {
+        "selected_pts": 266658,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 299990,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 300000
+      }
+    },
+    {
+      "id": "video_4908",
+      "source_sha256": "e0d294a3e89dec20211b847102e94db9b2ca4c99bf3b8a52e2ad53ed2e082700",
+      "cutoff_ns": 267041000,
+      "expected_pts": 233660,
+      "before": {
+        "selected_pts": 233660,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 233660,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_4908",
+      "source_sha256": "e0d294a3e89dec20211b847102e94db9b2ca4c99bf3b8a52e2ad53ed2e082700",
+      "cutoff_ns": 267041100,
+      "expected_pts": 267041,
+      "before": {
+        "selected_pts": 233660,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 267041,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_10592",
+      "source_sha256": "874c358405393e3c86e26cf81785de8a450e7ccb6083a7165a9289664277d876",
+      "cutoff_ns": 266871000,
+      "expected_pts": 233512,
+      "before": {
+        "selected_pts": 233512,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 233512,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_10592",
+      "source_sha256": "874c358405393e3c86e26cf81785de8a450e7ccb6083a7165a9289664277d876",
+      "cutoff_ns": 266871100,
+      "expected_pts": 266871,
+      "before": {
+        "selected_pts": 233512,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 266871,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    },
+    {
+      "id": "video_800",
+      "source_sha256": "7c85a020bad59671afacc30c71969283ff992a21ed9f0610be09ffe043282950",
+      "cutoff_ns": 267255000,
+      "expected_pts": 233848,
+      "before": {
+        "selected_pts": 233848,
+        "final_pixel_bytes_identical": true
+      },
+      "after": {
+        "selected_pts": 233848,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 234000
+      }
+    },
+    {
+      "id": "video_800",
+      "source_sha256": "7c85a020bad59671afacc30c71969283ff992a21ed9f0610be09ffe043282950",
+      "cutoff_ns": 267255100,
+      "expected_pts": 267255,
+      "before": {
+        "selected_pts": 233848,
+        "final_pixel_bytes_identical": false
+      },
+      "after": {
+        "selected_pts": 267255,
+        "final_pixel_bytes_identical": true,
+        "final_stored_pts": 267000
+      }
+    }
+  ]
+}

@@ -45,6 +45,21 @@ class PictureTests(unittest.TestCase):
                 with Image.open(save_frame(film, 0, root / "still.png")) as still:
                     np.testing.assert_allclose(np.asarray(still.convert("RGB"))[8, [8, 24]], reference, atol=2)
 
+    def test_snapshot_keeps_full_range_camera_pixels(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            film = root / "camera.mov"
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "testsrc2=s=64x48:r=4:d=1",
+                            "-c:v", "mjpeg", "-pix_fmt", "yuvj422p", str(film)], check=True)
+            with patch("reel.perceive._build"):
+                build(film, root / "bounded", 30, "en", until=.5000001)
+            snapshot = root / "bounded" / "clip.mkv"
+            self.assertEqual(probe(snapshot)["color_range"], "pc")
+            expected = [(pts, rgb) for pts, _, rgb in native_frames(film, 64, 48, stop_us=500001)]
+            actual = [(pts, rgb) for pts, _, rgb in native_frames(snapshot, 64, 48)]
+            self.assertEqual([p for p, _ in expected], [0, 250000, 500000])
+            self.assertEqual(actual, expected)
+
     def test_each_still_keeps_all_four_corners_in_display_proportions(self):
         colors = np.array([(210, 40, 30), (30, 200, 50), (40, 30, 220), (210, 190, 30)], dtype=np.uint8)
         still = np.full((TH, TW, 3), 80, dtype=np.uint8)
@@ -116,7 +131,7 @@ class PictureTests(unittest.TestCase):
             quiet = np.full(301, -100., dtype=np.float32)
             helpers.enter_context(patch('reel.perceive.voices', return_value=dict(
                 words=[], repeats=[], crowd=None, vrms=quiet, vdb=np.tile(quiet, (40, 1)))))
-            for stop, index in [(1.5, 5), (1.5003, 6), (2., 7), (2.5, None)]:
+            for stop, index in [(1.5, 5), (1.5000001, 6), (1.5003, 6), (2., 7), (2.5, None)]:
                 with self.subTest(stop=stop):
                     snap = root / str(stop)
                     build(film, snap, 30, 'en', until=stop)

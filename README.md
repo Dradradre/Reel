@@ -42,7 +42,7 @@ order, with nothing left out.
 
 | Lane | What it is | What a viewer notices there |
 |---|---|---|
-| frames over time | selected whole frames at their recorded presentation times. A frame can stay up across a long pause between updates. Reel maps tagged PQ and HLG pictures to sRGB with a colour-managed FFmpeg build | See who and what share the screen. During playback, extra timestamped frames can reveal a brief local change. A pair of times and a box let you inspect its original pixels with `look`. [Reading trial](docs/perception-check.md#잠깐-나타난-글자를-다시-읽을-때) |
+| frames over time | selected whole frames at their recorded presentation times. A frame can stay up across a long pause between updates. Bounded snapshots retain the brightness range of footage tagged as full range. Reel maps tagged PQ and HLG pictures to sRGB with a colour-managed FFmpeg build | See who and what share the screen. During playback, extra timestamped frames can reveal a brief local change. A pair of times and a box let you inspect its original pixels with `look`. [Reading trial](docs/perception-check.md#잠깐-나타난-글자를-다시-읽을-때) |
 | motion point (playback) | the pixels along two fixed lines through a point, from every displayed frame | see how many times something crosses a line and in which direction with `view(motion_point=[x,y])` |
 | follow (playback) | the point you selected in an earlier picture, followed through each released frame | compare the selected detail with the last picture in which the tracker located it |
 | subject | where the person the film is about appears, and whether the eye is predicted to land on them | the film losing its subject |
@@ -62,6 +62,8 @@ order, with nothing left out.
 | heard again | the very same recording played again, in red (an echo within 3 s or a stretch pasted from far back), or a similar voice from earlier. During replay, `compare_heard(similarity=true)` compares two original excerpts. Pass `alternatives` to compare each description across them | an edit echo, a recycled crowd recording |
 
 ## Does it work?
+
+Across 32 real recordings, a 16 kHz mono excerpt matched an independently cut WAV in length and waveform within 0.000001 of full scale for **32/32** excerpts. In a separate test of 16 films, the final picture at a frame boundary and just after it matched all **32/32** reference images. [Signal and picture checks](docs/perception-check.md#멈춘-순간의-화면과-원음을-원본과-대조한-결과)
 
 On 12 unedited recordings, GPT matched the annotated sound at **15 of 24 marked moments**. Adding a separate source comparison for just the bracketed samples reduced that to **11/24**. Reel keeps the surrounding recording on replay. [Paired readings and controls](docs/listening-check.md#표시한-순간의-소리만-따로-비교한-시험)
 

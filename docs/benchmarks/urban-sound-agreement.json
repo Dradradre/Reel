@@ -1,0 +1,658 @@
+{
+  "method": "23 MACS recordings lasting 10 s at distinct recording sites. Allocate up to three sites per environment (airport, park, public square) and vote stratum (no voice tags, some up to half, or more than half) with at least four annotations. Exclude all sites from prior audio-cues/macs*, level-time, level-time/word-study and ambient-activity panels. Within eligible sites rank files by SHA256(reel-native-voice-2026v1/ + filename); maximum-cardinality minimum-rank assignment to strata. Four slots lacked a site. MACS voice tags are adults_talking, children_voices and announcement_speech. The reader could choose any of the ten original nonblank tags. The human references are each listener\u2019s own tags.",
+  "reader": "gpt-6.1-terra via local signed-in Codex. Fresh ephemeral session per recording per revision, only reel.view enabled, anonymous recording.wav, --image-client --tracks sound. Each session received two contiguous MCP views [0,8] and [8,10] through end_of_view, with spectra and local speech, AudioSet and CoNeTTE estimates. Raw WAV input and the optional 30B reader were off. Tag order and instructions were fixed. Neither a filename with a class nor any annotation was supplied. Score is the intersection divided by union of selected tags, 1 for two empty sets. Within each recording compare GPT with every listener and every pair of distinct listeners, then average equally over recordings. The mismatched control pairs each GPT response with every other recording. No joint negatives receive credit for a pair with a nonempty union.",
+  "revision": "8571f9a121325812f5a9fe8b9e2bb655bc3f8136",
+  "baseline_revision": "a501a2615e1c190d790f585a17cf42c15e80be60",
+  "source": "https://zenodo.org/records/5114771",
+  "audio_source": "https://zenodo.org/records/2589280",
+  "human_annotations_sha256": "eabd6ba36abf52a1c3034b96208729346022d7283db583681997729203f44329",
+  "ratings": 108,
+  "recordings_with_added_evidence": 2,
+  "other_sensory_payloads_equal": true,
+  "categories": [
+    "adults_talking",
+    "announcement_jingle",
+    "announcement_speech",
+    "birds_singing",
+    "children_voices",
+    "dog_barking",
+    "footsteps",
+    "music",
+    "siren",
+    "traffic_noise"
+  ],
+  "recordings": [
+    {
+      "id": "public_square-lisbon-1211-44820-a.wav",
+      "sha256": "1c9a4e934798f4db36f05dc25f4389140a4fb65dbb20127e6c29cd77e3d8259e",
+      "reader_tags": [
+        "adults_talking",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "public_square-london-250-7485-a.wav",
+      "sha256": "64839b7cf9ff59a9ceb201a70ea8e3eda0c783dba19899ac9cd2e92613af6aed",
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "birds_singing",
+        "footsteps"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "airport-lyon-1095-42121-a.wav",
+      "sha256": "942ec13c0df250f2dc835a1ff9a918538558dab7328e5c15e893fad677729fc3",
+      "reader_tags": [
+        "adults_talking"
+      ],
+      "previous_tags": [
+        "adults_talking"
+      ],
+      "gain_estimate": true
+    },
+    {
+      "id": "public_square-barcelona-248-7416-a.wav",
+      "sha256": "492b5e95f95c9bfcded6cb2c90b56f8d0bc66854f5bbf4e075b7b2b237b91b07",
+      "reader_tags": [
+        "birds_singing"
+      ],
+      "previous_tags": [
+        "birds_singing"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "airport-barcelona-2-101-a.wav",
+      "sha256": "f699beef2e3390d53e956f4c2e15dfc725cf5615ee9d8aefa2900c94acd18b76",
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "airport-prague-1023-41343-a.wav",
+      "sha256": "1a49ebe9640d21c196494128c8e8c3b43427005ec3d06b7acf1903e5a85938c8",
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-stockholm-246-7349-a.wav",
+      "sha256": "a7b788fba6e3a6abcc47378721e4760273788df3842655714400761bf6ef6024",
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "public_square-prague-1152-40734-a.wav",
+      "sha256": "1d397a0b30310e5bfd7ef80cae49cd006c2a430ffc30a79f3b4e3c609576d972",
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-lisbon-1198-45301-a.wav",
+      "sha256": "de5b4753cb3a74b73df770e9499a7f737115aa7a1eebce082a69b7a823acacee",
+      "reader_tags": [
+        "birds_singing"
+      ],
+      "previous_tags": [
+        "birds_singing"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-lisbon-1057-42299-a.wav",
+      "sha256": "d6a9e08d16eb851318f1a8f0b1b0a1bac195ec3e5a166874b14854b226723bb7",
+      "reader_tags": [],
+      "previous_tags": [],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-london-97-2731-a.wav",
+      "sha256": "39fc67d7daf6d2359f1760380df9964ce8a45f49f5e15a9f1c54e0f23396cbfd",
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-milan-1018-41490-a.wav",
+      "sha256": "7b9900ce7f64cf6d6403c8d15e68730a463725a95dc5ecb1428125dc68f29282",
+      "reader_tags": [
+        "adults_talking",
+        "birds_singing"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "birds_singing"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-helsinki-94-2615-a.wav",
+      "sha256": "264b436fc41fb7a8d36d33db22676eebe450e52674c727b529685bb3e240c9d2",
+      "reader_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-stockholm-101-2877-a.wav",
+      "sha256": "0c57be2bab04178606a0a8112342134ac02f8eaa4f1e3dca850dbff3c19ed0e8",
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "public_square-helsinki-249-7429-a.wav",
+      "sha256": "0d8e230e2e37a38a539c8cded2612f72b7e8c2e20eaec6f2566e82e7c49b8a63",
+      "reader_tags": [
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "park-barcelona-241-7157-a.wav",
+      "sha256": "c2855cbeb8a4afaa20ffec33ba37bcb2b95e73c396932338cb8e3f501666f70d",
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "airport-vienna-14-596-a.wav",
+      "sha256": "5a553bb96bd442663fd04b6153fae632f8b744723850d23958089d881b691c78",
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "gain_estimate": true
+    },
+    {
+      "id": "park-helsinki-93-2598-a.wav",
+      "sha256": "9138f8b7f4aa5783175537b3d2cbf982b55d2d1962cee3e51731641b671be4e9",
+      "reader_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "public_square-lisbon-1116-41620-a.wav",
+      "sha256": "fdbc321c87e16646e1de747b1e9b7a3f74fa1dad8dbc347001cfec1f86729c2d",
+      "reader_tags": [
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "public_square-milan-1168-44797-a.wav",
+      "sha256": "2df62105d16611ce1bf552b209c81e847dc6d554b36f5c685ebe28844fff5fde",
+      "reader_tags": [
+        "birds_singing"
+      ],
+      "previous_tags": [
+        "birds_singing"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "public_square-paris-116-3409-a.wav",
+      "sha256": "18080ec74b8f203ae7d88f1c8dc53c527f236791080fe6dbf95635bfc1cc2860",
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "airport-stockholm-12-481-a.wav",
+      "sha256": "160246b4ce5668d2bcb886f3c971a9149b266bc6e2108ebdb4c23cad7cfd8f0e",
+      "reader_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "gain_estimate": false
+    },
+    {
+      "id": "public_square-lyon-1024-42038-a.wav",
+      "sha256": "6faa7410b35170279bb5a6b139cb1762cd7322afcea412957de587783ad05f17",
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "gain_estimate": false
+    }
+  ],
+  "score": {
+    "reader_listener": 0.5630434782608695,
+    "listener_listener": 0.5894927536231884,
+    "different_recording": 0.24255599472990777,
+    "by_recording": [
+      {
+        "id": "public_square-lisbon-1211-44820-a.wav",
+        "reader_listener": 0.9,
+        "listener_listener": 0.8,
+        "different_recording": 0.23636363636363636
+      },
+      {
+        "id": "public_square-london-250-7485-a.wav",
+        "reader_listener": 0.9166666666666666,
+        "listener_listener": 0.8333333333333333,
+        "different_recording": 0.3058712121212121
+      },
+      {
+        "id": "airport-lyon-1095-42121-a.wav",
+        "reader_listener": 0.4666666666666667,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.1265151515151515
+      },
+      {
+        "id": "public_square-barcelona-248-7416-a.wav",
+        "reader_listener": 0.3333333333333333,
+        "listener_listener": 0.20833333333333331,
+        "different_recording": 0.26136363636363635
+      },
+      {
+        "id": "airport-barcelona-2-101-a.wav",
+        "reader_listener": 0.5,
+        "listener_listener": 0.7777777777777778,
+        "different_recording": 0.1534090909090909
+      },
+      {
+        "id": "airport-prague-1023-41343-a.wav",
+        "reader_listener": 0.4583333333333333,
+        "listener_listener": 0.4722222222222222,
+        "different_recording": 0.15056818181818182
+      },
+      {
+        "id": "park-stockholm-246-7349-a.wav",
+        "reader_listener": 0.8666666666666667,
+        "listener_listener": 0.7333333333333333,
+        "different_recording": 0.37424242424242427
+      },
+      {
+        "id": "public_square-prague-1152-40734-a.wav",
+        "reader_listener": 0.7166666666666667,
+        "listener_listener": 0.5416666666666666,
+        "different_recording": 0.28787878787878785
+      },
+      {
+        "id": "park-lisbon-1198-45301-a.wav",
+        "reader_listener": 0.0,
+        "listener_listener": 0.3,
+        "different_recording": 0.17727272727272728
+      },
+      {
+        "id": "park-lisbon-1057-42299-a.wav",
+        "reader_listener": 0.0,
+        "listener_listener": 0.5666666666666667,
+        "different_recording": 0.3106060606060606
+      },
+      {
+        "id": "park-london-97-2731-a.wav",
+        "reader_listener": 0.31666666666666665,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.12878787878787878
+      },
+      {
+        "id": "park-milan-1018-41490-a.wav",
+        "reader_listener": 0.55,
+        "listener_listener": 0.475,
+        "different_recording": 0.27499999999999997
+      },
+      {
+        "id": "park-helsinki-94-2615-a.wav",
+        "reader_listener": 0.9333333333333333,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.35227272727272724
+      },
+      {
+        "id": "park-stockholm-101-2877-a.wav",
+        "reader_listener": 0.7,
+        "listener_listener": 0.45,
+        "different_recording": 0.30454545454545456
+      },
+      {
+        "id": "public_square-helsinki-249-7429-a.wav",
+        "reader_listener": 0.4,
+        "listener_listener": 0.3,
+        "different_recording": 0.1590909090909091
+      },
+      {
+        "id": "park-barcelona-241-7157-a.wav",
+        "reader_listener": 0.7666666666666666,
+        "listener_listener": 0.6333333333333333,
+        "different_recording": 0.3924242424242424
+      },
+      {
+        "id": "airport-vienna-14-596-a.wav",
+        "reader_listener": 0.625,
+        "listener_listener": 0.3333333333333333,
+        "different_recording": 0.19128787878787878
+      },
+      {
+        "id": "park-helsinki-93-2598-a.wav",
+        "reader_listener": 0.9333333333333333,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.3212121212121212
+      },
+      {
+        "id": "public_square-lisbon-1116-41620-a.wav",
+        "reader_listener": 1.0,
+        "listener_listener": 1.0,
+        "different_recording": 0.20454545454545456
+      },
+      {
+        "id": "public_square-milan-1168-44797-a.wav",
+        "reader_listener": 0.0,
+        "listener_listener": 0.25,
+        "different_recording": 0.10606060606060606
+      },
+      {
+        "id": "public_square-paris-116-3409-a.wav",
+        "reader_listener": 0.625,
+        "listener_listener": 0.3333333333333333,
+        "different_recording": 0.2946969696969697
+      },
+      {
+        "id": "airport-stockholm-12-481-a.wav",
+        "reader_listener": 0.31666666666666665,
+        "listener_listener": 0.3333333333333333,
+        "different_recording": 0.19015151515151515
+      },
+      {
+        "id": "public_square-lyon-1024-42038-a.wav",
+        "reader_listener": 0.625,
+        "listener_listener": 0.75,
+        "different_recording": 0.2746212121212121
+      }
+    ]
+  },
+  "previous_score": {
+    "reader_listener": 0.5557971014492754,
+    "listener_listener": 0.5894927536231884,
+    "different_recording": 0.24401844532279315,
+    "by_recording": [
+      {
+        "id": "public_square-lisbon-1211-44820-a.wav",
+        "reader_listener": 0.9,
+        "listener_listener": 0.8,
+        "different_recording": 0.2318181818181818
+      },
+      {
+        "id": "public_square-london-250-7485-a.wav",
+        "reader_listener": 0.75,
+        "listener_listener": 0.8333333333333333,
+        "different_recording": 0.3058712121212121
+      },
+      {
+        "id": "airport-lyon-1095-42121-a.wav",
+        "reader_listener": 0.4666666666666667,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.12196969696969696
+      },
+      {
+        "id": "public_square-barcelona-248-7416-a.wav",
+        "reader_listener": 0.3333333333333333,
+        "listener_listener": 0.20833333333333331,
+        "different_recording": 0.2681818181818182
+      },
+      {
+        "id": "airport-barcelona-2-101-a.wav",
+        "reader_listener": 0.5,
+        "listener_listener": 0.7777777777777778,
+        "different_recording": 0.14772727272727273
+      },
+      {
+        "id": "airport-prague-1023-41343-a.wav",
+        "reader_listener": 0.4583333333333333,
+        "listener_listener": 0.4722222222222222,
+        "different_recording": 0.14488636363636365
+      },
+      {
+        "id": "park-stockholm-246-7349-a.wav",
+        "reader_listener": 0.8666666666666667,
+        "listener_listener": 0.7333333333333333,
+        "different_recording": 0.3856060606060606
+      },
+      {
+        "id": "public_square-prague-1152-40734-a.wav",
+        "reader_listener": 0.7166666666666667,
+        "listener_listener": 0.5416666666666666,
+        "different_recording": 0.28409090909090906
+      },
+      {
+        "id": "park-lisbon-1198-45301-a.wav",
+        "reader_listener": 0.0,
+        "listener_listener": 0.3,
+        "different_recording": 0.17424242424242423
+      },
+      {
+        "id": "park-lisbon-1057-42299-a.wav",
+        "reader_listener": 0.0,
+        "listener_listener": 0.5666666666666667,
+        "different_recording": 0.31136363636363634
+      },
+      {
+        "id": "park-london-97-2731-a.wav",
+        "reader_listener": 0.31666666666666665,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.12878787878787878
+      },
+      {
+        "id": "park-milan-1018-41490-a.wav",
+        "reader_listener": 0.55,
+        "listener_listener": 0.475,
+        "different_recording": 0.2775757575757576
+      },
+      {
+        "id": "park-helsinki-94-2615-a.wav",
+        "reader_listener": 0.9333333333333333,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.36666666666666664
+      },
+      {
+        "id": "park-stockholm-101-2877-a.wav",
+        "reader_listener": 0.7,
+        "listener_listener": 0.45,
+        "different_recording": 0.31136363636363634
+      },
+      {
+        "id": "public_square-helsinki-249-7429-a.wav",
+        "reader_listener": 0.4,
+        "listener_listener": 0.3,
+        "different_recording": 0.15757575757575756
+      },
+      {
+        "id": "park-barcelona-241-7157-a.wav",
+        "reader_listener": 0.7666666666666666,
+        "listener_listener": 0.6333333333333333,
+        "different_recording": 0.40454545454545454
+      },
+      {
+        "id": "airport-vienna-14-596-a.wav",
+        "reader_listener": 0.625,
+        "listener_listener": 0.3333333333333333,
+        "different_recording": 0.18181818181818182
+      },
+      {
+        "id": "park-helsinki-93-2598-a.wav",
+        "reader_listener": 0.9333333333333333,
+        "listener_listener": 0.8666666666666667,
+        "different_recording": 0.3356060606060606
+      },
+      {
+        "id": "public_square-lisbon-1116-41620-a.wav",
+        "reader_listener": 1.0,
+        "listener_listener": 1.0,
+        "different_recording": 0.20454545454545456
+      },
+      {
+        "id": "public_square-milan-1168-44797-a.wav",
+        "reader_listener": 0.0,
+        "listener_listener": 0.25,
+        "different_recording": 0.10321969696969696
+      },
+      {
+        "id": "public_square-paris-116-3409-a.wav",
+        "reader_listener": 0.625,
+        "listener_listener": 0.3333333333333333,
+        "different_recording": 0.30265151515151517
+      },
+      {
+        "id": "airport-stockholm-12-481-a.wav",
+        "reader_listener": 0.31666666666666665,
+        "listener_listener": 0.3333333333333333,
+        "different_recording": 0.18484848484848485
+      },
+      {
+        "id": "public_square-lyon-1024-42038-a.wav",
+        "reader_listener": 0.625,
+        "listener_listener": 0.75,
+        "different_recording": 0.2774621212121212
+      }
+    ]
+  },
+  "per_category": {
+    "adults_talking": {
+      "reader": 8,
+      "strict_listener_majority": 8,
+      "both": 7
+    },
+    "announcement_jingle": {
+      "reader": 0,
+      "strict_listener_majority": 0,
+      "both": 0
+    },
+    "announcement_speech": {
+      "reader": 0,
+      "strict_listener_majority": 0,
+      "both": 0
+    },
+    "birds_singing": {
+      "reader": 13,
+      "strict_listener_majority": 7,
+      "both": 7
+    },
+    "children_voices": {
+      "reader": 0,
+      "strict_listener_majority": 3,
+      "both": 0
+    },
+    "dog_barking": {
+      "reader": 0,
+      "strict_listener_majority": 0,
+      "both": 0
+    },
+    "footsteps": {
+      "reader": 8,
+      "strict_listener_majority": 7,
+      "both": 6
+    },
+    "music": {
+      "reader": 0,
+      "strict_listener_majority": 0,
+      "both": 0
+    },
+    "siren": {
+      "reader": 0,
+      "strict_listener_majority": 0,
+      "both": 0
+    },
+    "traffic_noise": {
+      "reader": 9,
+      "strict_listener_majority": 11,
+      "both": 9
+    }
+  },
+  "paired_change": {
+    "mean": 0.007246376811594201,
+    "scene_bootstrap_95": [
+      0.0,
+      0.021739130434782605
+    ],
+    "method": "Resample the 23 whole recordings with replacement 20,000 times, seed 1802. Does not capture repeat-reader variability."
+  }
+}

@@ -1,0 +1,2039 @@
+{
+  "design": "All official TUT evaluation recordings from 2016 and 2017. The 2017 street set had been used previously. One WAV (a009) in the 2016 residential and 2017 street sets is byte-identical. The original labels differ by release. Count each release separately. Annotations cover the specified scene vocabulary. Other audible sources can exist.",
+  "sources": {
+    "TUT_2016": "https://zenodo.org/records/996424",
+    "TUT_2017": "https://zenodo.org/records/1040179",
+    "Frame_MN": "https://github.com/fschmid56/PretrainedSED/tree/1aa47e482f7e89904cba2338999345025d8b4e36",
+    "PE_A_Frame": "https://huggingface.co/facebook/pe-a-frame-small/tree/e5fc71c1f0be50279f52f292390b589780079e13",
+    "YAMNet": "https://github.com/tensorflow/models/blob/dfffd623b6be8d1d9744b8e261fbac370d17c46d/research/audioset/yamnet/yamnet_class_map.csv"
+  },
+  "unprompted_and_prompted": "Count (second, scene category) pairs on half-open one-second bins, including the final partial second. A nonempty overlap marks a bin. Columns count matched, extra and missed. YAMNet uses the shipping threshold .5 and up to 3 labels per channel/window. Frame-MN06 uses sigmoid >.5 and a 9-frame median. PE-A-Frame uses sigmoid >.3 independently per prompt/channel at 40 ms, in nonoverlapping 10-second input contexts trimmed to original samples. Catalogue uses all 521 names prefixed with \"the sound of \". Prompted uses every category description in both releases. Credit either original channel. Fixed mappings include empty lists. None of the four operating points were tuned on the test. These are local classifiers, upstream of GPT.",
+  "mappings": {
+    "2017": {
+      "people walking": [
+        "Walk, footsteps"
+      ],
+      "people speaking": [
+        "Speech",
+        "Conversation",
+        "Narration, monologue",
+        "Whispering",
+        "Hubbub, speech noise, speech babble",
+        "Child speech, kid speaking"
+      ],
+      "children": [
+        "Child speech, kid speaking",
+        "Children shouting",
+        "Child singing",
+        "Children playing",
+        "Baby laughter",
+        "Baby cry, infant cry",
+        "Babbling"
+      ],
+      "car": [
+        "Car",
+        "Car passing by",
+        "Race car, auto racing"
+      ],
+      "large vehicle": [
+        "Bus",
+        "Truck",
+        "Ice cream truck, ice cream van"
+      ],
+      "brakes squeaking": []
+    },
+    "2016": {
+      "people walking": [
+        "Walk, footsteps"
+      ],
+      "people speaking": [
+        "Speech",
+        "Conversation",
+        "Narration, monologue",
+        "Whispering",
+        "Hubbub, speech noise, speech babble",
+        "Child speech, kid speaking",
+        "Male speech, man speaking",
+        "Female speech, woman speaking"
+      ],
+      "car passing by": [
+        "Car passing by"
+      ],
+      "bird singing": [
+        "Bird vocalization, bird call, bird song",
+        "Chirp, tweet"
+      ],
+      "children shouting": [
+        "Children shouting"
+      ],
+      "wind blowing": [
+        "Wind",
+        "Howl (wind)"
+      ],
+      "object impact": [
+        "Generic impact sounds",
+        "Thump, thud",
+        "Bang",
+        "Knock",
+        "Clatter"
+      ],
+      "dishes": [
+        "Dishes, pots, and pans"
+      ],
+      "drawer": [
+        "Drawer open or close"
+      ],
+      "washing dishes": [],
+      "cutlery": [
+        "Cutlery, silverware"
+      ],
+      "(object) rustling": [
+        "Rustle",
+        "Paper rustling"
+      ],
+      "(object) snapping": [
+        "Snap"
+      ],
+      "cupboard": [
+        "Cupboard open or close"
+      ],
+      "water tap running": [
+        "Water tap, faucet"
+      ],
+      "glass jingling": [
+        "Glass chink, clink"
+      ],
+      "(object) banging": [
+        "Bang"
+      ]
+    }
+  },
+  "queries": {
+    "people walking": "people walking, audible footsteps",
+    "people speaking": "people talking",
+    "children": "sounds made by children",
+    "car": "a car driving",
+    "large vehicle": "a bus or truck driving",
+    "brakes squeaking": "squeaking brakes",
+    "bird singing": "a bird singing",
+    "car passing by": "a car passing by",
+    "children shouting": "children shouting",
+    "wind blowing": "wind blowing",
+    "object impact": "an object striking a surface",
+    "dishes": "dishes clattering",
+    "drawer": "a drawer opening or closing",
+    "washing dishes": "someone washing the dishes",
+    "cutlery": "cutlery clinking",
+    "(object) rustling": "an object rustling",
+    "(object) snapping": "a snapping sound",
+    "cupboard": "a cupboard opening or closing",
+    "water tap running": "water running from a faucet",
+    "glass jingling": "glass clinking",
+    "(object) banging": "an object banging"
+  },
+  "whole_recording_counts": {
+    "2016 home": {
+      "yam": [
+        25,
+        28,
+        1046
+      ],
+      "frame": [
+        0,
+        5,
+        1071
+      ],
+      "catalogue": [
+        849,
+        5212,
+        222
+      ],
+      "prompted": [
+        906,
+        5011,
+        165
+      ]
+    },
+    "2016 residential_area": {
+      "yam": [
+        5,
+        1,
+        898
+      ],
+      "frame": [
+        49,
+        585,
+        854
+      ],
+      "catalogue": [
+        874,
+        3690,
+        29
+      ],
+      "prompted": [
+        677,
+        1612,
+        226
+      ]
+    },
+    "2017 street": {
+      "yam": [
+        49,
+        19,
+        1586
+      ],
+      "frame": [
+        5,
+        5,
+        1630
+      ],
+      "catalogue": [
+        1528,
+        5108,
+        107
+      ],
+      "prompted": [
+        1445,
+        3621,
+        190
+      ]
+    }
+  },
+  "recordings": {
+    "2016 home": [
+      {
+        "file": "audio/home/a029.wav",
+        "sha256": "6e308cd9e5fc17144938512882ecda371cd3c15a7d52fc005df76ec53a14e406",
+        "seconds": 180.85442176870748,
+        "counts": {
+          "yam": [
+            2,
+            8,
+            180
+          ],
+          "frame": [
+            0,
+            4,
+            182
+          ],
+          "catalogue": [
+            73,
+            1031,
+            109
+          ],
+          "prompted": [
+            168,
+            1106,
+            14
+          ]
+        }
+      },
+      {
+        "file": "audio/home/a033.wav",
+        "sha256": "32bba63168d04671e0ac264853b892978098cbd7304038129c2e83e8153b161c",
+        "seconds": 181.08662131519273,
+        "counts": {
+          "yam": [
+            3,
+            1,
+            221
+          ],
+          "frame": [
+            0,
+            0,
+            224
+          ],
+          "catalogue": [
+            171,
+            912,
+            53
+          ],
+          "prompted": [
+            201,
+            948,
+            23
+          ]
+        }
+      },
+      {
+        "file": "audio/home/a035.wav",
+        "sha256": "124875e023766235d4778fa9f64a367608396f38e8df3d821da565617acd63c5",
+        "seconds": 181.84126984126985,
+        "counts": {
+          "yam": [
+            1,
+            3,
+            314
+          ],
+          "frame": [
+            0,
+            0,
+            315
+          ],
+          "catalogue": [
+            288,
+            991,
+            27
+          ],
+          "prompted": [
+            268,
+            1055,
+            47
+          ]
+        }
+      },
+      {
+        "file": "audio/home/a037.wav",
+        "sha256": "c1a54e5966898635d809a4b779cfb115e9b55face7604a2eca29dad0a0987378",
+        "seconds": 181.1678911564626,
+        "counts": {
+          "yam": [
+            3,
+            2,
+            154
+          ],
+          "frame": [
+            0,
+            0,
+            157
+          ],
+          "catalogue": [
+            144,
+            905,
+            13
+          ],
+          "prompted": [
+            117,
+            934,
+            40
+          ]
+        }
+      },
+      {
+        "file": "audio/home/b043.wav",
+        "sha256": "0d0290d09177f6280410dadb0557be1806a7771bfe3b86d91c135ee5ae9a2be6",
+        "seconds": 344.4041723356009,
+        "counts": {
+          "yam": [
+            16,
+            14,
+            177
+          ],
+          "frame": [
+            0,
+            1,
+            193
+          ],
+          "catalogue": [
+            173,
+            1373,
+            20
+          ],
+          "prompted": [
+            152,
+            968,
+            41
+          ]
+        }
+      }
+    ],
+    "2016 residential_area": [
+      {
+        "file": "audio/residential_area/a008.wav",
+        "sha256": "ff080a27ae8c0aed5e2d68222f0b7b5ac31bc022ecd1ee38d802f1f273cd6235",
+        "seconds": 205.12507936507936,
+        "counts": {
+          "yam": [
+            1,
+            0,
+            165
+          ],
+          "frame": [
+            4,
+            185,
+            162
+          ],
+          "catalogue": [
+            162,
+            710,
+            4
+          ],
+          "prompted": [
+            135,
+            334,
+            31
+          ]
+        }
+      },
+      {
+        "file": "audio/residential_area/a009.wav",
+        "sha256": "a253e10a3400e4d167dc1aed6f3a4193f3267ca8f65d325f905d206665ef5b99",
+        "seconds": 229.4073469387755,
+        "counts": {
+          "yam": [
+            0,
+            0,
+            122
+          ],
+          "frame": [
+            7,
+            143,
+            115
+          ],
+          "catalogue": [
+            120,
+            830,
+            2
+          ],
+          "prompted": [
+            86,
+            424,
+            36
+          ]
+        }
+      },
+      {
+        "file": "audio/residential_area/b005.wav",
+        "sha256": "ca778164b553fbede84622477dff0b5e6db710e70d58a92a120420bfe6912277",
+        "seconds": 201.10802721088436,
+        "counts": {
+          "yam": [
+            4,
+            0,
+            253
+          ],
+          "frame": [
+            38,
+            132,
+            219
+          ],
+          "catalogue": [
+            252,
+            756,
+            5
+          ],
+          "prompted": [
+            236,
+            458,
+            21
+          ]
+        }
+      },
+      {
+        "file": "audio/residential_area/b006.wav",
+        "sha256": "0c47b261a178f207897c51d89455cb1e46d0e12ad1e5fcd9689f14f65c12f8a9",
+        "seconds": 222.6271201814059,
+        "counts": {
+          "yam": [
+            0,
+            0,
+            212
+          ],
+          "frame": [
+            0,
+            53,
+            212
+          ],
+          "catalogue": [
+            205,
+            632,
+            7
+          ],
+          "prompted": [
+            177,
+            146,
+            35
+          ]
+        }
+      },
+      {
+        "file": "audio/residential_area/b008.wav",
+        "sha256": "30fc1e1b974699c9729948c57020f2739e0e5ca72b17cc2543c2ee4381280a99",
+        "seconds": 210.802358276644,
+        "counts": {
+          "yam": [
+            0,
+            1,
+            146
+          ],
+          "frame": [
+            0,
+            72,
+            146
+          ],
+          "catalogue": [
+            135,
+            762,
+            11
+          ],
+          "prompted": [
+            43,
+            250,
+            103
+          ]
+        }
+      }
+    ],
+    "2017 street": [
+      {
+        "file": "audio/street/a002.wav",
+        "sha256": "fd8e159749dfb292c3b6506299a881e73e13d1ee455127465a9985367fe3a37b",
+        "seconds": 184.10521541950112,
+        "counts": {
+          "yam": [
+            0,
+            1,
+            13
+          ],
+          "frame": [
+            0,
+            0,
+            13
+          ],
+          "catalogue": [
+            11,
+            538,
+            2
+          ],
+          "prompted": [
+            8,
+            371,
+            5
+          ]
+        }
+      },
+      {
+        "file": "audio/street/a005.wav",
+        "sha256": "a1a8462cad88005f9d5ceebdc0dcf4b22f3477c3ba20d520dd869dc180021c67",
+        "seconds": 253.96244897959184,
+        "counts": {
+          "yam": [
+            6,
+            6,
+            233
+          ],
+          "frame": [
+            0,
+            0,
+            239
+          ],
+          "catalogue": [
+            184,
+            764,
+            55
+          ],
+          "prompted": [
+            216,
+            619,
+            23
+          ]
+        }
+      },
+      {
+        "file": "audio/street/a009.wav",
+        "sha256": "a253e10a3400e4d167dc1aed6f3a4193f3267ca8f65d325f905d206665ef5b99",
+        "seconds": 229.4073469387755,
+        "counts": {
+          "yam": [
+            0,
+            0,
+            112
+          ],
+          "frame": [
+            0,
+            0,
+            112
+          ],
+          "catalogue": [
+            105,
+            649,
+            7
+          ],
+          "prompted": [
+            95,
+            468,
+            17
+          ]
+        }
+      },
+      {
+        "file": "audio/street/a011.wav",
+        "sha256": "7977ed72900c4763c0f95cfcc3fc27d710bac213213db2d6d044e423be2ba024",
+        "seconds": 215.9049433106576,
+        "counts": {
+          "yam": [
+            6,
+            0,
+            220
+          ],
+          "frame": [
+            0,
+            0,
+            226
+          ],
+          "catalogue": [
+            217,
+            671,
+            9
+          ],
+          "prompted": [
+            175,
+            521,
+            51
+          ]
+        }
+      },
+      {
+        "file": "audio/street/a123.wav",
+        "sha256": "c12766f3e82b1611d91b3797896778d60fcce23ef1765225e24fe95caf80286f",
+        "seconds": 301.4704761904762,
+        "counts": {
+          "yam": [
+            17,
+            12,
+            513
+          ],
+          "frame": [
+            0,
+            0,
+            530
+          ],
+          "catalogue": [
+            511,
+            758,
+            19
+          ],
+          "prompted": [
+            485,
+            469,
+            45
+          ]
+        }
+      },
+      {
+        "file": "audio/street/b002.wav",
+        "sha256": "34b71f9bc09de5d96aae739893b26d49e8e587077cd1dd06cb7545d1a09580d7",
+        "seconds": 197.24770975056688,
+        "counts": {
+          "yam": [
+            0,
+            0,
+            179
+          ],
+          "frame": [
+            0,
+            0,
+            179
+          ],
+          "catalogue": [
+            170,
+            531,
+            9
+          ],
+          "prompted": [
+            167,
+            330,
+            12
+          ]
+        }
+      },
+      {
+        "file": "audio/street/b004.wav",
+        "sha256": "5b5d3fe32751f498934ca3a6c6489b5b94659a066bf849c7b40451fca95b2a5d",
+        "seconds": 156.21528344671202,
+        "counts": {
+          "yam": [
+            18,
+            0,
+            157
+          ],
+          "frame": [
+            0,
+            0,
+            175
+          ],
+          "catalogue": [
+            173,
+            553,
+            2
+          ],
+          "prompted": [
+            157,
+            405,
+            18
+          ]
+        }
+      },
+      {
+        "file": "audio/street/b092.wav",
+        "sha256": "793e354899117f518d12241d1674a5c0ff738e8f52124b6bd362dab176597746",
+        "seconds": 211.12163265306123,
+        "counts": {
+          "yam": [
+            2,
+            0,
+            159
+          ],
+          "frame": [
+            5,
+            5,
+            156
+          ],
+          "catalogue": [
+            157,
+            644,
+            4
+          ],
+          "prompted": [
+            142,
+            438,
+            19
+          ]
+        }
+      }
+    ]
+  },
+  "panel_design": "Two anonymous eight-second excerpts per TUT 2016 recording. For each half, select a whole second by the first 8 big-endian SHA-256 bytes of reel-framed-audition-01/<file>/<zero-based half>, modulo the number of possible starts. Both score all scene options on the identical original channels, using the supplied free-text queries. CLAP repeats each isolated second inside the encoder. PE-A-Frame hears the whole eight seconds. For each query choose the second with the largest channel score, averaging the 25 frame scores per channel for PE-A-Frame. Conditional timing is scored only when the human marked at least one but fewer than all eight seconds. The timing analysis and CLAP comparison were exploratory. The panel and query texts were selected before examining model output. Model pretraining overlap is unknown.",
+  "gpt": "Model gpt-6.1-terra in fresh authenticated local Codex CLI sessions. Anonymous scene-option vocabulary identical across arms. Original recorded channel spectrogram plus AST/CoNeTTE/YAMNet readings, no WAV. Query arm also received strongest second, peak and median one-second means per option. No human annotations in inputs. A source is counted as present if a human annotation overlaps the excerpt. Jaccard intersection/union per clip, both sets empty scores one. Score clips equally. Single generation per arm.",
+  "score": {
+    "locations": {
+      "queries": 31,
+      "clap": 15,
+      "pe_a_frame": 23,
+      "uniform_expected": 13.0
+    },
+    "reader": {
+      "base": {
+        "found": 20,
+        "extra": 17,
+        "missed": 20,
+        "mean_clip_overlap": 0.4375
+      },
+      "query": {
+        "found": 28,
+        "extra": 30,
+        "missed": 12,
+        "mean_clip_overlap": 0.48845238095238097
+      }
+    }
+  },
+  "paired_95pct": {
+    "resampling": "Resample ten source recordings with replacement, paired, 10000 draws, seed 42. The two excerpts from the same file stay together.",
+    "PE_minus_CLAP_timing": [
+      0.08333333333333333,
+      0.4482758620689655
+    ],
+    "query_minus_base_GPT_clip_overlap": [
+      -0.08916666666666666,
+      0.18333333333333332
+    ]
+  },
+  "panel": [
+    {
+      "file": "audio/home/a029.wav",
+      "start_s": 7,
+      "end_s": 15,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 6,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "cupboard",
+          "clap": 5,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "cutlery",
+          "clap": 5,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "dishes",
+          "clap": 5,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "drawer",
+          "clap": 6,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "glass jingling",
+          "clap": 5,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "object impact",
+          "clap": 5,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people walking",
+          "clap": 6,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "washing dishes",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "water tap running",
+          "clap": 3,
+          "pe_a_frame": 1
+        }
+      ],
+      "reader": {
+        "base": [
+          "water tap running"
+        ],
+        "query": [
+          "dishes",
+          "washing dishes",
+          "water tap running"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/a029.wav",
+      "start_s": 138,
+      "end_s": 146,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "cupboard",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "cutlery",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "dishes",
+          "clap": 5,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "drawer",
+          "clap": 3,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "glass jingling",
+          "clap": 5,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "object impact",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "people walking",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "washing dishes",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "water tap running",
+          "clap": 3,
+          "pe_a_frame": 0
+        }
+      ],
+      "reader": {
+        "base": [
+          "cupboard"
+        ],
+        "query": [
+          "(object) rustling",
+          "cupboard",
+          "dishes",
+          "drawer",
+          "people walking"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/a033.wav",
+      "start_s": 0,
+      "end_s": 8,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "cupboard",
+          "clap": 4,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "cutlery",
+          "clap": 6,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "dishes",
+          "clap": 3,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "drawer",
+          "clap": 1,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "glass jingling",
+          "clap": 4,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "object impact",
+          "clap": 5,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "people walking",
+          "clap": 0,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "washing dishes",
+          "clap": 5,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "water tap running",
+          "clap": 5,
+          "pe_a_frame": 2
+        }
+      ],
+      "reader": {
+        "base": [
+          "water tap running"
+        ],
+        "query": [
+          "dishes",
+          "washing dishes",
+          "water tap running"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/a033.wav",
+      "start_s": 143,
+      "end_s": 151,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 3,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 3,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "cupboard",
+          "clap": 5,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "cutlery",
+          "clap": 3,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "dishes",
+          "clap": 3,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "drawer",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "glass jingling",
+          "clap": 3,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "object impact",
+          "clap": 3,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "people walking",
+          "clap": 3,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "washing dishes",
+          "clap": 3,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "water tap running",
+          "clap": 3,
+          "pe_a_frame": 1
+        }
+      ],
+      "reader": {
+        "base": [
+          "cupboard",
+          "people walking"
+        ],
+        "query": [
+          "(object) rustling",
+          "cupboard",
+          "dishes",
+          "drawer",
+          "object impact",
+          "people walking"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/a035.wav",
+      "start_s": 44,
+      "end_s": 52,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 1,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 1,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "cupboard",
+          "clap": 5,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "cutlery",
+          "clap": 4,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "dishes",
+          "clap": 0,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "drawer",
+          "clap": 5,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "glass jingling",
+          "clap": 0,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "object impact",
+          "clap": 1,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "people walking",
+          "clap": 7,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "washing dishes",
+          "clap": 1,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "water tap running",
+          "clap": 1,
+          "pe_a_frame": 1
+        }
+      ],
+      "reader": {
+        "base": [
+          "water tap running"
+        ],
+        "query": [
+          "dishes",
+          "washing dishes",
+          "water tap running"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/a035.wav",
+      "start_s": 159,
+      "end_s": 167,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "cupboard",
+          "clap": 7,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "cutlery",
+          "clap": 7,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "dishes",
+          "clap": 7,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "drawer",
+          "clap": 7,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "glass jingling",
+          "clap": 7,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "object impact",
+          "clap": 4,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "people walking",
+          "clap": 5,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "washing dishes",
+          "clap": 4,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "water tap running",
+          "clap": 3,
+          "pe_a_frame": 4
+        }
+      ],
+      "reader": {
+        "base": [
+          "dishes",
+          "cutlery",
+          "washing dishes"
+        ],
+        "query": [
+          "cutlery",
+          "dishes",
+          "washing dishes",
+          "water tap running"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/a037.wav",
+      "start_s": 42,
+      "end_s": 50,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 4,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 3,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "cupboard",
+          "clap": 5,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "cutlery",
+          "clap": 2,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "dishes",
+          "clap": 2,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "drawer",
+          "clap": 6,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "glass jingling",
+          "clap": 2,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "object impact",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "people walking",
+          "clap": 3,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "washing dishes",
+          "clap": 2,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "water tap running",
+          "clap": 3,
+          "pe_a_frame": 6
+        }
+      ],
+      "reader": {
+        "base": [
+          "people walking",
+          "object impact"
+        ],
+        "query": [
+          "cupboard",
+          "dishes",
+          "object impact",
+          "people walking",
+          "(object) rustling"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/a037.wav",
+      "start_s": 131,
+      "end_s": 139,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 7,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 7,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "cupboard",
+          "clap": 2,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "cutlery",
+          "clap": 1,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "dishes",
+          "clap": 2,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "drawer",
+          "clap": 1,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "glass jingling",
+          "clap": 2,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "object impact",
+          "clap": 7,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "people walking",
+          "clap": 0,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "washing dishes",
+          "clap": 6,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "water tap running",
+          "clap": 6,
+          "pe_a_frame": 6
+        }
+      ],
+      "reader": {
+        "base": [
+          "water tap running"
+        ],
+        "query": [
+          "cupboard",
+          "dishes",
+          "washing dishes",
+          "water tap running"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/b043.wav",
+      "start_s": 51,
+      "end_s": 59,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "cupboard",
+          "clap": 6,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "cutlery",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "dishes",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "drawer",
+          "clap": 6,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "glass jingling",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "object impact",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "people walking",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "washing dishes",
+          "clap": 7,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "water tap running",
+          "clap": 6,
+          "pe_a_frame": 2
+        }
+      ],
+      "reader": {
+        "base": [
+          "water tap running",
+          "washing dishes"
+        ],
+        "query": [
+          "dishes",
+          "washing dishes",
+          "water tap running"
+        ]
+      }
+    },
+    {
+      "file": "audio/home/b043.wav",
+      "start_s": 283,
+      "end_s": 291,
+      "locations": [
+        {
+          "description": "(object) rustling",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "(object) snapping",
+          "clap": 2,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "cupboard",
+          "clap": 0,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "cutlery",
+          "clap": 1,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "dishes",
+          "clap": 1,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "drawer",
+          "clap": 7,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "glass jingling",
+          "clap": 1,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "object impact",
+          "clap": 1,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "people walking",
+          "clap": 1,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "washing dishes",
+          "clap": 2,
+          "pe_a_frame": 3
+        },
+        {
+          "description": "water tap running",
+          "clap": 2,
+          "pe_a_frame": 3
+        }
+      ],
+      "reader": {
+        "base": [
+          "cupboard",
+          "object impact"
+        ],
+        "query": [
+          "(object) rustling",
+          "cupboard"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/a008.wav",
+      "start_s": 49,
+      "end_s": 57,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 2,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "bird singing",
+          "clap": 2,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "car passing by",
+          "clap": 2,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "children shouting",
+          "clap": 2,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people speaking",
+          "clap": 1,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "people walking",
+          "clap": 6,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "wind blowing",
+          "clap": 3,
+          "pe_a_frame": 0
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "wind blowing"
+        ],
+        "query": [
+          "bird singing",
+          "wind blowing"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/a008.wav",
+      "start_s": 119,
+      "end_s": 127,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 2,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "bird singing",
+          "clap": 2,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "car passing by",
+          "clap": 2,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "children shouting",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "people speaking",
+          "clap": 3,
+          "pe_a_frame": 5
+        },
+        {
+          "description": "people walking",
+          "clap": 3,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "wind blowing",
+          "clap": 6,
+          "pe_a_frame": 0
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "wind blowing"
+        ],
+        "query": [
+          "bird singing",
+          "wind blowing"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/a009.wav",
+      "start_s": 35,
+      "end_s": 43,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 6,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "bird singing",
+          "clap": 0,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "car passing by",
+          "clap": 0,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "children shouting",
+          "clap": 6,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "people speaking",
+          "clap": 0,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "people walking",
+          "clap": 0,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "wind blowing",
+          "clap": 3,
+          "pe_a_frame": 0
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "car passing by"
+        ],
+        "query": [
+          "bird singing",
+          "car passing by"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/a009.wav",
+      "start_s": 140,
+      "end_s": 148,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 1,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "bird singing",
+          "clap": 6,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "car passing by",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "children shouting",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people speaking",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people walking",
+          "clap": 4,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "wind blowing",
+          "clap": 7,
+          "pe_a_frame": 3
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "car passing by",
+          "wind blowing"
+        ],
+        "query": [
+          "bird singing",
+          "car passing by",
+          "wind blowing"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/b005.wav",
+      "start_s": 35,
+      "end_s": 43,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 5,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "bird singing",
+          "clap": 1,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "car passing by",
+          "clap": 1,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "children shouting",
+          "clap": 1,
+          "pe_a_frame": 6
+        },
+        {
+          "description": "people speaking",
+          "clap": 1,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people walking",
+          "clap": 6,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "wind blowing",
+          "clap": 1,
+          "pe_a_frame": 5
+        }
+      ],
+      "reader": {
+        "base": [
+          "car passing by",
+          "people walking"
+        ],
+        "query": [
+          "car passing by",
+          "people walking"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/b005.wav",
+      "start_s": 131,
+      "end_s": 139,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 6,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "bird singing",
+          "clap": 1,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "car passing by",
+          "clap": 4,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "children shouting",
+          "clap": 6,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "people speaking",
+          "clap": 2,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "people walking",
+          "clap": 3,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "wind blowing",
+          "clap": 0,
+          "pe_a_frame": 5
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "wind blowing"
+        ],
+        "query": [
+          "bird singing",
+          "wind blowing"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/b006.wav",
+      "start_s": 66,
+      "end_s": 74,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "bird singing",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "car passing by",
+          "clap": 3,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "children shouting",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people speaking",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people walking",
+          "clap": 2,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "wind blowing",
+          "clap": 0,
+          "pe_a_frame": 0
+        }
+      ],
+      "reader": {
+        "base": [
+          "car passing by"
+        ],
+        "query": [
+          "car passing by"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/b006.wav",
+      "start_s": 184,
+      "end_s": 192,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 2,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "bird singing",
+          "clap": 7,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "car passing by",
+          "clap": 3,
+          "pe_a_frame": 2
+        },
+        {
+          "description": "children shouting",
+          "clap": 7,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "people speaking",
+          "clap": 3,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "people walking",
+          "clap": 3,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "wind blowing",
+          "clap": 2,
+          "pe_a_frame": 6
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "wind blowing"
+        ],
+        "query": [
+          "bird singing",
+          "people walking",
+          "wind blowing"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/b008.wav",
+      "start_s": 17,
+      "end_s": 25,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 4,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "bird singing",
+          "clap": 5,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "car passing by",
+          "clap": 5,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "children shouting",
+          "clap": 3,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "people speaking",
+          "clap": 4,
+          "pe_a_frame": 1
+        },
+        {
+          "description": "people walking",
+          "clap": 0,
+          "pe_a_frame": 7
+        },
+        {
+          "description": "wind blowing",
+          "clap": 0,
+          "pe_a_frame": 0
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "car passing by"
+        ],
+        "query": [
+          "bird singing",
+          "car passing by"
+        ]
+      }
+    },
+    {
+      "file": "audio/residential_area/b008.wav",
+      "start_s": 154,
+      "end_s": 162,
+      "locations": [
+        {
+          "description": "(object) banging",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "bird singing",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "car passing by",
+          "clap": 1,
+          "pe_a_frame": 4
+        },
+        {
+          "description": "children shouting",
+          "clap": 0,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people speaking",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "people walking",
+          "clap": 7,
+          "pe_a_frame": 0
+        },
+        {
+          "description": "wind blowing",
+          "clap": 7,
+          "pe_a_frame": 0
+        }
+      ],
+      "reader": {
+        "base": [
+          "bird singing",
+          "car passing by",
+          "wind blowing"
+        ],
+        "query": [
+          "car passing by"
+        ]
+      }
+    }
+  ],
+  "door": {
+    "cutoff_s": 8.5,
+    "locations": {
+      "A": [
+        {
+          "description": "something rattling",
+          "best_interval_s": [
+            5.5,
+            6.5
+          ],
+          "largest_1s_mean": 0.9885,
+          "median_1s_mean": 0.0831
+        },
+        {
+          "description": "a person speaking",
+          "best_interval_s": [
+            4.5,
+            5.5
+          ],
+          "largest_1s_mean": 0.1765,
+          "median_1s_mean": 0.0399
+        }
+      ],
+      "B": [
+        {
+          "description": "something rattling",
+          "best_interval_s": [
+            3.5,
+            4.5
+          ],
+          "largest_1s_mean": 0.0,
+          "median_1s_mean": 0.0
+        },
+        {
+          "description": "a person speaking",
+          "best_interval_s": [
+            3.5,
+            4.5
+          ],
+          "largest_1s_mean": 0.0014,
+          "median_1s_mean": 0.0008
+        }
+      ]
+    },
+    "gpt_answers": {
+      "A": "A brief jingling or rattling sound grew louder before fading, while the door remained closed. No words were clear.",
+      "B": "A very faint, steady background noise is the only apparent sound, with no clear change before playback ended. No words were discernible."
+    },
+    "identical_A_C_prefix_blocks": 17,
+    "past_cutoff_rejected": true
+  }
+}

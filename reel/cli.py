@@ -8,7 +8,7 @@
   reel listen DIR --t0 S --t1 S [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
-  reel match DIR --t0 S --t1 S [--per-second] ["sound description" ...]    compare descriptions with the recorded channels
+  reel match DIR --t0 S --t1 S [--per-second | --locate] ["sound description" ...]    compare descriptions with the recorded channels
   reel observe DIR --t0 S --t1 S [--joint] [--motion-point X Y] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
   reel speech TURN [--lang CODE] [--verify]               read words from a delivered audio interval
   reel follow TURN --from S --point X Y [--out NEW_DIR]    follow a pictured point through published frames
@@ -16,7 +16,7 @@
   reel play FILM --out NEW_DIR [--until S] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
   reel mcp FILM [--until S] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
-  reel setup [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds]    fetch models for the selected senses
+  reel setup [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
 """
 import shlex
 import sys as _sys, pathlib as _pl
@@ -52,6 +52,7 @@ def doctor():
     from unmix import PYTHON as unmix_py, ready as layers_ready
     from point_reader import PYTHON as follow_py, ready as follow_ready
     from scene_audio import READY as captions_ready
+    from localize_sound import ready as location_ready
     from sound_events import ready as events_ready
     from config import CAPTION_PY
     captions = (captions_ready.is_file() and pathlib.Path(CAPTION_PY).is_file() and
@@ -74,6 +75,7 @@ def doctor():
             ("waveform and optional joint picture/sound readings: Qwen3-Omni", hearing, "reel setup --describe-sounds"),
             ("overlapping sounds: MixIT separator", layers_ready() and shutil.which(unmix_py) is not None
              and has(unmix_py, "tensorflow"), "reel setup --layers"),
+            ("locate a described sound: PE-A-Frame", location_ready(), "reel setup --locate-sounds"),
             ("optional sound comparison: local CLAP", compare, "pip install -e '.[tags]' and reel setup --compare-sounds"),
             ("moving point: online BootsTAPIR", follow_ready() and subprocess.run(
                 [follow_py, str(HERE / "point_reader.py"), "--check"], capture_output=True).returncode == 0, "reel setup --follow"),
@@ -125,7 +127,11 @@ def setup():
     if "--compare-sounds" in sys.argv:
         subprocess.run([COMPARE_PY, str(HERE / "compare_sounds.py"), "--setup"], check=True)
         print("sound comparison ready")
-    optional_models = {"--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
+    if "--locate-sounds" in sys.argv:
+        from localize_sound import prepare_environment
+        prepare_environment()
+        print("sound location ready")
+    optional_models = {"--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
     if "--sync" not in sys.argv and optional_models.intersection(sys.argv):
         return
     if not UNISAL.exists():
@@ -228,18 +234,25 @@ def main():
             ap.error(str(error))
         return
     if cmd == "match":
-        from compare_sounds import SoundMatcher
+        from compare_sounds import SoundMatcher, match_excerpt
+        from localize_sound import locate
         ap = argparse.ArgumentParser(prog="reel match")
         ap.add_argument("out")
         ap.add_argument("--t0", type=float, required=True)
         ap.add_argument("--t1", type=float, required=True)
-        ap.add_argument("--per-second", action="store_true", help="compare consecutive seconds on the film clock")
+        mode = ap.add_mutually_exclusive_group()
+        mode.add_argument("--locate", action="store_true", help="find the second most similar to each supplied description")
+        mode.add_argument("--per-second", action="store_true", help="compare consecutive seconds on the film clock")
         ap.add_argument("descriptions", nargs="*")
         x = ap.parse_intermixed_args(sys.argv[2:])
         try:
-            with SoundMatcher() as matcher:
-                report = matcher.inspect(x.out, x.t0, x.t1, x.descriptions, per_second=x.per_second)
-                print(json.dumps(report, ensure_ascii=False))
+            if x.locate:
+                wav, start, end, first = match_excerpt(x.out, x.t0, x.t1)
+                report = locate(wav, start, end, x.descriptions, first)
+            else:
+                with SoundMatcher() as matcher:
+                    report = matcher.inspect(x.out, x.t0, x.t1, x.descriptions, per_second=x.per_second)
+            print(json.dumps(report, ensure_ascii=False))
         except (OSError, ValueError, subprocess.CalledProcessError) as error:
             ap.error(str(error))
         return
@@ -389,9 +402,15 @@ def main():
                                 raise ValueError('use match START END [--per-second] ["sound description" ...]')
                             per_second = fields[3:4] == ["--per-second"]
                             descriptions = fields[4:] if per_second else fields[3:]
-                            with layers.matcher.for_replay():
-                                result = layers.matcher.inspect(path.parent, float(fields[1]), float(fields[2]),
-                                                                descriptions, per_second=per_second)
+                            if fields[3:4] == ["--locate"]:
+                                from compare_sounds import match_excerpt
+                                from localize_sound import locate
+                                wav, start, end, first = match_excerpt(path.parent, float(fields[1]), float(fields[2]))
+                                result = locate(wav, start, end, fields[4:], first)
+                            else:
+                                with layers.matcher.for_replay():
+                                    result = layers.matcher.inspect(path.parent, float(fields[1]), float(fields[2]),
+                                                                    descriptions, per_second=per_second)
                             print(json.dumps(result, ensure_ascii=False), flush=True)
                         except (ValueError, OSError, subprocess.CalledProcessError) as error:
                             print(json.dumps({"error": str(error)}), flush=True)

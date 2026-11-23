@@ -33,6 +33,7 @@ if __package__:
     from .frames import SHEET_COLUMNS, SHEET_ROWS, frames_from_sheets
     from .hearing import SoundReader, WINDOW_S
     from .joint import CONTEXT_SECONDS, legacy_picture_size, published_scene, read_published_scene, scene_levels
+    from .localize_sound import locate
     from .live_speech import SpeechReader
     from .motion_slice import motion_slices, validate_motion_point
     from .observe import observe as observe_interval
@@ -59,6 +60,7 @@ else:
     from frames import SHEET_COLUMNS, SHEET_ROWS, frames_from_sheets
     from hearing import SoundReader, WINDOW_S
     from joint import CONTEXT_SECONDS, legacy_picture_size, published_scene, read_published_scene, scene_levels
+    from localize_sound import locate
     from live_speech import SpeechReader
     from motion_slice import motion_slices, validate_motion_point
     from observe import observe as observe_interval
@@ -600,7 +602,7 @@ class Viewing:
                 image_block(Path(detail["file"]))]
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
-               alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0.):
+               alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0., locate_sounds=None):
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -660,6 +662,8 @@ class Viewing:
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first)}
             if sound_events:
                 result["sound_events"] = original_events
+            if locate_sounds is not None:
+                result["sound_locations"] = locate(original, start, stop, locate_sounds, first)
             if alternatives is not None or per_second:
                 options = {"per_second": True, "first_sample": first} if per_second else {}
                 with self.match_session() as matcher:
@@ -971,7 +975,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
         async def listen(turn: int, question: str | None = None, start_s: float | None = None,
                          end_s: float | None = None, native_audio: bool = False, describe: bool = True,
                          component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False,
-                         mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0):
+                         mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0,
+                         locate_sounds: list[str] | None = None):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
@@ -986,11 +991,13 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             Set gain_db to adjust replay volume equally across channels. The WAV and local description use this gain.
             With sound_events=true, compare playback_sound_events at that volume with the original sound_events.
             The spectrum and matches use the signal before gain. native_audio includes the selected WAV.
+            Supply locate_sounds to find the second most similar to each description in the original recording.
+            A suggested replay time can exist for an absent sound. A tie has no unique location.
             Set sound_events=true for short, overlapping category estimates from the original channels.
             Set describe=false to use the recording and spectrum without the local waveform reader.
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
-                                           alternatives, per_second, mark_sound, sound_events, gain_db)
+                                           alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,

@@ -262,18 +262,23 @@ class SoundMatcher(LocalReader):
         return self.request({"operation": "choose_layer", "wavs": wavs, "focus": focus})
 
     def inspect(self, out, start, end, descriptions, *, per_second=False):
-        if __package__:
-            from .listen import excerpt
-            from .turn_audio import released_samples
-        else:
-            from listen import excerpt
-            from turn_audio import released_samples
-        first = None
-        if (Path(out) / "view.json").is_file():
-            wav, start, end, first, _ = released_samples(out, start, end, end - start)
-        else:
-            wav = excerpt(out, start, end)
+        wav, start, end, first = match_excerpt(out, start, end)
         return self.read(wav, start, end, descriptions, per_second=per_second, first_sample=first)
+
+
+def match_excerpt(out, start, end):
+    if __package__:
+        from .listen import excerpt
+        from .turn_audio import released_samples
+    else:
+        from listen import excerpt
+        from turn_audio import released_samples
+    first = None
+    if (Path(out) / "view.json").is_file():
+        wav, start, end, first, _ = released_samples(out, start, end, end - start)
+    else:
+        wav = excerpt(out, start, end)
+    return wav, start, end, first
 
 
 def neighbours(wav, windows):

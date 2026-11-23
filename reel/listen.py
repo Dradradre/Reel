@@ -207,9 +207,20 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
     if compare_sounds:
         ranges = [(p / native_rate, min(len(native), p + width) / native_rate) for p in positions]
         try:
+            request = ranges
+            if mark_sound is not None:
+                mark = {"wav": str(original), "first_sample": first_sample,
+                        "samples": report["recorded_sound_window"]["mark_samples"]}
+                request = {"windows": ranges, "original_mark": mark}
             proc = subprocess.run([COMPARE_PY, str(Path(__file__).with_name("compare_sounds.py")), str(wav)],
-                                  input=json.dumps(ranges), text=True, capture_output=True, check=True)
+                                  input=json.dumps(request), text=True, capture_output=True, check=True)
             matches = json.loads(proc.stdout)
+            if mark_sound is not None:
+                report["original_marked_match"] = matches["marked_interval"]
+                report["original_marked_match"]["basis"] = (
+                    "Closest AudioSet descriptions per original channel. Only the bracketed samples play once, "
+                    "then zeros fill the encoder input. Empty scores mean no signal at the encoder rate.")
+                matches = matches["windows"]
             for window, names in zip(report["windows"], matches, strict=True):
                 window["neighbours"] = names
             report["similarity_search"] = ("Top three relative matches among 527 AudioSet descriptions, ranked by local "

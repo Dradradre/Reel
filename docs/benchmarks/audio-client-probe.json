@@ -1,0 +1,72 @@
+{
+  "client": "codex-cli 0.165.0",
+  "reader": "gpt-6.1-terra in local signed-in Codex CLI",
+  "inputs": "Three random sequences of three unrelated English words spoken by macOS Samantha at 150 wpm, and one digital silence, random order. All files mono 16 kHz PCM16 WAV, zero-padded to five seconds. A fresh session could call only recording.hear. That read-only MCP tool returned a single audio/wav AudioContent block. No question alternatives, picture, filename, or text description appeared in the response. A separate standard MCP client verified the bytes for every file. The local speech reader read the same files with the language hint en.",
+  "reproduce": "examples/probe_audio_client.py",
+  "observations": [
+    {
+      "words": [
+        "towel",
+        "zebra",
+        "turtle"
+      ],
+      "native_client_verified": true,
+      "codex_block_type": "text",
+      "codex_block_text": "<audio content omitted because you do not support audio input>",
+      "reader": "UNKNOWN",
+      "wav_bytes": 160044,
+      "sha256": "4168232109299d6e725a367d38c21212ba4094ad071c3096406fbe90820d7f6d",
+      "local_speech_reader": [
+        "Towel",
+        "Zebra",
+        "Turtle"
+      ]
+    },
+    {
+      "words": [
+        "walnut",
+        "kettle",
+        "spider"
+      ],
+      "native_client_verified": true,
+      "codex_block_type": "text",
+      "codex_block_text": "<audio content omitted because you do not support audio input>",
+      "reader": "UNKNOWN",
+      "wav_bytes": 160044,
+      "sha256": "ba9526e36da3aa5bddc4afed6021522a9e6d6a8d58e1e59e364f2098b46b9dc1",
+      "local_speech_reader": [
+        "Walnut",
+        "Kettle",
+        "Spider"
+      ]
+    },
+    {
+      "words": [],
+      "native_client_verified": true,
+      "codex_block_type": "text",
+      "codex_block_text": "<audio content omitted because you do not support audio input>",
+      "reader": "UNKNOWN",
+      "wav_bytes": 160044,
+      "sha256": "262d1f34f300560a4c82ba8127ddea9e1d72946f187fdbd3e8f70ee096077aec",
+      "local_speech_reader": []
+    },
+    {
+      "words": [
+        "silver",
+        "magnet",
+        "towel"
+      ],
+      "native_client_verified": true,
+      "codex_block_type": "text",
+      "codex_block_text": "<audio content omitted because you do not support audio input>",
+      "reader": "UNKNOWN",
+      "wav_bytes": 160044,
+      "sha256": "c48e98089e82d2f47d19ac0b91d569ed31a45309e19b90f98c75f82b97c9e23c",
+      "local_speech_reader": [
+        "silver",
+        "magnet",
+        "towel"
+      ]
+    }
+  ]
+}

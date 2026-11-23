@@ -316,6 +316,8 @@ The field listening check uses Clotho-AQA by Lipping, Sudarsanam, Drossos and Vi
 
 The spoken grounding check uses the voice recordings, timed descriptions and pointer traces in Localized Narratives by Pont-Tuset, Uijlings, Changpinyo, Soricut and Ferrari (CC BY 4.0) with COCO validation photographs. [Localized Narratives](https://google.github.io/localized-narratives/) and [COCO terms](https://cocodataset.org/#termsofuse)
 
+A local waveform experiment used Gemma 4 E2B IT. The base model card lists Apache 2.0 and the tested MLX conversion lists the Gemma licence. [Google model card](https://huggingface.co/google/gemma-4-E2B-it) and [MLX conversion](https://huggingface.co/mlx-community/gemma-4-e2b-it-4bit).
+
 The sign-reading check uses human word transcriptions from COCO-Text V2 and COCO photographs. The source images retain their individual licences. [COCO-Text V2](https://bgshih.github.io/cocotext/) and [COCO image terms](https://cocodataset.org/dataset/termsofuse.htm)
 
 The free-viewing check uses fixation data from the DIEM Project (Mital, Smith, Hill and Henderson), available for non-commercial research under CC BY-NC-SA 3.0. [DIEM data and licence](https://jhenderson.org/vclab/DIEM.html)

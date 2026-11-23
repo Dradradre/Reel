@@ -311,6 +311,8 @@ Synchformer를 설치하면 `reel observe`에 `--sync-region LEFT TOP RIGHT BOTT
 
 화자의 설명과 화면 위치를 비교할 때는 Pont-Tuset, Uijlings, Changpinyo, Soricut, Ferrari의 Localized Narratives에서 공개한 녹음과 시각별 문장, 마우스 좌표(CC BY 4.0)를 COCO 검증 사진과 함께 사용했다. [Localized Narratives](https://google.github.io/localized-narratives/), [COCO 이용 조건](https://cocodataset.org/#termsofuse)
 
+원음 청취 실험에서 Gemma 4 E2B IT를 시험했다. 원 모델 카드는 Apache 2.0, 실험에 쓴 MLX 변환본은 Gemma 라이선스를 표기한다. [Google 모델 카드](https://huggingface.co/google/gemma-4-E2B-it), [MLX 변환본](https://huggingface.co/mlx-community/gemma-4-e2b-it-4bit)
+
 표지판을 읽는 실험에는 COCO 사진과 COCO-Text V2의 전사를 썼다. 사진마다 원작자가 정한 이용 조건이 있다. [COCO-Text V2](https://bgshih.github.io/cocotext/), [COCO 사진 이용 조건](https://cocodataset.org/dataset/termsofuse.htm)
 
 영상을 자유롭게 보는 사람들의 시선을 비교할 때는 Mital, Smith, Hill, Henderson의 DIEM 연구 자료를 썼다. 비상업적 연구에 CC BY-NC-SA 3.0 조건으로 사용할 수 있다. [DIEM 자료와 이용 조건](https://jhenderson.org/vclab/DIEM.html)

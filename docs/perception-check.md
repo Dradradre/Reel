@@ -1569,6 +1569,8 @@ python examples/check_event_boundaries.py docs/benchmarks/event-boundaries.json
 | 기억나는 화면과 화면만 본 사람의 설명 | 95.0 | 77.8~112.5 |
 | 기억나는 소리와 소리만 들은 사람의 설명 | 56.9 | 43.1~83.7 |
 
+화면과 소리 회상을 절반씩 반영하면 사람 기준 **76.0%**였다. 같은 영상을 두 항목에서 함께 재표집한 95% 구간은 69.1~87.2%다. 두 항목의 비중은 이 결과를 요약하면서 정했다.
+
 GPT는 아이들이 노래하는 영상에서 노래를 짚었다. 다른 영상에서는 여러 사람이 아기의 울음이나 비명을 들었다고 했지만 GPT는 무슨 소리였는지 모르겠다고 답했다. GPT는 세 질문 모두에서 화면과 소리 설명을 함께 접했다. [영상별 응답과 채점값](benchmarks/earlier-observations.json) · [AVCaps 원자료](https://huggingface.co/datasets/TUT-ARG/AVCaps)
 
 ## OVO-Bench에서 질문 시각까지의 화면을 읽은 결과

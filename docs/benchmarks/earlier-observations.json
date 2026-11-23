@@ -1510,5 +1510,13 @@
       "survivors": [],
       "status": "ok"
     }
+  },
+  "equal_weight_sight_sound_recall": {
+    "fraction_of_human": 0.7596525550036335,
+    "paired_film_bootstrap_95": [
+      0.6912644427920919,
+      0.8724928831090142
+    ],
+    "definition": "Post-hoc equal-weight mean of the two modality-specific model/human ratios, excluding the overall first impression. Resample the same eight film indices for both modalities, 10,000 times, seed 20261123. This measures sentence-level recall with image-client audio evidence, not all senses."
   }
 }

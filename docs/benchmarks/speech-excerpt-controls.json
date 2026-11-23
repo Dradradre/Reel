@@ -9,7 +9,17 @@
       "two_excerpts_equal": true,
       "word_pieces": 4,
       "reference_chars": 50,
-      "char_edits": 34
+      "char_edits": 34,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "বাতিল",
+        "char_edits": 45
+      },
+      "exact_reader": {
+        "voice": "yes",
+        "quote": "এরোএ তাদের সফারের বাতির",
+        "char_edits": 34
+      }
     },
     {
       "language": "bn_in",
@@ -17,7 +27,17 @@
       "kind": "environment",
       "activity": 0,
       "two_excerpts_equal": true,
-      "word_pieces": 0
+      "word_pieces": 0,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "no",
+        "quote": "",
+        "char_edits": 0
+      }
     },
     {
       "language": "en_us",
@@ -27,7 +47,17 @@
       "two_excerpts_equal": true,
       "word_pieces": 14,
       "reference_chars": 75,
-      "char_edits": 2
+      "char_edits": 2,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "changes color depending on how acidic, basic, alkaline the chemical is.",
+        "char_edits": 17
+      },
+      "exact_reader": {
+        "voice": "yes",
+        "quote": "The cabbage juice changes color depending on how acidic, basic, alkaline the chemical is.",
+        "char_edits": 2
+      }
     },
     {
       "language": "en_us",
@@ -35,7 +65,17 @@
       "kind": "environment",
       "activity": 0,
       "two_excerpts_equal": true,
-      "word_pieces": 0
+      "word_pieces": 0,
+      "before_reader": {
+        "voice": "unclear",
+        "quote": "",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "no",
+        "quote": "",
+        "char_edits": 0
+      }
     },
     {
       "language": "es_419",
@@ -45,7 +85,17 @@
       "two_excerpts_equal": true,
       "word_pieces": 9,
       "reference_chars": 55,
-      "char_edits": 0
+      "char_edits": 0,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "Los luchadores compañeros de Luna también le rindieron homenaje.",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "yes",
+        "quote": "Los luchadores compañeros de Luna también le rindieron homenaje.",
+        "char_edits": 0
+      }
     },
     {
       "language": "es_419",
@@ -53,7 +103,17 @@
       "kind": "environment",
       "activity": 0,
       "two_excerpts_equal": true,
-      "word_pieces": 0
+      "word_pieces": 0,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "unclear",
+        "quote": "",
+        "char_edits": 0
+      }
     },
     {
       "language": "hi_in",
@@ -63,7 +123,17 @@
       "two_excerpts_equal": true,
       "word_pieces": 12,
       "reference_chars": 57,
-      "char_edits": 3
+      "char_edits": 3,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "टेलेविजन रिपोर्टों में प्लांट से निकलने वाला सफेद दुआ दिखाया गया है।",
+        "char_edits": 3
+      },
+      "exact_reader": {
+        "voice": "yes",
+        "quote": "टेलेविजन रिपोर्टों में प्लांट से निकलने वाला सफेद धुआं दिखाया गया है।",
+        "char_edits": 2
+      }
     },
     {
       "language": "hi_in",
@@ -71,7 +141,17 @@
       "kind": "environment",
       "activity": 0,
       "two_excerpts_equal": true,
-      "word_pieces": 0
+      "word_pieces": 0,
+      "before_reader": {
+        "voice": "unclear",
+        "quote": "",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "no",
+        "quote": "",
+        "char_edits": 0
+      }
     },
     {
       "language": "ko_kr",
@@ -81,7 +161,17 @@
       "two_excerpts_equal": true,
       "word_pieces": 13,
       "reference_chars": 39,
-      "char_edits": 0
+      "char_edits": 0,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안전 경고에 세심한 주의를 기울여야 합니다.",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "yes",
+        "quote": "그래도 관계자의 조언을 듣고 모든 표지판을 지키고 안전 경고에 세심한 주의를 기울여야 합니다.",
+        "char_edits": 0
+      }
     },
     {
       "language": "ko_kr",
@@ -89,7 +179,17 @@
       "kind": "environment",
       "activity": 0,
       "two_excerpts_equal": true,
-      "word_pieces": 0
+      "word_pieces": 0,
+      "before_reader": {
+        "voice": "unclear",
+        "quote": "",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "unclear",
+        "quote": "",
+        "char_edits": 0
+      }
     },
     {
       "language": "th_th",
@@ -99,7 +199,17 @@
       "two_excerpts_equal": true,
       "word_pieces": 42,
       "reference_chars": 75,
-      "char_edits": 8
+      "char_edits": 8,
+      "before_reader": {
+        "voice": "yes",
+        "quote": "สิ่งนี้เรียกว่าค่าของสารเคมี คุณสามารถสร้างตัวระบุได้โดยใช้น้ำกปีแดง",
+        "char_edits": 8
+      },
+      "exact_reader": {
+        "voice": "yes",
+        "quote": "สิ่งนี้เรียกว่าค่าของสารเคมี คุณสามารถสร้างตัวระบุได้โดยใช้น้ำกปีแดง",
+        "char_edits": 8
+      }
     },
     {
       "language": "th_th",
@@ -107,7 +217,38 @@
       "kind": "environment",
       "activity": 0,
       "two_excerpts_equal": true,
-      "word_pieces": 0
+      "word_pieces": 0,
+      "before_reader": {
+        "voice": "unclear",
+        "quote": "",
+        "char_edits": 0
+      },
+      "exact_reader": {
+        "voice": "unclear",
+        "quote": "",
+        "char_edits": 0
+      }
     }
-  ]
+  ],
+  "blind_reader": {
+    "model": "gpt-6.1-terra via local Codex CLI",
+    "method": "For each target send a new reader the film times and the full speech-reader JSON, with no labels, waveform, picture or shell. Use the first released turn covering the target end. Before is the existing whole-turn request at 8797b31. Exact is the new excerpt request. Both use the same language hint and source, with the same three seconds of another speaker before and after. Run the 24 responses in a fixed shuffled order (seed 17422). A match is yes for FLEURS and no for ESC-10; unclear is an abstention. Quotes use the source language.",
+    "prompt_template": "You checked the speech in a film. Answer just for {a} to {b} seconds on the film clock. Do you have evidence of a voice, and which words in that interval could you quote? Keep the recording's original language and wording. If no words are supported, leave the quote empty. Return a JSON object with voice (yes, no, or unclear) and quote (a string).",
+    "before": {
+      "correct_voice_presence": 6,
+      "unclear": 4,
+      "nonvoice_quotes": 0,
+      "speech_char_edits": 73,
+      "speech_chars": 351,
+      "wrong": 2
+    },
+    "exact": {
+      "correct_voice_presence": 9,
+      "unclear": 3,
+      "nonvoice_quotes": 0,
+      "speech_char_edits": 46,
+      "speech_chars": 351,
+      "wrong": 0
+    }
+  }
 }

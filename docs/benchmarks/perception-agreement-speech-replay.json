@@ -1,0 +1,379 @@
+{
+  "reader": "gpt-6.1-terra via signed-in local Codex CLI",
+  "revision": "c4433f73e074fcdf26e14b789a70d80d895395ee",
+  "conditions": "Same 18 films, original prompts and options as the two named panels. Fresh session per film. WAV input and optional 30B model disabled. A sound comparison now includes a fresh speech reading of exactly the target samples.",
+  "panels": [
+    {
+      "panel": "perception-agreement-v1.json",
+      "baseline": "perception-agreement-v1-replay-results.json",
+      "correct": 29,
+      "wrong": 3,
+      "abstained": 4,
+      "total": 36,
+      "fraction": 0.8055555555555556,
+      "films": 12,
+      "all_three_correct": 8,
+      "by_question": {
+        "picture": {
+          "correct": 12,
+          "wrong": 0,
+          "abstained": 0
+        },
+        "sound": {
+          "correct": 9,
+          "wrong": 1,
+          "abstained": 2
+        },
+        "visible_source": {
+          "correct": 8,
+          "wrong": 2,
+          "abstained": 2
+        }
+      },
+      "by_film": [
+        {
+          "video_id": "video_1775",
+          "answers": [
+            "C",
+            "?",
+            "?"
+          ],
+          "verified_turns": 3,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_2134",
+          "answers": [
+            "C",
+            "B",
+            "N"
+          ],
+          "verified_turns": 3,
+          "target_speech_reading": {
+            "activity": true,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_11193",
+          "answers": [
+            "C",
+            "B",
+            "N"
+          ],
+          "verified_turns": 5,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_9705",
+          "answers": [
+            "B",
+            "B",
+            "N"
+          ],
+          "verified_turns": 2,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_2291",
+          "answers": [
+            "A",
+            "B",
+            "Y"
+          ],
+          "verified_turns": 5,
+          "target_speech_reading": {
+            "activity": true,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_2212",
+          "answers": [
+            "A",
+            "B",
+            "Y"
+          ],
+          "verified_turns": 4,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_3228",
+          "answers": [
+            "C",
+            "A",
+            "N"
+          ],
+          "verified_turns": 4,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_6694",
+          "answers": [
+            "A",
+            "A",
+            "N"
+          ],
+          "verified_turns": 5,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_282",
+          "answers": [
+            "A",
+            "?",
+            "?"
+          ],
+          "verified_turns": 5,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_11498",
+          "answers": [
+            "C",
+            "A",
+            "N"
+          ],
+          "verified_turns": 2,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_4253",
+          "answers": [
+            "C",
+            "A",
+            "N"
+          ],
+          "verified_turns": 4,
+          "target_speech_reading": {
+            "activity": true,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_2138",
+          "answers": [
+            "A",
+            "B",
+            "Y"
+          ],
+          "verified_turns": 2,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        }
+      ]
+    },
+    {
+      "panel": "perception-agreement-holdout-v1.json",
+      "baseline": "perception-agreement-holdout-v1-results.json",
+      "correct": 15,
+      "wrong": 3,
+      "abstained": 0,
+      "total": 18,
+      "fraction": 0.8333333333333334,
+      "films": 6,
+      "all_three_correct": 3,
+      "by_question": {
+        "picture": {
+          "correct": 5,
+          "wrong": 1,
+          "abstained": 0
+        },
+        "sound": {
+          "correct": 6,
+          "wrong": 0,
+          "abstained": 0
+        },
+        "visible_source": {
+          "correct": 4,
+          "wrong": 2,
+          "abstained": 0
+        }
+      },
+      "by_film": [
+        {
+          "video_id": "video_6226",
+          "answers": [
+            "C",
+            "B",
+            "Y"
+          ],
+          "verified_turns": 4,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_1244",
+          "answers": [
+            "C",
+            "B",
+            "N"
+          ],
+          "verified_turns": 4,
+          "target_speech_reading": {
+            "activity": true,
+            "word_pieces": [
+              "vinegar",
+              "vinegar"
+            ]
+          }
+        },
+        {
+          "video_id": "video_8408",
+          "answers": [
+            "A",
+            "A",
+            "N"
+          ],
+          "verified_turns": 3,
+          "target_speech_reading": {
+            "activity": true,
+            "word_pieces": [
+              "So",
+              "this",
+              "is",
+              "how",
+              "I",
+              "tie."
+            ]
+          }
+        },
+        {
+          "video_id": "video_8110",
+          "answers": [
+            "A",
+            "A",
+            "N"
+          ],
+          "verified_turns": 2,
+          "target_speech_reading": {
+            "activity": false,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_9456",
+          "answers": [
+            "A",
+            "A",
+            "N"
+          ],
+          "verified_turns": 4,
+          "target_speech_reading": {
+            "activity": true,
+            "word_pieces": []
+          }
+        },
+        {
+          "video_id": "video_6611",
+          "answers": [
+            "A",
+            "A",
+            "N"
+          ],
+          "verified_turns": 5,
+          "target_speech_reading": {
+            "activity": true,
+            "word_pieces": []
+          }
+        }
+      ]
+    }
+  ],
+  "combined": {
+    "correct": 44,
+    "wrong": 6,
+    "abstained": 4,
+    "total": 54,
+    "fraction": 0.8148148148148148,
+    "films": 18,
+    "all_three_correct": 11,
+    "by_question": {
+      "picture": {
+        "correct": 17,
+        "wrong": 1,
+        "abstained": 0
+      },
+      "sound": {
+        "correct": 15,
+        "wrong": 1,
+        "abstained": 2
+      },
+      "visible_source": {
+        "correct": 12,
+        "wrong": 4,
+        "abstained": 2
+      }
+    }
+  },
+  "before": {
+    "correct": 44,
+    "wrong": 6,
+    "abstained": 4,
+    "total": 54,
+    "fraction": 0.8148148148148148,
+    "films": 18,
+    "all_three_correct": 11,
+    "by_question": {
+      "picture": {
+        "correct": 17,
+        "wrong": 1,
+        "abstained": 0
+      },
+      "sound": {
+        "correct": 15,
+        "wrong": 1,
+        "abstained": 2
+      },
+      "visible_source": {
+        "correct": 12,
+        "wrong": 4,
+        "abstained": 2
+      }
+    }
+  },
+  "changed_responses": [],
+  "verified_turns": 66,
+  "field_code": {
+    "mcp_server_sha256": "947726928d1abf67da8d42436a20e66f8632a18b8b428cb9804f3b64ee4f934f",
+    "note": "Field runs used the same MCP schema, prompt and successful excerpt processing throughout. While the first panel was running, the interactive CLI gained range syntax and the worker stopped clearing live history after a failed request. All 18 target speech reads succeeded.",
+    "initial_files_sha256": {
+      "reel/live_speech.py": "d8ba053d3f25d0934929db5ee6266721c69b1e468dc481ca5023016d7e617650",
+      "reel/cli.py": "91509d47d1f46f01aa670c1355032511b2bb99373ba2d11d044ca7719d91107a",
+      "reel/mcp_server.py": "947726928d1abf67da8d42436a20e66f8632a18b8b428cb9804f3b64ee4f934f"
+    },
+    "published_files_sha256": {
+      "reel/live_speech.py": "fdf2edee86f48426dffcf4f76bebf5c1c9c3a23a46fb496cc935858f73b3675f",
+      "reel/cli.py": "ad54c2b8bb5dad1283bbc2ee768a174b19b62ac459ae82655c7c4db4ea93b634",
+      "reel/mcp_server.py": "947726928d1abf67da8d42436a20e66f8632a18b8b428cb9804f3b64ee4f934f"
+    }
+  }
+}

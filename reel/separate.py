@@ -21,22 +21,17 @@ from pathlib import Path
 import numpy as np
 import soundfile as sf
 import torch
+from common import read_audio
 
 SR = 44100
 STEMS = ("drums", "bass", "other", "vocals")
 
 
 def decode(path, ss, t):
-    cmd = ["ffmpeg", "-v", "error", "-nostdin"]
-    if ss:
-        cmd += ["-ss", f"{ss}"]
-    if t:
-        cmd += ["-t", f"{t}"]
-    cmd += ["-i", str(path), "-vn", "-ac", "2", "-ar", str(SR), "-f", "f32le", "-"]
-    raw = subprocess.run(cmd, check=True, capture_output=True).stdout
-    if not raw:
+    samples = read_audio(path, SR, ss=ss or None, t=t or None, channels=2)
+    if not len(samples):
         sys.exit(f"no audio decoded from {path}")
-    return np.frombuffer(raw, dtype=np.float32).reshape(-1, 2).T.copy()
+    return samples.T.copy()
 
 
 def rms_db(x):

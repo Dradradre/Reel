@@ -22,16 +22,21 @@ from __future__ import annotations
 import sys as _sys, pathlib as _pl
 _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
 import argparse, json, math, os, pathlib, re, subprocess, sys, tempfile
+from collections import deque
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np, cv2, librosa
 from PIL import Image, ImageDraw
-from common import probe, read_audio, font, lut, tc, polyline
+from common import RecordedSource, audio_timeline, display_scale, pcm_codec, probe, read_audio, reel_source, sample_boundary, video_end, font, lut, tc, polyline
+from frames import native_frames, save_frame as _save_frame
 from config import SEP_PY, ASR_PY, GAZE_PY, GENRES
+from stereo import channel_pairs, pair_cues
+from sounds import AST_NAME, AudioTagger, recorded_context, SOURCE_SCORE
 
 HERE = pathlib.Path(__file__).resolve().parent
 SR = 48000
 HOP = 480                      # 10 ms audio frames
 TW, TH = 267, 150              # thumbnail size on the page
+PICTURE_TOP, PICTURE_FOOT = 34, 35  # space for quality, timestamp and frame-shape labels
 THUMB_FPS = 4
 LEFT, PW = 64, 1500
 BG = (12, 13, 16)
@@ -44,17 +49,16 @@ def video_pass(path, info, log):
     of every new shot."""
     fps = info["fps"]
     W, H = 320, 180
-    p = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(path), "-an", "-vf", f"scale={W}:{H}:flags=area",
-                          "-pix_fmt", "rgb24", "-f", "rawvideo", "-"], stdout=subprocess.PIPE, bufsize=W * H * 3 * 8)
-    n = W * H * 3
-    step = max(1, int(round(fps / THUMB_FPS)))
     luma, mad, corr, slit, hashes, thumbs, th_idx = [], [], [], [], [], [], []
+    times = []
+    last_bucket = -1
+    next_minute = 60
     prev = None
-    i = 0
-    while True:
-        buf = p.stdout.read(n)
-        if len(buf) < n:
-            break
+    end = 0
+    for i, (pts, duration, buf) in enumerate(native_frames(path, W, H)):
+        t = pts / 1_000_000
+        times.append(t)
+        end = min(info["dur"], t + (duration / 1_000_000 if duration else 1 / fps))
         fr = np.frombuffer(buf, np.uint8).reshape(H, W, 3)
         g = cv2.cvtColor(fr, cv2.COLOR_RGB2GRAY)
         s = cv2.resize(g, (64, 36), interpolation=cv2.INTER_AREA).astype(np.float32)
@@ -69,16 +73,31 @@ def video_pass(path, info, log):
         slit.append(cv2.resize(fr[H // 2 - 1:H // 2 + 1].mean(0, keepdims=True).astype(np.uint8), (64, 1),
                                interpolation=cv2.INTER_AREA)[0])
         new_shot = len(mad) > 1 and corr[-1] < 0.55 and mad[-1] > 9
-        if i % step == 0 or new_shot:
+        bucket = pts * THUMB_FPS // 1_000_000
+        if i == 0 or bucket != last_bucket or new_shot:
             thumbs.append(cv2.resize(fr, (TW, TH), interpolation=cv2.INTER_AREA)); th_idx.append(i)
             hashes.append(cv2.resize(g, (32, 18), interpolation=cv2.INTER_AREA).astype(np.float32))
-        i += 1
-        if i % (int(fps) * 60) == 0:
-            log(f"  picture {i / fps / 60:.0f} min")
-    p.stdout.close(); p.wait()
-    return dict(fps=fps, luma=np.array(luma, np.float32), mad=np.array(mad, np.float32), corr=np.array(corr, np.float32),
+        last_bucket = bucket
+        if t >= next_minute:
+            log(f"  picture {t / 60:.0f} min")
+            next_minute = (int(t // 60) + 1) * 60
+    return dict(fps=fps, edges=np.array([*times, end]), luma=np.array(luma, np.float32), mad=np.array(mad, np.float32), corr=np.array(corr, np.float32),
                 slit=np.array(slit, np.uint8), thumbs=np.array(thumbs, np.uint8), th_idx=np.array(th_idx),
                 hashes=np.array(hashes, np.float32))
+
+
+def frame_edges(v):
+    if "edges" in v:
+        return v["edges"]
+    return np.arange(len(v["mad"]) + 1) / v["fps"]
+
+
+def thumbnail_times(v):
+    if "thumb_times" in v:  # a zoom can add frames that an older cache never decoded
+        return v["thumb_times"]
+    if "edges" in v:
+        return v["edges"][v["th_idx"]]
+    return v["th_idx"] / v["fps"]
 
 
 def rolling_median(x, k):
@@ -93,8 +112,9 @@ def find_cuts(v):
     cand[0] = False
     cuts = list(np.flatnonzero(cand))
     merged = []
+    edges = frame_edges(v)
     for c in cuts:                       # a fade or flash makes several candidates in a row: keep the first
-        if merged and c - merged[-1] <= 2:
+        if merged and c - merged[-1] <= 2 and edges[c] - edges[merged[-1]] < 0.25:
             continue
         merged.append(int(c))
     return np.array(merged, int)
@@ -103,8 +123,9 @@ def find_cuts(v):
 # ============================================================== sound
 
 def ebur128(path):
-    p = subprocess.run(["ffmpeg", "-nostats", "-hide_banner", "-i", str(path), "-vn", "-af",
-                        "ebur128=metadata=1,ametadata=mode=print:key=lavfi.r128.M:file=-", "-f", "null", "-"],
+    info = probe(path)
+    p = subprocess.run(["ffmpeg", "-nostats", "-hide_banner", "-i", str(path), "-map", f"0:{info['audio_index']}", "-af",
+                        f"{audio_timeline(info)},ebur128=metadata=1,ametadata=mode=print:key=lavfi.r128.M:file=-", "-f", "null", "-"],
                        capture_output=True, text=True)
     t, v, cur = [], [], None
     for line in p.stdout.splitlines():
@@ -121,12 +142,25 @@ def ebur128(path):
     return np.array(t, np.float32), np.array(v, np.float32)
 
 
-def audio_pass(path, log):
-    y = read_audio(path, SR).mean(1)
-    S = librosa.feature.melspectrogram(y=y, sr=SR, n_fft=2048, hop_length=HOP, n_mels=128, fmin=30, fmax=16000)
+def audio_pass(path, log, *, has_audio=True):
+    channels = read_audio(path, SR, channels=None)
+    starts = np.arange(0, len(channels), HOP)
+    lengths = np.minimum(HOP, len(channels) - starts)
+    powers = []
+    S = None
+    for channel in channels.T:
+        mel = librosa.feature.melspectrogram(y=channel, sr=SR, n_fft=2048, hop_length=HOP,
+                                             n_mels=128, fmin=30, fmax=16000)
+        if S is None:
+            S = mel
+        else:
+            S += mel
+        powers.append(np.add.reduceat(np.square(channel), starts) / lengths)
+    S /= channels.shape[1]
     db = librosa.power_to_db(S, ref=1.0, top_db=None).astype(np.float32)
-    k = len(y) // HOP
-    rms = 20 * np.log10(np.sqrt((y[:k * HOP].reshape(k, HOP) ** 2).mean(1) + 1e-12) + 1e-9).astype(np.float32)
+    powers = np.asarray(powers, dtype=np.float32)
+    channel_rms = 10 * np.log10(np.maximum(powers, 1e-12))
+    rms = 10 * np.log10(np.maximum(powers.mean(axis=0), 1e-12))
     # sound-scene change: how different the last half second sounds from the next half second
     z = (db - db.mean(1, keepdims=True)) / (db.std(1, keepdims=True) + 1e-6)
     c = np.cumsum(np.pad(z, ((0, 0), (1, 0))), axis=1)
@@ -139,41 +173,63 @@ def audio_pass(path, log):
     from scipy.signal import find_peaks
     pk, _ = find_peaks(nov, height=float(np.percentile(nov, 97)), distance=60)
     mt, mv = ebur128(path)
+    stereo = {}
+    if has_audio and channels.shape[1] > 1:
+        pairs = channel_pairs(channels.shape[1], probe(path)["audio_layout"])
+        if pairs:
+            channel_numbers = np.array([p["channels"] for p in pairs])
+            starts = np.arange(0, len(channels), SR // 4)
+            ends = np.minimum(starts + SR // 4, len(channels))
+            lags = np.full((len(pairs), len(starts)), np.nan, dtype=np.float32)
+            for i, (first, second) in enumerate(channel_numbers - 1):
+                for j, (start, stop) in enumerate(zip(starts, ends)):
+                    cue = pair_cues(channels[start:stop, [first, second]], SR)
+                    if cue["second_minus_first_us"] is not None:
+                        lags[i, j] = cue["second_minus_first_us"]
+            stereo = dict(stereo_pairs=channel_numbers, stereo_us=lags, stereo_end=ends / SR)
     log("  sound done")
-    return dict(db=db, rms=rms, nov=nov, changes=pk * HOP / SR, m_t=mt, m_v=mv, dur=len(y) / SR)
+    return dict(db=db, rms=rms, channel_rms=channel_rms, nov=nov, changes=pk * HOP / SR,
+                m_t=mt, m_v=mv, dur=len(channels) / SR, **stereo)
 
 
-def voices(path, out, lang, log, prompt=None):
+def voices(path, out, lang, log, prompt=None, deterministic=False):
     """Voices (commentary, interviews, crowd voices) separated from music, transcribed, and fingerprinted for memory."""
     stem_dir = out / "stems"
     voc = stem_dir / "vocals.wav"
     if not voc.exists() or not (stem_dir / "crowd.wav").exists():
-        subprocess.run([SEP_PY, str(HERE / "separate.py"), str(path), "--out", str(stem_dir), "--crowd"],
+        shifts = ["--shifts", "0"] if deterministic else []
+        subprocess.run([SEP_PY, str(HERE / "separate.py"), str(path), "--out", str(stem_dir), "--crowd", *shifts],
                        capture_output=True)
     if voc.exists():
         y = read_audio(voc, SR).mean(1)
     else:
         log("  (no separation available; using the full mix for voices)")
         y = read_audio(path, SR).mean(1)
+    # An empty successful transcript is a result. Retrying it with another decoder
+    # can put words back into a stretch both the mix and the vocal stem marked unvoiced.
+    source = voc if voc.exists() else path
+    wj = out / "words.json"
+    activity_file = out / "speech_activity.json"
+    args = [str(HERE / "asr.py"), "speech", str(source), str(path), "--out", str(wj),
+            "--activity-out", str(activity_file), "--lang", lang]
+    activity = None
     words = []
-    hear_py = pathlib.Path(ASR_PY)
-    if voc.exists():
-        wj = out / "words.json"
-        r = subprocess.run([str(hear_py), str(HERE / "asr.py"), "speech", str(voc), str(path), "--out", str(wj), "--lang", lang],
-                           capture_output=True, text=True)
-        if r.returncode == 0 and wj.exists():
-            words = json.load(open(wj))
-    if not words:
-      try:
-        from faster_whisper import WhisperModel
-        m = WhisperModel("small", device="cpu", compute_type="int8")
-        y16 = librosa.resample(y, orig_sr=SR, target_sr=16000).astype(np.float32)
-        segs, _ = m.transcribe(y16, language=lang, word_timestamps=True, vad_filter=True, initial_prompt=prompt)
-        for s_ in segs:
-            for wd in (s_.words or []):
-                words.append(dict(t=float(wd.start), e=float(wd.end), w=wd.word.strip(), p=round(float(wd.probability), 2)))
-      except Exception as ex:                                 # transcription is a help, never a requirement
-        log(f"  (no transcript: {ex})")
+    for python in dict.fromkeys((ASR_PY, sys.executable)):
+        try:
+            r = subprocess.run([python, *args], capture_output=True, text=True)
+        except OSError as error:
+            log(f"  (speech helper unavailable: {error})")
+            continue
+        if r.returncode == 0:
+            words = json.loads(wj.read_text())
+            activity = json.loads(activity_file.read_text())
+            break
+        detail = r.stderr.strip().splitlines()
+        log(f"  (speech helper failed: {detail[-1] if detail else r.returncode})")
+    else:
+        wj.write_text("[]")
+        activity_file.unlink(missing_ok=True)
+        log("  (no transcript available)")
     S = librosa.feature.melspectrogram(y=y, sr=SR, n_fft=2048, hop_length=HOP, n_mels=40, fmin=80, fmax=8000)
     vdb = librosa.power_to_db(S, ref=1.0, top_db=None).astype(np.float32)
     k = len(y) // HOP
@@ -185,8 +241,11 @@ def voices(path, out, lang, log, prompt=None):
         Sc = librosa.feature.melspectrogram(y=yc, sr=SR, n_fft=4096, hop_length=HOP, n_mels=64, fmin=300, fmax=4000)
         crowd = librosa.power_to_db(Sc, ref=1.0, top_db=None).astype(np.float32)
     reps = exact_repeats(y8)
-    log(f"  voices done, {len(words)} words, {len(reps)} exact repeats")
-    return dict(words=words, vdb=vdb, vrms=vrms, repeats=reps, crowd=crowd)
+    with_gain = [w for w in words if "gain_db" in w]
+    words = [w for w in words if "gain_db" not in w]
+    log(f"  voices done, {len(words)} words, {len(with_gain)} candidates after gain, {len(reps)} exact repeats")
+    return dict(words=words, speech_with_gain=with_gain, speech_activity=activity,
+                vdb=vdb, vrms=vrms, repeats=reps, crowd=crowd)
 
 
 # ============================================================== quality and timbre
@@ -213,45 +272,44 @@ def _frames(path, w, h, fps):
     return read_frames(path, w, h, fps)
 
 
-AST_NAME = "MIT/ast-finetuned-audioset-10-10-0.4593"
 GENERIC = {"Music", "Speech", "Inside, small room", "Inside, large room or hall", "Silence", "Sound effect"}
 
 
-def timbre_pass(path, log):
-    """What each second sounds like to a listener, as AudioSet labels (AST). Returns [(t, [(label, p), ...])]."""
+def source_guess(candidates):
+    # AST sigmoid scores are multi-label scores, not calibrated probabilities.
+    # Apply the same conservative display threshold on pages and in the text stream.
+    names = [name.split(",")[0] for name, score in candidates if score >= SOURCE_SCORE]
+    return " / ".join(names[:2])
+
+
+def timbre_pass(path, end, log):
+    """Short sound changes and source estimates supported by a longer listening window."""
     try:
-        import torch
-        from transformers import ASTFeatureExtractor, ASTForAudioClassification
-    except Exception as ex:
-        log(f"  (no timbre labels: {ex})"); return []
-    fe = ASTFeatureExtractor.from_pretrained(AST_NAME)
-    m = ASTForAudioClassification.from_pretrained(AST_NAME).eval()
-    dev = "mps" if torch.backends.mps.is_available() else "cpu"
-    m = m.to(dev)
-    y = read_audio(path, 16000).mean(1).astype(np.float32)
-    n = int(len(y) / 16000)
+        tagger = AudioTagger()
+    except (ImportError, OSError, RuntimeError, ValueError) as ex:
+        log(f"  (no timbre labels: {ex})"); return [], []
+    # Keep the existing short-window downmix. Longer windows use the original channels.
+    stop = sample_boundary(end, 16000)
+    y = read_audio(path, 16000)[:stop].mean(1).astype(np.float32)
+    n = (len(y) + 15999) // 16000
     clips = [y[i * 16000:(i + 1) * 16000] for i in range(n)]
-    labels = [m.config.id2label[i] for i in range(m.config.num_labels)]
+    if clips and len(clips[-1]) < 400:
+        clips.pop()  # AST needs a full 25 ms analysis frame.
+    labels = tagger.labels
     res = []
-    for k in range(0, n, 16):
-        x = fe(clips[k:k + 16], sampling_rate=16000, return_tensors="pt")
-        with torch.no_grad():
-            pr = torch.sigmoid(m(x.input_values.to(dev)).logits).cpu().numpy()
+    for k in range(0, len(clips), 16):
+        pr = tagger.scores(clips[k:k + 16])
         for j, row in enumerate(pr):
             top = [(labels[i], float(row[i])) for i in np.argsort(row)[::-1][:5] if row[i] > 0.08]
             res.append((float(k + j), top))
     log(f"  timbre done, {len(res)} seconds labelled")
-    return res
+    channels = read_audio(path, 16000, channels=None)[:stop]
+    return res, recorded_context(tagger, channels, 16000, end)
 
 
 def hit_pass(path, rms, log):
     """Hits: moments where the level jumps by 15 dB or more within 50 ms to a loud peak, as an impact effect does.
     Each hit is listened to on its own (the second that starts with it) and labelled. Returns [(t, [(label, p)])]."""
-    try:
-        import torch
-        from transformers import ASTFeatureExtractor, ASTForAudioClassification
-    except Exception:
-        return []
     hop = HOP / SR
     hits, last = [], -9
     for i in range(5, len(rms)):
@@ -259,23 +317,24 @@ def hit_pass(path, rms, log):
             hits.append(i * hop); last = i * hop
     if not hits:
         return []
-    fe = ASTFeatureExtractor.from_pretrained(AST_NAME)
-    m = ASTForAudioClassification.from_pretrained(AST_NAME).eval()
+    try:
+        tagger = AudioTagger(device="cpu")
+    except (ImportError, OSError, RuntimeError, ValueError) as ex:
+        log(f"  (sound onsets measured without source labels: {ex})")
+        return [(t, []) for t in hits]
     y = read_audio(path, 16000).mean(1).astype(np.float32)
     clips = [y[int(t * 16000):int(t * 16000) + 16000] for t in hits]
     clips = [c if len(c) == 16000 else np.pad(c, (0, 16000 - len(c))) for c in clips]
-    labels = [m.config.id2label[i] for i in range(m.config.num_labels)]
+    labels = tagger.labels
     out = []
     for k in range(0, len(clips), 16):
-        x = fe(clips[k:k + 16], sampling_rate=16000, return_tensors="pt")
-        with torch.no_grad():
-            pr = torch.sigmoid(m(x.input_values).logits).numpy()
+        pr = tagger.scores(clips[k:k + 16])
         for j, row in enumerate(pr):
             top = [(labels[i], float(row[i])) for i in np.argsort(row)[::-1][:6] if labels[i] not in GENERIC and row[i] > 0.04][:2]
-            if top and any(w in top[0][0] for w in ("speech", "Narration", "Conversation", "Speech", "singing", "Singing")):
+            if top and top[0][1] >= 0.5 and any(w in top[0][0] for w in ("speech", "Narration", "Conversation", "Speech", "singing", "Singing")):
                 continue                                    # a voice starting is not an impact
             out.append((hits[k + j], top))
-    log(f"  {len(out)} hits labelled")
+    log(f"  {len(out)} sound onsets")
     return out
 
 
@@ -369,7 +428,7 @@ def loud_bumps(r, db=None):
 def picture_events(v):
     """How the picture goes to and comes back from black: a fade the eye follows, or a hard cut that jolts it."""
     lu = np.asarray(v["luma"], np.float32)
-    fps = v["fps"]
+    edges = frame_edges(v)
     ev = []
     dark = lu < 8
     i = 1
@@ -380,18 +439,18 @@ def picture_events(v):
                 j += 1
             th_in = [k_ for k_, fi in enumerate(v["th_idx"]) if i <= fi < j]
             has_content = any(v["thumbs"][k_].astype(np.float32).mean(2).std() > 10 for k_ in th_in)
-            if (j - i) / fps >= 0.3 and not has_content:
+            if edges[j] - edges[i] >= 0.3 and not has_content:
                 k = i - 1                                   # how long the way down took
-                while k > 0 and lu[k - 1] > lu[k] + 1.5 and i - k < fps * 2:
+                while k > 0 and lu[k - 1] > lu[k] + 1.5 and edges[i] - edges[k] < 2:
                     k -= 1
-                down = (i - k) / fps
+                down = edges[i] - edges[k]
                 m = j                                       # and the way back up
-                while m < len(lu) - 1 and lu[m + 1] > lu[m] + 1.5 and m - j < fps * 2:
+                while m < len(lu) - 1 and lu[m + 1] > lu[m] + 1.5 and edges[m] - edges[j] < 2:
                     m += 1
-                up = (m - j) / fps
+                up = edges[m] - edges[j]
                 how_in = "fades to black" if down >= 0.25 else "hard cut to black"
-                how_out = "fades back in" if up >= 0.25 else "hard cut back"
-                ev.append((i / fps, (j - i) / fps, how_in, how_out))
+                how_out = "still black" if j == len(lu) else ("fades back in" if up >= 0.25 else "hard cut back")
+                ev.append((edges[i], edges[j] - edges[i], how_in, how_out))
             i = j
         i += 1
     return ev
@@ -400,15 +459,15 @@ def picture_events(v):
 def blips(v):
     """A flash or drop-out of one to four frames: the picture jumps away and comes straight back to where it was."""
     lu = np.asarray(v["luma"], np.float32)
-    fps = v["fps"]
+    edges = frame_edges(v)
     out, i = [], 1
-    while i < len(lu) - 6:
+    while i < len(lu) - 1:
         if abs(lu[i] - lu[i - 1]) > 35:
-            for n in range(1, 5):
+            for n in range(1, min(5, len(lu) - i)):
                 j = i + n
                 if abs(lu[j] - lu[i - 1]) < 0.2 * abs(lu[i] - lu[i - 1]) and abs(lu[j] - lu[j - 1]) > 35 \
-                        and np.all(np.abs(lu[i:j] - lu[i]) < 15):
-                    out.append((i / fps, n / fps, "white flash" if lu[i] > lu[i - 1] else "dark blink"))
+                        and edges[j] - edges[i] <= 0.25 and np.all(np.abs(lu[i:j] - lu[i]) < 15):
+                    out.append((edges[i], edges[j] - edges[i], "white flash" if lu[i] > lu[i - 1] else "dark blink"))
                     i = j
                     break
         i += 1
@@ -546,14 +605,15 @@ def memory_picture(v, cuts):
     A flash or blink of a few frames is not a new shot: the picture before and after it is one continuous shot."""
     fl = blips(v)
     if fl:
-        span = [(int(round(tb * v["fps"])) - 1, int(round((tb + du) * v["fps"])) + 1) for tb, du, _ in fl]
+        edges = frame_edges(v)
+        span = [(edges.searchsorted(tb) - 1, edges.searchsorted(tb + du - 1e-9) + 1) for tb, du, _ in fl]
         cuts = np.array([c for c in cuts if not any(a_ <= c <= b_ for a_, b_ in span)], dtype=np.asarray(cuts).dtype)
     h = v["hashes"].reshape(len(v["hashes"]), -1)
     sd = h.std(1)
     z = (h - h.mean(1, keepdims=True)) / (sd[:, None] + 1e-6)
     z /= np.sqrt(z.shape[1])
     sim = z @ z.T
-    t = v["th_idx"] / v["fps"]
+    t = thumbnail_times(v)
     shot = np.searchsorted(cuts, v["th_idx"], side="right")
     best_t = np.full(len(t), np.nan, np.float32); best_s = np.zeros(len(t), np.float32)
     for i in range(len(t)):
@@ -618,11 +678,13 @@ def memory_voice(vo):
 def ocr_pass(path, dur, log, step=1.0, subject=None):
     from ocrmac import ocrmac
     W, H = 1920, 1080
+    scale = display_scale(path, f"{W}:{H}")
+    stream = f"0:{probe(path)['video_index']}"
     times = np.arange(0.25, dur, step)
     tags = []
     def one(t):
-        raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.3f}", "-i", str(path), "-frames:v", "1", "-vf",
-                              f"scale={W}:{H}", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True).stdout
+        raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.3f}", "-i", str(path), "-map", stream, "-frames:v", "1", "-vf",
+                              scale, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True).stdout
         if len(raw) < W * H * 3:
             return t, []
         img = Image.fromarray(np.frombuffer(raw, np.uint8).reshape(H, W, 3))
@@ -769,11 +831,87 @@ def pooled(values, ts, pg, how="max"):
     return out
 
 
+def band_levels(db, n_fft, fmin, fmax):
+    """Mel band power relative to a full-scale digital sample, using the stored Slaney/Hann analysis."""
+    edges = librosa.mel_frequencies(n_mels=len(db) + 2, fmin=fmin, fmax=fmax)
+    # Undo Slaney area normalization and account for a one-sided power spectrum.
+    # A periodic Hann window of length N has squared sum 3N/8. Both filter banks exclude DC/Nyquist.
+    scale = (edges[2:] - edges[:-2]) / (n_fft * (3 * n_fft / 8))
+    return db + (10 * np.log10(scale)).astype(np.float32)[:, None]
+
+
+def draw_spectrum(pg, lane, db, n_fft, fmin, fmax, end, palette):
+    """Draw on a fixed -80..0 dBFS scale. A narrow, strong bin survives time compression."""
+    rate = SR / HOP
+    stop = min(pg.t1, end, db.shape[1] / rate)
+    if stop <= pg.t0:
+        return
+    width = min(PW, math.ceil(pg.x(stop) - LEFT))
+    times = np.minimum(stop, pg.t0 + np.arange(width + 1) * (pg.t1 - pg.t0) / PW)
+    ticks = np.round(times * rate, 9)
+    starts = np.minimum(np.floor(ticks[:-1]).astype(int), db.shape[1] - 1)
+    stops = np.maximum(starts + 1, np.ceil(ticks[1:]).astype(int))
+    # Pool every time bin overlapping a pixel, including when a zoom makes a bin several pixels wide.
+    bands = np.stack([db[:, a:b].max(axis=1) for a, b in zip(starts, stops)], axis=1)
+    levels = band_levels(bands, n_fft, fmin, fmax)
+    y, height = pg.y[lane]
+    colors = np.clip((levels[::-1] + 80) / 80, 0, 1)
+    pixels = cv2.resize(colors, (width, height), interpolation=cv2.INTER_AREA)
+    pg.img.paste(Image.fromarray(lut(palette)[(pixels * 255).astype(np.uint8)]), (LEFT, y))
+
+
+def draw_picture_frames(pg, v, cuts_t, end):
+    """Place separate, uncropped stills inside the time span of their shot."""
+    y, height = pg.y["picture"]
+    times = thumbnail_times(v)
+    aspect = float(v.get("display_aspect", TW / TH))
+    # Leave the quality and black-bar annotations outside the frame.
+    top, bottom = y + PICTURE_TOP, y + height - PICTURE_FOOT
+    visible = max(pg.t0, times[0]) if len(times) else end
+    bounds = [visible, *cuts_t[(cuts_t > visible) & (cuts_t < end)], end]
+    for start, stop in zip(bounds, bounds[1:]):
+        left, right = round(pg.x(start)), round(pg.x(stop))
+        if right <= left:
+            continue
+        baseline = bottom + 14
+        pg.d.line((left, baseline - 3, left, baseline, right - 1, baseline), fill=(83, 89, 100))
+        first, last = times.searchsorted([start, stop])
+        if first == last:
+            # The page can start between cached frames. Only carry a still from this shot.
+            previous_cut = cuts_t.searchsorted(start, side="right") - 1
+            shot_start = cuts_t[previous_cut] if previous_cut >= 0 else 0
+            if first == 0 or times[first - 1] < shot_start:
+                continue
+            first -= 1
+        count = min(last - first, math.ceil((right - left) / 178))
+        edges = np.linspace(left, right, count + 1).round().astype(int)
+        for x0, x1 in zip(edges[:-1], edges[1:]):
+            center = (x0 + x1) / 2
+            target = pg.t0 + (center - LEFT) * (pg.t1 - pg.t0) / PW
+            index = first + np.argmin(np.abs(times[first:last] - target))
+            space = max(1, x1 - x0 - 4)
+            w = max(1, min(space, round((bottom - top) * aspect)))
+            h = max(1, min(bottom - top, round(w / aspect)))
+            frame = Image.fromarray(v["thumbs"][index]).resize((w, h), Image.Resampling.LANCZOS)
+            pg.img.paste(frame, (int((x0 + x1 - w) // 2), top + (bottom - top - h) // 2))
+            tick = max(left, min(right - 1, round(pg.x(times[index]))))
+            pg.d.line((tick, baseline - 2, tick, baseline), fill=(176, 184, 197))
+            label = tc(times[index])
+            if font(10).getlength(label) <= space:
+                pg.d.text((center, bottom), label, font=font(10), anchor="mt", fill=(190, 198, 209))
+    pg.label("picture", "frames", "over time")
+
+
 def render_page(F, t0, t1, idx, total, name):
     v, a, vo = F["v"], F["a"], F["vo"]
-    fps = v["fps"]
-    rows = [("ruler", 12), ("picture", TH), ("eye", 18), ("read", 40), ("change", 46), ("seen", 16),
-            ("sound", 110), ("like", 52), ("level", 36), ("sync", 42), ("crowd", 44), ("said", 34), ("heard", 22)]
+    rows = [("ruler", 12), ("picture", TH + PICTURE_TOP + PICTURE_FOOT), ("eye", 18), ("read", 40), ("change", 46), ("seen", 16),
+            ("sound", 110), ("like", 52), ("level", 36)]
+    channel_rms = a.get("channel_rms", ())
+    if len(channel_rms) > 1:
+        rows.append(("channels", 16 * len(channel_rms)))
+    if len(a.get("stereo_pairs", ())):
+        rows.append(("earlier", 26 * len(a["stereo_pairs"])))
+    rows.extend([("sync", 42), ("crowd", 44), ("said", 34), ("heard", 22)])
     pg = Page(t0, t1, rows, f"{name}   reel page {idx}/{total}   {tc(t0)} - {tc(t1)}   (read pages in order)")
     d = pg.d
     # ruler
@@ -786,26 +924,12 @@ def render_page(F, t0, t1, idx, total, name):
         if big:
             d.text((x + 2, y - 1), tc(t)[:-3], font=font(10), fill=(175, 180, 190))
         t += 1
-    fr_t = np.arange(len(v["mad"])) / fps
-    cuts_t = F["cuts"] / fps
-    # picture: every shot appears, at its true width; long shots show several thumbnails
+    edges = frame_edges(v)
+    fr_t = edges[:-1]
+    cuts_t = fr_t[F["cuts"]]
     y, h = pg.y["picture"]
-    th_t = v["th_idx"] / fps
-    bounds = [t0] + [c for c in cuts_t if t0 < c < t1] + [min(t1, F["dur"])]
-    for sa, sb in zip(bounds[:-1], bounds[1:]):
-        xa, xb = pg.x(sa), pg.x(sb)
-        xx = xa
-        tile = 178
-        while xx < xb - 0.5:
-            w = int(min(tile, math.ceil(xb - xx)))
-            tm = sa + (xx + w / 2 - xa) / max(xb - xa, 1e-6) * (sb - sa)
-            cand = np.flatnonzero((th_t >= sa - 1e-6) & (th_t < sb))
-            j = cand[np.argmin(np.abs(th_t[cand] - tm))] if len(cand) else int(np.argmin(np.abs(th_t - tm)))
-            im = v["thumbs"][j]
-            off = max((im.shape[1] - w) // 2, 0)
-            pg.img.paste(Image.fromarray(np.ascontiguousarray(im[:, off:off + w])), (int(round(xx)), y))
-            xx += tile
-    pg.label("picture", "picture")
+    th_t = thumbnail_times(v)
+    draw_picture_frames(pg, F.get("detail_pictures", v), cuts_t, min(t1, F["dur"], edges[-1]))
     # frame shape, drawn as a thin strip under the pictures: grey = picture fills the frame, orange = black bars
     # or a boxed picture (rows or columns that are uniformly dark)
     yb = y + h - 6
@@ -862,7 +986,7 @@ def render_page(F, t0, t1, idx, total, name):
                 d.text((pg.x(tt) + 3, yq + 5), lab, font=fk, fill=(150, 180, 255))
             prev_soft = soft
     if sh is not None and len(sh):
-        for tb, du in blur_runs(sh, np.asarray(F["cuts"], float) / v["fps"]):
+        for tb, du in blur_runs(sh, cuts_t):
             if tb + du < t0 or tb >= t1:
                 continue
             xa, xb = pg.x(max(tb, t0)), pg.x(min(tb + du, t1))
@@ -898,19 +1022,17 @@ def render_page(F, t0, t1, idx, total, name):
     ch = pooled(np.log1p(v["mad"]), fr_t, pg, "max")
     lu = pooled(v["luma"], fr_t, pg, "mean")
     hold = np.zeros(len(v["mad"]), np.float32)
-    flat = v["mad"] < 0.05
-    i = 0
-    while i < len(flat):
-        if flat[i]:
-            j = i
-            while j < len(flat) and flat[j]:
-                j += 1
-            if j - i >= int(0.5 * fps):
-                hold[i:j] = 1
-            i = j
-        else:
-            i += 1
+    starts = np.r_[0, np.flatnonzero(v["mad"][1:] >= 0.05) + 1]
+    for i, j in zip(starts, np.r_[starts[1:], len(hold)]):
+        if edges[j] - edges[i] >= 0.5:
+            hold[i:j] = 1
     still = pooled(hold, fr_t, pg, "mean")
+    # Between presentations the previous frame remains on screen, even across a long VFR hold.
+    columns = t0 + (np.arange(PW) + 0.5) * (t1 - t0) / PW
+    active = np.searchsorted(edges, columns, side="right") - 1
+    missing = np.isnan(lu) & (active >= 0) & (active < len(fr_t))
+    lu[missing] = v["luma"][active[missing]]
+    still[missing] = hold[active[missing]]
     top = math.log1p(60)
     for xpx in range(PW):
         if not np.isnan(ch[xpx]):
@@ -959,13 +1081,7 @@ def render_page(F, t0, t1, idx, total, name):
     pg.label("seen", "seen again")
     # sound: spectrogram with the sound-scene changes marked
     y, h = pg.y["sound"]
-    fa, fb = int(t0 * SR / HOP), int(min(t1, F["dur"]) * SR / HOP)
-    seg = a["db"][:, max(fa, 0):max(fb, 0)]
-    if seg.shape[1] > 1:
-        ref = float(np.percentile(a["db"], 99.5))
-        z = np.clip((seg - ref + 70) / 70, 0, 1)[::-1]
-        wpx = int(round((min(t1, F["dur"]) - t0) / (t1 - t0) * PW))
-        pg.img.paste(Image.fromarray(lut("magma")[(cv2.resize(z, (max(wpx, 1), h), interpolation=cv2.INTER_AREA) * 255).astype(np.uint8)]), (LEFT, y))
+    draw_spectrum(pg, "sound", a["db"], 2048, 30, 16000, F["dur"], "magma")
     for ct in a["changes"]:
         if t0 <= ct <= t1:
             d.polygon([(pg.x(ct), y + 9), (pg.x(ct) - 5, y), (pg.x(ct) + 5, y)], fill=(80, 255, 160))
@@ -975,11 +1091,14 @@ def render_page(F, t0, t1, idx, total, name):
     y, h = pg.y["like"]
     last_x, last_lab = [-1e9, -1e9], None
     for tt, top in F.get("timbre", []):
-        if not (t0 <= tt < t1) or not top:
+        if not t0 <= tt < t1:
             continue
-        specific = [(l, p_) for l, p_ in top if l not in GENERIC]
-        show = specific[:2] if specific and specific[0][1] > 0.12 else top[:1]
-        lab = ", ".join(l.split(",")[0] for l, _ in show)
+        guess = source_guess(top)
+        lab = "resembles " + guess if guess else "source unclear"
+        if not guess:
+            levels = a["rms"][round(tt * SR / HOP):round((tt + 1) * SR / HOP)]
+            if not len(levels) or levels.max() < -60:
+                continue
         if lab == last_lab:
             continue
         xs = pg.x(tt)
@@ -987,19 +1106,19 @@ def render_page(F, t0, t1, idx, total, name):
         if k is None:
             continue
         fk = font(11, True)
-        d.text((xs + 1, y + 2 + k * 16), lab, font=fk, fill=(255, 225, 150) if specific else (150, 150, 160))
+        d.text((xs + 1, y + 2 + k * 16), lab, font=fk, fill=(255, 225, 150) if guess else (150, 150, 160))
         last_x[k] = xs + fk.getlength(lab) + 8
         last_lab = lab
     # hits: each impact, heard on its own
     for tt, top in F.get("hits", []):
-        if not (t0 <= tt < t1) or not top:
+        if not t0 <= tt < t1:
             continue
         xs = pg.x(tt)
         d.polygon([(xs, y + h - 1), (xs - 4, y + h - 8), (xs + 4, y + h - 8)], fill=(255, 120, 80))
     pg.label("like", "sounds", "like")
     # hit labels go on a line of their own just under the lane. Hits close together are told as one group,
     # counted by what each one sounds like, so no hit is hidden behind its neighbour's label.
-    hs = [(tt, top) for tt, top in F.get("hits", []) if t0 <= tt < t1 and top]
+    hs = [(tt, top) for tt, top in F.get("hits", []) if t0 <= tt < t1]
     groups = []
     for tt, top in hs:
         if groups and tt - groups[-1][-1][0] < 3.0:
@@ -1009,14 +1128,14 @@ def render_page(F, t0, t1, idx, total, name):
     free = -1e9
     fk = font(10)
     for g in groups:
-        names = [top[0][0].split(",")[0] for _, top in g]
+        names = [("resembles " + guess) if (guess := source_guess(top)) else "source unclear" for _, top in g]
         if len(g) == 1:
-            lab = "hit: " + " / ".join(l.split(",")[0] for l, _ in g[0][1])
+            lab = "sharp rise: " + names[0]
         else:
             cnt = {}
             for n_ in names:
                 cnt[n_] = cnt.get(n_, 0) + 1
-            lab = f"{len(g)} hits: " + ", ".join(f"{k} x{v}" if v > 1 else k for k, v in sorted(cnt.items(), key=lambda kv: -kv[1]))
+            lab = f"{len(g)} sharp rises: " + ", ".join(f"{k} x{v}" if v > 1 else k for k, v in sorted(cnt.items(), key=lambda kv: -kv[1]))
         xs = max(pg.x(g[0][0]), free)
         if xs > pg.x(t1) - 40:
             continue
@@ -1032,6 +1151,32 @@ def render_page(F, t0, t1, idx, total, name):
             hh = np.clip((lv[xpx] + 60) / 60, 0, 1) * (h - 2)
             d.line([(LEFT + xpx, y + h - 1), (LEFT + xpx, y + h - 1 - hh)], fill=(120, 200, 255))
     pg.label("level", "level", "-60..0 dB")
+    if len(channel_rms) > 1:
+        channel_y, _ = pg.y["channels"]
+        times = np.arange(channel_rms.shape[1]) * HOP / SR
+        for i, levels in enumerate(channel_rms):
+            top = channel_y + 16 * i
+            name = ("L level", "R level")[i] if len(channel_rms) == 2 else f"ch {i + 1}"
+            d.text((4, top + 1), name, font=font(10), fill=(185, 190, 200))
+            heights = np.clip((pooled(levels, times, pg) + 60) / 60, 0, 1) * 13
+            d.line((LEFT, top + 14, LEFT + PW, top + 14), fill=(45, 49, 54))
+            for col in np.flatnonzero(heights >= 1):
+                d.line((LEFT + col, top + 13, LEFT + col, top + 14 - heights[col]), fill=(120, 200, 255))
+    if "earlier" in pg.y:
+        pg.box("earlier")
+        top, _ = pg.y["earlier"]
+        ends = a["stereo_end"]
+        for i, (first, second) in enumerate(a["stereo_pairs"]):
+            mid = top + 26 * i + 12
+            d.text((4, mid - 12), f"{first} early", font=font(10), fill=(130, 205, 245))
+            d.text((4, mid), f"{second} early", font=font(10), fill=(246, 180, 105))
+            for j in range(max(0, math.floor(t0 * 4)), min(len(ends), math.ceil(t1 * 4))):
+                lag = a["stereo_us"][i, j]
+                if np.isfinite(lag) and ends[j] > t0:
+                    offset = math.copysign(2 + 8 * abs(lag) / 1000, lag) if lag else 0
+                    color = (130, 205, 245) if lag > 0 else (246, 180, 105) if lag < 0 else (165, 168, 175)
+                    left, right = pg.x(max(t0, j / 4)), pg.x(min(t1, ends[j]))
+                    d.line((left, mid - offset, right, mid - offset), fill=color, width=2)
     if "ear" not in F:
         F["ear"] = ear_events(a)
     free = -1e9
@@ -1050,7 +1195,7 @@ def render_page(F, t0, t1, idx, total, name):
     pg.box("sync")
     y, h = pg.y["sync"]
     S = F.get("sync")
-    if S:
+    if S and S["windows"]:
         g = np.asarray(S["grid"]); W_ = S["win"]
         cen = np.array([w["t"] + W_ / 2 for w in S["windows"]]); P_ = np.array([w["p"] for w in S["windows"]])
         img = np.zeros((len(g), PW), np.float32)
@@ -1087,13 +1232,7 @@ def render_page(F, t0, t1, idx, total, name):
     # crowd: the crowd separated from music and commentary, voice band; a chant shows as arcs repeating at a steady beat
     pg.box("crowd")
     if vo.get("crowd") is not None:
-        y, h = pg.y["crowd"]
-        seg = vo["crowd"][:, max(fa, 0):max(fb, 0)]
-        if seg.shape[1] > 1:
-            ref = float(np.percentile(vo["crowd"], 99.5))
-            z = np.clip((seg - ref + 45) / 45, 0, 1)[::-1]
-            wpx = int(round((min(t1, F["dur"]) - t0) / (t1 - t0) * PW))
-            pg.img.paste(Image.fromarray(lut("inferno")[(cv2.resize(z, (max(wpx, 1), h), interpolation=cv2.INTER_AREA) * 255).astype(np.uint8)]), (LEFT, y))
+        draw_spectrum(pg, "crowd", vo["crowd"], 4096, 300, 4000, F["dur"], "inferno")
     if "chants" not in F:
         F["chants"] = chant_windows(vo.get("crowd"))
     y, h = pg.y["crowd"]
@@ -1105,7 +1244,7 @@ def render_page(F, t0, t1, idx, total, name):
         lab = f"crowd chanting, a shout every {per:.1f}s"
         hc = next((c for c in F.get("chant_heard", []) if abs(c["t0"] - ca) < 1 and c.get("heard")), None)
         if hc:
-            lab += f': heard as "{hc['heard']}" x{hc['repeats']}'
+            lab += f': heard as "{hc["heard"]}" x{hc["repeats"]}'
             if hc["closest"]:
                 lab += f", sounds most like {hc['closest'][0]['name']}"
             if hc.get("film_vote"):
@@ -1113,13 +1252,16 @@ def render_page(F, t0, t1, idx, total, name):
         fk = font(11, True)
         d.rectangle([xa, y + 4, xa + fk.getlength(lab) + 6, y + 19], fill=(0, 0, 0))
         d.text((xa + 3, y + 4), lab, font=fk, fill=(140, 255, 160))
-    pg.label("crowd", "crowd", "voices 0.3-4k")
+    pg.label("crowd", "crowd stem", "0.3-4 kHz")
     # what is said
     pg.box("said")
     y, h = pg.y["said"]
     last = [-1e9, -1e9]
+    speech_note = speech_status(vo, t0, t1)
+    if speech_note:
+        d.text((LEFT + 2, y + 2), speech_note, font=font(11), fill=(165, 165, 175))
     for wd in vo["words"]:
-        if not (t0 <= wd["t"] <= t1):
+        if not (t0 <= wd["t"] < t1):
             continue
         xs = pg.x(wd["t"])
         if last[0] <= xs:
@@ -1286,16 +1428,41 @@ def _eye_lane(pg, F):
 
 # ============================================================== stream
 
+def speech_status(voices, start, end):
+    regions = voices.get("speech_activity")
+    if regions is None or any(w["t"] < end and w["e"] >= start for w in voices["words"]):
+        return ""
+    if any(w["t"] < end and w["e"] > start for w in voices.get("speech_with_gain", [])):
+        return "possible speech, words unclear at recorded level"
+    if any(a < end and b > start for a, b in regions):
+        return "possible speech, words unclear"
+    return "no speech detected by the utterance detector"
+
+
+def mix_level_text(levels, start, end):
+    """Typical and loudest 10 ms mix levels within successive windows of this shot."""
+    bins_per_s = SR // HOP
+    first = sample_boundary(start, bins_per_s)
+    stop = min(sample_boundary(end, bins_per_s), len(levels))
+    # Use whole seconds for short shots and at most ten windows for a long take.
+    span = max(1, math.ceil((stop - first) / (10 * bins_per_s))) * bins_per_s
+    parts = []
+    for i in range(first, stop, span):
+        values = levels[i:min(i + span, stop)]
+        peak = int(np.argmax(values))
+        parts.append(f"{tc(i / bins_per_s)} {np.median(values):.0f}/{values[peak]:.0f}@{tc((i + peak) / bins_per_s)}")
+    return ", ".join(parts)
+
+
 def write_stream(F, out, name):
-    fps = F["v"]["fps"]
-    cuts = list(F["cuts"] / fps)
-    bounds = [0.0] + cuts + [F["dur"]]
+    cuts = frame_edges(F["v"])[F["cuts"]]
+    bounds = [0., *cuts[(cuts > 0) & (cuts < F["dur"])], F["dur"]]
     a, vo = F["a"], F["vo"]
     lines = [f"# {name}: what happens, shot by shot", "",
-             "time | length | on screen | said | loudness | seen before | heard before", ""]
+             "time | length | on screen | said | loudness | seen before | heard before | observations | mix dBFS (window start, median/loudest 10 ms @ peak time)", ""]
     mp, mv = F["mem_pic"], F["mem_voice"]
     for sa, sb in zip(bounds[:-1], bounds[1:]):
-        if sb - sa < 0.05:
+        if sb <= sa:
             continue
         txt = " / ".join(dict.fromkeys(it["text"] for it in F["ocr"] if it["t"] < sb and it["e"] > sa))[:140]
         said = " ".join(w["w"] for w in vo["words"] if sa <= w["t"] < sb)[:160]
@@ -1311,18 +1478,31 @@ def write_stream(F, out, name):
             seen_n = sum(1 for tg in F.get("tags", []) if sa <= tg["t"] < sb)
             said_n = sum(1 for w in vo["words"] if sa <= w["t"] < sb and any(x in w["w"] for x in al))
             subj_bits = f" [{al[0]}: seen {seen_n}x, named {said_n}x]" if (seen_n or said_n) else f" [{al[0]}: not seen, not named]"
-        tb = [", ".join(l.split(",")[0] for l, p_ in top if l not in GENERIC)[:40] for tt, top in F.get("timbre", []) if sa <= tt < sb]
-        tb = [x for x in dict.fromkeys(tb) if x][:3]
-        if tb:
-            subj_bits += " [sounds like: " + " / ".join(tb) + "]"
-        hs = [", ".join(l.split(",")[0] for l, _ in top) for tt, top in F.get("hits", []) if sa <= tt < sb and top]
-        if hs:
-            subj_bits += " [hits sound like: " + " / ".join(hs[:3]) + "]"
+        guesses = [source_guess(top) for tt, top in F.get("timbre", []) if sa <= tt < sb]
+        guesses = list(dict.fromkeys(guess for guess in guesses if guess))[:3]
+        observations = ["resembles " + guess for guess in guesses]
+        for window in F.get("sound_context", []):
+            if sa < window["end_s"] <= sb:
+                span = f'{tc(window["start_s"])}–{tc(window["end_s"])}'
+                names = ", ".join(c["sound"] for c in window["candidates"])
+                observations.append(f"possible sources across {span} (whole-window estimate): {names}")
+        for tt, top in F.get("hits", []):
+            if sa <= tt < sb:
+                guess = source_guess(top)
+                source = "resembles " + guess if guess else "source unclear"
+                observations.append(f"sharp rise in level at {tc(tt)}, {source}")
+        if not observations:
+            levels = a["rms"][round(sa * SR / HOP):round(sb * SR / HOP)]
+            if len(levels) and levels.max() >= -60:
+                observations.append("sound present, source unclear")
+        speech_note = speech_status(vo, sa, sb)
+        if speech_note:
+            observations.append(speech_note)
         evs = [lab for tt, lab, kind in F.get("ear") or ear_events(F["a"]) if sa <= tt < sb]
         evs += [f"picture {hi}, {du:.1f} s, {ho}" for tb, du, hi, ho in (F.get("pic_ev") or picture_events(F["v"])) if sa <= tb < sb]
         evs += [f"{k_} {du:.2f} s" for tb, du, k_ in (F.get("blips") or blips(F["v"])) if sa <= tb < sb]
         if F.get("sharp") is not None and len(F["sharp"]):
-            evs += [f"picture much softer than around it ({du:.0f} s)" for tb, du in blur_runs(F["sharp"], np.asarray(F["cuts"], float) / F["v"]["fps"]) if sa <= tb < sb]
+            evs += [f"picture much softer than around it ({du:.0f} s)" for tb, du in blur_runs(F["sharp"], cuts) if sa <= tb < sb]
         if evs:
             subj_bits += " [" + "; ".join(evs[:3]) + "]"
         for ra, rb, late, sure in sync_runs(F.get("sync")):
@@ -1333,19 +1513,83 @@ def write_stream(F, out, name):
                 subj_bits += f" [SAME RECORDING AGAIN as {tc(es)[:-3]}, {eb - ea:.1f} s]"
         rp = [r for r in vo.get("repeats", []) if sa <= r[0] < sb]
         if rp:
-            said += "  [SAME SOUND AGAIN " + ", ".join(f"at {tc(r[0])}, {r[2]:.1f}s after it first played" for r in rp) + "]"
-        said += subj_bits
-        lines.append(f"{tc(sa)} | {sb - sa:.1f}s | {txt} | {said} | {loud} | "
-                     f"{tc(float(np.median(sp)))[:-3] if len(sp) else ''} | {tc(float(np.median(sv)))[:-3] if len(sv) else ''}")
+            subj_bits += "  [SAME SOUND AGAIN " + ", ".join(f"at {tc(r[0])}, {r[2]:.1f}s after it first played" for r in rp) + "]"
+        if subj_bits.strip():
+            observations.append(subj_bits.strip())
+        mix = mix_level_text(a["rms"], sa, sb) if a.get("has_audio", True) else "no audio track"
+        duration = f"{sb - sa:.3f}s" if sb - sa < .1 else f"{sb - sa:.1f}s"
+        lines.append(f"{tc(sa)} | {duration} | {txt} | {said} | {loud} | "
+                     f"{tc(float(np.median(sp)))[:-3] if len(sp) else ''} | {tc(float(np.median(sv)))[:-3] if len(sv) else ''} | {', '.join(observations)} | "
+                     f"{mix}")
     (out / "stream.md").write_text("\n".join(lines) + "\n")
 
 
 # ============================================================== main
 
-def build(film, out, page_s, lang, title=None, subject=None, genre=None):
+def build(film, out, page_s, lang, title=None, subject=None, genre=None, until=None):
+    info = probe(film)
+    if not info["has_video"]:
+        raise ValueError("pages need a timed video track; use reel play for an audio recording")
+    if until is None:
+        return _build(film, out, page_s, lang, title, subject, genre)
+    if not math.isfinite(until) or until <= 0:
+        raise ValueError("--until must be a finite positive number of seconds")
+    out = pathlib.Path(out)
+    if out.is_symlink() or (out.exists() and (not out.is_dir() or any(out.iterdir()))):
+        raise ValueError("choose a new or empty --out directory for a time-limited reel")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=out.parent) as tmp:
+        work = pathlib.Path(tmp)
+        clip = work / "clip.mkv"
+        # Trim decoded frames and samples. Stream copying can carry packets beyond the boundary.
+        end = f"{until:.9f}"
+        # trim removes the next presentation, which could be seconds away on a VFR hold.
+        # Carry the final retained picture up to the cutoff or the actual end of its track.
+        picture_stop = min(until, video_end(film, info))
+        frame_clock = work / "frame-times.us"
+        duration_filter = f"setts=duration='if(eq(NEXT_PTS,NOPTS),max(1,round({picture_stop:.9f}/TB)-PTS),DURATION)'"
+        audio_opts = []
+        if info["has_audio"]:
+            stop = sample_boundary(until, info["audio_rate"])
+            audio_opts = ["-map", f"0:{info['audio_index']}", "-af", f"{audio_timeline(info)},atrim=end_sample={stop}", "-c:a", pcm_codec(info)]
+        subprocess.run(["ffmpeg", "-v", "error", "-nostdin", "-i", str(film),
+                        "-map", f"0:{info['video_index']}", "-map_metadata", "-1", "-map_chapters", "-1",
+                        "-vf", f"settb=AVTB,trim=end={end}", *audio_opts,
+                        "-fps_mode", "passthrough", "-enc_time_base:v", "1:1000000", "-c:v", "ffv1",
+                        "-stats_enc_pre:v", str(frame_clock), "-stats_enc_pre_fmt:v", "{pts}",
+                        "-bsf:v", duration_filter, str(clip)], check=True)
+        # Save the last retained source PTS before the container rounds it to milliseconds.
+        with frame_clock.open() as stamps:
+            last_pts = next(iter(deque(stamps, maxlen=1)), None)
+        if last_pts is None:
+            raise ValueError("no video frames in the requested interval")
+        # All helpers, including OCR, ASR and zoom, only get the clipped media.
+        _build(clip, work, page_s, lang, title or "Reel", subject, genre, until,
+               picture_stop=picture_stop, last_source_pts=int(last_pts))
+        bundle = work / "snapshot"
+        bundle.mkdir()
+        for name in ("clip.mkv", "pages", "stream.md", "meta.json", "features.npz", "sync.json", "now.png"):
+            artifact = work / name
+            if artifact.exists():
+                artifact.rename(bundle / name)
+        bundle.rename(out)
+    print(f"[perceive] snapshot -> {out / 'pages'}", flush=True)
+    if (out / "now.png").is_file():
+        print(f"[perceive] picture at stop -> {out / 'now.png'}", flush=True)
+
+
+def _build(film, out, page_s, lang, title, subject, genre, until=None, *, picture_stop=None, last_source_pts=None):
     out.mkdir(parents=True, exist_ok=True)
     log = lambda s: print(s, flush=True)
     info = probe(film)
+    analysis = out
+    if info["alternate_streams"]:
+        # Old stems and sync estimates may describe a different track in this same file.
+        version = "-".join(map(str, RecordedSource.version(pathlib.Path(film))))
+        analysis = out / f"tracks-{info['video_index']}-{info.get('audio_index', 'none')}-{version}"
+        analysis.mkdir(exist_ok=True)
+    if until is not None:
+        info["dur"] = min(info["dur"], until)
     audio_src = film
     if not info["has_audio"]:                          # a silent film is still watchable: give it a silent track
         audio_src = out / "silence.wav"
@@ -1356,31 +1600,56 @@ def build(film, out, page_s, lang, title=None, subject=None, genre=None):
     log(f"[perceive] {name} {info['dur']:.1f}s")
     with ThreadPoolExecutor(3) as ex:
         fv = ex.submit(video_pass, film, info, log)
-        fa = ex.submit(audio_pass, audio_src, log)
+        fa = ex.submit(audio_pass, audio_src, log, has_audio=info["has_audio"])
         fo = ex.submit(ocr_pass, film, info["dur"], log, 1.0, subject)
         v, a, (ocr, tags) = fv.result(), fa.result(), fo.result()
+    a["has_audio"] = info["has_audio"]
+    if not info["has_audio"]:
+        a.pop("channel_rms", None)
     seen_words = {}
     for it in ocr:
         for w_ in re.findall(r"[가-힣A-Za-z0-9]{2,}", it["text"]):
             seen_words[w_] = seen_words.get(w_, 0) + 1
     prompt = " ".join(w_ for w_, _ in sorted(seen_words.items(), key=lambda kv: -kv[1])[:60])[:220] or None
+    if not len(v["mad"]):
+        raise ValueError("no video frames in the requested interval")
+    if picture_stop is not None:
+        # Matroska rounds track duration to milliseconds. The source track tells us
+        # whether the last image was still on screen in a fractional final millisecond.
+        v["edges"][-1] = max(v["edges"][-2], picture_stop)
+    if until is not None:
+        for item in ocr:
+            item["e"] = min(item["e"], info["dur"])
     if info["has_audio"]:
-        vo = voices(film, out, lang, log, None)  # a prompt built from screen text made whisper drop speech; keep it off
+        vo = voices(film, analysis, lang, log, None, deterministic=until is not None)  # a prompt built from screen text made whisper drop speech; keep it off
     else:
         n = a["db"].shape[1]
         vo = dict(words=[], vdb=np.full((40, n), -100, np.float32), vrms=np.full(n, -100, np.float32), repeats=[], crowd=None)
+    if until is not None:
+        vo["words"] = [word for word in vo["words"] if 0 <= word["t"] < info["dur"]]
+        for word in vo["words"]:
+            word["e"] = min(word["e"], info["dur"])
     cuts = find_cuts(v)
-    F = dict(v=v, a=a, vo=vo, ocr=ocr, cuts=cuts, dur=min(info["dur"], len(v["mad"]) / v["fps"]), tags=tags, subject=subject)
+    v["display_aspect"] = info["display_aspect"]
+    # A container with a nonzero starting timestamp can report an end time as its duration.
+    # Keep a real audio tail while ending a picture-only reel at the last displayed frame.
+    media_end = max(v["edges"][-1], a["dur"] if info["has_audio"] else 0)
+    F = dict(v=v, a=a, vo=vo, ocr=ocr, cuts=cuts, dur=min(until if until is not None else info["dur"], media_end), tags=tags, subject=subject)
+    if until is not None and vo.get("speech_with_gain"):
+        vo["speech_with_gain"] = [w for w in vo["speech_with_gain"] if 0 <= w["t"] < F["dur"]]
+        for w in vo["speech_with_gain"]:
+            w["e"] = min(w["e"], F["dur"])
+            w["context_end_s"] = min(w["context_end_s"], F["dur"])
     F["sharp"] = sharpness_pass(film, F["dur"])
-    F["timbre"] = timbre_pass(film, log) if info["has_audio"] else []
+    F["timbre"], F["sound_context"] = timbre_pass(film, F["dur"], log) if info["has_audio"] else ([], [])
     F["hits"] = hit_pass(film, a["rms"], log) if info["has_audio"] else []
-    F["sync"] = sync_pass(film, out, log) if info["has_audio"] else None
+    F["sync"] = sync_pass(film, analysis, log) if info["has_audio"] else None
     F["chants"] = chant_windows(vo.get("crowd"))
-    F["chant_heard"] = hear_chants(out, F["chants"], ocr, genre, lang, log)
+    F["chant_heard"] = hear_chants(analysis, F["chants"], ocr, genre, lang, log)
     if subject:
-        subprocess.run([GAZE_PY, str(HERE / "gaze.py"), str(film), "--out", str(out / "gaze")], capture_output=True)
-        if (out / "gaze/gaze.json").exists():
-            sm = json.load(open(out / "gaze/gaze.json"))["samples"]
+        subprocess.run([GAZE_PY, str(HERE / "gaze.py"), str(film), "--out", str(analysis / "gaze")], capture_output=True)
+        if (analysis / "gaze/gaze.json").exists():
+            sm = json.load(open(analysis / "gaze/gaze.json"))["samples"]
             F["gaze"] = dict(t=np.array([q["t"] for q in sm]), x=np.array([q["x"] for q in sm]), y=np.array([q["y"] for q in sm]))
     F["mem_pic"] = memory_picture(v, cuts)
     F["mem_voice"] = memory_voice(vo)
@@ -1393,7 +1662,10 @@ def build(film, out, page_s, lang, title=None, subject=None, genre=None):
     if g is not None:
         g.save(pages / "page_00.png")
     for i in range(total):
-        render_page(F, i * page_s, (i + 1) * page_s, i + 1, total, name).save(pages / f"page_{i + 1:02d}.png")
+        end = (i + 1) * page_s
+        if until is not None:
+            end = min(end, F["dur"])
+        render_page(F, i * page_s, end, i + 1, total, name).save(pages / f"page_{i + 1:02d}.png")
     write_stream(F, out, name)
     np.savez_compressed(out / "features.npz", **{f"v_{k}": val for k, val in v.items() if k != "fps"},
                         **{f"a_{k}": val for k, val in a.items() if k not in ("changes", "dur")}, a_changes=a["changes"],
@@ -1401,12 +1673,28 @@ def build(film, out, page_s, lang, title=None, subject=None, genre=None):
                         vo_crowd=vo["crowd"] if vo["crowd"] is not None else np.zeros((0, 0), np.float32),
                         mp_t=F["mem_pic"]["t"], mp_src=F["mem_pic"]["src"], mv_t=F["mem_voice"]["t"], mv_src=F["mem_voice"]["src"],
                         mp_score=F["mem_pic"]["score"], mv_score=F["mem_voice"]["score"])
-    json.dump(dict(film=str(pathlib.Path(film).resolve()), fps=v["fps"], dur=F["dur"], page_s=page_s, pages=total, words=vo["words"], ocr=ocr, tags=tags,
+    source = str(pathlib.Path(film).resolve()) if until is None else "clip.mkv"
+    snapshot = {} if until is None else {"until": F["dur"]}
+    if until is not None:
+        # The last picture in a history strip can be older than the stopping point.
+        # An audio tail can also continue after the picture has ended.
+        snapshot["picture_end_s"] = picture_stop
+        snapshot["current_frame"] = None
+        if F["dur"] <= picture_stop:
+            clip_last_us = round(float(v["edges"][-2]) * 1_000_000)
+            _save_frame(film, clip_last_us, out / "now.png")
+            snapshot["current_frame"] = {"file": "now.png", "pts_us": last_source_pts}
+    metadata = dict(film=source, **snapshot, fps=v["fps"], dur=F["dur"], page_s=page_s, pages=total,
+                   words=vo["words"], speech_activity=vo.get("speech_activity"), speech_with_gain=vo.get("speech_with_gain", []), ocr=ocr, tags=tags,
                    subject=subject, genre=genre, chants=[list(c) for c in F["chants"]], chant_heard=F["chant_heard"],
-                   sharp=[None if np.isnan(x) else float(x) for x in F["sharp"]], timbre=F["timbre"], hits=F["hits"],
-                   gaze={k: list(map(float, v_)) for k, v_ in F["gaze"].items()} if "gaze" in F else None),
-              open(out / "meta.json", "w"), ensure_ascii=False)
-    log(f"[perceive] {total} pages -> {pages}")
+                   sharp=[None if np.isnan(x) else float(x) for x in F["sharp"]], timbre=F["timbre"],
+                   sound_context=F["sound_context"], hits=F["hits"],
+                   gaze={k: list(map(float, v_)) for k, v_ in F["gaze"].items()} if "gaze" in F else None)
+    if analysis != out:
+        metadata["analysis_directory"] = analysis.name
+    (out / "meta.json").write_text(json.dumps(metadata, ensure_ascii=False))
+    if until is None:
+        log(f"[perceive] {total} pages -> {pages}")
 
 
 def load(out):
@@ -1415,35 +1703,60 @@ def load(out):
     z = np.load(out / "features.npz")
     v = {k[2:]: z[k] for k in z.files if k.startswith("v_")}; v["fps"] = m["fps"]
     a = {k[2:]: z[k] for k in z.files if k.startswith("a_")}
-    vo = dict(words=m["words"], vdb=z["vo_vdb"], vrms=z["vo_vrms"], repeats=[tuple(r) for r in z["vo_repeats"]] if "vo_repeats" in z.files else [],
+    vo = dict(words=m["words"], speech_activity=m.get("speech_activity"), speech_with_gain=m.get("speech_with_gain", []), vdb=z["vo_vdb"], vrms=z["vo_vrms"], repeats=[tuple(r) for r in z["vo_repeats"]] if "vo_repeats" in z.files else [],
               crowd=z["vo_crowd"] if "vo_crowd" in z.files and z["vo_crowd"].size else None)
     extra = dict(tags=m.get("tags", []), subject=m.get("subject"), chants=[tuple(c) for c in m.get("chants", [])],
                  chant_heard=m.get("chant_heard", []), timbre=[(t_, [tuple(x) for x in top]) for t_, top in m.get("timbre", [])],
-                 hits=[(t_, [tuple(x) for x in top]) for t_, top in m.get("hits", [])],
+                 sound_context=m.get("sound_context", []), hits=[(t_, [tuple(x) for x in top]) for t_, top in m.get("hits", [])],
                  sharp=np.array([np.nan if x is None else x for x in m.get("sharp", [])], np.float32))
     if m.get("gaze"):
         extra["gaze"] = {k: np.array(v_) for k, v_ in m["gaze"].items()}
-    extra["sync"] = json.load(open(out / "sync.json")) if (out / "sync.json").exists() else None
+    sync_file = out / m.get("analysis_directory", ".") / "sync.json"
+    extra["sync"] = json.loads(sync_file.read_text()) if sync_file.exists() else None
     return dict(**extra, v=v, a=a, vo=vo, ocr=m["ocr"], cuts=z["cuts"], dur=m["dur"],
                 mem_pic=dict(t=z["mp_t"], src=z["mp_src"], score=z["mp_score"] if "mp_score" in z.files else None),
                 mem_voice=dict(t=z["mv_t"], src=z["mv_src"], score=z["mv_score"] if "mv_score" in z.files else None)), m
 
 
+def frame_at(out, at):
+    """Return the full frame on display at this instant, including in a variable-rate film."""
+    out = pathlib.Path(out)
+    meta = json.loads((out / "meta.json").read_text())
+    end = meta.get("until", meta["dur"])
+    if not 0 <= at < end:
+        raise ValueError(f"frame time must be at least 0 and less than {end:g} seconds")
+    source = reel_source(out, meta)
+    picture_end = meta["picture_end_s"] if "picture_end_s" in meta else video_end(source, probe(source))
+    if at >= picture_end:
+        raise ValueError(f"no video frame on display at {at:g} seconds")
+    us = int(at * 1_000_000)
+    return _save_frame(source, us, out / f"frame_{us}us.png")
+
+
 def zoom(out, t0, t1):
-    """Re-watch a stretch closer: same lanes, more pixels per second, thumbnails at 12 fps for the stretch."""
-    global THUMB_FPS
+    """Redraw the lanes for a stretch, using native frames and their presentation times."""
     F, m = load(out)
-    film = m["film"]
-    fps = F["v"]["fps"]
-    # denser thumbnails for the stretch
-    n = TW * TH * 3
-    p = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t0:.3f}", "-t", f"{t1 - t0:.3f}", "-i", film, "-an", "-vf",
-                        f"fps=12,scale={TW}:{TH}:flags=area", "-pix_fmt", "rgb24", "-f", "rawvideo", "-"], capture_output=True).stdout
-    th = np.frombuffer(p[:len(p) // n * n], np.uint8).reshape(-1, TH, TW, 3)
-    idx = np.round((t0 + np.arange(len(th)) / 12) * fps).astype(int)
-    F["v"]["thumbs"] = np.concatenate([F["v"]["thumbs"], th]); F["v"]["th_idx"] = np.concatenate([F["v"]["th_idx"], idx])
-    o = np.argsort(F["v"]["th_idx"], kind="stable")
-    F["v"]["thumbs"], F["v"]["th_idx"] = F["v"]["thumbs"][o], F["v"]["th_idx"][o]
+    film = str(reel_source(out, m))
+    if "until" in m:
+        if not 0 <= t0 < t1 <= m["until"]:
+            raise ValueError(f"zoom range must be within 0 to {m['until']:g} seconds")
+    if "display_aspect" not in F["v"] and pathlib.Path(film).is_file():
+        F["v"]["display_aspect"] = probe(film)["display_aspect"]
+    if not 0 <= t0 < t1 or not math.isfinite(t1):
+        raise ValueError("zoom requires a finite, increasing time interval")
+    cut_times = frame_edges(F["v"])[F["cuts"]]
+    times, thumbs = [], []
+    last_bucket = last_shot = None
+    for pts, _, pixels in native_frames(film, TW, TH, int(t0 * 1e6), sample_boundary(t1, 1_000_000)):
+        t = pts / 1e6
+        bucket = pts * 12 // 1_000_000
+        shot = cut_times.searchsorted(t, side="right")
+        if t1 - t0 <= 5 or bucket != last_bucket or shot != last_shot:
+            times.append(t)
+            thumbs.append(np.frombuffer(pixels, np.uint8).reshape(TH, TW, 3))
+        last_bucket, last_shot = bucket, shot
+    F["detail_pictures"] = dict(thumb_times=np.asarray(times), thumbs=thumbs,
+                                display_aspect=F["v"].get("display_aspect", TW / TH))
     img = render_page(F, t0, t1, 0, 0, pathlib.Path(film).name + "  ZOOM")
     path = pathlib.Path(out) / f"zoom_{t0:.1f}_{t1:.1f}.png"
     img.save(path)
@@ -1458,7 +1771,8 @@ if __name__ == "__main__":
     else:
         ap = argparse.ArgumentParser(); ap.add_argument("film"); ap.add_argument("--out", required=True)
         ap.add_argument("--page", type=float, default=30.0); ap.add_argument("--lang", default="ko")
+        ap.add_argument("--until", type=float)
         ap.add_argument("--title", default=None, help="name printed on the pages (default: the file name)")
         ap.add_argument("--subject", default=None, help="the person the film is about, as written on name tags (e.g. Zeus)")
         ap.add_argument("--genre", default=None, help="'lol' adds page 0 with a normal League of Legends broadcast frame")
-        x = ap.parse_args(); build(x.film, pathlib.Path(x.out), x.page, x.lang, x.title, x.subject, x.genre)
+        x = ap.parse_args(); build(x.film, pathlib.Path(x.out), x.page, x.lang, x.title, x.subject, x.genre, x.until)

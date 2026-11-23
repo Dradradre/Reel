@@ -17,18 +17,12 @@ import sys as _sys, pathlib as _pl
 _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
 import argparse, json, os, subprocess, sys, pathlib
 import numpy as np
+from common import display_scale, probe, read_audio
 
 HERE = pathlib.Path(__file__).resolve().parent
 from config import SYNCHFORMER as REPO
 MODELS = {"audioset": "24-01-04T16-39-21", "lrs3": "23-12-23T18-33-57"}
 VFPS, AFPS, SIDE, WIN = 25, 16000, 256, 5.0
-
-
-def probe(path):
-    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height:format=duration",
-                        "-of", "json", str(path)], capture_output=True, text=True)
-    j = json.loads(r.stdout)
-    return j["streams"][0]["width"], j["streams"][0]["height"], float(j["format"]["duration"])
 
 
 def load_model(name, device):
@@ -50,6 +44,21 @@ def load_model(name, device):
     return model, get_transforms(cfg, ["test"])["test"], grid
 
 
+def offset_distributions(model, transform, device, inputs):
+    import torch
+    items = []
+    for clip, audio in inputs:
+        item = dict(video=torch.from_numpy(clip).permute(0, 3, 1, 2).contiguous(),
+                    audio=torch.from_numpy(audio.copy()),
+                    meta={"video": {"fps": [VFPS]}, "audio": {"framerate": [AFPS]}}, path="", split="test",
+                    targets={"v_start_i_sec": 0.0, "offset_sec": 0.0})
+        items.append(transform(item))
+    batch = torch.utils.data.default_collate(items)
+    with torch.no_grad():
+        _, logits = model(batch["video"].float().to(device), batch["audio"].float().to(device))
+    return torch.softmax(logits.float(), -1).cpu().numpy()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("film"); ap.add_argument("--out", required=True)
@@ -60,15 +69,15 @@ def main():
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     model, tf, grid = load_model(a.model, device)
 
-    W0, H0, dur = probe(a.film)
-    if W0 >= H0:
-        h = SIDE; w = int(round(W0 * SIDE / H0 / 2)) * 2
+    info = probe(a.film)
+    aspect, dur = info["display_aspect"], info["dur"]
+    if aspect >= 1:
+        h = SIDE; w = int(round(aspect * SIDE / 2)) * 2
     else:
-        w = SIDE; h = int(round(H0 * SIDE / W0 / 2)) * 2
-    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(a.film), "-vn", "-ac", "1", "-ar", str(AFPS), "-f", "f32le", "-"],
-                         capture_output=True).stdout
-    audio = np.frombuffer(raw, np.float32).copy()
-    dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(a.film), "-an", "-vf", f"fps={VFPS},scale={w}:{h}",
+        w = SIDE; h = int(round(SIDE / aspect / 2)) * 2
+    audio = read_audio(a.film, AFPS, channels=1)[:, 0]
+    scale = display_scale(a.film, f"{w}:{h}")
+    dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(a.film), "-map", f"0:{info['video_index']}", "-vf", f"fps={VFPS},{scale}",
                             "-pix_fmt", "rgb24", "-f", "rawvideo", "-"], stdout=subprocess.PIPE)
     fsz = w * h * 3
     nwin_f = int(WIN * VFPS)
@@ -77,20 +86,14 @@ def main():
     out, pending = [], []
 
     def run(batch):
-        items = []
+        inputs = []
         for t0, clip in batch:
             a0 = int(round(t0 * AFPS))
-            aud = audio[a0:a0 + int(WIN * AFPS)]
-            if len(aud) < int(WIN * AFPS):
-                aud = np.pad(aud, (0, int(WIN * AFPS) - len(aud)))
-            item = dict(video=torch.from_numpy(clip).permute(0, 3, 1, 2).contiguous(), audio=torch.from_numpy(aud.copy()),
-                        meta={"video": {"fps": [VFPS]}, "audio": {"framerate": [AFPS]}}, path="", split="test",
-                        targets={"v_start_i_sec": 0.0, "offset_sec": 0.0})
-            items.append(tf(item))
-        b = torch.utils.data.default_collate(items)
-        with torch.no_grad():
-            _, logits = model(b["video"].float().to(device), b["audio"].float().to(device))
-        pr = torch.softmax(logits.float(), -1).cpu().numpy()
+            audio_window = audio[a0:a0 + int(WIN * AFPS)]
+            if len(audio_window) < int(WIN * AFPS):
+                audio_window = np.pad(audio_window, (0, int(WIN * AFPS) - len(audio_window)))
+            inputs.append((clip, audio_window))
+        pr = offset_distributions(model, tf, device, inputs)
         for (t0, _), p in zip(batch, pr):
             out.append(dict(t=t0, p=[round(float(x), 4) for x in p]))
             print(f"  {t0:7.1f}s  best {grid[int(np.argmax(p))]:+.1f}  p={float(np.max(p)):.2f}", flush=True)

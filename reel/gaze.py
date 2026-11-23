@@ -54,7 +54,7 @@ os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")     # single unsupport
 import numpy as np, cv2, torch
 import torch.nn.functional as F
 from PIL import Image, ImageDraw
-from common import probe, font, lut, tc, polyline
+from common import display_scale, probe, font, lut, tc, polyline
 
 HERE = pathlib.Path(__file__).resolve().parent
 MW, MH = 96, 54                      # stored map size
@@ -83,8 +83,9 @@ def load_model():
 def sampled_frames(path, fps, step, hw=False):
     """Every step-th frame of the constant-fps stream, picked before scaling, so only the frames we use get resized.
     hw: decode on the Mac's video hardware (same pixels, a tenth of the CPU time, about twice the wait)."""
-    cmd = ["ffmpeg", "-v", "error"] + (["-hwaccel", "videotoolbox"] if hw else []) + ["-i", str(path), "-an", "-vf",
-           f"fps={fps},select='not(mod(n\\,{step}))',scale={IW}:{IH}:flags=area", "-fps_mode", "passthrough",
+    scale = display_scale(path, f"{IW}:{IH}:flags=area")
+    cmd = ["ffmpeg", "-v", "error"] + (["-hwaccel", "videotoolbox"] if hw else []) + ["-i", str(path), "-map", f"0:{probe(path)['video_index']}", "-vf",
+           f"fps={fps},select='not(mod(n\\,{step}))',{scale}", "-fps_mode", "passthrough",
            "-pix_fmt", "rgb24", "-f", "rawvideo", "-"]
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=IW * IH * 3 * 16)
     n = IW * IH * 3
@@ -118,6 +119,94 @@ def forward(m, x, h, source="DHF1K"):
     f = getattr(m, "smoothing" + (s if m.ds_smoothing else ""))(f)
     f = F.interpolate(f, size=(MH, MW), mode="bilinear", align_corners=False)
     return torch.log_softmax(f.flatten(1), dim=1).view_as(f), h
+
+
+class PlaybackGaze:
+    """Advance on a fixed six-Hz film clock; endpoint-only inspections never update the recurrent state."""
+    def __init__(self):
+        self.model = load_model()
+        # Small, intermittent batches run on CPU to leave the GPU available to the audio reader.
+        torch.set_num_threads(2)
+        self.mean = torch.tensor([.485, .456, .406]).view(1, 3, 1, 1)
+        self.std = torch.tensor([.229, .224, .225]).view(1, 3, 1, 1)
+        self.hidden = self.last_map = self.last_pts = None
+
+    def infer(self, images, commit):
+        pixels = np.stack([np.asarray(image.resize((IW, IH), Image.Resampling.BOX)) for image in images])
+        x = (torch.from_numpy(pixels).permute(0, 3, 1, 2).float() / 255 - self.mean) / self.std
+        with torch.inference_mode():
+            # UNISAL replaces entries in its input state list, even for a one-frame inspection.
+            hidden = None if self.hidden is None else self.hidden.copy()
+            maps, hidden = forward(self.model, x, hidden)
+        densities = maps[:, 0].exp().numpy()
+        if commit:
+            self.hidden = hidden
+            self.last_map = densities[-1].copy()
+        return densities
+
+    @staticmethod
+    def point(density, image):
+        if all(a == b for a, b in image.getextrema()):
+            return None
+        y, x = np.unravel_index(density.argmax(), density.shape)
+        return [(float(x) + .5) / density.shape[1], (float(y) + .5) / density.shape[0]]
+
+    def read(self, start_s, end_s, current_frame, size, pages):
+        from attention import fixation_box
+        from common import sample_boundary
+        from sound_glimpses import sheet_picture
+        picture = sheet_picture(pages, size)
+        batch = []
+        samples = []
+        def flush():
+            densities = self.infer([image for _, _, image in batch], True)
+            for (tick, pts, image), density in zip(batch, densities):
+                samples.append({"tick": tick, "pts_us": pts, "point": self.point(density, image)})
+            self.last_pts = batch[-1][1]
+            batch.clear()
+
+        for tick in range(sample_boundary(start_s, 6), sample_boundary(end_s, 6)):
+            frame = picture(tick * 1_000_000 // 6)
+            if frame is None:
+                continue
+            pts, image = frame
+            batch.append((tick, pts, image))
+            if len(batch) >= CHUNK:
+                flush()
+        if batch:
+            flush()
+        result = {"status": "available", "model": "UNISAL/DHF1K", "rate_hz": 6, "samples": samples,
+                  "basis": "Predicted fixation from pictures shown by each tick. Audio and viewer eye positions are unknown."}
+        if current_frame is None:
+            return result
+        pts = result["pts_us"] = current_frame["pts_us"]
+        current = picture(pts)
+        if current is None or current[0] != pts:
+            raise ValueError("current picture missing from the delivered frame sheets")
+        image = current[1]
+        density = self.last_map if pts == self.last_pts else self.infer([image], False)[0]
+        point = self.point(density, image)
+        if point is None:
+            result["reason"] = "uniform picture"
+            return result
+        result.update(point=point, box=fixation_box(point))
+        return result
+
+
+def serve():
+    from contextlib import redirect_stdout
+    reader = None
+    for line in sys.stdin:
+        try:
+            with redirect_stdout(sys.stderr):
+                if reader is None:
+                    reader = PlaybackGaze()
+                result = reader.read(**json.loads(line))
+        except Exception as error:
+            result = {"status": "unavailable", "model": "UNISAL/DHF1K", "reason": str(error),
+                      "startup_failure": reader is None}
+            reader = None
+        print(json.dumps(result), flush=True)
 
 
 def predict(path, info, rate=6, device="auto", decode="auto"):
@@ -340,4 +429,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:] == ["--serve"]:
+        serve()
+    else:
+        main()

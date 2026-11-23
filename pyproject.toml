@@ -12,10 +12,12 @@ license = { text = "MIT" }
 dependencies = ["numpy", "opencv-python-headless", "pillow", "librosa", "scipy", "soundfile", "matplotlib"]
 
 [project.optional-dependencies]
+mcp = ["mcp>=1.20,<2"]
 separate = ["demucs", "torch", "torchaudio"]
 crowd = ["audio-separator"]
-mlx = ["mlx-whisper"]
+mlx = ["mlx-whisper", "faster-whisper"]
 speech = ["faster-whisper"]
+hearing = ["mlx-vlm==0.8.0"]
 ocr = ["ocrmac"]
 gaze = ["torch"]
 tags = ["torch", "transformers>=4.40,<4.46"]

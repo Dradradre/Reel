@@ -1,0 +1,3924 @@
+{
+  "protocol": "At the usual first-view pace a model receives a maximum of two seconds per turn. Visual or acoustic changes can shorten these further. A captioner can hear a released two-to-ten-second phrase ending during a short turn even if the optional primary reader cannot name anything from that turn in isolation. Test preserving that phrase in sound_in_context with its own bounds and the time the current turn began. Keep current-turn-only sound_descriptions unchanged. No new sound labels, no new waveform analysis. Select the four shortest recordings among the 40 additional AVCaps films by frame count divided by native audio rate (tie by ID) so both independent readers can see each film in full at ordinary cadence. Present existing/full versus contextual report in separate fresh GPT sessions in alternating submission order (the two observers may run concurrently) at the default Reel pace, one observation per condition. No raw WAV or human caption given to GPT. Primary criterion for the interface is that valid earlier-context readings remain accessible with their original bounds whenever produced, without being marked current, suppressing silence and retaining the primary reader. Describe downstream accuracy on four films only as exploratory.\n",
+  "source": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+  "human_reference_sha256": "162185e4adefaac50d0be361550f3477650bbdf5c24b0b8a04fdd338bd8ad126",
+  "reader": "Local signed-in gpt-6.1-terra, separate sessions, pictures and text. CoNeTTE with its default Clotho task, AST, YAMNet and local speech estimates in all conditions, optional Qwen3-Omni unavailable. Same original recordings, pictures, measurements and viewing times per film. The with condition also surfaces the just-completed cross-boundary waveform caption and an explicit note that a sound in that window may have stopped. Raw audio not attached to GPT.",
+  "rules": "Only an available waveform caption ending during the current release qualifies. The current waveform must be nonzero. Prefer a wholly in-turn caption. Otherwise preserve any primary contextual reading or describe the last completed crossing window; in a tie use the shorter one. current_start_s divides already heard material from the current turn. No new classifier or source categories.",
+  "counts": {
+    "turns": 137,
+    "current_only_caption": 23,
+    "crossing_caption": 104
+  },
+  "films": [
+    {
+      "id": "4609275864",
+      "sha256": "06095e55d8b160262b5a7f644aedfeae686a99314145618bdda60c5133081b7e",
+      "turns": [
+        {
+          "turn": 1,
+          "start_s": 0.0,
+          "end_s": 0.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "099ac14e0a6c5429479c94fceb950895a902396d2738b9ebde2a6e9693b7fa9e"
+        },
+        {
+          "turn": 2,
+          "start_s": 0.8,
+          "end_s": 1.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "45aecb063eec095b7f7abb00a47ae808d0871d0c8c3e3e07c517e8372c9f3d4a"
+        },
+        {
+          "turn": 3,
+          "start_s": 1.3,
+          "end_s": 3.3,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "b5386643eb701a3a0790b968968b2f2dee91581215fe99832c297ec90cd6e002"
+        },
+        {
+          "turn": 4,
+          "start_s": 3.3,
+          "end_s": 5.3,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "9e68334cb93b3e0544e8c4b8533d94b046688d1628e8b153e38e5ba100ec0e06"
+        },
+        {
+          "turn": 5,
+          "start_s": 5.3,
+          "end_s": 7.3,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "083ba329042206cc847151329341886abc02840886c6078b340cb24643cb192c"
+        },
+        {
+          "turn": 6,
+          "start_s": 7.3,
+          "end_s": 9.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 9.1,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a group of children are playing and talking to each other"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a group of children are playing and talking to each other"
+                }
+              ],
+              "current_start_s": 7.3
+            }
+          ],
+          "combined_image_sha256": "bf306d76661903c0c5a6f9459d166e3b78237a7ca1a60441362f52b5a1a2449c"
+        },
+        {
+          "turn": 7,
+          "start_s": 9.1,
+          "end_s": 9.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 7.6,
+              "end_s": 9.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a group of people are talking and laughing with each other"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a group of people are talking and laughing with each other"
+                }
+              ],
+              "current_start_s": 9.1
+            }
+          ],
+          "combined_image_sha256": "173b8fdf2fb6868acecf58273ff6946572113dacab6312276c786d9031320bf0"
+        },
+        {
+          "turn": 8,
+          "start_s": 9.6,
+          "end_s": 10.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.1,
+              "end_s": 10.1,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "children and adults are talking and laughing in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "children and adults are talking and laughing in the background"
+                }
+              ],
+              "current_start_s": 9.6
+            }
+          ],
+          "combined_image_sha256": "222543117ffc38e6f5e9f33c55a567f8fa1da9d12d95c502b36b0eace3c523d4"
+        },
+        {
+          "turn": 9,
+          "start_s": 10.1,
+          "end_s": 10.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.6,
+              "end_s": 10.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "children and adults are talking to each other"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "children and adults are talking to each other"
+                }
+              ],
+              "current_start_s": 10.1
+            }
+          ],
+          "combined_image_sha256": "d8d480feb7033c2467643cfe3a0726fd382bff1270f26b32f220522712860490"
+        },
+        {
+          "turn": 10,
+          "start_s": 10.6,
+          "end_s": 12.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "d689a87ccc1fe67d68aebde49c19a741bb9810471d6fb376af003e494b9d6956"
+        },
+        {
+          "turn": 11,
+          "start_s": 12.6,
+          "end_s": 14.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "9d51632579e51625e5af31fbef1482d7cc10be44c00839119a306df2b53c5600"
+        },
+        {
+          "turn": 12,
+          "start_s": 14.6,
+          "end_s": 16.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "afe31b8987d1d4ef332d3cdab0dd58792e9ef9343975ab4903ae1071f7a44488"
+        },
+        {
+          "turn": 13,
+          "start_s": 16.6,
+          "end_s": 18.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "6248856f734915928cc04d6a84c5f947aab59caa574e0d3322a9846a34c28070"
+        },
+        {
+          "turn": 14,
+          "start_s": 18.6,
+          "end_s": 20.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "7b2e6baea45d6ca36060cd001f7b5ed16d2b43111adc85d98211e27cd0027c07"
+        },
+        {
+          "turn": 15,
+          "start_s": 20.6,
+          "end_s": 22.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "afc2145d0840316916f73773137099c961915f3ed25e0d513bbcf36fa7e926fe"
+        },
+        {
+          "turn": 16,
+          "start_s": 22.6,
+          "end_s": 24.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "da28efaaf2e54256dbb9108c1cacbd03581e8325209ab181cab4142f4425e655"
+        },
+        {
+          "turn": 17,
+          "start_s": 24.6,
+          "end_s": 24.9846485260771,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 14.984648526077098,
+              "end_s": 24.9846485260771,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a group of people are talking and laughing with each other"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a group of people are talking and laughing with each other"
+                }
+              ],
+              "current_start_s": 24.6
+            }
+          ],
+          "combined_image_sha256": "af9e34eeb2c497a74a0fadc94d4b3ae94349e78790702806de2eea2a541e6f1b"
+        }
+      ],
+      "readers": {
+        "without": {
+          "caption": "Two babies crawl and play near a doorway while a woman watches and other young children move around them.",
+          "turns": 17,
+          "seen": "Two babies move around a doorway while a seated woman watches and other young children pass nearby.",
+          "heard": "The audio readings suggest people talking and laughing in the background, though I could not hear the recording directly."
+        },
+        "with": {
+          "caption": "Two babies move around a doorway while a seated woman watches and other young children gather nearby.",
+          "turns": 17,
+          "seen": "Two babies move around a doorway as a seated woman watches and other young children gather nearby.",
+          "heard": "The audio readings suggested people talking and laughing, though I could not hear the recording directly."
+        }
+      }
+    },
+    {
+      "id": "4876265566",
+      "sha256": "301fe9bcc453ea08aa16a875f3c1711b1d708191a6273aa9715a16892c4b4e72",
+      "turns": [
+        {
+          "turn": 1,
+          "start_s": 0.0,
+          "end_s": 0.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "0a95f76f8aecc095e3c9e36d2e513d3a1c3ef6d360ccc54d99bea593d0b61bc1"
+        },
+        {
+          "turn": 2,
+          "start_s": 0.6,
+          "end_s": 1.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "88b4c9ca4e9dfb068ac7985b1b174ddae1f402fc754cbd22221f08e6bed7afd8"
+        },
+        {
+          "turn": 3,
+          "start_s": 1.7,
+          "end_s": 2.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.2,
+              "end_s": 2.2,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a man is speaking and then a door is opened and closed"
+                }
+              ],
+              "current_start_s": 1.7
+            }
+          ],
+          "combined_image_sha256": "d568c680323691592f80fdc3223a762968c249972049e67f4e202a50bafcb372"
+        },
+        {
+          "turn": 4,
+          "start_s": 2.2,
+          "end_s": 2.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 2.7,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a woman is speaking while a dog barks in the background"
+                }
+              ],
+              "current_start_s": 2.2
+            }
+          ],
+          "combined_image_sha256": "2626954d7ed36d96f5e8e669f06637164d5f447d34aaf09759dc91031aa2d9e7"
+        },
+        {
+          "turn": 5,
+          "start_s": 2.7,
+          "end_s": 3.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 3.2,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a woman is speaking while a dog barks in the background"
+                }
+              ],
+              "current_start_s": 2.7
+            }
+          ],
+          "combined_image_sha256": "72107283dd6daaad6bf6a8f124e65da636c5916ef0d548e0af084ac2660126b4"
+        },
+        {
+          "turn": 6,
+          "start_s": 3.2,
+          "end_s": 3.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 3.7,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a woman is talking and then a man is speaking"
+                }
+              ],
+              "current_start_s": 3.2
+            }
+          ],
+          "combined_image_sha256": "fa360001283be5e9804e6abeaee0689667f6a0d288e05b8761ccc8949224e3b2"
+        },
+        {
+          "turn": 7,
+          "start_s": 3.7,
+          "end_s": 4.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 2.2,
+              "end_s": 4.2,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "dishes are being moved around while people are talking in the background"
+                }
+              ],
+              "current_start_s": 3.7
+            }
+          ],
+          "combined_image_sha256": "aaabd478eb64976684badc2d5357a8a18dbcff999735c8df61062c2133e72cd2"
+        },
+        {
+          "turn": 8,
+          "start_s": 4.2,
+          "end_s": 5.0,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 5.0,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "people are talking and moving around in a room with dishes clanging in the background"
+                }
+              ],
+              "current_start_s": 4.2
+            }
+          ],
+          "combined_image_sha256": "4fee1668c22ad7500ccf6c0369ace6f89320a242d969dd795571d7f4d15224ed"
+        },
+        {
+          "turn": 9,
+          "start_s": 5.0,
+          "end_s": 6.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.3,
+              "end_s": 6.3,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a man is speaking while a door is being opened and closed"
+                }
+              ],
+              "current_start_s": 5.0
+            }
+          ],
+          "combined_image_sha256": "f6b151cecfb48559e3ddaf07356157b4a8bdf63af68331473343c1b9be73627b"
+        },
+        {
+          "turn": 10,
+          "start_s": 6.3,
+          "end_s": 6.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 6.8,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a woman is speaking while a door is being opened and closed"
+                }
+              ],
+              "current_start_s": 6.3
+            }
+          ],
+          "combined_image_sha256": "95f1425d93def3d7aba1225f3a65763958ebab0bec7646364315c330345c282b"
+        },
+        {
+          "turn": 11,
+          "start_s": 6.8,
+          "end_s": 7.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 7.3,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a man is speaking while a door is being opened and closed"
+                }
+              ],
+              "current_start_s": 6.8
+            }
+          ],
+          "combined_image_sha256": "8244d82bb872e2b5328ed59911e2c43ed5439d8140c00be1837c819e76187a44"
+        },
+        {
+          "turn": 12,
+          "start_s": 7.3,
+          "end_s": 7.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 7.8,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a man is speaking while a door is being opened and closed"
+                }
+              ],
+              "current_start_s": 7.3
+            }
+          ],
+          "combined_image_sha256": "3bba1cc74a1afe612adc583236522865422c43747e6ce22570a0a56a9ece9936"
+        },
+        {
+          "turn": 13,
+          "start_s": 7.8,
+          "end_s": 8.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 6.3,
+              "end_s": 8.3,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a man is speaking about something in a room"
+                }
+              ],
+              "current_start_s": 7.8
+            }
+          ],
+          "combined_image_sha256": "deb200e7d5b9ce276f6e8570c49913973323f71ec8fb53b39f4dc35577d381fe"
+        },
+        {
+          "turn": 14,
+          "start_s": 8.3,
+          "end_s": 9.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 9.1,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a man speaks and then a door opens and closes"
+                }
+              ],
+              "current_start_s": 8.3
+            }
+          ],
+          "combined_image_sha256": "b9a29733796e6756e1aede6071603d533903ccfb6d34cd6ec5d040e000fec725"
+        },
+        {
+          "turn": 15,
+          "start_s": 9.1,
+          "end_s": 9.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 9.6,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a man speaks and then a door opens and closes"
+                }
+              ],
+              "current_start_s": 9.1
+            }
+          ],
+          "combined_image_sha256": "52636ec922a58933a3b5732f9513314c13711c73b26868fea45f23141dc0c767"
+        },
+        {
+          "turn": 16,
+          "start_s": 9.6,
+          "end_s": 10.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.1,
+              "end_s": 10.1,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while dishes are being moved around in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while dishes are being moved around in the background"
+                }
+              ],
+              "current_start_s": 9.6
+            }
+          ],
+          "combined_image_sha256": "b9b9294b3894645e0fd360884ef5aa503ec768ac55c350a0c52beeec74638c7f"
+        },
+        {
+          "turn": 17,
+          "start_s": 10.1,
+          "end_s": 11.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 9.3,
+              "end_s": 11.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is breathing quietly in the background while a fan is blowing"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is breathing quietly in the background while a fan is blowing"
+                }
+              ],
+              "current_start_s": 10.1
+            }
+          ],
+          "combined_image_sha256": "2e20055463dfddf5e0b33f192cea6a2ab906acfdd6271026883fb4d14a6d3b7b"
+        },
+        {
+          "turn": 18,
+          "start_s": 11.3,
+          "end_s": 11.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 1.8,
+              "end_s": 11.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while dishes are being moved around in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while dishes are being moved around in the background"
+                }
+              ],
+              "current_start_s": 11.3
+            }
+          ],
+          "combined_image_sha256": "0d907e105def1dad614cbd1bdca64f1ab2bd5be9af14a42a026946fbffe43678"
+        },
+        {
+          "turn": 19,
+          "start_s": 11.8,
+          "end_s": 12.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 2.3,
+              "end_s": 12.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man speaks and then a door opens and closes"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man speaks and then a door opens and closes"
+                }
+              ],
+              "current_start_s": 11.8
+            }
+          ],
+          "combined_image_sha256": "13a9b76e4c4ece6b5ace9b83ac62e1fcbb4eea87c0c4da47159b8efc1bd96ea4"
+        },
+        {
+          "turn": 20,
+          "start_s": 12.3,
+          "end_s": 12.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 2.8,
+              "end_s": 12.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while dishes are being moved around in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while dishes are being moved around in the background"
+                }
+              ],
+              "current_start_s": 12.3
+            }
+          ],
+          "combined_image_sha256": "dc5dc5c85bc27200f2081f0dd626a82151280c40494dcff6e9f5e83107ed4d2b"
+        },
+        {
+          "turn": 21,
+          "start_s": 12.8,
+          "end_s": 13.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 11.3,
+              "end_s": 13.3,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a woman coughs five times and then speaks again"
+                }
+              ],
+              "current_start_s": 12.8
+            }
+          ],
+          "combined_image_sha256": "820f23b1d37e096592af0cdfbf51354705bd61a4d06138628312d58ed304bc43"
+        },
+        {
+          "turn": 22,
+          "start_s": 13.3,
+          "end_s": 13.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 3.8,
+              "end_s": 13.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a woman is speaking and then someone is coughing"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a woman is speaking and then someone is coughing"
+                }
+              ],
+              "current_start_s": 13.3
+            }
+          ],
+          "combined_image_sha256": "a5c7b5089f026bfa013e46526507f0de5b64dfcc9ce324e4e21e4445f79a35b2"
+        },
+        {
+          "turn": 23,
+          "start_s": 13.8,
+          "end_s": 14.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.3,
+              "end_s": 14.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking and then a door is opened and closed"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking and then a door is opened and closed"
+                }
+              ],
+              "current_start_s": 13.8
+            }
+          ],
+          "combined_image_sha256": "506f8485f6b24bbe7ac87104dc0f9b4847861b31df5d1233cf4a0523469fe314"
+        },
+        {
+          "turn": 24,
+          "start_s": 14.3,
+          "end_s": 14.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.8,
+              "end_s": 14.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking and then a woman coughs"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking and then a woman coughs"
+                }
+              ],
+              "current_start_s": 14.3
+            }
+          ],
+          "combined_image_sha256": "bed1e13361d3891f18215cf73ccecafe56e874f65ac76f15505dd8045a1d6545"
+        },
+        {
+          "turn": 25,
+          "start_s": 14.8,
+          "end_s": 15.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 13.3,
+              "end_s": 15.3,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person moves around in a room with their mouth"
+                }
+              ],
+              "current_start_s": 14.8
+            }
+          ],
+          "combined_image_sha256": "cf45957e2ed33d2da5934df9aa401f672371aabd8370e82b0936be148a7b7d6a"
+        },
+        {
+          "turn": 26,
+          "start_s": 15.3,
+          "end_s": 15.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 5.8,
+              "end_s": 15.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a woman is speaking and someone is breathing in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a woman is speaking and someone is breathing in the background"
+                }
+              ],
+              "current_start_s": 15.3
+            }
+          ],
+          "combined_image_sha256": "e34ec4c5bd46c12137245c2a23fad6d09dc74e518ab447a43089369031458a6c"
+        },
+        {
+          "turn": 27,
+          "start_s": 15.8,
+          "end_s": 16.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 6.3,
+              "end_s": 16.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking and then he is coughing"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking and then he is coughing"
+                }
+              ],
+              "current_start_s": 15.8
+            }
+          ],
+          "combined_image_sha256": "780a0931e0b96e91c1801e44881822aad13b7fd6d5dd10df732e2acfd925ee5b"
+        },
+        {
+          "turn": 28,
+          "start_s": 16.3,
+          "end_s": 18.3,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "25245bb8146a1d114c08a0ffd23538a90a0a3d31a34e582523ba22cbb9f6684d"
+        },
+        {
+          "turn": 29,
+          "start_s": 18.3,
+          "end_s": 19.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 9.6,
+              "end_s": 19.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a woman coughs sniffs then sneezes twice"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a woman coughs sniffs then sneezes twice"
+                }
+              ],
+              "current_start_s": 18.3
+            }
+          ],
+          "combined_image_sha256": "d2583d5dcac954f8df72d893f39323667d59028aa397aadf24507f025c449652"
+        },
+        {
+          "turn": 30,
+          "start_s": 19.6,
+          "end_s": 20.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 10.1,
+              "end_s": 20.1,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person is whispering and moving around in a room"
+                }
+              ],
+              "current_start_s": 19.6
+            }
+          ],
+          "combined_image_sha256": "559520ca14fcbf58a8b8da22969cc000ab2eabeca66bfe8bd200151ac2f529e6"
+        },
+        {
+          "turn": 31,
+          "start_s": 20.1,
+          "end_s": 20.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 18.6,
+              "end_s": 20.6,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a zipper is being opened and closed over and over again"
+                }
+              ],
+              "current_start_s": 20.1
+            }
+          ],
+          "combined_image_sha256": "bbd556caa0720e8200e37e6118ca901690936810b85249d658577dbd0ffe65ef"
+        },
+        {
+          "turn": 32,
+          "start_s": 20.6,
+          "end_s": 21.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 11.3,
+              "end_s": 21.3,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person is writing on a piece of wood with a marker on a hard surface"
+                }
+              ],
+              "current_start_s": 20.6
+            }
+          ],
+          "combined_image_sha256": "f81f34806d4706ee303fae6ae41c26cb7aa65e70899ab305740ef44a89fd04d1"
+        },
+        {
+          "turn": 33,
+          "start_s": 21.3,
+          "end_s": 22.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 12.4,
+              "end_s": 22.4,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person is whispering and moving around in a room"
+                }
+              ],
+              "current_start_s": 21.3
+            }
+          ],
+          "combined_image_sha256": "ca73ccc2ffa5e71757666c35a973b78d4b3605374c850f24f1485635679f74fc"
+        },
+        {
+          "turn": 34,
+          "start_s": 22.4,
+          "end_s": 22.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 20.9,
+              "end_s": 22.9,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "someone is opening and closing a locker room with a squeaking noise in the background"
+                }
+              ],
+              "current_start_s": 22.4
+            }
+          ],
+          "combined_image_sha256": "3871f143dfb28a95ac8cd62c1ba242249f186b8d32005f91a3885b2ac270703e"
+        },
+        {
+          "turn": 35,
+          "start_s": 22.9,
+          "end_s": 24.9,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "ed16743ddc997cb88402c7e7e69b369da9d863d37c2f423c902d57b5464bf9cc"
+        },
+        {
+          "turn": 36,
+          "start_s": 24.9,
+          "end_s": 26.9,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "84f8d55ccf0515c7e8c8acb7a2d3dd70ee9b25060a2d30e08a740cb3b2d76fe4"
+        },
+        {
+          "turn": 37,
+          "start_s": 26.9,
+          "end_s": 27.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 17.4,
+              "end_s": 27.4,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "someone is opening and closing a squeaky door"
+                }
+              ],
+              "current_start_s": 26.9
+            }
+          ],
+          "combined_image_sha256": "027f6368b976cb98a7ab9e6c3caa8f06c238eae6e93d072bd257da0d83ff42dc"
+        },
+        {
+          "turn": 38,
+          "start_s": 27.4,
+          "end_s": 27.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 17.9,
+              "end_s": 27.9,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface and dragging objects across the floor"
+                }
+              ],
+              "current_start_s": 27.4
+            }
+          ],
+          "combined_image_sha256": "7bd1617c026dcea33e7e196c23f1106d080849e06ffec6e2c5670118e297642f"
+        },
+        {
+          "turn": 39,
+          "start_s": 27.9,
+          "end_s": 28.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 18.4,
+              "end_s": 28.4,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface and a door opens and closes"
+                }
+              ],
+              "current_start_s": 27.9
+            }
+          ],
+          "combined_image_sha256": "d2fbb1ca5bcb63aceaee7c812b7a2c1027fe3b687d9e15ca3085bfc138b3a0a8"
+        },
+        {
+          "turn": 40,
+          "start_s": 28.4,
+          "end_s": 28.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 26.9,
+              "end_s": 28.9,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a woman is talking and walking on a hard surface while people are speaking in the background"
+                }
+              ],
+              "current_start_s": 28.4
+            }
+          ],
+          "combined_image_sha256": "1517728cd4ac86bc43463fe3157eca792a76d0a8d4cac64df60e040efc14962e"
+        },
+        {
+          "turn": 41,
+          "start_s": 28.9,
+          "end_s": 29.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 19.4,
+              "end_s": 29.4,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a woman is speaking while a door opens and closes"
+                }
+              ],
+              "current_start_s": 28.9
+            }
+          ],
+          "combined_image_sha256": "bf10556259c1a57cf5b58c9caf3a944ef104893f260367d1bcc5ecf6c51f6c94"
+        },
+        {
+          "turn": 42,
+          "start_s": 29.4,
+          "end_s": 29.791179138321997,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 19.791179138321997,
+              "end_s": 29.791179138321997,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface and people are talking in the background"
+                }
+              ],
+              "current_start_s": 29.4
+            }
+          ],
+          "combined_image_sha256": "b4cc37b7dcc67803330d40464f43f4c4669104e2ae8c5a948c4b8978be3b426b"
+        }
+      ],
+      "readers": {
+        "without": {
+          "caption": "A gray kitten and a black kitten chase and wrestle with each other across a living room rug and hardwood floor.",
+          "turns": 42,
+          "seen": "A gray kitten and a black kitten chase and wrestle across a living room floor and rug.",
+          "heard": "I could not reliably tell what sounds were present."
+        },
+        "with": {
+          "caption": "A gray kitten and a black kitten chase and wrestle with each other across a living room rug while a dog watches nearby.",
+          "turns": 42,
+          "seen": "A gray kitten and a black kitten chase and wrestle on a living room rug while a dog watches nearby.",
+          "heard": "I could not directly hear the audio, though the speech reader identified a few words."
+        }
+      }
+    },
+    {
+      "id": "4508384185",
+      "sha256": "7fbffa21846a12294bc4edd20acba0cce14467490c727a6786bf90f5c3bd37c0",
+      "turns": [
+        {
+          "turn": 1,
+          "start_s": 0.0,
+          "end_s": 0.5,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "bfe8f3bbfa049e08fec4b6080f014651531ff30a2b3f50d3b341715da5adbeb2"
+        },
+        {
+          "turn": 2,
+          "start_s": 0.5,
+          "end_s": 1.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "0feb0a6993d2bbd6f3acdb77aa973de71f75cbfa453d3add4d9d7ac9305b0caa"
+        },
+        {
+          "turn": 3,
+          "start_s": 1.4,
+          "end_s": 1.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "9873b0d6339a272cbf6d5e43e823796fa3f46455af5a57cb10a1b82159e36c9c"
+        },
+        {
+          "turn": 4,
+          "start_s": 1.9,
+          "end_s": 2.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.7,
+              "end_s": 2.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is shuffling cards out of their hands"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is shuffling around in a small room"
+                }
+              ],
+              "current_start_s": 1.9
+            }
+          ],
+          "combined_image_sha256": "e946797c532b5950b97ef131d4ca5772d5d79aad61fdcc1c3368d03df0bb49b0"
+        },
+        {
+          "turn": 5,
+          "start_s": 2.7,
+          "end_s": 3.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 3.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is laughing and making a lot of noises"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is laughing with their hands in the background"
+                }
+              ],
+              "current_start_s": 2.7
+            }
+          ],
+          "combined_image_sha256": "2ae1b7956c0c9c232c0d8c3df729db13d8e1f6c05d18bbf6b60525290908a75e"
+        },
+        {
+          "turn": 6,
+          "start_s": 3.6,
+          "end_s": 5.6,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "22682fb65aa1897862fed64e8f6b00a45401f3df377c8d3adacf2b0d64a72f70"
+        },
+        {
+          "turn": 7,
+          "start_s": 5.6,
+          "end_s": 6.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 6.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and cooing while another person is breathing in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is laughing and cooing while another person is talking in the background"
+                }
+              ],
+              "current_start_s": 5.6
+            }
+          ],
+          "combined_image_sha256": "76868c7e4e469f5e365fde6bf899b669827a83800e24f9abe38ac7eede6a3314"
+        },
+        {
+          "turn": 8,
+          "start_s": 6.2,
+          "end_s": 8.2,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "e3e6bd6bfb553e66fc54bc0557e767f236aaf6824de2e916f0f33a9ad07d7397"
+        },
+        {
+          "turn": 9,
+          "start_s": 8.2,
+          "end_s": 8.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 8.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and cooing while another person is coughing in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is laughing and cooing while another person is talking in the background"
+                }
+              ],
+              "current_start_s": 8.2
+            }
+          ],
+          "combined_image_sha256": "4ce765ad442ac1a30eb5740bfb1530e0dc9e30ca5688c3ce57581b4230e7e696"
+        },
+        {
+          "turn": 10,
+          "start_s": 8.7,
+          "end_s": 10.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 8.6,
+              "end_s": 10.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is crying and laughing with a child"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is crying and laughing while a person is speaking"
+                }
+              ],
+              "current_start_s": 8.7
+            }
+          ],
+          "combined_image_sha256": "02583b4f3adfa47bdf1d0f2c16c042b9a13a9b7692022ec6cb5df19cb53e2723"
+        },
+        {
+          "turn": 11,
+          "start_s": 10.6,
+          "end_s": 11.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 1.1,
+              "end_s": 11.1,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and a person is giggling"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is laughing and cooing while a person is giggling"
+                }
+              ],
+              "current_start_s": 10.6
+            }
+          ],
+          "combined_image_sha256": "60962aaab6e6261bde94a1b24fecea0585290f8058b9cb2daf297720afc5fe37"
+        },
+        {
+          "turn": 12,
+          "start_s": 11.1,
+          "end_s": 11.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 1.6,
+              "end_s": 11.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and making a lot of noises"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is laughing and making a lot of noises"
+                }
+              ],
+              "current_start_s": 11.1
+            }
+          ],
+          "combined_image_sha256": "16bb0648de144dfe45f67757b6680a0b2831c0ce5b2debf73f6fe5e6c2986e3f"
+        },
+        {
+          "turn": 13,
+          "start_s": 11.6,
+          "end_s": 12.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 2.1,
+              "end_s": 12.1,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and making a lot of noises"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is laughing and cooing while a person is talking in the background"
+                }
+              ],
+              "current_start_s": 11.6
+            }
+          ],
+          "combined_image_sha256": "29dd2e830f5ecccc5de4886f15b19af0c5267971e1edef5464641e723ae6b67d"
+        },
+        {
+          "turn": 14,
+          "start_s": 12.1,
+          "end_s": 13.5,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 11.5,
+              "end_s": 13.5,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is crying and laughing with other sounds in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is crying and laughing with other noises in the background"
+                }
+              ],
+              "current_start_s": 12.1
+            }
+          ],
+          "combined_image_sha256": "729b4fc2ba8056ff9a26c1bb2ac6e9acfd2d1414dc43cb8330b602cb9384626d"
+        },
+        {
+          "turn": 15,
+          "start_s": 13.5,
+          "end_s": 14.0,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.0,
+              "end_s": 14.0,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and cooing while a person is talking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is laughing and cooing while a child is speaking in the background"
+                }
+              ],
+              "current_start_s": 13.5
+            }
+          ],
+          "combined_image_sha256": "8a9939d3fb803523f5ad02b2c15ff195c043d823e543ae3a86124692cca2f851"
+        },
+        {
+          "turn": 16,
+          "start_s": 14.0,
+          "end_s": 14.5,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.5,
+              "end_s": 14.5,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is crying and laughing with other people in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is laughing and cooing while a person is coughing in the background"
+                }
+              ],
+              "current_start_s": 14.0
+            }
+          ],
+          "combined_image_sha256": "83fd033e5700afc7d8e1dae3f5f411010d9e234dd45112945d5975fc40041485"
+        },
+        {
+          "turn": 17,
+          "start_s": 14.5,
+          "end_s": 15.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 5.2,
+              "end_s": 15.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and cooing while a person is talking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is crying and laughing while a child is speaking in the background"
+                }
+              ],
+              "current_start_s": 14.5
+            }
+          ],
+          "combined_image_sha256": "014ee726001e1a5ceccab3305b2cf9e369baf1056353ef17aca0b2c83aa385a0"
+        },
+        {
+          "turn": 18,
+          "start_s": 15.2,
+          "end_s": 17.2,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "584ccfab58ab40942e96d8f53e8edc3c15eedb3e2de0446076dbc609dfef5dee"
+        },
+        {
+          "turn": 19,
+          "start_s": 17.2,
+          "end_s": 17.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 7.7,
+              "end_s": 17.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is crying and laughing with a person in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is crying and laughing with a person in the background"
+                }
+              ],
+              "current_start_s": 17.2
+            }
+          ],
+          "combined_image_sha256": "d548060788eecc2448094fbe7115f380291f27b407532c0a994bf595098023a2"
+        },
+        {
+          "turn": 20,
+          "start_s": 17.7,
+          "end_s": 19.7,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "7f6289e369b1d39b90d157426cafc82e76e5d6e7b7adfefcd96b593817eabdeb"
+        },
+        {
+          "turn": 21,
+          "start_s": 19.7,
+          "end_s": 21.5,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 11.5,
+              "end_s": 21.5,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is crying and making noises in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is crying and laughing while a woman is speaking in the background"
+                }
+              ],
+              "current_start_s": 19.7
+            }
+          ],
+          "combined_image_sha256": "99a8a96e0551cb66e2c6f761a4ed11e48864fb0d88271be2dc524d65915d8e09"
+        },
+        {
+          "turn": 22,
+          "start_s": 21.5,
+          "end_s": 22.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 20.3,
+              "end_s": 22.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is struggling to start up and down a long flight of stairs"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "someone is opening and closing a plastic bottle"
+                }
+              ],
+              "current_start_s": 21.5
+            }
+          ],
+          "combined_image_sha256": "3dfd5a3ee0fe1d64b6b58b264bd9058fcbaeef8eda53441d379334adc22d4cea"
+        },
+        {
+          "turn": 23,
+          "start_s": 22.3,
+          "end_s": 22.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 12.8,
+              "end_s": 22.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is crying and making noises in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is crying and making noises in the background"
+                }
+              ],
+              "current_start_s": 22.3
+            }
+          ],
+          "combined_image_sha256": "9e662e63ebb49e3eee397d4219775efd8ed1b6d88e7c639ce01e7e1a50d08092"
+        },
+        {
+          "turn": 24,
+          "start_s": 22.8,
+          "end_s": 23.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 13.8,
+              "end_s": 23.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a baby is laughing and making noises in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a baby is crying and a man is speaking"
+                }
+              ],
+              "current_start_s": 22.8
+            }
+          ],
+          "combined_image_sha256": "683b950b65daf83c50aba24b574845a98965b2efdf0fa5449b52c76514581cad"
+        },
+        {
+          "turn": 25,
+          "start_s": 23.8,
+          "end_s": 24.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 22.3,
+              "end_s": 24.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is laughing and making loud noises with a dog in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a dog is growling and laughing with a person in the background"
+                }
+              ],
+              "current_start_s": 23.8
+            }
+          ],
+          "combined_image_sha256": "42e5fc04ab9140e3add6b25715d39f9fa535059ec79203a58711a7db28738ee0"
+        },
+        {
+          "turn": 26,
+          "start_s": 24.3,
+          "end_s": 24.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 14.8,
+              "end_s": 24.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a dog is barking and a person is talking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a dog is barking and a person is talking in the background"
+                }
+              ],
+              "current_start_s": 24.3
+            }
+          ],
+          "combined_image_sha256": "88d8e2ad0f53eccaa3d45ca2e19da6e5db1fce2837d3103c00f716d788607aca"
+        },
+        {
+          "turn": 27,
+          "start_s": 24.8,
+          "end_s": 25.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 15.3,
+              "end_s": 25.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is laughing and talking while a dog is barking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a dog is growling and yelping in the background while a woman is speaking"
+                }
+              ],
+              "current_start_s": 24.8
+            }
+          ],
+          "combined_image_sha256": "da9d5311a82d9c3bb0bfe2f575b367e226c8754602d3eb11f7c60dfced340234"
+        },
+        {
+          "turn": 28,
+          "start_s": 25.3,
+          "end_s": 25.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 15.9,
+              "end_s": 25.9,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is snoring while a dog is barking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is snoring while a dog is barking in the background"
+                }
+              ],
+              "current_start_s": 25.3
+            }
+          ],
+          "combined_image_sha256": "ed832c5c6ce1ee8804eefcd1ec4260ae09fea5e7791f253ff75c09f55e14e55a"
+        },
+        {
+          "turn": 29,
+          "start_s": 25.9,
+          "end_s": 26.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 24.4,
+              "end_s": 26.4,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a dog is growling and making loud noises in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a dog is barking and growling at a high pitch"
+                }
+              ],
+              "current_start_s": 25.9
+            }
+          ],
+          "combined_image_sha256": "2029f28fabf35096bfa246e4e93714a53e197e490a2bfbcdb9597954ea20a19d"
+        },
+        {
+          "turn": 30,
+          "start_s": 26.4,
+          "end_s": 26.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 16.9,
+              "end_s": 26.9,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a dog is growling and snoring while people are talking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a dog is growling and snoring while people are talking in the background"
+                }
+              ],
+              "current_start_s": 26.4
+            }
+          ],
+          "combined_image_sha256": "08ac4e3f6bdf132a54ca0100c87b370f66271d92ae5bd1dfe13f70f1937555b8"
+        },
+        {
+          "turn": 31,
+          "start_s": 26.9,
+          "end_s": 28.9,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "073b8541969390aaf2abb4702a62760763344bc0d380c7378de3c1c440632095"
+        },
+        {
+          "turn": 32,
+          "start_s": 28.9,
+          "end_s": 29.5,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 19.5,
+              "end_s": 29.5,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is laughing and making noises with their mouth open"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is laughing and making noises with their mouth open"
+                }
+              ],
+              "current_start_s": 28.9
+            }
+          ],
+          "combined_image_sha256": "f1e98d59e518aba261c4b1cf51b751e65910f54b1242896822471babc129b691"
+        },
+        {
+          "turn": 33,
+          "start_s": 29.5,
+          "end_s": 30.0,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 20.0,
+              "end_s": 30.0,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is making a sound with their mouth open"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is trying to start up a balloon"
+                }
+              ],
+              "current_start_s": 29.5
+            }
+          ],
+          "combined_image_sha256": "1ca9fa6f6afc1b7668df2c9ce2e1d3f62ef5894f85776a1c9982375c0d71ce5f"
+        },
+        {
+          "turn": 34,
+          "start_s": 30.0,
+          "end_s": 32.0,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "c226cb7159c342287d4ebea58a08e4eb3f3b48e8d96585c51a53841de49cc11a"
+        },
+        {
+          "turn": 35,
+          "start_s": 32.0,
+          "end_s": 33.06519274376417,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 23.06519274376417,
+              "end_s": 33.06519274376417,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is making a sound with their mouth open"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a dog is growling and whining in the background"
+                }
+              ],
+              "current_start_s": 32.0
+            }
+          ],
+          "combined_image_sha256": "f76274b9660dab0737525507889a3acd5789e1575339485994c8ee9d50682ded"
+        }
+      ],
+      "readers": {
+        "without": {
+          "caption": "A baby in an orange shirt laughs and reaches from a high chair as an adult playfully touches their nose.",
+          "turns": 35,
+          "seen": "A baby in an orange shirt sat in a high chair, smiling and reaching toward an adult who touched the baby's nose.",
+          "heard": "The audio readings indicated laughter and baby-like vocalizations, though I could not hear the recording directly."
+        },
+        "with": {
+          "caption": "A baby in an orange shirt laughs and reaches toward an adult while sitting in a high chair.",
+          "turns": 35,
+          "seen": "A baby in an orange shirt sits in a high chair, smiling and reaching toward an adult who touches the baby's nose.",
+          "heard": "The audio readings indicated laughter and vocal sounds, though I could not hear the recording directly."
+        }
+      }
+    },
+    {
+      "id": "4474236062",
+      "sha256": "dc588239c50c1a5e479163f2852723813f7c98e724f96792974876dc3a248e1e",
+      "turns": [
+        {
+          "turn": 1,
+          "start_s": 0.0,
+          "end_s": 1.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [],
+          "combined_image_sha256": "4b2440ac81d83488937e7a33b03275f95bb6b8205193ca39a9eebd774467972a"
+        },
+        {
+          "turn": 2,
+          "start_s": 1.3,
+          "end_s": 2.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.1,
+              "end_s": 2.1,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a car is driving down the road with birds chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a car is driving down the road with birds chirping in the background"
+                }
+              ],
+              "current_start_s": 1.3
+            }
+          ],
+          "combined_image_sha256": "43e17b0a57117401d8efb1f2e16044de3fd90e90af1fa3a1fdd6bb6168ce27db"
+        },
+        {
+          "turn": 3,
+          "start_s": 2.1,
+          "end_s": 2.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 2.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a car is driving down the road and the wind is blowing"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a car is driving down the road and the wind is blowing"
+                }
+              ],
+              "current_start_s": 2.1
+            }
+          ],
+          "combined_image_sha256": "a33b14c4a6a6379698d3a39ce695f38309b5e4828ffd8066a82c02badf36aa3d"
+        },
+        {
+          "turn": 4,
+          "start_s": 2.6,
+          "end_s": 3.1,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 3.1,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a car is driving down the road and the wind is blowing"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a car is driving down the road and the wind is blowing"
+                }
+              ],
+              "current_start_s": 2.6
+            }
+          ],
+          "combined_image_sha256": "615e21f93caa5e2888f447d7ca08d2d114461a87fda8df65f2194bdd2d4415f0"
+        },
+        {
+          "turn": 5,
+          "start_s": 3.1,
+          "end_s": 4.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 2.2,
+              "end_s": 4.2,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface with their footsteps in the background"
+                }
+              ],
+              "current_start_s": 3.1
+            }
+          ],
+          "combined_image_sha256": "5803c000d34c6d7007d3b0523312429bbda422d88a0f46091c5e7982c52d0986"
+        },
+        {
+          "turn": 6,
+          "start_s": 4.2,
+          "end_s": 4.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 4.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 4.2
+            }
+          ],
+          "combined_image_sha256": "727a101aa0105563a4b3eecd131289b92657446745ef401971bef6dbc3171594"
+        },
+        {
+          "turn": 7,
+          "start_s": 4.7,
+          "end_s": 5.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 5.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a dog is barking and a cat is meowing in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a dog is barking and a cat is meowing in the background"
+                }
+              ],
+              "current_start_s": 4.7
+            }
+          ],
+          "combined_image_sha256": "0ac55da90fb2b34f9a4f54def0199a78c923a3dffcc9f309ff58229a7d4ec800"
+        },
+        {
+          "turn": 8,
+          "start_s": 5.2,
+          "end_s": 5.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 5.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a bird is chirping and a dog is barking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a bird is chirping and a dog is barking in the background"
+                }
+              ],
+              "current_start_s": 5.2
+            }
+          ],
+          "combined_image_sha256": "b93dc1f6e6bb794d965c4c5a138cc7538e2a776391362e5be28fbf64b9602150"
+        },
+        {
+          "turn": 9,
+          "start_s": 5.7,
+          "end_s": 6.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.2,
+              "end_s": 6.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "an owl hoots in the distance while a bird is cooing"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "an owl hoots in the distance while a bird is cooing"
+                }
+              ],
+              "current_start_s": 5.7
+            }
+          ],
+          "combined_image_sha256": "f787461b4450e618f8f81f6bc1a962135319dc8276ceb9553d08b4397f0f8b55"
+        },
+        {
+          "turn": 10,
+          "start_s": 6.2,
+          "end_s": 6.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 6.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a bird is cooing while a dog barks in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a bird is cooing while a dog barks in the background"
+                }
+              ],
+              "current_start_s": 6.2
+            }
+          ],
+          "combined_image_sha256": "6379d7668123a3bfe03eb94e77f9842b66c7f080130baee48dcb6bf25a5dc146"
+        },
+        {
+          "turn": 11,
+          "start_s": 6.7,
+          "end_s": 7.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 7.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a bird is chirping and a dog is barking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a bird is chirping and a dog is barking in the background"
+                }
+              ],
+              "current_start_s": 6.7
+            }
+          ],
+          "combined_image_sha256": "9e9aa8fe9ea78f753c212bb8dea97dd9c81480d948589e9159de443dcfa8de8a"
+        },
+        {
+          "turn": 12,
+          "start_s": 7.2,
+          "end_s": 7.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 7.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a bird is chirping and a dog is barking in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a bird is chirping and a dog is barking in the background"
+                }
+              ],
+              "current_start_s": 7.2
+            }
+          ],
+          "combined_image_sha256": "645cac3f9ee4cb55736cc0d01ccaaeb5a45dc76ee5daeb937ed327845a19a119"
+        },
+        {
+          "turn": 13,
+          "start_s": 7.7,
+          "end_s": 8.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 6.2,
+              "end_s": 8.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a machine is running at a constant speed"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a machine is running at a constant speed"
+                }
+              ],
+              "current_start_s": 7.7
+            }
+          ],
+          "combined_image_sha256": "27b6e2fc8ab61b0304c641be5c027acde447f9a5ad9b8d19b693c7d77f168204"
+        },
+        {
+          "turn": 14,
+          "start_s": 8.2,
+          "end_s": 8.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 8.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 8.2
+            }
+          ],
+          "combined_image_sha256": "89b201570df6d08a4be930c1b50e7dac8ccfbbf1523c60625245873655475889"
+        },
+        {
+          "turn": 15,
+          "start_s": 8.7,
+          "end_s": 9.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 0.0,
+              "end_s": 9.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 8.7
+            }
+          ],
+          "combined_image_sha256": "3ee84064fb8b06c517b196cd46389549984eb3c070d32908de7f53b806e49d3b"
+        },
+        {
+          "turn": 16,
+          "start_s": 9.3,
+          "end_s": 11.3,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "461623adb98b62d187b46822991de4ed1b16c9d05c86d101331e5c63bf1a24e3"
+        },
+        {
+          "turn": 17,
+          "start_s": 11.3,
+          "end_s": 11.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 1.8,
+              "end_s": 11.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 11.3
+            }
+          ],
+          "combined_image_sha256": "81af40629a77db925cb269a19ed8d5fa92636dc17c45bef0d7afae0883ddb102"
+        },
+        {
+          "turn": 18,
+          "start_s": 11.8,
+          "end_s": 13.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 11.6,
+              "end_s": 13.6,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "people are talking in the background while someone is breathing in the distance"
+                }
+              ],
+              "current_start_s": 11.8
+            }
+          ],
+          "combined_image_sha256": "b6c300f2ebe159f54ab6a32ce057830dca0faa4b719fcb210fa0cf5e1986ef98"
+        },
+        {
+          "turn": 19,
+          "start_s": 13.6,
+          "end_s": 14.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.2,
+              "end_s": 14.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while a bird is chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while a bird is chirping in the background"
+                }
+              ],
+              "current_start_s": 13.6
+            }
+          ],
+          "combined_image_sha256": "2eab0746aca2af077d43012a6017e32ea4f2801dc94cccbd615b816404f2e7b5"
+        },
+        {
+          "turn": 20,
+          "start_s": 14.2,
+          "end_s": 14.7,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 4.7,
+              "end_s": 14.7,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while a bird is chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while a bird is chirping in the background"
+                }
+              ],
+              "current_start_s": 14.2
+            }
+          ],
+          "combined_image_sha256": "550c2296a274363bd2fe86b3e89e283623b3090bdbd56da70a32cfcbf458ae49"
+        },
+        {
+          "turn": 21,
+          "start_s": 14.7,
+          "end_s": 16.7,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "2f64ca97263544ec7635dd7de1416c23d3d0d7b8abdb7e2a8cf225b049c2a543"
+        },
+        {
+          "turn": 22,
+          "start_s": 16.7,
+          "end_s": 18.0,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 8.0,
+              "end_s": 18.0,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 16.7
+            }
+          ],
+          "combined_image_sha256": "c92d26ecd0fd19cfb43351f50d537d7cce493af8e3fec54dd71c280f22a8a485"
+        },
+        {
+          "turn": 23,
+          "start_s": 18.0,
+          "end_s": 18.5,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 8.5,
+              "end_s": 18.5,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 18.0
+            }
+          ],
+          "combined_image_sha256": "f0aa5e80f443618f34f1fb4b2c7b43f3c615f50f7b704eef37fe32d136f797fe"
+        },
+        {
+          "turn": 24,
+          "start_s": 18.5,
+          "end_s": 20.0,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 18.0,
+              "end_s": 20.0,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "a group of people are talking and laughing with each other"
+                }
+              ],
+              "current_start_s": 18.5
+            }
+          ],
+          "combined_image_sha256": "1b699252d05ac8ffa524966d2e3a2413f6c802d02418f22aed6eda06340ab00a"
+        },
+        {
+          "turn": 25,
+          "start_s": 20.0,
+          "end_s": 20.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 10.8,
+              "end_s": 20.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 20.0
+            }
+          ],
+          "combined_image_sha256": "236928f039ef41b8afbf3d82b06a95f457979e3c9fad5f9014c16325304dbec8"
+        },
+        {
+          "turn": 26,
+          "start_s": 20.8,
+          "end_s": 21.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 11.3,
+              "end_s": 21.3,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 20.8
+            }
+          ],
+          "combined_image_sha256": "3c8e30370ecec3a3c633175278f064b2a5f7716a61279564ae1ff245a72240f3"
+        },
+        {
+          "turn": 27,
+          "start_s": 21.3,
+          "end_s": 21.8,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 11.8,
+              "end_s": 21.8,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "people are talking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 21.3
+            }
+          ],
+          "combined_image_sha256": "e9a9ad4eab36b53722e660d7b478d7f0e889b7e99c9cd09d4171c5ea04e86294"
+        },
+        {
+          "turn": 28,
+          "start_s": 21.8,
+          "end_s": 22.3,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 20.3,
+              "end_s": 22.3,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "birds are chirping and people are talking in the background"
+                }
+              ],
+              "current_start_s": 21.8
+            }
+          ],
+          "combined_image_sha256": "1a99d5554ad33fdf33513c0f10765d865a9168a42f871be805c529aa1bfd5710"
+        },
+        {
+          "turn": 29,
+          "start_s": 22.3,
+          "end_s": 23.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 13.4,
+              "end_s": 23.4,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 22.3
+            }
+          ],
+          "combined_image_sha256": "c5485581c3f6b3e75c1b3b5fef43dbbf4f09cd3c33315535608bd7ef86c9b25e"
+        },
+        {
+          "turn": 30,
+          "start_s": 23.4,
+          "end_s": 23.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 13.9,
+              "end_s": 23.9,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 23.4
+            }
+          ],
+          "combined_image_sha256": "a748118fb6a4ef0b1b1648695e96d5c92c47fb3623d837e1fd09cd0f5fe36cc0"
+        },
+        {
+          "turn": 31,
+          "start_s": 23.9,
+          "end_s": 24.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 22.4,
+              "end_s": 24.4,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 23.9
+            }
+          ],
+          "combined_image_sha256": "2bb7c3479ca4f10845572dcd5a81a0c41090cfb278f9c5ece23fdf6ca9324329"
+        },
+        {
+          "turn": 32,
+          "start_s": 24.4,
+          "end_s": 24.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 14.9,
+              "end_s": 24.9,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 24.4
+            }
+          ],
+          "combined_image_sha256": "2ffe9afb71fa3a0a41fa30d652b9fe58ef1158b59bad09d40081e5ff0f1a21b3"
+        },
+        {
+          "turn": 33,
+          "start_s": 24.9,
+          "end_s": 25.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 15.4,
+              "end_s": 25.4,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 24.9
+            }
+          ],
+          "combined_image_sha256": "2bc02746d1860ac3b33ef1c2be039166e6b089c182791abd627f2ef13cc93a9a"
+        },
+        {
+          "turn": 34,
+          "start_s": 25.4,
+          "end_s": 25.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 15.9,
+              "end_s": 25.9,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 25.4
+            }
+          ],
+          "combined_image_sha256": "6335e674fcbc6af6dbd425ca61f3d04bd825b990fd8fe5ba4599fdb0472222b8"
+        },
+        {
+          "turn": 35,
+          "start_s": 25.9,
+          "end_s": 27.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 25.4,
+              "end_s": 27.4,
+              "channels": [
+                {
+                  "channels": [
+                    1,
+                    2
+                  ],
+                  "impression": "birds are chirping in the background and a waterfall is flowing in the distance"
+                }
+              ],
+              "current_start_s": 25.9
+            }
+          ],
+          "combined_image_sha256": "0095f95619b3fe5b0e7e1cf4fed3681937ec6acc29a16c5a66fc62fc32beb699"
+        },
+        {
+          "turn": 36,
+          "start_s": 27.4,
+          "end_s": 27.9,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 17.9,
+              "end_s": 27.9,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 27.4
+            }
+          ],
+          "combined_image_sha256": "ab3b15018d24fb24c885bfec886bf633500b2aa8d9fd26df23d09f3df1f0f0d8"
+        },
+        {
+          "turn": 37,
+          "start_s": 27.9,
+          "end_s": 29.9,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "1d2329b3dbd016168698ac418520eb4c68e418e26c9581597e53c637fd364d72"
+        },
+        {
+          "turn": 38,
+          "start_s": 29.9,
+          "end_s": 31.9,
+          "signal": "nonzero",
+          "current_status": "available",
+          "context_windows": [],
+          "combined_image_sha256": "d832338e453da5a5ed836e83336d1d23caff1c2e9ea45073cded23a4ba904439"
+        },
+        {
+          "turn": 39,
+          "start_s": 31.9,
+          "end_s": 32.4,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 22.4,
+              "end_s": 32.4,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 31.9
+            }
+          ],
+          "combined_image_sha256": "0c6107a04d543b148cb926bb158fb50dbd148b75a10c8b025fd518e410e1ced5"
+        },
+        {
+          "turn": 40,
+          "start_s": 32.4,
+          "end_s": 33.6,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 23.6,
+              "end_s": 33.6,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a man is speaking while birds are chirping in the background"
+                }
+              ],
+              "current_start_s": 32.4
+            }
+          ],
+          "combined_image_sha256": "c2e74092a27a1aba45d4e1525e570c712e888b5dc54ffa1fa69da3f8b6938f29"
+        },
+        {
+          "turn": 41,
+          "start_s": 33.6,
+          "end_s": 34.2,
+          "signal": "nonzero",
+          "current_status": "unavailable",
+          "context_windows": [
+            {
+              "start_s": 32.2,
+              "end_s": 34.2,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a person is walking on a hard surface with shoes moving around"
+                },
+                {
+                  "channels": [
+                    2
+                  ],
+                  "impression": "a person is walking on a hard surface with shoes moving around"
+                }
+              ],
+              "current_start_s": 33.6
+            }
+          ],
+          "combined_image_sha256": "f132ebd1d6fcdfd9d6a8c3e5c24104c31b12857551f1363f856c6dada6ffd7b6"
+        },
+        {
+          "turn": 42,
+          "start_s": 34.2,
+          "end_s": 34.7,
+          "signal": "digital_silence",
+          "current_status": "digital_silence",
+          "context_windows": [],
+          "combined_image_sha256": "0437175a3a425ea44471455cef7f3fa2211aa9eb127fdde66f9f5fbcd8df8f29"
+        },
+        {
+          "turn": 43,
+          "start_s": 34.7,
+          "end_s": 34.946009070294785,
+          "signal": "digital_silence",
+          "current_status": "digital_silence",
+          "context_windows": [],
+          "combined_image_sha256": "bcae2d525075f3e0ba76c2aad56085de08ebca2f952fdefd6900e66fa55362ce"
+        }
+      ],
+      "readers": {
+        "without": {
+          "caption": "A toddler in a blue shirt plays with an orange ball on the grass while an adult stays nearby and briefly picks the child up.",
+          "turns": 43,
+          "seen": "A toddler in a blue shirt plays with an orange ball on a grassy lawn while an adult stays nearby and briefly picks the child up.",
+          "heard": "I could not directly hear the audio, though the sound readings suggested birds and occasional speech."
+        },
+        "with": {
+          "caption": "A toddler in a blue shirt plays with an orange ball on the grass, occasionally helped by an adult nearby.",
+          "turns": 43,
+          "seen": "A toddler in a blue shirt plays with an orange ball on a grassy lawn while an adult helps nearby.",
+          "heard": "I could not directly hear the audio, though the sound readings suggested birds and speech in the background."
+        }
+      }
+    }
+  ],
+  "scores": {
+    "heard": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 4,
+      "human_captions": 12,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.3607611072560151,
+          "other_film_cosine": 0.29587547605236375,
+          "same_minus_other": 0.06488563120365137,
+          "top_one_film": 0.08333333333333333
+        },
+        "without": {
+          "same_film_cosine": 0.35663140813509625,
+          "other_film_cosine": 0.27615803480148315,
+          "same_minus_other": 0.0804733733336131,
+          "top_one_film": 0.5
+        },
+        "with": {
+          "same_film_cosine": 0.31694943333665526,
+          "other_film_cosine": 0.2750445790588856,
+          "same_minus_other": 0.04190485427776969,
+          "top_one_film": 0.25
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "4609275864": {
+          "human": [
+            0.4545904000600179,
+            0.34733594457308453,
+            0.0
+          ],
+          "without": [
+            0.28294814626375836,
+            0.32601821422576904,
+            0.0
+          ],
+          "with": [
+            0.24937565128008524,
+            0.305836945772171,
+            0.0
+          ]
+        },
+        "4876265566": {
+          "human": [
+            0.25637028614679974,
+            0.29597993195056915,
+            0.0
+          ],
+          "without": [
+            0.3556815485159556,
+            0.2671646773815155,
+            0.0
+          ],
+          "with": [
+            0.347774863243103,
+            0.2951199412345886,
+            0.0
+          ]
+        },
+        "4508384185": {
+          "human": [
+            0.43517326315244037,
+            0.26605358719825745,
+            0.3333333333333333
+          ],
+          "without": [
+            0.3751441438992818,
+            0.28651586174964905,
+            1.0
+          ],
+          "with": [
+            0.24957662324110666,
+            0.2580612003803253,
+            0.0
+          ]
+        },
+        "4474236062": {
+          "human": [
+            0.29691047966480255,
+            0.27413244048754376,
+            0.0
+          ],
+          "without": [
+            0.41275179386138916,
+            0.22493338584899902,
+            1.0
+          ],
+          "with": [
+            0.42107059558232623,
+            0.24116022884845734,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "without": {
+          "human_same_minus_other": 0.06488563120365141,
+          "reader_same_minus_other": 0.08047337333361308,
+          "fraction_of_human": 1.2402341140989699,
+          "film_bootstrap_95": null
+        },
+        "with": {
+          "human_same_minus_other": 0.06488563120365141,
+          "reader_same_minus_other": 0.041904854277769715,
+          "fraction_of_human": 0.6458264102609445,
+          "film_bootstrap_95": null
+        }
+      },
+      "change_in_separation": {
+        "mean_change": -0.03856851905584337,
+        "bootstrap_95_percent": [
+          -0.07618245109915733,
+          -0.01064963390429817
+        ],
+        "increased": 0,
+        "decreased": 4,
+        "tied": 0,
+        "by_film": {
+          "4609275864": -0.013391226530075101,
+          "4876265566": -0.03586194912592572,
+          "4508384185": -0.09711285928885141,
+          "4474236062": -0.007908041278521238
+        }
+      }
+    },
+    "seen": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 4,
+      "human_captions": 14,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5124056606243055,
+          "other_film_cosine": 0.2171349423006177,
+          "same_minus_other": 0.2952707183236878,
+          "top_one_film": 0.9166666666666666
+        },
+        "without": {
+          "same_film_cosine": 0.49686578599115216,
+          "other_film_cosine": 0.21099970489740372,
+          "same_minus_other": 0.28586608109374845,
+          "top_one_film": 1.0
+        },
+        "with": {
+          "same_film_cosine": 0.5018000987668831,
+          "other_film_cosine": 0.20869584754109383,
+          "same_minus_other": 0.2931042512257893,
+          "top_one_film": 1.0
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "4609275864": {
+          "human": [
+            0.4582343101501465,
+            0.25908391177654266,
+            1.0
+          ],
+          "without": [
+            0.5024629433949789,
+            0.21688751876354218,
+            1.0
+          ],
+          "with": [
+            0.49851404627164203,
+            0.21527738869190216,
+            1.0
+          ]
+        },
+        "4876265566": {
+          "human": [
+            0.6299220621585846,
+            0.12031754292547703,
+            1.0
+          ],
+          "without": [
+            0.4917609170079231,
+            0.1681678146123886,
+            1.0
+          ],
+          "with": [
+            0.49636582285165787,
+            0.16312022507190704,
+            1.0
+          ]
+        },
+        "4508384185": {
+          "human": [
+            0.43535951773325604,
+            0.2588870972394943,
+            0.6666666666666666
+          ],
+          "without": [
+            0.5535926520824432,
+            0.2062474489212036,
+            1.0
+          ],
+          "with": [
+            0.5659307241439819,
+            0.22325515747070312,
+            1.0
+          ]
+        },
+        "4474236062": {
+          "human": [
+            0.5261067524552345,
+            0.23025121726095676,
+            1.0
+          ],
+          "without": [
+            0.4396466314792633,
+            0.25269603729248047,
+            1.0
+          ],
+          "with": [
+            0.446389801800251,
+            0.23313061892986298,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "without": {
+          "human_same_minus_other": 0.29527071832368773,
+          "reader_same_minus_other": 0.28586608109374845,
+          "fraction_of_human": 0.968149103022029,
+          "film_bootstrap_95": [
+            0.6338535272804697,
+            1.6849898249024218
+          ]
+        },
+        "with": {
+          "human_same_minus_other": 0.29527071832368773,
+          "reader_same_minus_other": 0.29310425122578937,
+          "fraction_of_human": 0.9926627770264596,
+          "film_bootstrap_95": [
+            0.6785001660183608,
+            1.6663317370876545
+          ]
+        }
+      },
+      "change_in_separation": {
+        "mean_change": 0.007238170132040964,
+        "bootstrap_95_percent": [
+          -0.003504201769828824,
+          0.019146749749779687
+        ],
+        "increased": 2,
+        "decreased": 2,
+        "tied": 0,
+        "by_film": {
+          "4609275864": -0.002338767051696833,
+          "4876265566": 0.009652495384216309,
+          "4508384185": -0.004669636487960815,
+          "4474236062": 0.026308588683605194
+        }
+      }
+    },
+    "caption": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 4,
+      "human_captions": 15,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5070906554659208,
+          "other_film_cosine": 0.22445073824686307,
+          "same_minus_other": 0.28263991721905773,
+          "top_one_film": 0.8125
+        },
+        "without": {
+          "same_film_cosine": 0.5204900099585453,
+          "other_film_cosine": 0.25669849663972855,
+          "same_minus_other": 0.2637915133188168,
+          "top_one_film": 1.0
+        },
+        "with": {
+          "same_film_cosine": 0.5174673441797495,
+          "other_film_cosine": 0.2224632017314434,
+          "same_minus_other": 0.2950041424483061,
+          "top_one_film": 1.0
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "4609275864": {
+          "human": [
+            0.47253671288490295,
+            0.26617683470249176,
+            1.0
+          ],
+          "without": [
+            0.5640242099761963,
+            0.30305030941963196,
+            1.0
+          ],
+          "with": [
+            0.5572579801082611,
+            0.21750859916210175,
+            1.0
+          ]
+        },
+        "4876265566": {
+          "human": [
+            0.5601279338200887,
+            0.11553423603375752,
+            1.0
+          ],
+          "without": [
+            0.5301200846831003,
+            0.19316916167736053,
+            1.0
+          ],
+          "with": [
+            0.5392478704452515,
+            0.19245044887065887,
+            1.0
+          ]
+        },
+        "4508384185": {
+          "human": [
+            0.5851138532161713,
+            0.26980462297797203,
+            1.0
+          ],
+          "without": [
+            0.5210290923714638,
+            0.24181212484836578,
+            1.0
+          ],
+          "with": [
+            0.4972275272011757,
+            0.20848096907138824,
+            1.0
+          ]
+        },
+        "4474236062": {
+          "human": [
+            0.41058412194252014,
+            0.24628725927323103,
+            0.25
+          ],
+          "without": [
+            0.466786652803421,
+            0.2887623906135559,
+            1.0
+          ],
+          "with": [
+            0.4761359989643097,
+            0.27141278982162476,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "without": {
+          "human_same_minus_other": 0.2826399172190577,
+          "reader_same_minus_other": 0.2637915133188168,
+          "fraction_of_human": 0.9333130150698685,
+          "film_bootstrap_95": [
+            0.793601578891826,
+            1.1843792770035513
+          ]
+        },
+        "with": {
+          "human_same_minus_other": 0.2826399172190577,
+          "reader_same_minus_other": 0.2950041424483061,
+          "fraction_of_human": 1.0437455025847096,
+          "film_bootstrap_95": [
+            0.8311419768618208,
+            1.4689402082307945
+          ]
+        }
+      },
+      "change_in_separation": {
+        "mean_change": 0.031212629129489272,
+        "bootstrap_95_percent": [
+          0.009688044587771116,
+          0.06154323493440947
+        ],
+        "increased": 4,
+        "decreased": 0,
+        "tied": 0,
+        "by_film": {
+          "4609275864": 0.07877548038959503,
+          "4876265566": 0.00984649856885278,
+          "4508384185": 0.009529590606689453,
+          "4474236062": 0.026698946952819824
+        }
+      }
+    }
+  },
+  "stopping_sound": {
+    "rate_hz": 16000,
+    "tone_hz": 440,
+    "target_s": [
+      2,
+      2.5
+    ],
+    "continued_answer": "There was no apparent change in the last half second: the same steady, pure tone continued at a constant pitch and volume.",
+    "stopped_answer": "The steady tone stopped at the start of the last half second, leaving near silence. There may have been very faint background noise.",
+    "identical_prefix_blocks": 5,
+    "stop_context_windows": [
+      {
+        "start_s": 0.0,
+        "end_s": 2.5,
+        "channels": [
+          {
+            "channels": [
+              1,
+              2
+            ],
+            "impression": "a sine wave is being played with a high pitch"
+          }
+        ],
+        "current_start_s": 2.0
+      }
+    ],
+    "continued_context_windows": [
+      {
+        "start_s": 0.0,
+        "end_s": 2.5,
+        "channels": [
+          {
+            "channels": [
+              1,
+              2
+            ],
+            "impression": "a sine wave is being played with a high pitch"
+          }
+        ],
+        "current_start_s": 2.0
+      }
+    ],
+    "beyond_cutoff_rejected": true
+  },
+  "backend": {
+    "scene_prefix": {
+      "rate_hz": 44100,
+      "first_sample_on_film": 44100,
+      "until": 3.0000056689342403,
+      "prefix_samples": 88201,
+      "sha256s": [
+        "c250ca499564a9b4d374e5de69fc0e9a4b4b646dc912adc7e77cf7f435e0de69",
+        "aaee79837797d4c65ee58ac0caf66abcef27eb9a84ac3ce523ff5da77b87350a",
+        "750e6ff6348ab939c93e08e090cf7b5e9b449b48a867d72e76762299b9228c3d"
+      ],
+      "prefix_and_following_reading": [
+        {
+          "status": "available",
+          "model": "Labbeti/conette",
+          "basis": "A local captioner received each distinct channel's waveform, with no picture, filename, question or transcript. Each impression describes the stated interval and can misidentify actions and sources. A description of speech supplies no words to quote.",
+          "windows": [
+            {
+              "start_s": 1.0,
+              "end_s": 3.0000056689342403,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "people are talking while a car is driving and a man is speaking"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "status": "available",
+          "model": "Labbeti/conette",
+          "basis": "A local captioner received each distinct channel's waveform, with no picture, filename, question or transcript. Each impression describes the stated interval and can misidentify actions and sources. A description of speech supplies no words to quote.",
+          "windows": [
+            {
+              "start_s": 1.0,
+              "end_s": 4.00000566893424,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a crowd of people are talking and a car is driving by"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "transport": {
+      "earliest_turn_unchanged_after_later_replay": true,
+      "raw_wav_sha256": "21c09009a0cafeaa2a4d0dfaeedd8fdf5a987e1dce6d54921a83319b1b00a763",
+      "raw_wav_bytes": 64058,
+      "channels": 2,
+      "sample_count": 8000,
+      "same_context_for_image_and_audio": true,
+      "estimates_off_removed_context": true,
+      "range": [
+        2.0,
+        2.5
+      ],
+      "context": {
+        "status": "available",
+        "model": "Labbeti/conette",
+        "basis": "A local captioner received each distinct channel's waveform, with no picture, filename, question or transcript. Each impression describes the stated interval and can misidentify actions and sources. A description of speech supplies no words to quote. This window includes earlier audio. A sound in the description may already have stopped.",
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 2.5,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "impression": "a high pitched tone is being played at a steady pace"
+              }
+            ],
+            "current_start_s": 2.0
+          }
+        ]
+      }
+    }
+  },
+  "resources": {
+    "max_sampled_tree_kib": 4306928,
+    "min_system_free_percent": 63,
+    "surviving_processes": 0
+  },
+  "door": {
+    "until_s": 8.5,
+    "turn_s": 0.75,
+    "identical_prefix_blocks": 52,
+    "responses": {
+      "A": {
+        "seen": "A closed brown door remains still in a beige wall.",
+        "heard": "The audio analysis suggested a brief jingling or rattling sound, but I could not hear it directly.",
+        "caption": "A simple illustration shows a closed brown door in a beige wall while a brief jingling sound occurs offscreen."
+      },
+      "B": {
+        "seen": "A closed brown door with a yellow knob is centered in a beige wall.",
+        "heard": "I could not tell what was heard, though an audio analysis described a faint, steady fan-like sound.",
+        "caption": "A simple illustration shows a closed brown door centered in a beige wall."
+      }
+    },
+    "contextual_turns": {
+      "A": 10,
+      "B": 10
+    }
+  },
+  "experimental_display": "The with arm foregrounded sound_in_context at every eligible short turn. The without arm is the shipped default. The door and stopping-sound observations originally recorded for this experiment used the with arm.",
+  "shipped_behavior": "Only an explicitly requested view(turn=N, full_detail=true) promotes cross-boundary captions. Existing in-turn descriptions, the captioner’s full audio.scene and the usual native WAV behavior remain available. No change of caption model or task embedding. Across four films the foregrounded description reduced audio-only recall separation in all four and increased first-sentence audiovisual separation in all four. These small-sample outcomes are reported separately.",
+  "shipped_backend": {
+    "scene_prefix": {
+      "rate_hz": 44100,
+      "first_sample_on_film": 44100,
+      "until": 3.0000056689342403,
+      "prefix_samples": 88201,
+      "sha256s": [
+        "dac9ed75ad6215842355fa603f55c13408a5b545e86e9eb52a02c5878725641b",
+        "58029c280e316aa4773f2c43950b121aa98a7e253f02fa7561632c44893afa94",
+        "f0b645600bccc71df8966c7fa150a45050b1e46f7d4f1ac71ea29a5cc5a8bfae"
+      ],
+      "prefix_and_following_reading": [
+        {
+          "status": "available",
+          "model": "Labbeti/conette",
+          "basis": "A local captioner received each distinct channel's waveform, with no picture, filename, question or transcript. Each impression describes the stated interval and can misidentify actions and sources. A description of speech supplies no words to quote.",
+          "windows": [
+            {
+              "start_s": 1.0,
+              "end_s": 3.0000056689342403,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "people are talking while a car is driving and a man is speaking"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "status": "available",
+          "model": "Labbeti/conette",
+          "basis": "A local captioner received each distinct channel's waveform, with no picture, filename, question or transcript. Each impression describes the stated interval and can misidentify actions and sources. A description of speech supplies no words to quote.",
+          "windows": [
+            {
+              "start_s": 1.0,
+              "end_s": 4.00000566893424,
+              "channels": [
+                {
+                  "channels": [
+                    1
+                  ],
+                  "impression": "a crowd of people are talking and a car is driving by"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "transport": {
+      "default_omits_crossing_caption_with_and_without_wav": true,
+      "explicit_detail_required": true,
+      "earliest_turn_unchanged_after_later_replay": true,
+      "raw_wav_sha256": "21c09009a0cafeaa2a4d0dfaeedd8fdf5a987e1dce6d54921a83319b1b00a763",
+      "raw_wav_bytes": 64058,
+      "channels": 2,
+      "sample_count": 8000,
+      "same_context_for_image_and_audio": true,
+      "estimates_off_removed_context": true,
+      "range": [
+        2.0,
+        2.5
+      ],
+      "context": {
+        "status": "available",
+        "model": "Labbeti/conette",
+        "basis": "A local captioner received each distinct channel's waveform, with no picture, filename, question or transcript. Each impression describes the stated interval and can misidentify actions and sources. A description of speech supplies no words to quote. This window includes earlier audio. A sound in the description may already have stopped.",
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 2.5,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "impression": "a high pitched tone is being played at a steady pace"
+              }
+            ],
+            "current_start_s": 2.0
+          }
+        ]
+      }
+    }
+  },
+  "shipped_door": {
+    "until_s": 8.5,
+    "turn_s": 0.75,
+    "identical_prefix_blocks": 52,
+    "replies": {
+      "A": {
+        "seen": "A closed brown door with a gold knob stood against a plain wall.",
+        "heard": "The audio analysis suggested a brief jingling or rattling sound, though I could not hear it directly.",
+        "caption": "A static illustration shows a closed brown door against a plain wall while a brief jingling sound is heard."
+      },
+      "B": {
+        "seen": "A closed brown door with a golden knob stood in a plain wall.",
+        "heard": "I could not tell what was making the faint background sound.",
+        "caption": "A simple illustration shows a closed brown door with a golden knob in a plain wall."
+      }
+    }
+  }
+}

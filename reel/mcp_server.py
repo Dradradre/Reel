@@ -124,7 +124,7 @@ def end_of(path):
     return json.loads(path.read_text())["end_s"]
 
 
-def scene_description_fields(report):
+def scene_description_fields(report, *, include_context=True):
     """Keep an in-turn caption distinct from one that also heard a previous turn."""
     primary = report.get("sound_descriptions", {})
     track = report.get("audio") or {}
@@ -146,7 +146,7 @@ def scene_description_fields(report):
     if current:
         return {"sound_descriptions": {**reading, "windows": [current[k] for k in sorted(current)],
                                        "other_reader": primary}}
-    if crossing and not report.get("sound_in_context"):
+    if include_context and crossing and not report.get("sound_in_context"):
         # Prefer the latest completed reading. At the same end the shorter one
         # gives less weight to a sound that may already have stopped.
         window = max(crossing, key=lambda w: (w["end_s"], w["start_s"]))
@@ -449,13 +449,14 @@ class Viewing:
                 sequence["picture_end_s"] = packet["picture_end_s"]
             report["images_in_order"].append(sequence)
             blocks.append(image_block(directory / sheet["file"]))
+        detailed_measurements = full_detail or (image_hearing and (native_audio or not sound_estimates))
         for page in packet.get("action_view", {}).get("pages", []):
             description = {"action_over_time": [page["start_s"], page["end_s"]]}
             if "pts_us" in page:
                 description["picture_pts_us"] = page["pts_us"]
             if "at_s" in page:
                 description["at_s"] = page["at_s"]
-            if full_detail and "rgb_change" in page:
+            if detailed_measurements and "rgb_change" in page:
                 description["rgb_change"] = page["rgb_change"]
             if page.get("additional_frames"):
                 description["additional_frames"] = page["additional_frames"]
@@ -557,8 +558,8 @@ class Viewing:
             report.update(hearing)
         if joint_requested:
             report["joint"] = joint
-        extra = scene_description_fields(report)
-        if not full_detail:
+        extra = scene_description_fields(report, include_context=full_detail)
+        if not detailed_measurements:
             report = first_view_report({**report, **extra})
         # Keep the captioner’s exact windows and channel groups in both transports.
         report.update(extra)
@@ -940,7 +941,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             Set native_audio=false to omit it, or start with --image-client. Set sound_estimates=false
             for a first impression without source guesses, transcripts or local model descriptions.
             A picture-and-text view shows relative channel level and arrival over time. Replay with
-            full_detail=true for the individual measurements and encoder timing.
+            full_detail=true for the individual measurements, encoder timing and any local caption
+            that began in an earlier turn and finished during this one.
             Pass focus=[x,y] (0..1 from top left) to magnify a fixed region. Add follow_from_s with
             the time when you saw that point to follow it across published pictures, up to eight
             seconds through this turn. The ring marks estimated positions and can drift. An
@@ -963,7 +965,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             return await asyncio.to_thread(reader.advance, turn, native_audio, sound_estimates, focus, max_seconds,
                                            continuous_seconds, joint_seconds, image_hearing=True,
                                            follow_from_s=follow_from_s, question=question,
-                                           full_detail=full_detail or native_audio or not sound_estimates, max_frames=max_frames,
+                                           full_detail=full_detail, max_frames=max_frames,
                                            motion_point=motion_point)
 
         @server.tool(annotations=hints, structured_output=False)

@@ -243,12 +243,34 @@ class TransportTests(unittest.TestCase):
         report = {"sound_descriptions": {"status": "unavailable"}, "audio": track, "start_s": 5., "end_s": 6.}
         result = scene_description_fields(report)
         self.assertEqual(set(result), {"sound_in_context"})
+        self.assertEqual(scene_description_fields(report, include_context=False), {})
         self.assertEqual(result["sound_in_context"]["windows"], [{**window(3.5, 5.5), "current_start_s": 5.}])
         for changes in ({"sound_in_context": {"status": "available"}}, {"sound_descriptions": {"status": "available"}},
                         {"audio": {**track, "signal": "digital_silence"}}, {"audio": {}}, {"start_s": 5.5}):
             self.assertEqual(scene_description_fields({**report, **changes}), {})
         scene["recent_windows"].append(window(5., 5.8))
         self.assertEqual(set(scene_description_fields(report)), {"sound_descriptions"})
+
+    def test_only_explicit_detail_promotes_a_crossing_caption_for_either_transport(self):
+        sound = Mock()
+        sound.read.return_value = {"status": "unavailable"}
+        self.turn["start_s"] = .5
+        self.turn["speech"] = {"status": "available", "windows": []}
+        window = {"start_s": 0, "end_s": 1, "channels": [{"channels": [1], "impression": "a hum"}]}
+        self.turn["audio"]["scene"] = {"status": "available", "model": "captioner",
+                                       "basis": "waveform", "windows": [window]}
+        self.path.write_text(json.dumps(self.turn))
+        reader = Viewing(iter([self.path]), sound, Mock(), None)
+        for wav in (False, True):
+            for detailed in (False, True):
+                blocks = reader.advance(1, wav, full_detail=detailed, image_hearing=True)
+                report = json.loads(blocks[0].text)
+                self.assertEqual(report["sound_descriptions"]["status"], "unavailable")
+                self.assertEqual(report["audio"]["scene"]["windows"], [window])
+                if detailed:
+                    self.assertEqual(report["sound_in_context"]["windows"], [{**window, "current_start_s": .5}])
+                else:
+                    self.assertNotIn("sound_in_context", report)
 
     def test_wav_and_image_readers_get_the_same_current_waveform_caption(self):
         sound, words = Mock(), Mock()

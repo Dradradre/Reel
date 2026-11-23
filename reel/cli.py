@@ -5,7 +5,7 @@
   reel zoom DIR --t0 S --t1 S
   reel frame DIR --at S     save the full frame on display at S
   reel frame DIR --t0 S --t1 S     read every frame displayed in the interval
-  reel listen DIR --t0 S --t1 S [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
+  reel listen DIR --t0 S --t1 S [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second] ["sound description" ...]    compare descriptions with the recorded channels
@@ -431,15 +431,18 @@ def main():
                     if command[:1] == ["listen"]:
                         question = line.strip().split(maxsplit=1)[1] if len(command) > 1 else None
                         try:
-                            component = "mix"
-                            if command[1:2] == ["--component"]:
-                                fields = line.strip().split(maxsplit=3)
-                                if len(fields) < 3:
-                                    raise ValueError("use listen --component mix|harmonic|percussive|mid|side [QUESTION]")
-                                component = fields[2].lower()
-                                question = fields[3] if len(fields) == 4 else None
+                            component, gain_db = "mix", 0.
+                            while question and question.split(maxsplit=1)[0].lower() in ("--component", "--gain-db"):
+                                fields = question.split(maxsplit=2)
+                                if len(fields) < 2:
+                                    raise ValueError(f"give a value after {fields[0]}")
+                                if fields[0].lower() == "--component":
+                                    component = fields[1].lower()
+                                else:
+                                    gain_db = float(fields[1])
+                                question = fields[2] if len(fields) > 2 else None
                             with sound_reader.for_replay():
-                                result = sound_reader.inspect(path.parent, question, component=component)
+                                result = sound_reader.inspect(path.parent, question, component=component, gain_db=gain_db)
                             print(json.dumps(result, ensure_ascii=False), flush=True)
                         except (ValueError, OSError, subprocess.CalledProcessError) as error:
                             print(json.dumps({"error": str(error)}), flush=True)
@@ -474,7 +477,7 @@ def main():
                         continue
                     if not command or command[0] != "next" or len(command) > 2:
                         ap.error("enter next, next SECONDS, joint SECONDS, observe START END, look [--at SECONDS] LEFT TOP RIGHT BOTTOM, "
-                                 "listen [--component mix|harmonic|percussive|mid|side] [QUESTION], match START END DESCRIPTION, compare-heard [--similarity] START END START END, layer START END RANK [CHANNEL], speech [LANG], or quit")
+                                 "listen [--component mix|harmonic|percussive|mid|side] [--gain-db DB] [QUESTION], match START END DESCRIPTION, compare-heard [--similarity] START END START END, layer START END RANK [CHANNEL], speech [LANG], or quit")
                     duration = float(command[1]) if len(command) == 2 else None
                     try:
                         with original.reading():
@@ -494,6 +497,7 @@ def main():
             from audio_focus import COMPONENTS
             ap.add_argument("--mark-sound", type=float, nargs=2, metavar=("START", "END"),
                             help="mark these film seconds on the original recording inside --t0 and --t1")
+            ap.add_argument("--gain-db", type=float, default=0., help="adjust replay volume equally across channels")
             ap.add_argument("--component", choices=COMPONENTS, default="mix", help="listen to the mix or a filtered component")
             ap.add_argument("--describe-sounds", action="store_true", help="describe the bounded waveform locally")
             ap.add_argument("--question", help="ask the local waveform model about the recorded sound")
@@ -514,7 +518,7 @@ def main():
             else:
                 from listen import inspect_sound
                 data = inspect_sound(x.out, x.t0, x.t1, compare_sounds=x.compare_sounds, describe_sounds=x.describe_sounds,
-                                     question=x.question, component=x.component, mark_sound=x.mark_sound)
+                                     question=x.question, component=x.component, mark_sound=x.mark_sound, gain_db=x.gain_db)
             print(json.dumps(data, ensure_ascii=False, indent=2))
         except (ValueError, OSError, subprocess.CalledProcessError) as error:
             ap.error(str(error))

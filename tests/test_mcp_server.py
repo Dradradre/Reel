@@ -38,6 +38,27 @@ class TransportTests(unittest.TestCase):
         self.path = self.root / "view.json"
         self.path.write_text(json.dumps(self.turn))
 
+    def test_replay_volume_changes_only_the_released_waveform_and_adjusted_candidates(self):
+        reader = Viewing(iter([self.path]), None, None, None)
+        reader.advance(1, False)
+        def inspect(wav, first, end):
+            data, rate = sf.read(wav)
+            self.assertEqual((len(data), rate, first, end), (4000, 8000, 2000, .75))
+            return {"peak": float(np.max(np.abs(data)))}
+        with patch("reel.mcp_server.inspect_events", side_effect=inspect):
+            ordinary = reader.listen(1, None, .25, .75, True, False, sound_events=True)
+            boosted = reader.listen(1, None, .25, .75, True, False, sound_events=True, gain_db=6.)
+        orig, adjusted = (json.loads(reply[0].text) for reply in (ordinary, boosted))
+        self.assertNotIn("playback_gain", orig)
+        self.assertEqual(orig["sound_events"], adjusted["sound_events"])
+        self.assertEqual(ordinary[1].data, boosted[1].data)
+        self.assertEqual(orig["pitch_contour"], adjusted["pitch_contour"])
+        base, amplified = (sf.read(io.BytesIO(base64.b64decode(reply[-1].data)))[0] for reply in (ordinary, boosted))
+        np.testing.assert_allclose(amplified, base * 10 ** .3, rtol=1e-6)
+        self.assertAlmostEqual(adjusted["playback_sound_events"]["peak"], amplified.max())
+        with self.assertRaisesRegex(ValueError, "within the time viewed"):
+            reader.listen(1, None, .25, 1.1, True, False, gain_db=18.)
+
     def test_sound_event_replay_reads_only_the_requested_native_samples(self):
         reader = Viewing(iter([self.path]), None, None, None)
         reader.advance(1, False)

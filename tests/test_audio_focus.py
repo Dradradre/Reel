@@ -11,12 +11,37 @@ from scipy.fft import next_fast_len
 from scipy.signal.windows import hann
 import soundfile as sf
 
-from reel.audio_focus import focus_recording, harmonic_part
+from reel.audio_focus import focus_recording, harmonic_part, playback_volume
 from reel.hearing import ListeningHistory, RATE
 from reel.play import play
 
 
 class AcousticFocusTests(unittest.TestCase):
+    def test_volume_uses_one_peak_limited_gain_and_preserves_the_original(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / "source.wav"
+            left = np.linspace(-.25, .5, 90000, dtype=np.float32)
+            signal = np.column_stack((left, -left / 4))
+            sf.write(path, signal, 11025, subtype="FLOAT")
+            original = path.read_bytes()
+            self.assertEqual(playback_volume(path, 0, root), (path, None))
+            for requested, scale in ((18., 2.), (-6., 10 ** (-6 / 20))):
+                wav, gain = playback_volume(path, requested, root)
+                pcm, rate = sf.read(wav, dtype="float32")
+                self.assertEqual(rate, 11025)
+                self.assertAlmostEqual(gain["requested_db"], requested)
+                self.assertAlmostEqual(gain["applied_db"], 20 * np.log10(scale))
+                np.testing.assert_allclose(pcm, signal * scale, rtol=2e-6, atol=1e-8)
+            self.assertEqual(path.read_bytes(), original)
+            with self.assertRaisesRegex(ValueError, "finite"):
+                playback_volume(path, float("nan"), root)
+            sf.write(path, np.zeros((12, 2)), 11025, subtype="FLOAT")
+            wav, gain = playback_volume(path, 36, root)
+            self.assertEqual(wav, path)
+            self.assertEqual(gain["applied_db"], 0)
+            self.assertIsNone(gain["peak_before_dbfs"])
+
     def test_comparison_keeps_both_waveforms_on_the_same_clock(self):
         calls = []
 

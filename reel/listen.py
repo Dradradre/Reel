@@ -10,7 +10,7 @@ import numpy as np
 
 if __package__:
     from .sound_window import sound_window, validate_mark
-    from .audio_focus import focus_recording
+    from .audio_focus import focus_recording, playback_volume
     from .common import audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary
     from .turn_audio import released_samples
     from .hearing import SoundReader, WINDOW_S
@@ -22,7 +22,7 @@ if __package__:
     from .stereo import StereoHistory
 else:
     from sound_window import sound_window, validate_mark
-    from audio_focus import focus_recording
+    from audio_focus import focus_recording, playback_volume
     from common import audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary
     from turn_audio import released_samples
     from hearing import SoundReader, WINDOW_S
@@ -67,12 +67,13 @@ def _slice_audio(source, out, t0, t1):
 
 
 def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_sounds=False, question=None,
-                  component="mix", mark_sound=None):
+                  component="mix", mark_sound=None, gain_db=0.):
     out = Path(out)
     packet = out / "view.json"
     validate_mark(start, end, mark_sound)
     if packet.is_file():
-        across_turns = mark_sound is not None or question is not None or (component != "mix" and (start is not None or end is not None))
+        selected_range = start is not None or end is not None
+        across_turns = mark_sound is not None or question is not None or (selected_range and (component != "mix" or gain_db != 0))
         if not across_turns:
             view = json.loads(packet.read_text())
             if view.get("schema") != "reel.play.v1" or not view.get("audio"):
@@ -84,12 +85,13 @@ def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_s
                 raise ValueError(f"listening range must be within {left:g} to {right:g} seconds")
         wav, start, end, first, _ = released_samples(out, start, end, WINDOW_S)
         return listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
-                                  question=question, component=component, first_sample=first, mark_sound=mark_sound, turn_directory=out)
+                                  question=question, component=component, first_sample=first, mark_sound=mark_sound,
+                                  turn_directory=out, gain_db=gain_db)
     if start is None or end is None:
         raise ValueError("specify --t0 and --t1 when listening to an existing reel")
     wav = excerpt(out, start, end)
     evidence = listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
-                                  question=question, component=component, mark_sound=mark_sound)
+                                  question=question, component=component, mark_sound=mark_sound, gain_db=gain_db)
     meta = json.loads((Path(out) / "meta.json").read_text())
     words = [w for w in meta.get("speech_with_gain", [])
              if start <= w["context_start_s"] and w["context_end_s"] <= end
@@ -132,11 +134,12 @@ def level_changes(signal, rate, origin, end):
 
 
 def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds=False, question=None,
-                       component="mix", first_sample=None, mark_sound=None, turn_directory=None):
+                       component="mix", first_sample=None, mark_sound=None, turn_directory=None, gain_db=0.):
     """Describe only this WAV using local measurements and cached AudioSet weights."""
     rate = 16000
     original = Path(wav)
     wav, focus = focus_recording(original, component, original.parent)
+    playback, volume = playback_volume(wav, gain_db, original.parent)
     info = probe(wav)
     native_rate = info["audio_rate"]
     native = read_audio(wav, native_rate, channels=None)
@@ -203,8 +206,13 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
         if cues:
             report["stereo_cues"] = cues
     report["pitch_contour"] = PitchTrace().read(wav, first_sample)
+    if volume:
+        report.update(wav=str(playback), recorded_wav=str(original), measured_wav=str(wav), playback_gain=volume)
     if events_ready():
         report["sound_events"] = inspect_events(original, first_sample, end)
+        if volume:
+            report["playback_sound_events"] = (report["sound_events"] if playback == original else
+                                              inspect_events(playback, first_sample, end))
     report["scene"] = inspect_scene(original, first_sample, end)
     if focus:
         report["scene_basis"] = "The scene reader heard the original mix."
@@ -224,5 +232,5 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
     if describe_sounds or question is not None:
         with SoundReader() as reader:
             comparison = {"mix_wav": original, "component": component} if focus else {}
-            report["sound_descriptions"] = reader.read(wav, start, end, question=question, **comparison)
+            report["sound_descriptions"] = reader.read(playback, start, end, question=question, **comparison)
     return report

@@ -411,21 +411,24 @@ class SoundReader(LocalReader):
             recording = self.read(wav, start, end, question=question)
         return {**result, "recording": recording}
 
-    def inspect(self, directory, question=None, start=None, end=None, component="mix"):
+    def inspect(self, directory, question=None, start=None, end=None, component="mix", gain_db=0.):
         if __package__:
-            from .audio_focus import focus_recording
+            from .audio_focus import focus_recording, playback_volume
             from .stereo import StereoHistory
             from .turn_audio import released_recording
         else:
-            from audio_focus import focus_recording
+            from audio_focus import focus_recording, playback_volume
             from stereo import StereoHistory
             from turn_audio import released_recording
         wav, start, end = released_recording(directory, start, end, WINDOW_S)
         original = wav
         wav, focus = focus_recording(wav, component, wav.parent)
+        playback, gain = playback_volume(wav, gain_db, wav.parent)
         comparison = {"mix_wav": original, "component": component} if focus else {}
-        result = {"wav": str(wav), "start_s": start, "end_s": end,
-                  "sound_descriptions": self.read(wav, start, end, question=question, **comparison)}
+        result = {"wav": str(playback), "start_s": start, "end_s": end,
+                  "sound_descriptions": self.read(playback, start, end, question=question, **comparison)}
+        if gain:
+            result.update(playback_gain=gain, recorded_wav=str(original))
         if focus:
             result.update(component=focus, mix_wav=str(original))
         cues = StereoHistory().read(wav, start, end)

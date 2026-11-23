@@ -1,0 +1,2466 @@
+{
+  "baseline": "b9551c3",
+  "model": "local Codex gpt-6.1-terra, image and text only",
+  "preregistered_plan": [
+    "Keep recording, time cutoff and channel balance. Test a single +18 dB replay request applied evenly to every channel over a released excerpt, capped at 0 dBFS peak, with neither compression nor per-channel normalization. First diagnose whether the level or the original source filter hides signal in TUT 2017 (all 8, chunked into 8 s released excerpts, new YAMNet grid per excerpt). Three descriptive controls: index every 0.975 s YAMNet score; allow original top 3 with score >=.5 versus all 521 scores >=.5 and top 3 >=.1. The lower threshold is diagnostic, not a shipping rule. Keep source mapping frozen from the earlier street evaluation; report false positives alongside hits. Primary external check: 18 previously unused MACS recording locations, six per scene, selected by a salted hash before inspecting annotations. One anonymous local GPT session per clip/arm. Both hear via the same compact short-window and caption evidence, baseline sees original, other sees original plus adjustable-volume replay. Score per-recording mean IoU with individual human listener tags, bootstrap difference by recording (seed 20261123); report false additions/misses and chance of sampling variation. Check gain on digital silence, stereo polarity, ceiling, and no future. Do not promote a volume setting to automatic on the basis of these trials.",
+    "",
+    "Before any external inference: only eleven eligible new locations remain after excluding previously published/staged source locations (five airport, two park, four public square). Use all eleven, one clip per location."
+  ],
+  "playback": {
+    "requested_db": 18,
+    "method": "One constant gain on native channels per selected excerpt, limited by the highest absolute sample to avoid saturation. A request of zero returns the original recording. Classifier threshold .5, top three on each distinct active channel. Same YAMNet weights and clock as short-sound-events.json."
+  },
+  "streets": {
+    "source": "https://zenodo.org/records/1040179",
+    "source_checksums_and_class_mapping": "short-sound-events.json",
+    "protocol": "All eight files, 247 annotated spans, same six-class fixed map as earlier. Replay in successive <=8 s excerpts with a fresh YAMNet grid per excerpt; count any overlap with a one-second class bin. The brake class has no mapped category. Last incomplete model window in each excerpt yields no estimate. This grid differs from the continuous baseline in the previous milestone. For the lower-threshold control use the top three at >=.1. The uncapped control uses all labels at >=.5. Confirm both replay levels with the shipping WAV renderer and EventHistory on every excerpt.",
+    "totals": {
+      "recorded": {
+        "tp": 48,
+        "fp": 15,
+        "fn": 1587,
+        "precision": 0.7619047619047619,
+        "recall": 0.029357798165137616
+      },
+      "volume": {
+        "tp": 72,
+        "fp": 46,
+        "fn": 1563,
+        "precision": 0.6101694915254238,
+        "recall": 0.044036697247706424
+      },
+      "all_at_half": {
+        "tp": 48,
+        "fp": 15,
+        "fn": 1587,
+        "precision": 0.7619047619047619,
+        "recall": 0.029357798165137616
+      },
+      "top_at_tenth": {
+        "tp": 345,
+        "fp": 346,
+        "fn": 1290,
+        "precision": 0.4992764109985528,
+        "recall": 0.21100917431192662
+      }
+    },
+    "count_order": [
+      "TP",
+      "FP",
+      "FN"
+    ],
+    "by_file": [
+      {
+        "source": "a002",
+        "seconds": 184.10521541950112,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              0,
+              0,
+              13
+            ],
+            "people speaking": [
+              0,
+              1,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              0
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              0
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              13
+            ],
+            "people speaking": [
+              0,
+              1,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              0
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              0
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              0,
+              0,
+              13
+            ],
+            "people speaking": [
+              0,
+              1,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              0
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              0
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              2,
+              1,
+              11
+            ],
+            "people speaking": [
+              0,
+              3,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              0
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "source": "a005",
+        "seconds": 253.96244897959184,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              0,
+              0,
+              0
+            ],
+            "people speaking": [
+              5,
+              5,
+              12
+            ],
+            "children": [
+              0,
+              0,
+              18
+            ],
+            "car": [
+              0,
+              0,
+              124
+            ],
+            "large vehicle": [
+              0,
+              0,
+              25
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              55
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              0
+            ],
+            "people speaking": [
+              3,
+              5,
+              14
+            ],
+            "children": [
+              0,
+              0,
+              18
+            ],
+            "car": [
+              0,
+              0,
+              124
+            ],
+            "large vehicle": [
+              3,
+              28,
+              22
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              55
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              0,
+              0,
+              0
+            ],
+            "people speaking": [
+              5,
+              5,
+              12
+            ],
+            "children": [
+              0,
+              0,
+              18
+            ],
+            "car": [
+              0,
+              0,
+              124
+            ],
+            "large vehicle": [
+              0,
+              0,
+              25
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              55
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              0,
+              0,
+              0
+            ],
+            "people speaking": [
+              7,
+              18,
+              10
+            ],
+            "children": [
+              2,
+              0,
+              16
+            ],
+            "car": [
+              18,
+              13,
+              106
+            ],
+            "large vehicle": [
+              11,
+              44,
+              14
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              55
+            ]
+          }
+        }
+      },
+      {
+        "source": "a009",
+        "seconds": 229.4073469387755,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              0,
+              0,
+              17
+            ],
+            "people speaking": [
+              0,
+              0,
+              15
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              63
+            ],
+            "large vehicle": [
+              0,
+              0,
+              12
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              17
+            ],
+            "people speaking": [
+              0,
+              0,
+              15
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              63
+            ],
+            "large vehicle": [
+              0,
+              0,
+              12
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              0,
+              0,
+              17
+            ],
+            "people speaking": [
+              0,
+              0,
+              15
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              63
+            ],
+            "large vehicle": [
+              0,
+              0,
+              12
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              0,
+              0,
+              17
+            ],
+            "people speaking": [
+              9,
+              39,
+              6
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              14,
+              4,
+              49
+            ],
+            "large vehicle": [
+              0,
+              0,
+              12
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          }
+        }
+      },
+      {
+        "source": "a011",
+        "seconds": 215.9049433106576,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              0,
+              0,
+              40
+            ],
+            "people speaking": [
+              6,
+              0,
+              90
+            ],
+            "children": [
+              0,
+              0,
+              3
+            ],
+            "car": [
+              0,
+              0,
+              69
+            ],
+            "large vehicle": [
+              0,
+              0,
+              10
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              8
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              40
+            ],
+            "people speaking": [
+              20,
+              1,
+              76
+            ],
+            "children": [
+              0,
+              0,
+              3
+            ],
+            "car": [
+              0,
+              0,
+              69
+            ],
+            "large vehicle": [
+              0,
+              0,
+              10
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              8
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              0,
+              0,
+              40
+            ],
+            "people speaking": [
+              6,
+              0,
+              90
+            ],
+            "children": [
+              0,
+              0,
+              3
+            ],
+            "car": [
+              0,
+              0,
+              69
+            ],
+            "large vehicle": [
+              0,
+              0,
+              10
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              8
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              5,
+              6,
+              35
+            ],
+            "people speaking": [
+              53,
+              23,
+              43
+            ],
+            "children": [
+              0,
+              0,
+              3
+            ],
+            "car": [
+              8,
+              5,
+              61
+            ],
+            "large vehicle": [
+              3,
+              0,
+              7
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              8
+            ]
+          }
+        }
+      },
+      {
+        "source": "a123",
+        "seconds": 301.4704761904762,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              2,
+              0,
+              201
+            ],
+            "people speaking": [
+              15,
+              7,
+              24
+            ],
+            "children": [
+              0,
+              0,
+              4
+            ],
+            "car": [
+              0,
+              2,
+              151
+            ],
+            "large vehicle": [
+              2,
+              0,
+              121
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              10
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              203
+            ],
+            "people speaking": [
+              14,
+              5,
+              25
+            ],
+            "children": [
+              0,
+              0,
+              4
+            ],
+            "car": [
+              0,
+              2,
+              151
+            ],
+            "large vehicle": [
+              2,
+              2,
+              121
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              10
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              2,
+              0,
+              201
+            ],
+            "people speaking": [
+              15,
+              7,
+              24
+            ],
+            "children": [
+              0,
+              0,
+              4
+            ],
+            "car": [
+              0,
+              2,
+              151
+            ],
+            "large vehicle": [
+              2,
+              0,
+              121
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              10
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              27,
+              5,
+              176
+            ],
+            "people speaking": [
+              21,
+              29,
+              18
+            ],
+            "children": [
+              0,
+              0,
+              4
+            ],
+            "car": [
+              52,
+              59,
+              99
+            ],
+            "large vehicle": [
+              27,
+              13,
+              96
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "source": "b002",
+        "seconds": 197.24770975056688,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              0,
+              0,
+              34
+            ],
+            "people speaking": [
+              0,
+              0,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              140
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              34
+            ],
+            "people speaking": [
+              0,
+              0,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              140
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              0,
+              0,
+              34
+            ],
+            "people speaking": [
+              0,
+              0,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              140
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              9,
+              6,
+              25
+            ],
+            "people speaking": [
+              0,
+              6,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              140
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          }
+        }
+      },
+      {
+        "source": "b004",
+        "seconds": 156.21528344671202,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              0,
+              0,
+              27
+            ],
+            "people speaking": [
+              15,
+              0,
+              57
+            ],
+            "children": [
+              0,
+              0,
+              20
+            ],
+            "car": [
+              0,
+              0,
+              54
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              2
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              27
+            ],
+            "people speaking": [
+              27,
+              0,
+              45
+            ],
+            "children": [
+              0,
+              0,
+              20
+            ],
+            "car": [
+              0,
+              0,
+              54
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              2
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              0,
+              0,
+              27
+            ],
+            "people speaking": [
+              15,
+              0,
+              57
+            ],
+            "children": [
+              0,
+              0,
+              20
+            ],
+            "car": [
+              0,
+              0,
+              54
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              2
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              4,
+              0,
+              23
+            ],
+            "people speaking": [
+              41,
+              16,
+              31
+            ],
+            "children": [
+              0,
+              0,
+              20
+            ],
+            "car": [
+              0,
+              0,
+              54
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "source": "b092",
+        "seconds": 211.12163265306123,
+        "counts": {
+          "recorded": {
+            "people walking": [
+              0,
+              0,
+              28
+            ],
+            "people speaking": [
+              3,
+              0,
+              3
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              117
+            ],
+            "large vehicle": [
+              0,
+              0,
+              7
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              3
+            ]
+          },
+          "volume": {
+            "people walking": [
+              0,
+              0,
+              28
+            ],
+            "people speaking": [
+              3,
+              2,
+              3
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              117
+            ],
+            "large vehicle": [
+              0,
+              0,
+              7
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              3
+            ]
+          },
+          "all_at_half": {
+            "people walking": [
+              0,
+              0,
+              28
+            ],
+            "people speaking": [
+              3,
+              0,
+              3
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              117
+            ],
+            "large vehicle": [
+              0,
+              0,
+              7
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              3
+            ]
+          },
+          "top_at_tenth": {
+            "people walking": [
+              0,
+              17,
+              28
+            ],
+            "people speaking": [
+              3,
+              8,
+              3
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              26,
+              11,
+              91
+            ],
+            "large vehicle": [
+              3,
+              20,
+              4
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              3
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "macs": {
+    "source": "https://zenodo.org/records/5114771",
+    "recordings": "https://zenodo.org/records/2589280",
+    "selection": "Use each previously unused eligible recording location (scene-city-location). At least three annotators. Sort by SHA-256 of reel-recording-gain-01/ plus filename, initially seeking six locations in each scene. Five airport, two park and four public square sites remained. Choose one recording per location and freeze selection before inference.",
+    "conditions": "Two 5 s turns, same recorded-channel spectrum images, original AST, CoNeTTE, YAMNet and unadjusted replay. Present both turns together in one prompt on a constant gray video, with no image of the source, WAV attachment, filename, answers or previous reply. The adjusted arm also receives applied gain and the categories on the adjusted WAV. One independent local GPT session per recording and arm. Repeat only the adjusted arm independently with the revised gain help text after verifying identical acoustic candidates. Whitespace-only human tags are empty responses.",
+    "method": "For each recording average Jaccard of GPT tags vs each individual listener, and Jaccard across human pairs. Both sets empty gives one. Weight recordings equally. The paired 10,000-resample percentile interval, seed 20261123, only varies the sampled locations. All observed per-location differences are zero; this cannot bound reader variability or effects elsewhere. Counts across listener responses use shared tags, extra tags, missed tags in that order.",
+    "first_run": {
+      "people": 51,
+      "unique_listeners": 36,
+      "jaccard": {
+        "human": 0.5637373737373736,
+        "recorded": 0.6184343434343434,
+        "gain": 0.6184343434343434
+      },
+      "paired_mean": 0.0,
+      "film_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "better": 0,
+      "worse": 0,
+      "equal": 11,
+      "match_extra_missed": {
+        "recorded": [
+          57,
+          21,
+          34
+        ],
+        "gain": [
+          57,
+          21,
+          34
+        ]
+      }
+    },
+    "repeat_with_shipping_help": {
+      "people": 51,
+      "unique_listeners": 36,
+      "jaccard": {
+        "human": 0.5637373737373736,
+        "recorded": 0.6184343434343434,
+        "gain": 0.6184343434343434
+      },
+      "paired_mean": 0.0,
+      "film_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "better": 0,
+      "worse": 0,
+      "equal": 11,
+      "match_extra_missed": {
+        "recorded": [
+          57,
+          21,
+          34
+        ],
+        "gain": [
+          56,
+          17,
+          35
+        ]
+      }
+    },
+    "files": [
+      {
+        "filename": "airport-paris-206-6266-a.wav",
+        "sha256": "25fa09f9b2746a71b4babb0ac89cc7dbb30479d9945e1d4b26a2d9ba7c846395",
+        "listeners": 5,
+        "original_categories": [
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Ocean",
+          "Rail transport",
+          "Speech",
+          "Train",
+          "Vehicle",
+          "Waves, surf"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking",
+          "birds_singing"
+        ],
+        "adjusted_answer": [
+          "adults_talking",
+          "birds_singing"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking",
+          "birds_singing"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.21666666666666667,
+          "gain": 0.21666666666666667,
+          "human": 0.175
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            3,
+            7,
+            5
+          ],
+          "gain": [
+            3,
+            7,
+            5
+          ]
+        }
+      },
+      {
+        "filename": "public_square-prague-1192-45523-a.wav",
+        "sha256": "cefbec2a3193489ad9db2665c4fe63df9df6ce656db88364acf8f852846b8c1d",
+        "listeners": 3,
+        "original_categories": [
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Speech"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking"
+        ],
+        "adjusted_answer": [
+          "adults_talking"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.6111111111111112,
+          "gain": 0.6111111111111112,
+          "human": 0.5
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            3,
+            0,
+            3
+          ],
+          "gain": [
+            3,
+            0,
+            3
+          ]
+        }
+      },
+      {
+        "filename": "airport-prague-1069-43326-a.wav",
+        "sha256": "18eb6361cd8321fcd52c6bcfff3f6d76fa8f35fac3d05f91099356bd32ae1b05",
+        "listeners": 4,
+        "original_categories": [
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Speech"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking",
+          "footsteps"
+        ],
+        "adjusted_answer": [
+          "adults_talking",
+          "footsteps"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking",
+          "footsteps"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.9166666666666666,
+          "gain": 0.9166666666666666,
+          "human": 0.8333333333333334
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            8,
+            0,
+            1
+          ],
+          "gain": [
+            8,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "filename": "park-lyon-1012-43700-a.wav",
+        "sha256": "fe561b290ba895af2fc7c7d91ab0e94cbcc18174c0a722121ad2916eb259e546",
+        "listeners": 5,
+        "original_categories": [],
+        "adjusted_categories": [
+          "Rustling leaves",
+          "Wind"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [],
+        "adjusted_answer": [],
+        "adjusted_answer_with_revised_help": [],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.8,
+          "gain": 0.8,
+          "human": 0.6
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            0,
+            0,
+            1
+          ],
+          "gain": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "filename": "airport-barcelona-203-6126-a.wav",
+        "sha256": "599d60514377fdce7992ed128b003e6e4c30fddf71bba0c793969ab8d730b6d3",
+        "listeners": 5,
+        "original_categories": [
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Run",
+          "Speech"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking"
+        ],
+        "adjusted_answer": [
+          "adults_talking"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.36666666666666664,
+          "gain": 0.36666666666666664,
+          "human": 0.5816666666666667
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            5,
+            0,
+            10
+          ],
+          "gain": [
+            5,
+            0,
+            10
+          ]
+        }
+      },
+      {
+        "filename": "park-milan-1063-41812-a.wav",
+        "sha256": "cfd05899338b2eaa2551781402452b58af894d14110352b729641aac17c1b8ae",
+        "listeners": 5,
+        "original_categories": [],
+        "adjusted_categories": [],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [],
+        "adjusted_answer": [],
+        "adjusted_answer_with_revised_help": [],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.2,
+          "gain": 0.2,
+          "human": 0.4
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            0,
+            0,
+            6
+          ],
+          "gain": [
+            0,
+            0,
+            6
+          ]
+        }
+      },
+      {
+        "filename": "public_square-barcelona-107-3065-a.wav",
+        "sha256": "c9efc6e18efe8bb8840d838e42e9508a82eac2657ae82fb7dc9cd78297268fb2",
+        "listeners": 4,
+        "original_categories": [
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Basketball bounce",
+          "Speech"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking",
+          "footsteps",
+          "music"
+        ],
+        "adjusted_answer": [
+          "adults_talking",
+          "footsteps",
+          "music"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking",
+          "footsteps",
+          "music"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.7083333333333334,
+          "gain": 0.7083333333333334,
+          "human": 0.4444444444444444
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            9,
+            3,
+            1
+          ],
+          "gain": [
+            9,
+            3,
+            1
+          ]
+        }
+      },
+      {
+        "filename": "public_square-prague-1214-44267-a.wav",
+        "sha256": "b6901309eaea5c2ab33ce6f7fec7d9b796cdf5aa47623ad47aabf5ce6dc49ffe",
+        "listeners": 5,
+        "original_categories": [
+          "Animal",
+          "Chicken, rooster",
+          "Livestock, farm animals, working animals",
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Animal",
+          "Chicken, rooster",
+          "Livestock, farm animals, working animals",
+          "Speech"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking"
+        ],
+        "adjusted_answer": [
+          "adults_talking"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.85,
+          "gain": 0.85,
+          "human": 0.7
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            5,
+            0,
+            3
+          ],
+          "gain": [
+            5,
+            0,
+            3
+          ]
+        }
+      },
+      {
+        "filename": "public_square-london-115-3370-a.wav",
+        "sha256": "fab4f4db252289751360e0a6cc5859ab83b74813cd5401ac71b4103ac7b48c91",
+        "listeners": 5,
+        "original_categories": [
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Speech"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking",
+          "children_voices"
+        ],
+        "adjusted_answer": [
+          "adults_talking",
+          "children_voices"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking",
+          "children_voices"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.9333333333333333,
+          "gain": 0.9333333333333333,
+          "human": 0.8666666666666667
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            10,
+            0,
+            1
+          ],
+          "gain": [
+            10,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "filename": "airport-barcelona-0-14-a.wav",
+        "sha256": "89f3b33c28d2a29e1d7b3a67315b597d3588b0d82a2873c5b3acc29ae8c70f2b",
+        "listeners": 5,
+        "original_categories": [
+          "Chicken, rooster",
+          "Speech"
+        ],
+        "adjusted_categories": [
+          "Speech"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking",
+          "footsteps"
+        ],
+        "adjusted_answer": [
+          "adults_talking",
+          "footsteps"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking",
+          "footsteps"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.9,
+          "gain": 0.9,
+          "human": 0.8
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            9,
+            1,
+            0
+          ],
+          "gain": [
+            9,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "filename": "airport-prague-1195-44169-a.wav",
+        "sha256": "6360caaa152aefd6feafd8fc44b97ef7cf3d1c7e8107465d7cb2cb49fd18094c",
+        "listeners": 5,
+        "original_categories": [
+          "Bird",
+          "Pigeon, dove",
+          "Speech",
+          "Wild animals"
+        ],
+        "adjusted_categories": [
+          "Bee, wasp, etc.",
+          "Bird",
+          "Insect",
+          "Pigeon, dove",
+          "Speech",
+          "Wild animals"
+        ],
+        "applied_db": [
+          18,
+          18
+        ],
+        "recorded_answer": [
+          "adults_talking",
+          "birds_singing",
+          "footsteps"
+        ],
+        "adjusted_answer": [
+          "adults_talking",
+          "birds_singing",
+          "footsteps"
+        ],
+        "adjusted_answer_with_revised_help": [
+          "adults_talking",
+          "birds_singing"
+        ],
+        "jaccard_with_individual_listeners": {
+          "recorded": 0.3,
+          "gain": 0.3,
+          "human": 0.3
+        },
+        "recorded_and_adjusted_comparisons": {
+          "recorded": [
+            5,
+            10,
+            3
+          ],
+          "gain": [
+            4,
+            6,
+            4
+          ]
+        }
+      }
+    ]
+  },
+  "esc50": {
+    "source": "https://github.com/karolpiczak/ESC-50",
+    "protocol": "One existing reference recording in each of the 50 categories. Compare YAMNet candidate names and supporting times with readings at one eighth of native amplitude and after restoring the lost gain. The task tests sensitivity to level and sample preservation; original classifier outputs are model references.",
+    "clips": [
+      {
+        "filename": "5-103420-A-2.wav",
+        "category": "pig",
+        "sha256": "e62aa6dd6684f8fb7e184331f17b289aaa7e6a01465a588c8f283f74d238d89e",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 3,
+        "restored_candidates": 3,
+        "quiet_matches_original": true,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-141683-A-35.wav",
+        "category": "washing_machine",
+        "sha256": "c8ac3bafa369ff4bcfef515f00060c963f4c19d9275ada75edbc8cdb9c1ad591",
+        "max_sample_error": 0.0,
+        "original_candidates": 1,
+        "quiet_candidates": 0,
+        "restored_candidates": 1,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-151085-A-20.wav",
+        "category": "crying_baby",
+        "sha256": "e46d87b3673136a4d97b42f0ac6411ed299075bb2c88d61f7c456c0afe6804db",
+        "max_sample_error": 0.0,
+        "original_candidates": 4,
+        "quiet_candidates": 2,
+        "restored_candidates": 4,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-156026-C-4.wav",
+        "category": "frog",
+        "sha256": "615275b1ece880c24a3d17356b99b03ccf4c248832fe26e4cdcb337690066a81",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 3,
+        "restored_candidates": 3,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-156999-B-19.wav",
+        "category": "thunderstorm",
+        "sha256": "c793c4f1a0a03d26b5118a93fd8d164136d2f06c3c05c65625ac27fbd2a43a28",
+        "max_sample_error": 0.0,
+        "original_candidates": 4,
+        "quiet_candidates": 2,
+        "restored_candidates": 4,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-160614-G-48.wav",
+        "category": "fireworks",
+        "sha256": "9d1b69c0be10cf245ef400ea0466a0be5d4235ccd6c549740c06c1582bc413f7",
+        "max_sample_error": 0.0,
+        "original_candidates": 8,
+        "quiet_candidates": 3,
+        "restored_candidates": 8,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-177034-A-18.wav",
+        "category": "toilet_flush",
+        "sha256": "a20b707d80b8abf2cf12062328bd19d1f93d801f18a03aaceceecf153d818db0",
+        "max_sample_error": 0.0,
+        "original_candidates": 1,
+        "quiet_candidates": 1,
+        "restored_candidates": 1,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-177957-D-40.wav",
+        "category": "helicopter",
+        "sha256": "8d88a04034bfaf1d279d25097d59e6205c0c3ddc7757ee35b691768a9a2c0aaa",
+        "max_sample_error": 0.0,
+        "original_candidates": 6,
+        "quiet_candidates": 6,
+        "restored_candidates": 6,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-178997-A-24.wav",
+        "category": "coughing",
+        "sha256": "c7aba9fe825d201275860a99588bf8ee1cf26c2d6232f9d89eb52e47cab19221",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 2,
+        "restored_candidates": 3,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-179866-A-43.wav",
+        "category": "car_horn",
+        "sha256": "aecc03f051ef2dc592a3a62e51e95c61267e835a2e4a70492104e312edebaf6c",
+        "max_sample_error": 0.0,
+        "original_candidates": 1,
+        "quiet_candidates": 1,
+        "restored_candidates": 1,
+        "quiet_matches_original": true,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-182010-A-36.wav",
+        "category": "vacuum_cleaner",
+        "sha256": "0ac4e7dd19c4f99e9453c79e0409650b1fb12972f9da4d15f96408788b015a07",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 1,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-184323-A-42.wav",
+        "category": "siren",
+        "sha256": "bc3d8abd08b3e37ed980c21972acb5ce5ba83ee001f7ddffd95f04e5e6b642ea",
+        "max_sample_error": 0.0,
+        "original_candidates": 6,
+        "quiet_candidates": 10,
+        "restored_candidates": 6,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-185579-B-41.wav",
+        "category": "chainsaw",
+        "sha256": "853d5ae507977df944cba7775cbdd2a3e262b3f7e99729d5ec465c51dc692a6d",
+        "max_sample_error": 0.0,
+        "original_candidates": 8,
+        "quiet_candidates": 7,
+        "restored_candidates": 8,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-189212-A-12.wav",
+        "category": "crackling_fire",
+        "sha256": "bd9983a6e739ea7df03c9363b17834a71ba0b74cbb59d8766d48ccb0fedd2138",
+        "max_sample_error": 0.0,
+        "original_candidates": 0,
+        "quiet_candidates": 4,
+        "restored_candidates": 0,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-191497-A-33.wav",
+        "category": "door_wood_creaks",
+        "sha256": "5e1a829f78e85a50dee157c5cadfc99cdb47ac2c0509e840503ef554aca02f15",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 2,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-194899-C-3.wav",
+        "category": "cow",
+        "sha256": "a78edc545b8c5d4c1f875a3e62929d680f2008de80ae486032af175bc79b6b52",
+        "max_sample_error": 0.0,
+        "original_candidates": 9,
+        "quiet_candidates": 4,
+        "restored_candidates": 9,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-195518-A-7.wav",
+        "category": "insects",
+        "sha256": "d826d4ceb38127fac8fdead53b89274ffe716088acfedd2c5168913ad4564e14",
+        "max_sample_error": 0.0,
+        "original_candidates": 7,
+        "quiet_candidates": 8,
+        "restored_candidates": 7,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-197118-A-45.wav",
+        "category": "train",
+        "sha256": "67d2f6fc339fb9a6734b0ad9f124dffb867f5c186c7619560cbfd78c83f37058",
+        "max_sample_error": 0.0,
+        "original_candidates": 8,
+        "quiet_candidates": 1,
+        "restored_candidates": 8,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-197988-A-46.wav",
+        "category": "church_bells",
+        "sha256": "7b8aad416b5c8a5e6d240ee7aa4d5e1493ff12bf441925ea43f8edf3702e68de",
+        "max_sample_error": 0.0,
+        "original_candidates": 6,
+        "quiet_candidates": 6,
+        "restored_candidates": 6,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-198891-B-8.wav",
+        "category": "sheep",
+        "sha256": "6b487e7468849dc89506455d796b23b6222cefd29e35a0dad4696fc1325a62bc",
+        "max_sample_error": 0.0,
+        "original_candidates": 5,
+        "quiet_candidates": 9,
+        "restored_candidates": 5,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-200339-A-1.wav",
+        "category": "rooster",
+        "sha256": "a29c86e2ebae1084f18a17ff73f6de34a3470a974de6c44f714801fc3eb49fde",
+        "max_sample_error": 0.0,
+        "original_candidates": 6,
+        "quiet_candidates": 6,
+        "restored_candidates": 6,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-202898-A-10.wav",
+        "category": "rain",
+        "sha256": "06ba576df5efc793523c7adebfca21094e1d3cbdd924c0655a16ac5aa5785b78",
+        "max_sample_error": 0.0,
+        "original_candidates": 9,
+        "quiet_candidates": 4,
+        "restored_candidates": 9,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-203128-A-0.wav",
+        "category": "dog",
+        "sha256": "435e476d5d429aa1cc51c23c9b5e5f8f472faf022846996ade18a457621d0552",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 8,
+        "restored_candidates": 3,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-205589-A-17.wav",
+        "category": "pouring_water",
+        "sha256": "cdaf920749710c45af9e15dfc9dc87be1b330e4b3299b1cdebb9165b442912a5",
+        "max_sample_error": 0.0,
+        "original_candidates": 8,
+        "quiet_candidates": 8,
+        "restored_candidates": 8,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-207836-B-29.wav",
+        "category": "drinking_sipping",
+        "sha256": "c23c558c085d236738a75bf6b70ebe7ee107ce3e02d0f6d385d6f0a41bacd91f",
+        "max_sample_error": 0.0,
+        "original_candidates": 1,
+        "quiet_candidates": 0,
+        "restored_candidates": 1,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-215005-A-32.wav",
+        "category": "keyboard_typing",
+        "sha256": "b8c6b7a28f1523c4aa0a0261ed45dee934c5a8f2558893312d9d981bf1f92067",
+        "max_sample_error": 0.0,
+        "original_candidates": 6,
+        "quiet_candidates": 2,
+        "restored_candidates": 6,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-215179-A-13.wav",
+        "category": "crickets",
+        "sha256": "881d746721acc929af3e21f344905f30575ec8f2654df20a1e11b467f04e4736",
+        "max_sample_error": 0.0,
+        "original_candidates": 0,
+        "quiet_candidates": 0,
+        "restored_candidates": 0,
+        "quiet_matches_original": true,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-216368-A-28.wav",
+        "category": "snoring",
+        "sha256": "b3163718b6ef689ee635bb1d9429066ea198ccf101ded0b6ceaf5b55c1f7e460",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 8,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-217186-A-16.wav",
+        "category": "wind",
+        "sha256": "428743d3755e48d1c6f3179f832f47014c37432fe8ac1bec6c0fe30c73f5123e",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 2,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-219242-B-37.wav",
+        "category": "clock_alarm",
+        "sha256": "21679508d50f7b025c74d8c9bd332fb835ce51b2768d6e98eb5c118810dfdf8d",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 7,
+        "restored_candidates": 3,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-219379-A-11.wav",
+        "category": "sea_waves",
+        "sha256": "152ec7b65431ae066b3ed6e19d695febbd641f9186fd7e549526160108b123e7",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 3,
+        "restored_candidates": 3,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-220026-A-21.wav",
+        "category": "sneezing",
+        "sha256": "01d02b64a5bbf7bf29672883699b1ecebd16ed6f5bd138ad2fc905214b65b63b",
+        "max_sample_error": 0.0,
+        "original_candidates": 1,
+        "quiet_candidates": 1,
+        "restored_candidates": 1,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-220939-A-27.wav",
+        "category": "brushing_teeth",
+        "sha256": "44d2fb9fee4d70db7c59db63d70dc71f8ed033936906afd3a6d6b83eb838f311",
+        "max_sample_error": 0.0,
+        "original_candidates": 0,
+        "quiet_candidates": 1,
+        "restored_candidates": 0,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-221528-A-39.wav",
+        "category": "glass_breaking",
+        "sha256": "f4796e4ec53c1dee2257365e58ff5ab75cf37d9a813f07b681927e85ee472cde",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 3,
+        "restored_candidates": 3,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-233260-A-23.wav",
+        "category": "breathing",
+        "sha256": "0ea99448699adde99988c1f148a3715fc94cc9abb5a3ac728050f1dab3a3aadf",
+        "max_sample_error": 0.0,
+        "original_candidates": 3,
+        "quiet_candidates": 0,
+        "restored_candidates": 3,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-235671-A-38.wav",
+        "category": "clock_tick",
+        "sha256": "28a721a5db87aed186e7cd63439c798ba9c0e44cf6654340d7b1ac2e7af02eee",
+        "max_sample_error": 0.0,
+        "original_candidates": 4,
+        "quiet_candidates": 0,
+        "restored_candidates": 4,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-237795-A-34.wav",
+        "category": "can_opening",
+        "sha256": "c687632878ef0f0a15554227ee10a108d8373f94331e159af0f7fabad2df209d",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 0,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-243773-A-44.wav",
+        "category": "engine",
+        "sha256": "9a7a3d9190bc14437ddbd4cad8a9715ae582247e42704857b6c3b777bd1c156e",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 0,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-244651-A-31.wav",
+        "category": "mouse_click",
+        "sha256": "7089cd08769ed70839b1c036048a8409b673a5210cf2fe73d069162823180d6d",
+        "max_sample_error": 0.0,
+        "original_candidates": 0,
+        "quiet_candidates": 0,
+        "restored_candidates": 0,
+        "quiet_matches_original": true,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-251426-B-30.wav",
+        "category": "door_wood_knock",
+        "sha256": "2738fe71989e18f2e8e0800c678793af2eeba6ca84551f8745f64d21e738ab81",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 2,
+        "restored_candidates": 2,
+        "quiet_matches_original": true,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-251963-A-47.wav",
+        "category": "airplane",
+        "sha256": "058fe2aeaae74891df77b1a1022a7e5c30c264a0d0899e6e2f43af007d10ab12",
+        "max_sample_error": 0.0,
+        "original_candidates": 4,
+        "quiet_candidates": 0,
+        "restored_candidates": 4,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-253094-A-49.wav",
+        "category": "hand_saw",
+        "sha256": "adef71efcffdbc20d1889b60ad57b15b7b3df8fc10628ca1ccd9fe62f6be98ea",
+        "max_sample_error": 0.0,
+        "original_candidates": 4,
+        "quiet_candidates": 4,
+        "restored_candidates": 4,
+        "quiet_matches_original": true,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-253534-A-26.wav",
+        "category": "laughing",
+        "sha256": "251c084088b365d60f5509569e97cbf6d10259926470a53f004c4adec97fcfba",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 7,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-254832-B-15.wav",
+        "category": "water_drops",
+        "sha256": "e05488cd28dcfabf6d02e8b719f27a4b586b83aadf81f8d83d72879bbc603f65",
+        "max_sample_error": 0.0,
+        "original_candidates": 0,
+        "quiet_candidates": 0,
+        "restored_candidates": 0,
+        "quiet_matches_original": true,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-257839-A-14.wav",
+        "category": "chirping_birds",
+        "sha256": "db73c55a7bd0d77247e7f865549edaeb0032a47c6ecefedf0896cae352218b3c",
+        "max_sample_error": 0.0,
+        "original_candidates": 6,
+        "quiet_candidates": 6,
+        "restored_candidates": 6,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-259169-A-5.wav",
+        "category": "cat",
+        "sha256": "2b8b1f359ba995c00e638f29a42b0530e162a7ae483696074473763e4c1dc485",
+        "max_sample_error": 0.0,
+        "original_candidates": 1,
+        "quiet_candidates": 3,
+        "restored_candidates": 1,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-261325-A-9.wav",
+        "category": "crow",
+        "sha256": "b2e3db27ca4c2c982ffa838d9369f67263b56ff18bb987ff3b0e6d86a58a132d",
+        "max_sample_error": 0.0,
+        "original_candidates": 9,
+        "quiet_candidates": 10,
+        "restored_candidates": 9,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-262957-A-22.wav",
+        "category": "clapping",
+        "sha256": "f385093df5a3ba607f47356bab51f48501376ff67f167f60e932a89509878a93",
+        "max_sample_error": 0.0,
+        "original_candidates": 4,
+        "quiet_candidates": 11,
+        "restored_candidates": 4,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-263490-A-25.wav",
+        "category": "footsteps",
+        "sha256": "6ee260dd4ef0d0329c7a2e06c4c331db4f61049733f19e6535f041732384566e",
+        "max_sample_error": 0.0,
+        "original_candidates": 2,
+        "quiet_candidates": 1,
+        "restored_candidates": 2,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      },
+      {
+        "filename": "5-263831-A-6.wav",
+        "category": "hen",
+        "sha256": "17b93306476581caf2d04306ab96ebc3bf70b6fd26010224d2adb9605356a1b1",
+        "max_sample_error": 0.0,
+        "original_candidates": 7,
+        "quiet_candidates": 8,
+        "restored_candidates": 7,
+        "quiet_matches_original": false,
+        "replay_matches_original": true
+      }
+    ],
+    "constructed_controls": [
+      {
+        "source": "silence",
+        "recorded": [],
+        "replay": []
+      },
+      {
+        "source": "white noise",
+        "recorded": [
+          [
+            "Noise",
+            1.44,
+            2.895
+          ],
+          [
+            "White noise",
+            0.48,
+            2.895
+          ]
+        ],
+        "replay": [
+          [
+            "Noise",
+            0.0,
+            2.895
+          ],
+          [
+            "Static",
+            0.48,
+            1.455
+          ],
+          [
+            "Static",
+            1.44,
+            2.415
+          ],
+          [
+            "White noise",
+            0.0,
+            2.895
+          ]
+        ]
+      },
+      {
+        "source": "steady sine",
+        "recorded": [
+          [
+            "Sine wave",
+            0.0,
+            2.895
+          ]
+        ],
+        "replay": [
+          [
+            "Sine wave",
+            0.0,
+            2.895
+          ]
+        ]
+      }
+    ]
+  },
+  "door": {
+    "method": "Anonymous real MCP stdio, stop at 8.5 s. Identical view cadence, speech request from 0.5-8.5 s, recorded and adjusted replays of 3.5-8.5 s with the same marked interval. GPT received pictures and local evidence only. An independent client compared the actual attached native and adjusted waveform samples. Requests ending at 8.51 s were rejected. A/C have different suffixes.",
+    "responses": {
+      "A": {
+        "requested_db": 18,
+        "applied_db": 9.874342772029713,
+        "answer": "The quiet background is briefly interrupted by a faint rattling or jingling sound, then becomes quiet again before the video ends. No words are clear enough to make out."
+      },
+      "B": {
+        "requested_db": 18,
+        "applied_db": 18.0,
+        "answer": "There seems to be a very faint, steady hiss or whoosh before the video ends, with no clear change or distinct short sound. I couldn’t make out any words."
+      }
+    },
+    "identical_a_c_block_count": 21,
+    "a_c_content_type_and_sha256": [
+      [
+        "text",
+        "2113f483138ce7c176b71a046e43595ff2b8df9f55a473178fff8df2502a9eb1"
+      ],
+      [
+        "image",
+        "0cf5b95a4e79d643ec14c52c3f695b32cade92ea107e85ca71d495fcadea6df6"
+      ],
+      [
+        "image",
+        "44f5c9cc6180aaf6026191f9dedb5f99f941d2701ff545556d549a0b53978f9a"
+      ],
+      [
+        "image",
+        "bfcfe1c6228c5092cf52240444a2e44d7232c52efc37b820c898d1501a89dc32"
+      ],
+      [
+        "image",
+        "20e5862906438a09f6d05d407ba8079d7befd944029a38b7ac614486818b62dd"
+      ],
+      [
+        "image",
+        "077888a84d661de7851c6b449fd092161c3aa92ad6d110b52434795ef552e698"
+      ],
+      [
+        "image",
+        "66e0131e89d4cf39bc9768921aa4233bb502e6fe43bbfd2e10f87f070d86e230"
+      ],
+      [
+        "text",
+        "6073f31c8aaacd205df8ddae9c42b6f83031ec4f1c973cd5fcbc109613dd39d3"
+      ],
+      [
+        "image",
+        "7686b0b4d0073e232b26200eef761a3dc0152e5dfd4602a15c2c3e54fe339d9c"
+      ],
+      [
+        "image",
+        "a9a5470b01eb019b98af2a148916595fd0bfcefbb225fc21bb883301cf5adae2"
+      ],
+      [
+        "image",
+        "72553dcd38c3fc6cb142c3743ee5c6b376bca098758fefb45d1538dc8375ee89"
+      ],
+      [
+        "image",
+        "077888a84d661de7851c6b449fd092161c3aa92ad6d110b52434795ef552e698"
+      ],
+      [
+        "image",
+        "4ace5651be0e503936290201fcb959c7e5115f93fefa0348127d448e254fe258"
+      ],
+      [
+        "text",
+        "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+      ],
+      [
+        "text",
+        "28f74c33ef087ab1faac165c5edf8d767187361fa38cfaf408df233549c97a15"
+      ],
+      [
+        "text",
+        "ddb4db4280c058ba57e0ea1dca4212af81a75949864301bba6bd7de75d9b754f"
+      ],
+      [
+        "image",
+        "49215f054e07b24545099a5d39b6c9e10629e096a00ee49637a6ea15837b855e"
+      ],
+      [
+        "audio",
+        "07f7f77329eb1f3c3db330ebfd2c3a392bdc14d1221f0772c2c8db077394a453"
+      ],
+      [
+        "text",
+        "d6e59235c092acbab7ebd0510460e35d28049142ea804501690867a7f03967fe"
+      ],
+      [
+        "image",
+        "49215f054e07b24545099a5d39b6c9e10629e096a00ee49637a6ea15837b855e"
+      ],
+      [
+        "audio",
+        "fbd36c67624606373b6143c8e496d7e29f05b6021366e73b422533f24f9099b1"
+      ]
+    ]
+  },
+  "resources": {
+    "fetch": {
+      "code": 0,
+      "peak_kib": 81840,
+      "seconds": 43.05,
+      "survivors": []
+    },
+    "prepare": {
+      "code": 0,
+      "peak_kib": 2089472,
+      "seconds": 117.17,
+      "survivors": []
+    },
+    "readers": {
+      "code": 0,
+      "peak_kib": 383024,
+      "seconds": 113.82,
+      "survivors": []
+    },
+    "shipped-read": {
+      "code": 0,
+      "peak_kib": 480704,
+      "seconds": 32.94,
+      "survivors": []
+    },
+    "street": {
+      "code": 0,
+      "peak_kib": 131632,
+      "seconds": 14.15,
+      "survivors": []
+    },
+    "street-confirm": {
+      "code": 0,
+      "peak_kib": 133936,
+      "seconds": 26.05,
+      "survivors": []
+    },
+    "controls": {
+      "code": 0,
+      "peak_kib": 124784,
+      "seconds": 3.54,
+      "survivors": []
+    },
+    "doors-finished": {
+      "code": 0,
+      "peak_kib": 2024368,
+      "seconds": 44.83,
+      "survivors": []
+    },
+    "command": {
+      "code": 0,
+      "peak_kib": 1688784,
+      "seconds": 9.27,
+      "survivors": []
+    },
+    "verified-tests": {
+      "code": 0,
+      "peak_kib": 2097872,
+      "seconds": 97.69,
+      "survivors": []
+    },
+    "demo": {
+      "code": 0,
+      "peak_kib": 3787264,
+      "seconds": 154.41,
+      "survivors": []
+    },
+    "doctor": {
+      "code": 0,
+      "peak_kib": 998928,
+      "seconds": 10.88,
+      "survivors": []
+    }
+  }
+}

@@ -1,5 +1,6 @@
 """Rehear spectral or stereo components of an already released recording."""
 from pathlib import Path
+import math
 import subprocess
 import tempfile
 from typing import Literal, get_args
@@ -123,3 +124,32 @@ def focus_recording(wav, component, out):
     mix_db, component_db = [[round(float(10 * np.log10(e / length)), 2) if e else None for e in row]
                             for row in energy]
     return dest, {"name": component, **detail, "mix_rms_dbfs": mix_db, "component_rms_dbfs": component_db}
+
+
+def playback_volume(wav, gain_db, out):
+    """Apply one gain to every released sample, limited by the loudest channel."""
+    wav = Path(wav)
+    if not math.isfinite(gain_db):
+        raise ValueError("playback gain in dB must be finite")
+    if gain_db == 0:
+        return wav, None
+    peak = 0.
+    with open_recording(wav) as recording:
+        for block in recording.blocks(blocksize=65536, dtype="float64", always_2d=True):
+            peak = max(peak, float(np.max(np.abs(block), initial=0.)))
+    peak_db = 20 * math.log10(peak) if peak else None
+    applied = min(gain_db, -peak_db) if peak else 0.
+    detail = {"requested_db": gain_db, "applied_db": applied, "peak_before_dbfs": peak_db,
+              "basis": "One gain across the selected channels and interval. Peak limited to full scale by "
+                       "reducing the gain for the whole excerpt. The replay WAV and any waveform description "
+                       "use this playback level."}
+    if applied == 0:
+        return wav, detail
+    dest = Path(out) / f"{wav.stem}_gain_{float(gain_db)}.wav"
+    with tempfile.TemporaryDirectory(dir=out) as tmp:
+        rendered = Path(tmp) / "volume.wav"
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(wav), "-map", "0:a:0",
+                        "-af", f"volume={applied}dB:precision=double", "-map_metadata", "-1",
+                        "-c:a", "pcm_f32le", "-rf64", "auto", str(rendered)], check=True, capture_output=True)
+        rendered.replace(dest)
+    return dest, detail

@@ -21,7 +21,7 @@ from PIL import Image
 
 if __package__:
     from .action_view import action_views, exposure_view
-    from .audio_focus import Component, focus_recording
+    from .audio_focus import Component, focus_recording, playback_volume
     from .attention import fixation_box, focus_motion, focus_still, inspect_past, inspect_turn
     from .common import RecordedSource
     from .replay import replay
@@ -47,7 +47,7 @@ if __package__:
     from .turn_audio import released_samples, sample_at
 else:
     from action_view import action_views, exposure_view
-    from audio_focus import Component, focus_recording
+    from audio_focus import Component, focus_recording, playback_volume
     from attention import fixation_box, focus_motion, focus_still, inspect_past, inspect_turn
     from common import RecordedSource
     from replay import replay
@@ -600,7 +600,7 @@ class Viewing:
                 image_block(Path(detail["file"]))]
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
-               alternatives=None, per_second=False, mark_sound=None, sound_events=False):
+               alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0.):
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -628,7 +628,7 @@ class Viewing:
             if native_audio:
                 # Bound encoded media in a single reply, including high-rate multichannel recordings.
                 bytes_per_frame = math.ceil(wav.stat().st_size / track["sample_count"])
-                if component != "mix":
+                if component != "mix" or gain_db:
                     bytes_per_frame = max(bytes_per_frame, 4 * track["channels"])
                 sample_limit = max(1, MAX_INLINE_PCM_BYTES // bytes_per_frame)
                 if sample_at(packet, stop) - first > sample_limit:
@@ -642,15 +642,24 @@ class Viewing:
             original = wav
             wav, focus = focus_recording(original, component, original.parent)
             result = {"status": "recording"}
-            if describe:
-                with self.sound_session(replay=True) as sound:
-                    comparison = {"mix_wav": original, "component": component} if focus else {}
-                    result = sound.read(wav, start, stop, question=question, **comparison)
+            original_events = inspect_events(original, first, stop) if sound_events else None
+            with TemporaryDirectory() if gain_db else nullcontext() as tmp:
+                playback, gain = playback_volume(wav, gain_db, tmp)
+                if describe:
+                    with self.sound_session(replay=True) as sound:
+                        comparison = {"mix_wav": original, "component": component} if focus else {}
+                        result = sound.read(playback, start, stop, question=question, **comparison)
+                if gain:
+                    result["playback_gain"] = gain
+                    if sound_events:
+                        result["playback_sound_events"] = (original_events if playback == original else
+                                                           inspect_events(playback, first, stop))
+                adjusted_audio = audio_block(playback) if native_audio and gain else None
             result = {**result, "start_s": start, "end_s": stop, "next_start_s": stop if stop < end else None,
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first)}
             if sound_events:
-                result["sound_events"] = inspect_events(original, first, stop)
+                result["sound_events"] = original_events
             if alternatives is not None or per_second:
                 options = {"per_second": True, "first_sample": first} if per_second else {}
                 with self.match_session() as matcher:
@@ -671,7 +680,7 @@ class Viewing:
             result.setdefault("images_in_order", []).append(row)
             blocks.append(image)
         if native_audio:
-            blocks.append(audio_block(wav))
+            blocks.append(adjusted_audio or audio_block(wav))
         return [text_block(result), *blocks]
 
     def listen_layer(self, turn, start_s, end_s, channel, layer, native_audio, describe, focus=None):
@@ -962,7 +971,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
         async def listen(turn: int, question: str | None = None, start_s: float | None = None,
                          end_s: float | None = None, native_audio: bool = False, describe: bool = True,
                          component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False,
-                         mark_sound: list[float] | None = None, sound_events: bool = False):
+                         mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
@@ -974,12 +983,14 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             A close match on a component may sound different in the original mix.
             An empty list retrieves the closest catalogue sounds. Set per_second=true to compare each second
             independently, including the last partial second. The scores do not certify a source.
-            native_audio includes the selected WAV.
+            Set gain_db to adjust replay volume equally across channels. The WAV and local description use this gain.
+            With sound_events=true, compare playback_sound_events at that volume with the original sound_events.
+            The spectrum and matches use the signal before gain. native_audio includes the selected WAV.
             Set sound_events=true for short, overlapping category estimates from the original channels.
             Set describe=false to use the recording and spectrum without the local waveform reader.
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
-                                           alternatives, per_second, mark_sound, sound_events)
+                                           alternatives, per_second, mark_sound, sound_events, gain_db)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,

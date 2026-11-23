@@ -1,0 +1,1320 @@
+{
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "revisions": {
+    "before": "d646f77898f8103ca38f0574de897f25697f0a59",
+    "measured": "f7da0e586be4794f42e4a5e913a741635f38dfbc"
+  },
+  "data_source": "https://github.com/google-deepmind/perception_test",
+  "selection": "Fixed before responses. Three archived pairs and four new combinations of eight distinct visible-source sound classes from previously acquired single-film test scenes. Four more matched visible/hidden pairs of single scenes. No overlap of new clips with the earlier 44-film question panels or the archived soundtrack swaps. Keyed SHA-256 ordering (reel-whole-region-01/).",
+  "method": "One fresh session per arm, scene and version. Both versions use actual Synchformer and original waveform analysis. Reader receives view_media through 2.4 seconds followed by a bounded image-and-text ask_scene with the same rectangles. WAV attachment and optional 30B reader off. No annotation, file identity or other arm disclosed. Independent sessions can give different decisions. An unclear answer scores zero.",
+  "soundtrack_exchange": {
+    "method": "Two simultaneously displayed actions with frame-identical RGB in both arms (decoded SHA-256 recorded per pair). Each version plays the original soundtrack from one visible action, normalized to the same RMS. 15 fps, 24 kHz mono, 2.4 s, 320 × 240 per panel. Prompt asks which panel shows movement that fits the sound and allows unclear. The reference identifies the recording by construction. Human listeners did not judge these composites.",
+    "scores": {
+      "before": {
+        "all": {
+          "correct": 8,
+          "wrong": 2,
+          "unclear": 4,
+          "both_correct": 3,
+          "pairs": 7
+        },
+        "archived": {
+          "correct": 4,
+          "wrong": 1,
+          "unclear": 1,
+          "both_correct": 2,
+          "pairs": 3
+        },
+        "new_combinations": {
+          "correct": 4,
+          "wrong": 1,
+          "unclear": 3,
+          "both_correct": 1,
+          "pairs": 4
+        }
+      },
+      "measured": {
+        "all": {
+          "correct": 9,
+          "wrong": 2,
+          "unclear": 3,
+          "both_correct": 3,
+          "pairs": 7
+        },
+        "archived": {
+          "correct": 4,
+          "wrong": 1,
+          "unclear": 1,
+          "both_correct": 2,
+          "pairs": 3
+        },
+        "new_combinations": {
+          "correct": 5,
+          "wrong": 1,
+          "unclear": 2,
+          "both_correct": 1,
+          "pairs": 4
+        }
+      }
+    },
+    "timing_argmax_control": {
+      "before": {
+        "correct": 11,
+        "wrong": 3,
+        "unclear": 0,
+        "both_correct": 5,
+        "pairs": 7
+      },
+      "measured": {
+        "correct": 11,
+        "wrong": 3,
+        "unclear": 0,
+        "both_correct": 4,
+        "pairs": 7
+      }
+    },
+    "pairs": [
+      {
+        "name": "archive4",
+        "layout": "horizontal",
+        "regions": [
+          [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          [
+            0.5,
+            0,
+            1,
+            1
+          ]
+        ],
+        "ids": [
+          "video_3826",
+          "video_10096"
+        ],
+        "picture_sha256": "52854227592d47921451e4319a2c8ed32a144aa91c6a114e66bdec613e99eb39",
+        "labels": [
+          "Human:Sound(clapping)",
+          "Interaction:hitting"
+        ],
+        "start_s": [
+          1.500613,
+          9.30447
+        ],
+        "by_soundtrack": [
+          {
+            "reference": "left",
+            "before": {
+              "side": "left",
+              "reason": "The left panel’s repeated hand movements align more closely with the recorded impact sounds.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.6776,
+                0.1335
+              ],
+              "timing_argmax": "left"
+            },
+            "measured": {
+              "side": "left",
+              "reason": "The left panel’s movements align more closely with the repeated sounds; the timing comparison favors it over the right panel.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.5167,
+                0.1284
+              ],
+              "timing_argmax": "left"
+            }
+          },
+          {
+            "reference": "right",
+            "before": {
+              "side": "right",
+              "reason": "The right panel’s movement aligns more closely with the timing of the recorded sounds.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.3306,
+                0.8983
+              ],
+              "timing_argmax": "right"
+            },
+            "measured": {
+              "side": "right",
+              "reason": "The right panel’s movement aligns more closely with the recorded sound in the timing comparison.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.3533,
+                0.7363
+              ],
+              "timing_argmax": "right"
+            }
+          }
+        ]
+      },
+      {
+        "name": "archive6",
+        "layout": "horizontal",
+        "regions": [
+          [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          [
+            0.5,
+            0,
+            1,
+            1
+          ]
+        ],
+        "ids": [
+          "video_7023",
+          "video_5695"
+        ],
+        "picture_sha256": "eb15b62da1a07efb44eba8188f6ca16dc9537a2272687a15b4fba3a68577cc39",
+        "labels": [
+          "Object:breaking of something",
+          "Human:Speech"
+        ],
+        "start_s": [
+          10.748315,
+          20.433333
+        ],
+        "by_soundtrack": [
+          {
+            "reference": "left",
+            "before": {
+              "side": "left",
+              "reason": "The left panel’s movement aligns more closely with the recorded sound; the timing comparison strongly favors it.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.7323,
+                0.0059
+              ],
+              "timing_argmax": "left"
+            },
+            "measured": {
+              "side": "left",
+              "reason": "The timing comparison favors the left panel’s movement as matching the recorded sound.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.6377,
+                0.0039
+              ],
+              "timing_argmax": "left"
+            }
+          },
+          {
+            "reference": "right",
+            "before": {
+              "side": "right",
+              "reason": "The right panel’s movement aligns more closely with the timing of the recorded sound.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.0093,
+                0.8647
+              ],
+              "timing_argmax": "right"
+            },
+            "measured": {
+              "side": "right",
+              "reason": "The right panel’s movement aligns more closely with the recorded sound, then stops around the time the audio becomes silent.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.0111,
+                0.7202
+              ],
+              "timing_argmax": "right"
+            }
+          }
+        ]
+      },
+      {
+        "name": "archive1",
+        "layout": "horizontal",
+        "regions": [
+          [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          [
+            0.5,
+            0,
+            1,
+            1
+          ]
+        ],
+        "ids": [
+          "video_2051",
+          "video_4367"
+        ],
+        "picture_sha256": "f938c698aeeefe2daa655ee0b6c9b42c61b0f909705a99b225ef48eadfa7d93b",
+        "labels": [
+          "Object:opening/closing of something",
+          "Animal:sound"
+        ],
+        "start_s": [
+          4.632239,
+          1.192889
+        ],
+        "by_soundtrack": [
+          {
+            "reference": "left",
+            "before": {
+              "side": "unclear",
+              "reason": "The timing comparison slightly favors the right panel, but the difference is too small to distinguish a match confidently.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.2279,
+                0.3078
+              ],
+              "timing_argmax": "right"
+            },
+            "measured": {
+              "side": "right",
+              "reason": "The right panel’s movement aligns more closely with the recorded sound in the timing comparison.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.2269,
+                0.6408
+              ],
+              "timing_argmax": "right"
+            }
+          },
+          {
+            "reference": "right",
+            "before": {
+              "side": "left",
+              "reason": "The strongest sound occurs around 0.68 seconds, alongside movement in the left panel; the timing comparison also favors the left.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.4086,
+                0.3239
+              ],
+              "timing_argmax": "left"
+            },
+            "measured": {
+              "side": "unclear",
+              "reason": "The sound has a prominent burst around 0.68 seconds, but the timing comparison does not clearly distinguish either panel’s movement as its source.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.3263,
+                0.4364
+              ],
+              "timing_argmax": "right"
+            }
+          }
+        ]
+      },
+      {
+        "name": "new0",
+        "layout": "vertical",
+        "regions": [
+          [
+            0,
+            0,
+            1,
+            0.5
+          ],
+          [
+            0,
+            0.5,
+            1,
+            1
+          ]
+        ],
+        "ids": [
+          "video_4633",
+          "video_10309"
+        ],
+        "labels": [
+          "Interaction: fluid",
+          "Object:opening/closing of something"
+        ],
+        "end_s": [
+          9.5,
+          8.5
+        ],
+        "picture_sha256": "050949565ad599a642b1e6b20615998308961e2b42859078571c9aa201d223c7",
+        "by_soundtrack": [
+          {
+            "reference": "top",
+            "before": {
+              "side": "top",
+              "reason": "The top panel shows liquid being poured, matching the recorded pouring and gurgling sound.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.802,
+                0.4609
+              ],
+              "timing_argmax": "top"
+            },
+            "measured": {
+              "side": "top",
+              "reason": "The top panel shows liquid being poured, consistent with the recorded pouring and water-like sound.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.6898,
+                0.4716
+              ],
+              "timing_argmax": "top"
+            }
+          },
+          {
+            "reference": "bottom",
+            "before": {
+              "side": "bottom",
+              "reason": "The bottom panel’s repeated hand movements fit the recorded impact-like sounds; the top panel shows liquid being poured.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.7776,
+                0.8476
+              ],
+              "timing_argmax": "bottom"
+            },
+            "measured": {
+              "side": "bottom",
+              "reason": "The bottom panel’s repeated hand movements align more closely with the recorded sharp impact sounds.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.6222,
+                0.8805
+              ],
+              "timing_argmax": "bottom"
+            }
+          }
+        ]
+      },
+      {
+        "name": "new1",
+        "layout": "horizontal",
+        "regions": [
+          [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          [
+            0.5,
+            0,
+            1,
+            1
+          ]
+        ],
+        "ids": [
+          "video_1265",
+          "video_3144"
+        ],
+        "labels": [
+          "Object:breaking of something",
+          "Interaction:dropping"
+        ],
+        "end_s": [
+          6.0,
+          18.0
+        ],
+        "picture_sha256": "c0743f99cc0bcff35e32a5081cf04204e7882c901d6b1e06b75b6bf346dea9a9",
+        "by_soundtrack": [
+          {
+            "reference": "left",
+            "before": {
+              "side": "right",
+              "reason": "The right panel shows fabric being handled as the recording produces shuffling and tearing-like sounds; the left panel is nearly still.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.8167,
+                0.5326
+              ],
+              "timing_argmax": "left"
+            },
+            "measured": {
+              "side": "left",
+              "reason": "The timing comparison favors the left panel: its movement aligns more closely with the recorded sound.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.8509,
+                0.3442
+              ],
+              "timing_argmax": "left"
+            }
+          },
+          {
+            "reference": "right",
+            "before": {
+              "side": "unclear",
+              "reason": "The recording has a steady mechanical whir, but it does not clearly track the visible movement in either panel.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.9132,
+                0.7947
+              ],
+              "timing_argmax": "left"
+            },
+            "measured": {
+              "side": "unclear",
+              "reason": "The sound is a steady mechanical whir, and the timing comparison does not clearly distinguish the panels.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.8138,
+                0.824
+              ],
+              "timing_argmax": "right"
+            }
+          }
+        ]
+      },
+      {
+        "name": "new2",
+        "layout": "vertical",
+        "regions": [
+          [
+            0,
+            0,
+            1,
+            0.5
+          ],
+          [
+            0,
+            0.5,
+            1,
+            1
+          ]
+        ],
+        "ids": [
+          "video_701",
+          "video_4237"
+        ],
+        "labels": [
+          "Interaction:hitting",
+          "Human:Sound(clapping)"
+        ],
+        "end_s": [
+          13.0,
+          3.5
+        ],
+        "picture_sha256": "c1e93392ef7a990026336fa1cf06c0e00bb828e520f060ea7504dba37741a081",
+        "by_soundtrack": [
+          {
+            "reference": "top",
+            "before": {
+              "side": "unclear",
+              "reason": "The sound is a low rumble, and the available timing comparison does not clearly distinguish which panel’s movement produced it.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.6966,
+                0.5366
+              ],
+              "timing_argmax": "top"
+            },
+            "measured": {
+              "side": "unclear",
+              "reason": "The timing comparisons are close, and the recorded sound does not clearly distinguish either panel’s movement.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.5293,
+                0.5859
+              ],
+              "timing_argmax": "bottom"
+            }
+          },
+          {
+            "reference": "bottom",
+            "before": {
+              "side": "bottom",
+              "reason": "The hand movements in the bottom panel align with the recorded sharp impacts.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.5275,
+                0.9305
+              ],
+              "timing_argmax": "bottom"
+            },
+            "measured": {
+              "side": "bottom",
+              "reason": "The bottom panel’s repeated hand movements align more closely with the recorded impact sounds.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.3539,
+                0.8852
+              ],
+              "timing_argmax": "bottom"
+            }
+          }
+        ]
+      },
+      {
+        "name": "new3",
+        "layout": "horizontal",
+        "regions": [
+          [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          [
+            0.5,
+            0,
+            1,
+            1
+          ]
+        ],
+        "ids": [
+          "video_6711",
+          "video_11299"
+        ],
+        "labels": [
+          "Human:other",
+          "Other"
+        ],
+        "end_s": [
+          19.0,
+          21.5
+        ],
+        "picture_sha256": "fb29586d24b6d3841e1feb2753d4f4bee488e1f8ef1f15456934b4a954e7c3ae",
+        "by_soundtrack": [
+          {
+            "reference": "left",
+            "before": {
+              "side": "unclear",
+              "reason": "A sharp sound occurs around 1.7 seconds, but neither panel shows a clearly corresponding movement that distinguishes it from the other.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.4225,
+                0.3686
+              ],
+              "timing_argmax": "left"
+            },
+            "measured": {
+              "side": "right",
+              "reason": "The right panel’s movement aligns more closely with the sharp sound near 1.7 seconds; the timing comparison also favors the right panel.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.4196,
+                0.7113
+              ],
+              "timing_argmax": "right"
+            }
+          },
+          {
+            "reference": "right",
+            "before": {
+              "side": "right",
+              "reason": "The right panel’s hand movements align more closely with the recorded shuffling and scratching sounds.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.5591,
+                0.9002
+              ],
+              "timing_argmax": "right"
+            },
+            "measured": {
+              "side": "right",
+              "reason": "The right panel’s movement has a stronger timing match with the recorded sound in the synchronization comparison.",
+              "samples": 57600,
+              "near_zero_mass": [
+                0.6001,
+                0.9636
+              ],
+              "timing_argmax": "right"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "single_scene": {
+    "method": "2.4 seconds of original picture and channels ending near the annotated event. Four sound classes, one visible and one hidden source each. A separate blind GPT session selected up to two rectangles from four pictures at 0.15, 0.8, 1.55 and 2.32 s without sound. Two new sessions then received identical region coordinates, one per version, and answered whether the source is visible or hidden near the end, with unclear allowed. A visible answer also needs a normalized point. Point agreement uses the annotated source-object box nearest the end (within 0.55 s). No new human panel rated the clips.",
+    "scores": {
+      "before": {
+        "correct": 0,
+        "wrong": 0,
+        "unclear": 8,
+        "visible_objects_located": 0,
+        "visible_objects": 4,
+        "false_visible_in_four_hidden": 0
+      },
+      "measured": {
+        "correct": 0,
+        "wrong": 0,
+        "unclear": 8,
+        "visible_objects_located": 0,
+        "visible_objects": 4,
+        "false_visible_in_four_hidden": 0
+      }
+    },
+    "by_film": [
+      {
+        "video_id": "video_6720",
+        "end_s": 23.0,
+        "sound_class": "Animal:sound",
+        "reference": "hidden",
+        "reference_objects": [],
+        "regions": [
+          [
+            0,
+            0,
+            0.64,
+            0.99
+          ],
+          [
+            0.65,
+            0.59,
+            1,
+            0.86
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The visible shoes remain still near the end, and the sound cannot be confidently linked to a visible source.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.0995,
+                0.3809
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.3056,
+                0.4035
+              ]
+            }
+          ],
+          "samples": 115200
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The shoes are visible, but no clear movement near the end connects them to the faint sound.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.1721,
+                0.3913
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.3137,
+                0.3969
+              ]
+            }
+          ],
+          "samples": 115200
+        }
+      },
+      {
+        "video_id": "video_3343",
+        "end_s": 22.0,
+        "sound_class": "Animal:sound",
+        "reference": "visible",
+        "reference_objects": [
+          [
+            "shoe-lace",
+            [
+              0.3710170090198517,
+              0.5983380079269409,
+              0.47895100712776184,
+              0.7240769863128662
+            ]
+          ]
+        ],
+        "regions": [
+          [
+            0.3,
+            0.4,
+            0.51,
+            0.84
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "A person moves their hands near a shoe, but the sound comparisons do not identify a source or establish that the movement produces it.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.4405
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.278
+              ]
+            }
+          ],
+          "samples": 115200
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The person is handling a shoe, but the audio comparisons do not clearly identify the sound or link it to that movement.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.3998
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.286
+              ]
+            }
+          ],
+          "samples": 115200
+        }
+      },
+      {
+        "video_id": "video_4908",
+        "end_s": 15.0,
+        "sound_class": "Interaction:hitting",
+        "reference": "hidden",
+        "reference_objects": [],
+        "regions": [
+          [
+            0.177,
+            0.0,
+            0.779,
+            0.615
+          ],
+          [
+            0.119,
+            0.085,
+            0.71,
+            0.65
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The faint buzz or hiss near the end cannot be confidently linked to a visible object; the item being handled has moved out of view.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.9329,
+                0.9148
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.941,
+                0.9267
+              ]
+            }
+          ],
+          "samples": 115200
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The faint sound cannot be confidently attributed to a visible object; the item being moved leaves the picture near the end.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.642,
+                0.6659
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.6012,
+                0.7164
+              ]
+            }
+          ],
+          "samples": 115200
+        }
+      },
+      {
+        "video_id": "video_7705",
+        "end_s": 25.0,
+        "sound_class": "Interaction:hitting",
+        "reference": "visible",
+        "reference_objects": [
+          [
+            "carrot",
+            [
+              0.5442349910736084,
+              0.3364650011062622,
+              0.6921160221099854,
+              0.42620399594306946
+            ]
+          ]
+        ],
+        "regions": [
+          [
+            0.5,
+            0.02,
+            0.85,
+            0.45
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "A low thud occurs near the end while a hand moves over the objects, but the sound cannot be confidently attributed to a visible source.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.9402
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.8983
+              ]
+            }
+          ],
+          "samples": 115200
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "A low thud occurs near the end as the hand moves among the objects, but the evidence does not establish what produced it.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.839
+              ]
+            },
+            {
+              "channels": [
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.8138
+              ]
+            }
+          ],
+          "samples": 115200
+        }
+      },
+      {
+        "video_id": "video_10676",
+        "end_s": 34.5,
+        "sound_class": "Human:Speech",
+        "reference": "hidden",
+        "reference_objects": [],
+        "regions": [
+          [
+            0.308,
+            0.45,
+            0.408,
+            0.63
+          ],
+          [
+            0.665,
+            0.615,
+            0.725,
+            0.945
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "A faint buzz or hum is present near the end, but the images and timing comparisons do not identify its source.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.4495,
+                0.3208
+              ]
+            }
+          ],
+          "samples": 115200
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "A faint buzz or hum is heard near the end, but the static picture and timing comparisons do not identify its source.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.2463,
+                0.1899
+              ]
+            }
+          ],
+          "samples": 115200
+        }
+      },
+      {
+        "video_id": "video_7991",
+        "end_s": 19.0,
+        "sound_class": "Human:Speech",
+        "reference": "visible",
+        "reference_objects": [
+          [
+            "person",
+            [
+              0.0,
+              0.0,
+              0.4403809905052185,
+              0.44026100635528564
+            ]
+          ]
+        ],
+        "regions": [
+          [
+            0.0,
+            0.0,
+            0.51,
+            0.34
+          ],
+          [
+            0.1,
+            0.31,
+            0.26,
+            0.54
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The sound near the end cannot be confidently linked to the visible hand or cup; it may come from outside the picture.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1,
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.8163,
+                0.5104
+              ]
+            }
+          ],
+          "samples": 115200
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The sound resembles a voice, but the person's face is outside the picture, so the source cannot be confirmed.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1,
+                2
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.8672,
+                0.6001
+              ]
+            }
+          ],
+          "samples": 115200
+        }
+      },
+      {
+        "video_id": "video_97",
+        "end_s": 13.5,
+        "sound_class": "Other",
+        "reference": "hidden",
+        "reference_objects": [],
+        "regions": [
+          [
+            0,
+            0.78,
+            0.72,
+            1
+          ],
+          [
+            0,
+            0.07,
+            0.22,
+            0.75
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The sound near the end resembles footsteps, but no visible movement clearly identifies its source.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.5939,
+                0.3585
+              ]
+            }
+          ],
+          "samples": 105840
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The sound near the end resembles footsteps, but no corresponding source is visible or identifiable with confidence.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.0934,
+                0.1468
+              ]
+            }
+          ],
+          "samples": 105840
+        }
+      },
+      {
+        "video_id": "video_3531",
+        "end_s": 9.0,
+        "sound_class": "Other",
+        "reference": "visible",
+        "reference_objects": [
+          [
+            "button",
+            [
+              0.4162769913673401,
+              0.6605150103569031,
+              0.45105400681495667,
+              0.7196789979934692
+            ]
+          ]
+        ],
+        "regions": [
+          [
+            0.23,
+            0.48,
+            0.6,
+            0.78
+          ]
+        ],
+        "before": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The person’s hands move near the vest, but the sound comparisons and timing do not establish what is producing the sound near the end.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.9761
+              ]
+            }
+          ],
+          "samples": 105840
+        },
+        "measured": {
+          "visibility": "unclear",
+          "point": null,
+          "reason": "The hands move near the vest, but the sound comparisons and timing do not establish what produces the sound near the end.",
+          "inside_reference_box": false,
+          "channel_timing": [
+            {
+              "channels": [
+                1
+              ],
+              "digital_silence": false,
+              "near_zero_mass": [
+                0.9772
+              ]
+            }
+          ],
+          "samples": 105840
+        }
+      }
+    ]
+  },
+  "edge_control": {
+    "method": "Two 384 × 77 displayed regions with movement only near their outer edges. 50 fps synthetic input. Paused at 1.103 and 2.28 s. Replayed 0.312 to 2.28 s. Compared all four response blocks across two versions of the film with completely different pictures and sound from the cutoff onward. A request exceeding the cutoff by 1 microsecond failed.",
+    "before": {
+      "blocks": [
+        "52b9106757735881d5a555d34c597c420f465ff93ded94c94e421fd484f8aa16",
+        "6d2405875ecf44e7af952d3096117a25fcc380c8920b9d79a7a2fb850fbee845",
+        "b26da63005d40984106c736fb5fd5043b0964e72a5e9b2b7f5d4bf0a8b880598",
+        "448ca514fdf58e2b04190340a6b13e745a577d4f062e9ab5cdc6c092f24faebd"
+      ],
+      "static": [
+        0,
+        1
+      ],
+      "scores": [
+        null,
+        null
+      ],
+      "bounds": [
+        [
+          153,
+          0,
+          230,
+          77
+        ],
+        [
+          153,
+          77,
+          230,
+          154
+        ]
+      ],
+      "size": [
+        384,
+        154
+      ],
+      "released_samples": 47232
+    },
+    "after": {
+      "blocks": [
+        "ffec4312ce9675ee9a714b2298ef2e6bef8ca89e8d2b3ef2851011dfa268ab0c",
+        "6d2405875ecf44e7af952d3096117a25fcc380c8920b9d79a7a2fb850fbee845",
+        "3226f76de229741076320644a1de086b6b74bd56f6815f1520dca3bba1156e0d",
+        "448ca514fdf58e2b04190340a6b13e745a577d4f062e9ab5cdc6c092f24faebd"
+      ],
+      "static": [],
+      "scores": [
+        0.6486,
+        0.2651
+      ],
+      "bounds": [
+        [
+          0,
+          0,
+          384,
+          77
+        ],
+        [
+          0,
+          77,
+          384,
+          154
+        ]
+      ],
+      "size": [
+        384,
+        154
+      ],
+      "released_samples": 47232
+    },
+    "post_cutoff_identical": true
+  },
+  "checks": {
+    "door_before_8_5_seconds": {
+      "key_recording": "A closed brown door remains still against a plain wall throughout the clip. The audio measurements show a louder, high-frequency change around 4.6–6.7 seconds, though its source is uncertain; the speech reader found no intelligible words.",
+      "room_only": "A simple illustration showed a closed brown door that remained still throughout. The audio measurements showed a quiet, steady signal that may be hiss, with no clear change or intelligible words detected."
+    },
+    "door_post_cutoff_twins_matching_blocks": 32,
+    "cli_first_archived_arm": [
+      {
+        "start_s": 0.0,
+        "end_s": 2.4,
+        "padded_s": 2.6,
+        "channels": [
+          {
+            "channels": [
+              1
+            ],
+            "digital_silence": false,
+            "near_zero_mass": [
+              0.5178,
+              0.1468
+            ]
+          }
+        ]
+      }
+    ],
+    "regression_tests": 169,
+    "demo": "Read all three generated 70 s demo pages with music and checked six planted faults."
+  }
+}

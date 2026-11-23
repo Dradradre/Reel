@@ -527,6 +527,43 @@ class TransportTests(unittest.TestCase):
                 self.assertEqual(report["original_sound_match"]["status"], "available")
             self.assertEqual(matches.read.call_count, 2)
 
+    def test_scene_alternatives_and_ranged_words_use_the_same_released_recording(self):
+        from reel.live_speech import SpeechReader
+        from reel.play import play
+
+        rate = 8000
+        samples = np.arange(16000, dtype=np.int16)
+        source = self.root / "track.wav"
+        sf.write(source, samples, rate)
+        paths = list(play(source, self.root / "released", step=1, continuous=True, recording_only=True))
+        words, matches = SpeechReader(), Mock()
+        matches.read.return_value = {"status": "available"}
+        reader = Viewing(iter(paths), None, words, "en", matcher=matches)
+        readings = []
+        def recognize(job):
+            data, sr = sf.read(job["wav"], dtype="int16")
+            self.assertEqual(sr, rate)
+            self.assertEqual(job["history_files"], [])
+            readings.append((data, job["lang"]))
+            return {"status": "available", "windows": []}
+
+        with patch.object(words, "request", side_effect=recognize):
+            reader.release(1)
+            with self.assertRaises(ValueError):
+                reader.ask_scene(.75, 1.25, alternatives=[])
+            reader.release(2)
+            base = json.loads(reader.ask_scene(.75, 1.25)[0].text)
+            self.assertNotIn("speech", base)
+            scene = json.loads(reader.ask_scene(.75, 1.25, alternatives=[])[0].text)
+            report = json.loads(reader.speech(2, "ko", .75, 1.25)[0].text)
+            self.assertEqual(scene["speech"], report)
+            self.assertEqual([lang for _, lang in readings], ["en", "ko"])
+            for data, _ in readings:
+                np.testing.assert_array_equal(data, samples[6000:10000])
+            with self.assertRaises(ValueError):
+                reader.speech(1, None, .75, 1.25)
+            self.assertEqual(reader.hearing_by_turn, {})
+
     def test_listen_and_compare_release_only_helpers_they_started(self):
         from reel.hearing import SoundReader
 

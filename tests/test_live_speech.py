@@ -1,3 +1,4 @@
+import math
 import json
 import os
 from pathlib import Path
@@ -180,6 +181,38 @@ class LiveSpeechTests(unittest.TestCase):
                     (copied / name).write_bytes((middle / name).read_bytes())
                 reader.inspect(copied)
                 self.assertAlmostEqual(captured[-1][0], packet["audio"]["first_sample_on_film"] / rate)
+
+    def test_exact_speech_replay_excludes_neighbours_and_preserves_live_history(self):
+        rate = 11025
+        signal = np.arange(3 * rate, dtype=np.int16).reshape(-1, 1)
+        samples = np.column_stack((signal, -signal))
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "recording.wav"
+            sf.write(source, samples, rate)
+            paths = list(play(source, Path(tmp) / "view", step=1, continuous=True, recording_only=True))
+            worker = LiveSpeech()
+            captured = []
+            def window(audio, sr, start, end, lang):
+                captured.append((start, end, audio.copy()))
+                return {}
+            with SpeechReader() as reader, patch.object(reader, "request", side_effect=lambda job: worker.read(**job)), \
+                 patch.object(worker, "window", side_effect=window):
+                for path in paths[:2]:
+                    reader.read(path.parent, json.loads(path.read_text()), "en")
+                saved = worker.history.copy()
+                start, end = .73013, 1.33529
+                replay = reader.inspect(paths[1].parent, "ko", start_s=start, end_s=end)
+                self.assertEqual(replay["language_hint"], "ko")
+                first, last = math.ceil(start * rate), math.ceil(end * rate)
+                self.assertEqual(captured[-1][:2], (first / rate, end))
+                np.testing.assert_array_equal(captured[-1][2], samples[first:last] / 32768)
+                np.testing.assert_array_equal(worker.history, saved)
+                self.assertEqual(worker.next_sample, 2 * rate)
+                reader.read(paths[2].parent, json.loads(paths[2].read_text()), "en")
+                np.testing.assert_array_equal(captured[-1][2], samples / 32768)
+                for a, b in ((0, None), (None, 1), (-1, 1), (1, 1), (.5, 2.01), (0, 8.01)):
+                    with self.subTest(bounds=(a, b)), self.assertRaises(ValueError):
+                        reader.inspect(paths[1].parent, start_s=a, end_s=b)
 
     def test_archived_transcript_can_be_read_without_a_helper(self):
         with tempfile.TemporaryDirectory() as tmp:

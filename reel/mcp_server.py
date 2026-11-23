@@ -208,6 +208,11 @@ class Viewing:
             directory = self.paths[bisect_left(self.paths, end_s, key=end_of)].parent
             joint, scene = self.read_scene(("interval", start_s, end_s, question), directory, question=question,
                                           interval=(start_s, end_s), native_audio=native_audio)
+            speech = None
+            if scene.get("wav") and self.words is not None and (question is not None or alternatives is not None):
+                with self.words.for_replay():
+                    speech = self.words.read_excerpt(scene["wav"], scene["rate_hz"], scene["channels"],
+                                                     scene["first_sample"], end_s, self.lang)
             match = None
             if scene.get("wav") and alternatives is not None:
                 match = self.match_original(scene["wav"], start_s, end_s, alternatives, per_second=True,
@@ -215,6 +220,8 @@ class Viewing:
             if sync_regions:
                 timing = published_timing(scene, sync_regions)
         report = {"start_s": start_s, "end_s": end_s, "joint": joint, "images_in_order": [], "audio": None}
+        if speech is not None:
+            report["speech"] = speech
         if sync_regions:
             report["region_timing"] = timing
         if match is not None:
@@ -656,11 +663,15 @@ class Viewing:
                       wavs_in_order=["reference", "target"] if native_audio else [])
         return [text_block(report), *blocks]
 
-    def speech(self, turn, lang=None):
+    def speech(self, turn, lang=None, start_s=None, end_s=None):
         with self.lock:
             directory, packet = self.published(turn)
             if not packet["audio"]:
                 return [text_block({"status": "no_audio"})]
+            if start_s is not None or end_s is not None:
+                with self.words.for_replay(), self.sound_session(replay=True):
+                    result = self.words.inspect(directory, lang or self.lang, start_s=start_s, end_s=end_s)
+                return [text_block(result)]
             original = lang is None or lang == self.lang
             saved = self.hearing_by_turn.get(turn, {}).get("speech")
             if original and saved and saved["status"] == "available":
@@ -835,7 +846,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                             alternatives: list[str] | None = None, sync_regions: list[list[float]] | None = None):
             """Ask what happened within an exact span of released film, up to eight seconds across pauses.
             With only start_s and end_s, get pictures, channel levels and times of frequency-band changes
-            without starting a model. Give alternatives to compare sound descriptions with each second of original
+            without starting a model. Asking a question or giving alternatives also checks this exact recording
+            for voice activity and independently supported words. Give alternatives to compare sound descriptions with each second of original
             audio on the same clock, or [] for catalogue neighbours. A match can have an unrelated visible cause. Supply a question for a local reading of the waveform alone and with the
             pictures. A band change marks an acoustic observation. Its source may be unknown.
             For competing visible movements, pass sync_regions as normalized [left,top,right,bottom] boxes.
@@ -896,10 +908,12 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             return await asyncio.to_thread(reader.listen_layer, turn, start_s, end_s, channel, layer, native_audio, describe, focus)
 
         @server.tool(annotations=hints, structured_output=False)
-        async def heard_words(turn: int, lang: str | None = None):
-            """Check voice activity and timed words through this turn. If you know the language, pass its code
+        async def heard_words(turn: int, lang: str | None = None, start_s: float | None = None, end_s: float | None = None):
+            """Check voice activity and timed words through this turn. Give start_s and end_s to hear just those
+            samples, up to eight seconds across pauses, independently of the surrounding conversation.
+            If you know the language, pass its code
             (e.g. bn for Bengali) to rehear this recording. The hint applies only to this request.
             possible_words are uncertain gap readings."""
-            return await asyncio.to_thread(reader.speech, turn, lang)
+            return await asyncio.to_thread(reader.speech, turn, lang, start_s, end_s)
 
         server.run(transport="stdio")

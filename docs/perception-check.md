@@ -1220,3 +1220,11 @@ GPT는 그림과 로컬 도구의 소리 분석 결과를 받았다. 선택형 3
 이 점수는 세 가지 선택형 질문에서 사람 주석과 일치한 비율이다. 자유롭게 본 뒤의 첫인상과 같은 문항을 푼 사람끼리의 일치율은 이번에 재지 않았다. [기존 영상 재측정](benchmarks/perception-agreement-v1-replay-results.json) [별도 6편의 문항](benchmarks/perception-agreement-holdout-v1.json) [별도 6편의 응답](benchmarks/perception-agreement-holdout-v1-results.json)
 
 다른 모델도 같은 문항에 각자의 답을 내고 `python examples/check_perception_agreement.py 응답.json`으로 채점할 수 있다. 별도 6편은 `--panel docs/benchmarks/perception-agreement-holdout-v1.json`을 붙인다. [응답 파일 형식](../examples/check_perception_agreement.py)
+
+## 대화 중 한 구간만 다시 들었을 때
+
+발화가 있었는지와 무슨 말을 했는지를 따로 확인하기 위해 FLEURS의 낭독 여섯 개와 ESC-10의 환경음 여섯 개를 썼다. 녹음 앞뒤에 다른 언어를 쓰는 화자의 말을 3초씩 붙이고 2.91초마다 재생을 멈췄다. 같은 녹음 양옆을 또 다른 화자의 말로 바꾼 뒤 두 버전에서 가운데 구간만 다시 들었다.
+
+12개 모두 양옆에서 무슨 말을 했든 다시 들은 원음의 샘플과 발화 검출기 및 받아쓰기 응답이 같았다. 여섯 언어의 낭독에서는 발화 구간과 단어가 나왔고 환경음 여섯 개에서는 둘 다 비었다. 띄어쓰기와 문장부호를 빼고 사람 대본과 대조하면 스페인어와 한국어 문장은 일치했지만 벵골어 문장은 정답 50글자에 편집 거리가 34였다. 말소리를 감지하고도 상당 부분을 놓친 예다. [녹음별 단어 수와 글자 오류](benchmarks/speech-excerpt-controls.json)
+
+문이 열리기 전 열쇠 A/B에서 GPT는 A의 4.6초 무렵부터 높은 소리가 반복된다고 답했다. B에서는 낮고 일정한 소리를 짚었으며 둘 다 대사를 보고하지 않았다. 8.5초 이후만 바꾼 사본에서는 구간 받아쓰기를 포함한 재생 응답 32개가 바이트 단위로 일치했다.

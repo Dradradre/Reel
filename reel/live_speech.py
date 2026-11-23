@@ -84,6 +84,17 @@ class SpeechReader(LocalReader):
         job = {"wav": str((directory / audio["wav"]).resolve()), "rate": audio["rate_hz"],
                "channels": audio["channels"], "first_sample": audio["first_sample_on_film"],
                "end": view["end_s"], "lang": lang, "history_files": history}
+        return self.recognize(job, saved)
+
+    def read_excerpt(self, wav, rate, channels, first, end, lang, *, verify=False):
+        job = {"wav": str(Path(wav).resolve()), "rate": rate, "channels": channels,
+               "first_sample": first, "end": end, "lang": lang, "history_files": []}
+        result = self.recognize(job) if verify else self.request(job)
+        return {**result, "basis": "Only the selected recording enters this speech reading. Activity intervals are "
+                                   "estimated voice. Timed words are supported by two listening windows. "
+                                   "A short or unclear voice may yield no intervals or words."}
+
+    def recognize(self, job, saved=None):
         if self.waveform is None or self.waveform.failure:
             return self.request(job)
         if saved:
@@ -113,17 +124,22 @@ class SpeechReader(LocalReader):
             result["independent_word_check"] = status
             return result
 
-    def inspect(self, directory, lang=None):
+    def inspect(self, directory, lang=None, *, start_s=None, end_s=None):
         # The presenter assembles playback history. The speech worker needs only audio dependencies.
         if __package__:
-            from .turn_audio import preceding_audio
+            from .turn_audio import preceding_audio, released_samples
         else:
-            from turn_audio import preceding_audio
+            from turn_audio import preceding_audio, released_samples
         directory = Path(directory).resolve()
         view = json.loads((directory / "view.json").read_text())
         audio = view.get("audio")
         if view.get("schema") != "reel.play.v1" or not audio:
             raise ValueError("no recorded audio in this playback interval")
+        if start_s is not None or end_s is not None:
+            if start_s is None or end_s is None or not start_s < end_s <= start_s + CONTEXT_SECONDS:
+                raise ValueError("give both ends of a speech interval up to eight seconds long")
+            wav, _, end, first, _ = released_samples(directory, start_s, end_s, CONTEXT_SECONDS)
+            return self.read_excerpt(wav, audio["rate_hz"], audio["channels"], first, end, lang, verify=True)
         saved = view.get("speech", {})
         cached = saved.get("status") == "available" and saved.get("language_hint") == lang
         if cached and (self.waveform is None or self.waveform.failure
@@ -253,9 +269,11 @@ class LiveSpeech:
                     break
             windows.append(self.window(context, rate, *bounds, lang, **options))
             history = context
-        self.history = history.copy()
-        self.next_sample = first_sample + len(samples)
-        self.rate = rate
+        # A replay supplies its own history and must not replace the live listening window.
+        if history_files is None:
+            self.history = history.copy()
+            self.next_sample = first_sample + len(samples)
+            self.rate = rate
         result = {"status": "available", "windows": windows}
         if any("outside_speech_activity" in c for w in windows for c in w.get("channels", ())):
             result["outside_speech_activity_basis"] = (
@@ -276,7 +294,7 @@ def serve():
         except Exception as error:
             result = {"status": "unavailable", "reason": str(error),
                       "startup_failure": isinstance(error, (ImportError, OSError))}
-            reader = LiveSpeech()
+            # Failed reads leave the last successful streaming window in place.
         print(json.dumps(result, ensure_ascii=False), flush=True)
 
 

@@ -1,0 +1,113 @@
+{
+  "method": "Google FLEURS first local test recording per language and six ESC-10 recordings in SHA-256(excerpt-v1/filename) order. Mono PCM 16 kHz. The target recording follows three seconds of speech from another language and precedes three more seconds from that speaker. Both surrounding excerpts are replaced for the second run. Playback pauses every 2.91 s. Rehear the target with its language hint through the saved turn, across pauses. Assert bit-identical PCM and identical speech responses for the two contexts. Character edit distance uses casefold, NFC and Unicode letter, mark and number categories.",
+  "results": [
+    {
+      "language": "bn_in",
+      "file": "bn_in-0.wav",
+      "kind": "voice",
+      "activity": 1,
+      "two_excerpts_equal": true,
+      "word_pieces": 4,
+      "reference_chars": 50,
+      "char_edits": 34
+    },
+    {
+      "language": "bn_in",
+      "file": "5-220955-A-40.wav",
+      "kind": "environment",
+      "activity": 0,
+      "two_excerpts_equal": true,
+      "word_pieces": 0
+    },
+    {
+      "language": "en_us",
+      "file": "en_us0.audio",
+      "kind": "voice",
+      "activity": 1,
+      "two_excerpts_equal": true,
+      "word_pieces": 14,
+      "reference_chars": 75,
+      "char_edits": 2
+    },
+    {
+      "language": "en_us",
+      "file": "3-164120-A-11.wav",
+      "kind": "environment",
+      "activity": 0,
+      "two_excerpts_equal": true,
+      "word_pieces": 0
+    },
+    {
+      "language": "es_419",
+      "file": "es_4190.audio",
+      "kind": "voice",
+      "activity": 1,
+      "two_excerpts_equal": true,
+      "word_pieces": 9,
+      "reference_chars": 55,
+      "char_edits": 0
+    },
+    {
+      "language": "es_419",
+      "file": "4-193480-B-40.wav",
+      "kind": "environment",
+      "activity": 0,
+      "two_excerpts_equal": true,
+      "word_pieces": 0
+    },
+    {
+      "language": "hi_in",
+      "file": "hi_in-0.wav",
+      "kind": "voice",
+      "activity": 1,
+      "two_excerpts_equal": true,
+      "word_pieces": 12,
+      "reference_chars": 57,
+      "char_edits": 3
+    },
+    {
+      "language": "hi_in",
+      "file": "3-171041-A-38.wav",
+      "kind": "environment",
+      "activity": 0,
+      "two_excerpts_equal": true,
+      "word_pieces": 0
+    },
+    {
+      "language": "ko_kr",
+      "file": "ko_kr0.audio",
+      "kind": "voice",
+      "activity": 1,
+      "two_excerpts_equal": true,
+      "word_pieces": 13,
+      "reference_chars": 39,
+      "char_edits": 0
+    },
+    {
+      "language": "ko_kr",
+      "file": "2-66637-B-20.wav",
+      "kind": "environment",
+      "activity": 0,
+      "two_excerpts_equal": true,
+      "word_pieces": 0
+    },
+    {
+      "language": "th_th",
+      "file": "th_th-0.wav",
+      "kind": "voice",
+      "activity": 1,
+      "two_excerpts_equal": true,
+      "word_pieces": 42,
+      "reference_chars": 75,
+      "char_edits": 8
+    },
+    {
+      "language": "th_th",
+      "file": "3-158476-A-12.wav",
+      "kind": "environment",
+      "activity": 0,
+      "two_excerpts_equal": true,
+      "word_pieces": 0
+    }
+  ]
+}

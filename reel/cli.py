@@ -226,11 +226,13 @@ def main():
         ap = argparse.ArgumentParser(prog="reel speech")
         ap.add_argument("turn")
         ap.add_argument("--lang", help="spoken language code (default: detect)")
+        ap.add_argument("--t0", type=float, help="start of a previously heard speech interval")
+        ap.add_argument("--t1", type=float, help="end of that interval, up to eight seconds later")
         ap.add_argument("--verify", action="store_true", help="check gaps with the local waveform reader")
         x = ap.parse_args(sys.argv[2:])
         try:
             with (SoundReader() if x.verify else nullcontext()) as sound, SpeechReader(sound) as reader:
-                print(json.dumps(reader.inspect(x.turn, x.lang), ensure_ascii=False))
+                print(json.dumps(reader.inspect(x.turn, x.lang, start_s=x.t0, end_s=x.t1), ensure_ascii=False))
         except (ValueError, OSError) as error:
             ap.error(str(error))
         return
@@ -408,10 +410,16 @@ def main():
                         continue
                     if command[:1] == ["speech"]:
                         try:
-                            if len(command) > 2:
-                                raise ValueError("use speech [LANG]")
+                            if len(command) > 4:
+                                raise ValueError("use speech [LANG] or speech START END [LANG]")
+                            interval = {}
+                            lang = x.lang
+                            if len(command) >= 3:
+                                interval = {"start_s": float(command[1]), "end_s": float(command[2])}
+                            if len(command) in (2, 4):
+                                lang = command[-1]
                             with sound_reader.for_replay():
-                                result = speech_reader.inspect(path.parent, command[1] if len(command) == 2 else x.lang)
+                                result = speech_reader.inspect(path.parent, lang, **interval)
                             print(json.dumps(result, ensure_ascii=False), flush=True)
                         except (ValueError, OSError) as error:
                             print(json.dumps({"error": str(error)}), flush=True)

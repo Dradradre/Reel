@@ -1570,3 +1570,24 @@ python examples/check_event_boundaries.py docs/benchmarks/event-boundaries.json
 | 기억나는 소리와 소리만 들은 사람의 설명 | 56.9 | 43.1~83.7 |
 
 GPT는 아이들이 노래하는 영상에서 노래를 짚었다. 다른 영상에서는 여러 사람이 아기의 울음이나 비명을 들었다고 했지만 GPT는 무슨 소리였는지 모르겠다고 답했다. GPT는 세 질문 모두에서 화면과 소리 설명을 함께 접했다. [영상별 응답과 채점값](benchmarks/earlier-observations.json) · [AVCaps 원자료](https://huggingface.co/datasets/TUT-ARG/AVCaps)
+
+## OVO-Bench에서 질문 시각까지의 화면을 읽은 결과
+
+OVO-Bench는 과거 장면을 되짚는 능력, 질문 시각에 보이는 화면을 읽는 능력, 답할 만한 단서가 모인 시점을 가리는 능력을 잰다. 저자들이 배포한 판본에는 영상 644개와 문항 1,640개가 있다. 한 문항을 여러 시점에 묻는 경우를 세면 응답은 3,035개다. [공식 문항과 채점 코드](https://github.com/JoeLeelyf/OVO-Bench/tree/c34093f9a072d93f9e1c6b923446dfba71f4528e)
+
+첫 측정에서는 12개 과제에서 두 문항씩 뽑았다. 여러 시점이 있는 문항은 해시 순서로 한 시점을 골랐다. 고른 문항과 시점은 GPT에 보여주기 전에 고정했다.
+
+| 평가 영역 | 맞힌 응답 | 공식 계산법으로 낸 표본 점수 |
+|---|---:|---:|
+| 과거 장면 추적 | 4/6 | 66.67 |
+| 현재 장면 읽기 | 9/12 | 75.00 |
+| 시점별 행동 횟수나 단서 판단 | 4/6 | 66.67 |
+| 전체 표본 | 17/24 | 69.44 |
+
+시점마다 새 로컬 Codex 세션에서 GPT가 공식 질문에 답했다. Reel은 처음부터 질문 직전까지 최대 24개 시각에 실제로 표시된 프레임을 뽑아 시각과 함께 전달했다. GPT는 소리와 대본을 받지 않았다. 영역마다 과제별 정답률을 평균하고 세 영역을 같은 비중으로 합쳤다. 따라서 표본 점수 69.44와 단순 정답률 70.83%는 계산법이 다르다. [문항별 결과와 버전](benchmarks/ovo-pilot.json)
+
+공식 저장소와 원본 영상 디렉터리가 있으면 같은 표본을 다시 측정할 수 있다. `--pilot`을 빼면 모든 시점에 답한다. [실행 코드](../examples/run_ovo_bench.py)
+
+```sh
+python examples/run_ovo_bench.py --checkout /path/to/OVO-Bench --videos /path/to/src_videos --out examples/out/ovo-local --pilot
+```

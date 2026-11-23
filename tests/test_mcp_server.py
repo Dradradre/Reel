@@ -232,6 +232,24 @@ class TransportTests(unittest.TestCase):
         available = {"model": "other", "status": "available", "windows": []}
         self.assertIs(available_sound_description({**report, "sound_descriptions": available}), available)
 
+    def test_crossing_caption_cannot_become_a_current_sound_or_replace_a_primary_read(self):
+        from reel.mcp_server import scene_description_fields
+        def window(start, end):
+            return {"start_s": start, "end_s": end, "channels": [{"channels": [1], "impression": "a rattle"}]}
+        scene = {"status": "available", "model": "captioner", "basis": "waveform",
+                 "windows": [window(0, 5.5), window(0, 6.1)],
+                 "recent_windows": [window(3.5, 5.5), window(3, 5.)]}
+        track = {"signal": "nonzero", "scene": scene}
+        report = {"sound_descriptions": {"status": "unavailable"}, "audio": track, "start_s": 5., "end_s": 6.}
+        result = scene_description_fields(report)
+        self.assertEqual(set(result), {"sound_in_context"})
+        self.assertEqual(result["sound_in_context"]["windows"], [{**window(3.5, 5.5), "current_start_s": 5.}])
+        for changes in ({"sound_in_context": {"status": "available"}}, {"sound_descriptions": {"status": "available"}},
+                        {"audio": {**track, "signal": "digital_silence"}}, {"audio": {}}, {"start_s": 5.5}):
+            self.assertEqual(scene_description_fields({**report, **changes}), {})
+        scene["recent_windows"].append(window(5., 5.8))
+        self.assertEqual(set(scene_description_fields(report)), {"sound_descriptions"})
+
     def test_wav_and_image_readers_get_the_same_current_waveform_caption(self):
         sound, words = Mock(), Mock()
         primary = {"status": "unavailable", "model": "primary"}

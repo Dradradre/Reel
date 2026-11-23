@@ -17,11 +17,11 @@ from urllib.request import urlopen
 import numpy as np
 
 if __package__:
-    from .common import open_recording
+    from .common import open_recording, sample_boundary
     from .config import CAPTION_PY, HOME, MODELS
     from .local_reader import LocalReader
 else:
-    from common import open_recording
+    from common import open_recording, sample_boundary
     from config import CAPTION_PY, HOME, MODELS
     from local_reader import LocalReader
 
@@ -150,8 +150,10 @@ class SceneHistory:
                 self.last_recent_end = first_sample
             self.rate = rate
             cursor = first_sample
-            while recording.tell() < len(recording):
-                block = recording.read(MAX_SECONDS * rate, dtype="float32", always_2d=True)
+            available = min(len(recording), max(0, sample_boundary(end_s, rate) - first_sample))
+            while recording.tell() < available:
+                count = min(MAX_SECONDS * rate, available - recording.tell())
+                block = recording.read(count, dtype="float32", always_2d=True)
                 keep = MAX_SECONDS * rate - len(block)
                 if keep and len(self.tail):
                     context = np.concatenate((self.tail[-keep:], block))

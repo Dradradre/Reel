@@ -83,6 +83,22 @@ class SceneAudioTests(unittest.TestCase):
             self.assertEqual([(w["start_s"], w["end_s"]) for w in windows], [(2, 4), (4, 6)])
             self.assertEqual(ear.read(path, 7 * rate, 7.25)["windows"], [])
 
+    def test_longer_file_cannot_supply_a_future_sound_to_this_or_the_next_read(self):
+        ear = SceneHistory(lambda signals, _: [str(float(np.max(s))) for s in signals])
+        rate = 8000
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "part.wav"
+            start = 3 * rate
+            prefix = np.full(2 * rate + 1, .125)
+            for future in (.5, .875):
+                sf.write(path, np.r_[prefix, np.full(rate, future)], rate, subtype="FLOAT")
+                result = ear.read(path, start, 5.00001)
+                self.assertEqual(ear.next_sample, start + len(prefix))
+                self.assertEqual(result["windows"][0]["channels"][0]["impression"], "0.125")
+                sf.write(path, np.full(rate, .0625), rate, subtype="FLOAT")
+                after = ear.read(path, start + len(prefix), 6.00001)
+                self.assertEqual(after["windows"][0]["channels"][0]["impression"], "0.125")
+
     def test_short_read_failure_preserves_the_wider_impression(self):
         ear = SceneHistory(Mock(side_effect=[["first"], ["whole recording"], RuntimeError("encoder failed")]))
         with tempfile.TemporaryDirectory() as tmp:

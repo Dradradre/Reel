@@ -62,6 +62,8 @@ order, with nothing left out.
 
 ## Does it work?
 
+On a pilot of two prespecified items from each of the 12 OVO-Bench tasks, local GPT with Reel answered 17 of 24 visual prompts correctly. The official three-mode average on this subset was **69.44**. [Selection, timestamps, answers and scoring](docs/benchmarks/ovo-pilot.json)
+
 On eight unfamiliar films, the first sentence from GPT with Reel reached 98.2% of human same-film description separation. Picture recall reached 95.0% and sound recall 56.9%. GPT received pictures, local sound descriptions and speech readings. [Per-film responses and uncertainty](docs/benchmarks/earlier-observations.json)
 
 When a colour or fine pattern changed briefly at constant average brightness, GPT found the right second from the page’s change trace on **8/8** clips, up from **0/8**. Pausing more often for RGB changes on eight real films reduced activity-boundary F1 against five observers from **40.7 to 34.6**. Reel keeps its ordinary viewing pace. [Frame changes and human timing](docs/perception-check.md#밝기가-같은-화면에서-색이나-무늬가-바뀐-순간)
@@ -316,6 +318,8 @@ flowchart LR
 - Reel shows; it does not decide taste.
 
 ## Credits
+
+OVO-Bench by Niu et al. (CVPR 2025) provides the timed visual questions and their scorer. The benchmark uses CC BY-NC-SA 4.0 and the source-video datasets retain their own terms. [Project and dataset terms](https://github.com/JoeLeelyf/OVO-Bench#license)
 
 The event timing check uses annotations from Shou et al. (Kinetics-GEBD, CC BY-NC 4.0). The clips are distributed separately by the Common Visual Data Foundation. [Annotations and licence](https://github.com/StanLei52/GEBD), [Kinetics recordings](https://github.com/cvdfoundation/kinetics-dataset).
 

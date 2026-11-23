@@ -5,12 +5,14 @@ import numpy as np
 
 if __package__:
     from .common import open_recording, sample_boundary
+    from .compare_sounds import SoundMatcher
     from .pitch import PitchTrace
     from .hearing import LIVE_CONTEXT_S
     from .listen import excerpt
     from .turn_audio import released_samples
 else:
     from common import open_recording, sample_boundary
+    from compare_sounds import SoundMatcher
     from pitch import PitchTrace
     from hearing import LIVE_CONTEXT_S
     from listen import excerpt
@@ -50,6 +52,11 @@ def recordings(directory, reference, target):
             "pitch_contour": PitchTrace().read(wav, first),
         }
     return clips
+
+
+def sound_similarity(clips, matcher=None):
+    with (matcher or SoundMatcher()).for_replay() as reader:
+        return reader.compare_recordings(clips["reference"]["wav"], clips["target"]["wav"])
 
 
 def describe_recordings(reader, clips, question=None):

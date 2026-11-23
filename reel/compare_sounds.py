@@ -87,12 +87,40 @@ class Comparator:
                 parts.append(self.unit(self.model.get_text_features(**tokens)))
         return torch.cat(parts)
 
-    def similarities(self, channels, text, *, padding="repeatpad"):
+    def audio_features(self, channels, padding):
         import torch
         with torch.inference_mode():
             batch = self.proc.feature_extractor(channels, sampling_rate=RATE, padding=padding,
                                                 return_tensors="pt").to(self.device)
-            return (self.unit(self.model.get_audio_features(**batch)) @ text.T).cpu().numpy()
+            return self.unit(self.model.get_audio_features(**batch))
+
+    def similarities(self, channels, text, *, padding="repeatpad"):
+        return (self.audio_features(channels, padding) @ text.T).cpu().numpy()
+
+    def compare_recordings(self, reference, target):
+        """Compare original channel waveforms independently of any words or pictures."""
+        vectors = []
+        for wav in (reference, target):
+            with open_recording(wav) as recording:
+                signal = resample_channels(recording.read(dtype="float32", always_2d=True),
+                                           recording.samplerate, RATE)
+            channels = []
+            for channel in signal.T:
+                vector = None
+                if np.any(channel):
+                    vector = self.audio_features([channel], "pad")[0].cpu().numpy()
+                channels.append(vector)
+            vectors.append(channels)
+        reference_channels, target_channels = vectors
+        return {"status": "available", "model": CLAP_NAME,
+                "cosines": [[round(float(np.clip(left @ right, -1, 1)), 4)
+                             if left is not None and right is not None else None
+                             for right in target_channels] for left in reference_channels],
+                "basis": "Rows follow the reference channels and columns the target channels in recording order. "
+                         "Each encoder input contains one channel of one excerpt at its recorded level, played "
+                         "once with zero padding. Null means no signal at the encoder rate. A higher cosine "
+                         "indicates more similar whole-clip audio features. Background sound can contribute. "
+                         "The score does not identify an object, speaker or word."}
 
     def choose_layer(self, wavs, focus):
         signals = [read_audio(wav, RATE, channels=1)[:, 0] for wav in wavs]
@@ -161,6 +189,10 @@ class SoundMatcher(LocalReader):
             job.update(per_second=True, first_sample=first_sample)
         return self.request(job)
 
+    def compare_recordings(self, reference, target):
+        return self.request({"operation": "compare_recordings", "reference": str(Path(reference).resolve()),
+                             "target": str(Path(target).resolve())})
+
     def choose_layer(self, wavs, focus):
         return self.request({"operation": "choose_layer", "wavs": wavs, "focus": focus})
 
@@ -205,7 +237,10 @@ def serve():
                 if model is None:
                     model = Comparator()
                 job = json.loads(line)
-                if job.pop("operation", None) == "choose_layer":
+                operation = job.pop("operation", None)
+                if operation == "compare_recordings":
+                    result = model.compare_recordings(**job)
+                elif operation == "choose_layer":
                     result = model.choose_layer(**job)
                 else:
                     result = model.match(**job)

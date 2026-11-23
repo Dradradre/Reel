@@ -7,7 +7,7 @@
   reel frame DIR --t0 S --t1 S     read every frame displayed in the interval
   reel listen DIR --t0 S --t1 S [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
-  reel compare-heard DIR --reference START END --target START END [--question TEXT]
+  reel compare-heard DIR --reference START END --target START END [--similarity] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second] ["sound description" ...]    compare descriptions with the recorded channels
   reel observe DIR --t0 S --t1 S [--joint] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
   reel speech TURN [--lang CODE] [--verify]               read words from a delivered audio interval
@@ -182,20 +182,23 @@ def main():
             ap.error(str(error))
         return
     if cmd == "compare-heard":
-        from compare_heard import describe_recordings, recordings
+        from compare_heard import describe_recordings, recordings, sound_similarity
         from hearing import SoundReader
         ap = argparse.ArgumentParser(prog="reel compare-heard")
         ap.add_argument("out", help="a published turn or a saved reel")
         for flag in ("--reference", "--target"):
             ap.add_argument(flag, nargs=2, type=float, metavar=("START", "END"), required=True)
         ap.add_argument("--question", help="ask about an audible difference or similarity")
-        ap.add_argument("--recordings-only", action="store_true", help="return both original WAVs without model interpretation")
+        ap.add_argument("--similarity", action="store_true", help="compare the two original recordings directly with CLAP")
+        ap.add_argument("--recordings-only", action="store_true", help="return both original WAVs without worded descriptions")
         x = ap.parse_args(sys.argv[2:])
         if x.recordings_only and x.question is not None:
             ap.error("omit --recordings-only to ask a question")
         try:
             clips = recordings(x.out, x.reference, x.target)
             report = dict(clips)
+            if x.similarity:
+                report["sound_similarity"] = sound_similarity(clips)
             if not x.recordings_only:
                 with SoundReader() as sound:
                     report["independent_readings"] = describe_recordings(sound, clips, x.question)
@@ -331,16 +334,21 @@ def main():
                             print(json.dumps({"error": str(error)}), flush=True)
                         continue
                     if command[:1] == ["compare-heard"]:
-                        from compare_heard import describe_recordings, recordings
+                        from compare_heard import describe_recordings, recordings, sound_similarity
                         try:
-                            fields = line.strip().split(maxsplit=5)
-                            if len(fields) < 5:
-                                raise ValueError("use compare-heard START END START END [QUESTION]")
-                            times = [float(t) for t in fields[1:5]]
+                            similarity = command[1:2] == ["--similarity"]
+                            # Split only numeric positions; preserve the reader's question verbatim.
+                            fields = line.strip().split(maxsplit=6 if similarity else 5)[2 if similarity else 1:]
+                            if len(fields) < 4:
+                                raise ValueError("use compare-heard [--similarity] START END START END [QUESTION]")
+                            times = [float(t) for t in fields[:4]]
                             clips = recordings(path.parent, times[:2], times[2:])
                             with sound_reader.for_replay():
-                                reading = describe_recordings(sound_reader, clips, fields[5] if len(fields) == 6 else None)
-                            print(json.dumps({**clips, "independent_readings": reading}, ensure_ascii=False), flush=True)
+                                reading = describe_recordings(sound_reader, clips, fields[4] if len(fields) == 5 else None)
+                            report = {**clips, "independent_readings": reading}
+                            if similarity:
+                                report["sound_similarity"] = sound_similarity(clips)
+                            print(json.dumps(report, ensure_ascii=False), flush=True)
                         except (ValueError, OSError, subprocess.CalledProcessError) as error:
                             print(json.dumps({"error": str(error)}), flush=True)
                         continue
@@ -438,7 +446,7 @@ def main():
                         continue
                     if not command or command[0] != "next" or len(command) > 2:
                         ap.error("enter next, next SECONDS, joint SECONDS, observe START END, look [--at SECONDS] LEFT TOP RIGHT BOTTOM, "
-                                 "listen [--component mix|harmonic|percussive] [QUESTION], match START END DESCRIPTION, compare-heard START END START END, layer START END RANK [CHANNEL], speech [LANG], or quit")
+                                 "listen [--component mix|harmonic|percussive] [QUESTION], match START END DESCRIPTION, compare-heard [--similarity] START END START END, layer START END RANK [CHANNEL], speech [LANG], or quit")
                     duration = float(command[1]) if len(command) == 2 else None
                     try:
                         with original.reading():

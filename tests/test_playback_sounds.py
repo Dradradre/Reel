@@ -107,6 +107,32 @@ class PlaybackSoundTests(unittest.TestCase):
         self.assertTrue(np.any(spans[0][1]))
         self.assertFalse(np.any(spans[1][1]))
 
+    def test_recording_similarity_keeps_channel_order_and_silent_channels(self):
+        matcher = Comparator.__new__(Comparator)
+        features = []
+        for xy in ((1., 0.), (0., 1.), (0., 1.), (1., 0.)):
+            feature = Mock()
+            feature.cpu.return_value.numpy.return_value = np.array(xy)
+            features.append([feature])
+        matcher.audio_features = Mock(side_effect=features)
+        rate = 24000
+        tone = np.sin(2 * np.pi * 440 * np.arange(rate // 10) / rate).astype(np.float32)
+        with tempfile.TemporaryDirectory() as tmp:
+            ref, target = (Path(tmp) / name for name in ("ref.wav", "target.wav"))
+            sf.write(ref, np.stack([tone, -tone, np.zeros_like(tone)], axis=1), rate, subtype="FLOAT")
+            sf.write(target, np.stack([-tone, tone], axis=1), rate, subtype="FLOAT")
+            comparison = matcher.compare_recordings(ref, target)
+        self.assertEqual(comparison["cosines"], [[0., 1.], [1., 0.], [None, None]])
+        signals = []
+        for call in matcher.audio_features.call_args_list:
+            channels, padding = call.args
+            self.assertEqual(padding, "pad")
+            self.assertEqual(len(channels), 1)
+            self.assertEqual(len(channels[0]), 4800)
+            signals.append(channels[0])
+        np.testing.assert_array_equal(signals[0], -signals[1])
+        np.testing.assert_array_equal(signals[0], signals[3])
+
     def test_future_and_empty_hypotheses_do_not_start_the_model(self):
         with SoundMatcher() as reader, patch.object(reader, "request") as request:
             with self.assertRaises(ValueError):

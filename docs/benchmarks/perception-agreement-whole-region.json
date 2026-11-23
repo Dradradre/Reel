@@ -1,0 +1,452 @@
+{
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "revision": "f7da0e586be4794f42e4a5e913a741635f38dfbc",
+  "panel": "perception-agreement-holdout-v3.json",
+  "previous": "exposure-replay.json",
+  "method": "Repeat of the 16-film published panel. One independent session per film, original unchanged prompt with three choices for picture, two for sound and yes/no for source visibility. All three may be left unresolved (? scores zero). Through end of playback and an exact second look at the designated sound interval. Original-recording helper outputs and visual media supplied, native WAV and optional 30B reader off. Reader can choose its tools. Original archive, answer references and media hashes verified. No new human responses.",
+  "score": {
+    "correct": 36,
+    "wrong": 8,
+    "abstained": 4,
+    "total": 48,
+    "fraction": 0.75,
+    "films": 16,
+    "all_three_correct": 8,
+    "by_question": {
+      "picture": {
+        "correct": 14,
+        "wrong": 2,
+        "abstained": 0
+      },
+      "sound": {
+        "correct": 11,
+        "wrong": 3,
+        "abstained": 2
+      },
+      "visible_source": {
+        "correct": 11,
+        "wrong": 3,
+        "abstained": 2
+      }
+    }
+  },
+  "by_film": [
+    {
+      "video_id": "video_8223",
+      "answers": [
+        "B",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.944,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 1102061,
+        "samples": 14396,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_4956",
+      "answers": [
+        "B",
+        "B",
+        "Y"
+      ],
+      "turns": 3,
+      "end_s": 21.675,
+      "calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 3,
+      "sound_caption_turns": 3,
+      "exact_replay": {
+        "first_sample": 345591,
+        "samples": 107198,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_2983",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 35.008,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 1034635,
+        "samples": 14664,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_82",
+      "answers": [
+        "A",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.901,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 519415,
+        "samples": 81508,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_762",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.965,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 294600,
+        "samples": 48294,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_918",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 35.029,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 615838,
+        "samples": 59184,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_5560",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "end_s": 16.880997732426305,
+      "calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 3,
+      "sound_caption_turns": 3,
+      "exact_replay": {
+        "first_sample": 544277,
+        "samples": 123565,
+        "rate_hz": 44100
+      }
+    },
+    {
+      "video_id": "video_10592",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "end_s": 17.792,
+      "calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 3,
+      "sound_caption_turns": 3,
+      "exact_replay": {
+        "first_sample": 91270,
+        "samples": 60846,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_5230",
+      "answers": [
+        "B",
+        "A",
+        "Y"
+      ],
+      "turns": 2,
+      "end_s": 14.210997732426303,
+      "calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 2,
+      "sound_caption_turns": 2,
+      "exact_replay": {
+        "first_sample": 495390,
+        "samples": 19111,
+        "rate_hz": 44100
+      }
+    },
+    {
+      "video_id": "video_152",
+      "answers": [
+        "C",
+        "A",
+        "Y"
+      ],
+      "turns": 5,
+      "end_s": 35.051,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 1,
+      "sound_caption_turns": 1,
+      "exact_replay": {
+        "first_sample": 1226136,
+        "samples": 87923,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_6540",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 35.03900226757369,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 232426,
+        "samples": 11769,
+        "rate_hz": 44100
+      }
+    },
+    {
+      "video_id": "video_1075",
+      "answers": [
+        "B",
+        "?",
+        "?"
+      ],
+      "turns": 5,
+      "end_s": 33.367006802721086,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 464381,
+        "samples": 7348,
+        "rate_hz": 44100
+      }
+    },
+    {
+      "video_id": "video_5626",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 2,
+      "end_s": 11.146009070294784,
+      "calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 2,
+      "sound_caption_turns": 2,
+      "exact_replay": {
+        "first_sample": 157291,
+        "samples": 13230,
+        "rate_hz": 44100
+      }
+    },
+    {
+      "video_id": "video_2371",
+      "answers": [
+        "B",
+        "?",
+        "?"
+      ],
+      "turns": 4,
+      "end_s": 26.63299319727891,
+      "calls": {
+        "view": 5,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 4,
+      "sound_caption_turns": 4,
+      "exact_replay": {
+        "first_sample": 304615,
+        "samples": 111839,
+        "rate_hz": 44100
+      }
+    },
+    {
+      "video_id": "video_6480",
+      "answers": [
+        "C",
+        "A",
+        "Y"
+      ],
+      "turns": 2,
+      "end_s": 15.403,
+      "calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 2,
+      "sound_caption_turns": 2,
+      "exact_replay": {
+        "first_sample": 549390,
+        "samples": 75946,
+        "rate_hz": 48000
+      }
+    },
+    {
+      "video_id": "video_6614",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "end_s": 31.509,
+      "calls": {
+        "view": 5,
+        "ask_scene": 1
+      },
+      "regional_comparison_requested": false,
+      "source_estimate_turns": 4,
+      "sound_caption_turns": 4,
+      "exact_replay": {
+        "first_sample": 54503,
+        "samples": 44884,
+        "rate_hz": 48000
+      }
+    }
+  ],
+  "previous_score": {
+    "correct": 35,
+    "wrong": 7,
+    "abstained": 6,
+    "total": 48,
+    "fraction": 0.7291666666666666,
+    "films": 16,
+    "all_three_correct": 7,
+    "by_question": {
+      "picture": {
+        "correct": 15,
+        "wrong": 1,
+        "abstained": 0
+      },
+      "sound": {
+        "correct": 10,
+        "wrong": 3,
+        "abstained": 3
+      },
+      "visible_source": {
+        "correct": 10,
+        "wrong": 3,
+        "abstained": 3
+      }
+    }
+  },
+  "bootstrap": {
+    "whole_film_percentile_95": [
+      0.6041666666666666,
+      0.875
+    ],
+    "paired_difference_vs_previous_95": [
+      -0.0625,
+      0.125
+    ],
+    "draws": 10000,
+    "seed": 20261123,
+    "scope": "Resamples these 16 films. Does not include uncertainty from replaying the model again, human-to-human variability, or changing the video population."
+  },
+  "human_reference_source_visibility": {
+    "Y": {
+      "N": 2,
+      "Y": 4,
+      "?": 2
+    },
+    "N": {
+      "N": 7,
+      "Y": 1
+    }
+  },
+  "turns": 63,
+  "regional_comparison_requested_films": 0,
+  "repeated_for_missing_required_tool_calls": [
+    "video_8223"
+  ],
+  "resource_check": {
+    "failed_protocol_runs": [
+      "broad-0-usage.json"
+    ],
+    "attempts_checked": 75,
+    "peak_individual_tree_kib": 4538208,
+    "min_free_system_pct": 55,
+    "surviving_owned_processes": 0
+  },
+  "regional_experiment": "whole-region-sound.json"
+}

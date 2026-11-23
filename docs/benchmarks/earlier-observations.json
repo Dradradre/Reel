@@ -1,0 +1,1514 @@
+{
+  "source": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+  "baseline": "1bb1beb",
+  "model": "local Codex gpt-6.1-terra",
+  "selection": "Eight previously unused videos of 4–35 s with at least three distinct human captions per modality, ascending salted SHA256 of the source ID (reel-recalled-scene-01/).",
+  "reader": "view() replayed all successive picture sheets and compact reports from native Reel playback (8 s turns, original track times). No WAV attachment. Local AST, CoNeTTE and speech readings available. The optional 30B audio descriptor was disabled after the first run exceeded the memory limit, before any captions were accepted. No API key, model access to filenames, or human references. One blind session per film. First submit one uncued sentence, then recall sight and sound separately without tools. Compare with joint, visual-only and audio-only human caption panels respectively. GPT received both streams of evidence in all three questions.",
+  "metrics_definition": "For each film, compare the model sentence and one held-out human sentence to the remaining humans on that film and the other seven panels with the pinned MiniLM evaluator. Average over held-out humans, then films. Divide model same-minus-other similarity by the corresponding human gap. 95% intervals resample whole films, holding the distractor panel fixed. A ratio is not an accuracy.",
+  "films": [
+    {
+      "id": "4660653323",
+      "duration": 33.808231,
+      "sha256": "1e2c9dd476721eab449f7498b7f973eafa42a1d45c0530d89e035ff506caf99f",
+      "model": {
+        "caption": "A group of adults and children walk along a wooded trail, and one man playfully leans close to the camera.",
+        "seen": "Adults and children walk along a wooded trail, and one man leans close to the camera.",
+        "heard": "The speech reader detected conversation, including “Are you shooting a video?”, but I could not directly hear the audio."
+      },
+      "captions": {
+        "caption": 4,
+        "seen": 4,
+        "heard": 4
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 32.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 32.0,
+          "end": 33.80823129251701,
+          "attached_wav": false,
+          "images": 4,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "4410882051",
+      "duration": 32.693673,
+      "sha256": "0a08c4b46a45364bf364ed71593f5f9de805d1ce67cb71ed7179f18d5a101c06",
+      "model": {
+        "caption": "A man and a young child play street hockey together on a residential road bordered by patches of snow.",
+        "seen": "A man and a young child play street hockey on a residential road with snow along the side.",
+        "heard": "I could not hear the audio, though the supplied sound analysis suggested birds and possible voices."
+      },
+      "captions": {
+        "caption": 4,
+        "seen": 3,
+        "heard": 4
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 9,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 32.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 32.0,
+          "end": 32.693673469387754,
+          "attached_wav": false,
+          "images": 4,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "4465235803",
+      "duration": 33.877891,
+      "sha256": "989738f9a910800092fdd1d7b58d108f850b0a6c21670a45a58696ec3b7d471d",
+      "model": {
+        "caption": "A young child sits in a red car-shaped salon chair, holding the steering wheel while a hairdresser trims and combs his hair.",
+        "seen": "A hairdresser trims a young child's hair while he sits in a red car-shaped chair holding its steering wheel.",
+        "heard": "I could not directly hear the audio, though the speech reading detected fragments of conversation."
+      },
+      "captions": {
+        "caption": 4,
+        "seen": 3,
+        "heard": 3
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 32.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 32.0,
+          "end": 33.87789115646258,
+          "attached_wav": false,
+          "images": 4,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "4734391811",
+      "duration": 32.531134,
+      "sha256": "8308441274060cc68daa52dfd58f93c347a590aee4a3781dfa47d11d63b2f6bc",
+      "model": {
+        "caption": "An older man sits on a couch holding a crying baby, gently moving its hands until the baby calms and smiles.",
+        "seen": "An older man held a crying baby on a couch and gently moved the baby's hands until the baby calmed and smiled.",
+        "heard": "The audio readings indicated a baby crying and a man speaking, though I could not directly hear the recording."
+      },
+      "captions": {
+        "caption": 4,
+        "seen": 4,
+        "heard": 4
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 9,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 32.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 32.0,
+          "end": 32.53113378684807,
+          "attached_wav": false,
+          "images": 4,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "4653911781",
+      "duration": 26.168889,
+      "sha256": "23d868ea644edf1afbfe228da0a5ef516ad9b35af36081839d68000e189af7c0",
+      "model": {
+        "caption": "A woman holds a baby in a yellow outfit on her lap as the baby watches a small dog sitting in its bed.",
+        "seen": "A woman holds a baby in a yellow outfit on her lap while a small dog sits in a nearby bed.",
+        "heard": "I could not directly hear the clip, though the speech reader detected the words “that doggy.”"
+      },
+      "captions": {
+        "caption": 4,
+        "seen": 3,
+        "heard": 5
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 26.16888888888889,
+          "attached_wav": false,
+          "images": 5,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "11329995395",
+      "duration": 27.882993,
+      "sha256": "26444890d4b6e7beddbe3cfec8d2ff267f18e8bc08ba7d0449660f20d91edd4f",
+      "model": {
+        "caption": "A group of children sit with papers in a classroom while a girl sings and the camera pans across them.",
+        "seen": "A group of children sat with papers in a classroom as the camera panned between them.",
+        "heard": "I could not directly hear the audio, but the audio analysis suggested children were singing."
+      },
+      "captions": {
+        "caption": 5,
+        "seen": 4,
+        "heard": 5
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 9,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 9,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 27.88299319727891,
+          "attached_wav": false,
+          "images": 6,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "4669303210",
+      "duration": 33.761791,
+      "sha256": "9ec082f04d94b1dbf613406c23c67216b7e006526be1bb5a9d0f34d30b5f1822",
+      "model": {
+        "caption": "A young child wearing a helmet rides a pink and purple tricycle along a neighborhood sidewalk.",
+        "seen": "A young child wearing a helmet rides a pink and purple tricycle along a neighborhood sidewalk.",
+        "heard": "I could not tell what sounds were heard."
+      },
+      "captions": {
+        "caption": 5,
+        "seen": 5,
+        "heard": 3
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 32.0,
+          "attached_wav": false,
+          "images": 10,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 32.0,
+          "end": 33.76179138321996,
+          "attached_wav": false,
+          "images": 4,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "4707679105",
+      "duration": 32.229274,
+      "sha256": "7c1868ed2e2933f7f464fcbeb9af9b1eb3e01a62d0807eaf79a26b5a35b309b4",
+      "model": {
+        "caption": "A man sits in an armchair with a young child on his lap, reading a picture book and asking about the colors of the cars.",
+        "seen": "A man sits in an armchair with a young child on his lap, showing the child a picture book.",
+        "heard": "The speech reader recorded questions about how many green and yellow cars could be found."
+      },
+      "captions": {
+        "caption": 3,
+        "seen": 5,
+        "heard": 4
+      },
+      "sources": [
+        {
+          "start": 0.0,
+          "end": 8.0,
+          "attached_wav": false,
+          "images": 8,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 8.0,
+          "end": 16.0,
+          "attached_wav": false,
+          "images": 9,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 16.0,
+          "end": 24.0,
+          "attached_wav": false,
+          "images": 9,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 24.0,
+          "end": 32.0,
+          "attached_wav": false,
+          "images": 9,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        },
+        {
+          "start": 32.0,
+          "end": 32.22927437641723,
+          "attached_wav": false,
+          "images": 4,
+          "speech": "available",
+          "captioner": "available",
+          "sound_classifier": "available",
+          "generative_audio": "unavailable"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "caption": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 8,
+      "human_captions": 33,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5174489334846536,
+          "other_film_cosine": 0.14396550295253596,
+          "same_minus_other": 0.37348343053211763,
+          "top_one_film": 0.96875
+        },
+        "gpt": {
+          "same_film_cosine": 0.4912260059267282,
+          "other_film_cosine": 0.12447214871644974,
+          "same_minus_other": 0.3667538572102785,
+          "top_one_film": 1.0
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "4660653323": {
+          "human": [
+            0.5672625601291656,
+            0.07312452141195536,
+            1.0
+          ],
+          "gpt": [
+            0.5313882082700729,
+            0.11748849600553513,
+            1.0
+          ]
+        },
+        "4410882051": {
+          "human": [
+            0.5879474133253098,
+            0.19953258708119392,
+            0.75
+          ],
+          "gpt": [
+            0.5789924114942551,
+            0.14212478697299957,
+            1.0
+          ]
+        },
+        "4465235803": {
+          "human": [
+            0.46967433393001556,
+            0.11938449647277594,
+            1.0
+          ],
+          "gpt": [
+            0.5009371861815453,
+            0.12221573293209076,
+            1.0
+          ]
+        },
+        "4734391811": {
+          "human": [
+            0.4284089282155037,
+            0.1863989606499672,
+            1.0
+          ],
+          "gpt": [
+            0.39569466561079025,
+            0.10999822616577148,
+            1.0
+          ]
+        },
+        "4653911781": {
+          "human": [
+            0.5984306484460831,
+            0.14293986931443214,
+            1.0
+          ],
+          "gpt": [
+            0.44854000210762024,
+            0.1082843616604805,
+            1.0
+          ]
+        },
+        "11329995395": {
+          "human": [
+            0.4217083752155304,
+            0.11425207704305648,
+            1.0
+          ],
+          "gpt": [
+            0.502004611492157,
+            0.1236444041132927,
+            1.0
+          ]
+        },
+        "4669303210": {
+          "human": [
+            0.5582547187805176,
+            0.12265119850635528,
+            1.0
+          ],
+          "gpt": [
+            0.5426384449005127,
+            0.10565020889043808,
+            1.0
+          ]
+        },
+        "4707679105": {
+          "human": [
+            0.5079044898351034,
+            0.19344031314055124,
+            1.0
+          ],
+          "gpt": [
+            0.42961251735687256,
+            0.16637097299098969,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "gpt": {
+          "human_same_minus_other": 0.3734834305321177,
+          "reader_same_minus_other": 0.36675385721027853,
+          "fraction_of_human": 0.981981601399957,
+          "film_bootstrap_95": [
+            0.8729653786570275,
+            1.1030028795328044
+          ]
+        }
+      }
+    },
+    "seen": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 8,
+      "human_captions": 31,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5344124554966887,
+          "other_film_cosine": 0.16696192603558302,
+          "same_minus_other": 0.3674505294611057,
+          "top_one_film": 0.96875
+        },
+        "gpt": {
+          "same_film_cosine": 0.46994389239698653,
+          "other_film_cosine": 0.1208364674821496,
+          "same_minus_other": 0.34910742491483693,
+          "top_one_film": 1.0
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "4660653323": {
+          "human": [
+            0.3559028431773186,
+            0.10516120679676533,
+            1.0
+          ],
+          "gpt": [
+            0.4672761783003807,
+            0.09157095104455948,
+            1.0
+          ]
+        },
+        "4410882051": {
+          "human": [
+            0.8083508014678955,
+            0.20684762795766196,
+            1.0
+          ],
+          "gpt": [
+            0.689113438129425,
+            0.15097324550151825,
+            1.0
+          ]
+        },
+        "4465235803": {
+          "human": [
+            0.4718150794506073,
+            0.17268972098827362,
+            1.0
+          ],
+          "gpt": [
+            0.3780108491579692,
+            0.08836641162633896,
+            1.0
+          ]
+        },
+        "4734391811": {
+          "human": [
+            0.5288872793316841,
+            0.21228547394275665,
+            0.75
+          ],
+          "gpt": [
+            0.523788757622242,
+            0.13174758851528168,
+            1.0
+          ]
+        },
+        "4653911781": {
+          "human": [
+            0.6515825788180033,
+            0.18873132268587747,
+            1.0
+          ],
+          "gpt": [
+            0.5633877714474996,
+            0.1313554346561432,
+            1.0
+          ]
+        },
+        "11329995395": {
+          "human": [
+            0.404481865465641,
+            0.07877915911376476,
+            1.0
+          ],
+          "gpt": [
+            0.42379162460565567,
+            0.09978439658880234,
+            1.0
+          ]
+        },
+        "4669303210": {
+          "human": [
+            0.535730504989624,
+            0.17730053514242172,
+            1.0
+          ],
+          "gpt": [
+            0.43942928314208984,
+            0.12341611087322235,
+            1.0
+          ]
+        },
+        "4707679105": {
+          "human": [
+            0.5185486912727356,
+            0.19390036165714264,
+            1.0
+          ],
+          "gpt": [
+            0.2747532367706299,
+            0.14947760105133057,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "gpt": {
+          "human_same_minus_other": 0.3674505294611057,
+          "reader_same_minus_other": 0.34910742491483693,
+          "fraction_of_human": 0.9500800704433048,
+          "film_bootstrap_95": [
+            0.7782223691579393,
+            1.1253568666161873
+          ]
+        }
+      }
+    },
+    "heard": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 8,
+      "human_captions": 32,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5107879742359122,
+          "other_film_cosine": 0.31895754284535843,
+          "same_minus_other": 0.19183043139055372,
+          "top_one_film": 0.5020833333333333
+        },
+        "gpt": {
+          "same_film_cosine": 0.325869478409489,
+          "other_film_cosine": 0.2166747935116291,
+          "same_minus_other": 0.10919468489785988,
+          "top_one_film": 0.44166666666666665
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "4660653323": {
+          "human": [
+            0.6011518388986588,
+            0.3589731976389885,
+            0.75
+          ],
+          "gpt": [
+            0.31862790882587433,
+            0.24904800951480865,
+            0.0
+          ]
+        },
+        "4410882051": {
+          "human": [
+            0.24856635183095932,
+            0.30937036499381065,
+            0.0
+          ],
+          "gpt": [
+            0.19427508115768433,
+            0.19320106506347656,
+            0.0
+          ]
+        },
+        "4465235803": {
+          "human": [
+            0.5835373004277548,
+            0.3362821638584137,
+            0.3333333333333333
+          ],
+          "gpt": [
+            0.3539883494377136,
+            0.2310880422592163,
+            0.3333333333333333
+          ]
+        },
+        "4734391811": {
+          "human": [
+            0.5804359167814255,
+            0.3242538943886757,
+            0.75
+          ],
+          "gpt": [
+            0.4518670439720154,
+            0.2953435480594635,
+            0.0
+          ]
+        },
+        "4653911781": {
+          "human": [
+            0.5315616846084594,
+            0.36593387722969056,
+            0.6
+          ],
+          "gpt": [
+            0.25933554768562317,
+            0.19520999491214752,
+            0.2
+          ]
+        },
+        "11329995395": {
+          "human": [
+            0.6384600639343262,
+            0.20279030799865722,
+            1.0
+          ],
+          "gpt": [
+            0.45764813423156736,
+            0.2665758728981018,
+            1.0
+          ]
+        },
+        "4669303210": {
+          "human": [
+            0.42818965514500934,
+            0.29490671555201214,
+            0.3333333333333333
+          ],
+          "gpt": [
+            0.3513811031977336,
+            0.19519548118114471,
+            1.0
+          ]
+        },
+        "4707679105": {
+          "human": [
+            0.47440098226070404,
+            0.35914982110261917,
+            0.25
+          ],
+          "gpt": [
+            0.2198326587677002,
+            0.10773633420467377,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "gpt": {
+          "human_same_minus_other": 0.19183043139055372,
+          "reader_same_minus_other": 0.10919468489785988,
+          "fraction_of_human": 0.5692250395639622,
+          "film_bootstrap_95": [
+            0.4313737324958916,
+            0.8373573499689512
+          ]
+        }
+      }
+    }
+  },
+  "control_method": "For each film use 320x180 RGB pictures at 35% and 70% of duration. Encode five copies of the first at 4 fps, five blank, five final using lossless FFV1. The last shot either copies the first, adds RGB (24,-10,6) clipped to 8 bits, inverts a 35x26 patch at x77 y65, or uses the later picture. Compare first and third retained previews at 0 and 2.5 s. Before_match means older general resemblance marker, not a byte check. After_confirmed is the byte-verified claim. Unedited comparisons count all matched thumbnails.",
+  "natural": [
+    {
+      "id": "4660653323",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    },
+    {
+      "id": "4410882051",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    },
+    {
+      "id": "4465235803",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    },
+    {
+      "id": "4734391811",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    },
+    {
+      "id": "4653911781",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    },
+    {
+      "id": "11329995395",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    },
+    {
+      "id": "4669303210",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    },
+    {
+      "id": "4707679105",
+      "before": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      },
+      "after": {
+        "matches": 0,
+        "equal": 0,
+        "different": 0,
+        "confirmed": 0
+      }
+    }
+  ],
+  "controls": [
+    {
+      "id": "4660653323",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true,
+      "blind_reader": {
+        "decision": {
+          "before": "uncertain",
+          "after": "uncertain"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "confirmed"
+        }
+      }
+    },
+    {
+      "id": "4660653323",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4660653323",
+      "variant": "patch",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4660653323",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false
+    },
+    {
+      "id": "4410882051",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true,
+      "blind_reader": {
+        "decision": {
+          "before": "uncertain",
+          "after": "uncertain"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "confirmed"
+        }
+      }
+    },
+    {
+      "id": "4410882051",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4410882051",
+      "variant": "patch",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4410882051",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false
+    },
+    {
+      "id": "4465235803",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true
+    },
+    {
+      "id": "4465235803",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false,
+      "blind_reader": {
+        "decision": {
+          "before": "different",
+          "after": "uncertain"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "uncertain"
+        }
+      }
+    },
+    {
+      "id": "4465235803",
+      "variant": "patch",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false
+    },
+    {
+      "id": "4465235803",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false
+    },
+    {
+      "id": "4734391811",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true
+    },
+    {
+      "id": "4734391811",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false,
+      "blind_reader": {
+        "decision": {
+          "before": "different",
+          "after": "different"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "uncertain"
+        }
+      }
+    },
+    {
+      "id": "4734391811",
+      "variant": "patch",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4734391811",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false
+    },
+    {
+      "id": "4653911781",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true
+    },
+    {
+      "id": "4653911781",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4653911781",
+      "variant": "patch",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false,
+      "blind_reader": {
+        "decision": {
+          "before": "uncertain",
+          "after": "uncertain"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "uncertain"
+        }
+      }
+    },
+    {
+      "id": "4653911781",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false
+    },
+    {
+      "id": "11329995395",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true
+    },
+    {
+      "id": "11329995395",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "11329995395",
+      "variant": "patch",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false,
+      "blind_reader": {
+        "decision": {
+          "before": "uncertain",
+          "after": "uncertain"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "uncertain"
+        }
+      }
+    },
+    {
+      "id": "11329995395",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false
+    },
+    {
+      "id": "4669303210",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true
+    },
+    {
+      "id": "4669303210",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4669303210",
+      "variant": "patch",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4669303210",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false,
+      "blind_reader": {
+        "decision": {
+          "before": "uncertain",
+          "after": "uncertain"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "uncertain"
+        }
+      }
+    },
+    {
+      "id": "4707679105",
+      "variant": "copy",
+      "equal": true,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": true
+    },
+    {
+      "id": "4707679105",
+      "variant": "tint",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4707679105",
+      "variant": "patch",
+      "equal": false,
+      "before_match": true,
+      "after_match": true,
+      "after_confirmed": false
+    },
+    {
+      "id": "4707679105",
+      "variant": "later",
+      "equal": false,
+      "before_match": false,
+      "after_match": false,
+      "after_confirmed": false,
+      "blind_reader": {
+        "decision": {
+          "before": "uncertain",
+          "after": "uncertain"
+        },
+        "guided": {
+          "before": "uncertain",
+          "after": "uncertain"
+        }
+      }
+    }
+  ],
+  "blind_prompt": "Look at the retained pictures of the first and last shot and Reel’s earlier-picture lane. Do you have evidence that the last colour preview is pixel-for-pixel the same as the first? Answer with exactly one word: confirmed, different, or uncertain. Use uncertain when resemblance alone is all you can establish.",
+  "blind_method": "First and last retained images, plus the seen-again lane rendered from that version, two controls per variant in source selection order. One independent local GPT session per arm and film. Decision was exploratory without the reading guide. Guided repeated the experiment with neutral attachment filenames and the version-specific seen-again row supplied before the identical question. Exact images permit confirmed, other images may be different or uncertain. These are short strips, not complete guided-page rounds.",
+  "legacy_and_new_demo": [
+    {
+      "stored_identity": false,
+      "cards": [
+        {
+          "at": 8.0,
+          "earlier": 0.0,
+          "score": 0.9885103702545166,
+          "same": false,
+          "verified": false
+        },
+        {
+          "at": 18.0,
+          "earlier": 0.0,
+          "score": 0.997382402420044,
+          "same": false,
+          "verified": false
+        }
+      ]
+    },
+    {
+      "stored_identity": true,
+      "cards": [
+        {
+          "at": 8.0,
+          "earlier": 0.0,
+          "score": 0.9885103702545166,
+          "same": false,
+          "verified": false
+        },
+        {
+          "at": 18.0,
+          "earlier": 0.0,
+          "score": 0.997382402420044,
+          "same": false,
+          "verified": false
+        }
+      ]
+    }
+  ],
+  "search_profile": {
+    "before": {
+      "windows": 9000,
+      "features": 400,
+      "valid": 360,
+      "seconds": 0.12316479199216701,
+      "max_rss_bytes": 386842624,
+      "index_sha256": "c872f65bb8c9786df6bffd046caad2a13b0d892e7d36b547cb230b05e067563b"
+    },
+    "after": {
+      "windows": 9000,
+      "features": 400,
+      "valid": 360,
+      "seconds": 0.003253125003539026,
+      "max_rss_bytes": 51625984,
+      "index_sha256": "c872f65bb8c9786df6bffd046caad2a13b0d892e7d36b547cb230b05e067563b"
+    }
+  },
+  "profile_condition": "9000 half-second voice windows, 400 float32 features, 360 active, 80 unit patterns, seed 13, Apple Silicon. Peak process RSS measured separately. The earlier result indices matched byte for byte.",
+  "resource": {
+    "capture-reader": {
+      "leader": 14042,
+      "code": 0,
+      "peak_kib": 4026704,
+      "min_free_pct": 85,
+      "seconds": 279.04,
+      "catch_on_exit": [],
+      "survivors": [],
+      "status": "ok"
+    },
+    "free-read": {
+      "leader": 15887,
+      "code": 0,
+      "peak_kib": 1538464,
+      "min_free_pct": 68,
+      "seconds": 163.82,
+      "catch_on_exit": [],
+      "survivors": [],
+      "status": "ok"
+    },
+    "blind": {
+      "leader": 17699,
+      "code": 0,
+      "peak_kib": 375136,
+      "min_free_pct": 68,
+      "seconds": 37.81,
+      "catch_on_exit": [],
+      "survivors": [],
+      "status": "ok"
+    },
+    "guided": {
+      "leader": 19764,
+      "code": 0,
+      "peak_kib": 375376,
+      "min_free_pct": 91,
+      "seconds": 38.35,
+      "catch_on_exit": [],
+      "survivors": [],
+      "status": "ok"
+    },
+    "release": {
+      "leader": 16039,
+      "code": 0,
+      "peak_kib": 3805984,
+      "min_free_pct": 68,
+      "seconds": 143.18,
+      "catch_on_exit": [],
+      "survivors": [],
+      "status": "ok"
+    },
+    "suite": {
+      "leader": 16647,
+      "code": 0,
+      "peak_kib": 2010720,
+      "min_free_pct": 68,
+      "seconds": 101.22,
+      "catch_on_exit": [],
+      "survivors": [],
+      "status": "ok"
+    }
+  }
+}

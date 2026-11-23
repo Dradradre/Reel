@@ -31,8 +31,7 @@ order, with nothing left out.
   never sampled, so a one-frame flash or a one-second repeat survives.
 - **One time axis.** Picture, on-screen text, sound, loudness, crowd and speech sit on the same axis, so you can see
   whether a voice belongs to its picture or a cut lands with its sound.
-- **Memory.** A viewer thinks "I just heard that" and "I have seen this before". The reel marks both: a sample-exact
-  replay of the same recording in red, similar footage and voices coming back from earlier with the time they first played.
+- **Memory.** The page gives the time of an earlier picture or sound. A reader can see whether two colour previews match pixel for pixel, share a layout, or whether a sound has a similar waveform or frequency pattern.
 - **Read before judging.** Pages run strictly forward, 30 seconds each, and are read in order with a short log after
   each page, before any summary. Nothing on a page is a verdict.
 
@@ -48,7 +47,7 @@ order, with nothing left out.
 | subject | where the person the film is about appears, and whether the eye is predicted to land on them | the film losing its subject |
 | on screen | recognized words and numbers during the frames in which they appear | read a score or sign alongside the sound at that moment |
 | change | mean absolute RGB change between displayed frames, brightness and holds. A colour change can register at constant brightness. On MCP replay, `ask_scene(exposure_detail=true)` places the recorded peak under each consecutive picture in a short sequence. With `sync_regions`, each motion trace covers the whole requested rectangle | cuts, flashes, blackouts, a frozen picture |
-| seen again | pictures that already appeared | reused footage |
+| seen again | Green marks a pixel-for-pixel match between two retained colour previews. Blue marks a similar layout across shots. Both give the earlier time. | a returning title card, two different cards with similar lettering |
 | sound | power in each frequency band on a fixed −80 to 0 dBFS scale, with changes in the sound marked. On replay, a marked interval can be read against the surrounding channel spectra. In stereo you can listen to the average or difference between the channels. | the same sound keeps its brightness across recordings and zooms. During playback you can rehear a sustained band or a brief impact alongside the original. The speech reader measures what remains in the gaps before, between and after detected voices. Playback also reports the frequency of a clearly repeating sound. |
 | sounds like | short sound changes on the page. Live playback also gives the time, channel and frequency range of sharp rises or falls. Source estimates cover up to ten seconds in `stream.md` and four seconds per channel in `play`. First-listen descriptions can cover ten seconds. A second description can isolate the latest passage when the longer reading includes an earlier turn. A first MCP view includes available local waveform readings and supported words with or without a WAV attachment. On replay, compare the one-second estimates with one continuous reading of the sound. | a single impact, music underneath it, or voices in a busy room |
 | level | recorded mix level in 10 ms steps, with the typical level and strongest moment of each window in `stream.md` | a slow fade, a quiet background or a brief rise |
@@ -59,9 +58,11 @@ order, with nothing left out.
 | in sync? | where the sound sits against the picture, from 2 s early to 2 s late, moment by moment | lips moving before the words, a ball struck before its sound |
 | crowd stem | estimated audience sound on the same band-power scale as the mix, with repeated rhythms marked | the timing of a possible chant and its relation to the recorded mix |
 | said | On replay, `heard_words` can check just the selected interval. Playback marks possible voices found only after amplification and keeps their times separate from the transcript. The page shows words that agree in two listening windows, checked against the mix when only the stem suggests speech. Gain-assisted candidates are available in `reel listen` | what is said; whether it matches the subtitles |
-| heard again | the very same recording played again, in red (an echo within 3 s or a stretch pasted from far back), or a similar voice from earlier. During replay, `compare_heard(similarity=true)` compares two original excerpts. Pass `alternatives` to compare each description across them | an edit echo, a recycled crowd recording |
+| heard again | A short waveform repeat or a sequence of similar voice patterns points to the earlier sound. On replay, `compare_heard(similarity=true)` compares two original excerpts. Pass `alternatives` to compare descriptions across them. | a possible echo, a recurring crowd sound |
 
 ## Does it work?
+
+On eight unfamiliar films, the first sentence from GPT with Reel reached 98.2% of human same-film description separation. Picture recall reached 95.0% and sound recall 56.9%. GPT received pictures, local sound descriptions and speech readings. [Per-film responses and uncertainty](docs/benchmarks/earlier-observations.json)
 
 When a colour or fine pattern changed briefly at constant average brightness, GPT found the right second from the page’s change trace on **8/8** clips, up from **0/8**. Pausing more often for RGB changes on eight real films reduced activity-boundary F1 against five observers from **40.7 to 34.6**. Reel keeps its ordinary viewing pace. [Frame changes and human timing](docs/perception-check.md#밝기가-같은-화면에서-색이나-무늬가-바뀐-순간)
 

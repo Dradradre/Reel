@@ -28,6 +28,7 @@ import numpy as np, cv2, librosa
 from PIL import Image, ImageDraw
 from common import RecordedSource, audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary, video_end, font, lut, tc, polyline
 from frames import mean_rgb_change, native_frames, save_frame as _save_frame
+from memory import earlier_matches, prefer_identical_previews, match_note
 from screen_text import screen_intervals
 from config import SEP_PY, ASR_PY, GAZE_PY, GENRES
 from stereo import channel_pairs, pair_cues
@@ -246,7 +247,7 @@ def voices(path, out, lang, log, prompt=None, deterministic=False):
     reps = exact_repeats(y8)
     with_gain = [w for w in words if "gain_db" in w]
     words = [w for w in words if "gain_db" not in w]
-    log(f"  voices done, {len(words)} words, {len(with_gain)} candidates after gain, {len(reps)} exact repeats")
+    log(f"  voices done, {len(words)} words, {len(with_gain)} candidates after gain, {len(reps)} waveform matches")
     return dict(words=words, speech_with_gain=with_gain, speech_activity=activity,
                 vdb=vdb, vrms=vrms, repeats=reps, crowd=crowd)
 
@@ -574,8 +575,8 @@ def sync_runs(S):
 # ============================================================== memory
 
 def exact_repeats(y, sr=8000, lo=0.3, hi=3.0, thr=0.9):
-    """Stretches whose sound is a sample-for-sample copy of what played lo..hi seconds earlier. Music loops in a mix
-    almost never are; an edit that replays a second of footage always is. Returns [(t, dur, lag, corr)]."""
+    """Find half-second waveforms with normalized correlation above thr at a prior lag.
+    Returns (time, duration, lag, correlation) for each run."""
     from scipy.signal import fftconvolve
     win, hop = int(0.5 * sr), int(0.1 * sr)
     L0, L1 = int(lo * sr), int(hi * sr)
@@ -604,7 +605,7 @@ def exact_repeats(y, sr=8000, lo=0.3, hi=3.0, thr=0.9):
 
 
 def memory_picture(v, cuts):
-    """For every 4-fps picture: the earlier moment (in a different shot, at least 1 s back) that looks the same.
+    """For every 4-fps picture: a similar layout or identical retained preview in an earlier shot.
     A flash or blink of a few frames is not a new shot: the picture before and after it is one continuous shot."""
     fl = blips(v)
     if fl:
@@ -615,24 +616,15 @@ def memory_picture(v, cuts):
     sd = h.std(1)
     z = (h - h.mean(1, keepdims=True)) / (sd[:, None] + 1e-6)
     z /= np.sqrt(z.shape[1])
-    sim = z @ z.T
     t = thumbnail_times(v)
     shot = np.searchsorted(cuts, v["th_idx"], side="right")
-    best_t = np.full(len(t), np.nan, np.float32); best_s = np.zeros(len(t), np.float32)
-    for i in range(len(t)):
-        if sd[i] < 8:                                         # flat frames (black, white) do not count as memories
-            continue
-        ok = (t < t[i] - 1.0) & (shot != shot[i]) & (sd >= 8)
-        if not ok.any():
-            continue
-        j = int(np.argmax(np.where(ok, sim[i], -1)))
-        if sim[i, j] > 0.965:
-            best_t[i], best_s[i] = t[j], sim[i, j]
-    return dict(t=t, src=best_t, score=best_s)
+    indices, scores = earlier_matches(z, t, sd >= 8, 1., .965, shot)
+    same = prefer_identical_previews(v["thumbs"], t, shot, indices, scores)
+    return dict(t=t, src=np.where(indices >= 0, t[indices], np.nan), score=scores, same_pixels=same)
 
 
 def memory_voice(vo):
-    """For every 0.1 s: the earlier moment (at least 0.6 s back) whose voices sound the same."""
+    """For every 0.1 s: the earlier moment (more than 3 s back) with similar voice-band features."""
     db = vo["vdb"]
     n = db.shape[1]
     hop, win = 10, 50
@@ -647,17 +639,9 @@ def memory_voice(vo):
     F = np.array(feats, np.float32)
     live = np.array(live)
     t = idx * HOP / SR
-    sim = F @ F.T
-    best_t = np.full(len(t), np.nan, np.float32); best_s = np.zeros(len(t), np.float32)
-    for i in range(len(t)):
-        if not live[i]:
-            continue
-        ok = (t < t[i] - 3.0) & live
-        if not ok.any():
-            continue
-        j = int(np.argmax(np.where(ok, sim[i], -1)))
-        if sim[i, j] > 0.93:
-            best_t[i], best_s[i] = t[j], sim[i, j]
+    indices, best_s = earlier_matches(F, t, live, 3., .93)
+    centers = t + win * HOP / SR / 2
+    best_t = np.where(indices >= 0, centers[indices], np.nan)
     # keep only runs of 3 or more windows (0.3 s): single coincidences are not memories
     keep = ~np.isnan(best_t)
     run = np.zeros(len(t), bool)
@@ -673,7 +657,7 @@ def memory_voice(vo):
         else:
             i += 1
     best_t[~run] = np.nan
-    return dict(t=t + win * HOP / SR / 2, src=best_t, score=best_s)
+    return dict(t=centers, src=best_t, score=best_s)
 
 
 # ============================================================== reading
@@ -1028,14 +1012,7 @@ def render_page(F, t0, t1, idx, total, name):
     if mv.get("score") is None or mp.get("score") is None:
         F["mem_voice"] = mv = memory_voice(vo) if mv.get("score") is None else mv
         F["mem_pic"] = mp = memory_picture(v, F["cuts"]) if mp.get("score") is None else mp
-    ex_v = exact_replays(mv)
-    ex_p = []                                               # the picture is the same footage when it matches at the voice's lag
-    for ea, eb, es in ex_v:
-        sel = (mp["t"] >= ea) & (mp["t"] < eb) & ~np.isnan(mp["src"])
-        if sel.sum() and np.median(np.abs((mp["t"][sel] - mp["src"][sel]) - (ea - es))) < 0.4:
-            ex_p.append((ea, eb, es))
-    F["_exact"] = (ex_v, ex_p)
-    _memory_lane(pg, "seen", mp["t"], mp["src"], (110, 200, 255), ex_p)
+    _memory_lane(pg, "seen", mp["t"], mp["src"], (110, 200, 255), same_pixels=mp.get("same_pixels"))
     pg.label("seen", "seen again")
     # sound: spectrogram with the sound-scene changes marked
     y, h = pg.y["sound"]
@@ -1236,7 +1213,7 @@ def render_page(F, t0, t1, idx, total, name):
     pg.label("said", "said")
     pg.box("heard")
     mv = F["mem_voice"]
-    _memory_lane(pg, "heard", mv["t"], mv["src"], (255, 170, 90), F.get("_exact", ([], []))[0])
+    _memory_lane(pg, "heard", mv["t"], mv["src"], (255, 170, 90), aligned_voice_matches(mv))
     y, h = pg.y["heard"]
     for (rt, rd, lag, c) in vo.get("repeats", []):
         if rt + rd < t0 or rt > t1:
@@ -1244,7 +1221,7 @@ def render_page(F, t0, t1, idx, total, name):
         xa, xb = pg.x(max(rt, t0)), pg.x(min(rt + rd, t1))
         d.rectangle([xa, y, max(xb, xa + 3), y + h], fill=(255, 40, 40))
         was = " ".join(w["w"] for w in vo["words"] if rt - lag - 0.2 <= w["t"] < rt - lag + rd + 0.2)[:40]
-        lab = f"SAME SOUND AGAIN, {lag:.1f}s later" + (f": {was}" if was else "")
+        lab = f"waveform repeats, {lag:.1f}s later" + (f": {was}" if was else "")
         d.text((xa + 3, y + 3), lab, font=font(12, True), fill=(255, 255, 255))
         # and mark where it was first heard
         xo = pg.x(rt - lag)
@@ -1261,9 +1238,8 @@ def render_page(F, t0, t1, idx, total, name):
     return pg.img
 
 
-def exact_replays(mv):
-    """Stretches of 0.5 s or more whose voices are the very same recording as an earlier moment (similarity 0.99+),
-    not merely the same speaker or singer again. Returns [(t0, t1, src_t0)]."""
+def aligned_voice_matches(mv):
+    """Runs of similar voice features advancing together on their two clocks."""
     if mv.get("score") is None:
         return []
     ts, src, sc = np.asarray(mv["t"]), np.asarray(mv["src"], float), np.asarray(mv["score"])
@@ -1272,9 +1248,11 @@ def exact_replays(mv):
     while i < len(ts):
         if on[i]:
             j = i
-            while j + 1 < len(ts) and (on[j + 1] or (j + 3 < len(ts) and on[j + 2:j + 4].any())) and ts[j + 1] - ts[i] < 30:
+            lag = ts[i] - src[i]
+            while (j + 1 < len(ts) and on[j + 1] and ts[j + 1] - ts[i] < 30
+                   and abs(ts[j + 1] - src[j + 1] - lag) < .05):
                 j += 1
-            if ts[j] - ts[i] >= 0.4:
+            if j - i >= 4:
                 out.append((float(ts[i]), float(ts[j] + 0.1), float(src[i])))
             i = j + 1
         else:
@@ -1282,41 +1260,43 @@ def exact_replays(mv):
     return out
 
 
-def _memory_lane(pg, name, ts, src, colr, exact=()):
-    """Runs where something earlier comes back. Bars first, then labels that never overlap one another. Stretches in
-    `exact` are the very same recording replayed: drawn red and named so."""
+def _memory_lane(pg, name, ts, src, colr, aligned=(), *, same_pixels=None):
+    """Show earlier matches with the evidence used to identify them."""
     y, h = pg.y[name]
     d = pg.d
     on = ~np.isnan(src)
+    same = np.zeros(len(ts), dtype=bool) if same_pixels is None else same_pixels
     runs, i, n = [], 0, len(ts)
     while i < n:
-        if on[i] and pg.t0 <= ts[i] <= pg.t1:
+        if on[i] and pg.t0 <= ts[i] < pg.t1:
             j = i
-            while j + 1 < n and on[j + 1] and ts[j + 1] - ts[j] < 0.6 and abs(src[j + 1] - src[j] - (ts[j + 1] - ts[j])) < 0.6:
+            while (j + 1 < n and on[j + 1] and same[j + 1] == same[i] and ts[j + 1] < pg.t1
+                   and ts[j + 1] - ts[j] < 0.6 and abs(src[j + 1] - src[j] - (ts[j + 1] - ts[j])) < 0.6):
                 j += 1
-            runs.append((ts[i], min(ts[j] + 0.25, pg.t1), float(src[i])))
+            runs.append((ts[i], min(ts[j] + 0.25, pg.t1), float(src[i]), same[i]))
             i = j + 1
         else:
             i += 1
-    for a, b, _ in runs:
-        d.rectangle([pg.x(a), y + 2, max(pg.x(b), pg.x(a) + 2), y + h - 2], fill=colr)
+    for a, b, _, identical in runs:
+        d.rectangle([pg.x(a), y + 2, max(pg.x(b), pg.x(a) + 2), y + h - 2],
+                    fill=(108, 224, 177) if identical else colr)
     free = -1e9
-    for ea, eb, es in exact:
+    for ea, eb, es in aligned:
         if eb < pg.t0 or ea > pg.t1:
             continue
         xa, xb = pg.x(max(ea, pg.t0)), pg.x(min(eb, pg.t1))
         d.rectangle([xa, y + 1, max(xb, xa + 2), y + h - 1], fill=(220, 30, 30))
-        lab = f"SAME RECORDING AGAIN as {tc(es)[:-3]}" + (" (picture too)" if name == "seen" else "")
+        lab = f"voice pattern like {tc(es)}"
         fw = font(10, True).getlength(lab) + 6
         d.rectangle([xa, y + 1, xa + fw, y + h - 1], fill=(220, 30, 30))
         d.text((xa + 3, y + 1), lab, font=font(10, True), fill=(255, 255, 255))
         free = max(free, xa + fw + 2)
-    for a, b, sv in runs:
+    for a, b, sv, identical in runs:
         xa = pg.x(a)
-        if xa < free or any(ea - 0.5 <= a <= eb for ea, eb, _ in exact):
+        if xa < free or any(ea - 0.5 <= a <= eb for ea, eb, _ in aligned):
             continue
-        lag = a - sv
-        lab = f"= {tc(sv)[:-3]}" if lag > 20 else f"= {lag:.1f}s ago"
+        kind = ("same preview" if identical else "layout like") if name == "seen" else "voice like"
+        lab = f"{kind} {tc(sv)}"
         fw = font(10).getlength(lab) + 6
         d.rectangle([xa, y + 1, xa + fw, y + h - 1], fill=(250, 250, 250))
         d.text((xa + 3, y + 1), lab, font=font(10), fill=(20, 20, 20))
@@ -1426,10 +1406,6 @@ def write_stream(F, out, name):
         said = " ".join(w["w"] for w in vo["words"] if sa <= w["t"] < sb)[:160]
         mm = a["m_v"][(a["m_t"] >= sa) & (a["m_t"] < sb)]
         loud = f"{np.median(mm):.0f}" if len(mm) else ""
-        sp = mp["src"][(mp["t"] >= sa) & (mp["t"] < sb)]
-        sp = sp[~np.isnan(sp)]
-        sv = mv["src"][(mv["t"] >= sa) & (mv["t"] < sb)]
-        sv = sv[~np.isnan(sv)]
         subj_bits = ""
         if F.get("subject"):
             al = [x.strip() for x in F["subject"].split(",") if x.strip()]
@@ -1466,18 +1442,18 @@ def write_stream(F, out, name):
         for ra, rb, late, sure in sync_runs(F.get("sync")):
             if ra < sb and rb > sa:
                 subj_bits += f" [sound {abs(late):.1f} s {'late' if late > 0 else 'early'} against the picture, {'sure' if sure else 'likely'}]"
-        for ea, eb, es in exact_replays(F["mem_voice"]):
+        for ea, eb, es in aligned_voice_matches(F["mem_voice"]):
             if sa <= ea < sb:
-                subj_bits += f" [SAME RECORDING AGAIN as {tc(es)[:-3]}, {eb - ea:.1f} s]"
+                subj_bits += f" [similar voice pattern at {tc(es)}, {eb - ea:.1f} s]"
         rp = [r for r in vo.get("repeats", []) if sa <= r[0] < sb]
         if rp:
-            subj_bits += "  [SAME SOUND AGAIN " + ", ".join(f"at {tc(r[0])}, {r[2]:.1f}s after it first played" for r in rp) + "]"
+            subj_bits += "  [similar waveform " + ", ".join(f"at {tc(r[0])}, {r[2]:.1f}s apart" for r in rp) + "]"
         if subj_bits.strip():
             observations.append(subj_bits.strip())
         mix = mix_level_text(a["rms"], sa, sb) if a.get("has_audio", True) else "no audio track"
         duration = f"{sb - sa:.3f}s" if sb - sa < .1 else f"{sb - sa:.1f}s"
         lines.append(f"{tc(sa)} | {duration} | {txt} | {said} | {loud} | "
-                     f"{tc(float(np.median(sp)))[:-3] if len(sp) else ''} | {tc(float(np.median(sv)))[:-3] if len(sv) else ''} | {', '.join(observations)} | "
+                     f"{match_note(mp, sa, sb, 'layout')} | {match_note(mv, sa, sb, 'voice like')} | {', '.join(observations)} | "
                      f"{mix}")
     (out / "stream.md").write_text("\n".join(lines) + "\n")
 
@@ -1634,7 +1610,7 @@ def _build(film, out, page_s, lang, title, subject, genre, until=None, *, pictur
                         vo_vdb=vo["vdb"], vo_vrms=vo["vrms"], cuts=cuts, vo_repeats=np.array(vo["repeats"], np.float32).reshape(-1, 4),
                         vo_crowd=vo["crowd"] if vo["crowd"] is not None else np.zeros((0, 0), np.float32),
                         mp_t=F["mem_pic"]["t"], mp_src=F["mem_pic"]["src"], mv_t=F["mem_voice"]["t"], mv_src=F["mem_voice"]["src"],
-                        mp_score=F["mem_pic"]["score"], mv_score=F["mem_voice"]["score"])
+                        mp_score=F["mem_pic"]["score"], mp_same_pixels=F["mem_pic"]["same_pixels"], mv_score=F["mem_voice"]["score"])
     source = str(pathlib.Path(film).resolve()) if until is None else "clip.mkv"
     snapshot = {} if until is None else {"until": F["dur"]}
     if until is not None:
@@ -1675,9 +1651,15 @@ def load(out):
         extra["gaze"] = {k: np.array(v_) for k, v_ in m["gaze"].items()}
     sync_file = out / m.get("analysis_directory", ".") / "sync.json"
     extra["sync"] = json.loads(sync_file.read_text()) if sync_file.exists() else None
+    if "mp_same_pixels" in z.files:
+        pictures = dict(t=z["mp_t"], src=z["mp_src"], score=z["mp_score"], same_pixels=z["mp_same_pixels"])
+        voices_earlier = dict(t=z["mv_t"], src=z["mv_src"], score=z["mv_score"])
+    else:
+        # Older reels have colour thumbnails and voice features but only tentative matches.
+        pictures = memory_picture(v, z["cuts"])
+        voices_earlier = memory_voice(vo)
     return dict(**extra, v=v, a=a, vo=vo, ocr=m["ocr"], cuts=z["cuts"], dur=m["dur"],
-                mem_pic=dict(t=z["mp_t"], src=z["mp_src"], score=z["mp_score"] if "mp_score" in z.files else None),
-                mem_voice=dict(t=z["mv_t"], src=z["mv_src"], score=z["mv_score"] if "mv_score" in z.files else None)), m
+                mem_pic=pictures, mem_voice=voices_earlier), m
 
 
 def frame_at(out, at):

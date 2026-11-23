@@ -123,14 +123,31 @@ class SceneHistory:
         self.tail = None
         self.next_sample = None
         self.rate = None
+        self.last_recent_end = None
+
+    def _window(self, samples, active, rate, end_sample, end_s):
+        signals, groups = [], []
+        for i in np.flatnonzero(active):
+            channel = samples[:, i]
+            same = next((j for j, other in enumerate(signals) if np.array_equal(channel, other)), None)
+            if same is None:
+                signals.append(channel)
+                groups.append([int(i) + 1])
+            else:
+                groups[same].append(int(i) + 1)
+        notes = self.describe(signals, rate)
+        return {"start_s": (end_sample - len(samples)) / rate, "end_s": min(end_s, end_sample / rate),
+                "channels": [{"channels": group, "impression": note}
+                             for group, note in zip(groups, notes, strict=True)]}
 
     def read(self, wav, first_sample, end_s):
-        windows = []
+        windows, recent = [], []
         with open_recording(wav) as recording:
             rate = recording.samplerate
             if (self.next_sample != first_sample or self.rate != rate or self.tail is None
                     or recording.channels != self.tail.shape[1]):
                 self.tail = np.empty((0, recording.channels), dtype=np.float32)
+                self.last_recent_end = first_sample
             self.rate = rate
             cursor = first_sample
             while recording.tell() < len(recording):
@@ -144,24 +161,28 @@ class SceneHistory:
                 self.tail = context
                 if len(context) < MIN_SECONDS * rate:
                     continue
-                groups = []
-                signals = []
-                for i, channel in enumerate(context.T):
-                    if not np.any(block[:, i]):
-                        continue
-                    same = next((j for j, other in enumerate(signals) if np.array_equal(channel, other)), None)
-                    if same is None:
-                        signals.append(channel)
-                        groups.append([i + 1])
-                    else:
-                        groups[same].append(i + 1)
-                if signals:
-                    notes = self.describe(signals, rate)
-                    windows.append({"start_s": (cursor - len(context)) / rate, "end_s": min(end_s, cursor / rate),
-                                    "channels": [{"channels": group, "impression": note}
-                                                 for group, note in zip(groups, notes, strict=True)]})
+                active = np.any(block, axis=0)
+                if not np.any(active):
+                    continue
+                windows.append(self._window(context, active, rate, cursor, end_s))
+                # Compare the new passage with the wider history. Several rapid pauses
+                # share a two-second listening interval, with its own actual bounds.
+                width = max(len(block), MIN_SECONDS * rate)
+                if len(context) == width:
+                    self.last_recent_end = cursor
+                elif cursor - self.last_recent_end >= MIN_SECONDS * rate:
+                    try:
+                        reading = self._window(context[-width:], active, rate, cursor, end_s)
+                    except (OSError, RuntimeError, ValueError):
+                        reading = {"start_s": (cursor - width) / rate, "end_s": min(end_s, cursor / rate),
+                                   "status": "unavailable", "channels": []}
+                    recent.append(reading)
+                    self.last_recent_end = cursor
             self.next_sample = cursor
-        return {"status": "available", "model": MODEL, "basis": BASIS, "windows": windows}
+        report = {"status": "available", "model": MODEL, "basis": BASIS, "windows": windows}
+        if recent:
+            report["recent_windows"] = recent
+        return report
 
 
 class SceneReader(LocalReader):

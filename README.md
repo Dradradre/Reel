@@ -62,6 +62,8 @@ order, with nothing left out.
 
 ## Does it work?
 
+With the marked sound replay available, local GPT matched **21/36** human annotations on the same 12 films (picture 10/12, sound 6/12, visible source 5/12). None of the readers requested a mark. When explicitly shown a sound interval in a separate timing task, GPT matched annotated starts and continuations on **9/24** natural excerpts, up from 2/24. Wrong answers rose from 1 to 3, and abstentions fell from 21 to 12. [Ordinary viewing](docs/perception-check.md#소리-구간-표시를-추가한-뒤-같은-12편을-본-결과) · [Timing trial](docs/listening-check.md#짧은-소리가-시작되는-순간)
+
 On 12 previously unused films, signed-in local Codex GPT matched human annotations on **21/36 questions (58.3%)** and **22/36 (61.1%)** in a second independent pass. Picture agreement was 9/12 then 10/12. Sound identity and whether its source was visible each scored 6/12 both times. A reader given only the questions and forced to guess scored 16/36. [Both runs, human references and individual misses](docs/perception-check.md#새-영상-12편에서-두-번-잰-일치율)
 
 On eight everyday clips, GPT described each whole film in a single sentence without questions about its content. Against 37 human descriptions, its captions distinguished the matching film from the other seven **87.0% as well as a held-out viewer's caption** (film bootstrap interval 74.0–103.7%). GPT chose to skip optional sound estimates on 26 of 47 playback turns. A separate run that delivered those estimates on all 47 turns scored **86.5%** by the same measure. [Human comparison and viewing conditions](docs/perception-check.md#자유-설명에서-사람끼리의-일치도를-100으로-뒀을-때)

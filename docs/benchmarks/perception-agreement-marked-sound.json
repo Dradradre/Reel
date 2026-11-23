@@ -1,0 +1,357 @@
+{
+  "panel": "perception-agreement-holdout-v4.json",
+  "revision": "9d6fa7f80e567e4baca36036359542d2f911f0b9",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "method": "Identical protocol, 12 unaltered audiovisual films and questions from the previous two-pass panel. One fresh session per film on shipped code, no suggested marker. Verified the published recording hashes, all consecutive picture turns, end_of_view and the exact replayed audio interval and alternatives. Normal coded choices, with wrong and unresolved answers receiving zero.",
+  "score": {
+    "correct": 21,
+    "wrong": 5,
+    "abstained": 10,
+    "total": 36,
+    "fraction": 0.5833333333333334,
+    "films": 12,
+    "all_three_correct": 5,
+    "by_question": {
+      "picture": {
+        "correct": 10,
+        "wrong": 1,
+        "abstained": 1
+      },
+      "sound": {
+        "correct": 6,
+        "wrong": 2,
+        "abstained": 4
+      },
+      "visible_source": {
+        "correct": 5,
+        "wrong": 2,
+        "abstained": 5
+      }
+    }
+  },
+  "by_film": [
+    {
+      "video_id": "video_10368",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 3,
+      "end_s": 20.693,
+      "tool_calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 516575,
+        "sample_count": 51336,
+        "rate_hz": 48000
+      },
+      "source_estimate_turns": 3,
+      "sound_caption_turns": 3
+    },
+    {
+      "video_id": "video_8861",
+      "answers": [
+        "C",
+        "?",
+        "?"
+      ],
+      "turns": 2,
+      "end_s": 11.121995464852608,
+      "tool_calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 108846,
+        "sample_count": 13238,
+        "rate_hz": 44100
+      },
+      "source_estimate_turns": 2,
+      "sound_caption_turns": 2
+    },
+    {
+      "video_id": "video_10303",
+      "answers": [
+        "B",
+        "A",
+        "?"
+      ],
+      "turns": 5,
+      "end_s": 32.83299319727891,
+      "tool_calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 803968,
+        "sample_count": 42624,
+        "rate_hz": 44100
+      },
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5
+    },
+    {
+      "video_id": "video_4471",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.96900226757369,
+      "tool_calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 1372980,
+        "sample_count": 10291,
+        "rate_hz": 44100
+      },
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5
+    },
+    {
+      "video_id": "video_8407",
+      "answers": [
+        "B",
+        "A",
+        "Y"
+      ],
+      "turns": 3,
+      "end_s": 19.550997732426303,
+      "tool_calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 177870,
+        "sample_count": 16170,
+        "rate_hz": 44100
+      },
+      "source_estimate_turns": 3,
+      "sound_caption_turns": 3
+    },
+    {
+      "video_id": "video_4022",
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "turns": 4,
+      "end_s": 26.447006802721088,
+      "tool_calls": {
+        "view": 5,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 758102,
+        "sample_count": 36801,
+        "rate_hz": 44100
+      },
+      "source_estimate_turns": 4,
+      "sound_caption_turns": 4
+    },
+    {
+      "video_id": "video_8768",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "end_s": 22.464,
+      "tool_calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 758830,
+        "sample_count": 115121,
+        "rate_hz": 48000
+      },
+      "source_estimate_turns": 3,
+      "sound_caption_turns": 3
+    },
+    {
+      "video_id": "video_7267",
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "turns": 2,
+      "end_s": 15.104,
+      "tool_calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 151922,
+        "sample_count": 17408,
+        "rate_hz": 48000
+      },
+      "source_estimate_turns": 2,
+      "sound_caption_turns": 2
+    },
+    {
+      "video_id": "video_7359",
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "turns": 2,
+      "end_s": 9.845011337868481,
+      "tool_calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 396900,
+        "sample_count": 35280,
+        "rate_hz": 44100
+      },
+      "source_estimate_turns": 2,
+      "sound_caption_turns": 2
+    },
+    {
+      "video_id": "video_5058",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.752,
+      "tool_calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 1646849,
+        "sample_count": 19356,
+        "rate_hz": 48000
+      },
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5
+    },
+    {
+      "video_id": "video_6400",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 3,
+      "end_s": 17.408,
+      "tool_calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 508412,
+        "sample_count": 11191,
+        "rate_hz": 48000
+      },
+      "source_estimate_turns": 3,
+      "sound_caption_turns": 3
+    },
+    {
+      "video_id": "video_833",
+      "answers": [
+        "B",
+        "A",
+        "Y"
+      ],
+      "turns": 4,
+      "end_s": 24.61299319727891,
+      "tool_calls": {
+        "view": 5,
+        "ask_scene": 1
+      },
+      "requested_marks": [],
+      "exact_replay": {
+        "first_sample": 881411,
+        "sample_count": 38258,
+        "rate_hz": 44100
+      },
+      "source_estimate_turns": 4,
+      "sound_caption_turns": 4
+    }
+  ],
+  "previous": "perception-agreement-holdout-v4-results.json",
+  "previous_scores": [
+    {
+      "correct": 21,
+      "wrong": 6,
+      "abstained": 9,
+      "total": 36,
+      "fraction": 0.5833333333333334,
+      "films": 12,
+      "all_three_correct": 4,
+      "by_question": {
+        "picture": {
+          "correct": 9,
+          "wrong": 2,
+          "abstained": 1
+        },
+        "sound": {
+          "correct": 6,
+          "wrong": 2,
+          "abstained": 4
+        },
+        "visible_source": {
+          "correct": 6,
+          "wrong": 2,
+          "abstained": 4
+        }
+      }
+    },
+    {
+      "correct": 22,
+      "wrong": 7,
+      "abstained": 7,
+      "total": 36,
+      "fraction": 0.6111111111111112,
+      "films": 12,
+      "all_three_correct": 5,
+      "by_question": {
+        "picture": {
+          "correct": 10,
+          "wrong": 1,
+          "abstained": 1
+        },
+        "sound": {
+          "correct": 6,
+          "wrong": 3,
+          "abstained": 3
+        },
+        "visible_source": {
+          "correct": 6,
+          "wrong": 3,
+          "abstained": 3
+        }
+      }
+    }
+  ],
+  "mark_requested_films": [],
+  "repeated_for_missing_end_signal": [
+    "video_833"
+  ]
+}

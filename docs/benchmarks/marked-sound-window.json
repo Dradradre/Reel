@@ -1,0 +1,2857 @@
+{
+  "revisions": {
+    "before": "96498ed9214a7fabe8ce0ae16fc93fc6a101bb0f",
+    "shipped": "9d6fa7f80e567e4baca36036359542d2f911f0b9"
+  },
+  "model": "gpt-6.1-terra via signed-in local Codex CLI, no native WAV attachment",
+  "methods": {
+    "controls": "Eight pairs of two-second stereo recordings. A continuous bed in both channels and a filtered noise in one. Onset and ongoing arms have identical PCM in both channels from the start of the 220 ms mark to the end. In the onset arm a different frequency band precedes the mark with a 4 ms crossfade at its left edge. The ongoing arm continues the target band. Butterworth order four, 24 kHz, hashed media and marked samples below.",
+    "natural": "Twelve separate Perception Test films outside the 56 prior audiovisual agreement films. Events with a specific label and duration of 2.1\u20139 s, without an immediately preceding overlapping annotation of that class. Deterministic hash ordering with salt reel-auditory-boundary-v1/, initially one example per distinct class. Two original two-second excerpts of each film: the mark meets the annotated event start or lies at least 1.25 s inside that event. Sound only. These are agreements with published event boundaries, which can span pauses. No new listeners heard the cuts.",
+    "protocol": "One fresh session per clip and version. Both see the same anonymous PCM through Reel, the same two-second conventional channel spectrogram, film clock, peak/pitch/change readings and question. Both can replay. The marked condition also supplies a 25 ms spectrogram with a 220 ms bracket. No answers or filenames, no visual scene, same amount of original audio. Answers new, ongoing or unclear. An unclear answer scores zero. Stimuli, question wording, protocol and case order frozen before responses. The collected prototype and shipped code return identical marked sample ranges and PNG hashes on all 40 clips. The prototype and release differ in their tool descriptions and in handling marks at rounded boundaries between playback turns. Attribution includes the improved diagram, bracket and tool instructions together.",
+    "bootstrap": "Resample entire stimulus pairs (including both answers in both versions), 10000 draws, seed 20261123. Conditional on the chosen films and single responses.",
+    "source": "https://github.com/google-deepmind/perception_test"
+  },
+  "summary": {
+    "controlled": {
+      "before": {
+        "correct": 14,
+        "wrong": 2,
+        "abstained": 0,
+        "both_arms_correct": 6,
+        "by_annotation": {
+          "new": {
+            "new": 6,
+            "ongoing": 2
+          },
+          "ongoing": {
+            "ongoing": 8
+          }
+        }
+      },
+      "marked": {
+        "correct": 16,
+        "wrong": 0,
+        "abstained": 0,
+        "both_arms_correct": 8,
+        "by_annotation": {
+          "new": {
+            "new": 8
+          },
+          "ongoing": {
+            "ongoing": 8
+          }
+        }
+      },
+      "paired_difference_film_bootstrap_95": [
+        0.0,
+        0.3125
+      ]
+    },
+    "natural": {
+      "before": {
+        "correct": 2,
+        "wrong": 1,
+        "abstained": 21,
+        "both_arms_correct": 0,
+        "by_annotation": {
+          "new": {
+            "unclear": 10,
+            "new": 2
+          },
+          "ongoing": {
+            "unclear": 11,
+            "new": 1
+          }
+        }
+      },
+      "marked": {
+        "correct": 9,
+        "wrong": 3,
+        "abstained": 12,
+        "both_arms_correct": 3,
+        "by_annotation": {
+          "new": {
+            "unclear": 7,
+            "new": 4,
+            "ongoing": 1
+          },
+          "ongoing": {
+            "unclear": 5,
+            "new": 2,
+            "ongoing": 5
+          }
+        }
+      },
+      "paired_difference_film_bootstrap_95": [
+        0.125,
+        0.5
+      ]
+    }
+  },
+  "by_clip": [
+    {
+      "kind": "natural",
+      "id": "video_10309",
+      "condition": "ongoing",
+      "mark": [
+        0.924,
+        1.144
+      ],
+      "duration": 2.0,
+      "source_hash": "6ff886798e99ca493d28efae0d7fbf07ebe1f7ab15a5524e11377e9de72fdc5d",
+      "human_label": "Object:opening/closing of something",
+      "event_id": 2,
+      "event": [
+        5.644849,
+        8.684383
+      ],
+      "source_range": [
+        6.369714,
+        8.369714
+      ],
+      "word": "opening/closing of something",
+      "media_sha256": "aaa30ff18545dcd0824cdd8224c0a8f0036cbd1c56e6fbf100be1c1c91b2ee31",
+      "image_sha256": "d6dd37b0d612bf8f476d3b69b32b324ed0c795f553e224ec885b1acd0f28f3c7",
+      "marked_native_samples": [
+        44352,
+        54912
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The spectra show activity before and after 0.924 s, but do not establish whether it comes from the same opening or closing sound."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show sound before 0.924 s and a later rise, but do not establish which part is the opening or closing sound."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          },
+          {
+            "tool": "listen",
+            "start_s": 0.5,
+            "end_s": 1.3,
+            "question": "Is the opening or closing sound already underway just before 0.924 seconds, or does it begin around that time? Describe the acoustic timing."
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-6",
+      "condition": "new",
+      "mark": [
+        0.877,
+        1.097
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "e5364d72ececeddc15dd7a04e6ff168ccee27ca951109747778fa6172205d737",
+      "image_sha256": "0ad2974f7b59bc592f9c50880aea6464143f712bf2fdb6dbd5f9f843f2a216a1",
+      "marked_native_samples": [
+        21048,
+        26328
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "Channel 2\u2019s spectrum changes near 0.877 s, with a different frequency distribution appearing after the boundary."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "Channel 2\u2019s spectrum changes at the marked boundary, with lower frequencies rising and higher frequencies falling."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_11602",
+      "condition": "new",
+      "mark": [
+        0.796,
+        1.016
+      ],
+      "duration": 2.0,
+      "source_hash": "8b0fc28d53182802e143c3f5d13e9af084a4e661aecebc908e0f3549bca9e3fb",
+      "human_label": "Animal:sound",
+      "event_id": 9,
+      "event": [
+        9.362859,
+        13.061355
+      ],
+      "source_range": [
+        8.566859,
+        10.566859
+      ],
+      "word": "animal sound",
+      "media_sha256": "bb8323a02e925e2c52e312a90938a64f42f3c7e9fc9677252b1b655728e64319",
+      "image_sha256": "d102a910683d9721f93f7d1c7fa10749c7c902be09f29bf5c1e3371e3fd00f08",
+      "marked_native_samples": [
+        38208,
+        48768
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel measurements do not identify the animal sound or establish when it began."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectrum shows sound before 0.796 s, but it does not establish whether that sound is the animal."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_5741",
+      "condition": "ongoing",
+      "mark": [
+        1.048,
+        1.268
+      ],
+      "duration": 2.0,
+      "source_hash": "68e568df129f097a8e6218ce0c570c199dbf04af7f859cf160038d1889867e99",
+      "human_label": "Interaction:hitting",
+      "event_id": 5,
+      "event": [
+        12.260878,
+        14.426522
+      ],
+      "source_range": [
+        12.952525,
+        14.952525
+      ],
+      "word": "hitting",
+      "media_sha256": "75ff2883af15b2d6e41bca34d022bc8e65d322ba4b01a3feb827df3af10e71da",
+      "image_sha256": "8c2310a7ed4a2d707643a9bf6127573de7212bace907ed00cd2455a69c2e8920",
+      "marked_native_samples": [
+        50304,
+        60864
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "Both channels show a sharp high-frequency rise around 1.04 s, consistent with a new hitting sound."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "The spectrum shows a sharp rise in high-frequency energy around 1.04 s, consistent with a hit starting near the marked boundary."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-5",
+      "condition": "ongoing",
+      "mark": [
+        0.69,
+        0.91
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "f28af42088c8a39a4b0c82ed5df07fa7a02e782c7c3ca3f1cfe55d1a74cc66f8",
+      "image_sha256": "9a7720f43dacea909386876df2f28df24324f1afdab1939b9a206a7524440833",
+      "marked_native_samples": [
+        16560,
+        21840
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 1\u2019s broadband spectral texture continues across 0.69 s without a visible change."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 1 shows the same broadband spectral texture immediately before and throughout the marked interval."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_3076",
+      "condition": "new",
+      "mark": [
+        0.79,
+        1.01
+      ],
+      "duration": 2.0,
+      "source_hash": "dfabce4e59df423f132fd9f972dfdca05fe2c13c10384a25bb9ceb2be439cde3",
+      "human_label": "Interaction:rolling",
+      "event_id": 1,
+      "event": [
+        1.399617,
+        4.632067
+      ],
+      "source_range": [
+        0.609617,
+        2.609617
+      ],
+      "word": "rolling",
+      "media_sha256": "7f45ac0f6162089b7fef40c6170c71322a17d9c4100cb0bcd76c5a30a8a5a754",
+      "image_sha256": "e30991fbf7e649961a02814088baad0f7ec194ac9659edea11ef103b6977cb6d",
+      "marked_native_samples": [
+        34839,
+        44541
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements show a frequency change near 0.84 s, but do not establish when the rolling sound began."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectrum shows sound before 0.79 s and a change around 0.84 s, but it does not identify when the rolling sound begins."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_5741",
+      "condition": "new",
+      "mark": [
+        1.048,
+        1.268
+      ],
+      "duration": 2.0,
+      "source_hash": "68e568df129f097a8e6218ce0c570c199dbf04af7f859cf160038d1889867e99",
+      "human_label": "Interaction:hitting",
+      "event_id": 5,
+      "event": [
+        12.260878,
+        14.426522
+      ],
+      "source_range": [
+        11.212878,
+        13.212878
+      ],
+      "word": "hitting",
+      "media_sha256": "fbde67a3e07c405d34090e18e684c7a89e6247fd7fbbeddc1826f36bec75bfa8",
+      "image_sha256": "c6ae70f847447de58861876b33b95a3d1c3d3c0459f80f27d380431bd827ce0a",
+      "marked_native_samples": [
+        50304,
+        60864
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The spectral change near 1.12 s cannot establish whether the hitting sound had already started before 1.048 s."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "A distinct broadband rise begins within the marked interval, around 1.12 seconds."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 1.4,
+            "question": "Is the hitting sound already ongoing immediately before 1.048 seconds, or does it begin around then?"
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-2",
+      "condition": "ongoing",
+      "mark": [
+        0.691,
+        0.911
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "51384b1c6ffd5fd45ef369429e47f3de9261d38c724f312a0ff6a3d476c5f719",
+      "image_sha256": "28c743d469ed339bbcfe7b51e1021714ef5d1ef6bd41386ba023dcefd43063ac",
+      "marked_native_samples": [
+        16584,
+        21864
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 2\u2019s broadband spectral band is already present immediately before 0.691 s and continues through the marked interval."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 2\uc758 \uc2a4\ud399\ud2b8\ub7fc \uc9c8\uac10\uc774 0.691\ucd08 \uc9c1\uc804\ubd80\ud130 \uc774\uc5b4\uc9c0\uba70 \uacbd\uacc4\uc5d0\uc11c \ub69c\ub837\ud55c \ubcc0\ud654\uac00 \ubcf4\uc774\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-7",
+      "condition": "new",
+      "mark": [
+        0.978,
+        1.198
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "e98f06999c8a753636bf42a68ca38db656c26be95b5e1137230efc9961d5bf9d",
+      "image_sha256": "24f59f9663cbbcd64055c0bd03bca8eb90cd5b8dc7437bc07686a65444210e0a",
+      "marked_native_samples": [
+        23472,
+        28752
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "Channel 1\u2019s spectrum changes sharply near 0.98 s, with a new low-frequency texture replacing the preceding texture."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "Channel 1 shows a distinct low-frequency texture beginning near 0.978 s, replacing the preceding spectral pattern."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_3826",
+      "condition": "new",
+      "mark": [
+        0.764,
+        0.984
+      ],
+      "duration": 2.0,
+      "source_hash": "6d10760d6f879a19e059fb619a1174ab53737de2d2114552c76c356de5490610",
+      "human_label": "Human:Sound(clapping)",
+      "event_id": 6,
+      "event": [
+        16.971186,
+        19.538536
+      ],
+      "source_range": [
+        16.207186,
+        18.207186
+      ],
+      "word": "clapping",
+      "media_sha256": "bacc89316c26bc6961944a38ca4f25e8d02e55f1ef37eb1dbb53468621ea1fa9",
+      "image_sha256": "a517e66bba20fe3cdabca00dffd4fb99a02b2bc2974bc4815326b5b05cc178fd",
+      "marked_native_samples": [
+        36672,
+        47232
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "A strong broadband rise occurs around 0.90 s, with no comparable rise just before 0.764 s."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "The spectrum shows a sharp broadband onset around 0.9 s, within the marked interval, with no comparable clap immediately beforehand."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-4",
+      "condition": "new",
+      "mark": [
+        0.988,
+        1.208
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "da87bc9ec7b37fd02313db679772679ebc809aee6b2090159f2e9b64f96ad402",
+      "image_sha256": "72c45abb0b20e77d428d28a34f03da1059be86753f9aac457383dbf5a0ed737e",
+      "marked_native_samples": [
+        23712,
+        28992
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "Channel 2\u2019s spectrum changes sharply around 0.988 s, with a new higher-frequency texture replacing the earlier one."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "Channel 2\u2019s spectrum changes sharply near 1.0 s, as a higher-frequency texture replaces the preceding one."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_5983",
+      "condition": "ongoing",
+      "mark": [
+        1.132,
+        1.352
+      ],
+      "duration": 2.0,
+      "source_hash": "64306a21768e407e649a43372659387d2e6f31e6c4db2204d06830ecd841b4f0",
+      "human_label": "Object:breaking of something",
+      "event_id": 5,
+      "event": [
+        7.366523,
+        10.533128
+      ],
+      "source_range": [
+        7.573973,
+        9.573972999999999
+      ],
+      "word": "breaking of something",
+      "media_sha256": "b45b7ed3161f1c32d036241c05ea934d3c26d6f0e5c062c5785e6ce322bcb7a4",
+      "image_sha256": "6156d51199df8df9137ff89bb552916554a8baa10dba4b5fcbc27a7c646055d3",
+      "marked_native_samples": [
+        54336,
+        64896
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel measurements do not establish whether the breaking sound was already present before 1.132 s or began around then."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show no distinct onset at 1.132 s, but they do not identify whether the preceding sound is the breaking sound."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-3",
+      "condition": "ongoing",
+      "mark": [
+        1.165,
+        1.385
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "001ce2e2bd90c3c04f2e72f37160435fbff0e46d2124a1adf567ddc3e5760f0e",
+      "image_sha256": "90a899204ecc05d2e2cdf25b24bf3e6c8547ec3069196cb0991cb6cefa338bdd",
+      "marked_native_samples": [
+        27960,
+        33240
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 1\u2019s spectral band continues across 1.165 s without a visible change in texture."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 1\u2019s spectral texture continues across 1.165 s without a visible change."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-4",
+      "condition": "ongoing",
+      "mark": [
+        0.988,
+        1.208
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "825c158e32ab63a2f24ad1419dec3e26c26b145fc3bcd2731cd48f4e8e8b0536",
+      "image_sha256": "5e1add89e3793fb4fd5590f07ad23425e2d38200c4503b0a59947181e9e3024f",
+      "marked_native_samples": [
+        23712,
+        28992
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 2 shows a similar continuous spectral texture immediately before and during the marked interval."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 2 shows the same continuous spectral texture immediately before and throughout the marked interval."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_3076",
+      "condition": "ongoing",
+      "mark": [
+        0.79,
+        1.01
+      ],
+      "duration": 2.0,
+      "source_hash": "dfabce4e59df423f132fd9f972dfdca05fe2c13c10384a25bb9ceb2be439cde3",
+      "human_label": "Interaction:rolling",
+      "event_id": 1,
+      "event": [
+        1.399617,
+        4.632067
+      ],
+      "source_range": [
+        1.907907,
+        3.907907
+      ],
+      "word": "rolling",
+      "media_sha256": "d381d67bd0cddce21e1633f275f86d52e46dc331fb560aa338593f2c8c1abdb5",
+      "image_sha256": "b711dfd749213ab219a1697f580af75bd36e8e20914681767a44133973f699be",
+      "marked_native_samples": [
+        34839,
+        44541
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements show sound before 0.79 s and a spectral change around 0.86 s, but they do not identify when the rolling sound began."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "The rolling-like acoustic pattern is already present before 0.79 s and continues through the marked interval."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_1736",
+      "condition": "ongoing",
+      "mark": [
+        1.025,
+        1.245
+      ],
+      "duration": 2.0,
+      "source_hash": "425c8dd574e324e343381044d13dd821d793e4b0b8f35c5f568108897cd1ce23",
+      "human_label": "Interaction: fluid",
+      "event_id": 5,
+      "event": [
+        25.201684,
+        33.802259
+      ],
+      "source_range": [
+        25.813224,
+        27.813224
+      ],
+      "word": " fluid",
+      "media_sha256": "bc7565cf5595efb60fce42ac78cb6d3b90e2bde1c09ebd1503ec577db48fdddd",
+      "image_sha256": "b4e24555586ed9221dc2d88ce3fc42d3965bc83b2f2146143234af5e7793a2d3",
+      "marked_native_samples": [
+        49200,
+        59760
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel measurements do not identify the fluid sound or establish its onset."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "A distinct broadband sound begins around 1.025 s after a quieter interval."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-1",
+      "condition": "ongoing",
+      "mark": [
+        1.021,
+        1.241
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "d271709c144fdec63375db04367bad06b5c6d604f16f704cb0b3b18284f07a09",
+      "image_sha256": "a348c8c2ef7d8a80c736f210f05ae2d4db21f6f8ec5810149ce81ee67590af73",
+      "marked_native_samples": [
+        24504,
+        29784
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 1\u2019s spectral texture continues across 1.021 s without a visible change."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 1 shows the same spectral bands immediately before and throughout the marked interval, with no apparent change at 1.021 s."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-2",
+      "condition": "new",
+      "mark": [
+        0.691,
+        0.911
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "40f89103c507039fe1563995b10f648daf98883c7a01eea1f515e07f81d16e56",
+      "image_sha256": "20777c5bba548b469cd49e9823a69f34009301d9a53263476ee0fc28ef2addda",
+      "marked_native_samples": [
+        16584,
+        21864
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "Channel 2 shows a sharp spectral change near 0.70 s, with a strong rise in low-frequency energy."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "Channel 2 shows an abrupt shift near 0.691 s, with a new low-frequency texture replacing the preceding spectral pattern."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-0",
+      "condition": "new",
+      "mark": [
+        1.143,
+        1.363
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "9757b8be1c0f32cab37367bb9aad4847421d896d6059c3dd88f1451695b1932b",
+      "image_sha256": "6d4f098ca315ba8a0cc98eb7d7d2fa453c72d733c1115ab74c8753db585caa20",
+      "marked_native_samples": [
+        27432,
+        32712
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 2\u2019s low-frequency spectral texture continues across 1.143 s without a clear onset."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "Channel 2\u2019s spectrum changes at the marked boundary: the higher-frequency band drops away and a different texture follows."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_6355",
+      "condition": "ongoing",
+      "mark": [
+        0.811,
+        1.031
+      ],
+      "duration": 2.0,
+      "source_hash": "0fb6741b73b621cdf695195f0fa212816a34933990f528ead8fa564d8d279a51",
+      "human_label": "Interaction:hitting",
+      "event_id": 1,
+      "event": [
+        3.9,
+        8.166667
+      ],
+      "source_range": [
+        4.827481,
+        6.827481
+      ],
+      "word": "hitting",
+      "media_sha256": "4ba3bd293b6da09d74bbe731336cb924f41cadb5fc223f23c43bab08398d93f5",
+      "image_sha256": "d2804f8b0dfa1f5f62dd7882e7f85ed523d2e35e3b08dd18e6f1245eca1148e7",
+      "marked_native_samples": [
+        35766,
+        45468
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel measurements show sound before 0.811 s, but they do not establish whether it was the hitting sound."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "The spectrum shows a hit beginning before 0.811 s and continuing across that boundary."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_7260",
+      "condition": "ongoing",
+      "mark": [
+        0.811,
+        1.031
+      ],
+      "duration": 2.0,
+      "source_hash": "d0bd32666af3267120d5f2469340fd1e2c24c9741fc293e6a9b6c6094b6f9774",
+      "human_label": "Animal:sound",
+      "event_id": 21,
+      "event": [
+        22.646124,
+        24.977342
+      ],
+      "source_range": [
+        23.406543,
+        25.406543
+      ],
+      "word": "animal sound",
+      "media_sha256": "fec969db4e679999e60b00adb2600c8024380790219ef5cf98a324fbc7f3afde",
+      "image_sha256": "48f1c90fa03892889bcc8606145fb67c72a4dd3fc15f43b8d4844f2ea3198975",
+      "marked_native_samples": [
+        38928,
+        49488
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements do not identify which sound was present before 0.811 s or establish when the animal sound began."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show sound before 0.811 s, but they do not identify whether it is the animal sound."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_665",
+      "condition": "ongoing",
+      "mark": [
+        0.863,
+        1.083
+      ],
+      "duration": 2.0,
+      "source_hash": "92eae1958b11d8cb34720f6b6c18bb7e3961d272aca18cd7742a5e5c262580c2",
+      "human_label": "Human:Speech",
+      "event_id": 14,
+      "event": [
+        20.467894,
+        22.834703
+      ],
+      "source_range": [
+        21.218123,
+        23.218123
+      ],
+      "word": "speech",
+      "media_sha256": "7264c52ac3c40c830cdb2da8f736368f68718a449f383aff00058d15a2712153",
+      "image_sha256": "909ff7e968c1dcb9fab718adda6583fa3e06c683f1adcc5f0283315b0ed4b6e3",
+      "marked_native_samples": [
+        38059,
+        47761
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements show sound before 0.863 s, but do not establish whether it is the same speech."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Speech-like harmonic patterns are visible before 0.863 seconds and continue into the marked interval."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-3",
+      "condition": "new",
+      "mark": [
+        1.165,
+        1.385
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "5eb1b803b6ce273e8c91df533403a62b06a0019d4c76a9e04fd0cec6d3cdd126",
+      "image_sha256": "9f1d7a701bae8985a22e99b6fe4e835690aa02cc7b28be4386ed5eed72cc7ea1",
+      "marked_native_samples": [
+        27960,
+        33240
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 1 shows the same broad spectral band continuing across 1.165 seconds."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "At 1.165 s, channel 1\u2019s low-frequency texture gives way to a higher-frequency band."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_10309",
+      "condition": "new",
+      "mark": [
+        0.924,
+        1.144
+      ],
+      "duration": 2.0,
+      "source_hash": "6ff886798e99ca493d28efae0d7fbf07ebe1f7ab15a5524e11377e9de72fdc5d",
+      "human_label": "Object:opening/closing of something",
+      "event_id": 2,
+      "event": [
+        5.644849,
+        8.684383
+      ],
+      "source_range": [
+        4.720849,
+        6.720849
+      ],
+      "word": "opening/closing of something",
+      "media_sha256": "d30545644114a1842f8a4cc5bc8a11313ab898f7bb2de0895cfdb5d378889b34",
+      "image_sha256": "0d636fddd8f1711673a1377c68ea3e90039f0512289fb4fa21d02d047a40fab0",
+      "marked_native_samples": [
+        44352,
+        54912
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements show sound before 0.924 s, but do not establish whether it is the same opening or closing sound."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show sound before 0.924 s, but do not establish whether it is the same opening or closing sound."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_3144",
+      "condition": "ongoing",
+      "mark": [
+        0.783,
+        1.003
+      ],
+      "duration": 2.0,
+      "source_hash": "d29866dace29dd222e988e1db2f84c59b7454a0069294584e1c837f3be2a1c40",
+      "human_label": "Interaction:dropping",
+      "event_id": 2,
+      "event": [
+        12.296889,
+        18.295372
+      ],
+      "source_range": [
+        13.215776,
+        15.215776
+      ],
+      "word": "dropping",
+      "media_sha256": "084f21c18ed3450a3e27f3529e38a29928e95355a0a9abe4c7ce8da39889388d",
+      "image_sha256": "665dca4856f06443723c8a2d31e655bdf6526da20892a04aeb1f0fb8d67ffd08",
+      "marked_native_samples": [
+        37584,
+        48144
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel measurements do not identify when the dropping sound begins."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show continuous sound across 0.783 s, but do not establish whether it is the sound described as dropping."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_1736",
+      "condition": "new",
+      "mark": [
+        1.025,
+        1.245
+      ],
+      "duration": 2.0,
+      "source_hash": "425c8dd574e324e343381044d13dd821d793e4b0b8f35c5f568108897cd1ce23",
+      "human_label": "Interaction: fluid",
+      "event_id": 5,
+      "event": [
+        25.201684,
+        33.802259
+      ],
+      "source_range": [
+        24.176684,
+        26.176684
+      ],
+      "word": " fluid",
+      "media_sha256": "30332403d857f7de8577ef1ff35c755f76b6a6972edfaf3528c419b9fc41cd4a",
+      "image_sha256": "9ed643d25accf54b8e0b7cfc3ddd17f45289b408d97c82fe65984319af925514",
+      "marked_native_samples": [
+        49200,
+        59760
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements show sound before 1.025 s, but do not establish whether it is the fluid sound."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "The spectral pattern in the marked interval is already present immediately before 1.025 s."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_3826",
+      "condition": "ongoing",
+      "mark": [
+        0.764,
+        0.984
+      ],
+      "duration": 2.0,
+      "source_hash": "6d10760d6f879a19e059fb619a1174ab53737de2d2114552c76c356de5490610",
+      "human_label": "Human:Sound(clapping)",
+      "event_id": 6,
+      "event": [
+        16.971186,
+        19.538536
+      ],
+      "source_range": [
+        17.909003,
+        19.909003
+      ],
+      "word": "clapping",
+      "media_sha256": "9220f9aacb27d95beeb08aee13ac9dd4e86e59d9846902fcdb11736b0ee8c21c",
+      "image_sha256": "56d4b4c43bb774c509208957d73de64e06ab8705467bfcff2cd51148c8d03880",
+      "marked_native_samples": [
+        36672,
+        47232
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements show sound before 0.764 s and a later spectral rise, but do not establish when the clapping began."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "The spectrum shows repeated clap-like bursts before 0.764 s, with another burst around 0.9 s."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_8241",
+      "condition": "ongoing",
+      "mark": [
+        1.004,
+        1.224
+      ],
+      "duration": 2.0,
+      "source_hash": "81ff2f3f93af9ba5b7b23e21b4c6daf8b9a7e4931df9fc947eaa4d6349b59345",
+      "human_label": "Interaction: fluid",
+      "event_id": 2,
+      "event": [
+        16.395201,
+        18.809219
+      ],
+      "source_range": [
+        16.966162,
+        18.966162
+      ],
+      "word": " fluid",
+      "media_sha256": "ff639c505b38802353367f2ad4af7f857a0731a8f996c182c14c2cb4297aea74",
+      "image_sha256": "4e309bbd141158cc02826da86e5a095441185370d10fb58dfd6469de3a8a4221",
+      "marked_native_samples": [
+        48192,
+        58752
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel measurements show sound before 1.004 s, but do not establish whether it is the fluid sound."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "Sound is present before 1.004 s, but the spectra do not identify whether it is the fluid sound."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_6355",
+      "condition": "new",
+      "mark": [
+        0.811,
+        1.031
+      ],
+      "duration": 2.0,
+      "source_hash": "0fb6741b73b621cdf695195f0fa212816a34933990f528ead8fa564d8d279a51",
+      "human_label": "Interaction:hitting",
+      "event_id": 1,
+      "event": [
+        3.9,
+        8.166667
+      ],
+      "source_range": [
+        3.089,
+        5.089
+      ],
+      "word": "hitting",
+      "media_sha256": "48e32cf65221d3ada9b66d89e7f6385d57e55553406893dd1a86c155bd43064a",
+      "image_sha256": "a9eba6bf19996422eb3b495c0e47bb42d19275f22b559358998e84f53df3ee4d",
+      "marked_native_samples": [
+        35766,
+        45468
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "A sharp broadband rise occurs around 0.88 s, consistent with a hit starting near the interval\u2019s beginning."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "A strong broadband onset appears around 0.88 s, within the marked interval; the preceding sound is much weaker."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-6",
+      "condition": "ongoing",
+      "mark": [
+        0.877,
+        1.097
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "831f6aef8feb631616965fabe5f8a01efe1c2d81ca78a88f8d347153b1494a0b",
+      "image_sha256": "859331e2933202c77c7b6ef3f856bbf3d37febad6adbe2e812a697cd15513510",
+      "marked_native_samples": [
+        21048,
+        26328
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 2 shows the same continuous spectral band immediately before and during the marked interval."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 2 shows the same broad spectral texture immediately before and throughout the marked interval, with no clear change at 0.877 s."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-1",
+      "condition": "new",
+      "mark": [
+        1.021,
+        1.241
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "5f197b8c6644fb02768e377524c12f3dfdde75a0342083a00cb1bed90ad655ee",
+      "image_sha256": "ecf887681c535893c138ef84af64bec531e16f981a1b4597053f12b6c20090ce",
+      "marked_native_samples": [
+        24504,
+        29784
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "Channel 1\u2019s spectrum changes near 1.021 s, with a new lower-frequency band replacing the preceding texture."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "Channel 1\u2019s spectrum changes at the marked start: a lower-frequency band appears as the earlier texture recedes."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_8241",
+      "condition": "new",
+      "mark": [
+        1.004,
+        1.224
+      ],
+      "duration": 2.0,
+      "source_hash": "81ff2f3f93af9ba5b7b23e21b4c6daf8b9a7e4931df9fc947eaa4d6349b59345",
+      "human_label": "Interaction: fluid",
+      "event_id": 2,
+      "event": [
+        16.395201,
+        18.809219
+      ],
+      "source_range": [
+        15.391201,
+        17.391201000000002
+      ],
+      "word": " fluid",
+      "media_sha256": "31c19e6c1619a9cef9835d02b18f8c362093ba383abdc5b4265e1c401b15acef",
+      "image_sha256": "6f0e9f260b7e478956f83b4f0f84b378339d5a30cec5c2dcc791029071e03455",
+      "marked_native_samples": [
+        48192,
+        58752
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel levels show sound before 1.004 s, but they do not establish whether it is the fluid sound."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectrum shows sound before 1.004 s, but it does not establish whether that sound is the fluid sound."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-5",
+      "condition": "new",
+      "mark": [
+        0.69,
+        0.91
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "520ba75a278df8a26113842273bbaccfb824399f7e5cc859bcc27e40b562ace0",
+      "image_sha256": "0b4bc00137d55a96b688cfda2289a6e1bc04ed999e03c01f5bed9375619e61ee",
+      "marked_native_samples": [
+        16560,
+        21840
+      ],
+      "answers": {
+        "before": {
+          "choice": "new",
+          "reason": "Channel 1\u2019s spectrum changes near 0.69 s: the earlier low-frequency texture gives way to a higher-frequency texture."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "Channel 1\u2019s spectrum changes at about 0.69 s: the lower-frequency texture gives way to a broader high-frequency texture."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_11602",
+      "condition": "ongoing",
+      "mark": [
+        0.796,
+        1.016
+      ],
+      "duration": 2.0,
+      "source_hash": "8b0fc28d53182802e143c3f5d13e9af084a4e661aecebc908e0f3549bca9e3fb",
+      "human_label": "Animal:sound",
+      "event_id": 9,
+      "event": [
+        9.362859,
+        13.061355
+      ],
+      "source_range": [
+        9.930735,
+        11.930735
+      ],
+      "word": "animal sound",
+      "media_sha256": "bada2c19970e660de36f407cb91f5d10dfd311c3b30f362318aa0d5b6e3a52a0",
+      "image_sha256": "5f738e2997570ecfbc69a768167bed24b6b3d0b09391fdbd168e4a5fef10b07c",
+      "marked_native_samples": [
+        38208,
+        48768
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The spectrum shows sound before 0.796 s, but the supplied evidence does not establish whether it is the animal sound."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "The spectral pattern continues across 0.796 s, with no clear onset at that boundary."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_5983",
+      "condition": "new",
+      "mark": [
+        1.132,
+        1.352
+      ],
+      "duration": 2.0,
+      "source_hash": "64306a21768e407e649a43372659387d2e6f31e6c4db2204d06830ecd841b4f0",
+      "human_label": "Object:breaking of something",
+      "event_id": 5,
+      "event": [
+        7.366523,
+        10.533128
+      ],
+      "source_range": [
+        6.234523,
+        8.234523
+      ],
+      "word": "breaking of something",
+      "media_sha256": "2269fb4b0def6fb9f1c52ddd3dc01a3d2742f22e98f1e561d0e0055cf672508e",
+      "image_sha256": "6c03d289de5bcda689051b3d75650036afb85dc287e8649a624ddb050d69be83",
+      "marked_native_samples": [
+        54336,
+        64896
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The spectrum shows sound before 1.132 s, but it does not establish whether that sound is the breaking event."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show sound before 1.132 s, but do not establish whether it is the breaking sound."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 1.5,
+            "question": "Does the breaking sound begin near 1.132 seconds or is it already ongoing before then? Describe the timing."
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_7260",
+      "condition": "new",
+      "mark": [
+        0.811,
+        1.031
+      ],
+      "duration": 2.0,
+      "source_hash": "d0bd32666af3267120d5f2469340fd1e2c24c9741fc293e6a9b6c6094b6f9774",
+      "human_label": "Animal:sound",
+      "event_id": 21,
+      "event": [
+        22.646124,
+        24.977342
+      ],
+      "source_range": [
+        21.835124,
+        23.835124
+      ],
+      "word": "animal sound",
+      "media_sha256": "383519324c388ab1e4b20f4fb9ae513d6dfb719a6bde3a536d016c703abb8c94",
+      "image_sha256": "e25414037caec765232fd89f99e820f1e2c633612ab778d186d4d9cf319961e0",
+      "marked_native_samples": [
+        38928,
+        49488
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements do not establish whether the animal sound was present before 0.811 s or began around then."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show sound before 0.811 s, but do not establish whether it is the animal sound."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-0",
+      "condition": "ongoing",
+      "mark": [
+        1.143,
+        1.363
+      ],
+      "duration": 2,
+      "changing_channel": 2,
+      "media_sha256": "df4a3cac0f51a20748fbca243e94e441ce9592afa50e038f6419982c90fe4b49",
+      "image_sha256": "9b9d18a890cdb1a14e9f1f22d894570b16349d134457832ac04297ba895aa8e5",
+      "marked_native_samples": [
+        27432,
+        32712
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 2 shows a similar broadband spectral texture immediately before and during the marked interval, with no clear change at 1.143 s."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 2 shows a similar broadband spectral texture immediately before and throughout the marked interval."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "controlled",
+      "id": "noise-7",
+      "condition": "ongoing",
+      "mark": [
+        0.978,
+        1.198
+      ],
+      "duration": 2,
+      "changing_channel": 1,
+      "media_sha256": "f528a4586c01d79103bd96367be71ec274617184b4e2a1619fb2bd1640359c6a",
+      "image_sha256": "9c348e76c0201016b60eb15f588ee043e75e9c3f89b2f086b39927f4137f6018",
+      "marked_native_samples": [
+        23472,
+        28752
+      ],
+      "answers": {
+        "before": {
+          "choice": "ongoing",
+          "reason": "Channel 1\u2019s spectral texture continues across 0.978 s without a visible change at that point."
+        },
+        "measured": {
+          "choice": "ongoing",
+          "reason": "Channel 1 shows the same broad spectral texture immediately before and throughout the marked interval, with no clear change at 0.978 s."
+        }
+      },
+      "additional_replays": {
+        "before": [
+          {
+            "tool": "listen",
+            "start_s": 0.0,
+            "end_s": 2.0,
+            "question": null
+          }
+        ],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_3144",
+      "condition": "new",
+      "mark": [
+        0.783,
+        1.003
+      ],
+      "duration": 2.0,
+      "source_hash": "d29866dace29dd222e988e1db2f84c59b7454a0069294584e1c837f3be2a1c40",
+      "human_label": "Interaction:dropping",
+      "event_id": 2,
+      "event": [
+        12.296889,
+        18.295372
+      ],
+      "source_range": [
+        11.513889,
+        13.513889
+      ],
+      "word": "dropping",
+      "media_sha256": "222101fd67041bab8693436844ee7cd8acf90a008365a89f0381d90aa03a8295",
+      "image_sha256": "bdbc21ea8b938715909a521c313824c37f474790c9feaf04ca748eb932948b2c",
+      "marked_native_samples": [
+        37584,
+        48144
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The channel measurements do not identify the dropping sound or establish when it begins."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The spectra show continuous background sound with no distinct onset at 0.783 s, but they do not identify which sound is the dropping."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    },
+    {
+      "kind": "natural",
+      "id": "video_665",
+      "condition": "new",
+      "mark": [
+        0.863,
+        1.083
+      ],
+      "duration": 2.0,
+      "source_hash": "92eae1958b11d8cb34720f6b6c18bb7e3961d272aca18cd7742a5e5c262580c2",
+      "human_label": "Human:Speech",
+      "event_id": 14,
+      "event": [
+        20.467894,
+        22.834703
+      ],
+      "source_range": [
+        19.604894,
+        21.604894
+      ],
+      "word": "speech",
+      "media_sha256": "2bac6efae4d08bea0d030944b405c72354348959c260b9ea6c358faba3c9fdd6",
+      "image_sha256": "c1895b7cfa63baed937390d7379922fd4d4b857827ff88e2bb6f9d28ec6b6edf",
+      "marked_native_samples": [
+        38059,
+        47761
+      ],
+      "answers": {
+        "before": {
+          "choice": "unclear",
+          "reason": "The measurements show a pitch estimate near 0.85 s, but do not establish whether it is speech or when the speech begins."
+        },
+        "measured": {
+          "choice": "new",
+          "reason": "The speech-like harmonic bands begin around 0.86 s; they are not evident immediately beforehand."
+        }
+      },
+      "additional_replays": {
+        "before": [],
+        "measured": []
+      }
+    }
+  ],
+  "encoder_pilot": {
+    "method": "Existing CLAP at recorded gain. Rank the two stored descriptions by their cosine averaged across active channels. Compare the exact excerpt padded once with zeros, repeated padding, one additional second of the original on each available side, the same context with the event samples zeroed, and the difference between the containing and zeroed clip cosines. This exploratory comparison is outside the product path. A counterfactual edit can itself affect the score.",
+    "correct": {
+      "isolated": 39,
+      "repeated": 38,
+      "context": 33,
+      "without": 24,
+      "difference": 39
+    },
+    "by_film": [
+      {
+        "video_id": "video_10368",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          10.761967,
+          11.831479
+        ],
+        "wider": [
+          9.761967,
+          12.831479
+        ]
+      },
+      {
+        "video_id": "video_8861",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          2.468148,
+          2.768328
+        ],
+        "wider": [
+          1.4681479999999998,
+          3.768328
+        ]
+      },
+      {
+        "video_id": "video_10303",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          18.230556,
+          19.197076
+        ],
+        "wider": [
+          17.230556,
+          20.197076
+        ]
+      },
+      {
+        "video_id": "video_4471",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "B",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          31.133333,
+          31.366667
+        ],
+        "wider": [
+          30.133333,
+          32.366667
+        ]
+      },
+      {
+        "video_id": "video_8407",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          4.033333,
+          4.4
+        ],
+        "wider": [
+          3.033333,
+          5.4
+        ]
+      },
+      {
+        "video_id": "video_4022",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          17.190509,
+          18.025
+        ],
+        "wider": [
+          16.190509,
+          19.025
+        ]
+      },
+      {
+        "video_id": "video_8768",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          15.808938,
+          18.207303
+        ],
+        "wider": [
+          14.808938,
+          19.207303
+        ]
+      },
+      {
+        "video_id": "video_7267",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "B",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          3.165033,
+          3.527693
+        ],
+        "wider": [
+          2.165033,
+          4.527693
+        ]
+      },
+      {
+        "video_id": "video_7359",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          9.0,
+          9.8
+        ],
+        "wider": [
+          8.0,
+          9.845011
+        ]
+      },
+      {
+        "video_id": "video_5058",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          34.309352,
+          34.712596
+        ],
+        "wider": [
+          33.309352,
+          34.752
+        ]
+      },
+      {
+        "video_id": "video_6400",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          10.591898,
+          10.825053
+        ],
+        "wider": [
+          9.591898,
+          11.825053
+        ]
+      },
+      {
+        "video_id": "video_833",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "B",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          19.986633,
+          20.854167
+        ],
+        "wider": [
+          18.986633,
+          21.854167
+        ]
+      },
+      {
+        "video_id": "video_1775",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          11.820256,
+          12.513527
+        ],
+        "wider": [
+          10.820256,
+          13.513527
+        ]
+      },
+      {
+        "video_id": "video_2134",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          3.412922,
+          3.852208
+        ],
+        "wider": [
+          2.412922,
+          4.852208
+        ]
+      },
+      {
+        "video_id": "video_11193",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          27.430426,
+          34.99744
+        ],
+        "wider": [
+          26.430426,
+          35.051
+        ]
+      },
+      {
+        "video_id": "video_9705",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          12.108973,
+          13.910308
+        ],
+        "wider": [
+          11.108973,
+          14.910308
+        ]
+      },
+      {
+        "video_id": "video_2291",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          25.711878,
+          32.172811
+        ],
+        "wider": [
+          24.711878,
+          33.172811
+        ]
+      },
+      {
+        "video_id": "video_2212",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          23.813395,
+          24.048506
+        ],
+        "wider": [
+          22.813395,
+          25.048506
+        ]
+      },
+      {
+        "video_id": "video_3228",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          10.812185,
+          11.108861
+        ],
+        "wider": [
+          9.812185,
+          12.108861
+        ]
+      },
+      {
+        "video_id": "video_6694",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          33.118915,
+          34.419658
+        ],
+        "wider": [
+          32.118915,
+          35.039002
+        ]
+      },
+      {
+        "video_id": "video_282",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          18.084733,
+          21.588233
+        ],
+        "wider": [
+          17.084733,
+          22.588233
+        ]
+      },
+      {
+        "video_id": "video_11498",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          6.865769,
+          8.098941
+        ],
+        "wider": [
+          5.865769,
+          9.098941
+        ]
+      },
+      {
+        "video_id": "video_4253",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "B",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          0.0,
+          0.133333
+        ],
+        "wider": [
+          0,
+          1.133333
+        ]
+      },
+      {
+        "video_id": "video_2138",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          8.664656,
+          10.564216
+        ],
+        "wider": [
+          7.664656000000001,
+          11.564216
+        ]
+      },
+      {
+        "video_id": "video_6226",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          23.094663,
+          24.494339
+        ],
+        "wider": [
+          22.094663,
+          25.494339
+        ]
+      },
+      {
+        "video_id": "video_1244",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          6.40274,
+          9.003852
+        ],
+        "wider": [
+          5.40274,
+          10.003852
+        ]
+      },
+      {
+        "video_id": "video_8408",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "B",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          0.866544,
+          3.299533
+        ],
+        "wider": [
+          0,
+          4.299533
+        ]
+      },
+      {
+        "video_id": "video_8110",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          4.820679,
+          5.262009
+        ],
+        "wider": [
+          3.820679,
+          6.262009
+        ]
+      },
+      {
+        "video_id": "video_9456",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          1.432967,
+          4.332226
+        ],
+        "wider": [
+          0.4329670000000001,
+          5.332226
+        ]
+      },
+      {
+        "video_id": "video_6611",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          9.673572,
+          13.909929
+        ],
+        "wider": [
+          8.673572,
+          14.909929
+        ]
+      },
+      {
+        "video_id": "video_5603",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          0.667153,
+          1.234233
+        ],
+        "wider": [
+          0,
+          2.2342329999999997
+        ]
+      },
+      {
+        "video_id": "video_8093",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          0.96905,
+          4.678173
+        ],
+        "wider": [
+          0,
+          5.678173
+        ]
+      },
+      {
+        "video_id": "video_9056",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          4.931906,
+          10.877218
+        ],
+        "wider": [
+          3.9319059999999997,
+          11.877218
+        ]
+      },
+      {
+        "video_id": "video_2795",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          17.005538,
+          22.92919
+        ],
+        "wider": [
+          16.005538,
+          23.232
+        ]
+      },
+      {
+        "video_id": "video_8297",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          6.259646,
+          7.724669
+        ],
+        "wider": [
+          5.259646,
+          8.724668999999999
+        ]
+      },
+      {
+        "video_id": "video_4558",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          8.132312,
+          8.432274
+        ],
+        "wider": [
+          7.132312000000001,
+          9.432274
+        ]
+      },
+      {
+        "video_id": "video_5695",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "B",
+          "repeated": "A",
+          "context": "B",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          21.233333,
+          21.5
+        ],
+        "wider": [
+          20.233333,
+          21.548005
+        ]
+      },
+      {
+        "video_id": "video_8910",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          14.33084,
+          14.630788
+        ],
+        "wider": [
+          13.33084,
+          15.630788
+        ]
+      },
+      {
+        "video_id": "video_7223",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          9.362946,
+          9.862747
+        ],
+        "wider": [
+          8.362946,
+          10.862747
+        ]
+      },
+      {
+        "video_id": "video_1219",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          11.566667,
+          12.3
+        ],
+        "wider": [
+          10.566667,
+          13.3
+        ]
+      },
+      {
+        "video_id": "video_8223",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          22.959596,
+          23.259504
+        ],
+        "wider": [
+          21.959596,
+          24.259504
+        ]
+      },
+      {
+        "video_id": "video_4956",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "B",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          7.199812,
+          9.433087
+        ],
+        "wider": [
+          6.199812,
+          10.433087
+        ]
+      },
+      {
+        "video_id": "video_2983",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "A",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          21.554887,
+          21.860389
+        ],
+        "wider": [
+          20.554887,
+          22.860389
+        ]
+      },
+      {
+        "video_id": "video_82",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          10.821129,
+          12.519213
+        ],
+        "wider": [
+          9.821129,
+          13.519213
+        ]
+      },
+      {
+        "video_id": "video_762",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "B",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          6.13748,
+          7.143624
+        ],
+        "wider": [
+          5.13748,
+          8.143623999999999
+        ]
+      },
+      {
+        "video_id": "video_918",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          12.829939,
+          14.062947
+        ],
+        "wider": [
+          11.829939,
+          15.062947
+        ]
+      },
+      {
+        "video_id": "video_5560",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          12.341864,
+          15.143801
+        ],
+        "wider": [
+          11.341864,
+          16.143801
+        ]
+      },
+      {
+        "video_id": "video_10592",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          1.901445,
+          3.169075
+        ],
+        "wider": [
+          0.901445,
+          4.169074999999999
+        ]
+      },
+      {
+        "video_id": "video_5230",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "B",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          11.233333,
+          11.666667
+        ],
+        "wider": [
+          10.233333,
+          12.666667
+        ]
+      },
+      {
+        "video_id": "video_152",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          25.544486,
+          27.376229
+        ],
+        "wider": [
+          24.544486,
+          28.376229
+        ]
+      },
+      {
+        "video_id": "video_6540",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          5.270429,
+          5.537286
+        ],
+        "wider": [
+          4.270429,
+          6.537286
+        ]
+      },
+      {
+        "video_id": "video_1075",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "B",
+          "difference": "B"
+        },
+        "target": [
+          10.530177,
+          10.696793
+        ],
+        "wider": [
+          9.530177,
+          11.696793
+        ]
+      },
+      {
+        "video_id": "video_5626",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          3.566667,
+          3.866667
+        ],
+        "wider": [
+          2.566667,
+          4.866667
+        ]
+      },
+      {
+        "video_id": "video_2371",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "B",
+          "repeated": "B",
+          "context": "B",
+          "without": "A",
+          "difference": "B"
+        },
+        "target": [
+          6.90735,
+          9.443381
+        ],
+        "wider": [
+          5.90735,
+          10.443381
+        ]
+      },
+      {
+        "video_id": "video_6480",
+        "sound_ref": "A",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "B",
+          "difference": "A"
+        },
+        "target": [
+          11.445625,
+          13.027815
+        ],
+        "wider": [
+          10.445625,
+          14.027815
+        ]
+      },
+      {
+        "video_id": "video_6614",
+        "sound_ref": "B",
+        "choices": {
+          "isolated": "A",
+          "repeated": "A",
+          "context": "A",
+          "without": "A",
+          "difference": "A"
+        },
+        "target": [
+          1.135467,
+          2.070557
+        ],
+        "wider": [
+          0.135467,
+          3.070557
+        ]
+      }
+    ]
+  },
+  "physical_check": {
+    "sha": "5382a5fe009641d63fe68658207baf07e9e4ddebf036346afa4bb3204d395687",
+    "metadata": {
+      "start_s": 0.312,
+      "end_s": 2.28,
+      "rate_hz": 24000,
+      "first_sample_on_film": 7488,
+      "samples_per_channel": 47232,
+      "channels": 1,
+      "fft_samples": 600,
+      "basis": "Frequency increases upwards on a logarithmic scale. The bottom row includes DC. All channels use the same \u221280 to 0 dBFS scale. The peak trace uses every sample. Spectral windows can straddle the marked boundary by half a window.",
+      "mark_s": [
+        1.10001,
+        1.27501
+      ],
+      "mark_samples": [
+        18913,
+        23113
+      ]
+    },
+    "first": 7488,
+    "count": 47232,
+    "wav": "448ca514fdf58e2b04190340a6b13e745a577d4f062e9ab5cdc6c092f24faebd"
+  },
+  "closed_door": {
+    "until": 8.5,
+    "key_arm": "A",
+    "answers": {
+      "A": "A simple illustration of a closed brown door remains unchanged throughout. The audio measurements show a series of louder high-frequency bursts around 4.6\u20136.5 seconds, possibly resembling jangling or rattling, though the source is uncertain; no intelligible words were identified.",
+      "B": "A closed brown door with a yellow knob remains still against a plain wall throughout the clip. The audio evidence suggests a faint, steady hiss, though its source is uncertain; no intelligible words were detected."
+    }
+  },
+  "targeted_resources": {
+    "sessions": 80,
+    "peak_tree_rss_kib": 416048,
+    "min_free_pct": 70,
+    "survivors": 0
+  }
+}

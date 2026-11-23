@@ -512,7 +512,7 @@ class TransportTests(unittest.TestCase):
         panel = info["images_in_order"][-1]["region_motion_and_channel_peaks"]
         self.assertEqual(panel["picture_pts_us"], [0, 450000])
         self.assertEqual(panel["region_numbers"], [1, 2])
-        self.assertEqual(panel["input_squares_px"], [[0, 4, 24, 28], [24, 4, 48, 28]])
+        self.assertEqual(panel["input_rectangles_px"], [[0, 0, 24, 32], [24, 0, 48, 32]])
         with Image.open(io.BytesIO(base64.b64decode(blocks[-2].data))) as im:
             self.assertTrue(im.width > im.height)
         with patch("reel.mcp_server.published_timing") as read:

@@ -864,7 +864,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             audio, or [] for catalogue neighbours. A match can have an unrelated visible cause. Supply a
             question for a local reading of the waveform alone and with the pictures. A band change marks an acoustic observation. Its source may be unknown.
             For competing visible movements, pass sync_regions as normalized [left,top,right,bottom] boxes.
-            The diagram shows changes in the centre square of each box above the channel peaks. The optional
+            The diagram shows changes across each full rectangle above the channel peaks. The optional
             sync reader compares these regions with the same audio. Synchronized motion
             can be incidental and the sound may come from offscreen. native_audio=true attaches the same recording."""
             return await asyncio.to_thread(reader.ask_scene, start_s, end_s, question, native_audio, alternatives,

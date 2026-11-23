@@ -14,13 +14,13 @@ from PIL import Image, ImageDraw
 
 if __package__:
     from .action_view import draw_peaks
-    from .common import display_scale, font, open_recording, probe, sample_boundary, save_observation_png
+    from .common import display_scale, font, hdr_picture, open_recording, probe, sample_boundary, save_observation_png
     from .frames import frames_from_sheets
     from .config import SYNC_PY
     from .sound_glimpses import sheet_picture
 else:
     from action_view import draw_peaks
-    from common import display_scale, font, open_recording, probe, sample_boundary, save_observation_png
+    from common import display_scale, font, hdr_picture, open_recording, probe, sample_boundary, save_observation_png
     from frames import frames_from_sheets
     from config import SYNC_PY
     from sound_glimpses import sheet_picture
@@ -67,17 +67,21 @@ def run_timing(job):
 def region_frames(source, start, end, box, fps, count, side):
     left, top, right, bottom = box
     begin, stop = (sample_boundary(t, 1_000_000) for t in (start, end))
-    # Bound the frame PTS before rate conversion. A frame already on screen at start can carry in.
-    # Square pixels in the input to Synchformer correspond to a square in display coordinates.
-    sar = "if(gt(sar,0),sar,1)"
-    filters = [f"settb=AVTB,trim=end_pts={stop},setpts=PTS-{begin}",
-               f"fps={fps}:start_time=0:eof_action=pass",
-               f"crop=w='max(1,iw*{right-left})':h='max(1,ih*{bottom-top})':x=iw*{left}:y=ih*{top}:exact=1",
-               f"crop=w='max(1,min(iw,ih/({sar})))':h='max(1,min(ih,iw*({sar})))':exact=1",
-               display_scale(source, f"{side}:{side}"), "setsar=1,format=rgb24"]
+    # Round new frame onsets up to the next encoder tick, preserving a still held at the left edge.
+    filters = ["settb=AVTB", f"trim=end_pts={stop}", f"setpts=PTS-{begin}",
+               f"fps={fps}:start_time=0:round=up:eof_action=pass"]
+    if hdr_picture(source):
+        filters.append(display_scale(source, "iw:ih"))
+    # Cropping RGB keeps the requested edges even when they fall between chroma samples.
+    filters.extend(["format=rgb24",
+                    f"crop=w='ceil(iw*{right})-floor(iw*{left})':h='ceil(ih*{bottom})-floor(ih*{top})':"
+                    f"x='floor(iw*{left})':y='floor(ih*{top})':exact=1",
+                    f"scale=w='max(1,round({side}*min(1,dar)))':h='max(1,round({side}*min(1,1/dar)))':flags=bilinear",
+                    "setsar=1", f"pad={side}:{side}:floor((ow-iw)/2):floor((oh-ih)/2)"])
+    ticks = min(count, math.ceil((Fraction(str(end)) - Fraction(str(start))) * fps))
     cmd = ["ffmpeg", "-v", "error", "-nostdin", "-copyts", "-start_at_zero", "-noaccurate_seek", "-ss",
-           f"{begin}us", "-i", str(source), "-map", f"0:{probe(source)['video_index']}", "-vf", ",".join(filters), "-frames:v", str(count),
-           "-c:v", "rawvideo", "-f", "rawvideo", "-"]
+           f"{begin}us", "-i", str(source), "-map", f"0:{probe(source)['video_index']}", "-vf", ",".join(filters),
+           "-frames:v", str(ticks), "-c:v", "rawvideo", "-threads:v", "2", "-f", "rawvideo", "-"]
     raw = subprocess.run(cmd, capture_output=True, check=True).stdout
     frames = np.frombuffer(raw, np.uint8).reshape(-1, side, side, 3)
     if not len(frames):
@@ -86,23 +90,19 @@ def region_frames(source, start, end, box, fps, count, side):
     return np.concatenate([frames, np.repeat(frames[-1:], count - len(frames), axis=0)])
 
 
-def square_region(box, size):
-    """Square at the centre of the requested box in square display pixels."""
+def region_bounds(box, size):
+    """Return the selected rectangle in published display pixels, with exclusive right and bottom edges."""
     w, h = size
-    left, top = math.floor(box[0] * w), math.floor(box[1] * h)
-    right, bottom = math.ceil(box[2] * w), math.ceil(box[3] * h)
-    width = min(right - left, bottom - top)
-    x, y = left + (right - left - width) // 2, top + (bottom - top - width) // 2
-    return x, y, x + width, y + width
+    return math.floor(box[0] * w), math.floor(box[1] * h), math.ceil(box[2] * w), math.ceil(box[3] * h)
 
 
 def region_views(out, scene, regions):
-    """Place changes in the same input squares beside the original channel peaks."""
+    """Place changes in the full requested rectangles beside the original channel peaks."""
     if not scene.get("pages") or not scene.get("wav") or scene["start"] >= scene["picture_end"]:
         return []
     size = scene["size"]
     start, end = (Fraction(str(scene[k])) for k in ("start", "end"))
-    bounds = [square_region(box, size) for box in regions]
+    bounds = [region_bounds(box, size) for box in regions]
     rows = [[] for _ in regions]
     previous = None
     first = None
@@ -174,7 +174,7 @@ def region_views(out, scene, regions):
             result.append({"file": save_observation_png(out, panel, "region_motion"), "picture_pts_us": [pts for pts, _ in stills],
                            "picture_interval_s": [max(float(start), first[0] / 1e6), scene["picture_end"]],
                            "region_numbers": list(range(base + 1, base + count + 1)),
-                           "input_squares_px": bounds[base:base + count], "picture_size": size})
+                           "input_rectangles_px": bounds[base:base + count], "picture_size": size})
     return result
 
 
@@ -182,6 +182,10 @@ def released_region_frames(picture, start, end, bounds, fps, count, side):
     """Sample the exposure on display at each encoder tick, then hold the last sampled image."""
     first, stop = Fraction(str(start)) * 1_000_000, Fraction(str(end)) * 1_000_000
     clip = np.empty((count, side, side, 3), dtype=np.uint8)
+    width, height = bounds[2] - bounds[0], bounds[3] - bounds[1]
+    longest = max(width, height)
+    fit = (max(1, round(side * width / longest)), max(1, round(side * height / longest)))
+    x, y = (side - fit[0]) // 2, (side - fit[1]) // 2
     previous = None
     for i in range(count):
         at = first + Fraction(i * 1_000_000, fps)
@@ -193,8 +197,9 @@ def released_region_frames(picture, start, end, bounds, fps, count, side):
             raise ValueError("no released picture at the requested encoder tick")
         pts, image = frame
         if pts != previous:
-            tile = image.crop(bounds).resize((side, side), Image.Resampling.BILINEAR)
-            clip[i] = np.asarray(tile)
+            tile = image.crop(bounds).resize(fit, Image.Resampling.BILINEAR)
+            clip[i].fill(0)
+            clip[i, y:y + fit[1], x:x + fit[0]] = np.asarray(tile)
         else:
             clip[i] = clip[i - 1]
         previous = pts
@@ -204,10 +209,12 @@ def released_region_frames(picture, start, end, bounds, fps, count, side):
 def measure(source, wav, origin, start, end, regions, *, pages=None, size=None, first_sample=None):
     from scipy.signal import resample_poly
     if __package__:
-        from .sync import AFPS, SIDE, VFPS, WIN, load_model, offset_distributions
+        from .sync import AFPS, VFPS, WIN, load_model, offset_distributions
     else:
-        from sync import AFPS, SIDE, VFPS, WIN, load_model, offset_distributions
+        from sync import AFPS, VFPS, WIN, load_model, offset_distributions
 
+    # The AudioSet test transform takes a 224 x 224 centre crop. Fit inside that actual field.
+    encoder_side = 224
     validate_regions(regions)
     picture = sheet_picture(pages, size) if pages else None
     model = None
@@ -256,10 +263,10 @@ def measure(source, wav, origin, start, end, regions, *, pages=None, size=None, 
                 c["near_zero_mass"] = []
             for box_index, box in enumerate(regions):
                 if picture is None:
-                    clip = region_frames(source, left, right, box, VFPS, int(WIN * VFPS), SIDE)
+                    clip = region_frames(source, left, right, box, VFPS, int(WIN * VFPS), encoder_side)
                 else:
-                    clip = released_region_frames(picture, left, right, square_region(box, size),
-                                                  VFPS, int(WIN * VFPS), SIDE)
+                    clip = released_region_frames(picture, left, right, region_bounds(box, size),
+                                                  VFPS, int(WIN * VFPS), encoder_side)
                 if not np.any(clip != clip[0]):
                     window.setdefault("static_region_indices", []).append(box_index)
                     for c in audible:
@@ -273,8 +280,8 @@ def measure(source, wav, origin, start, end, regions, *, pages=None, size=None, 
                     dist, = offset_distributions(model, transform, device, [(clip, wave)])
                     c["near_zero_mass"].append(round(float(dist[np.abs(np.round(grid, 2)) <= .2].sum()), 4))
     return {"status": "available", "model": "Synchformer AudioSet", "regions": regions,
-            "basis": "For each box in order, offset-model mass within 0.2 s of zero. The encoder uses the centre "
-                     "of each box. This measures timing; coincident motion and offscreen sound are possible. "
+            "basis": "For each box in order, offset-model mass within 0.2 s of zero. Each entire rectangle fits inside the encoder square with "
+                     "its display aspect preserved and black padding as needed. This measures timing; coincident motion and offscreen sound are possible. "
                      "Static means unchanged at the 25 Hz encoder ticks. Short windows hold their last sampled image "
                      "and pad their sound with silence.", "windows": windows}
 

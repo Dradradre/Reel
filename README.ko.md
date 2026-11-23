@@ -294,6 +294,8 @@ Synchformer를 설치하면 `reel observe`에 `--sync-region LEFT TOP RIGHT BOTT
 
 ## 사용한 오픈소스
 
+장면의 변화 시각을 비교할 때는 Shou 등의 Kinetics-GEBD 주석(CC BY-NC 4.0)을 썼다. 원본 영상은 Common Visual Data Foundation에서 배포한다. [주석과 이용 조건](https://github.com/StanLei52/GEBD), [Kinetics 영상](https://github.com/cvdfoundation/kinetics-dataset)
+
 낭독 비교에는 Google FLEURS의 벵골어, 영어, 힌디어, 한국어, 중남미 스페인어, 태국어 시험 자료를 썼다. 녹음과 기준 문장의 이용 조건은 CC BY 4.0이다. [녹음과 기준 문장](https://huggingface.co/datasets/google/fleurs)
 
 사람과 GPT가 같은 발화를 들은 실험에는 Magnotti 등(2024)이 CC0으로 공개한 영상과 연구진이 집계한 참가자 응답을 썼다. [실험 영상](https://openwetware.org/wiki/Beauchamp:Stimuli), [연구진의 분석 자료](https://zenodo.org/records/10689633)

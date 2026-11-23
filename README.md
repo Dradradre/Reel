@@ -297,6 +297,8 @@ flowchart LR
 
 ## Credits
 
+The event timing check uses annotations from Shou et al. (Kinetics-GEBD, CC BY-NC 4.0). The clips are distributed separately by the Common Visual Data Foundation. [Annotations and licence](https://github.com/StanLei52/GEBD), [Kinetics recordings](https://github.com/cvdfoundation/kinetics-dataset).
+
 The read-speech check uses the Bengali, English, Hindi, Korean, Latin American Spanish and Thai test sets from Google FLEURS (CC BY 4.0). [Recordings and reference transcripts](https://huggingface.co/datasets/google/fleurs).
 
 The same-clip speech comparison uses the stimuli released by Magnotti et al. (2024) under CC0 and participant summaries from their deposited analysis. [Stimulus archive](https://openwetware.org/wiki/Beauchamp:Stimuli) and [authors’ analysis](https://zenodo.org/records/10689633).

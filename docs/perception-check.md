@@ -1573,6 +1573,8 @@ python examples/check_event_boundaries.py docs/benchmarks/event-boundaries.json
 
 GPT는 아이들이 노래하는 영상에서 노래를 짚었다. 다른 영상에서는 여러 사람이 아기의 울음이나 비명을 들었다고 했지만 GPT는 무슨 소리였는지 모르겠다고 답했다. GPT는 세 질문 모두에서 화면과 소리 설명을 함께 접했다. [영상별 응답과 채점값](benchmarks/earlier-observations.json) · [AVCaps 원자료](https://huggingface.co/datasets/TUT-ARG/AVCaps)
 
+새로 고른 36~66초짜리 실사 여덟 편에서도 화면과 소리 회상을 반씩 반영해 쟀다. 같은 여덟 편에서 기존 방식은 사람 기준 61.3%, 짧은 구간의 소리 후보를 더 준 방식은 70.9%였다. [영상별 응답과 구간별 청각 측정](listening-check.md#짧은-소리를-언제-들었는가)
+
 ## OVO-Bench에서 질문 시각까지의 화면을 읽은 결과
 
 OVO-Bench는 과거 장면을 되짚는 능력, 질문 시각에 보이는 화면을 읽는 능력, 답할 만한 단서가 모인 시점을 가리는 능력을 잰다. 저자들이 배포한 판본에는 영상 644개와 문항 1,640개가 있다. 한 문항을 여러 시점에 묻는 경우를 세면 응답은 3,035개다. [공식 문항과 채점 코드](https://github.com/JoeLeelyf/OVO-Bench/tree/c34093f9a072d93f9e1c6b923446dfba71f4528e)

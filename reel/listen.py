@@ -17,6 +17,7 @@ if __package__:
     from .config import COMPARE_PY
     from .sounds import AudioTagger, SOURCE_SCORE
     from .scene_audio import inspect_scene
+    from .sound_events import inspect_events, ready as events_ready
     from .pitch import PitchTrace
     from .stereo import StereoHistory
 else:
@@ -28,6 +29,7 @@ else:
     from config import COMPARE_PY
     from sounds import AudioTagger, SOURCE_SCORE
     from scene_audio import inspect_scene
+    from sound_events import inspect_events, ready as events_ready
     from pitch import PitchTrace
     from stereo import StereoHistory
 
@@ -201,6 +203,8 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
         if cues:
             report["stereo_cues"] = cues
     report["pitch_contour"] = PitchTrace().read(wav, first_sample)
+    if events_ready():
+        report["sound_events"] = inspect_events(original, first_sample, end)
     report["scene"] = inspect_scene(original, first_sample, end)
     if focus:
         report["scene_basis"] = "The scene reader heard the original mix."

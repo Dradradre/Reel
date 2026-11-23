@@ -1,0 +1,2160 @@
+{
+  "baseline": "234bdd4",
+  "model": "local Codex gpt-6.1-terra",
+  "sound_events": {
+    "model": "Google YAMNet LiteRT",
+    "model_card": "https://www.kaggle.com/models/google/yamnet/tfLite/classification-tflite/1",
+    "sha256": "4d8b4a53282dc83ef04e3e7dbc4fbc98082e34e44ed798e16c3a0cdd4c584faf",
+    "window_samples_at_16khz": 15600,
+    "hop_samples_at_16khz": 7680,
+    "score_threshold": 0.5,
+    "top_k_per_distinct_active_channel": 3
+  },
+  "avcaps": {
+    "source": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+    "selection": "First eight unused eligible films by SHA-256 of reel-acoustic-window-01/ plus source ID. 72 previously used IDs excluded. At least three distinct captions per modality. Duration range extended from 4-35 s to 4-70 s before inference because only four unseen films qualified. One source per film.",
+    "protocol": "Freeze 8 unseen AVCaps films by the existing hash-selection protocol, prior to reading responses. Compare the exact same playback packets with and without additional waveform-based YAMNet observations. Local Codex sees pictures, existing AST, CoNeTTE, speech evidence and no attached WAV in both arms. No changes to questions. A fresh anonymous session per arm/film reports uncued first impression, then separate sight and sound recall. Primary endpoint difference in same-minus-other sound caption cosine against independent human sound-only captions; also visual and initial impressions and paired film uncertainty. Do not tune on the holdout. Explore development films separately; include a controlled change in sound with identical pictures, silence and discontinuities. Report neither classifier confidence nor a whole-film description match as an event annotation.",
+    "reader": "Same image bytes, sample and turn bounds in both arms. 8 s maximum per turn, continuous playback. Local AST and CoNeTTE where prepared and speech readings. No WAV sent to GPT; optional 30B waveform reader off in both arms. One isolated reader per film and condition. No caption/answer key in reader context.",
+    "scoring": "Compare the sentence with human descriptions of that film and the other seven using the specified embedding revision. Subtract the other-film mean cosine from the same-film mean cosine. The human reference holds out each human caption in turn. Each scene has equal weight. Use the mean model separation divided by mean human separation for each modality, then weight sight and sound equally as in earlier-observations.json. In a paired film bootstrap use the same eight sampled film indices for both modalities, 10000 resamples, seed 20261123. Ranges reflect film sampling only; other-film contrasts fixed. A value above 1 is possible.",
+    "equal_weight_recall": {
+      "before": {
+        "sight": 1.0161410915454117,
+        "sound": 0.20980437945602531,
+        "equal_weight": 0.6129727355007185,
+        "paired_film_bootstrap_95": [
+          0.2904397911866107,
+          0.9348175850045418
+        ]
+      },
+      "after": {
+        "sight": 1.0626839349386747,
+        "sound": 0.35491827067665976,
+        "equal_weight": 0.7088011028076673,
+        "paired_film_bootstrap_95": [
+          0.43314252465616176,
+          1.023132612285258
+        ]
+      }
+    },
+    "films": [
+      {
+        "id": "11117946583",
+        "duration": 63.49683,
+        "sha256": "8e3a95fc7262d90a1b275f4ba25b84d1f2c4f6e1ad404e6c37161fa8e4b7c717",
+        "turns": 8,
+        "responses": {
+          "before": {
+            "caption": "A smiling toddler in a red jacket drives a red ride-on toy car along a residential street, passing a parked blue car before getting off.",
+            "seen": "A smiling toddler in a red jacket drives a red ride-on toy car along a street beside a parked blue car, then gets off.",
+            "heard": "The speech reader recorded someone encouraging the child and saying things including “Put your feet up” and “Turn the wheel”; I could not directly hear the audio."
+          },
+          "after": {
+            "caption": "A smiling toddler in a red jacket drives a red toy car along a residential street, then stops beside a parked blue car and climbs off.",
+            "seen": "A smiling toddler in a red jacket drives a red toy car down a street, stops beside a blue car, and climbs off.",
+            "heard": "The speech reader identified someone saying “Come on, buddy” and giving directions to lift his feet and turn the wheel; I could not directly hear the audio."
+          }
+        }
+      },
+      {
+        "id": "4915733559",
+        "duration": 35.712268,
+        "sha256": "6feaa439cce59d0af961712fe6328d66628fb73d2dee7923f322da82b360c431",
+        "turns": 5,
+        "responses": {
+          "before": {
+            "caption": "A toddler walks up to a seated woman, and they look at a small device together before the child moves toward the coffee table.",
+            "seen": "A toddler approaches a seated woman, and they look at a small device together before the child moves toward a coffee table.",
+            "heard": "I could not directly hear the audio, though the speech reader identified the word “Bye.”"
+          },
+          "after": {
+            "caption": "A toddler walks up to a woman sitting in an armchair, and they look at a small handheld device together before he wanders over to the coffee table.",
+            "seen": "A toddler approaches a woman in an armchair, looks at a small device with her, and then walks to a coffee table.",
+            "heard": "I could not directly hear the audio, but the speech reader identified the word “bye.”"
+          }
+        }
+      },
+      {
+        "id": "4862215227",
+        "duration": 49.086961,
+        "sha256": "25582255565e01213368c8ea6673b9c7771172695e6096e21d65022873d93ca1",
+        "turns": 7,
+        "responses": {
+          "before": {
+            "caption": "A woman holds a smiling baby, playfully squeezing the baby's cheeks as the baby reaches toward the camera.",
+            "seen": "A woman held a baby, playfully squeezing the baby's cheeks as the baby smiled and reached toward the camera.",
+            "heard": "The audio was not available to listen to, though the speech reader detected the words “you” and “happy.”"
+          },
+          "after": {
+            "caption": "A woman holds and plays with a smiling baby, gently squeezing the baby's cheeks as the baby reaches toward the camera.",
+            "seen": "A woman held a smiling baby, squeezed the baby's cheeks, and watched as the baby reached toward the camera.",
+            "heard": "I could not directly hear the audio, but the speech and sound readings indicated a woman speaking and possible baby sounds."
+          }
+        }
+      },
+      {
+        "id": "4516647839",
+        "duration": 66.269728,
+        "sha256": "41f9be28a23c57c6545b5c479308e0e368e60ca2f4f4ad073b280c991aea6814",
+        "turns": 9,
+        "responses": {
+          "before": {
+            "caption": "A baby laughs and smiles on a bed as a small black-and-white dog moves around nearby.",
+            "seen": "A baby smiles on a bed while a small black-and-white dog moves nearby.",
+            "heard": "I could not directly hear the audio."
+          },
+          "after": {
+            "caption": "A baby laughs on a bed while a small black-and-white dog moves around nearby, then settles back against the pillows.",
+            "seen": "A baby smiles and laughs on a bed as a small black-and-white dog moves nearby, then rests against the pillows.",
+            "heard": "I could not directly hear the audio, though the audio analysis suggested barking and laughter."
+          }
+        }
+      },
+      {
+        "id": "4480586020",
+        "duration": 57.562245,
+        "sha256": "0b6da1a8a3ca2d19d7c5cea8883450807baeeb3f090adb0299abb2f2c8db360a",
+        "turns": 8,
+        "responses": {
+          "before": {
+            "caption": "A woman bathes a newborn in a blue baby bath by the kitchen sink, gently washing the baby with a cloth and an orange cup.",
+            "seen": "A woman tends to a newborn in a blue baby bath beside a kitchen sink, using a cloth and an orange cup.",
+            "heard": "I could not directly hear the audio, though the speech reader detected speech."
+          },
+          "after": {
+            "caption": "A woman bathes a newborn in a blue infant bath by a sink, gently washing the baby with a cloth and an orange cup.",
+            "seen": "A woman bathes a newborn in a blue infant bath beside a sink, using a cloth and an orange cup.",
+            "heard": "I could not hear the audio directly, but the supplied audio analysis indicated speech and possible water sounds."
+          }
+        }
+      },
+      {
+        "id": "4654125833",
+        "duration": 60.627279,
+        "sha256": "ada4d63ca8ca52a3dca57b433b416e4133d1be077f51efc96f4ba7ba991eaf66",
+        "turns": 8,
+        "responses": {
+          "before": {
+            "caption": "A man sits on the floor holding a crying baby, then cradles and comforts the baby as a white dog briefly approaches.",
+            "seen": "A man sitting on the floor holds and comforts a crying baby while a white dog briefly approaches.",
+            "heard": "I could not directly hear the audio, but the available sound readings suggested a baby crying and a person speaking."
+          },
+          "after": {
+            "caption": "A man sitting on the floor comforts a crying baby, first holding the infant upright and then cradling and rocking them in his arms.",
+            "seen": "A man sitting on the floor holds and comforts a crying baby, while a white dog briefly approaches.",
+            "heard": "The audio analysis suggested a baby crying and background music, but I could not directly hear the recording."
+          }
+        }
+      },
+      {
+        "id": "4654222137",
+        "duration": 38.730862,
+        "sha256": "93986bffcde31dccda9cfcd8b1f87088c6084e978ef36c40ced338891d7b7448",
+        "turns": 5,
+        "responses": {
+          "before": {
+            "caption": "A model airplane flies over a city skyline at dusk, then lands on a paved area as two dogs walk past.",
+            "seen": "A model airplane flew over a city skyline at dusk and landed on pavement, where two dogs walked past it.",
+            "heard": "I could not tell what the clip sounded like."
+          },
+          "after": {
+            "caption": "A model airplane circles above a city skyline at dusk, then lands on a paved area as two dogs walk past it.",
+            "seen": "A model airplane circles above a city skyline at dusk, then lands on a paved area as two dogs walk past it.",
+            "heard": "I could not tell what the sounds were."
+          }
+        }
+      },
+      {
+        "id": "4849169953",
+        "duration": 65.27127,
+        "sha256": "1a9257c45fbafa72db65addae15025399bf0848ce0a4c9f53927b937be638fb5",
+        "turns": 9,
+        "responses": {
+          "before": {
+            "caption": "A wide-eyed baby reclines in a blue seat, gripping and studying a dangling green toy before letting it swing away.",
+            "seen": "A baby reclined in a blue seat, holding a dangling green toy and watching it swing.",
+            "heard": "I could not directly hear the audio, but the supplied audio analysis indicated possible music and detected the word “Oops.”"
+          },
+          "after": {
+            "caption": "A wide-eyed baby reclines in a blue seat, gripping and watching a dangling green toy before letting it swing freely.",
+            "seen": "A baby reclines in a blue seat, holding and watching a dangling green toy before letting it swing.",
+            "heard": "I could not tell what sounds were present."
+          }
+        }
+      }
+    ],
+    "metrics": {
+      "caption": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "films": 8,
+        "human_captions": 32,
+        "summary": {
+          "human": {
+            "same_film_cosine": 0.5572320055837433,
+            "other_film_cosine": 0.25194964250937724,
+            "same_minus_other": 0.30528236307436607,
+            "top_one_film": 0.8458333333333333
+          },
+          "before": {
+            "same_film_cosine": 0.5087078025564551,
+            "other_film_cosine": 0.20901228697039187,
+            "same_minus_other": 0.2996955155860632,
+            "top_one_film": 0.9333333333333332
+          },
+          "after": {
+            "same_film_cosine": 0.5241790988792976,
+            "other_film_cosine": 0.20840473158750683,
+            "same_minus_other": 0.31577436729179076,
+            "top_one_film": 0.975
+          }
+        },
+        "by_film_columns": [
+          "same_film_cosine",
+          "other_film_cosine",
+          "top_one_film"
+        ],
+        "by_film": {
+          "11117946583": {
+            "human": [
+              0.45871113538742064,
+              0.1657446190714836,
+              0.8
+            ],
+            "before": [
+              0.4943637251853943,
+              0.2531704306602478,
+              1.0
+            ],
+            "after": [
+              0.49745005965232847,
+              0.25627878308296204,
+              0.8
+            ]
+          },
+          "4915733559": {
+            "human": [
+              0.3936421275138855,
+              0.2800515840450923,
+              0.6666666666666666
+            ],
+            "before": [
+              0.326622595389684,
+              0.20468780398368835,
+              0.6666666666666666
+            ],
+            "after": [
+              0.3167334993680318,
+              0.1861618310213089,
+              1.0
+            ]
+          },
+          "4862215227": {
+            "human": [
+              0.6683506965637207,
+              0.33774932225545246,
+              1.0
+            ],
+            "before": [
+              0.4538160463174184,
+              0.2795783579349518,
+              1.0
+            ],
+            "after": [
+              0.5571809013684591,
+              0.30696460604667664,
+              1.0
+            ]
+          },
+          "4516647839": {
+            "human": [
+              0.6202922701835633,
+              0.2947378039360046,
+              1.0
+            ],
+            "before": [
+              0.6497750759124756,
+              0.2579573094844818,
+              1.0
+            ],
+            "after": [
+              0.6584883570671082,
+              0.2595958113670349,
+              1.0
+            ]
+          },
+          "4480586020": {
+            "human": [
+              0.4377131834626198,
+              0.2540334351360798,
+              0.5
+            ],
+            "before": [
+              0.5249180644750595,
+              0.15892446041107178,
+              1.0
+            ],
+            "after": [
+              0.5305904746055603,
+              0.16576477885246277,
+              1.0
+            ]
+          },
+          "4654125833": {
+            "human": [
+              0.5507970809936523,
+              0.23637332022190094,
+              0.8
+            ],
+            "before": [
+              0.5453766465187073,
+              0.2180398553609848,
+              0.8
+            ],
+            "after": [
+              0.5781689167022706,
+              0.20154282450675964,
+              1.0
+            ]
+          },
+          "4654222137": {
+            "human": [
+              0.5384678840637207,
+              0.08462207717821002,
+              1.0
+            ],
+            "before": [
+              0.4971398189663887,
+              0.022875430062413216,
+              1.0
+            ],
+            "after": [
+              0.4642186611890793,
+              0.01179244089871645,
+              1.0
+            ]
+          },
+          "4849169953": {
+            "human": [
+              0.7898816665013632,
+              0.36228497823079425,
+              1.0
+            ],
+            "before": [
+              0.5776504476865133,
+              0.2768646478652954,
+              1.0
+            ],
+            "after": [
+              0.590601921081543,
+              0.2791367769241333,
+              1.0
+            ]
+          }
+        },
+        "human_relative_description_separation": {
+          "before": {
+            "human_same_minus_other": 0.305282363074366,
+            "reader_same_minus_other": 0.2996955155860632,
+            "fraction_of_human": 0.9816994095825252,
+            "film_bootstrap_95": [
+              0.7754863272419626,
+              1.247344787586733
+            ]
+          },
+          "after": {
+            "human_same_minus_other": 0.305282363074366,
+            "reader_same_minus_other": 0.31577436729179076,
+            "fraction_of_human": 1.0343681964190932,
+            "film_bootstrap_95": [
+              0.8518577544820867,
+              1.2905798533381012
+            ]
+          }
+        },
+        "paired_change_in_separation": {
+          "mean": 0.016078851705727475,
+          "film_bootstrap_95": [
+            -0.0023465972560613177,
+            0.03747133760616027
+          ],
+          "improved_films": 5
+        }
+      },
+      "seen": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "films": 8,
+        "human_captions": 32,
+        "summary": {
+          "human": {
+            "same_film_cosine": 0.4799801645800471,
+            "other_film_cosine": 0.21055872787643842,
+            "same_minus_other": 0.2694214367036087,
+            "top_one_film": 0.7708333333333333
+          },
+          "before": {
+            "same_film_cosine": 0.4563041160814464,
+            "other_film_cosine": 0.18253392330370843,
+            "same_minus_other": 0.27377019277773795,
+            "top_one_film": 0.6875
+          },
+          "after": {
+            "same_film_cosine": 0.4611800174849729,
+            "other_film_cosine": 0.17487018497195095,
+            "same_minus_other": 0.28630983251302194,
+            "top_one_film": 0.65625
+          }
+        },
+        "by_film_columns": [
+          "same_film_cosine",
+          "other_film_cosine",
+          "top_one_film"
+        ],
+        "by_film": {
+          "11117946583": {
+            "human": [
+              0.40415987372398376,
+              0.130073934327811,
+              0.75
+            ],
+            "before": [
+              0.3567548170685768,
+              0.21840617060661316,
+              0.25
+            ],
+            "after": [
+              0.35387976467609406,
+              0.2291393131017685,
+              0.0
+            ]
+          },
+          "4915733559": {
+            "human": [
+              0.29977279156446457,
+              0.18212896957993507,
+              0.25
+            ],
+            "before": [
+              0.20451606437563896,
+              0.2049665004014969,
+              0.0
+            ],
+            "after": [
+              0.2022600881755352,
+              0.1593005359172821,
+              0.0
+            ]
+          },
+          "4862215227": {
+            "human": [
+              0.4631780683994293,
+              0.2562895230948925,
+              0.75
+            ],
+            "before": [
+              0.4000503495335579,
+              0.23577703535556793,
+              0.25
+            ],
+            "after": [
+              0.37128227204084396,
+              0.22564151883125305,
+              0.25
+            ]
+          },
+          "4516647839": {
+            "human": [
+              0.6280124932527542,
+              0.2713972479104996,
+              1.0
+            ],
+            "before": [
+              0.6090239137411118,
+              0.2605457305908203,
+              1.0
+            ],
+            "after": [
+              0.6240719854831696,
+              0.2339138686656952,
+              1.0
+            ]
+          },
+          "4480586020": {
+            "human": [
+              0.4441903233528137,
+              0.16724313547213873,
+              0.6666666666666666
+            ],
+            "before": [
+              0.5551695823669434,
+              0.12194027006626129,
+              1.0
+            ],
+            "after": [
+              0.5836274226506551,
+              0.13334564864635468,
+              1.0
+            ]
+          },
+          "4654125833": {
+            "human": [
+              0.42792998254299164,
+              0.2156042978167534,
+              0.75
+            ],
+            "before": [
+              0.6151454895734787,
+              0.1446782350540161,
+              1.0
+            ],
+            "after": [
+              0.6168158501386642,
+              0.14384929835796356,
+              1.0
+            ]
+          },
+          "4654222137": {
+            "human": [
+              0.5300133526325226,
+              0.13474699202924967,
+              1.0
+            ],
+            "before": [
+              0.37498918175697327,
+              0.018080485984683037,
+              1.0
+            ],
+            "after": [
+              0.39649517834186554,
+              0.014985512010753155,
+              1.0
+            ]
+          },
+          "4849169953": {
+            "human": [
+              0.6425844311714173,
+              0.32698572278022764,
+              1.0
+            ],
+            "before": [
+              0.5347835302352906,
+              0.25587695837020874,
+              1.0
+            ],
+            "after": [
+              0.5410075783729553,
+              0.25878578424453735,
+              1.0
+            ]
+          }
+        },
+        "human_relative_description_separation": {
+          "before": {
+            "human_same_minus_other": 0.2694214367036087,
+            "reader_same_minus_other": 0.27377019277773795,
+            "fraction_of_human": 1.0161410915454117,
+            "film_bootstrap_95": [
+              0.7000957950388019,
+              1.3815615793198603
+            ]
+          },
+          "after": {
+            "human_same_minus_other": 0.2694214367036087,
+            "reader_same_minus_other": 0.28630983251302194,
+            "fraction_of_human": 1.0626839349386747,
+            "film_bootstrap_95": [
+              0.7452168212885145,
+              1.4343157390856094
+            ]
+          }
+        },
+        "paired_change_in_separation": {
+          "mean": 0.01253963973528395,
+          "film_bootstrap_95": [
+            -0.0021077914757188366,
+            0.027759921985367933
+          ],
+          "improved_films": 6
+        }
+      },
+      "heard": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "films": 8,
+        "human_captions": 26,
+        "summary": {
+          "human": {
+            "same_film_cosine": 0.4920862988879283,
+            "other_film_cosine": 0.31552527202293273,
+            "same_minus_other": 0.17656102686499558,
+            "top_one_film": 0.45833333333333326
+          },
+          "before": {
+            "same_film_cosine": 0.26184514674047626,
+            "other_film_cosine": 0.22480187006294727,
+            "same_minus_other": 0.03704327667752899,
+            "top_one_film": 0.25
+          },
+          "after": {
+            "same_film_cosine": 0.30794492190082867,
+            "other_film_cosine": 0.2452801875770092,
+            "same_minus_other": 0.06266473432381947,
+            "top_one_film": 0.29166666666666663
+          }
+        },
+        "by_film_columns": [
+          "same_film_cosine",
+          "other_film_cosine",
+          "top_one_film"
+        ],
+        "by_film": {
+          "11117946583": {
+            "human": [
+              0.23245327770709992,
+              0.2249648503959179,
+              0.0
+            ],
+            "before": [
+              0.20263153910636902,
+              0.3269495368003845,
+              0.0
+            ],
+            "after": [
+              0.22572164833545685,
+              0.28910136222839355,
+              0.0
+            ]
+          },
+          "4915733559": {
+            "human": [
+              0.4345689614613851,
+              0.33716127276420593,
+              0.0
+            ],
+            "before": [
+              0.2371221383412679,
+              0.22949202358722687,
+              0.0
+            ],
+            "after": [
+              0.23902746041615805,
+              0.23355862498283386,
+              0.0
+            ]
+          },
+          "4862215227": {
+            "human": [
+              0.4985676010449727,
+              0.33731671174367267,
+              0.3333333333333333
+            ],
+            "before": [
+              0.25812359650929767,
+              0.20782028138637543,
+              0.0
+            ],
+            "after": [
+              0.4191863139470418,
+              0.3555944263935089,
+              0.3333333333333333
+            ]
+          },
+          "4516647839": {
+            "human": [
+              0.739220380783081,
+              0.3597727020581563,
+              1.0
+            ],
+            "before": [
+              0.10865834852059682,
+              0.1667024791240692,
+              0.0
+            ],
+            "after": [
+              0.305672953526179,
+              0.24070265889167786,
+              0.0
+            ]
+          },
+          "4480586020": {
+            "human": [
+              0.5347319841384888,
+              0.32420561214288074,
+              0.3333333333333333
+            ],
+            "before": [
+              0.2023978183666865,
+              0.20717556774616241,
+              0.0
+            ],
+            "after": [
+              0.17643865446249643,
+              0.19792857766151428,
+              0.0
+            ]
+          },
+          "4654125833": {
+            "human": [
+              0.4557982285817464,
+              0.30565009514490765,
+              0.6666666666666666
+            ],
+            "before": [
+              0.47798311710357666,
+              0.31596893072128296,
+              1.0
+            ],
+            "after": [
+              0.45828285813331604,
+              0.26093611121177673,
+              1.0
+            ]
+          },
+          "4654222137": {
+            "human": [
+              0.4670538405577342,
+              0.317111204067866,
+              0.6666666666666666
+            ],
+            "before": [
+              0.30296296377976734,
+              0.14498932659626007,
+              1.0
+            ],
+            "after": [
+              0.3483773469924927,
+              0.16999761760234833,
+              1.0
+            ]
+          },
+          "4849169953": {
+            "human": [
+              0.5742961168289185,
+              0.3180197278658549,
+              0.6666666666666666
+            ],
+            "before": [
+              0.30488165219624835,
+              0.1993168145418167,
+              0.0
+            ],
+            "after": [
+              0.2908521393934886,
+              0.21442212164402008,
+              0.0
+            ]
+          }
+        },
+        "human_relative_description_separation": {
+          "before": {
+            "human_same_minus_other": 0.17656102686499556,
+            "reader_same_minus_other": 0.037043276677529005,
+            "fraction_of_human": 0.20980437945602531,
+            "film_bootstrap_95": [
+              -0.20987583358629938,
+              0.6073166301922872
+            ]
+          },
+          "after": {
+            "human_same_minus_other": 0.17656102686499556,
+            "reader_same_minus_other": 0.06266473432381948,
+            "fraction_of_human": 0.35491827067665976,
+            "film_bootstrap_95": [
+              0.02864822267640171,
+              0.7535232774285001
+            ]
+          }
+        },
+        "paired_change_in_separation": {
+          "mean": 0.025621457646290473,
+          "film_bootstrap_95": [
+            -0.0022628756705671367,
+            0.05986033566296103
+          ],
+          "improved_films": 5
+        }
+      }
+    }
+  },
+  "development_observation": {
+    "film": "4669303210",
+    "source": "docs/benchmarks/earlier-observations.json",
+    "observation": "Human listeners described a crying child. A local long-window captioner suggested a screaming child and barking in the opening turn. GPT had left the source open. The short-window classifier also missed the crying category in this original film. This film was excluded from the new panel."
+  },
+  "controlled_order": {
+    "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+    "sources": {
+      "crying_baby": {
+        "filename": "5-151085-A-20.wav",
+        "fold": "5",
+        "target": "20",
+        "category": "crying_baby",
+        "esc10": "True",
+        "src_file": "151085",
+        "take": "A"
+      },
+      "clock_tick": {
+        "filename": "5-201194-A-38.wav",
+        "fold": "5",
+        "target": "38",
+        "category": "clock_tick",
+        "esc10": "True",
+        "src_file": "201194",
+        "take": "A"
+      },
+      "rain": {
+        "filename": "5-188655-A-10.wav",
+        "fold": "5",
+        "target": "10",
+        "category": "rain",
+        "esc10": "True",
+        "src_file": "188655",
+        "take": "A"
+      },
+      "rooster": {
+        "filename": "5-194930-B-1.wav",
+        "fold": "5",
+        "target": "1",
+        "category": "rooster",
+        "esc10": "True",
+        "src_file": "194930",
+        "take": "B"
+      },
+      "helicopter": {
+        "filename": "5-191131-A-40.wav",
+        "fold": "5",
+        "target": "40",
+        "category": "helicopter",
+        "esc10": "True",
+        "src_file": "191131",
+        "take": "A"
+      },
+      "chainsaw": {
+        "filename": "5-216370-B-41.wav",
+        "fold": "5",
+        "target": "41",
+        "category": "chainsaw",
+        "esc10": "True",
+        "src_file": "216370",
+        "take": "B"
+      },
+      "sea_waves": {
+        "filename": "5-219379-B-11.wav",
+        "fold": "5",
+        "target": "11",
+        "category": "sea_waves",
+        "esc10": "True",
+        "src_file": "219379",
+        "take": "B"
+      },
+      "crackling_fire": {
+        "filename": "5-186924-A-12.wav",
+        "fold": "5",
+        "target": "12",
+        "category": "crackling_fire",
+        "esc10": "True",
+        "src_file": "186924",
+        "take": "A"
+      },
+      "sneezing": {
+        "filename": "5-220027-A-21.wav",
+        "fold": "5",
+        "target": "21",
+        "category": "sneezing",
+        "esc10": "True",
+        "src_file": "220027",
+        "take": "A"
+      },
+      "dog": {
+        "filename": "5-217158-A-0.wav",
+        "fold": "5",
+        "target": "0",
+        "category": "dog",
+        "esc10": "True",
+        "src_file": "217158",
+        "take": "A"
+      }
+    },
+    "cases": [
+      {
+        "candidates": [
+          "clock_tick",
+          "crying_baby"
+        ],
+        "order": [
+          "crying_baby",
+          "clock_tick"
+        ],
+        "expected": "B",
+        "responses": {
+          "before": "B",
+          "after": "B"
+        }
+      },
+      {
+        "candidates": [
+          "clock_tick",
+          "crying_baby"
+        ],
+        "order": [
+          "clock_tick",
+          "crying_baby"
+        ],
+        "expected": "A",
+        "responses": {
+          "before": "A",
+          "after": "A"
+        }
+      },
+      {
+        "candidates": [
+          "rain",
+          "rooster"
+        ],
+        "order": [
+          "rain",
+          "rooster"
+        ],
+        "expected": "A",
+        "responses": {
+          "before": "A",
+          "after": "A"
+        }
+      },
+      {
+        "candidates": [
+          "rain",
+          "rooster"
+        ],
+        "order": [
+          "rooster",
+          "rain"
+        ],
+        "expected": "B",
+        "responses": {
+          "before": "B",
+          "after": "B"
+        }
+      },
+      {
+        "candidates": [
+          "chainsaw",
+          "helicopter"
+        ],
+        "order": [
+          "helicopter",
+          "chainsaw"
+        ],
+        "expected": "B",
+        "responses": {
+          "before": "?",
+          "after": "?"
+        }
+      },
+      {
+        "candidates": [
+          "chainsaw",
+          "helicopter"
+        ],
+        "order": [
+          "chainsaw",
+          "helicopter"
+        ],
+        "expected": "A",
+        "responses": {
+          "before": "?",
+          "after": "A"
+        }
+      },
+      {
+        "candidates": [
+          "crackling_fire",
+          "sea_waves"
+        ],
+        "order": [
+          "sea_waves",
+          "crackling_fire"
+        ],
+        "expected": "B",
+        "responses": {
+          "before": "B",
+          "after": "B"
+        }
+      },
+      {
+        "candidates": [
+          "crackling_fire",
+          "sea_waves"
+        ],
+        "order": [
+          "crackling_fire",
+          "sea_waves"
+        ],
+        "expected": "A",
+        "responses": {
+          "before": "A",
+          "after": "A"
+        }
+      },
+      {
+        "candidates": [
+          "dog",
+          "sneezing"
+        ],
+        "order": [
+          "sneezing",
+          "dog"
+        ],
+        "expected": "B",
+        "responses": {
+          "before": "B",
+          "after": "B"
+        }
+      },
+      {
+        "candidates": [
+          "dog",
+          "sneezing"
+        ],
+        "order": [
+          "dog",
+          "sneezing"
+        ],
+        "expected": "A",
+        "responses": {
+          "before": "A",
+          "after": "A"
+        }
+      },
+      {
+        "candidates": [
+          "clock_tick",
+          "crying_baby"
+        ],
+        "order": [],
+        "expected": "?",
+        "responses": {
+          "before": "?",
+          "after": "?"
+        }
+      },
+      {
+        "candidates": [
+          "crackling_fire",
+          "sea_waves"
+        ],
+        "order": [],
+        "expected": "?",
+        "responses": {
+          "before": "?",
+          "after": "?"
+        }
+      }
+    ],
+    "source": "https://github.com/karolpiczak/ESC-50",
+    "protocol": "Fold 5 of ESC-10. Sort ten categories and select one file per category by SHA-256 of reel-waveform-order-01/ plus the category or filename. Play both orders of each pair; 5 s sound, 1 s silence, 5 s sound. Two entirely silent clips. Identical gray frames. Two successive turn packets supplied together in one prompt with the same content except for sound_events. Both category names supplied. A/B require both sources and their order; ? means absent or unclear. Fresh local GPT session per arm and case."
+  },
+  "street": {
+    "source": "https://zenodo.org/records/1040179",
+    "licence": "TUT database licence, non-commercial scientific research",
+    "audio_md5": "1d3aa81896be0f142130ca9ca7a2b871",
+    "meta_md5": "a951598abaea87296ca409e30fb0b379",
+    "files": 8,
+    "seconds": 1749.4350566893424,
+    "annotated_source_spans": 247,
+    "mapping": {
+      "people walking": [
+        "Walk, footsteps"
+      ],
+      "people speaking": [
+        "Speech",
+        "Conversation",
+        "Narration, monologue",
+        "Whispering",
+        "Hubbub, speech noise, speech babble",
+        "Child speech, kid speaking"
+      ],
+      "children": [
+        "Child speech, kid speaking",
+        "Children shouting",
+        "Child singing",
+        "Children playing",
+        "Baby laughter",
+        "Baby cry, infant cry",
+        "Babbling"
+      ],
+      "car": [
+        "Car",
+        "Car passing by",
+        "Race car, auto racing"
+      ],
+      "large vehicle": [
+        "Bus",
+        "Truck",
+        "Ice cream truck, ice cream van"
+      ],
+      "brakes squeaking": []
+    },
+    "metric": "All eight TUT evaluation recordings. A one-second bin is positive if any part overlaps a human annotation or a predicted support window. Use source-specific AudioSet labels at the shipping score threshold .5 in either recorded channel. Count TP, FP and FN for each class, including zero predictions and the unmapped brake class. Report micro F1 and class counts for AST, YAMNet and their union. No tuning after looking at results.",
+    "by_method": {
+      "ast": {
+        "tp": 55,
+        "fp": 10,
+        "fn": 1580,
+        "precision": 0.8461538461538461,
+        "recall": 0.03363914373088685,
+        "f1": 0.06470588235294118
+      },
+      "yamnet": {
+        "tp": 49,
+        "fp": 19,
+        "fn": 1586,
+        "precision": 0.7205882352941176,
+        "recall": 0.02996941896024465,
+        "f1": 0.057545507927187316
+      },
+      "union": {
+        "tp": 79,
+        "fp": 27,
+        "fn": 1556,
+        "precision": 0.7452830188679245,
+        "recall": 0.048318042813455656,
+        "f1": 0.09075244112578977
+      }
+    },
+    "by_class": {
+      "ast": {
+        "people walking": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 362,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "people speaking": {
+          "tp": 55,
+          "fp": 10,
+          "fn": 190,
+          "precision": 0.8461538461538461,
+          "recall": 0.22448979591836735,
+          "f1": 0.3548387096774194
+        },
+        "children": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 45,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "car": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 718,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "large vehicle": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 177,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "brakes squeaking": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 88,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "yamnet": {
+        "people walking": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 360,
+          "precision": 1.0,
+          "recall": 0.0055248618784530384,
+          "f1": 0.01098901098901099
+        },
+        "people speaking": {
+          "tp": 47,
+          "fp": 16,
+          "fn": 198,
+          "precision": 0.746031746031746,
+          "recall": 0.19183673469387755,
+          "f1": 0.3051948051948052
+        },
+        "children": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 45,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "car": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 718,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "large vehicle": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 177,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "brakes squeaking": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 88,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "union": {
+        "people walking": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 360,
+          "precision": 1.0,
+          "recall": 0.0055248618784530384,
+          "f1": 0.01098901098901099
+        },
+        "people speaking": {
+          "tp": 77,
+          "fp": 24,
+          "fn": 168,
+          "precision": 0.7623762376237624,
+          "recall": 0.3142857142857143,
+          "f1": 0.44508670520231214
+        },
+        "children": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 45,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "car": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 718,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "large vehicle": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 177,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "brakes squeaking": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 88,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "per_recording_count_order": [
+      "tp",
+      "fp",
+      "fn"
+    ],
+    "by_recording": [
+      {
+        "id": "a002",
+        "seconds": 184.10521541950112,
+        "bins": 185,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              13
+            ],
+            "people speaking": [
+              0,
+              0,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              0
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              0
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              0,
+              0,
+              13
+            ],
+            "people speaking": [
+              0,
+              1,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              0
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              0
+            ]
+          },
+          "union": {
+            "people walking": [
+              0,
+              0,
+              13
+            ],
+            "people speaking": [
+              0,
+              1,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              0
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "id": "a005",
+        "seconds": 253.96244897959184,
+        "bins": 254,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              0
+            ],
+            "people speaking": [
+              2,
+              2,
+              15
+            ],
+            "children": [
+              0,
+              0,
+              18
+            ],
+            "car": [
+              0,
+              0,
+              124
+            ],
+            "large vehicle": [
+              0,
+              0,
+              25
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              55
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              0,
+              0,
+              0
+            ],
+            "people speaking": [
+              6,
+              6,
+              11
+            ],
+            "children": [
+              0,
+              0,
+              18
+            ],
+            "car": [
+              0,
+              0,
+              124
+            ],
+            "large vehicle": [
+              0,
+              0,
+              25
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              55
+            ]
+          },
+          "union": {
+            "people walking": [
+              0,
+              0,
+              0
+            ],
+            "people speaking": [
+              6,
+              6,
+              11
+            ],
+            "children": [
+              0,
+              0,
+              18
+            ],
+            "car": [
+              0,
+              0,
+              124
+            ],
+            "large vehicle": [
+              0,
+              0,
+              25
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              55
+            ]
+          }
+        }
+      },
+      {
+        "id": "a009",
+        "seconds": 229.4073469387755,
+        "bins": 230,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              17
+            ],
+            "people speaking": [
+              0,
+              0,
+              15
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              63
+            ],
+            "large vehicle": [
+              0,
+              0,
+              12
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              0,
+              0,
+              17
+            ],
+            "people speaking": [
+              0,
+              0,
+              15
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              63
+            ],
+            "large vehicle": [
+              0,
+              0,
+              12
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "union": {
+            "people walking": [
+              0,
+              0,
+              17
+            ],
+            "people speaking": [
+              0,
+              0,
+              15
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              63
+            ],
+            "large vehicle": [
+              0,
+              0,
+              12
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          }
+        }
+      },
+      {
+        "id": "a011",
+        "seconds": 215.9049433106576,
+        "bins": 216,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              40
+            ],
+            "people speaking": [
+              12,
+              0,
+              84
+            ],
+            "children": [
+              0,
+              0,
+              3
+            ],
+            "car": [
+              0,
+              0,
+              69
+            ],
+            "large vehicle": [
+              0,
+              0,
+              10
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              8
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              0,
+              0,
+              40
+            ],
+            "people speaking": [
+              6,
+              0,
+              90
+            ],
+            "children": [
+              0,
+              0,
+              3
+            ],
+            "car": [
+              0,
+              0,
+              69
+            ],
+            "large vehicle": [
+              0,
+              0,
+              10
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              8
+            ]
+          },
+          "union": {
+            "people walking": [
+              0,
+              0,
+              40
+            ],
+            "people speaking": [
+              15,
+              0,
+              81
+            ],
+            "children": [
+              0,
+              0,
+              3
+            ],
+            "car": [
+              0,
+              0,
+              69
+            ],
+            "large vehicle": [
+              0,
+              0,
+              10
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              8
+            ]
+          }
+        }
+      },
+      {
+        "id": "a123",
+        "seconds": 301.4704761904762,
+        "bins": 302,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              203
+            ],
+            "people speaking": [
+              7,
+              1,
+              32
+            ],
+            "children": [
+              0,
+              0,
+              4
+            ],
+            "car": [
+              0,
+              0,
+              151
+            ],
+            "large vehicle": [
+              0,
+              0,
+              123
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              10
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              2,
+              0,
+              201
+            ],
+            "people speaking": [
+              15,
+              9,
+              24
+            ],
+            "children": [
+              0,
+              0,
+              4
+            ],
+            "car": [
+              0,
+              3,
+              151
+            ],
+            "large vehicle": [
+              0,
+              0,
+              123
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              10
+            ]
+          },
+          "union": {
+            "people walking": [
+              2,
+              0,
+              201
+            ],
+            "people speaking": [
+              17,
+              10,
+              22
+            ],
+            "children": [
+              0,
+              0,
+              4
+            ],
+            "car": [
+              0,
+              3,
+              151
+            ],
+            "large vehicle": [
+              0,
+              0,
+              123
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "id": "b002",
+        "seconds": 197.24770975056688,
+        "bins": 198,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              34
+            ],
+            "people speaking": [
+              0,
+              0,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              140
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              0,
+              0,
+              34
+            ],
+            "people speaking": [
+              0,
+              0,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              140
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          },
+          "union": {
+            "people walking": [
+              0,
+              0,
+              34
+            ],
+            "people speaking": [
+              0,
+              0,
+              0
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              140
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              5
+            ]
+          }
+        }
+      },
+      {
+        "id": "b004",
+        "seconds": 156.21528344671202,
+        "bins": 157,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              27
+            ],
+            "people speaking": [
+              34,
+              7,
+              38
+            ],
+            "children": [
+              0,
+              0,
+              20
+            ],
+            "car": [
+              0,
+              0,
+              54
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              2
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              0,
+              0,
+              27
+            ],
+            "people speaking": [
+              18,
+              0,
+              54
+            ],
+            "children": [
+              0,
+              0,
+              20
+            ],
+            "car": [
+              0,
+              0,
+              54
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              2
+            ]
+          },
+          "union": {
+            "people walking": [
+              0,
+              0,
+              27
+            ],
+            "people speaking": [
+              37,
+              7,
+              35
+            ],
+            "children": [
+              0,
+              0,
+              20
+            ],
+            "car": [
+              0,
+              0,
+              54
+            ],
+            "large vehicle": [
+              0,
+              0,
+              0
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "b092",
+        "seconds": 211.12163265306123,
+        "bins": 212,
+        "metric": {
+          "ast": {
+            "people walking": [
+              0,
+              0,
+              28
+            ],
+            "people speaking": [
+              0,
+              0,
+              6
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              117
+            ],
+            "large vehicle": [
+              0,
+              0,
+              7
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              3
+            ]
+          },
+          "yamnet": {
+            "people walking": [
+              0,
+              0,
+              28
+            ],
+            "people speaking": [
+              2,
+              0,
+              4
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              117
+            ],
+            "large vehicle": [
+              0,
+              0,
+              7
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              3
+            ]
+          },
+          "union": {
+            "people walking": [
+              0,
+              0,
+              28
+            ],
+            "people speaking": [
+              2,
+              0,
+              4
+            ],
+            "children": [
+              0,
+              0,
+              0
+            ],
+            "car": [
+              0,
+              0,
+              117
+            ],
+            "large vehicle": [
+              0,
+              0,
+              7
+            ],
+            "brakes squeaking": [
+              0,
+              0,
+              3
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "cutoff_check": "Actual 44.1 kHz MCP stdio with --until 1.25: first 0.975 s window ends at native sample 42998 (0.9750113 s). Replay of 0.5-1.25 s returns zero complete windows, replay through 1.3 s rejected.",
+  "resources": {
+    "capture": {
+      "code": 0,
+      "peak_kib": 4053728,
+      "seconds": 417.03,
+      "survivors": []
+    },
+    "blind": {
+      "code": 0,
+      "peak_kib": 1755296,
+      "seconds": 510.82,
+      "survivors": []
+    },
+    "score": {
+      "code": 0,
+      "peak_kib": 318880,
+      "seconds": 51.52,
+      "survivors": []
+    },
+    "order": {
+      "code": 0,
+      "peak_kib": 1814912,
+      "seconds": 131.15,
+      "survivors": []
+    },
+    "street-measured": {
+      "code": 0,
+      "peak_kib": 788448,
+      "seconds": 175.02,
+      "survivors": []
+    },
+    "wire-measured": {
+      "code": 0,
+      "peak_kib": 666528,
+      "seconds": 3.98,
+      "survivors": []
+    },
+    "complete-tests": {
+      "code": 0,
+      "peak_kib": 2113792,
+      "seconds": 102.01,
+      "survivors": []
+    },
+    "demo": {
+      "code": 0,
+      "peak_kib": 3776672,
+      "seconds": 159.95,
+      "survivors": []
+    }
+  }
+}

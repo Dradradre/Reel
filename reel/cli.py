@@ -16,7 +16,7 @@
   reel play FILM --out NEW_DIR [--until S] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
   reel mcp FILM [--until S] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
-  reel setup [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--compare-sounds] [--describe-sounds]    fetch models for the selected senses
+  reel setup [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds]    fetch models for the selected senses
 """
 import shlex
 import sys as _sys, pathlib as _pl
@@ -52,6 +52,7 @@ def doctor():
     from unmix import PYTHON as unmix_py, ready as layers_ready
     from point_reader import PYTHON as follow_py, ready as follow_ready
     from scene_audio import READY as captions_ready
+    from sound_events import ready as events_ready
     from config import CAPTION_PY
     captions = (captions_ready.is_file() and pathlib.Path(CAPTION_PY).is_file() and
                 subprocess.run([CAPTION_PY, str(HERE / "scene_audio.py"), "--check"], capture_output=True).returncode == 0)
@@ -66,6 +67,9 @@ def doctor():
             ("speech activity (Silero) and CPU transcription", has(ASR_PY, "faster_whisper"), "pip install -e '.[speech]'"),
             ("on-screen text: Apple Vision (ocrmac)", has(sys.executable, "ocrmac"), "pip install -e '.[ocr]'"),
             ("sounds like: AudioSet tagger (AST)", subprocess.run([sys.executable, str(HERE / "sounds.py"), "--check"], capture_output=True).returncode == 0, "pip install -e '.[tags]' and reel setup --sound-labels"),
+            ("short sound events: YAMNet", events_ready() and subprocess.run(
+                [sys.executable, str(HERE / "sound_events.py"), "--check"], capture_output=True).returncode == 0,
+             "pip install -e '.[events]' and reel setup --sound-events"),
             ("first-listen descriptions: CoNeTTE", captions, "reel setup --captions"),
             ("waveform and optional joint picture/sound readings: Qwen3-Omni", hearing, "reel setup --describe-sounds"),
             ("overlapping sounds: MixIT separator", layers_ready() and shutil.which(unmix_py) is not None
@@ -104,6 +108,13 @@ def setup():
         except (ValueError, OSError) as error:
             raise SystemExit(str(error))
         print("first-listen descriptions ready")
+    if "--sound-events" in sys.argv:
+        from sound_events import setup as setup_events
+        try:
+            setup_events()
+        except (ValueError, OSError) as error:
+            raise SystemExit(str(error))
+        print("short sound events ready")
     if "--sound-labels" in sys.argv:
         subprocess.run([sys.executable, str(HERE / "sounds.py"), "--setup"], check=True)
         print("playback sound labels ready")
@@ -114,7 +125,7 @@ def setup():
     if "--compare-sounds" in sys.argv:
         subprocess.run([COMPARE_PY, str(HERE / "compare_sounds.py"), "--setup"], check=True)
         print("sound comparison ready")
-    optional_models = {"--follow", "--layers", "--speech", "--captions", "--sound-labels", "--describe-sounds", "--compare-sounds"}
+    optional_models = {"--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
     if "--sync" not in sys.argv and optional_models.intersection(sys.argv):
         return
     if not UNISAL.exists():

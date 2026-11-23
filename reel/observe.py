@@ -15,6 +15,7 @@ if __package__:
     from .sound_glimpses import SoundChanges, sheet_picture, sound_glimpses
     from .stereo import StereoHistory
     from .scene_audio import inspect_scene
+    from .sound_events import inspect_events, ready as events_ready
     from .hearing import SoundReader
     from .listen import _slice_audio
     from .region_sync import regional_timing, validate_regions
@@ -28,6 +29,7 @@ else:
     from sound_glimpses import SoundChanges, sheet_picture, sound_glimpses
     from stereo import StereoHistory
     from scene_audio import inspect_scene
+    from sound_events import inspect_events, ready as events_ready
     from hearing import SoundReader
     from listen import _slice_audio
     from region_sync import regional_timing, validate_regions
@@ -90,6 +92,8 @@ def observe(out, start, end, *, sync_regions=(), media=False, focus=None, playba
                     raise ValueError("the extracted audio does not match the requested sample range")
                 report["audio"] = {"wav": str(wav.resolve()), "rate_hz": rate, "channels": audio.channels,
                                    "first_sample_on_film": first, "samples_per_channel": len(audio)}
+                if events_ready():
+                    report["audio"]["sound_events"] = inspect_events(wav, first, end)
                 report["audio"]["scene"] = inspect_scene(wav, first, end)
                 if audio.channels > 1:
                     cues = StereoHistory().read(wav, start, end, info.get("audio_layout", ""))

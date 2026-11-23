@@ -19,6 +19,7 @@ from PIL import Image
 if __package__:
     from .attention import gaze_detail, local_change
     from .scene_audio import READY as CAPTIONS_READY, SceneReader
+    from .sound_events import EventReader, ready as events_ready
     from .sounds import AST_NAME
     from .config import GAZE_PY, PY
     from .live_speech import SpeechReader
@@ -34,6 +35,7 @@ if __package__:
 else:
     from attention import gaze_detail, local_change
     from scene_audio import READY as CAPTIONS_READY, SceneReader
+    from sound_events import EventReader, ready as events_ready
     from sounds import AST_NAME
     from config import GAZE_PY, PY
     from live_speech import SpeechReader
@@ -184,6 +186,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
         tagger = stack.enter_context(LocalReader([PY, str(Path(__file__).with_name("sounds.py")), "--serve"],
                                                  AST_NAME)) if info["has_audio"] else None
         scene = stack.enter_context(SceneReader()) if info["has_audio"] and CAPTIONS_READY.is_file() else None
+        event_reader = stack.enter_context(EventReader()) if info["has_audio"] and events_ready() else None
         reader = None
         if info["has_audio"] and (describe_sounds or joint):
             reader = sound_reader if sound_reader is not None else stack.enter_context(SoundReader())
@@ -349,6 +352,8 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                 shown.clear()
                 if audio and not pace.recording_only:
                     # Feed silent intervals into the same history so old sources expire on the film clock.
+                    if event_reader is not None:
+                        audio["sound_events"] = event_reader.read(dest / audio["wav"], audio["first_sample_on_film"], float(position))
                     if scene is not None:
                         audio["scene"] = scene.read(dest / audio["wav"], audio["first_sample_on_film"], float(position))
                     else:

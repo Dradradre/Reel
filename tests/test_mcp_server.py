@@ -38,6 +38,21 @@ class TransportTests(unittest.TestCase):
         self.path = self.root / "view.json"
         self.path.write_text(json.dumps(self.turn))
 
+    def test_sound_event_replay_reads_only_the_requested_native_samples(self):
+        reader = Viewing(iter([self.path]), None, None, None)
+        reader.advance(1, False)
+        def inspect(wav, first, end):
+            samples, rate = sf.read(wav, dtype="int16")
+            self.assertEqual((rate, first, end), (8000, 2000, .75))
+            np.testing.assert_array_equal(samples, np.arange(2000, 6000))
+            return {"status": "available", "windows_evaluated": 0, "candidates": []}
+        with patch("reel.mcp_server.inspect_events", side_effect=inspect) as classify:
+            ordinary = reader.listen(1, None, .25, .75, describe=False)
+            self.assertNotIn("sound_events", json.loads(ordinary[0].text))
+            reply = reader.listen(1, None, .25, .75, describe=False, sound_events=True)
+            self.assertEqual(json.loads(reply[0].text)["sound_events"]["windows_evaluated"], 0)
+            classify.assert_called_once()
+
     def test_optional_text_reads_only_the_published_crop(self):
         reader = Viewing(iter([self.path]), None, None, None)
         reader.advance(1, False)
@@ -264,6 +279,7 @@ class TransportTests(unittest.TestCase):
         self.turn["audio"]["band_changes"] = [event]
         self.turn["audio"]["scene"] = {"status": "available", "description": "voices"}
         self.turn["audio"]["source_estimates"] = {"status": "available"}
+        self.turn["audio"]["sound_events"] = {"status": "available", "candidates": []}
         self.turn.update(speech={"status": "available"}, joint={"status": "available"})
         self.turn["sound_descriptions"] = {"status": "available", "windows": [{"start_s": 0, "end_s": 1}]}
         self.turn["gaze"] = {"model": "UNISAL/DHF1K", "status": "available", "rate_hz": 6,
@@ -282,7 +298,7 @@ class TransportTests(unittest.TestCase):
         plain = reader.advance(1, True, sound_estimates=False)
         physical = json.loads(plain[0].text)
         self.assertEqual(info["images_in_order"], physical["images_in_order"])
-        self.assertEqual(physical["audio"], {k: v for k, v in info["audio"].items() if k not in ("scene", "source_estimates")})
+        self.assertEqual(physical["audio"], {k: v for k, v in info["audio"].items() if k not in ("scene", "source_estimates", "sound_events")})
         self.assertTrue({"speech", "joint", "sound_descriptions"}.isdisjoint(physical))
         self.assertEqual(plain[1:], reader.advance(1, True)[1:])
         self.assertEqual(reader.advance(1, False), blocks)

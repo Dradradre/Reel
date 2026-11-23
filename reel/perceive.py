@@ -27,7 +27,7 @@ from concurrent.futures import ThreadPoolExecutor
 import numpy as np, cv2, librosa
 from PIL import Image, ImageDraw
 from common import RecordedSource, audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary, video_end, font, lut, tc, polyline
-from frames import native_frames, save_frame as _save_frame
+from frames import mean_rgb_change, native_frames, save_frame as _save_frame
 from screen_text import screen_intervals
 from config import SEP_PY, ASR_PY, GAZE_PY, GENRES
 from stereo import channel_pairs, pair_cues
@@ -54,7 +54,8 @@ def video_pass(path, info, log):
     times = []
     last_bucket = -1
     next_minute = 60
-    prev = None
+    prev = previous_rgb = None
+    rgb_change = []
     end = 0
     for i, (pts, duration, buf) in enumerate(native_frames(path, W, H)):
         t = pts / 1_000_000
@@ -70,7 +71,8 @@ def video_pass(path, info, log):
             mad.append(float(np.abs(s - prev).mean()))
             a, b = s - s.mean(), prev - prev.mean()
             corr.append(float((a * b).sum() / (math.sqrt(float((a * a).sum()) * float((b * b).sum())) + 1e-6)))
-        prev = s
+        rgb_change.append(mean_rgb_change(fr, previous_rgb) if previous_rgb is not None else 0.)
+        prev, previous_rgb = s, fr
         slit.append(cv2.resize(fr[H // 2 - 1:H // 2 + 1].mean(0, keepdims=True).astype(np.uint8), (64, 1),
                                interpolation=cv2.INTER_AREA)[0])
         new_shot = len(mad) > 1 and corr[-1] < 0.55 and mad[-1] > 9
@@ -83,7 +85,7 @@ def video_pass(path, info, log):
             log(f"  picture {t / 60:.0f} min")
             next_minute = (int(t // 60) + 1) * 60
     return dict(fps=fps, edges=np.array([*times, end]), luma=np.array(luma, np.float32), mad=np.array(mad, np.float32), corr=np.array(corr, np.float32),
-                slit=np.array(slit, np.uint8), thumbs=np.array(thumbs, np.uint8), th_idx=np.array(th_idx),
+                rgb_change=np.array(rgb_change, np.float32), slit=np.array(slit, np.uint8), thumbs=np.array(thumbs, np.uint8), th_idx=np.array(th_idx),
                 hashes=np.array(hashes, np.float32))
 
 
@@ -974,10 +976,11 @@ def render_page(F, t0, t1, idx, total, name):
     # change: how much the picture changes from frame to frame (max per column, so one frame shows), brightness line
     pg.box("change")
     y, h = pg.y["change"]
-    ch = pooled(np.log1p(v["mad"]), fr_t, pg, "max")
+    change = v.get("rgb_change", v["mad"])  # Older saved reels contain only the reduced luminance differences.
+    ch = pooled(np.log1p(change), fr_t, pg, "max")
     lu = pooled(v["luma"], fr_t, pg, "mean")
-    hold = np.zeros(len(v["mad"]), np.float32)
-    starts = np.r_[0, np.flatnonzero(v["mad"][1:] >= 0.05) + 1]
+    hold = np.zeros(len(change), np.float32)
+    starts = np.r_[0, np.flatnonzero(change[1:] >= 0.05) + 1]
     for i, j in zip(starts, np.r_[starts[1:], len(hold)]):
         if edges[j] - edges[i] >= 0.5:
             hold[i:j] = 1

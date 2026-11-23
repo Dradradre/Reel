@@ -184,6 +184,8 @@ class TransportTests(unittest.TestCase):
                                            "wav_samples": [0, 8000], "channels": channels}]}
         self.turn["audio"].update(band_changes=[{"time_s": .36, "channels": [1], "band_change_db": 7}],
                                   stereo_cues={"windows": []})
+        rgb = {"pts_us": [500_000], "mean_abs_rgb": [11.25]}
+        self.turn["action_view"] = {"pages": [{"file": "page.png", "start_s": 0, "end_s": 1, "rgb_change": rgb}]}
         self.turn["speech"] = {"status": "available", "windows": []}
         self.path.write_text(json.dumps(self.turn))
         reader = Viewing(iter([self.path]), None, None, None)
@@ -191,6 +193,8 @@ class TransportTests(unittest.TestCase):
         full = reader.advance(1, False, full_detail=True)
         self.assertEqual(short[1:], full[1:])
         first, detail = (json.loads(blocks[0].text) for blocks in (short, full))
+        self.assertNotIn("rgb_change", first["images_in_order"][0])
+        self.assertEqual(detail["images_in_order"][0]["rgb_change"], rgb)
         self.assertEqual(first["audio"]["band_change_times_s"], [.36])
         self.assertEqual(detail["audio"]["band_changes"], self.turn["audio"]["band_changes"])
         self.assertEqual(first["speech"], detail["speech"])
@@ -427,7 +431,11 @@ class TransportTests(unittest.TestCase):
                 self.assertEqual(retry[1:], scene[1:-1])
                 ordinary = viewer.ask_scene(left, right, prompt)
                 self.assertEqual(ordinary[1:], scene[1:2])
-                self.assertEqual(json.loads(ordinary[0].text)["images_in_order"], reply["images_in_order"][:1])
+                action = dict(reply["images_in_order"][0])
+                changes = action.pop("rgb_change")
+                self.assertEqual(changes["pts_us"], window["picture_pts_us"][1:])
+                self.assertEqual(len(changes["mean_abs_rgb"]), len(changes["pts_us"]))
+                self.assertEqual(json.loads(ordinary[0].text)["images_in_order"], [action])
                 for a, b, q in ((0, 1.851, prompt), (right, left, prompt), (left, right, "  ")):
                     with self.assertRaises(ValueError):
                         viewer.ask_scene(a, b, q)

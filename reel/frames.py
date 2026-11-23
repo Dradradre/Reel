@@ -13,6 +13,7 @@ import subprocess
 import tempfile
 import threading
 
+import numpy as np
 from PIL import Image, ImageDraw
 
 if __package__:
@@ -78,14 +79,11 @@ def native_frames(source, width, height, start_us=0, stop_us=None, *, box=None):
                 if timing is None:
                     raise ValueError("ffmpeg returned pixels without a presentation timestamp")
                 pts, duration = timing
-                frame = (pts, duration, pixels)
-                if pts < start_us:
-                    held = frame
-                    continue
-                if held is not None and pts > start_us:
+                # Multiple pictures can have the same presentation time. Only the last
+                # is on screen; keep the preceding visible picture if it spans the start.
+                if held is not None and pts != held[0] and pts > start_us:
                     yield held
-                held = None
-                yield frame
+                held = (pts, duration, pixels)
             if proc.wait():
                 worker.join()
                 raise ValueError("ffmpeg could not decode the picture: " + " ".join(diagnostics))
@@ -97,6 +95,11 @@ def native_frames(source, width, height, start_us=0, stop_us=None, *, box=None):
             proc.stdout.close()
             proc.wait()
             worker.join()
+
+
+def mean_rgb_change(current, previous):
+    """Mean absolute difference over displayed RGB samples, before spatial averaging."""
+    return float(np.abs(np.subtract(current, previous, dtype=np.int16)).mean())
 
 
 def save_frame(source, us, path):

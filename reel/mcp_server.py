@@ -261,8 +261,10 @@ class Viewing:
                                     scene.get("first_sample", 0), chronological=True)
                 report["action_view_basis"] = view["basis"]
                 for page in view["pages"]:
-                    report["images_in_order"].append({"action_over_time": [page["start_s"], page["end_s"]],
-                                                       "rows": page["rows"]})
+                    description = {"action_over_time": [page["start_s"], page["end_s"]], "rows": page["rows"]}
+                    if exposure_detail:
+                        description["rgb_change"] = page["rgb_change"]
+                    report["images_in_order"].append(description)
                     blocks.append(image_block(Path(tmp) / page["file"]))
                 if exposure_detail and wav and (detail := exposure_view(tmp, scene, report["audio"]["band_changes"])):
                     path = Path(tmp) / detail.pop("file")
@@ -410,6 +412,8 @@ class Viewing:
                 description["picture_pts_us"] = page["pts_us"]
             if "at_s" in page:
                 description["at_s"] = page["at_s"]
+            if full_detail and "rgb_change" in page:
+                description["rgb_change"] = page["rgb_change"]
             if page.get("additional_frames"):
                 description["additional_frames"] = page["additional_frames"]
             report["images_in_order"].append(description)
@@ -564,7 +568,8 @@ class Viewing:
         if action.get("pages"):
             report["action_view_basis"] = action["basis"]
         for page in action.get("pages", []):
-            report["images_in_order"].append({"action_over_time": [page["start_s"], page["end_s"]], "rows": page["rows"]})
+            report["images_in_order"].append({"action_over_time": [page["start_s"], page["end_s"]],
+                                               "rows": page["rows"], "rgb_change": page["rgb_change"]})
             blocks.append(image_block(Path(page["file"])))
         for page in result.get("motion_slices", []):
             blocks.append(image_block(Path(page.pop("file"))))
@@ -869,7 +874,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             """See and hear one turn, starting at 1. Request the same number to replay, or the next to advance.
             The pause lists the first measured changes in picture, sound level or frequency bands.
             In action_over_time, at_s gives the observation times. Each picture_pts_us is the timestamp of
-            the frame then on screen, or null when no picture was displayed.
+            the frame then on screen, or null when no picture was displayed. With full_detail=true, rgb_change
+            lists the presentation time and mean absolute RGB difference from the preceding displayed picture.
             Each sound cue gives its film time for a closer listen. The local readers describe the published
             recording and report supported words. native_audio controls attachment of the original WAV.
             Set native_audio=false to omit it, or start with --image-client. Set sound_estimates=false
@@ -915,7 +921,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             With only start_s and end_s, get pictures, channel levels and times of frequency-band changes
             without starting a model. To hear a moment among nearby sounds, replay the wider interval
             and set mark_sound=[from_s,to_s] inside it. A channel spectrogram marks those bounds on the
-            original recording. Any words and source estimates still cover the wider interval. To see which picture coincided with a brief sound, set exposure_detail=true.
+            original recording. Any words and source estimates still cover the wider interval. Set exposure_detail=true for per-exposure RGB differences and to see which picture coincided with a brief sound.
             Up to 12 consecutive exposures appear with their recorded peaks. Longer scenes show up to six frames
             around the strongest measured rise in a frequency band. Identical pictures need no extra sheet.
             Asking a question or giving alternatives also checks this exact recording for voice activity and

@@ -11,11 +11,11 @@ from PIL import Image, ImageDraw
 
 if __package__:
     from .common import font, lut, open_recording, recording_levels, sample_boundary, save_observation_png
-    from .frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, sheet_size
+    from .frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, mean_rgb_change, native_frames, sheet_size
     from .sound_glimpses import band_levels, sheet_picture
 else:
     from common import font, lut, open_recording, recording_levels, sample_boundary, save_observation_png
-    from frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, sheet_size
+    from frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, mean_rgb_change, native_frames, sheet_size
     from sound_glimpses import band_levels, sheet_picture
 
 
@@ -291,8 +291,9 @@ def missing_sequence(out, frames, size, sheets, action, current):
 
 def draw_motion(draw, changes, start, end, left, width, bottom):
     first, stop = (sample_boundary(t, 1_000_000) for t in (start, end))
-    for pts, height in changes:
-        if first <= pts < stop:
+    for pts, delta in changes:
+        height = round(min(delta / 32, 1) * 27)
+        if height and first <= pts < stop:
             col = int((pts / 1e6 - float(start)) / float(end - start) * width)
             x = left + min(width - 1, max(0, col))
             draw.line((x, bottom - height, x, bottom), fill=(249, 185, 109), width=2)
@@ -394,6 +395,7 @@ def action_views(out, frames, size, start, end, picture_end, wav_path, first_sam
             count = min(6, max(1, math.ceil(float(b - a) * 3)))
             times = [float(a + (b - a) * (2 * i + 1) / (2 * count)) for i in range(count)]
             cells, changes = [], []
+            page_start_us = sample_boundary(a, 1_000_000)
             for i, t in enumerate(times):
                 begin = a + (b - a) * i / count
                 finish = b if i + 1 == count else a + (b - a) * (i + 1) / count
@@ -404,12 +406,12 @@ def action_views(out, frames, size, start, end, picture_end, wav_path, first_sam
                 bound = sample_boundary(finish, 1_000_000)
                 while upcoming is not None and upcoming[0] < bound:
                     pts, _, pixels = upcoming
+                    upcoming = next(frames, None)
+                    if upcoming is not None and upcoming[0] == pts:
+                        continue  # The later frame at this timestamp is the one displayed.
                     values = np.frombuffer(pixels, np.uint8)
-                    if previous is not None and pts >= float(a) * 1e6:
-                        delta = float(np.abs(values.astype(np.int16) - previous).mean())
-                        height = round(min(delta / 32, 1) * 27)
-                        if height:
-                            changes.append((pts, height))
+                    if previous is not None and pts >= page_start_us:
+                        changes.append((pts, mean_rgb_change(values, previous)))
                     previous = values
                     preview = held[2] if held is not None and pixels == held[1] else thumbnail(pixels, size, cell, thumb_h)
                     held = pts, pixels, preview
@@ -418,13 +420,14 @@ def action_views(out, frames, size, start, end, picture_end, wav_path, first_sam
                         if pictures and pictures[-1][0] == at:
                             pictures.pop()  # A new frame replaces the held picture at this instant.
                         pictures.append((at, pts, preview))
-                    upcoming = next(frames, None)
                 centre = next((row for row in reversed(pictures) if row[0] <= t), None) if t < stop else None
                 middle = (t, centre[1], centre[2]) if centre else (t, None, None)
                 cells.append((middle, additional_frame(pictures, centre, stop)))
             extra_times = [{"at_s": e[0], "pts_us": e[1]} if e else None for _, e in cells]
             page = {"start_s": float(a), "end_s": float(b), "at_s": times, "pts_us": [c[1] for c, _ in cells],
-                    "additional_frames": extra_times if any(extra_times) else []}
+                    "additional_frames": extra_times if any(extra_times) else [],
+                    "rgb_change": {"pts_us": [pts for pts, _ in changes],
+                                   "mean_abs_rgb": [round(delta, 4) for _, delta in changes]}}
             if chronological:
                 page["file"], page["rows"] = chronological_page(out, cells, changes, a, b, wav, first_sample)
             else:

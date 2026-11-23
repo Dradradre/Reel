@@ -45,6 +45,47 @@ class PictureTests(unittest.TestCase):
                 with Image.open(save_frame(film, 0, root / "still.png")) as still:
                     np.testing.assert_allclose(np.asarray(still.convert("RGB"))[8, [8, 24]], reference, atol=2)
 
+    def test_colour_change_is_visible_on_the_page_and_in_the_released_frame_measurements(self):
+        from reel.play import play
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            # The two colours both round to luminance 80. The event begins on the cutoff.
+            pixels = [bytes(c) * (64 * 48) for c in [(220, 20, 20), (20, 122, 20)]]
+            film = root / "colour.mkv"
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", "64x48",
+                            "-r", "10", "-i", "-", "-c:v", "ffv1", str(film)],
+                           input=pixels[0] * 8 + pixels[1] * 2 + pixels[0] * 4, check=True)
+            features = video_pass(film, probe(film), lambda _: None)
+            np.testing.assert_array_equal(features["luma"], 80)
+            expected = np.zeros(14)
+            expected[[8, 10]] = (200 + 102) / 3
+            np.testing.assert_allclose(features["rgb_change"], expected, atol=.01)
+            for cutoff in (.8, 1.2):
+                path, = play(film, root / str(cutoff), until=cutoff)
+                view = json.loads(path.read_text())
+                self.assertEqual(view["end_s"], cutoff)
+                page, = view["action_view"]["pages"]
+                trace = page["rgb_change"]
+                times = [pts for pts, delta in zip(trace["pts_us"], trace["mean_abs_rgb"], strict=True) if delta]
+                self.assertEqual(times, [] if cutoff == .8 else [800000, 1000000])
+                self.assertTrue(all(pts < cutoff * 1_000_000 for pts in trace["pts_us"]))
+
+    def test_picture_replaced_at_its_own_timestamp_has_no_visible_flash(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            film = root / "replaced.mkv"
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", "32x24",
+                            "-r", "10", "-i", "-", "-vf", "setpts='if(eq(N,2),1,N)'", "-fps_mode", "passthrough",
+                            "-c:v", "ffv1", str(film)],
+                           input=b"".join(bytes([v]) * 32 * 24 * 3 for v in [42, 220, 42, 42]), check=True)
+            for start, stop, expected in [(0, 100001, [0, 100000]), (150000, 350000, [100000, 300000])]:
+                frames = list(native_frames(film, 32, 24, start, stop))
+                self.assertEqual([pts for pts, _, _ in frames], expected)
+                self.assertTrue(all(set(pixels) == {42} for _, _, pixels in frames))
+            features = video_pass(film, probe(film), lambda _: None)
+            np.testing.assert_array_equal(features["rgb_change"], [0., 0., 0.])
+
     def test_snapshot_keeps_full_range_camera_pixels(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)

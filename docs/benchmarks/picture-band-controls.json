@@ -1,0 +1,131 @@
+{
+  "name": "Picture and sound replay, equal peaks with different pitches",
+  "reader": "gpt-6.1-terra via local Codex CLI",
+  "baseline_revision": "10023c2d2ac651bb5701724ff95463f8f4753d52",
+  "changed_file_sha256": "b0fd1272f2b569fe1d20ed09da89472f7f7f380e59cec55ae30bc56b31c6e035",
+  "input": "One anonymous chronological replay PNG in each fresh session, with shell and plugins disabled. The two arms were randomly interleaved, seed 23791. No WAV, source label, class suggestion from a sound model, or human annotation was supplied.",
+  "prompt": "Two shapes light up in turn. Read the replay left to right, row by row. Which side of the screen lights up during the higher-pitched of the two sounds? Answer LEFT or RIGHT. If both are the same pitch answer SAME. If the audio is silent answer SILENT. If the evidence cannot distinguish the answer, answer UNCLEAR. Return just the answer.",
+  "generation": "40 frames at 25 fps. Two shapes each light for 280 ms. Audio is mono 16 kHz with a cosine at amplitude 0.5 and a 10 ms linear attack and release. Multiplying alternate samples by -1 moves the tone to 8000 Hz minus the original frequency and preserves every sample magnitude. Each paired baseline PNG was byte-identical. The final two clips contain equal pitches or silence.",
+  "trials": [
+    {
+      "id": 1,
+      "first_side": "LEFT",
+      "onsets_s": [
+        0.24,
+        1.0
+      ],
+      "low_hz": 425,
+      "expected": "LEFT",
+      "before": "UNCLEAR",
+      "after": "LEFT"
+    },
+    {
+      "id": 2,
+      "first_side": "LEFT",
+      "onsets_s": [
+        0.24,
+        1.0
+      ],
+      "low_hz": 425,
+      "expected": "RIGHT",
+      "before": "UNCLEAR",
+      "after": "RIGHT"
+    },
+    {
+      "id": 3,
+      "first_side": "RIGHT",
+      "onsets_s": [
+        0.16,
+        0.92
+      ],
+      "low_hz": 650,
+      "expected": "RIGHT",
+      "before": "UNCLEAR",
+      "after": "RIGHT"
+    },
+    {
+      "id": 4,
+      "first_side": "RIGHT",
+      "onsets_s": [
+        0.16,
+        0.92
+      ],
+      "low_hz": 650,
+      "expected": "LEFT",
+      "before": "UNCLEAR",
+      "after": "LEFT"
+    },
+    {
+      "id": 5,
+      "first_side": "LEFT",
+      "onsets_s": [
+        0.32,
+        1.08
+      ],
+      "low_hz": 775,
+      "expected": "LEFT",
+      "before": "UNCLEAR",
+      "after": "LEFT"
+    },
+    {
+      "id": 6,
+      "first_side": "LEFT",
+      "onsets_s": [
+        0.32,
+        1.08
+      ],
+      "low_hz": 775,
+      "expected": "RIGHT",
+      "before": "UNCLEAR",
+      "after": "RIGHT"
+    },
+    {
+      "id": 7,
+      "first_side": "RIGHT",
+      "onsets_s": [
+        0.2,
+        1.0
+      ],
+      "low_hz": 925,
+      "expected": "RIGHT",
+      "before": "UNCLEAR",
+      "after": "RIGHT"
+    },
+    {
+      "id": 8,
+      "first_side": "RIGHT",
+      "onsets_s": [
+        0.2,
+        1.0
+      ],
+      "low_hz": 925,
+      "expected": "LEFT",
+      "before": "UNCLEAR",
+      "after": "LEFT"
+    },
+    {
+      "id": 9,
+      "first_side": "RIGHT",
+      "onsets_s": [
+        0.24,
+        0.96
+      ],
+      "low_hz": 500,
+      "expected": "SAME",
+      "before": "UNCLEAR",
+      "after": "SAME"
+    },
+    {
+      "id": 10,
+      "first_side": "LEFT",
+      "onsets_s": [
+        0.28,
+        1.04
+      ],
+      "low_hz": null,
+      "expected": "SILENT",
+      "before": "UNCLEAR",
+      "after": "SILENT"
+    }
+  ]
+}

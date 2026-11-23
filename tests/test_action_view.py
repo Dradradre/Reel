@@ -147,6 +147,42 @@ class ActionViewTests(unittest.TestCase):
             self.assertTrue(blue[height + 216:, 85].any())
             self.assertTrue((pixels[height:height + 186, 85] == [249, 185, 109]).all(axis=1).any())
 
+    def test_replay_bands_follow_the_film_clock_and_keep_channels_separate(self):
+        rate = 16000
+        start = Fraction(1, 17)
+        end = start + Fraction(6, 5)
+        first = (start * rate).__ceil__()
+        times = (first + np.arange(rate * 2)) / rate - float(start)
+        # Each channel plays the same two notes in opposite order at equal level.
+        sounding = ((times > .2) & (times < .4)) | ((times > .8) & (times < 1))
+        hz = np.where(times < .6, 375, 3000)
+        pcm = np.stack([np.sin(2 * np.pi * f * times) * sounding for f in (hz, 3375 - hz)], axis=1)
+        frames = [(0, 40000, bytes([55]) * 96)]
+        with tempfile.TemporaryDirectory() as tmp:
+            wav = Path(tmp) / "channels.wav"
+            def render():
+                sf.write(wav, pcm, rate, subtype="FLOAT")
+                page, = action_views(tmp, frames, (8, 4), start, end, end, wav, first, chronological=True)["pages"]
+                with Image.open(Path(tmp) / page["file"]) as image:
+                    return np.asarray(image).copy()
+            original = render()
+            pcm[(end * rate).__ceil__() - first:] = 1
+            np.testing.assert_array_equal(original, render())
+
+        # Read the rendered centres of the 250–500 Hz and 2–4 kHz bands. At
+        # this rate the display has seven bands, with high frequencies on top.
+        x_start = 85
+        span = original.shape[1] - x_start
+        for ch in range(2):
+            band_top = 186 + 2 * 30 + ch * 68 + 14
+            def brightness(t, band_from_top):
+                x = x_start + int(t / float(end - start) * span)
+                y = band_top + int((band_from_top + .5) * 54 / 7)
+                return int(original[y, x].sum())
+            for t, expected in ((.3, 4 if ch == 0 else 1), (.9, 1 if ch == 0 else 4)):
+                self.assertGreater(brightness(t, expected), brightness(t, 5 - expected) + 100)
+                self.assertGreater(brightness(t, expected), brightness(.6, expected) + 100)
+
     def test_a_picture_that_ends_before_the_centre_and_repeated_static_frames(self):
         raw = bytes([30]) * 8 * 12 * 3
         with tempfile.TemporaryDirectory() as tmp:

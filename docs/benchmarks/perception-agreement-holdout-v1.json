@@ -1,0 +1,179 @@
+{
+  "name": "Reel audiovisual question agreement, held-out six films",
+  "dataset": "Perception Test validation split (CC BY 4.0)",
+  "source": "https://github.com/google-deepmind/perception_test",
+  "measured_revision": "see measured_file_sha256",
+  "model": "gpt-6.1-terra via local Codex CLI",
+  "conditions": [
+    "Use a fresh session per film. Withhold the film ID, annotation IDs, reference answers and other responses. Show questions and alternatives in the order supplied.",
+    "Use reel mcp --image-client --lang en. Watch all consecutive view turns through end_of_view at continuous_seconds=8 and native_audio=false. Use ask_scene at the specified interval with the two sound alternatives. The reader may also use look.",
+    "The local AudioSet, CoNeTTE and CLAP readers are enabled. The optional Qwen3-Omni 30B waveform reader is disabled in this run. GPT receives the rendered pictures and local readings.",
+    "Give one letter per question. A question mark abstains. Score an exact match as 1 and every other answer as 0. Each film and each of its three questions has equal weight."
+  ],
+  "questions": [
+    "The film's published descriptive multiple-choice question (A/B/C).",
+    "Which of the two sounds occurs in the specified interval (A/B)? Both sounds have annotations in this film. The alternatives do not overlap in the target interval.",
+    "Is the source producing the sound in that interval visible (Y/N)?"
+  ],
+  "sampling": [
+    "Use locally available validation originals with a sound track, matching frame count and resolution, 4 to 45 seconds, without a cup game or a required benchmark cutoff. Exclude the eight sample videos used for the earlier multiple-choice page test.",
+    "Require a descriptive question with three options and a labelled sound of 0.1 to 8 seconds (the maximum exact replay interval). Exclude unspecified sounds. Require exactly one distinct annotated sound label overlapping the target and a different labelled sound elsewhere in the film.",
+    "Order candidates by SHA-256 with the salt reel-band-holdout-v1/. Pair two different films with the same target sound category and opposite source visibility. Select three such pairs after excluding the twelve films in panel 1, balancing visibility at 3/3. This is a local diagnostic panel."
+  ],
+  "films": [
+    {
+      "video_id": "video_6226",
+      "question_id": 1,
+      "picture_question": "Can the box be closed at the end?",
+      "picture_options": [
+        "I don't know.",
+        "The box cannot be closed at the end.",
+        "The box can be closed at the end."
+      ],
+      "target_sound_id": 9,
+      "alternative_sound_id": 3,
+      "sound_interval_s": [
+        23.094663,
+        24.494339
+      ],
+      "sound_options": [
+        "dropping",
+        "hitting"
+      ],
+      "human_reference": [
+        "C",
+        "B",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_1244",
+      "question_id": 0,
+      "picture_question": "Where is the person?",
+      "picture_options": [
+        "Indoors in the bathroom",
+        "Indoors in the living room or bedroom",
+        "Indoors in the kitchen"
+      ],
+      "target_sound_id": 2,
+      "alternative_sound_id": 5,
+      "sound_interval_s": [
+        6.40274,
+        9.003852
+      ],
+      "sound_options": [
+        "hitting",
+        "speech"
+      ],
+      "human_reference": [
+        "C",
+        "B",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_8408",
+      "question_id": 0,
+      "picture_question": "Where is the person?",
+      "picture_options": [
+        "Indoors in the living room or bedroom",
+        "Outdoors",
+        "Indoors in the kitchen"
+      ],
+      "target_sound_id": 0,
+      "alternative_sound_id": 4,
+      "sound_interval_s": [
+        0.866544,
+        3.299533
+      ],
+      "sound_options": [
+        "speech",
+        "hitting"
+      ],
+      "human_reference": [
+        "A",
+        "A",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_8110",
+      "question_id": 0,
+      "picture_question": "Where is the person?",
+      "picture_options": [
+        "Outdoors",
+        "Indoors in the living room or bedroom",
+        "Indoors in the kitchen"
+      ],
+      "target_sound_id": 5,
+      "alternative_sound_id": 12,
+      "sound_interval_s": [
+        4.820679,
+        5.262009
+      ],
+      "sound_options": [
+        "hitting",
+        "animal sound"
+      ],
+      "human_reference": [
+        "A",
+        "A",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_9456",
+      "question_id": 3,
+      "picture_question": "How many letters did the person put on the table?",
+      "picture_options": [
+        "5",
+        "4",
+        "3"
+      ],
+      "target_sound_id": 8,
+      "alternative_sound_id": 6,
+      "sound_interval_s": [
+        1.432967,
+        4.332226
+      ],
+      "sound_options": [
+        "speech",
+        "hitting"
+      ],
+      "human_reference": [
+        "A",
+        "A",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_6611",
+      "question_id": 0,
+      "picture_question": "The person uses multiple similar objects to play an occlusion game. Are these objects identical?",
+      "picture_options": [
+        "I don't know.",
+        "They are identical.",
+        "They are not identical."
+      ],
+      "target_sound_id": 26,
+      "alternative_sound_id": 23,
+      "sound_interval_s": [
+        9.673572,
+        13.909929
+      ],
+      "sound_options": [
+        "speech",
+        "dropping"
+      ],
+      "human_reference": [
+        "C",
+        "A",
+        "N"
+      ]
+    }
+  ],
+  "measured_file_sha256": {
+    "reel/action_view.py": "b0fd1272f2b569fe1d20ed09da89472f7f7f380e59cec55ae30bc56b31c6e035",
+    "reel/mcp_server.py": "1e451f6ef3695400b1377caa7b5979c88a53fe86996e9b2d5e3f8b66d570e570"
+  }
+}

@@ -232,6 +232,7 @@ class Viewing:
             with TemporaryDirectory() as tmp:
                 view = action_views(tmp, frames, scene["size"], start_s, end_s, scene["picture_end"], wav,
                                     scene.get("first_sample", 0), chronological=True)
+                report["action_view_basis"] = view["basis"]
                 for page in view["pages"]:
                     report["images_in_order"].append({"action_over_time": [page["start_s"], page["end_s"]],
                                                        "rows": page["rows"]})
@@ -509,6 +510,8 @@ class Viewing:
         for i, sheet in enumerate(sheets, 1):
             report["images_in_order"].append({"frame_page": i})
             blocks.append(image_block(Path(sheet)))
+        if action.get("pages"):
+            report["action_view_basis"] = action["basis"]
         for page in action.get("pages", []):
             report["images_in_order"].append({"action_over_time": [page["start_s"], page["end_s"]], "rows": page["rows"]})
             blocks.append(image_block(Path(page["file"])))

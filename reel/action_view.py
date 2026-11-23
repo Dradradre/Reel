@@ -9,11 +9,13 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 if __package__:
-    from .common import font, open_recording, recording_levels, sample_boundary, save_observation_png
+    from .common import font, lut, open_recording, recording_levels, sample_boundary, save_observation_png
     from .frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, sheet_size
+    from .sound_glimpses import band_levels
 else:
-    from common import font, open_recording, recording_levels, sample_boundary, save_observation_png
+    from common import font, lut, open_recording, recording_levels, sample_boundary, save_observation_png
     from frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, sheet_size
+    from sound_glimpses import band_levels
 
 
 def action_frames(source, info, start, end, box):
@@ -58,6 +60,36 @@ def draw_peaks(draw, wav, origin, start, end, left, top, width):
             for col, height in zip(columns[edges], heights[:, ch]):
                 if height:
                     draw.line((left + int(col), bottom - height, left + int(col), bottom), fill=(119, 204, 242))
+    return first, samples
+
+
+BAND_HEIGHT = 68
+
+
+def draw_bands(image, samples, rate, first, start, end, left, top, width):
+    """Place each channel's octave bands under the pictures on their film clock."""
+    if not len(samples):
+        return
+    hop = max(2, round(rate * .02))
+    # Each 20 ms cell reads a 40 ms Hann window centred on the cell. Include
+    # the first and last samples without reading outside this displayed row.
+    data = np.pad(samples, ((hop // 2, 2 * hop), (0, 0)))
+    levels, hz = band_levels(data, 2 * hop, hop, rate)
+    offset = float(start * rate - first)
+    positions = offset + (np.arange(width) + .5) * float(end - start) * rate / width
+    indices = np.clip(np.floor(positions / hop).astype(int), 0, (len(samples) - 1) // hop)
+    palette = lut()
+    draw = ImageDraw.Draw(image)
+    height = BAND_HEIGHT - 14
+    for ch in range(samples.shape[1]):
+        y = top + ch * BAND_HEIGHT
+        strength = np.rint(np.clip((levels[indices, ch, ::-1].T + 80) / 80, 0, 1) * 255).astype(np.uint8)
+        strip = Image.fromarray(palette[strength]).resize((width, height), Image.Resampling.NEAREST)
+        image.paste(strip, (left, y + 14))
+        draw.text((3, y), f"ch {ch + 1} bands Hz", font=font(11), fill="white")
+        # Upper and lower labels give the edges of the two outer frequency bands.
+        draw.text((3, y + 14), f"{hz[-2]:g}-{hz[-1]:g}", font=font(10), fill=(210, 205, 200))
+        draw.text((3, y + BAND_HEIGHT - 13), f"0-{hz[1]:g}", font=font(10), fill=(210, 205, 200))
 
 
 def sound_during_pictures(wav_path, origin, times, selected, picture_end):
@@ -251,7 +283,7 @@ def chronological_page(out, cells, changes, start, end, wav, first_sample):
     paired = any(extra is not None for _, extra in cells)
     per_row = 3 if paired else 6
     slots = 2 if paired else 1
-    row_height = 193 + (30 * wav.channels if wav else 0)
+    row_height = 193 + ((30 + BAND_HEIGHT) * wav.channels if wav else 0)
     n = len(cells)
     width = min(n, per_row) * slots * tile
     image = Image.new("RGB", (left + width, math.ceil(n / per_row) * row_height), (18, 21, 25))
@@ -285,7 +317,8 @@ def chronological_page(out, cells, changes, start, end, wav, first_sample):
                 times.append({"at_s": at, "pts_us": pts})
         draw_motion(draw, changes, a, b, left, span, top + 179)
         if wav:
-            draw_peaks(draw, wav, first_sample, a, b, left, top + 186, span)
+            first, samples = draw_peaks(draw, wav, first_sample, a, b, left, top + 186, span)
+            draw_bands(image, samples, wav.samplerate, first, a, b, left, top + 186 + 30 * wav.channels, span)
         rows.append({"start_s": float(a), "end_s": float(b), "pictures": times})
     return save_observation_png(out, image, "action"), rows
 
@@ -349,6 +382,8 @@ def action_views(out, frames, size, start, end, picture_end, wav_path, first_sam
             index += 1
     return {"box": list(box) if box is not None else [0, 0, 1, 1], "pages": pages,
             "basis": (("Read each row left to right, then down. The line below a picture shows its observation time. "
+                       "The frequency bands below the channel peaks run from low at the bottom to high at the top. "
+                       "Brighter bands contain more energy on the same scale across rows and channels. "
                        if chronological else "Each column shows the scene at its centre and any extra view below. ")
                       + "A different view can show the first exposure in the cell or a local change. "
                       "Orange marks frame-to-frame pixel change. Blue is the recorded peak in each channel "

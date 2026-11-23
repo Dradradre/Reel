@@ -10,8 +10,9 @@ import numpy as np
 from PIL import Image, ImageDraw
 import soundfile as sf
 
-from reel.action_view import action_frames, action_views, draw_peaks, missing_sequence, sound_during_pictures
+from reel.action_view import action_frames, action_views, draw_peaks, exposure_view, missing_sequence, sound_during_pictures
 from reel.common import probe
+from reel.frames import frame_sheets
 
 
 class ActionViewTests(unittest.TestCase):
@@ -35,6 +36,50 @@ class ActionViewTests(unittest.TestCase):
         self.assertNotIn("peak_dbfs", result[2])
         self.assertEqual([r.get("peak_dbfs") for r in (result[0], result[3], result[4])],
                          [[None, None], [None, -12.04], [None, None]])
+
+    def test_replay_pairs_published_cells_with_exact_channel_samples(self):
+        times = [0, 3125, 8200, 8200, 15500, 18970]
+        size = (12, 10)
+        frames = [(pts, 0, bytes([i * 31]) * 360) for i, pts in enumerate(times)]
+        pcm = np.zeros((14, 2))
+        pcm[3, 1] = -.5
+        pcm[-1, 0] = 1  # The recording continues after the picture has ended.
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            pages = frame_sheets(root, *size, frames)
+            pages[0].update(first_cell=1, pts_us=times[1:])
+            sf.write(root / "excerpt.wav", pcm, 1000, subtype="DOUBLE")
+            scene = dict(pages=pages, size=size, start=.006, picture_end=.0185,
+                         wav=root / "excerpt.wav", first_sample=6)
+            page = exposure_view(root, scene, [])
+            with Image.open(root / page["file"]) as sheet:
+                tile = sheet.width // 3
+                self.assertEqual([sheet.getpixel((i * tile + tile // 2, 0))[0] for i in range(3)], [31, 93, 124])
+        self.assertEqual([r["pts_us"] for r in page["frames"]], [3125, 8200, 15500])
+        self.assertEqual([r["wav_samples"] for r in page["frames"]], [[0, 3], [3, 10], [10, 13]])
+        self.assertEqual([r["peak_dbfs"] for r in page["frames"]], [[None, None], [None, -6.02], [None, None]])
+        self.assertNotIn("selected_by_band_rise", page)
+
+    def test_long_replay_shows_neighbours_of_a_rise_only_within_the_picture_track(self):
+        size = (12, 10)
+        times = [i * 25000 for i in range(35)]
+        frames = [(pts, 0, bytes([i + 10]) * 360) for i, pts in enumerate(times)]
+        rise = {"time_s": .4, "rise": {"db": 12}}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            sf.write(root / "excerpt.wav", np.zeros(1000), 1000)
+            scene = dict(pages=frame_sheets(root, *size, frames), size=size, start=0, picture_end=.85,
+                         wav=root / "excerpt.wav", first_sample=0)
+            outside = {"time_s": .85, "rise": {"db": 30}}
+            fall = {"time_s": .25, "fall": {"db": 40}}
+            self.assertIsNone(exposure_view(root, scene, [outside, fall]))
+            page = exposure_view(root, scene, [outside, rise, fall])
+            self.assertEqual(page["selected_by_band_rise"], rise)
+            self.assertEqual([r["pts_us"] for r in page["frames"]], times[13:19])
+            self.assertEqual(page["frames"][-1]["wav_samples"], [450, 475])
+            still = [(pts, 0, frames[0][2]) for pts in times]
+            scene["pages"] = frame_sheets(root, *size, still)
+            self.assertIsNone(exposure_view(root, scene, [rise]))
 
     def test_brief_local_changes_in_a_continuously_changing_scene(self):
         size = (128, 96)

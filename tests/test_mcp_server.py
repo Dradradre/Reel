@@ -390,7 +390,7 @@ class TransportTests(unittest.TestCase):
                 first, last = 1177, 6477
                 left, right = first / rate, last / rate
                 prompt = "What happened when the sound changed?"
-                scene = viewer.ask_scene(left, right, prompt, native_audio=True)
+                scene = viewer.ask_scene(left, right, prompt, native_audio=True, exposure_detail=True)
                 reply = json.loads(scene[0].text)
                 self.assertEqual((reply["start_s"], reply["end_s"], reply["joint"]["question"]), (left, right, prompt))
                 levels = reply["audio"].pop("levels")
@@ -408,14 +408,20 @@ class TransportTests(unittest.TestCase):
                 self.assertGreater(window["picture_pts_us"][1], left * 1e6)
                 self.assertLess(window["picture_pts_us"][-1], right * 1e6)
                 self.assertEqual(window["wav_samples"], [0, last - first])
-                self.assertEqual([b.type for b in scene], ["text", "image", "audio"])
+                self.assertEqual([b.type for b in scene], ["text", "image", "image", "audio"])
+                exposures = reply["images_in_order"][1]["consecutive_exposures"]["frames"]
+                self.assertEqual(exposures[0]["wav_samples"][0], 0)
+                self.assertEqual(exposures[-1]["wav_samples"][1], last - first)
                 self.assertEqual(reply["images_in_order"][0]["action_over_time"], [left, right])
                 original, _ = sf.read(io.BytesIO(base64.b64decode(scene[-1].data)), dtype="int16")
                 np.testing.assert_array_equal(original, samples[first:last])
                 calls = ear.calls
-                retry = viewer.ask_scene(left, right, prompt)
+                retry = viewer.ask_scene(left, right, prompt, exposure_detail=True)
                 self.assertFalse(json.loads(retry[0].text)["audio"]["wav_attached"])
                 self.assertEqual(retry[1:], scene[1:-1])
+                ordinary = viewer.ask_scene(left, right, prompt)
+                self.assertEqual(ordinary[1:], scene[1:2])
+                self.assertEqual(json.loads(ordinary[0].text)["images_in_order"], reply["images_in_order"][:1])
                 for a, b, q in ((0, 1.851, prompt), (right, left, prompt), (left, right, "  ")):
                     with self.assertRaises(ValueError):
                         viewer.ask_scene(a, b, q)

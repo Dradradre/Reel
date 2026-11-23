@@ -20,7 +20,7 @@ from mcp.server.fastmcp.resources import FunctionResource
 from PIL import Image
 
 if __package__:
-    from .action_view import action_views
+    from .action_view import action_views, exposure_view
     from .audio_focus import Component, focus_recording
     from .attention import fixation_box, focus_motion, focus_still, inspect_past, inspect_turn
     from .common import RecordedSource
@@ -43,7 +43,7 @@ if __package__:
     from .unmix import LayerReader, describe_layer
     from .turn_audio import released_samples, sample_at
 else:
-    from action_view import action_views
+    from action_view import action_views, exposure_view
     from audio_focus import Component, focus_recording
     from attention import fixation_box, focus_motion, focus_still, inspect_past, inspect_turn
     from common import RecordedSource
@@ -197,7 +197,8 @@ class Viewing:
             self.last_joint = (key, joint, scene)
         return joint, scene
 
-    def ask_scene(self, start_s, end_s, question=None, native_audio=False, alternatives=None, sync_regions=None):
+    def ask_scene(self, start_s, end_s, question=None, native_audio=False, alternatives=None, sync_regions=None,
+                  exposure_detail=False):
         if sync_regions:
             validate_regions(sync_regions)
         if question is not None:
@@ -246,6 +247,10 @@ class Viewing:
                     report["images_in_order"].append({"action_over_time": [page["start_s"], page["end_s"]],
                                                        "rows": page["rows"]})
                     blocks.append(image_block(Path(tmp) / page["file"]))
+                if exposure_detail and wav and (detail := exposure_view(tmp, scene, report["audio"]["band_changes"])):
+                    path = Path(tmp) / detail.pop("file")
+                    report["images_in_order"].append({"consecutive_exposures": detail})
+                    blocks.append(image_block(path))
         if sync_regions:
             with TemporaryDirectory() as tmp:
                 for page in region_views(Path(tmp), scene, sync_regions):
@@ -847,18 +852,23 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
 
         @server.tool(annotations=hints, structured_output=False)
         async def ask_scene(start_s: float, end_s: float, question: str | None = None, native_audio: bool = False,
-                            alternatives: list[str] | None = None, sync_regions: list[list[float]] | None = None):
+                            alternatives: list[str] | None = None, sync_regions: list[list[float]] | None = None,
+                            exposure_detail: bool = False):
             """Ask what happened within an exact span of released film, up to eight seconds across pauses.
             With only start_s and end_s, get pictures, channel levels and times of frequency-band changes
-            without starting a model. Asking a question or giving alternatives also checks this exact recording
-            for voice activity and independently supported words. Give alternatives to compare sound descriptions with each second of original
-            audio on the same clock, or [] for catalogue neighbours. A match can have an unrelated visible cause. Supply a question for a local reading of the waveform alone and with the
-            pictures. A band change marks an acoustic observation. Its source may be unknown.
+            without starting a model. To see which picture coincided with a brief sound, set exposure_detail=true.
+            Up to 12 consecutive exposures appear with their recorded peaks. Longer scenes show up to six frames
+            around the strongest measured rise in a frequency band. Identical pictures need no extra sheet.
+            Asking a question or giving alternatives also checks this exact recording for voice activity and
+            independently supported words. Give alternatives to compare descriptions with each second of recorded
+            audio, or [] for catalogue neighbours. A match can have an unrelated visible cause. Supply a
+            question for a local reading of the waveform alone and with the pictures. A band change marks an acoustic observation. Its source may be unknown.
             For competing visible movements, pass sync_regions as normalized [left,top,right,bottom] boxes.
             The diagram shows changes in the centre square of each box above the channel peaks. The optional
             sync reader compares these regions with the same audio. Synchronized motion
             can be incidental and the sound may come from offscreen. native_audio=true attaches the same recording."""
-            return await asyncio.to_thread(reader.ask_scene, start_s, end_s, question, native_audio, alternatives, sync_regions)
+            return await asyncio.to_thread(reader.ask_scene, start_s, end_s, question, native_audio, alternatives,
+                                           sync_regions, exposure_detail)
 
         @server.tool(annotations=hints, structured_output=False)
         async def observe(start_s: float, end_s: float, box: list[float] | None = None,

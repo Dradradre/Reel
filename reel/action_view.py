@@ -1,4 +1,5 @@
 """Show pictures, frame-to-frame change and recorded channel peaks on the same short time axis."""
+from bisect import bisect_right
 from contextlib import ExitStack
 from fractions import Fraction
 import heapq
@@ -11,11 +12,11 @@ from PIL import Image, ImageDraw
 if __package__:
     from .common import font, lut, open_recording, recording_levels, sample_boundary, save_observation_png
     from .frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, sheet_size
-    from .sound_glimpses import band_levels
+    from .sound_glimpses import band_levels, sheet_picture
 else:
     from common import font, lut, open_recording, recording_levels, sample_boundary, save_observation_png
     from frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, sheet_size
-    from sound_glimpses import band_levels
+    from sound_glimpses import band_levels, sheet_picture
 
 
 def action_frames(source, info, start, end, box):
@@ -110,6 +111,56 @@ def sound_during_pictures(wav_path, origin, times, selected, picture_end):
                 end = min(end, sample_boundary(Fraction(next_pts, 1_000_000), rate) - origin)
             rows.append({"pts_us": pts, **recording_levels(wav, first, end)})
     return rows
+
+
+def exposure_view(out, scene, changes):
+    """Show consecutive released exposures and the sound recorded while each was on screen."""
+    limit = sample_boundary(scene["picture_end"], 1_000_000)
+    times = list(dict.fromkeys(pts for page in scene["pages"] for pts in page["pts_us"] if pts < limit))
+    if not times:
+        return None
+    selected = times
+    event = None
+    if len(times) > SHEET_ROWS * SHEET_COLUMNS:
+        # The analyser timestamps a change at the final sample it has heard.
+        rises = [e for e in changes if "rise" in e
+                 and max(scene["start"], times[0] / 1e6) <= e["time_s"] < scene["picture_end"]]
+        if not rises:
+            return None
+        event = max(rises, key=lambda e: e["rise"]["db"])
+        anchor = bisect_right(times, event["time_s"], key=lambda pts: pts / 1e6) - 1
+        count = 2 * SHEET_COLUMNS
+        first = min(max(0, anchor - count // 2), len(times) - count)
+        selected = times[first:first + count]
+    get = sheet_picture(scene["pages"], scene["size"])
+    images = [get(pts)[1] for pts in selected]
+    if len(images) > 1 and all(image == images[0] for image in images[1:]):
+        return None
+    rows = sound_during_pictures(scene["wav"], scene["first_sample"], times, set(selected), scene["picture_end"])
+    width, height = scene["size"]
+    tile = max(width, 176)
+    columns = min(SHEET_COLUMNS, len(rows))
+    stride = height + 44
+    sheet = Image.new("RGB", (columns * tile, math.ceil(len(rows) / columns) * stride), (16, 17, 19))
+    draw = ImageDraw.Draw(sheet)
+    for index, (row, image) in enumerate(zip(rows, images, strict=True)):
+        x, y = index % columns * tile, index // columns * stride
+        sheet.paste(image, (x + (tile - width) // 2, y))
+        # The first picture may already have been on screen when the replay began.
+        at = max(scene["start"], row["pts_us"] / 1e6)
+        draw.text((x + 4, y + height + 2), f"{at:.6f} s", font=font(13), fill="white")
+        peaks = row.get("peak_dbfs")
+        finite = [v for v in peaks or [] if v is not None]
+        caption = (f"peak {max(finite):.1f} dBFS" if finite else
+                   "digital silence" if peaks is not None else "no audio sample")
+        draw.text((x + 4, y + height + 21), caption, font=font(12), fill=(149, 217, 244))
+    page = {"file": save_observation_png(out, sheet, "exposures"), "frames": rows,
+            "basis": "Row order follows consecutive displayed frames. Each peak is the loudest channel "
+                     "while that picture was on screen inside this replay. Per-channel levels and sample "
+                     "ranges refer to the released recording for this interval."}
+    if event is not None:
+        page["selected_by_band_rise"] = event
+    return page
 
 
 def thumbnail(pixels, size, cell, height):

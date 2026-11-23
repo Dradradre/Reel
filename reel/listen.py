@@ -9,6 +9,7 @@ import tempfile
 import numpy as np
 
 if __package__:
+    from .sound_window import sound_window, validate_mark
     from .audio_focus import focus_recording
     from .common import audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary
     from .turn_audio import released_samples
@@ -19,6 +20,7 @@ if __package__:
     from .pitch import PitchTrace
     from .stereo import StereoHistory
 else:
+    from sound_window import sound_window, validate_mark
     from audio_focus import focus_recording
     from common import audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary
     from turn_audio import released_samples
@@ -62,11 +64,13 @@ def _slice_audio(source, out, t0, t1):
     return target
 
 
-def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_sounds=False, question=None, component="mix"):
+def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_sounds=False, question=None,
+                  component="mix", mark_sound=None):
     out = Path(out)
     packet = out / "view.json"
+    validate_mark(start, end, mark_sound)
     if packet.is_file():
-        across_turns = question is not None or (component != "mix" and (start is not None or end is not None))
+        across_turns = mark_sound is not None or question is not None or (component != "mix" and (start is not None or end is not None))
         if not across_turns:
             view = json.loads(packet.read_text())
             if view.get("schema") != "reel.play.v1" or not view.get("audio"):
@@ -78,12 +82,12 @@ def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_s
                 raise ValueError(f"listening range must be within {left:g} to {right:g} seconds")
         wav, start, end, first, _ = released_samples(out, start, end, WINDOW_S)
         return listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
-                                  question=question, component=component, first_sample=first)
+                                  question=question, component=component, first_sample=first, mark_sound=mark_sound, turn_directory=out)
     if start is None or end is None:
         raise ValueError("specify --t0 and --t1 when listening to an existing reel")
     wav = excerpt(out, start, end)
     evidence = listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
-                                  question=question, component=component)
+                                  question=question, component=component, mark_sound=mark_sound)
     meta = json.loads((Path(out) / "meta.json").read_text())
     words = [w for w in meta.get("speech_with_gain", [])
              if start <= w["context_start_s"] and w["context_end_s"] <= end
@@ -126,7 +130,7 @@ def level_changes(signal, rate, origin, end):
 
 
 def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds=False, question=None,
-                       component="mix", first_sample=None):
+                       component="mix", first_sample=None, mark_sound=None, turn_directory=None):
     """Describe only this WAV using local measurements and cached AudioSet weights."""
     rate = 16000
     original = Path(wav)
@@ -140,6 +144,11 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
                                "If the reference is digital silence, any nonzero bin qualifies. "
                                "Up to eight runs are shown: first, last and strongest in between. Times describe level only.",
               "windows": []}
+    if mark_sound is not None:
+        origin = first_sample if first_sample is not None else sample_boundary(start, native_rate)
+        window = sound_window(original.parent, original, start, end, origin, mark_sound, turn_directory)
+        window["file"] = str((original.parent / window["file"]).resolve())
+        report["recorded_sound_window"] = window
     if focus:
         report.update(component=focus, mix_wav=str(original))
         report["window_basis"] = "Levels, source candidates and spectral matches below refer to the filtered sound."

@@ -38,6 +38,7 @@ if __package__:
     from .play import PlaybackPace, channel_spectrum, play
     from .region_sync import published_timing, region_views, validate_regions
     from .screen_text import read_crop
+    from .sound_window import sound_window, validate_mark
     from .sound_glimpses import SoundChanges
     from .stereo import summarize_stereo
     from .unmix import LayerReader, describe_layer
@@ -61,6 +62,7 @@ else:
     from play import PlaybackPace, channel_spectrum, play
     from region_sync import published_timing, region_views, validate_regions
     from screen_text import read_crop
+    from sound_window import sound_window, validate_mark
     from sound_glimpses import SoundChanges
     from stereo import summarize_stereo
     from unmix import LayerReader, describe_layer
@@ -96,6 +98,13 @@ def image_block(path, preview=False):
 def audio_block(path):
     return types.AudioContent(type="audio", mimeType="audio/wav",
                               data=base64.b64encode(path.read_bytes()).decode("ascii"))
+
+
+def sound_window_block(directory, wav, start, end, first, mark):
+    with TemporaryDirectory() as tmp:
+        window = sound_window(tmp, wav, start, end, first, mark, directory)
+        image = image_block(Path(tmp) / window.pop("file"))
+        return {"recorded_sound_window": window}, image
 
 
 def end_of(path):
@@ -198,7 +207,8 @@ class Viewing:
         return joint, scene
 
     def ask_scene(self, start_s, end_s, question=None, native_audio=False, alternatives=None, sync_regions=None,
-                  exposure_detail=False):
+                  exposure_detail=False, mark_sound=None):
+        validate_mark(start_s, end_s, mark_sound)
         if sync_regions:
             validate_regions(sync_regions)
         if question is not None:
@@ -257,6 +267,10 @@ class Viewing:
                     path = Path(tmp) / page.pop("file")
                     report["images_in_order"].append({"region_motion_and_channel_peaks": page})
                     blocks.append(image_block(path))
+        if wav and (mark_sound is not None or (not blocks and not native_audio)):
+            row, image = sound_window_block(directory, wav, start_s, end_s, scene["first_sample"], mark_sound)
+            report["images_in_order"].append(row)
+            blocks.append(image)
         if native_audio and wav:
             blocks.append(audio_block(wav))
         return [text_block(report), *blocks]
@@ -551,7 +565,7 @@ class Viewing:
                 image_block(Path(detail["file"]))]
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
-               alternatives=None, per_second=False):
+               alternatives=None, per_second=False, mark_sound=None):
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -584,6 +598,7 @@ class Viewing:
                 sample_limit = max(1, MAX_INLINE_PCM_BYTES // bytes_per_frame)
                 if sample_at(packet, stop) - first > sample_limit:
                     stop = math.nextafter((first + sample_limit) / rate, -math.inf)
+            validate_mark(start, stop, mark_sound)
             if (start, stop) != (packet["start_s"], packet["end_s"]):
                 index = bisect_left(self.paths, stop, hi=turn, key=end_of)
                 wav, start, stop, first, last = released_samples(self.paths[index].parent, start, stop, WINDOW_S)
@@ -605,12 +620,16 @@ class Viewing:
             if focus:
                 result["component"] = focus
         blocks = []
-        if start_s is not None or end_s is not None or not describe or focus:
+        if focus or (mark_sound is None and (start_s is not None or end_s is not None or not describe)):
             with TemporaryDirectory() as tmp:
                 spectrum = Path(tmp) / "spectrum.png"
                 channel_spectrum(wav, spectrum, track["channels"])
                 blocks.append(image_block(spectrum))
             result["images_in_order"] = [f"{component} component spectrum" if focus else "recorded channel spectrum"]
+        if mark_sound is not None:
+            row, image = sound_window_block(directory, original, start, stop, first, mark_sound)
+            result.setdefault("images_in_order", []).append(row)
+            blocks.append(image)
         if native_audio:
             blocks.append(audio_block(wav))
         return [text_block(result), *blocks]
@@ -855,10 +874,12 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
         @server.tool(annotations=hints, structured_output=False)
         async def ask_scene(start_s: float, end_s: float, question: str | None = None, native_audio: bool = False,
                             alternatives: list[str] | None = None, sync_regions: list[list[float]] | None = None,
-                            exposure_detail: bool = False):
+                            exposure_detail: bool = False, mark_sound: list[float] | None = None):
             """Ask what happened within an exact span of released film, up to eight seconds across pauses.
             With only start_s and end_s, get pictures, channel levels and times of frequency-band changes
-            without starting a model. To see which picture coincided with a brief sound, set exposure_detail=true.
+            without starting a model. To hear a moment among nearby sounds, replay the wider interval
+            and set mark_sound=[from_s,to_s] inside it. A channel spectrogram marks those bounds on the
+            original recording. Any words and source estimates still cover the wider interval. To see which picture coincided with a brief sound, set exposure_detail=true.
             Up to 12 consecutive exposures appear with their recorded peaks. Longer scenes show up to six frames
             around the strongest measured rise in a frequency band. Identical pictures need no extra sheet.
             Asking a question or giving alternatives also checks this exact recording for voice activity and
@@ -870,7 +891,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             sync reader compares these regions with the same audio. Synchronized motion
             can be incidental and the sound may come from offscreen. native_audio=true attaches the same recording."""
             return await asyncio.to_thread(reader.ask_scene, start_s, end_s, question, native_audio, alternatives,
-                                           sync_regions, exposure_detail)
+                                           sync_regions, exposure_detail, mark_sound)
 
         @server.tool(annotations=hints, structured_output=False)
         async def observe(start_s: float, end_s: float, box: list[float] | None = None,
@@ -890,9 +911,11 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
         @server.tool(annotations=hints, structured_output=False)
         async def listen(turn: int, question: str | None = None, start_s: float | None = None,
                          end_s: float | None = None, native_audio: bool = False, describe: bool = True,
-                         component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False):
+                         component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False,
+                         mark_sound: list[float] | None = None):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
-            A time range includes a channel spectrum. When sounds overlap, choose component="harmonic"
+            A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
+            marks that part on the original mix. When sounds overlap, choose component="harmonic"
             to emphasize sustained frequency bands or "percussive" to emphasize short broadband changes.
             Use "mix" for the original. The local reader compares a selected component with the original.
             Supply alternatives to compare proposed sounds against the original recording without pictures.
@@ -902,7 +925,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             Set describe=false to use the recording and spectrum without the local waveform reader.
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
-                                           alternatives, per_second)
+                                           alternatives, per_second, mark_sound)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,

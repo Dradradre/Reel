@@ -481,6 +481,21 @@ class TransportTests(unittest.TestCase):
             self.assertTrue(all(change["channels"] == [2] for change in changes))
             received, _ = sf.read(io.BytesIO(base64.b64decode(recording.data)), dtype="int16")
             np.testing.assert_array_equal(received, pcm[800:5600])
+            plain, plot = viewer.ask_scene(.1, .7)
+            self.assertEqual(plot.type, "image")
+            self.assertNotIn("mark_samples", json.loads(plain.text)["images_in_order"][0]["recorded_sound_window"])
+            marked, marked_plot, original = viewer.ask_scene(.1, .7, mark_sound=[.35001, .45001], native_audio=True)
+            data = json.loads(marked.text)["images_in_order"][0]["recorded_sound_window"]
+            self.assertEqual((data["first_sample_on_film"], data["samples_per_channel"]), (800, 4800))
+            self.assertEqual(data["mark_samples"], [2001, 2801])
+            self.assertNotEqual(marked_plot.data, plot.data)
+            self.assertEqual(original.data, recording.data)
+            via_listen = viewer.listen(1, None, .1, .7, describe=False, mark_sound=[.35001, .45001])
+            self.assertEqual(json.loads(via_listen[0].text)["images_in_order"], json.loads(marked.text)["images_in_order"])
+            self.assertEqual(via_listen[1].data, marked_plot.data)
+            for invalid in ([0, .3], [.3, .3], [.2, .8], [.3], []):
+                with self.assertRaises(ValueError):
+                    viewer.ask_scene(.1, .7, mark_sound=invalid)
             early = json.loads(viewer.ask_scene(.1, .35)[0].text)
             self.assertEqual(early["audio"]["band_changes"], [])
             with self.assertRaises(ValueError):

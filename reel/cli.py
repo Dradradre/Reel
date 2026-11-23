@@ -464,6 +464,8 @@ def main():
         ap.add_argument("--t1", type=float, required=cmd == "observe")
         if cmd == "listen":
             from audio_focus import COMPONENTS
+            ap.add_argument("--mark-sound", type=float, nargs=2, metavar=("START", "END"),
+                            help="mark these film seconds on the original recording inside --t0 and --t1")
             ap.add_argument("--component", choices=COMPONENTS, default="mix", help="listen to the mix or a filtered component")
             ap.add_argument("--describe-sounds", action="store_true", help="describe the bounded waveform locally")
             ap.add_argument("--question", help="ask the local waveform model about the recorded sound")
@@ -486,7 +488,7 @@ def main():
             else:
                 from listen import inspect_sound
                 data = inspect_sound(x.out, x.t0, x.t1, compare_sounds=x.compare_sounds, describe_sounds=x.describe_sounds,
-                                     question=x.question, component=x.component)
+                                     question=x.question, component=x.component, mark_sound=x.mark_sound)
             print(json.dumps(data, ensure_ascii=False, indent=2))
         except (ValueError, OSError, subprocess.CalledProcessError) as error:
             ap.error(str(error))

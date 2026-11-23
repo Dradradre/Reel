@@ -80,6 +80,12 @@ class TransportTests(unittest.TestCase):
                     blocks = view.advance(turn, native_audio=True)
                     self.assertEqual(any(b.type == "audio" for b in blocks), tracks != "picture")
                     self.assertEqual(bool(packet["pages"]), tracks != "sound")
+                    report = json.loads(blocks[0].text)
+                    for image in report["images_in_order"]:
+                        if isinstance(image, dict) and "action_over_time" in image:
+                            for at, pts in zip(image["at_s"], image["picture_pts_us"], strict=True):
+                                expected = int(at * 4) * 250_000 if .25 <= at < 1.25 else None
+                                self.assertEqual(pts, expected)
                     media = paths[turn - 1].parent / packet["media"]["file"]
                     streams = subprocess.check_output(["ffprobe", "-v", "error", "-show_entries",
                                                        "stream=codec_type", "-of", "csv=p=0", str(media)], text=True)

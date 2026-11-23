@@ -394,8 +394,10 @@ class Viewing:
             blocks.append(image_block(directory / sheet["file"]))
         for page in packet.get("action_view", {}).get("pages", []):
             description = {"action_over_time": [page["start_s"], page["end_s"]]}
-            if (packet.get("audio") or {}).get("during_pictures"):
+            if "pts_us" in page:
                 description["picture_pts_us"] = page["pts_us"]
+            if "at_s" in page:
+                description["at_s"] = page["at_s"]
             if page.get("additional_frames"):
                 description["additional_frames"] = page["additional_frames"]
             report["images_in_order"].append(description)

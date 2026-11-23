@@ -6,12 +6,24 @@ from unittest.mock import patch
 
 import numpy as np
 
-from examples.check_first_impressions import compare
+from examples.check_first_impressions import compare, relative_separation
 from examples.check_soundtrack_pairs import compare_pairs
 from examples.watch_first_impression import read_with_codex
 
 
 class CaptionComparisonTests(unittest.TestCase):
+    def test_human_reference_compares_same_minus_other_on_matched_films(self):
+        # Different foreign-film similarities and identical retrieval ranks must not cancel the gap.
+        rows = {"a": {"human": [.75, .25, 1], "reader": [.75, .125, 1]},
+                "b": {"human": [.5, .25, 1], "reader": [.625, .3125, 1]}}
+        result = relative_separation(rows, "reader")
+        self.assertEqual(result["fraction_of_human"], 1.25)
+        self.assertEqual(result["film_bootstrap_95"], [1.25, 1.25])
+        rows["b"]["human"] = [.25, .5, 0]
+        self.assertIsNone(relative_separation(rows, "reader")["film_bootstrap_95"])
+        rows["a"]["human"] = [.25, .25, 0]
+        self.assertIsNone(relative_separation(rows, "reader")["fraction_of_human"])
+
     def test_sound_effect_controls_for_the_same_picture_and_other_films(self):
         a, b, picture = np.eye(3)
         vectors = {"a": a, "b": b, "pictured": picture}

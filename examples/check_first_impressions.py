@@ -7,6 +7,7 @@ Run with python examples/check_first_impressions.py reports.json. Requires torch
 With "picture" and "sound" human panels, --sound-effect MUTED FULL compares the two reader
 conditions on the same pictures. Only FULL should receive the original soundtrack.
 Use --compare-readers BEFORE AFTER for paired changes in similarity to the same film's human captions.
+Use --human-reference to compare each reader's same-minus-other-film similarity with a held-out viewer's.
 """
 import argparse
 import json
@@ -53,7 +54,33 @@ def paired_change(films, before, after):
             "by_film": {film["id"]: float(delta) for film, delta in zip(films, differences, strict=True)}}
 
 
-def compare(films, vectors, *, sound_effect=None, compare_readers=None):
+def relative_separation(by_film, reader):
+    """Compare a reader and a held-out human against the same references and distractor films."""
+    gaps = {}
+    for name in ("human", reader):
+        gaps[name] = np.array([row[name][0] - row[name][1] for row in by_film.values()])
+    human, model = gaps["human"], gaps[reader]
+    baseline = human.mean()
+    result = {"human_same_minus_other": float(baseline), "reader_same_minus_other": float(model.mean()),
+              "fraction_of_human": None, "film_bootstrap_95": None}
+    if baseline <= 0:
+        return result
+    result["fraction_of_human"] = float(model.mean() / baseline)
+    rng = np.random.default_rng(20261123)
+    estimates = np.empty(10000)
+    batch = max(1, 262144 // len(human))
+    for start in range(0, len(estimates), batch):
+        block = estimates[start:start + batch]
+        indices = rng.integers(len(human), size=(len(block), len(human)))
+        reference = human[indices].mean(axis=1)
+        if np.any(reference <= 0):
+            return result  # Resampling can lose the human reference. A ratio interval would be misleading.
+        block[:] = model[indices].mean(axis=1) / reference
+    result["film_bootstrap_95"] = np.percentile(estimates, [2.5, 97.5]).tolist()
+    return result
+
+
+def compare(films, vectors, *, sound_effect=None, compare_readers=None, human_reference=False):
     if len(films) < 2 or len({f["id"] for f in films}) != len(films):
         raise ValueError("supply at least two films with distinct IDs")
     names = list(films[0]["readers"])
@@ -94,6 +121,8 @@ def compare(films, vectors, *, sound_effect=None, compare_readers=None):
     report = {"model": MODEL, "revision": REVISION, "films": len(films),
             "human_captions": sum(map(len, references)), "summary": summary,
             "by_film_columns": ["same_film_cosine", "other_film_cosine", "top_one_film"], "by_film": by_film}
+    if human_reference:
+        report["human_relative_description_separation"] = {name: relative_separation(by_film, name) for name in names}
     if compare_readers is not None:
         report["paired_readers"] = {
             "before": before, "after": after, "metric": "same_film_cosine",
@@ -158,6 +187,8 @@ if __name__ == "__main__":
                         help="report changes in same-film caption similarity with a film-level bootstrap interval")
     parser.add_argument("--sound-effect", nargs=2, metavar=("MUTED", "FULL"),
                         help="compare first descriptions with and without the soundtrack against human panels")
+    parser.add_argument("--human-reference", action="store_true",
+                        help="divide each reader's same-minus-other similarity by held-out viewers' separation")
     args = parser.parse_args()
     films = json.loads(args.reports.read_text())
     captions = []
@@ -168,5 +199,6 @@ if __name__ == "__main__":
     if not all(isinstance(s, str) and s.strip() for s in captions):
         parser.error("each response must contain a nonempty caption")
     captions = sorted(set(captions))
-    report = compare(films, embeddings(captions), sound_effect=args.sound_effect, compare_readers=args.compare_readers)
+    report = compare(films, embeddings(captions), sound_effect=args.sound_effect, compare_readers=args.compare_readers,
+                     human_reference=args.human_reference)
     print(json.dumps(report, ensure_ascii=False, indent=2))

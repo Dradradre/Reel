@@ -1,0 +1,384 @@
+{
+  "dataset": "AVCaps test, original audio-visual descriptions by people",
+  "source": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "revision": "412a589d2f611ba6fd8ad4c9d1fb8fb011ea5764",
+  "selection": "Of 200 locally available test clips, exclude 56 IDs found in previous local selections, report lists, choices, plans, and cases. Sort by SHA-256 of reel-current-free-description-01/ plus ID. Select first eight with both tracks, 4 to 60 s and three distinct human audiovisual descriptions. No generated dataset captions used.",
+  "method": "Before collecting responses, fix the films and their hashes. An independent reader sees each whole anonymous film in successive windows of up to eight seconds. Supply the recorded picture and local audio measurements and estimates. No native WAV attachment or optional 30B reader. Ask for one natural English sentence without cues, then compare with original human sentences. For each held-out human caption compare it and the GPT sentence with the remaining captions for the film. Report average same-film cosine, other-film cosine, and their difference using the repository scorer. Weight each film equally. Treat these scores as description similarity. Re-run only for an invalid playback or missing response.",
+  "films": [
+    {
+      "id": "4403191162",
+      "seconds": 54.473991,
+      "media_sha256": "d71bf2b42489e4b0b7a00729c0bef58b3aed4a772152b7d6e2e9c1a697f47727",
+      "human_captions": 5
+    },
+    {
+      "id": "11261138255",
+      "seconds": 36.758005,
+      "media_sha256": "ad1ae606c1e2c4261a2a27a7532ccd472f9dbf1ca5c0dbed9cf3deeee9d1c064",
+      "human_captions": 4
+    },
+    {
+      "id": "4451729145",
+      "seconds": 41.377937,
+      "media_sha256": "55390bc97c3c7aa2de9a4da688bceca681351c0d1463e3b8db764b45a8ffb309",
+      "human_captions": 5
+    },
+    {
+      "id": "11111957393",
+      "seconds": 44.29425,
+      "media_sha256": "8e4a9da0a0f85cced4f086a18abfb24dce48ad7cc7525eb0bf65548e3c3d728b",
+      "human_captions": 5
+    },
+    {
+      "id": "4938937283",
+      "seconds": 29.55898,
+      "media_sha256": "2366ed269f09d7f3e57a60fd1920f2527e0c3eed24d1dcb995d96a64b1d063c8",
+      "human_captions": 5
+    },
+    {
+      "id": "4564918802",
+      "seconds": 55.449229,
+      "media_sha256": "700ae6ee7aa20ae075ead5ff714624d8f0c4628952a8d1a5114857486e672856",
+      "human_captions": 4
+    },
+    {
+      "id": "4657443720",
+      "seconds": 49.7139,
+      "media_sha256": "1a3a960ead314a0da42e2f0318ddf59a4709725cfa1866a731a1112f7e52c75a",
+      "human_captions": 4
+    },
+    {
+      "id": "4604160981",
+      "seconds": 34.110091,
+      "media_sha256": "e38faa38f1359f5fb4af9fb8c9762b647390630f407dfe43c5199ced13852b1a",
+      "human_captions": 5
+    }
+  ],
+  "model_responses": [
+    {
+      "id": "4403191162",
+      "gpt": "A woman helps a blond toddler in pajamas open a colorful package, and the smiling child eventually runs off as other children play nearby.",
+      "turns": 7,
+      "end_s": 54.47399092970522,
+      "source_estimate_turns": 1,
+      "sound_caption_turns": 1,
+      "human_caption_sha256": [
+        "5b054e3441fe66f3c0682555b83285425a767a3fc3430a096218bfb140c01b35",
+        "4a035a77c0d70b3f69d4cbe8bc2276e9d1933b8cc8854bf287e31ede2b0ccb0c",
+        "e58ef0742d0f78ae6fb7dc379057a6532ca5d761e0f8afe49b87b1de38556382",
+        "a0d97b48859939837542a5d0e86bfe43723a11dff364e0e477165eff97199180",
+        "8f6c35339851e900f21e6f2b75d0f6353bca43642b364aae983a18cef29846dd"
+      ],
+      "sound_estimates_disabled_on_turns": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "11261138255",
+      "gpt": "A toddler pushes a colorful walker across a carpeted room while a man watches and helps turn it around.",
+      "turns": 5,
+      "end_s": 36.75800453514739,
+      "source_estimate_turns": 1,
+      "sound_caption_turns": 1,
+      "human_caption_sha256": [
+        "becbebd8f3d0c00e5552a563d095747d55ee86bfb8768219427fd8ccb3137b38",
+        "82ac2aab2f0fbb85cd0ef8fb2815af734c829a476d14817e45f3b19119ae6112",
+        "7e44ff9d17bf1a6c0d83c285a454535a74c1ce2b2a1316070a64e9e27f99ea8c",
+        "b0790df02d7c3dc4aa4f54db40e9b7a8723fa5fa832c4532b3d9e84698a66aa0"
+      ],
+      "sound_estimates_disabled_on_turns": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "4451729145",
+      "gpt": "A woman holds a gray cat for a young child to pet in an outdoor enclosure where other cats roam.",
+      "turns": 6,
+      "end_s": 41.37793650793651,
+      "source_estimate_turns": 1,
+      "sound_caption_turns": 1,
+      "human_caption_sha256": [
+        "c5e25ffc79cd03a5a3621b8667dc9b7eec45730fd39c94c3cc726a84f87714b9",
+        "cb115344c8770ba9825dfbe4b71393b429b7dd982332ec3e20405e46e132a36e",
+        "b7005ea539907bc804eb4e10cecb04a6511f5636b3dfd6c87ce69866de507a39",
+        "b742c0482519d3d4867195bdb5391725487b0c86efedac884244e759158ec131",
+        "e7f8dd5164988f152f3e88fbd32d4f2f28d3da6587adb3886d07d046bcee38bd"
+      ],
+      "sound_estimates_disabled_on_turns": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "11111957393",
+      "gpt": "A young girl twirls and dances in a living room while a boy joins in and other family members watch from the couch.",
+      "turns": 6,
+      "end_s": 44.29425,
+      "source_estimate_turns": 1,
+      "sound_caption_turns": 1,
+      "human_caption_sha256": [
+        "b1e3a2440627270e064cc9fb973fcbb1b1e7b566075b390158d61207289f40e9",
+        "a846afe4cad03d8f5965fe2272273a76960a5035445c6e09feaa7d18ee11948d",
+        "9440c087f96552602955f0553358bab1a2a50705ce7261d23d52206d583010ff",
+        "dd529515eb2f132f671b72569d404cab5f0637365553c999fd8144325770e6fc",
+        "baf1f518f20da8971d9ca807d37aa0619717ac81da8aa23a73c8281b6fa6c298"
+      ],
+      "sound_estimates_disabled_on_turns": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "4938937283",
+      "gpt": "A white kitten rolls around on a wooden floor, batting and biting a pink toy as people sit nearby.",
+      "turns": 4,
+      "end_s": 29.558979591836735,
+      "source_estimate_turns": 4,
+      "sound_caption_turns": 4,
+      "human_caption_sha256": [
+        "28275d7e73b7be71d0a07073c32088de82cf714275195b2d4dfb74b2622b017d",
+        "989cfc4f4a5522eac5f585050f2979c26d0d8fe63b985de6c63e5f1476048934",
+        "5f6dbb255ee284f5098b0bb243ff1927855b737066cb997314b120e8a8f53023",
+        "a08f658939e893027b324a40aa3e0a067aec92ff3298faf7a49e60b68ee343e8",
+        "3fda5fdc6615936ccdb054f7482c3bd35e523f7f438368ba81e4e47f586cda3a"
+      ],
+      "sound_estimates_disabled_on_turns": []
+    },
+    {
+      "id": "4564918802",
+      "gpt": "A young girl wearing new glasses eats gummies outside, chats with an adult, and beams at the camera.",
+      "turns": 7,
+      "end_s": 55.449229024943314,
+      "source_estimate_turns": 7,
+      "sound_caption_turns": 7,
+      "human_caption_sha256": [
+        "e0534a9bafb6bff2ddfc004d459fde760ae477ce31a29ab59241473c84a6167a",
+        "6ffb1317ca1391c8c13e3d327c650d8459b9a75894482b3ca414ac3e1744bd17",
+        "26d763299218f31f56337d9860a1685f8ede992ab6d306ed20223777be9cab89",
+        "dfa3897b4e2234a5ba0a1d5ab9f67ee83dbdef3265491b2008dd9fb180819398"
+      ],
+      "sound_estimates_disabled_on_turns": []
+    },
+    {
+      "id": "4657443720",
+      "gpt": "A woman sits on a couch holding a young child, talking and smiling as the child looks around and makes faces.",
+      "turns": 7,
+      "end_s": 49.71390022675737,
+      "source_estimate_turns": 1,
+      "sound_caption_turns": 1,
+      "human_caption_sha256": [
+        "8c1e44f258ff96e5493ad57db0b994083b0601395b17c8fb31d3ad194693de61",
+        "b97d811470ee576e79775edad7936206d4507c9c609831537446d798f37bdba5",
+        "fc32f22add9f8243d719c629e29972b624a8b2e6cbc6531b49d906033c1e6e63",
+        "0f20928147bcf2c3b003aa05bcdee74733a9a858779672eed73a406ffaf318a2"
+      ],
+      "sound_estimates_disabled_on_turns": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "4604160981",
+      "gpt": "A young child lounges on a couch, smiling and talking on a phone.",
+      "turns": 5,
+      "end_s": 34.11009070294784,
+      "source_estimate_turns": 5,
+      "sound_caption_turns": 5,
+      "human_caption_sha256": [
+        "6df989f7cdad7039c2a032487a14b5c5afaccdc34e4f3538bcc497aa7c255675",
+        "5236020edf1faceaa5aff8b165c2cede88f8a00a41c4a32b4da388a3bf5e6896",
+        "addb96e5339db5c2fdb4a7768f26d229260ddd48c2216cd7f4aa4d0f4352c411",
+        "7dc2205273f284355959d91352f8eb4ac5b946105ac29dfc1d596e4597b94a6f",
+        "bbd55dfda5f3d8027023fd8c974a818d751ff1e141fe095d1d06f27114b16e98"
+      ],
+      "sound_estimates_disabled_on_turns": []
+    }
+  ],
+  "language_model_metric": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "films": 8,
+    "human_captions": 37,
+    "summary": {
+      "human": {
+        "same_film_cosine": 0.4969663804396987,
+        "other_film_cosine": 0.19964898854959756,
+        "same_minus_other": 0.29731739189010115,
+        "top_one_film": 0.8
+      },
+      "gpt": {
+        "same_film_cosine": 0.44225162267684937,
+        "other_film_cosine": 0.1837185062468052,
+        "same_minus_other": 0.2585331164300442,
+        "top_one_film": 0.975
+      }
+    },
+    "by_film_columns": [
+      "same_film_cosine",
+      "other_film_cosine",
+      "top_one_film"
+    ],
+    "by_film": {
+      "4403191162": {
+        "human": [
+          0.5421783268451691,
+          0.2479199230670929,
+          1.0
+        ],
+        "gpt": [
+          0.39361696839332583,
+          0.2119245082139969,
+          0.8
+        ]
+      },
+      "11261138255": {
+        "human": [
+          0.3914364352822304,
+          0.26009032875299454,
+          0.25
+        ],
+        "gpt": [
+          0.28970231860876083,
+          0.1454726606607437,
+          1.0
+        ]
+      },
+      "4451729145": {
+        "human": [
+          0.5403695464134216,
+          0.24042739868164062,
+          0.6
+        ],
+        "gpt": [
+          0.5296741127967834,
+          0.17712567746639252,
+          1.0
+        ]
+      },
+      "11111957393": {
+        "human": [
+          0.5371529817581177,
+          0.18748091906309128,
+          0.8
+        ],
+        "gpt": [
+          0.4458666741847992,
+          0.1901157945394516,
+          1.0
+        ]
+      },
+      "4938937283": {
+        "human": [
+          0.6502848029136657,
+          0.18442267626523973,
+          1.0
+        ],
+        "gpt": [
+          0.5017917037010193,
+          0.18220201134681702,
+          1.0
+        ]
+      },
+      "4564918802": {
+        "human": [
+          0.38671840727329254,
+          0.12238743249326944,
+          1.0
+        ],
+        "gpt": [
+          0.4627343937754631,
+          0.15057316422462463,
+          1.0
+        ]
+      },
+      "4657443720": {
+        "human": [
+          0.3503934442996979,
+          0.1885208860039711,
+          0.75
+        ],
+        "gpt": [
+          0.3689533919095993,
+          0.2222234308719635,
+          1.0
+        ]
+      },
+      "4604160981": {
+        "human": [
+          0.5771970987319947,
+          0.16594234406948088,
+          1.0
+        ],
+        "gpt": [
+          0.545673418045044,
+          0.19011080265045166,
+          1.0
+        ]
+      }
+    },
+    "human_relative_description_separation": {
+      "gpt": {
+        "human_same_minus_other": 0.29731739189010115,
+        "reader_same_minus_other": 0.2585331164300442,
+        "fraction_of_human": 0.8695526177816298,
+        "film_bootstrap_95": [
+          0.7397567280845889,
+          1.0373223984644742
+        ]
+      }
+    }
+  },
+  "paired_gpt_minus_human_same_film": {
+    "mean_change": -0.054714757762849314,
+    "bootstrap_95_percent": [
+      -0.10527716077864167,
+      -0.0007752231881022582
+    ],
+    "increased": 2,
+    "decreased": 6,
+    "tied": 0,
+    "by_film": {
+      "4403191162": -0.14856135845184326,
+      "11261138255": -0.10173411667346954,
+      "4451729145": -0.010695433616638161,
+      "11111957393": -0.09128630757331846,
+      "4938937283": -0.14849309921264642,
+      "4564918802": 0.07601598650217056,
+      "4657443720": 0.018559947609901428,
+      "4604160981": -0.03152368068695066
+    }
+  },
+  "human_relative_method": "Ratio of two equal-film mean differences between same-film and other-film caption similarity. A ratio of 1 means a reader separates the matching film from the seven others as well as a held-out person by this measure. The interval draws 10,000 whole films with all paired readers and a fixed distractor panel (seed 20261123).",
+  "remarks": "Each person is held out in turn and compared with other viewers of that film. The source files do not identify whether the same people viewed different films. This calculation measures semantic agreement of one-sentence reports. It does not directly measure event recognition, localization, timestamps, or human hearing thresholds.",
+  "protocol_retries": [
+    {
+      "video_id": "4403191162",
+      "reason": "Streaming connection interrupted before a full response. Job timed out, all owned processes exited, identical new session."
+    }
+  ],
+  "resource_check": {
+    "peak_per_job_kib": 4537888,
+    "min_system_free_pct": 79,
+    "survivors": 0
+  },
+  "sound_estimate_delivery": "During ordinary viewing the reader chose whether to request optional sound estimates. The original mix was nonzero throughout. In 26 of 47 turns the reader explicitly disabled sound_estimates. It received waveform-derived measurements on those turns and local source estimates and captions on the other 21. No native waveform attachment."
+}

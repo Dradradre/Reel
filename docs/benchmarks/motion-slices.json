@@ -128,5 +128,2889 @@
       "A": "A simple illustration showed a closed brown door against a beige wall, with no visible change. The audio measurements show a brief increase in sound around the middle, but its source is uncertain, and the speech reader found no intelligible words.",
       "B": "A simple illustration showed a closed brown door in a beige wall, with no visible change. The audio measurements showed a very faint, steady signal of uncertain origin, and the speech reader found no intelligible words."
     }
+  },
+  "activity_timing": {
+    "source": "Kinetics-GEBD (Shou et al.), official raw Kinetics-400 validation annotations, CC BY-NC 4.0. Each original annotation range becomes its midpoint. Sorted only for one-to-one matching. The authors’ processed release merges nearby changes; this study keeps individual marks.",
+    "annotations": "https://github.com/StanLei52/GEBD",
+    "recordings": "https://github.com/cvdfoundation/kinetics-dataset",
+    "annotation_sha256": "2ecd5a1f8366b6d86dec56a39d95db96b2adc9fb9badc6d9a26615d5bef92a3b",
+    "selections": {
+      "original": "event-boundaries.json",
+      "holdout": "event-boundaries-holdout.json"
+    },
+    "comparison": "One blind reading per condition per film. The original 24 reuse previously recorded ordinary views from the clock condition. The further 12 ordinary reads used 12b1109. Each comparison adds a motion slice to every ordinary view at the centre [0.5,0.5], chosen before reading the films. The reader does not select the point in this experiment. Same released pictures, channel measurements, available sound estimates, prompt and response protocol. No direct waveform attachment.",
+    "reader_revision": "d639d00",
+    "prompt": "Watch the activity as it unfolds. Mark the times when one meaningful part of the main activity ends and another begins, one level below the overall activity. Include a change of shot. An ongoing activity may continue across many pictures. It is fine to mark several changes in an interval or none. Use advance with consecutive turn numbers starting at 1. At each call submit your changes in the preceding interval in seconds from the start of the film. Finish when the server returns end_of_view.",
+    "scoring": "Fixed scoring clock [0.3,8) s. Each GPT list is compared with all five human lists, each human with the other four. One-to-one temporal matches within 0.5s, F1=2*matches/(marks+reference marks); two empty lists score 1. Equal weight per pair inside film and per film. Human observers annotated the full original clip with their annotation interface; readers see the eight-second prefix, with online decisions irrevocable. The study does not document human audio playback settings. Rotated control preserves within-film relative marks and count on the circular scoring interval. Intervals resample films (10,000 draws). Observers received visual examples and a 100-video qualification exam. GPT received a written request. Each condition has one scored run per film. The film bootstrap does not describe within-reader rerun variability. This is a study-specific all-rater metric, different from the published best-rater benchmark.",
+    "receipt": "Each of 144 motion views listed at least one motion_slice in its images, four views per clip. The end receipt verified the image count. An unsuccessful session with no tool calls was reconnected before scoring. Only complete first viewings count.",
+    "films": [
+      {
+        "id": "-LISB_b8rIw_000049_000059",
+        "category": "making_sushi",
+        "sha256": "6accee65ba4770f19bc081a5159594825898ba224ba7236e41e3676747100cd5",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.857755,
+            5.27317,
+            2.27967,
+            4.31755,
+            6.42452
+          ],
+          [
+            0.998045,
+            4.7544,
+            5.57576
+          ],
+          [
+            0.75092,
+            4.507165,
+            6.83311
+          ],
+          [
+            0.74143,
+            2.36611,
+            5.64481,
+            7.15351,
+            4.51445
+          ],
+          [
+            0.682865,
+            4.89723,
+            5.12638,
+            6.06991,
+            4.12893
+          ]
+        ],
+        "human_shot_times": [
+          [
+            0.857755
+          ],
+          [
+            0.998045,
+            4.7544
+          ],
+          [
+            0.75092,
+            4.507165
+          ],
+          [
+            0.74143
+          ],
+          [
+            0.682865
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            5.3
+          ],
+          "motion": []
+        },
+        "turn_images": [
+          5,
+          6,
+          6,
+          5
+        ]
+      },
+      {
+        "id": "HkYNX9YpVtk_000001_000011",
+        "category": "push_up",
+        "sha256": "6a8563f1973e7c650b58f084795f62818570b4847ac644724b7efba8b7a04e39",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            1.20264,
+            2.5055,
+            3.70814,
+            4.91078,
+            6.0132
+          ],
+          [
+            5.92328
+          ],
+          [
+            2.01803,
+            3.77095,
+            6.02703,
+            6.99006,
+            0.5789
+          ],
+          [
+            5.99751,
+            7.37915
+          ],
+          [
+            1.19318,
+            6.01703,
+            6.99714
+          ]
+        ],
+        "human_shot_times": [
+          [
+            6.0132
+          ],
+          [
+            5.92328
+          ],
+          [
+            6.02703
+          ],
+          [
+            5.99751
+          ],
+          [
+            6.01703
+          ]
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "b2Z1JCnVMPY_000081_000091",
+        "category": "counting_money",
+        "sha256": "6966bb3401fa2ad4933a69dbf026a7a6e1d45338b8a5d8b791b992abf15df41d",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            4.56089
+          ],
+          [
+            0.81302,
+            1.94532,
+            4.22881,
+            5.87537,
+            7.5125
+          ],
+          [
+            4.13309
+          ],
+          [
+            4.38589
+          ],
+          [
+            0.52125,
+            2.00601,
+            3.09589,
+            5.41781,
+            6.03383,
+            7.10791,
+            7.37643,
+            4.0752
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "culNKOLKAic_000023_000033",
+        "category": "headbutting",
+        "sha256": "c056e3dac3238fc26fcaec9c486c47fb399548c7459dc173047b66e34989f81b",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            3.33558,
+            5.86602,
+            6.3146,
+            7.87887
+          ],
+          [
+            3.00578,
+            5.02978,
+            6.01157,
+            6.8121,
+            7.94494
+          ],
+          [
+            3.78802,
+            4.79864,
+            5.73613,
+            6.41922,
+            7.32904
+          ],
+          [
+            3.57424,
+            5.56466,
+            6.38483,
+            4.85483,
+            7.343
+          ],
+          [
+            2.99802,
+            4.34435,
+            5.97714,
+            6.62644
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            3.2,
+            6.7
+          ],
+          "motion": [
+            3.3,
+            6.7
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "bNMIsZhrucM_000000_000010",
+        "category": "playing_trumpet",
+        "sha256": "091cac39af18d65117b368488fef7ca9da827fbb6d01d2a57127234644fe4445",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.66289,
+            3.50875,
+            4.57045,
+            6.19531
+          ],
+          [
+            1.156205,
+            4.818085
+          ],
+          [
+            0.9521,
+            4.2051,
+            4.53569,
+            6.73742
+          ],
+          [
+            0.65032,
+            3.69159,
+            6.78749
+          ],
+          [
+            3.76892,
+            6.14304
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [
+            1.156205,
+            4.818085
+          ],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            4.8,
+            6.9
+          ],
+          "motion": [
+            4.8,
+            6.8
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      {
+        "id": "vTs8_j-HguU_000224_000234",
+        "category": "stomping_grapes",
+        "sha256": "81f697c5fafbfbd0d24fe70a3861c140977fa71fad61ec82742bb1e4784ca982",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            4.26413,
+            7.16461,
+            4.02604,
+            2.15371,
+            2.72731,
+            1.2879,
+            7.72739,
+            5.09748,
+            6.17975
+          ],
+          [
+            1.21246,
+            2.83569,
+            4.01016,
+            4.23932,
+            7.09431
+          ],
+          [
+            2.783485,
+            4.238485,
+            7.171505
+          ],
+          [
+            4.25331,
+            7.15379
+          ],
+          [
+            4.22235,
+            7.1548
+          ]
+        ],
+        "human_shot_times": [
+          [
+            4.26413,
+            7.16461
+          ],
+          [
+            4.23932,
+            7.09431
+          ],
+          [
+            4.238485,
+            7.171505
+          ],
+          [
+            4.25331,
+            7.15379
+          ],
+          [
+            4.22235,
+            7.1548
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            2.9,
+            4.23,
+            7.13
+          ],
+          "motion": [
+            2.9,
+            4.23,
+            7.13
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          6,
+          5
+        ]
+      },
+      {
+        "id": "ulB6EXqOVxg_000103_000113",
+        "category": "playing_cymbals",
+        "sha256": "3194ac7ceb7ff8fbe057e5bca1ab996ab2eebd6755f687c181d2e175104187d0",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            3.28517,
+            7.35537
+          ],
+          [
+            3.65699,
+            7.60587
+          ],
+          [
+            1.803775,
+            3.32046,
+            7.437185
+          ],
+          [
+            3.49567,
+            7.59787,
+            7.79821
+          ],
+          [
+            3.19592,
+            4.1989,
+            7.20782
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          5,
+          6,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "uSYK3tZJYNc_000053_000063",
+        "category": "parkour",
+        "sha256": "fab20161601d886d570fa19488f8496b65eb562361c91f1def371207ac671062",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            1.5495,
+            5.81389,
+            3.48613,
+            3.95359,
+            4.81219,
+            6.45307,
+            7.06363
+          ],
+          [
+            1.02395,
+            1.55299,
+            3.74595,
+            5.11121,
+            5.79384
+          ],
+          [
+            1.52752,
+            5.81758,
+            0.4047,
+            1.28239,
+            3.29533,
+            4.82173
+          ],
+          [
+            0.94694,
+            1.8324,
+            2.80388,
+            3.658,
+            5.24596,
+            5.86558
+          ],
+          [
+            0.39146,
+            1.50827,
+            2.2221,
+            3.6728,
+            4.49026,
+            5.79128
+          ]
+        ],
+        "human_shot_times": [
+          [
+            1.5495,
+            5.81389
+          ],
+          [
+            1.55299,
+            5.79384
+          ],
+          [
+            1.52752,
+            5.81758
+          ],
+          [
+            1.8324,
+            5.86558
+          ],
+          [
+            1.50827,
+            5.79128
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            1.53,
+            2.5,
+            5.8
+          ],
+          "motion": [
+            1.53,
+            2.5,
+            5.8
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          6,
+          6
+        ]
+      },
+      {
+        "id": "-WZgMWx8Elk_000013_000023",
+        "category": "cooking_on_campfire",
+        "sha256": "1eb64d25bbb95c757a959483993a5e0b08f9799c902d2e17936b33a13a6dd6aa",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            5.49946,
+            6.17783
+          ],
+          [
+            4.97217,
+            5.4237,
+            6.02574
+          ],
+          [
+            5.445875,
+            6.19425,
+            0.35692,
+            0.79443,
+            1.13983,
+            1.68097,
+            2.65961,
+            4.38664,
+            5.08896
+          ],
+          [
+            0.31086,
+            1.07075,
+            4.939285,
+            3.53464,
+            6.9196
+          ],
+          [
+            0.3308,
+            5.53561,
+            1.57657,
+            4.36373,
+            6.53856
+          ]
+        ],
+        "human_shot_times": [
+          [
+            5.49946
+          ],
+          [
+            4.97217,
+            5.4237,
+            6.02574
+          ],
+          [
+            5.445875
+          ],
+          [
+            4.939285
+          ],
+          [
+            5.53561
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            5.4
+          ],
+          "motion": [
+            5.4
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          6,
+          5
+        ]
+      },
+      {
+        "id": "wdEcmPUnNzQ_000275_000285",
+        "category": "answering_questions",
+        "sha256": "9a63b65525ea7853aefd2966c3460ea3716184cc4c9efb9909c1906b8a10eac1",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            4.28923,
+            2.09018,
+            3.36389,
+            1.34991
+          ],
+          [
+            2.23578,
+            3.432,
+            4.28535,
+            1.49846
+          ],
+          [
+            4.263,
+            2.25501,
+            3.50126
+          ],
+          [
+            4.2855,
+            1.61835
+          ],
+          [
+            2.18836,
+            3.461295,
+            4.28464
+          ]
+        ],
+        "human_shot_times": [
+          [
+            4.28923
+          ],
+          [
+            4.28535
+          ],
+          [
+            4.263
+          ],
+          [
+            4.2855
+          ],
+          [
+            4.28464
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            4.37
+          ],
+          "motion": [
+            4.37
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "bcGDXZfriMg_000079_000089",
+        "category": "golf_putting",
+        "sha256": "2ccfc308ecf56b1c3eea26bd5c3032c5ae8572494f922e77c267570f90e2e36c",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.50386,
+            1.42761,
+            2.477315,
+            3.88692,
+            5.36252,
+            6.56218,
+            7.92981
+          ],
+          [
+            3.64436,
+            4.57517
+          ],
+          [
+            3.66544,
+            4.92476
+          ],
+          [
+            3.51493,
+            4.74515
+          ],
+          [
+            1.09634,
+            2.02245,
+            3.09755,
+            4.11995,
+            5.29485,
+            6.13445,
+            7.15652
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "tnwb3XhnvBk_000099_000109",
+        "category": "tapping_guitar",
+        "sha256": "f825d00dc1150dde6c3ace670e2db0d36ffb5464efbfd4993d532138f09c1ea8",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            1.26949,
+            2.47236,
+            3.00697,
+            3.95208,
+            4.5917
+          ],
+          [
+            2.87057,
+            4.67404,
+            1.66707,
+            5.70357,
+            3.63772,
+            6.604,
+            7.36994
+          ],
+          [
+            2.4238,
+            4.62036,
+            2.94318
+          ],
+          [
+            1.69046,
+            2.49544,
+            3.57641,
+            4.43889,
+            5.17487,
+            5.76136,
+            7.21032
+          ],
+          [
+            1.44284,
+            5.44485
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            2.2,
+            5.65
+          ],
+          "motion": [
+            1.5,
+            2.2,
+            5.65
+          ]
+        },
+        "turn_images": [
+          6,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "c0cAryEFvHM_000005_000015",
+        "category": "wrestling",
+        "sha256": "2c3e3586ab1f983ddd9825dfa8d263a8d9d7c2286d4e44d6e286836ff15b1f1d",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.43017,
+            1.79954,
+            3.2551,
+            4.33719,
+            6.14706,
+            6.90356
+          ],
+          [
+            1.51145,
+            7.48934
+          ],
+          [
+            1.4317,
+            3.43807,
+            5.59256,
+            7.41042
+          ],
+          [
+            1.95585,
+            3.9357,
+            6.81547
+          ],
+          [
+            1.91086,
+            3.23292,
+            4.20271,
+            6.3369,
+            7.50005
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            7.8
+          ],
+          "motion": [
+            7.8
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "crfrKqFp0Zg_000044_000054",
+        "category": "playing_flute",
+        "sha256": "9b3cce93e9ae1d61f7dfbe83c004259760e216bed094e35699a271103173dae9",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.32838,
+            2.82787,
+            4.80265
+          ],
+          [
+            0.31437,
+            2.80799,
+            4.77592
+          ],
+          [
+            0.3475,
+            2.84316,
+            4.81758
+          ],
+          [
+            0.30334,
+            2.80587,
+            4.77756
+          ],
+          [
+            0.31672,
+            2.82235,
+            4.77195
+          ]
+        ],
+        "human_shot_times": [
+          [
+            0.32838,
+            2.82787,
+            4.80265
+          ],
+          [
+            0.31437,
+            2.80799,
+            4.77592
+          ],
+          [
+            0.3475,
+            2.84316,
+            4.81758
+          ],
+          [
+            0.30334,
+            2.80587,
+            4.77756
+          ],
+          [
+            0.31672,
+            2.82235,
+            4.77195
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            0.3,
+            2.8,
+            4.77
+          ],
+          "motion": [
+            0.3,
+            2.8,
+            4.77
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "wMKKmjly7JM_000139_000149",
+        "category": "kitesurfing",
+        "sha256": "edbc65b64b4f7647e65c58c8505bc2a4ad0a089b5fc7f0704f65f441fd55f86b",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            1.451725,
+            2.17759,
+            5.47553,
+            6.327625
+          ],
+          [
+            1.656855,
+            5.44397
+          ],
+          [
+            1.51935
+          ],
+          [
+            1.53843
+          ],
+          [
+            1.653805,
+            5.48535
+          ]
+        ],
+        "human_shot_times": [
+          [
+            1.451725,
+            6.327625
+          ],
+          [
+            1.656855
+          ],
+          [
+            1.51935
+          ],
+          [
+            1.53843
+          ],
+          [
+            1.653805
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            1.5,
+            2.7,
+            5.4
+          ],
+          "motion": [
+            1.4,
+            2.7,
+            5.35
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "tx1UQx2h0Z8_000018_000028",
+        "category": "carving_pumpkin",
+        "sha256": "c0612ad112b8497e33bbeed6c4219120e8fbb6e1174899b4c2a67908c54062c7",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.5017,
+            1.33008,
+            2.23314,
+            3.33688,
+            4.23979,
+            6.69812,
+            7.35033,
+            7.75169
+          ],
+          [
+            1.32168,
+            4.21422,
+            6.68203,
+            1.95019,
+            7.11133,
+            1.00572
+          ],
+          [
+            1.30368,
+            4.15332,
+            6.69157,
+            0.60543,
+            3.14368,
+            7.24829
+          ],
+          [
+            1.3222,
+            2.03955,
+            3.28015,
+            4.2205,
+            4.41424,
+            6.66807,
+            7.48702
+          ],
+          [
+            1.31254,
+            2.10697,
+            4.21393,
+            6.76417,
+            0.54113,
+            2.79778,
+            7.29955,
+            7.90976
+          ]
+        ],
+        "human_shot_times": [
+          [
+            1.33008,
+            4.23979,
+            6.69812
+          ],
+          [
+            1.32168,
+            4.21422,
+            6.68203
+          ],
+          [
+            1.30368,
+            4.15332,
+            6.69157
+          ],
+          [
+            1.3222,
+            4.2205,
+            6.66807
+          ],
+          [
+            1.31254,
+            4.21393,
+            6.76417
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            1.3,
+            2.7,
+            4.2,
+            6.65
+          ],
+          "motion": [
+            1.3,
+            2.9,
+            4.2,
+            6.64
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      {
+        "id": "u3JigZZPHKI_000011_000021",
+        "category": "contact_juggling",
+        "sha256": "bcddd18a85317e1bd5386fb714508c564ce671d956b6f7f8f551f28bb5fcdb7e",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            4.52029,
+            5.50946,
+            1.11569,
+            6.79769
+          ],
+          [
+            0.77382,
+            4.448125,
+            5.33558,
+            6.369145
+          ],
+          [
+            0.99735,
+            4.23663,
+            5.38742,
+            7.84245
+          ],
+          [
+            1.38594,
+            4.83598,
+            5.3411
+          ],
+          [
+            0.78511,
+            4.29351,
+            5.19567,
+            5.69687,
+            7.90215
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            4.4
+          ],
+          "motion": [
+            4.43
+          ]
+        },
+        "turn_images": [
+          4,
+          4,
+          5,
+          4
+        ]
+      },
+      {
+        "id": "cjv_8awzeyo_000000_000010",
+        "category": "opening_bottle",
+        "sha256": "03e6f8e1f57252569f5ceb77def0536e9966b0661b4069e2f48c0dcc93d4fb79",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            1.81581,
+            5.55242,
+            7.55969
+          ],
+          [
+            1.60384,
+            3.7316,
+            5.576015,
+            7.03551,
+            7.51666
+          ],
+          [
+            5.48126
+          ],
+          [
+            5.438395,
+            7.51094,
+            1.65587,
+            6.01741,
+            3.82041
+          ],
+          [
+            1.66123,
+            3.21763,
+            5.70978,
+            6.97018,
+            7.57173
+          ]
+        ],
+        "human_shot_times": [
+          [
+            1.81581,
+            5.55242
+          ],
+          [
+            5.576015
+          ],
+          [
+            5.48126
+          ],
+          [
+            5.438395
+          ],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            2.3,
+            7.6
+          ],
+          "motion": [
+            2.5
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          6,
+          5
+        ]
+      },
+      {
+        "id": "018EClOtVTM_000035_000045",
+        "category": "situp",
+        "sha256": "fbcc721855f155d8f61c82fb7486896f6e4d20f10bd5d7f0c5d81899a74d047e",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.37702,
+            2.69773,
+            2.94345,
+            3.48313
+          ],
+          [
+            0.43515,
+            3.32908
+          ],
+          [
+            0.51759,
+            3.28957,
+            2.69147,
+            4.0257
+          ],
+          [
+            0.35035,
+            2.68884,
+            3.44486
+          ],
+          [
+            0.41667,
+            3.01667,
+            3.75205
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            3.3,
+            7.3
+          ],
+          "motion": [
+            3.2,
+            7.2
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "0dwPQPV3iYQ_000039_000049",
+        "category": "washing_hair",
+        "sha256": "a162ae420b5f322fe4e894f438fb87967ef275362b9579ad0d760414f37775e5",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            1.65116,
+            3.79098,
+            5.47832
+          ],
+          [
+            1.00198,
+            2.70024,
+            3.49842,
+            4.891
+          ],
+          [
+            1.52923,
+            3.35159,
+            4.65341,
+            5.59593
+          ],
+          [
+            1.40197,
+            3.20208,
+            5.5128,
+            6.56597
+          ],
+          [
+            1.23378,
+            3.41997,
+            5.09748,
+            6.33127
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            3.1
+          ],
+          "motion": [
+            3.1
+          ]
+        },
+        "turn_images": [
+          5,
+          6,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "ukH4Li1VbbY_000006_000016",
+        "category": "training_dog",
+        "sha256": "2c06ef75a225f1380d9f85620feabe8ca165e6fab5b113034dd079f726dde098",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.79364,
+            2.956015,
+            4.79634,
+            6.60215,
+            7.57982
+          ],
+          [
+            0.81526,
+            2.9337,
+            4.50864,
+            5.41036,
+            7.17676,
+            6.32445
+          ],
+          [
+            0.84671,
+            3.02268,
+            4.6754,
+            7.18626,
+            5.37887
+          ],
+          [
+            0.81117,
+            3.14666,
+            4.62475,
+            5.48238,
+            6.78174,
+            7.17737
+          ],
+          [
+            0.73208,
+            2.93788,
+            4.77133,
+            6.67548,
+            7.18451
+          ]
+        ],
+        "human_shot_times": [
+          [
+            0.79364,
+            2.956015
+          ],
+          [
+            0.81526,
+            2.9337
+          ],
+          [
+            0.84671,
+            3.02268
+          ],
+          [
+            0.81117,
+            3.14666
+          ],
+          [
+            0.73208,
+            2.93788
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            4.8,
+            6.3,
+            7.5
+          ],
+          "motion": [
+            4.8,
+            6.4,
+            7.5
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "v4kmfcwoKTQ_000110_000120",
+        "category": "folding_paper",
+        "sha256": "0ef3ac1315c49133ac143c9b9d616cb35d0a00863bfa873f187280cdbaf2e3d9",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.66005,
+            1.56529,
+            3.11631,
+            5.08564,
+            6.6438,
+            7.5256
+          ],
+          [
+            0.57508,
+            1.46167,
+            3.32042,
+            4.92014,
+            5.40737,
+            7.6294,
+            6.77319
+          ],
+          [
+            1.06888,
+            2.37657,
+            4.39507,
+            5.57016,
+            6.58387,
+            7.84439
+          ],
+          [
+            0.60364,
+            1.86709,
+            2.99015,
+            3.64995,
+            5.9803
+          ],
+          [
+            3.38351,
+            5.25851,
+            6.64771,
+            4.84942,
+            0.34943,
+            1.5767,
+            2.46306,
+            7.55964
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            3.7,
+            5.3
+          ],
+          "motion": [
+            3.6,
+            5.2
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          6,
+          5
+        ]
+      },
+      {
+        "id": "031AhY-44lw_000003_000013",
+        "category": "surfing_crowd",
+        "sha256": "23dcaea79ebf51cff621100359d55ef01fe1e75315818e1e46a6e1356e7db68c",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.31055
+          ],
+          [
+            1.87059,
+            6.24255
+          ],
+          [
+            0.35889,
+            2.47784,
+            6.81599
+          ],
+          [
+            0.36314
+          ],
+          [
+            0.47102
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          6,
+          5,
+          6,
+          6
+        ]
+      },
+      {
+        "id": "I53n0DUWPOY_000036_000046",
+        "category": "exercising_with_an_exercise_ball",
+        "sha256": "c6efb7be5d99b087af2a9637778f9f6e90bd5b4f8cdad7228a1c45eb7817fd22",
+        "panel": "original",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.47286,
+            1.81141,
+            2.47127,
+            3.4799,
+            5.3652,
+            6.91114
+          ],
+          [
+            0.47551,
+            1.47749,
+            2.51343,
+            3.29463,
+            4.0079,
+            5.31556,
+            5.97789
+          ],
+          [
+            0.45703,
+            1.17422,
+            3.19922,
+            4.95001,
+            6.38439
+          ],
+          [
+            1.66779,
+            2.38091,
+            4.07171,
+            5.57847,
+            6.561895,
+            6.60215
+          ],
+          [
+            0.74618,
+            1.91446,
+            2.69969,
+            4.12652,
+            6.79823
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            1.5,
+            2.8,
+            4.3
+          ],
+          "motion": [
+            1.5,
+            2.8,
+            3.3
+          ]
+        },
+        "turn_images": [
+          5,
+          6,
+          6,
+          6
+        ]
+      },
+      {
+        "id": "WEhwJ0Ee1RM_000039_000049",
+        "category": "eating_watermelon",
+        "sha256": "15ff1eed1aadc56c9a08ed1a2c817fb6c6026586501818215510ab4dc8435227",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            4.08015,
+            4.994665,
+            6.78582
+          ],
+          [
+            4.96761,
+            3.695945,
+            4.25331,
+            6.01741
+          ],
+          [
+            5.1961,
+            4.08516,
+            6.08907,
+            6.77111
+          ],
+          [
+            3.7216,
+            1.44523,
+            4.922445,
+            6.43856
+          ],
+          [
+            5.01566
+          ]
+        ],
+        "human_shot_times": [
+          [
+            4.994665
+          ],
+          [
+            4.96761
+          ],
+          [
+            5.1961
+          ],
+          [
+            4.922445
+          ],
+          [
+            5.01566
+          ]
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          5,
+          5,
+          6,
+          5
+        ]
+      },
+      {
+        "id": "VTgqhdA7OMg_000209_000219",
+        "category": "making_bed",
+        "sha256": "668e4a20cf1201979ad408d3baad4c76e03fa19c30cc0608fe8d104cea4f87e2",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.48044,
+            1.89775,
+            3.84353,
+            5.47704,
+            6.78624
+          ],
+          [
+            0.6792,
+            3.52236,
+            6.19178
+          ],
+          [
+            0.39251,
+            2.67933,
+            4.36032,
+            5.4184,
+            6.27169,
+            7.65402
+          ],
+          [
+            0.39414,
+            1.82995,
+            2.65343,
+            4.21593,
+            6.47522,
+            7.81249
+          ],
+          [
+            0.34621,
+            1.31179,
+            2.5966,
+            4.21915,
+            5.61155,
+            6.54718,
+            7.48068
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            3.1
+          ],
+          "motion": [
+            3
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "Df2texc092Y_000042_000052",
+        "category": "bouncing_on_trampoline",
+        "sha256": "8a5897231382569ab61196592c7475feaae78b1c74b1adc6811948353027068e",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            2.03629,
+            6.1309,
+            7.20201,
+            3.28365
+          ],
+          [
+            2.03792,
+            7.59124,
+            3.02291,
+            5.9609
+          ],
+          [
+            0.98928,
+            2.40549,
+            3.76183,
+            6.29337,
+            7.88308
+          ],
+          [
+            0.61137,
+            3.36256,
+            6.4534
+          ],
+          [
+            0.58597,
+            1.93396,
+            3.14997,
+            7.40132
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            0.5,
+            1.8,
+            3,
+            6.2
+          ],
+          "motion": [
+            0.5,
+            2.2,
+            3.1,
+            7.5
+          ]
+        },
+        "turn_images": [
+          6,
+          5,
+          6,
+          6
+        ]
+      },
+      {
+        "id": "C3EwcscJQ1I_000002_000012",
+        "category": "climbing_ladder",
+        "sha256": "f37aa395221ed28e206eb65d7f5ed18a7acf3004783efe84b46ffe650871b783",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            3.12361,
+            7.24759
+          ],
+          [
+            3.51005,
+            4.20339,
+            7.29093
+          ],
+          [
+            1.52502,
+            3.77346,
+            7.2472,
+            3.47442,
+            6.58129,
+            7.72976
+          ],
+          [
+            0.83298,
+            4.1309,
+            7.10582
+          ],
+          [
+            1.21762,
+            7.21423,
+            3.22353
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "CnsOEEuyrrI_000144_000154",
+        "category": "tai_chi",
+        "sha256": "badc2d07cc769041c826469cded0b412ec8891364de3971b0ac5f5091995281c",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            2.81305,
+            3.25632,
+            4.00647,
+            5.44709
+          ],
+          [
+            0.59683,
+            1.13539,
+            1.86621,
+            2.9048,
+            3.29911,
+            5.51084,
+            7.4823
+          ],
+          [
+            1.44877,
+            2.69058,
+            4.16482,
+            5.68533,
+            6.96526
+          ],
+          [
+            0.80192,
+            1.70408,
+            3.0072,
+            4.31032,
+            5.91416,
+            7.21728
+          ],
+          [
+            1.05592,
+            2.74779,
+            4.03169,
+            6.65949
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            3.1,
+            4.4,
+            6.1,
+            7
+          ],
+          "motion": [
+            3.2,
+            4.4,
+            7.1
+          ]
+        },
+        "turn_images": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "XNYvNRBgcFo_000001_000011",
+        "category": "riding_a_bike",
+        "sha256": "250d44bb0d3b4a1477ad89d05c54e4d5892d5bea449e63f79fd2e2c672ae6063",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            3.28251,
+            6.54721,
+            7.80823
+          ],
+          [
+            2.76191,
+            6.51264
+          ],
+          [
+            0.40509,
+            2.97371,
+            6.46609,
+            5.1376
+          ],
+          [
+            2.73602,
+            6.48538
+          ],
+          [
+            0.432905,
+            2.759785,
+            4.88644,
+            6.58019,
+            7.732805
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            2.8,
+            7.1
+          ],
+          "motion": [
+            2.8,
+            6.8
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "CDIyErzttyg_000079_000089",
+        "category": "cartwheeling",
+        "sha256": "57395924abc1b0b090a4f42a59e9fde06e3f2c7e93ac9ae04acfe2fc069d4737",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            2.85117,
+            5.32337
+          ],
+          [
+            0.63324,
+            1.31254,
+            2.08394,
+            2.84383,
+            3.46556,
+            5.16955,
+            5.820065,
+            6.706605,
+            7.56436
+          ],
+          [
+            2.85,
+            5.59559,
+            3.14616
+          ],
+          [
+            2.82754,
+            5.35597,
+            6.60571,
+            7.44523
+          ],
+          [
+            2.85263,
+            5.19529,
+            0.66582
+          ]
+        ],
+        "human_shot_times": [
+          [
+            2.85117
+          ],
+          [
+            2.84383
+          ],
+          [
+            2.85
+          ],
+          [
+            2.82754
+          ],
+          [
+            2.85263,
+            0.66582
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            2.87,
+            5.5
+          ],
+          "motion": [
+            2.87,
+            5.5
+          ]
+        },
+        "turn_images": [
+          6,
+          5,
+          6,
+          6
+        ]
+      },
+      {
+        "id": "W5sJXu657wY_000010_000020",
+        "category": "shredding_paper",
+        "sha256": "005d06147b04ac0c82c04ab83f71d04846d1fbf2f30155c2d1287550ab569dc6",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.99016,
+            2.00334,
+            3.75339,
+            4.40966,
+            4.93928,
+            5.65312,
+            6.97717
+          ],
+          [
+            1.01532,
+            1.99305,
+            4.734525,
+            5.64515,
+            6.85294,
+            7.9409
+          ],
+          [
+            0.451315,
+            1.01667,
+            1.59505,
+            3.52395,
+            4.78516,
+            5.65,
+            6.75116,
+            7.993815
+          ],
+          [
+            0.5589,
+            1.01542,
+            3.62649,
+            5.64879,
+            6.77513,
+            6.99698,
+            4.86802,
+            7.974
+          ],
+          [
+            1.00297,
+            3.50191,
+            5.09987,
+            5.60986,
+            6.79983
+          ]
+        ],
+        "human_shot_times": [
+          [
+            0.99016,
+            5.65312
+          ],
+          [
+            1.01532,
+            4.734525,
+            5.64515,
+            7.9409
+          ],
+          [
+            0.451315,
+            1.01667,
+            4.78516,
+            5.65,
+            7.993815
+          ],
+          [
+            0.5589,
+            1.01542,
+            5.64879,
+            4.86802,
+            7.974
+          ],
+          [
+            1.00297,
+            5.60986
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            1.03,
+            5.64
+          ],
+          "motion": [
+            1.001,
+            5.639
+          ]
+        },
+        "turn_images": [
+          6,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "B7PqtWRQNbo_000316_000326",
+        "category": "baking_cookies",
+        "sha256": "2bf751d26c332aee6827e20a702b4ab84d9fa6f1ab3e7277bedc398dab6c47f1",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            0.81493,
+            1.84525,
+            3.03775,
+            4.52599,
+            6.88237
+          ],
+          [
+            2.2735,
+            4.61223,
+            7.04553,
+            0.60972
+          ],
+          [
+            2.39044,
+            4.86859,
+            5.86048,
+            0.84518
+          ],
+          [
+            0.65001,
+            2.405035,
+            3.07129,
+            4.83715
+          ],
+          [
+            0.97977,
+            3.1135,
+            6.10725
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [],
+          "motion": []
+        },
+        "turn_images": [
+          6,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "VD8g_9pocxk_000077_000087",
+        "category": "cleaning_pool",
+        "sha256": "3b9db9b1aff44948e2f27ccd44005ff538f6aa5ac90f217927414c620406d800",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            1.1167,
+            7.79983,
+            4.87954,
+            0.40065
+          ],
+          [
+            0.39449,
+            3.07702,
+            7.62155
+          ],
+          [
+            0.89493,
+            2.99618,
+            4.676105,
+            7.00512
+          ],
+          [
+            0.3355,
+            1.66669,
+            4.713275,
+            6.41785
+          ],
+          [
+            0.8521,
+            4.654985
+          ]
+        ],
+        "human_shot_times": [
+          [
+            4.87954
+          ],
+          [],
+          [
+            4.676105
+          ],
+          [
+            4.713275
+          ],
+          [
+            4.654985
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            4.8,
+            7
+          ],
+          "motion": [
+            4.7,
+            7.1
+          ]
+        },
+        "turn_images": [
+          5,
+          6,
+          6,
+          4
+        ]
+      },
+      {
+        "id": "C15qK3MFWLk_000001_000011",
+        "category": "tying_tie",
+        "sha256": "f3903ba2fbb563032f6076e9577cf6fbc36690445c39750c15348c9a5383aa02",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            6.46114,
+            6.98063
+          ],
+          [
+            4.02674,
+            6.49219,
+            7.14597
+          ],
+          [
+            5.94151,
+            6.32511,
+            7.08378
+          ],
+          [
+            6.09606,
+            6.54464,
+            7.24627,
+            0.31055
+          ],
+          [
+            7.57099,
+            6.4681
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "readers": {
+          "ordinary": [
+            6.2
+          ],
+          "motion": [
+            6.2
+          ]
+        },
+        "turn_images": [
+          6,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "id": "Wv02oSoS3vw_000367_000377",
+        "category": "scuba_diving",
+        "sha256": "3e9e2a420a3f0ea4a7c958aa0c841e09ae33da3c306c978d32df3d4bda10de56",
+        "panel": "holdout",
+        "interval": [
+          0.3,
+          8
+        ],
+        "human": [
+          [
+            4.11566,
+            5.40405,
+            7.93262
+          ],
+          [
+            1.21424,
+            2.94711,
+            3.69265,
+            3.56667,
+            4.58323,
+            7.54595
+          ],
+          [
+            3.01421,
+            3.72301,
+            7.7809
+          ],
+          [
+            3.05915
+          ],
+          [
+            2.94805,
+            7.463585
+          ]
+        ],
+        "human_shot_times": [
+          [],
+          [],
+          [
+            7.7809
+          ],
+          [],
+          [
+            7.463585
+          ]
+        ],
+        "readers": {
+          "ordinary": [
+            7.6
+          ],
+          "motion": [
+            7.6
+          ]
+        },
+        "turn_images": [
+          6,
+          6,
+          6,
+          6
+        ]
+      }
+    ],
+    "summary": {
+      "original_24": {
+        "human_f1": {
+          "mean": 0.6565258468383469,
+          "film_bootstrap_95": [
+            0.601570032976283,
+            0.7145588693713694
+          ]
+        },
+        "readers": {
+          "ordinary": {
+            "f1": {
+              "mean": 0.3922835497835498,
+              "film_bootstrap_95": [
+                0.28890137987012987,
+                0.4958004749879749
+              ]
+            },
+            "fraction_of_human_f1": {
+              "mean": 0.5975142512251156,
+              "film_bootstrap_95": [
+                0.4581564257144449,
+                0.7251387327557424
+              ]
+            },
+            "marks": 40,
+            "marks_near_majority": 35,
+            "matched_per_film_per_viewer": 1.3,
+            "rotated_f1": {
+              "mean": 0.2398843203237734,
+              "film_bootstrap_95": [
+                0.1775424817604993,
+                0.2996544062039667
+              ]
+            },
+            "above_rotation": {
+              "mean": 0.15239922945977633,
+              "film_bootstrap_95": [
+                0.09374085488440957,
+                0.21981571434208147
+              ]
+            },
+            "minus_human": {
+              "mean": -0.264242297054797,
+              "film_bootstrap_95": [
+                -0.35114060794529545,
+                -0.1833539079554704
+              ]
+            }
+          },
+          "motion": {
+            "f1": {
+              "mean": 0.3763780663780663,
+              "film_bootstrap_95": [
+                0.26227059283309284,
+                0.48999506974506957
+              ]
+            },
+            "fraction_of_human_f1": {
+              "mean": 0.5732875075529814,
+              "film_bootstrap_95": [
+                0.41329720556577165,
+                0.7204509132217445
+              ]
+            },
+            "marks": 39,
+            "marks_near_majority": 34,
+            "matched_per_film_per_viewer": 1.275,
+            "rotated_f1": {
+              "mean": 0.22739693249458873,
+              "film_bootstrap_95": [
+                0.1625205853174603,
+                0.2894693783773373
+              ]
+            },
+            "above_rotation": {
+              "mean": 0.14898113388347764,
+              "film_bootstrap_95": [
+                0.0827161423103806,
+                0.22105457382605812
+              ]
+            },
+            "minus_human": {
+              "mean": -0.2801477804602805,
+              "film_bootstrap_95": [
+                -0.3812663973757723,
+                -0.18596425594081845
+              ]
+            }
+          }
+        },
+        "paired": [
+          {
+            "before": "ordinary",
+            "after": "motion",
+            "change": {
+              "mean": -0.015905483405483405,
+              "film_bootstrap_95": [
+                -0.05884266774891775,
+                0.018427128427128427
+              ]
+            }
+          }
+        ]
+      },
+      "fresh_12": {
+        "human_f1": {
+          "mean": 0.6221899165649166,
+          "film_bootstrap_95": [
+            0.572392102110852,
+            0.6695483538452288
+          ]
+        },
+        "readers": {
+          "ordinary": {
+            "f1": {
+              "mean": 0.37349687349687355,
+              "film_bootstrap_95": [
+                0.22317294973544974,
+                0.5170333994708993
+              ]
+            },
+            "fraction_of_human_f1": {
+              "mean": 0.6002939995539199,
+              "film_bootstrap_95": [
+                0.36139383278284765,
+                0.8231264092268328
+              ]
+            },
+            "marks": 19,
+            "marks_near_majority": 16,
+            "matched_per_film_per_viewer": 1.1833333333333333,
+            "rotated_f1": {
+              "mean": 0.22622455018939394,
+              "film_bootstrap_95": [
+                0.1307910867886454,
+                0.3235356344321188
+              ]
+            },
+            "above_rotation": {
+              "mean": 0.14727232330747955,
+              "film_bootstrap_95": [
+                0.07024595377134439,
+                0.2316315656095929
+              ]
+            },
+            "minus_human": {
+              "mean": -0.24869304306804307,
+              "film_bootstrap_95": [
+                -0.39982352369852364,
+                -0.11079173777611284
+              ]
+            }
+          },
+          "motion": {
+            "f1": {
+              "mean": 0.40096801346801353,
+              "film_bootstrap_95": [
+                0.23337003968253967,
+                0.5635393217893218
+              ]
+            },
+            "fraction_of_human_f1": {
+              "mean": 0.6444463383169892,
+              "film_bootstrap_95": [
+                0.37716235192285724,
+                0.8959359174266139
+              ]
+            },
+            "marks": 18,
+            "marks_near_majority": 17,
+            "matched_per_film_per_viewer": 1.2333333333333334,
+            "rotated_f1": {
+              "mean": 0.21694755403739774,
+              "film_bootstrap_95": [
+                0.12847702048385642,
+                0.30346514273125597
+              ]
+            },
+            "above_rotation": {
+              "mean": 0.1840204594306157,
+              "film_bootstrap_95": [
+                0.08331565492161196,
+                0.2929739590379239
+              ]
+            },
+            "minus_human": {
+              "mean": -0.22122190309690312,
+              "film_bootstrap_95": [
+                -0.38811679350741846,
+                -0.06379820989195992
+              ]
+            }
+          }
+        },
+        "paired": [
+          {
+            "before": "ordinary",
+            "after": "motion",
+            "change": {
+              "mean": 0.02747113997113997,
+              "film_bootstrap_95": [
+                -0.017724867724867723,
+                0.10095238095238095
+              ]
+            }
+          }
+        ]
+      },
+      "all_36": {
+        "human_f1": {
+          "mean": 0.6450805367472034,
+          "film_bootstrap_95": [
+            0.603146329557788,
+            0.6879691953494037
+          ]
+        },
+        "readers": {
+          "ordinary": {
+            "f1": {
+              "mean": 0.3860213243546577,
+              "film_bootstrap_95": [
+                0.29858093835177174,
+                0.470679723825557
+              ]
+            },
+            "fraction_of_human_f1": {
+              "mean": 0.5984079543015777,
+              "film_bootstrap_95": [
+                0.4752617982669492,
+                0.7123763966964933
+              ]
+            },
+            "marks": 59,
+            "marks_near_majority": 51,
+            "matched_per_film_per_viewer": 1.261111111111111,
+            "rotated_f1": {
+              "mean": 0.2353310636123136,
+              "film_bootstrap_95": [
+                0.18248533629637145,
+                0.2863654059819425
+              ]
+            },
+            "above_rotation": {
+              "mean": 0.15069026074234407,
+              "film_bootstrap_95": [
+                0.10298666554558478,
+                0.2032199775533109
+              ]
+            },
+            "minus_human": {
+              "mean": -0.25905921239254565,
+              "film_bootstrap_95": [
+                -0.3333694141506641,
+                -0.18626003086419762
+              ]
+            }
+          },
+          "motion": {
+            "f1": {
+              "mean": 0.3845747154080488,
+              "film_bootstrap_95": [
+                0.2898800705467372,
+                0.4791634499759499
+              ]
+            },
+            "fraction_of_human_f1": {
+              "mean": 0.5961654297419259,
+              "film_bootstrap_95": [
+                0.45851428398743105,
+                0.7279052242512679
+              ]
+            },
+            "marks": 57,
+            "marks_near_majority": 51,
+            "matched_per_film_per_viewer": 1.261111111111111,
+            "rotated_f1": {
+              "mean": 0.22391380634219177,
+              "film_bootstrap_95": [
+                0.17136246345523684,
+                0.2746741801071228
+              ]
+            },
+            "above_rotation": {
+              "mean": 0.16066090906585695,
+              "film_bootstrap_95": [
+                0.10352377883497675,
+                0.22052242672571448
+              ]
+            },
+            "minus_human": {
+              "mean": -0.2605058213391546,
+              "film_bootstrap_95": [
+                -0.3469535688077355,
+                -0.17520683926413094
+              ]
+            }
+          }
+        },
+        "paired": [
+          {
+            "before": "ordinary",
+            "after": "motion",
+            "change": {
+              "mean": -0.001446608946608946,
+              "film_bootstrap_95": [
+                -0.036754449254449255,
+                0.03398163179413179
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "human_marks_with_any_reader_response_within_half_second": {
+      "original_24": {
+        "shot": {
+          "human_marks": 97,
+          "ordinary": 68,
+          "motion": 67
+        },
+        "event": {
+          "human_marks": 392,
+          "ordinary": 104,
+          "motion": 99
+        }
+      },
+      "fresh_12": {
+        "shot": {
+          "human_marks": 35,
+          "ordinary": 22,
+          "motion": 22
+        },
+        "event": {
+          "human_marks": 208,
+          "ordinary": 56,
+          "motion": 59
+        }
+      },
+      "all_36": {
+        "shot": {
+          "human_marks": 132,
+          "ordinary": 90,
+          "motion": 89
+        },
+        "event": {
+          "human_marks": 600,
+          "ordinary": 160,
+          "motion": 158
+        }
+      }
+    }
   }
 }

@@ -62,9 +62,11 @@ order, with nothing left out.
 
 ## Does it work?
 
+On 16 films new to Reel development, local GPT matched the human annotations on **38 of 48 questions (79.2%)**. Each of eight sounds had one film with a visible source and one with a hidden source. GPT guessed 23 of 48 correctly from the questions and choices alone. Across these and the 28 earlier films, agreement was **76.5% (101/132)**. [Results on the 16 new films](docs/perception-check.md#처음-사용한-영상-16편)
+
 On all 28 filmed scenes, local Codex GPT matched the human annotations on **63/84 questions (75.0%)**. It matched 25/28 for the picture, 20/28 for the sound in a specific interval and 18/28 for whether the sound source was visible. It gave 12 wrong answers and abstained on 9. Each film ran in a fresh session of the same version with pictures and local sound readings. The three panels used the original questions and choices. [Film-by-film answers and scoring](docs/perception-check.md#같은-버전으로-다시-본-실사-영상-28편)
 
-On 23 urban recordings, GPT and individual listeners overlapped on **56.3%** of the sound categories either picked. Two people listening to the same recording averaged **59.0%**. GPT missed children’s voices in all three recordings where a majority marked them. [Individual recordings and listener comparison](docs/listening-check.md#도시-녹음에서-gpt와-청취자가-고른-소리)
+On 23 urban recordings, GPT and individual listeners overlapped on **56.3%** of the sound categories either picked. Two people listening to the same recording averaged **58.9%**. GPT missed children’s voices in all three recordings where a majority marked them. [Individual recordings and listener comparison](docs/listening-check.md#도시-녹음에서-gpt와-청취자가-고른-소리)
 
 Fresh readers (a model given only the [reading guide](docs/READING.md) and the reel, never told what was wrong)
 watched real fan edits that a person had already reviewed:

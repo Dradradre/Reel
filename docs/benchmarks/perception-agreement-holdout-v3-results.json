@@ -1,0 +1,687 @@
+{
+  "panel": "perception-agreement-holdout-v3.json",
+  "frozen_panel_commit": "01f79ce",
+  "revision": "81f19cf235bb21223ff78f7eeb9872a97b9ebc7a",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "protocol": "Panel and human references committed before collecting any answers. One local session per anonymous film and one separate wording-only session per film. Runtime did not change between this panel and the 28-film panel. New films and old films have different sound-category mixes. A missing protocol step requires an identical fresh retry. A low score never triggers a retry.",
+  "protocol_retries": [],
+  "score": {
+    "correct": 38,
+    "wrong": 8,
+    "abstained": 2,
+    "total": 48,
+    "fraction": 0.7916666666666666,
+    "films": 16,
+    "all_three_correct": 8,
+    "by_question": {
+      "picture": {
+        "correct": 15,
+        "wrong": 1,
+        "abstained": 0
+      },
+      "sound": {
+        "correct": 12,
+        "wrong": 3,
+        "abstained": 1
+      },
+      "visible_source": {
+        "correct": 11,
+        "wrong": 4,
+        "abstained": 1
+      }
+    }
+  },
+  "by_film": [
+    {
+      "video_id": "video_8223",
+      "answers": [
+        "A",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.944,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 5,
+      "audio_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 1102061,
+        "sample_count": 14396,
+        "rate_hz": 48000,
+        "alternatives": [
+          "speech",
+          "animal sound"
+        ]
+      }
+    },
+    {
+      "video_id": "video_4956",
+      "answers": [
+        "B",
+        "B",
+        "Y"
+      ],
+      "turns": 3,
+      "end_s": 21.675,
+      "calls": {
+        "view": 4,
+        "look": 1,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 3,
+      "audio_caption_turns": 3,
+      "exact_replay": {
+        "first_sample": 345591,
+        "sample_count": 107198,
+        "rate_hz": 48000,
+        "alternatives": [
+          "opening or closing something",
+          "liquid movement"
+        ]
+      }
+    },
+    {
+      "video_id": "video_2983",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 35.008,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 5,
+      "audio_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 1034635,
+        "sample_count": 14664,
+        "rate_hz": 48000,
+        "alternatives": [
+          "hitting",
+          "opening or closing something"
+        ]
+      }
+    },
+    {
+      "video_id": "video_82",
+      "answers": [
+        "A",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.901,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 5,
+      "audio_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 519415,
+        "sample_count": 81508,
+        "rate_hz": 48000,
+        "alternatives": [
+          "opening or closing something",
+          "liquid movement"
+        ]
+      }
+    },
+    {
+      "video_id": "video_762",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 34.965,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 5,
+      "audio_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 294600,
+        "sample_count": 48294,
+        "rate_hz": 48000,
+        "alternatives": [
+          "speech",
+          "hitting"
+        ]
+      }
+    },
+    {
+      "video_id": "video_918",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 35.029,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 5,
+      "audio_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 615838,
+        "sample_count": 59184,
+        "rate_hz": 48000,
+        "alternatives": [
+          "hitting",
+          "dropping"
+        ]
+      }
+    },
+    {
+      "video_id": "video_5560",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "end_s": 16.880997732426305,
+      "calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 3,
+      "audio_caption_turns": 3,
+      "exact_replay": {
+        "first_sample": 544277,
+        "sample_count": 123565,
+        "rate_hz": 44100,
+        "alternatives": [
+          "clapping",
+          "opening or closing something"
+        ]
+      }
+    },
+    {
+      "video_id": "video_10592",
+      "answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "end_s": 17.792,
+      "calls": {
+        "view": 4,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 3,
+      "audio_caption_turns": 3,
+      "exact_replay": {
+        "first_sample": 91270,
+        "sample_count": 60846,
+        "rate_hz": 48000,
+        "alternatives": [
+          "animal sound",
+          "hitting"
+        ]
+      }
+    },
+    {
+      "video_id": "video_5230",
+      "answers": [
+        "B",
+        "A",
+        "Y"
+      ],
+      "turns": 2,
+      "end_s": 14.210997732426303,
+      "calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 2,
+      "audio_caption_turns": 2,
+      "exact_replay": {
+        "first_sample": 495390,
+        "sample_count": 19111,
+        "rate_hz": 44100,
+        "alternatives": [
+          "rolling",
+          "hitting"
+        ]
+      }
+    },
+    {
+      "video_id": "video_152",
+      "answers": [
+        "C",
+        "A",
+        "Y"
+      ],
+      "turns": 5,
+      "end_s": 35.051,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 1,
+      "audio_caption_turns": 1,
+      "exact_replay": {
+        "first_sample": 1226136,
+        "sample_count": 87923,
+        "rate_hz": 48000,
+        "alternatives": [
+          "opening or closing something",
+          "hitting"
+        ]
+      }
+    },
+    {
+      "video_id": "video_6540",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 35.03900226757369,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 5,
+      "audio_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 232426,
+        "sample_count": 11769,
+        "rate_hz": 44100,
+        "alternatives": [
+          "hitting",
+          "clapping"
+        ]
+      }
+    },
+    {
+      "video_id": "video_1075",
+      "answers": [
+        "B",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "end_s": 33.367006802721086,
+      "calls": {
+        "view": 6,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 5,
+      "audio_caption_turns": 5,
+      "exact_replay": {
+        "first_sample": 464381,
+        "sample_count": 7348,
+        "rate_hz": 44100,
+        "alternatives": [
+          "animal sound",
+          "hitting"
+        ]
+      }
+    },
+    {
+      "video_id": "video_5626",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 2,
+      "end_s": 11.146009070294784,
+      "calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 2,
+      "audio_caption_turns": 2,
+      "exact_replay": {
+        "first_sample": 157291,
+        "sample_count": 13230,
+        "rate_hz": 44100,
+        "alternatives": [
+          "hitting",
+          "clapping"
+        ]
+      }
+    },
+    {
+      "video_id": "video_2371",
+      "answers": [
+        "B",
+        "?",
+        "?"
+      ],
+      "turns": 4,
+      "end_s": 26.63299319727891,
+      "calls": {
+        "view": 5,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 4,
+      "audio_caption_turns": 4,
+      "exact_replay": {
+        "first_sample": 304615,
+        "sample_count": 111839,
+        "rate_hz": 44100,
+        "alternatives": [
+          "hitting",
+          "dropping"
+        ]
+      }
+    },
+    {
+      "video_id": "video_6480",
+      "answers": [
+        "C",
+        "A",
+        "Y"
+      ],
+      "turns": 2,
+      "end_s": 15.403,
+      "calls": {
+        "view": 3,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 2,
+      "audio_caption_turns": 2,
+      "exact_replay": {
+        "first_sample": 549390,
+        "sample_count": 75946,
+        "rate_hz": 48000,
+        "alternatives": [
+          "rolling",
+          "hitting"
+        ]
+      }
+    },
+    {
+      "video_id": "video_6614",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "end_s": 31.509,
+      "calls": {
+        "view": 5,
+        "ask_scene": 1
+      },
+      "audio_source_estimate_turns": 4,
+      "audio_caption_turns": 4,
+      "exact_replay": {
+        "first_sample": 54503,
+        "sample_count": 44884,
+        "rate_hz": 48000,
+        "alternatives": [
+          "hitting",
+          "speech"
+        ]
+      }
+    }
+  ],
+  "source_visibility_responses_by_human_reference": {
+    "Y": {
+      "N": 3,
+      "Y": 4,
+      "?": 1
+    },
+    "N": {
+      "N": 7,
+      "Y": 1
+    }
+  },
+  "wording_only": {
+    "forced_guess": true,
+    "score": {
+      "correct": 23,
+      "wrong": 25,
+      "abstained": 0,
+      "total": 48,
+      "fraction": 0.4791666666666667,
+      "films": 16,
+      "all_three_correct": 2,
+      "by_question": {
+        "picture": {
+          "correct": 6,
+          "wrong": 10,
+          "abstained": 0
+        },
+        "sound": {
+          "correct": 8,
+          "wrong": 8,
+          "abstained": 0
+        },
+        "visible_source": {
+          "correct": 9,
+          "wrong": 7,
+          "abstained": 0
+        }
+      }
+    },
+    "by_film": [
+      {
+        "video_id": "video_8223",
+        "answers": [
+          "B",
+          "A",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_4956",
+        "answers": [
+          "C",
+          "A",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_2983",
+        "answers": [
+          "C",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_82",
+        "answers": [
+          "C",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_762",
+        "answers": [
+          "B",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_918",
+        "answers": [
+          "C",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_5560",
+        "answers": [
+          "A",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_10592",
+        "answers": [
+          "B",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_5230",
+        "answers": [
+          "A",
+          "B",
+          "Y"
+        ]
+      },
+      {
+        "video_id": "video_152",
+        "answers": [
+          "C",
+          "A",
+          "Y"
+        ]
+      },
+      {
+        "video_id": "video_6540",
+        "answers": [
+          "B",
+          "B",
+          "Y"
+        ]
+      },
+      {
+        "video_id": "video_1075",
+        "answers": [
+          "B",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_5626",
+        "answers": [
+          "B",
+          "B",
+          "Y"
+        ]
+      },
+      {
+        "video_id": "video_2371",
+        "answers": [
+          "B",
+          "B",
+          "N"
+        ]
+      },
+      {
+        "video_id": "video_6480",
+        "answers": [
+          "C",
+          "B",
+          "Y"
+        ]
+      },
+      {
+        "video_id": "video_6614",
+        "answers": [
+          "A",
+          "B",
+          "N"
+        ]
+      }
+    ]
+  },
+  "video_cluster_bootstrap": {
+    "samples": 10000,
+    "seed": 20261123,
+    "panel_percentile_95": [
+      0.6666666666666666,
+      0.8958333333333334
+    ],
+    "paired_minus_wording_only_95": [
+      0.125,
+      0.5
+    ],
+    "scope": "Whole-film draws, conditional on these 16 recordings and single model responses. Does not estimate the population of all videos or repeated-reader variability."
+  },
+  "combined_with_28": {
+    "prior_report": "perception-agreement-gain-assisted.json",
+    "score": {
+      "correct": 101,
+      "wrong": 20,
+      "abstained": 11,
+      "total": 132,
+      "fraction": 0.7651515151515151,
+      "films": 44,
+      "all_three_correct": 22,
+      "by_question": {
+        "picture": {
+          "correct": 40,
+          "wrong": 4,
+          "abstained": 0
+        },
+        "sound": {
+          "correct": 32,
+          "wrong": 6,
+          "abstained": 6
+        },
+        "visible_source": {
+          "correct": 29,
+          "wrong": 10,
+          "abstained": 5
+        }
+      }
+    }
+  },
+  "target_counts": {
+    "animal sound": 2,
+    "liquid movement": 2,
+    "opening or closing something": 2,
+    "speech": 2,
+    "dropping": 2,
+    "clapping": 2,
+    "rolling": 2,
+    "hitting": 2
+  },
+  "released_turns": 63,
+  "door_control": {
+    "cutoff_s": 8.5,
+    "prompt_counts_per_arm": 1,
+    "exact_replay_s": [
+      3.76,
+      6.76
+    ],
+    "answers": {
+      "key_recording": "A closed brown door remains still against a plain wall throughout the clip. The audio measurements show a rise in high-frequency sound around 4.6–6.8 seconds; its source is uncertain, and the speech reader found no intelligible words.",
+      "room_only": "A simple illustration shows a closed brown door against a pale wall, with no visible change throughout the clip. The audio measurements show a very low, steady signal that may be hiss, though its source is uncertain; the speech reader found no intelligible words."
+    },
+    "post_cutoff_twin_check": "Two files identical through 8.5 s and different afterward returned identical bytes in all 32 compared MCP blocks. Both the native WAV path and the image-client path were included."
+  },
+  "published_soundscape_rescore": {
+    "recordings": 23,
+    "reader_listener": 0.5630434782608695,
+    "listener_listener": 0.5894927536231884,
+    "different_recording": 0.24255599472990777,
+    "source": "urban-sound-agreement.json"
+  },
+  "resources": {
+    "max_per_film_rss_kib": 4529856,
+    "min_host_free_pct": 83,
+    "surviving_owned_processes": 0
+  },
+  "playback_audio_readings": "AudioSet and CoNeTTE returned readings on 59 of 63 playback turns. In video_152 the reader disabled sound_estimates on turns 2 through 5. The exact replay with the original alternatives, speech reader and CLAP succeeded in every film.",
+  "reader_prompt_template": "Watch the entire film with reel.view, starting with turn=1 and continuous_seconds=8, and continue in order through end_of_view. Use native_audio=false. Once released, use reel.ask_scene on the exact sound interval below with the supplied alternatives and native_audio=false. Use only the evidence returned; you may use look to inspect pictures.\n1. {picture_question} A. {picture_A} B. {picture_B} C. {picture_C}\n2. During {start_s} s to {end_s} s, which sound is occurring? A. {sound_A} B. {sound_B}.\n3. During that interval, can you see the source producing that sound? Y = yes, N = no.\nChoose ? for any unresolved question. Return just a JSON array of three uppercase answer letters, in order."
+}

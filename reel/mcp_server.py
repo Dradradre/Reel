@@ -188,17 +188,12 @@ class Viewing:
             return self.sound.for_replay()
         return nullcontext(self.sound)
 
-    def match_original(self, wav, start, end, alternatives, *, per_second, first_sample):
+    def match_session(self):
         if self.matcher is None:
-            manager = SoundMatcher()
-        elif isinstance(self.matcher, SoundMatcher):
-            manager = self.matcher.for_replay()
-        else:
-            manager = nullcontext(self.matcher)
-        with manager as matcher:
-            if per_second:
-                return matcher.read(wav, start, end, alternatives, per_second=True, first_sample=first_sample)
-            return matcher.read(wav, start, end, alternatives)
+            return SoundMatcher()
+        if isinstance(self.matcher, SoundMatcher):
+            return self.matcher.for_replay()
+        return nullcontext(self.matcher)
 
     def read_scene(self, key, directory, *, seconds=None, question=None, interval=None, native_audio=False):
         cached = self.last_joint is not None and self.last_joint[0] == key
@@ -239,8 +234,9 @@ class Viewing:
                                                      scene["first_sample"], end_s, self.lang)
             match = None
             if scene.get("wav") and alternatives is not None:
-                match = self.match_original(scene["wav"], start_s, end_s, alternatives, per_second=True,
-                                            first_sample=scene["first_sample"])
+                with self.match_session() as matcher:
+                    match = matcher.read(scene["wav"], start_s, end_s, alternatives, per_second=True,
+                                         first_sample=scene["first_sample"])
             if sync_regions:
                 timing = published_timing(scene, sync_regions)
         report = {"start_s": start_s, "end_s": end_s, "joint": joint, "images_in_order": [], "audio": None}
@@ -645,8 +641,11 @@ class Viewing:
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first)}
             if alternatives is not None or per_second:
-                result["original_sound_match"] = self.match_original(original, start, stop, alternatives or [],
-                                                                     per_second=per_second, first_sample=first)
+                options = {"per_second": True, "first_sample": first} if per_second else {}
+                with self.match_session() as matcher:
+                    result["original_sound_match"] = matcher.read(original, start, stop, alternatives or [], **options)
+                    if focus and result["original_sound_match"].get("status") == "available":
+                        result["component_sound_match"] = matcher.read(wav, start, stop, alternatives or [], **options)
             if focus:
                 result["component"] = focus
         blocks = []
@@ -956,8 +955,11 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
             to emphasize sustained frequency bands or "percussive" to emphasize short broadband changes.
+            Use "mid" for the average waveform of each stereo pair, or "side" for its difference.
             Use "mix" for the original. The local reader compares a selected component with the original.
             Supply alternatives to compare proposed sounds against the original recording without pictures.
+            With a component, component_sound_match compares the same descriptions with the selected signal.
+            A close match on a component may sound different in the original mix.
             An empty list retrieves the closest catalogue sounds. Set per_second=true to compare each second
             independently, including the last partial second. The scores do not certify a source.
             native_audio includes the selected WAV.

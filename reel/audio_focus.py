@@ -1,4 +1,4 @@
-"""Rehear sustained and percussive structure within an already released recording."""
+"""Rehear spectral or stereo components of an already released recording."""
 from pathlib import Path
 import subprocess
 import tempfile
@@ -11,11 +11,13 @@ from scipy.signal.windows import hann
 
 if __package__:
     from .common import open_recording, probe
+    from .stereo import channel_pairs
 else:
     from common import open_recording, probe
+    from stereo import channel_pairs
 
 
-Component = Literal["mix", "harmonic", "percussive"]
+Component = Literal["mix", "harmonic", "percussive", "mid", "side"]
 COMPONENTS = get_args(Component)
 MEDIAN_WIDTH = 31
 BASIS = ("Harmonic-percussive median filtering of this excerpt only. Harmonic emphasizes frequency bands "
@@ -46,10 +48,41 @@ def harmonic_part(samples, hop, window):
     return result[:, width:width + len(samples)].T / 1.5
 
 
+def spectral_blocks(recording, component):
+    hop = next_fast_len(max(1, round(recording.samplerate * .0116)), real=True)
+    window = hann(4 * hop, sym=False)
+    # Align blocks on the same STFT grid and retain all neighbouring median windows.
+    context = (MEDIAN_WIDTH // 2 + 4) * hop
+    block_size = 96 * hop
+    for start in range(0, len(recording), block_size):
+        stop = min(len(recording), start + block_size)
+        left, right = max(0, start - context), min(len(recording), stop + context)
+        recording.seek(left)
+        samples = recording.read(right - left, dtype="float64", always_2d=True)
+        selected = slice(start - left, stop - left)
+        original = samples[selected]
+        part = harmonic_part(samples, hop, window)[selected]
+        yield original, part if component == "harmonic" else original - part
+
+
+def stereo_blocks(recording, pairs, component):
+    for samples in recording.blocks(blocksize=65536, dtype="float64", always_2d=True):
+        part = samples.copy() if component == "mid" else np.zeros_like(samples)
+        for pair in pairs:
+            left, right = (i - 1 for i in pair["channels"])
+            if component == "mid":
+                part[:, left] = part[:, right] = (samples[:, left] + samples[:, right]) * .5
+            else:
+                difference = (samples[:, left] - samples[:, right]) * .5
+                # A listener that folds the output to mono must still hear the side signal.
+                part[:, left] = part[:, right] = difference
+        yield samples, part
+
+
 def focus_recording(wav, component, out):
     """Return a playable component and levels on the original channel/sample clock."""
     if component not in COMPONENTS:
-        raise ValueError("choose mix, harmonic or percussive for the listening component")
+        raise ValueError("choose a listening component from " + ", ".join(COMPONENTS))
     wav = Path(wav)
     if component == "mix":
         return wav, None
@@ -59,29 +92,27 @@ def focus_recording(wav, component, out):
         rate, channels, length = recording.samplerate, recording.channels, len(recording)
         if length == 0:
             raise ValueError("the listening range contains no audio samples")
-        hop = next_fast_len(max(1, round(rate * .0116)), real=True)
-        window = hann(4 * hop, sym=False)
-        # Read neighbouring frames for the median and all overlap-add windows before cropping.
-        # Keep block boundaries on the same STFT grid, including the last partial block.
-        context = (MEDIAN_WIDTH // 2 + 4) * hop
-        block_size = 96 * hop
+        layout = probe(wav).get("audio_layout", "")
+        detail = {"basis": BASIS}
+        if component in ("mid", "side"):
+            pairs = channel_pairs(channels, layout)
+            if not pairs:
+                raise ValueError("mid and side need a channel pair; choose mix for this recording")
+            detail = {"pairs": pairs, "basis": (
+                "Mid is the half-sum of each listed pair. Side is half the left channel minus half the right. "
+                "The chosen signal plays in phase on both channels so it remains audible in mono. Mid plus side "
+                "restores the left channel; mid minus side restores the right. Unpaired channels play only in mid. "
+                "A source can occur in both. Levels are measured before playback gain.")}
+            blocks = stereo_blocks(recording, pairs, component)
+        else:
+            blocks = spectral_blocks(recording, component)
         energy = np.zeros((2, channels))
         raw = Path(tmp) / "component.f32"
         with raw.open("wb") as output:
-            for start in range(0, length, block_size):
-                stop = min(length, start + block_size)
-                left, right = max(0, start - context), min(length, stop + context)
-                recording.seek(left)
-                samples = recording.read(right - left, dtype="float64", always_2d=True)
-                selected = slice(start - left, stop - left)
-                original = samples[selected]
-                part = harmonic_part(samples, hop, window)[selected]
-                if component == "percussive":
-                    part = original - part
+            for original, part in blocks:
                 energy[0] += np.square(original).sum(axis=0)
                 energy[1] += np.square(part).sum(axis=0)
                 output.write(part.astype("<f4").tobytes())
-        layout = probe(wav).get("audio_layout")
         cmd = ["ffmpeg", "-nostdin", "-v", "error", "-f", "f32le", "-ar", str(rate), "-ac", str(channels)]
         if layout:
             cmd.extend(["-channel_layout", layout])
@@ -91,4 +122,4 @@ def focus_recording(wav, component, out):
         rendered.replace(dest)
     mix_db, component_db = [[round(float(10 * np.log10(e / length)), 2) if e else None for e in row]
                             for row in energy]
-    return dest, {"name": component, "basis": BASIS, "mix_rms_dbfs": mix_db, "component_rms_dbfs": component_db}
+    return dest, {"name": component, **detail, "mix_rms_dbfs": mix_db, "component_rms_dbfs": component_db}

@@ -193,7 +193,9 @@ class WaveListener:
     def compare(self, focused, original, component, question=None):
         if self.model is None:
             self.model, self.processor = self.load(str(weights()))
-        emphasis = {"harmonic": "sustained frequency bands", "percussive": "brief broadband changes"}[component]
+        emphasis = {"harmonic": "sustained frequency bands", "percussive": "brief broadband changes",
+                    "mid": "the average waveform of the two paired channels",
+                    "side": "the waveform difference between the two paired channels"}[component]
         instruction = (f"These are two versions of the same interval. The first emphasizes {emphasis}. "
                        "The second is the original recording. Use the first to locate a sound, then listen to "
                        "the original to decide what is audible. " + PROMPT)

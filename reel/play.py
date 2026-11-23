@@ -142,7 +142,7 @@ def save_sound(dest, chunks, info, wave_format, dtype):
     pcm = np.frombuffer(b"".join(chunks), dtype=dtype).reshape(count, channels)
     return {"wav": "sound.wav", "spectrum": "sound.png", "rate_hz": rate, "channels": channels,
             "sample_count": count, "recorded_spectrum": recorded_spectrum(pcm, rate),
-            "listen_command": "listen [--component mix|harmonic|percussive] [QUESTION]",
+            "listen_command": "listen [--component mix|harmonic|percussive|mid|side] [QUESTION]",
             "match_command": 'match START END ["sound description" ...]'}
 
 

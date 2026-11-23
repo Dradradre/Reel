@@ -77,6 +77,38 @@ class AcousticFocusTests(unittest.TestCase):
             self.assertGreater(abs(outputs["percussive"][900, 0]), .35)
             np.testing.assert_allclose(outputs["harmonic"][3800:4100, 0], note[3800:4100], atol=.005)
 
+    def test_mid_and_side_preserve_layout_and_only_transform_paired_channels(self):
+        import subprocess
+        rate = 24000
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            samples = np.random.default_rng(882).uniform(-.7, .7, (65541, 6)).astype("<f4")
+            samples[:, 1] = samples[:, 0]
+            samples[:, 5] = -samples[:, 4]
+            wav = root / "surround.wav"
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "f32le", "-ar", str(rate), "-ac", "6",
+                            "-channel_layout", "5.1", "-i", "-", "-c:a", "pcm_f32le", str(wav)],
+                           input=samples.tobytes(), check=True)
+            parts = []
+            for name in ("mid", "side"):
+                dest, report = focus_recording(wav, name, root)
+                part, sr = sf.read(dest, dtype="float32", always_2d=True)
+                self.assertEqual(sr, rate)
+                self.assertEqual([pair["channels"] for pair in report["pairs"]], [[1, 2], [5, 6]])
+                parts.append(part)
+            mid, side = parts
+            np.testing.assert_array_equal(mid[:, :4], samples[:, :4])
+            np.testing.assert_array_equal(mid[:, 4:], 0)
+            np.testing.assert_array_equal(side[:, :4], 0)
+            np.testing.assert_array_equal(side[:, 4], samples[:, 4])
+            np.testing.assert_array_equal(side[:, 5], samples[:, 4])
+            np.testing.assert_array_equal(mid[:, 4] + side[:, 4], samples[:, 4])
+            np.testing.assert_array_equal(mid[:, 5] - side[:, 5], samples[:, 5])
+            mono = root / "mono.wav"
+            sf.write(mono, samples[:, 0], rate)
+            with self.assertRaisesRegex(ValueError, "channel pair"):
+                focus_recording(mono, "side", root)
+
     def test_selected_audio_and_measurements_use_only_the_released_samples(self):
         try:
             from reel.mcp_server import Viewing
@@ -98,6 +130,12 @@ class AcousticFocusTests(unittest.TestCase):
                     for n in range(1, 5):
                         reader.advance(n, False, False)
                     blocks = reader.listen(4, None, .100125, .875, True, False, "harmonic")
+                    side = reader.listen(4, None, .100125, .875, True, False, "side")
+                    side_pcm, side_rate = sf.read(io.BytesIO(base64.b64decode(side[-1].data)), always_2d=True)
+                    self.assertEqual(side_rate, rate)
+                    expected = samples[801:7000].astype(np.float64) / 32768
+                    delta = (expected[:, 0] - expected[:, 1]) * .5
+                    np.testing.assert_array_equal(side_pcm, np.column_stack([delta, delta]))
                     with self.assertRaises(ValueError):
                         reader.listen(4, None, .1, .875125, False, False, "percussive")
                 info = json.loads(blocks[0].text)

@@ -424,7 +424,7 @@ def main():
                             if command[1:2] == ["--component"]:
                                 fields = line.strip().split(maxsplit=3)
                                 if len(fields) < 3:
-                                    raise ValueError("use listen --component mix|harmonic|percussive [QUESTION]")
+                                    raise ValueError("use listen --component mix|harmonic|percussive|mid|side [QUESTION]")
                                 component = fields[2].lower()
                                 question = fields[3] if len(fields) == 4 else None
                             with sound_reader.for_replay():
@@ -463,7 +463,7 @@ def main():
                         continue
                     if not command or command[0] != "next" or len(command) > 2:
                         ap.error("enter next, next SECONDS, joint SECONDS, observe START END, look [--at SECONDS] LEFT TOP RIGHT BOTTOM, "
-                                 "listen [--component mix|harmonic|percussive] [QUESTION], match START END DESCRIPTION, compare-heard [--similarity] START END START END, layer START END RANK [CHANNEL], speech [LANG], or quit")
+                                 "listen [--component mix|harmonic|percussive|mid|side] [QUESTION], match START END DESCRIPTION, compare-heard [--similarity] START END START END, layer START END RANK [CHANNEL], speech [LANG], or quit")
                     duration = float(command[1]) if len(command) == 2 else None
                     try:
                         with original.reading():

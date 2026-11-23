@@ -822,6 +822,20 @@ class TransportTests(unittest.TestCase):
             reader.listen(2, None, end_s=.25, describe=False, alternatives=[])
             self.assertEqual(attempts, [(.25, .75, choices), (0, .25, [])])
             self.assertEqual(worker.__exit__.call_count, 2)
+            def read_part(path, start, end, descriptions, **kwargs):
+                part, sr = sf.read(path, always_2d=True)
+                self.assertEqual(sr, rate)
+                self.assertEqual(kwargs, {"per_second": True, "first_sample": 2000})
+                self.assertEqual(descriptions, choices)
+                return {"status": "available", "silent": not np.any(part)}
+
+            worker.__enter__.return_value.read.side_effect = read_part
+            focused = reader.listen(2, None, .25, .75, describe=False, component="mid",
+                                    alternatives=choices, per_second=True)
+            data = json.loads(focused[0].text)
+            self.assertFalse(data["original_sound_match"]["silent"])
+            self.assertTrue(data["component_sound_match"]["silent"])
+            self.assertEqual(worker.__exit__.call_count, 3)
 
     def test_replay_reports_actual_sample_count_at_a_rounded_track_end(self):
         from reel.action_view import action_views

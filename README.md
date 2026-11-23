@@ -62,7 +62,7 @@ order, with nothing left out.
 
 ## Does it work?
 
-On ten other filmed scenes, local Codex GPT matched the human annotations **16/30 times (53.3%)**. It answered 6 questions incorrectly and abstained on 8. For the picture, sound and source visibility it scored 8/10, 3/10 and 5/10. With only the question wording, forced guesses scored 4/10, 3/10 and 5/10. The earlier 18 scenes scored 44/54. Across all 28 scenes that gives **60/84 (71.4%)**. GPT received pictures and local sound readings, with direct WAV input and the 30B listener off. [Individual answers and controls](docs/perception-check.md#기존-18편을-제외하고-다른-10편에서-측정한-결과)
+On ten filmed scenes, local Codex GPT matched the human annotations **18/30 times (60.0%)** on its latest run. It scored 8/10 for the picture, 4/10 for the sound and 6/10 for source visibility. It answered 5 questions incorrectly and abstained on 7. The previous run scored 16/30. Both newly correct answers came from one film and the previous version also got them right on a repeat. Eighteen other scenes scored 44/54 before this change. These runs used pictures and local sound readings with direct WAV input and the 30B reader off. [Paired responses and repeats](docs/perception-check.md#같은-10편에서-녹음을-이어-비교한-결과)
 
 Fresh readers (a model given only the [reading guide](docs/READING.md) and the reel, never told what was wrong)
 watched real fan edits that a person had already reviewed:

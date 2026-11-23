@@ -1,0 +1,7232 @@
+{
+  "source_panel": "sound-identity-switch.json",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "prototype_server_sha256": {
+    "previous": "cd470fb270e2a0568c0070d1ff0096802ee1fb6c8142f6a25ab4558f55ae2c30",
+    "measured": "59b21191bd53570458108087552fdacbfce575e6b412481dc009d170ac76222a"
+  },
+  "method": "Use held pictures from the original first scene and two consecutive equal-length recordings. Randomly permute the source order per film. The 24 distinct pairs preserve independently labelled events. Eight additional pairs repeat the exact recorded samples and eight replace one recording with exact digital silence. Each condition uses a fresh session with identical instructions, picture, audio, options, CLAP audio-to-audio similarities and separate spectra. The reader can replay either excerpt with ask_scene to compare both alternatives independently. Only the measured comparison directly includes each channel\u2019s match to the supplied descriptions and the mean target-minus-reference change. The previous adapter accepts the same call and returns the existing audio-to-audio report. No native WAV or optional 30B model. Readers may pick the same answer twice or abstain. Individual and pair scores count abstentions as incorrect for named events. Silence is reported separately.",
+  "by_condition": {
+    "previous": {
+      "distinct": {
+        "cases": 24,
+        "both_correct": 6,
+        "any_independent_replay": 22,
+        "two_different_names": 6,
+        "correct": 22,
+        "abstained": 18,
+        "wrong": 8
+      },
+      "repeat": {
+        "cases": 8,
+        "both_correct": 3,
+        "any_independent_replay": 6,
+        "two_different_names": 0,
+        "correct": 6,
+        "abstained": 10
+      },
+      "silence": {
+        "cases": 8,
+        "both_correct": 5,
+        "any_independent_replay": 6,
+        "two_different_names": 0,
+        "abstained": 2,
+        "silence_checks": 8,
+        "false_name_on_silence": 0,
+        "correct": 5,
+        "wrong": 1
+      }
+    },
+    "measured": {
+      "distinct": {
+        "cases": 24,
+        "both_correct": 6,
+        "any_independent_replay": 0,
+        "two_different_names": 6,
+        "correct": 28,
+        "wrong": 13,
+        "abstained": 7
+      },
+      "repeat": {
+        "cases": 8,
+        "both_correct": 4,
+        "any_independent_replay": 0,
+        "two_different_names": 0,
+        "correct": 8,
+        "wrong": 6,
+        "abstained": 2
+      },
+      "silence": {
+        "cases": 8,
+        "both_correct": 5,
+        "any_independent_replay": 0,
+        "two_different_names": 0,
+        "wrong": 2,
+        "silence_checks": 8,
+        "false_name_on_silence": 0,
+        "correct": 5,
+        "abstained": 1
+      }
+    },
+    "with_catalogue": {
+      "distinct": {
+        "cases": 24,
+        "both_correct": 6,
+        "any_independent_replay": 0,
+        "two_different_names": 6,
+        "correct": 25,
+        "abstained": 16,
+        "wrong": 7
+      },
+      "repeat": {
+        "cases": 8,
+        "both_correct": 4,
+        "any_independent_replay": 0,
+        "two_different_names": 0,
+        "correct": 8,
+        "wrong": 6,
+        "abstained": 2
+      },
+      "silence": {
+        "cases": 8,
+        "both_correct": 3,
+        "any_independent_replay": 0,
+        "two_different_names": 0,
+        "wrong": 2,
+        "silence_checks": 8,
+        "false_name_on_silence": 0,
+        "correct": 3,
+        "abstained": 3
+      }
+    },
+    "released": {
+      "distinct": {
+        "cases": 24,
+        "both_correct": 6,
+        "any_independent_replay": 0,
+        "two_different_names": 6,
+        "correct": 25,
+        "abstained": 16,
+        "wrong": 7
+      },
+      "repeat": {
+        "cases": 8,
+        "both_correct": 3,
+        "any_independent_replay": 6,
+        "two_different_names": 0,
+        "correct": 6,
+        "abstained": 8,
+        "wrong": 2
+      },
+      "silence": {
+        "cases": 8,
+        "both_correct": 5,
+        "any_independent_replay": 6,
+        "two_different_names": 0,
+        "abstained": 2,
+        "silence_checks": 8,
+        "false_name_on_silence": 0,
+        "correct": 5,
+        "wrong": 1
+      }
+    }
+  },
+  "distinct_both_correct_difference": {
+    "fraction": 0.0,
+    "interval_95": [
+      -0.125,
+      0.125
+    ],
+    "method": "20,000 paired film bootstrap draws, seed 7035"
+  },
+  "by_pair": [
+    {
+      "film": "video_10368",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "first_end": 0.9358072916666667,
+      "second_end": 1.8716197916666666,
+      "rate": 48000,
+      "samples": 44919,
+      "pcm_sha256": "98ce11d44640d0dcb33bfc5fe5401fb4a25b24b078dde58ec93bc2bf4775d77b",
+      "readers": {
+        "previous": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.9358072916666667
+            ],
+            [
+              0.9358072916666667,
+              1.8716197916666666
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.5239,
+          0.5139
+        ],
+        [
+          0.5332,
+          0.5264
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.0625,
+            0.3747
+          ],
+          [
+            0.1081,
+            0.4292
+          ]
+        ],
+        "target": [
+          [
+            0.2191,
+            0.3412
+          ],
+          [
+            0.2276,
+            0.3481
+          ]
+        ],
+        "target_minus_reference": [
+          0.1381,
+          -0.0573
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.4861
+            },
+            {
+              "sound": "Tools",
+              "cosine": 0.4468
+            },
+            {
+              "sound": "Dishes, pots, and pans",
+              "cosine": 0.4361
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.5166
+            },
+            {
+              "sound": "Tools",
+              "cosine": 0.4774
+            },
+            {
+              "sound": "Hammer",
+              "cosine": 0.4547
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Chirp, tweet",
+              "cosine": 0.4408
+            },
+            {
+              "sound": "Rodents, rats, mice",
+              "cosine": 0.3937
+            },
+            {
+              "sound": "Chirp tone",
+              "cosine": 0.3923
+            }
+          ],
+          [
+            {
+              "sound": "Chirp, tweet",
+              "cosine": 0.3985
+            },
+            {
+              "sound": "Rodents, rats, mice",
+              "cosine": 0.3971
+            },
+            {
+              "sound": "Tap",
+              "cosine": 0.3948
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_10368",
+      "condition": "repeat",
+      "arms": [
+        0,
+        0
+      ],
+      "answers": [
+        "B",
+        "B"
+      ],
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "first_end": 0.9358072916666667,
+      "second_end": 1.8716197916666666,
+      "rate": 48000,
+      "samples": 44919,
+      "pcm_sha256": "71faaa33471439a3bae4405060a08f747a30dee4323ae4ed1535b1a843e05fe5",
+      "readers": {
+        "previous": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.9358072916666667
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.9358072916666667
+            ]
+          ],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0,
+          0.9552
+        ],
+        [
+          0.9552,
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.0625,
+            0.3747
+          ],
+          [
+            0.1081,
+            0.4292
+          ]
+        ],
+        "target": [
+          [
+            0.0625,
+            0.3747
+          ],
+          [
+            0.1081,
+            0.4292
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.4861
+            },
+            {
+              "sound": "Tools",
+              "cosine": 0.4468
+            },
+            {
+              "sound": "Dishes, pots, and pans",
+              "cosine": 0.4361
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.5166
+            },
+            {
+              "sound": "Tools",
+              "cosine": 0.4774
+            },
+            {
+              "sound": "Hammer",
+              "cosine": 0.4547
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.4861
+            },
+            {
+              "sound": "Tools",
+              "cosine": 0.4468
+            },
+            {
+              "sound": "Dishes, pots, and pans",
+              "cosine": 0.4361
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.5166
+            },
+            {
+              "sound": "Tools",
+              "cosine": 0.4774
+            },
+            {
+              "sound": "Hammer",
+              "cosine": 0.4547
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_8861",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "dropping",
+        "hitting"
+      ],
+      "first_end": 0.3001757369614512,
+      "second_end": 0.6003571428571428,
+      "rate": 44100,
+      "samples": 13238,
+      "pcm_sha256": "b3b9bfd8c1e0f498ad9cd616d7de965092983a61015c661fffb40d97e6d9fc85",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "B"
+          ],
+          "independent_replays": [
+            [
+              0.3001757369614512,
+              0.6003571428571428
+            ],
+            [
+              0.0,
+              0.3001757369614512
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "B"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.6161
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "dropping",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.171,
+            0.2479
+          ]
+        ],
+        "target": [
+          [
+            0.1321,
+            0.1485
+          ]
+        ],
+        "target_minus_reference": [
+          -0.039,
+          -0.0994
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Clicking",
+              "cosine": 0.3593
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3568
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3547
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Ratchet, pawl",
+              "cosine": 0.4743
+            },
+            {
+              "sound": "Tambourine",
+              "cosine": 0.4491
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4033
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_8861",
+      "condition": "silence",
+      "arms": [
+        0,
+        2
+      ],
+      "answers": [
+        "A",
+        "?"
+      ],
+      "options": [
+        "dropping",
+        "hitting"
+      ],
+      "first_end": 0.3001757369614512,
+      "second_end": 0.6003571428571428,
+      "rate": 44100,
+      "samples": 13238,
+      "pcm_sha256": "473c645a161bba2bd827033da6abb47884c3ad91c2fa990558908a75043a4aad",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.3001757369614512
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.3001757369614512
+            ]
+          ],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "dropping",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.171,
+            0.2479
+          ]
+        ],
+        "target": [
+          null
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Clicking",
+              "cosine": 0.3593
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3568
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3547
+            }
+          ]
+        ],
+        "target": [
+          []
+        ]
+      }
+    },
+    {
+      "film": "video_10303",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "liquid movement"
+      ],
+      "first_end": 0.9665249433106576,
+      "second_end": 1.9330555555555555,
+      "rate": 44100,
+      "samples": 42624,
+      "pcm_sha256": "4d6eddcbd13c4047f4d05bbe2744dc5b7186bc4457ca0c5a54bb39883c9b4e73",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.9665249433106576
+            ],
+            [
+              0.9665249433106576,
+              1.9330555555555555
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.3769
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "liquid movement"
+        ],
+        "reference": [
+          [
+            0.1667,
+            0.2498
+          ]
+        ],
+        "target": [
+          [
+            0.402,
+            0.1746
+          ]
+        ],
+        "target_minus_reference": [
+          0.2353,
+          -0.0752
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Bicycle",
+              "cosine": 0.4069
+            },
+            {
+              "sound": "Sink (filling or washing)",
+              "cosine": 0.3986
+            },
+            {
+              "sound": "Gears",
+              "cosine": 0.3943
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.5427
+            },
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.5199
+            },
+            {
+              "sound": "Knock",
+              "cosine": 0.4784
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_10303",
+      "condition": "repeat",
+      "arms": [
+        1,
+        1
+      ],
+      "answers": [
+        "B",
+        "B"
+      ],
+      "options": [
+        "hitting",
+        "liquid movement"
+      ],
+      "first_end": 0.9665249433106576,
+      "second_end": 1.9330555555555555,
+      "rate": 44100,
+      "samples": 42624,
+      "pcm_sha256": "29061322cb9618c52ae1d2024a6376f6d2be661f72edc3d33ba6ed32ce12c26b",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.9665249433106576,
+              1.9330555555555555
+            ],
+            [
+              0.0,
+              0.9665249433106576
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.9665249433106576
+            ]
+          ],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "liquid movement"
+        ],
+        "reference": [
+          [
+            0.1667,
+            0.2498
+          ]
+        ],
+        "target": [
+          [
+            0.1667,
+            0.2498
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Bicycle",
+              "cosine": 0.4069
+            },
+            {
+              "sound": "Sink (filling or washing)",
+              "cosine": 0.3986
+            },
+            {
+              "sound": "Gears",
+              "cosine": 0.3943
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Bicycle",
+              "cosine": 0.4069
+            },
+            {
+              "sound": "Sink (filling or washing)",
+              "cosine": 0.3986
+            },
+            {
+              "sound": "Gears",
+              "cosine": 0.3943
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_4471",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "first_end": 0.23335034013605443,
+      "second_end": 0.4667063492063492,
+      "rate": 44100,
+      "samples": 10291,
+      "pcm_sha256": "b9879bf89bfdd54a804ad6d5e6118601ac2953145e28656e1199038e8a4aaf37",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "B"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.23335034013605443
+            ],
+            [
+              0.23335034013605443,
+              0.4667063492063492
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.7363
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.4157,
+            0.3006
+          ]
+        ],
+        "target": [
+          [
+            0.4133,
+            0.2038
+          ]
+        ],
+        "target_minus_reference": [
+          -0.0025,
+          -0.0968
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.4075
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3981
+            },
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3878
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Clicking",
+              "cosine": 0.5095
+            },
+            {
+              "sound": "Finger snapping",
+              "cosine": 0.4515
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4243
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_4471",
+      "condition": "repeat",
+      "arms": [
+        1,
+        1
+      ],
+      "answers": [
+        "B",
+        "B"
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "first_end": 0.23335034013605443,
+      "second_end": 0.4667063492063492,
+      "rate": 44100,
+      "samples": 10291,
+      "pcm_sha256": "869edca9c9b146519fb5b720c8b9c599e5139cc845e37ff14023dddd538bac85",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.4157,
+            0.3006
+          ]
+        ],
+        "target": [
+          [
+            0.4157,
+            0.3006
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.4075
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3981
+            },
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3878
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.4075
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3981
+            },
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3878
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_8407",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "first_end": 0.36666099773242633,
+      "second_end": 0.7333276643990929,
+      "rate": 44100,
+      "samples": 16170,
+      "pcm_sha256": "6db8503c70ab3f994d6350968f8224865a54892e04ae88fba2ebfb210ce083e3",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.36666099773242633,
+              0.7333276643990929
+            ],
+            [
+              0.0,
+              0.36666099773242633
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.6523
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.4749,
+            0.2111
+          ]
+        ],
+        "target": [
+          [
+            0.3104,
+            0.11
+          ]
+        ],
+        "target_minus_reference": [
+          -0.1645,
+          -0.1011
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.3317
+            },
+            {
+              "sound": "Toot",
+              "cosine": 0.317
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.3084
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.455
+            },
+            {
+              "sound": "Rodents, rats, mice",
+              "cosine": 0.4099
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4086
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_8407",
+      "condition": "silence",
+      "arms": [
+        2,
+        0
+      ],
+      "answers": [
+        "?",
+        "A"
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "first_end": 0.36666099773242633,
+      "second_end": 0.7333276643990929,
+      "rate": 44100,
+      "samples": 16170,
+      "pcm_sha256": "2285c28534ba9f23c73ece36b9757101ead43fce5d626c0128060234dc51dba5",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.36666099773242633,
+              0.7333276643990929
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.36666099773242633,
+              0.7333276643990929
+            ]
+          ],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "hitting"
+        ],
+        "reference": [
+          null
+        ],
+        "target": [
+          [
+            0.4749,
+            0.2111
+          ]
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          []
+        ],
+        "target": [
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.3317
+            },
+            {
+              "sound": "Toot",
+              "cosine": 0.317
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.3084
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_4022",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "animal sound",
+        "liquid movement"
+      ],
+      "first_end": 0.8011054421768707,
+      "second_end": 1.602216553287982,
+      "rate": 44100,
+      "samples": 35329,
+      "pcm_sha256": "17ebd3ed22554c9d4ba511e8e952a0aa7c8d5bc36f4a3c3ad29a71db1bdf82d8",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.8011054421768707
+            ],
+            [
+              0.8011054421768707,
+              1.602216553287982
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.754
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "liquid movement"
+        ],
+        "reference": [
+          [
+            0.0551,
+            0.2337
+          ]
+        ],
+        "target": [
+          [
+            0.1439,
+            0.1585
+          ]
+        ],
+        "target_minus_reference": [
+          0.0888,
+          -0.0751
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.327
+            },
+            {
+              "sound": "Sink (filling or washing)",
+              "cosine": 0.3134
+            },
+            {
+              "sound": "Tick-tock",
+              "cosine": 0.3006
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Chink, clink",
+              "cosine": 0.3888
+            },
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.3556
+            },
+            {
+              "sound": "Keys jangling",
+              "cosine": 0.3521
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_8768",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "first_end": 0.945828125,
+      "second_end": 1.8916614583333333,
+      "rate": 48000,
+      "samples": 45400,
+      "pcm_sha256": "0d78a3d1dbe2d3e2ebac2d9faf1b4fb78099ecc9aa91ef1e179770a3cb91438d",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.945828125
+            ],
+            [
+              0.945828125,
+              1.8916614583333333
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.6436
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.4364,
+            0.0321
+          ]
+        ],
+        "target": [
+          [
+            0.1265,
+            0.1065
+          ]
+        ],
+        "target_minus_reference": [
+          -0.3099,
+          0.0745
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Whale vocalization",
+              "cosine": 0.492
+            },
+            {
+              "sound": "Wind noise (microphone)",
+              "cosine": 0.4398
+            },
+            {
+              "sound": "Caw",
+              "cosine": 0.4362
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Boat, Water vehicle",
+              "cosine": 0.3954
+            },
+            {
+              "sound": "Idling",
+              "cosine": 0.3876
+            },
+            {
+              "sound": "Toilet flush",
+              "cosine": 0.384
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_8768",
+      "condition": "repeat",
+      "arms": [
+        0,
+        0
+      ],
+      "answers": [
+        "A",
+        "A"
+      ],
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "first_end": 0.945828125,
+      "second_end": 1.8916614583333333,
+      "rate": 48000,
+      "samples": 45400,
+      "pcm_sha256": "4f450d275a658b9c4c812d0b45f3063b1db62b9966ba2a17b1cd2f3c0127d9bf",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.945828125
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.945828125
+            ]
+          ],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.4364,
+            0.0321
+          ]
+        ],
+        "target": [
+          [
+            0.4364,
+            0.0321
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Whale vocalization",
+              "cosine": 0.492
+            },
+            {
+              "sound": "Wind noise (microphone)",
+              "cosine": 0.4398
+            },
+            {
+              "sound": "Caw",
+              "cosine": 0.4362
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Whale vocalization",
+              "cosine": 0.492
+            },
+            {
+              "sound": "Wind noise (microphone)",
+              "cosine": 0.4398
+            },
+            {
+              "sound": "Caw",
+              "cosine": 0.4362
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_7267",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "rolling"
+      ],
+      "first_end": 0.36266145833333335,
+      "second_end": 0.725328125,
+      "rate": 48000,
+      "samples": 17408,
+      "pcm_sha256": "1ce633362851bd11ab85774ec3afcc533ac42ed441c2e5bd12028591ac141460",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.36266145833333335,
+              0.725328125
+            ],
+            [
+              0.0,
+              0.36266145833333335
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.8486,
+          0.9152
+        ],
+        [
+          0.8303,
+          0.9374
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "rolling"
+        ],
+        "reference": [
+          [
+            0.1007,
+            -0.0178
+          ],
+          [
+            0.1434,
+            0.0274
+          ]
+        ],
+        "target": [
+          [
+            0.1577,
+            0.0358
+          ],
+          [
+            0.2136,
+            0.0826
+          ]
+        ],
+        "target_minus_reference": [
+          0.0636,
+          0.0544
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4186
+            },
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3582
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3496
+            }
+          ],
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3899
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3891
+            },
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3758
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4059
+            },
+            {
+              "sound": "Filing (rasp)",
+              "cosine": 0.4039
+            },
+            {
+              "sound": "Sawing",
+              "cosine": 0.357
+            }
+          ],
+          [
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3847
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3843
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3755
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_7359",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "hitting",
+        "speech"
+      ],
+      "first_end": 0.4666609977324263,
+      "second_end": 0.933327664399093,
+      "rate": 44100,
+      "samples": 20580,
+      "pcm_sha256": "293dc28cca1ffb1e640018bf78d55071b5aa6fe339788f090e558cff13b3af32",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.4666609977324263
+            ],
+            [
+              0.4666609977324263,
+              0.933327664399093
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.6876
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "speech"
+        ],
+        "reference": [
+          [
+            0.2475,
+            -0.0069
+          ]
+        ],
+        "target": [
+          [
+            0.2765,
+            0.0987
+          ]
+        ],
+        "target_minus_reference": [
+          0.029,
+          0.1056
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.4553
+            },
+            {
+              "sound": "Toot",
+              "cosine": 0.4198
+            },
+            {
+              "sound": "Tap",
+              "cosine": 0.4024
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Hiss",
+              "cosine": 0.4048
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3763
+            },
+            {
+              "sound": "Chirp tone",
+              "cosine": 0.3636
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_7359",
+      "condition": "silence",
+      "arms": [
+        2,
+        1
+      ],
+      "answers": [
+        "?",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "speech"
+      ],
+      "first_end": 0.4666609977324263,
+      "second_end": 0.933327664399093,
+      "rate": 44100,
+      "samples": 20580,
+      "pcm_sha256": "efc5d7d92a2496e20a1f128f9df8aa3f93a3bd8c83f1c1c8f02770712b58e635",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "speech"
+        ],
+        "reference": [
+          null
+        ],
+        "target": [
+          [
+            0.2475,
+            -0.0069
+          ]
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          []
+        ],
+        "target": [
+          [
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.4553
+            },
+            {
+              "sound": "Toot",
+              "cosine": 0.4198
+            },
+            {
+              "sound": "Tap",
+              "cosine": 0.4024
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_5058",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "animal sound",
+        "speech"
+      ],
+      "first_end": 0.40324479166666666,
+      "second_end": 0.8064947916666667,
+      "rate": 48000,
+      "samples": 19356,
+      "pcm_sha256": "555df9304b2d9f2fd9cb4e9bb402964327b072a200b0f8c1db6dc2721efd993a",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.40324479166666666,
+              0.8064947916666667
+            ],
+            [
+              0.0,
+              0.40324479166666666
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.8169,
+          0.8027
+        ],
+        [
+          0.7536,
+          0.7768
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "speech"
+        ],
+        "reference": [
+          [
+            0.2307,
+            -0.0079
+          ],
+          [
+            0.2858,
+            0.1445
+          ]
+        ],
+        "target": [
+          [
+            0.2192,
+            -0.0348
+          ],
+          [
+            0.2792,
+            -0.0425
+          ]
+        ],
+        "target_minus_reference": [
+          -0.0091,
+          -0.1069
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3489
+            },
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.3092
+            },
+            {
+              "sound": "Chirp tone",
+              "cosine": 0.268
+            }
+          ],
+          [
+            {
+              "sound": "Stomach rumble",
+              "cosine": 0.4398
+            },
+            {
+              "sound": "Croak",
+              "cosine": 0.3719
+            },
+            {
+              "sound": "Heart murmur",
+              "cosine": 0.3681
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.3913
+            },
+            {
+              "sound": "Tick-tock",
+              "cosine": 0.3878
+            },
+            {
+              "sound": "Clock",
+              "cosine": 0.3679
+            }
+          ],
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4467
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4263
+            },
+            {
+              "sound": "Tick-tock",
+              "cosine": 0.4246
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_5058",
+      "condition": "repeat",
+      "arms": [
+        0,
+        0
+      ],
+      "answers": [
+        "B",
+        "B"
+      ],
+      "options": [
+        "animal sound",
+        "speech"
+      ],
+      "first_end": 0.40324479166666666,
+      "second_end": 0.8064947916666667,
+      "rate": 48000,
+      "samples": 19356,
+      "pcm_sha256": "baa02e8350419d72c287ff0aa670169346e9248eca78ba83759ee3d5f404de6a",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.40324479166666666
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.40324479166666666
+            ]
+          ],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0,
+          0.8471
+        ],
+        [
+          0.8471,
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "speech"
+        ],
+        "reference": [
+          [
+            0.2307,
+            -0.0079
+          ],
+          [
+            0.2858,
+            0.1445
+          ]
+        ],
+        "target": [
+          [
+            0.2307,
+            -0.0079
+          ],
+          [
+            0.2858,
+            0.1445
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3489
+            },
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.3092
+            },
+            {
+              "sound": "Chirp tone",
+              "cosine": 0.268
+            }
+          ],
+          [
+            {
+              "sound": "Stomach rumble",
+              "cosine": 0.4398
+            },
+            {
+              "sound": "Croak",
+              "cosine": 0.3719
+            },
+            {
+              "sound": "Heart murmur",
+              "cosine": 0.3681
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3489
+            },
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.3092
+            },
+            {
+              "sound": "Chirp tone",
+              "cosine": 0.268
+            }
+          ],
+          [
+            {
+              "sound": "Stomach rumble",
+              "cosine": 0.4398
+            },
+            {
+              "sound": "Croak",
+              "cosine": 0.3719
+            },
+            {
+              "sound": "Heart murmur",
+              "cosine": 0.3681
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_833",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "first_end": 0.8675226757369614,
+      "second_end": 1.7350510204081633,
+      "rate": 44100,
+      "samples": 38258,
+      "pcm_sha256": "25a6095a035bc76c4969d65717b5334ef5498fb24da93dc35849c0f94c4f18fc",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "B"
+          ],
+          "independent_replays": [
+            [
+              0.8675226757369614,
+              1.7350510204081633
+            ],
+            [
+              0.0,
+              0.8675226757369614
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "B"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.5734
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "rolling",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.2577,
+            0.2447
+          ]
+        ],
+        "target": [
+          [
+            0.0734,
+            0.1783
+          ]
+        ],
+        "target_minus_reference": [
+          -0.1842,
+          -0.0664
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Dishes, pots, and pans",
+              "cosine": 0.4596
+            },
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.4311
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4156
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Marimba, xylophone",
+              "cosine": 0.416
+            },
+            {
+              "sound": "Alarm clock",
+              "cosine": 0.4087
+            },
+            {
+              "sound": "Tick-tock",
+              "cosine": 0.3814
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_833",
+      "condition": "silence",
+      "arms": [
+        2,
+        0
+      ],
+      "answers": [
+        "?",
+        "A"
+      ],
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "first_end": 0.8675226757369614,
+      "second_end": 1.7350510204081633,
+      "rate": 44100,
+      "samples": 38258,
+      "pcm_sha256": "5586071a9d38c2796e50dd40238ed50a2deaccc9229acf7b041cafe7f4f450e5",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.8675226757369614,
+              1.7350510204081633
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.8675226757369614,
+              1.7350510204081633
+            ]
+          ],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "rolling",
+          "hitting"
+        ],
+        "reference": [
+          null
+        ],
+        "target": [
+          [
+            0.2577,
+            0.2447
+          ]
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          []
+        ],
+        "target": [
+          [
+            {
+              "sound": "Dishes, pots, and pans",
+              "cosine": 0.4596
+            },
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.4311
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4156
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_8223",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "speech",
+        "animal sound"
+      ],
+      "first_end": 0.2999114583333333,
+      "second_end": 0.599828125,
+      "rate": 48000,
+      "samples": 14396,
+      "pcm_sha256": "733b46af285af56118c5cb7739948ffa7a3c894811915f528e6524b3df98715f",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.2999114583333333
+            ],
+            [
+              0.2999114583333333,
+              0.599828125
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.796,
+          0.796
+        ],
+        [
+          0.796,
+          0.796
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "speech",
+          "animal sound"
+        ],
+        "reference": [
+          [
+            0.1314,
+            0.319
+          ],
+          [
+            0.1314,
+            0.319
+          ]
+        ],
+        "target": [
+          [
+            0.183,
+            0.2038
+          ],
+          [
+            0.183,
+            0.2038
+          ]
+        ],
+        "target_minus_reference": [
+          0.0515,
+          -0.1152
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Growling",
+              "cosine": 0.4223
+            },
+            {
+              "sound": "Coo",
+              "cosine": 0.4021
+            },
+            {
+              "sound": "Domestic animals, pets",
+              "cosine": 0.3959
+            }
+          ],
+          [
+            {
+              "sound": "Growling",
+              "cosine": 0.4223
+            },
+            {
+              "sound": "Coo",
+              "cosine": 0.4021
+            },
+            {
+              "sound": "Domestic animals, pets",
+              "cosine": 0.3959
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.395
+            },
+            {
+              "sound": "Electronic organ",
+              "cosine": 0.3806
+            },
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3772
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.395
+            },
+            {
+              "sound": "Electronic organ",
+              "cosine": 0.3806
+            },
+            {
+              "sound": "Buzzer",
+              "cosine": 0.3772
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_4956",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "opening or closing something",
+        "liquid movement"
+      ],
+      "first_end": 0.266640625,
+      "second_end": 0.5332864583333333,
+      "rate": 48000,
+      "samples": 12799,
+      "pcm_sha256": "df4d306500a8a70f1c65b385b0d5766c571da04382d4bec8ae8eb4cee0f21baf",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.266640625
+            ],
+            [
+              0.266640625,
+              0.5332864583333333
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.7982,
+          0.7585
+        ],
+        [
+          0.7841,
+          0.7756
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "liquid movement"
+        ],
+        "reference": [
+          [
+            0.3919,
+            0.2456
+          ],
+          [
+            0.3714,
+            0.2202
+          ]
+        ],
+        "target": [
+          [
+            0.4148,
+            0.169
+          ],
+          [
+            0.3706,
+            0.186
+          ]
+        ],
+        "target_minus_reference": [
+          0.0111,
+          -0.0554
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4263
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4143
+            },
+            {
+              "sound": "Snicker",
+              "cosine": 0.4143
+            }
+          ],
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.392
+            },
+            {
+              "sound": "Tap",
+              "cosine": 0.3872
+            },
+            {
+              "sound": "Drip",
+              "cosine": 0.3864
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4367
+            },
+            {
+              "sound": "Tick-tock",
+              "cosine": 0.4243
+            },
+            {
+              "sound": "Toot",
+              "cosine": 0.4062
+            }
+          ],
+          [
+            {
+              "sound": "Tick-tock",
+              "cosine": 0.4177
+            },
+            {
+              "sound": "Toot",
+              "cosine": 0.4082
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4033
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_4956",
+      "condition": "silence",
+      "arms": [
+        2,
+        0
+      ],
+      "answers": [
+        "?",
+        "B"
+      ],
+      "options": [
+        "opening or closing something",
+        "liquid movement"
+      ],
+      "first_end": 0.266640625,
+      "second_end": 0.5332864583333333,
+      "rate": 48000,
+      "samples": 12799,
+      "pcm_sha256": "9416b9a06553e739516584c714618b37e6f4a56340a7869bc7b3bd366d115312",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.266640625,
+              0.5332864583333333
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.266640625,
+              0.5332864583333333
+            ]
+          ],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "liquid movement"
+        ],
+        "reference": [
+          null,
+          null
+        ],
+        "target": [
+          [
+            0.3919,
+            0.2456
+          ],
+          [
+            0.3714,
+            0.2202
+          ]
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          [],
+          []
+        ],
+        "target": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4263
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4143
+            },
+            {
+              "sound": "Snicker",
+              "cosine": 0.4143
+            }
+          ],
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.392
+            },
+            {
+              "sound": "Tap",
+              "cosine": 0.3872
+            },
+            {
+              "sound": "Drip",
+              "cosine": 0.3864
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_2983",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "first_end": 0.30549479166666665,
+      "second_end": 0.6109947916666667,
+      "rate": 48000,
+      "samples": 14664,
+      "pcm_sha256": "801edf8663957f11f57d9d3e3db0b9b451a2cb66dea275976795ea7224713a85",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.30549479166666665,
+              0.6109947916666667
+            ],
+            [
+              0.0,
+              0.30549479166666665
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "B"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.7935,
+          0.7747
+        ],
+        [
+          0.7626,
+          0.7768
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "opening or closing something"
+        ],
+        "reference": [
+          [
+            0.296,
+            0.3279
+          ],
+          [
+            0.3028,
+            0.3164
+          ]
+        ],
+        "target": [
+          [
+            0.2631,
+            0.3084
+          ],
+          [
+            0.2478,
+            0.302
+          ]
+        ],
+        "target_minus_reference": [
+          -0.0439,
+          -0.017
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Finger snapping",
+              "cosine": 0.5249
+            },
+            {
+              "sound": "Cap gun",
+              "cosine": 0.5171
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4984
+            }
+          ],
+          [
+            {
+              "sound": "Cap gun",
+              "cosine": 0.5517
+            },
+            {
+              "sound": "Finger snapping",
+              "cosine": 0.5437
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4994
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.4408
+            },
+            {
+              "sound": "Tap",
+              "cosine": 0.4392
+            },
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.4361
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.4503
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4288
+            },
+            {
+              "sound": "Mouse",
+              "cosine": 0.4288
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_82",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "opening or closing something",
+        "liquid movement"
+      ],
+      "first_end": 0.9988697916666667,
+      "second_end": 1.9977447916666666,
+      "rate": 48000,
+      "samples": 47946,
+      "pcm_sha256": "779184ccfe9b85fe81d55064ed3a6d7c5618257a2caad51704fce36f7d0ea042",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.9988697916666667
+            ],
+            [
+              0.9988697916666667,
+              1.9977447916666666
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.7992,
+          0.7603
+        ],
+        [
+          0.8156,
+          0.8034
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "liquid movement"
+        ],
+        "reference": [
+          [
+            0.5024,
+            0.2337
+          ],
+          [
+            0.4938,
+            0.1507
+          ]
+        ],
+        "target": [
+          [
+            0.5676,
+            0.1227
+          ],
+          [
+            0.5594,
+            0.0873
+          ]
+        ],
+        "target_minus_reference": [
+          0.0654,
+          -0.0872
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.4906
+            },
+            {
+              "sound": "Hiss",
+              "cosine": 0.4481
+            },
+            {
+              "sound": "Water tap, faucet",
+              "cosine": 0.4464
+            }
+          ],
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.4358
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4215
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4071
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3727
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.3707
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.3682
+            }
+          ],
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4142
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.3751
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3467
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_82",
+      "condition": "repeat",
+      "arms": [
+        0,
+        0
+      ],
+      "answers": [
+        "B",
+        "B"
+      ],
+      "options": [
+        "opening or closing something",
+        "liquid movement"
+      ],
+      "first_end": 0.9988697916666667,
+      "second_end": 1.9977447916666666,
+      "rate": 48000,
+      "samples": 47946,
+      "pcm_sha256": "f842572ba916b6527270c35e899524df8f5bcdddf45c172bfcb1ea3067f80bd6",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              1.9977447916666666
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.9988697916666667
+            ]
+          ],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0,
+          0.9217
+        ],
+        [
+          0.9217,
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "liquid movement"
+        ],
+        "reference": [
+          [
+            0.5024,
+            0.2337
+          ],
+          [
+            0.4938,
+            0.1507
+          ]
+        ],
+        "target": [
+          [
+            0.5024,
+            0.2337
+          ],
+          [
+            0.4938,
+            0.1507
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.4906
+            },
+            {
+              "sound": "Hiss",
+              "cosine": 0.4481
+            },
+            {
+              "sound": "Water tap, faucet",
+              "cosine": 0.4464
+            }
+          ],
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.4358
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4215
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4071
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.4906
+            },
+            {
+              "sound": "Hiss",
+              "cosine": 0.4481
+            },
+            {
+              "sound": "Water tap, faucet",
+              "cosine": 0.4464
+            }
+          ],
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.4358
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4215
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4071
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_762",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "speech",
+        "hitting"
+      ],
+      "first_end": 1.0061197916666667,
+      "second_end": 2.012244791666667,
+      "rate": 48000,
+      "samples": 48294,
+      "pcm_sha256": "93902940654e69678e3203d7d769c7d662567aceecd177e96b54266dd04c38aa",
+      "readers": {
+        "previous": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              1.0061197916666667,
+              2.012244791666667
+            ],
+            [
+              0.0,
+              1.0061197916666667
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.4827,
+          0.4337
+        ],
+        [
+          0.4339,
+          0.395
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "speech",
+          "hitting"
+        ],
+        "reference": [
+          [
+            -0.0045,
+            0.2073
+          ],
+          [
+            -0.017,
+            0.2203
+          ]
+        ],
+        "target": [
+          [
+            0.2033,
+            0.0794
+          ],
+          [
+            0.2935,
+            0.0842
+          ]
+        ],
+        "target_minus_reference": [
+          0.2591,
+          -0.132
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.456
+            },
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.4076
+            },
+            {
+              "sound": "Cutlery, silverware",
+              "cosine": 0.384
+            }
+          ],
+          [
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.4851
+            },
+            {
+              "sound": "Chop",
+              "cosine": 0.4662
+            },
+            {
+              "sound": "Cutlery, silverware",
+              "cosine": 0.3847
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Female speech, woman speaking",
+              "cosine": 0.4354
+            },
+            {
+              "sound": "Electronic tuner",
+              "cosine": 0.3574
+            },
+            {
+              "sound": "Female singing",
+              "cosine": 0.3262
+            }
+          ],
+          [
+            {
+              "sound": "Female speech, woman speaking",
+              "cosine": 0.4307
+            },
+            {
+              "sound": "Electronic tuner",
+              "cosine": 0.4174
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.3091
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_762",
+      "condition": "silence",
+      "arms": [
+        1,
+        2
+      ],
+      "answers": [
+        "B",
+        "?"
+      ],
+      "options": [
+        "speech",
+        "hitting"
+      ],
+      "first_end": 1.0061197916666667,
+      "second_end": 2.012244791666667,
+      "rate": 48000,
+      "samples": 48294,
+      "pcm_sha256": "74546531349cee99d91ee84bd1aa5ef12d1e9a3a77e2f901c3d3bc47ad742bab",
+      "readers": {
+        "previous": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              1.0061197916666667
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "B",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              1.0061197916666667
+            ]
+          ],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "speech",
+          "hitting"
+        ],
+        "reference": [
+          [
+            -0.0045,
+            0.2073
+          ],
+          [
+            -0.017,
+            0.2203
+          ]
+        ],
+        "target": [
+          null,
+          null
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.456
+            },
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.4076
+            },
+            {
+              "sound": "Cutlery, silverware",
+              "cosine": 0.384
+            }
+          ],
+          [
+            {
+              "sound": "Chopping (food)",
+              "cosine": 0.4851
+            },
+            {
+              "sound": "Chop",
+              "cosine": 0.4662
+            },
+            {
+              "sound": "Cutlery, silverware",
+              "cosine": 0.3847
+            }
+          ]
+        ],
+        "target": [
+          [],
+          []
+        ]
+      }
+    },
+    {
+      "film": "video_918",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "dropping"
+      ],
+      "first_end": 0.6331614583333334,
+      "second_end": 1.266328125,
+      "rate": 48000,
+      "samples": 30392,
+      "pcm_sha256": "0b025c4d1cd10abc95e572be4a5be2deb93063c0bca2e5897c1935d1201f2d6d",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.6331614583333334
+            ],
+            [
+              0.6331614583333334,
+              1.266328125
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.4841,
+          0.5409
+        ],
+        [
+          0.4206,
+          0.4824
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "dropping"
+        ],
+        "reference": [
+          [
+            0.4093,
+            0.2675
+          ],
+          [
+            0.4833,
+            0.3227
+          ]
+        ],
+        "target": [
+          [
+            0.2329,
+            0.2245
+          ],
+          [
+            0.2552,
+            0.2048
+          ]
+        ],
+        "target_minus_reference": [
+          -0.2023,
+          -0.0805
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Drum roll",
+              "cosine": 0.5366
+            },
+            {
+              "sound": "Rimshot",
+              "cosine": 0.5331
+            },
+            {
+              "sound": "Rapping",
+              "cosine": 0.5251
+            }
+          ],
+          [
+            {
+              "sound": "Rimshot",
+              "cosine": 0.531
+            },
+            {
+              "sound": "Drum roll",
+              "cosine": 0.5144
+            },
+            {
+              "sound": "Rapping",
+              "cosine": 0.4959
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.4907
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3974
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.3779
+            }
+          ],
+          [
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.5273
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4303
+            },
+            {
+              "sound": "Creak",
+              "cosine": 0.3326
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_5560",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "clapping",
+        "opening or closing something"
+      ],
+      "first_end": 2.401672335600907,
+      "second_end": 4.803350340136054,
+      "rate": 44100,
+      "samples": 105914,
+      "pcm_sha256": "dcf5c5efadaf8e77947f5d83d4bbb7cc44db66bbd8215a55712a199197ba509d",
+      "readers": {
+        "previous": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              2.401672335600907
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.1961
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "clapping",
+          "opening or closing something"
+        ],
+        "reference": [
+          [
+            0.0326,
+            0.4384
+          ]
+        ],
+        "target": [
+          [
+            0.591,
+            -0.1164
+          ]
+        ],
+        "target_minus_reference": [
+          0.5584,
+          -0.5548
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Clicking",
+              "cosine": 0.3771
+            },
+            {
+              "sound": "Mouse",
+              "cosine": 0.3746
+            },
+            {
+              "sound": "Cash register",
+              "cosine": 0.3645
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Clapping",
+              "cosine": 0.5976
+            },
+            {
+              "sound": "Applause",
+              "cosine": 0.5331
+            },
+            {
+              "sound": "Rapping",
+              "cosine": 0.4618
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_10592",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "first_end": 1.2676197916666667,
+      "second_end": 2.5352447916666665,
+      "rate": 48000,
+      "samples": 60846,
+      "pcm_sha256": "02c5d63f1c8d9b7e06e73e325ea1fba4b83a15a1fd8cd5dffb9b25e60bc047f0",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.7662
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.2861,
+            0.2504
+          ]
+        ],
+        "target": [
+          [
+            0.272,
+            0.2516
+          ]
+        ],
+        "target_minus_reference": [
+          -0.0142,
+          0.0013
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4092
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4066
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.4013
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Chirp tone",
+              "cosine": 0.4243
+            },
+            {
+              "sound": "Chirp, tweet",
+              "cosine": 0.4132
+            },
+            {
+              "sound": "Bird",
+              "cosine": 0.4119
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_10592",
+      "condition": "repeat",
+      "arms": [
+        1,
+        1
+      ],
+      "answers": [
+        "B",
+        "B"
+      ],
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "first_end": 1.2676197916666667,
+      "second_end": 2.5352447916666665,
+      "rate": 48000,
+      "samples": 60846,
+      "pcm_sha256": "b6a6ff12aab0745c6d4a356d836593370f73f754dbe6403e47de3d2db96fd894",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "animal sound",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.2861,
+            0.2504
+          ]
+        ],
+        "target": [
+          [
+            0.2861,
+            0.2504
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4092
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4066
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.4013
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4092
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4066
+            },
+            {
+              "sound": "Buzz",
+              "cosine": 0.4013
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_152",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "first_end": 0.399640625,
+      "second_end": 0.7992864583333333,
+      "rate": 48000,
+      "samples": 19183,
+      "pcm_sha256": "b6adb5672b075017d7abf16e3ee142e7c186f039f5edc586ba4b7b3b87a8a61d",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.399640625,
+              0.7992864583333333
+            ],
+            [
+              0.0,
+              0.399640625
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.6672,
+          0.6656
+        ],
+        [
+          0.6907,
+          0.7038
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.2538,
+            0.1908
+          ],
+          [
+            0.2843,
+            0.2866
+          ]
+        ],
+        "target": [
+          [
+            0.4907,
+            0.288
+          ],
+          [
+            0.4225,
+            0.2914
+          ]
+        ],
+        "target_minus_reference": [
+          0.1876,
+          0.051
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Zipper (clothing)",
+              "cosine": 0.4688
+            },
+            {
+              "sound": "Scratching (performance technique)",
+              "cosine": 0.3799
+            },
+            {
+              "sound": "Scratch",
+              "cosine": 0.3783
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.3507
+            },
+            {
+              "sound": "Whoop",
+              "cosine": 0.3291
+            },
+            {
+              "sound": "Mechanisms",
+              "cosine": 0.3073
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4449
+            },
+            {
+              "sound": "Tick-tock",
+              "cosine": 0.4343
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.4316
+            }
+          ],
+          [
+            {
+              "sound": "Creak",
+              "cosine": 0.4686
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4098
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3893
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_152",
+      "condition": "repeat",
+      "arms": [
+        0,
+        0
+      ],
+      "answers": [
+        "A",
+        "A"
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "first_end": 0.399640625,
+      "second_end": 0.7992864583333333,
+      "rate": 48000,
+      "samples": 19183,
+      "pcm_sha256": "90042feceed696c3180eb8ea4e0ffed1478375984a92d8cd636256c59256b7df",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.7992864583333333
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.0,
+              0.7992864583333333
+            ]
+          ],
+          "status": "identical_encoder_features"
+        }
+      },
+      "cosines": [
+        [
+          1.0,
+          0.934
+        ],
+        [
+          0.934,
+          1.0
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "opening or closing something",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.2538,
+            0.1908
+          ],
+          [
+            0.2843,
+            0.2866
+          ]
+        ],
+        "target": [
+          [
+            0.2538,
+            0.1908
+          ],
+          [
+            0.2843,
+            0.2866
+          ]
+        ],
+        "target_minus_reference": [
+          0.0,
+          0.0
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Zipper (clothing)",
+              "cosine": 0.4688
+            },
+            {
+              "sound": "Scratching (performance technique)",
+              "cosine": 0.3799
+            },
+            {
+              "sound": "Scratch",
+              "cosine": 0.3783
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.3507
+            },
+            {
+              "sound": "Whoop",
+              "cosine": 0.3291
+            },
+            {
+              "sound": "Mechanisms",
+              "cosine": 0.3073
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Zipper (clothing)",
+              "cosine": 0.4688
+            },
+            {
+              "sound": "Scratching (performance technique)",
+              "cosine": 0.3799
+            },
+            {
+              "sound": "Scratch",
+              "cosine": 0.3783
+            }
+          ],
+          [
+            {
+              "sound": "Chop",
+              "cosine": 0.3507
+            },
+            {
+              "sound": "Whoop",
+              "cosine": 0.3291
+            },
+            {
+              "sound": "Mechanisms",
+              "cosine": 0.3073
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_6540",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "hitting",
+        "clapping"
+      ],
+      "first_end": 0.26686507936507936,
+      "second_end": 0.5337358276643991,
+      "rate": 44100,
+      "samples": 11769,
+      "pcm_sha256": "99e9ea17e6fab2e05fe5b12a50b03a827a48d55ede8505ef49727275aa2de24d",
+      "readers": {
+        "previous": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": [
+            [
+              0.26686507936507936,
+              0.5337358276643991
+            ],
+            [
+              0.0,
+              0.26686507936507936
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "A",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "A",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.7444
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "clapping"
+        ],
+        "reference": [
+          [
+            0.2452,
+            0.1095
+          ]
+        ],
+        "target": [
+          [
+            0.3446,
+            0.1644
+          ]
+        ],
+        "target_minus_reference": [
+          0.0994,
+          0.055
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.4454
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3711
+            },
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.3615
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Buzz",
+              "cosine": 0.4083
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.4013
+            },
+            {
+              "sound": "Clickety-clack",
+              "cosine": 0.3852
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_6540",
+      "condition": "silence",
+      "arms": [
+        2,
+        0
+      ],
+      "answers": [
+        "?",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "clapping"
+      ],
+      "first_end": 0.26686507936507936,
+      "second_end": 0.5337358276643991,
+      "rate": 44100,
+      "samples": 11769,
+      "pcm_sha256": "c8a33c32b62eb0f3f7495f16d6106b95aa3e1e59ca51aeb8ab217a7227ae6686",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.26686507936507936,
+              0.5337358276643991
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.26686507936507936,
+              0.5337358276643991
+            ]
+          ],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "clapping"
+        ],
+        "reference": [
+          null
+        ],
+        "target": [
+          [
+            0.2452,
+            0.1095
+          ]
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          []
+        ],
+        "target": [
+          [
+            {
+              "sound": "Toot",
+              "cosine": 0.4454
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.3711
+            },
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.3615
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_5626",
+      "condition": "distinct",
+      "arms": [
+        0,
+        1
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "clapping"
+      ],
+      "first_end": 0.2999943310657596,
+      "second_end": 0.5999943310657596,
+      "rate": 44100,
+      "samples": 13230,
+      "pcm_sha256": "1912ba5f76e90f97c973f35537543659bb2c1e23eb7dbefb7bd5995469b8b299",
+      "readers": {
+        "previous": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.2999943310657596,
+              0.5999943310657596
+            ],
+            [
+              0.0,
+              0.2999943310657596
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.623
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "clapping"
+        ],
+        "reference": [
+          [
+            0.2247,
+            0.4378
+          ]
+        ],
+        "target": [
+          [
+            0.2453,
+            0.1395
+          ]
+        ],
+        "target_minus_reference": [
+          0.0206,
+          -0.2984
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Rimshot",
+              "cosine": 0.6065
+            },
+            {
+              "sound": "Slap, smack",
+              "cosine": 0.5864
+            },
+            {
+              "sound": "Cap gun",
+              "cosine": 0.5599
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Finger snapping",
+              "cosine": 0.4626
+            },
+            {
+              "sound": "Cap gun",
+              "cosine": 0.4486
+            },
+            {
+              "sound": "Clicking",
+              "cosine": 0.385
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_2371",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "options": [
+        "hitting",
+        "dropping"
+      ],
+      "first_end": 2.202329931972789,
+      "second_end": 4.404665532879819,
+      "rate": 44100,
+      "samples": 97123,
+      "pcm_sha256": "7f23a1d5dd4aa2d718842649c70e2dfa1209b1a164697dde863e8c03e5b7e3d7",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.9111
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "dropping"
+        ],
+        "reference": [
+          [
+            0.0896,
+            0.1313
+          ]
+        ],
+        "target": [
+          [
+            0.1449,
+            0.1905
+          ]
+        ],
+        "target_minus_reference": [
+          0.0552,
+          0.0592
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Writing",
+              "cosine": 0.4438
+            },
+            {
+              "sound": "Filing (rasp)",
+              "cosine": 0.4277
+            },
+            {
+              "sound": "Pant",
+              "cosine": 0.4113
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Filing (rasp)",
+              "cosine": 0.4822
+            },
+            {
+              "sound": "Mouse",
+              "cosine": 0.4339
+            },
+            {
+              "sound": "Sawing",
+              "cosine": 0.406
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_2371",
+      "condition": "silence",
+      "arms": [
+        2,
+        1
+      ],
+      "answers": [
+        "?",
+        "A"
+      ],
+      "options": [
+        "hitting",
+        "dropping"
+      ],
+      "first_end": 2.202329931972789,
+      "second_end": 4.404665532879819,
+      "rate": 44100,
+      "samples": 97123,
+      "pcm_sha256": "3ed877daf8ce48ebf18b601eb564c5c3588535ab9f497767e85d1862d579d022",
+      "readers": {
+        "previous": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "measured": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": []
+        },
+        "no_measurable_change": {
+          "answers": [
+            "?",
+            "?"
+          ],
+          "independent_replays": [],
+          "status": "no_signal_at_encoder_rate_in_one_or_both"
+        }
+      },
+      "cosines": [
+        [
+          null
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "hitting",
+          "dropping"
+        ],
+        "reference": [
+          null
+        ],
+        "target": [
+          [
+            0.0896,
+            0.1313
+          ]
+        ],
+        "target_minus_reference": null
+      },
+      "catalogue": {
+        "reference": [
+          []
+        ],
+        "target": [
+          [
+            {
+              "sound": "Writing",
+              "cosine": 0.4438
+            },
+            {
+              "sound": "Filing (rasp)",
+              "cosine": 0.4277
+            },
+            {
+              "sound": "Pant",
+              "cosine": 0.4113
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "film": "video_6480",
+      "condition": "distinct",
+      "arms": [
+        1,
+        0
+      ],
+      "answers": [
+        "B",
+        "A"
+      ],
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "first_end": 0.5385989583333334,
+      "second_end": 1.077203125,
+      "rate": 48000,
+      "samples": 25853,
+      "pcm_sha256": "5cd04b492f24434b7df1ea986f344ad087f0e0b2700fab5efdcd0b8c12037404",
+      "readers": {
+        "previous": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": [
+            [
+              0.5385989583333334,
+              1.077203125
+            ],
+            [
+              0.0,
+              0.5385989583333334
+            ]
+          ]
+        },
+        "measured": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        },
+        "with_catalogue": {
+          "answers": [
+            "B",
+            "A"
+          ],
+          "independent_replays": []
+        }
+      },
+      "cosines": [
+        [
+          0.5902,
+          0.5898
+        ],
+        [
+          0.5739,
+          0.5723
+        ]
+      ],
+      "description_comparison": {
+        "descriptions": [
+          "rolling",
+          "hitting"
+        ],
+        "reference": [
+          [
+            0.1389,
+            0.3405
+          ],
+          [
+            0.1337,
+            0.3372
+          ]
+        ],
+        "target": [
+          [
+            0.2608,
+            0.2349
+          ],
+          [
+            0.2571,
+            0.2372
+          ]
+        ],
+        "target_minus_reference": [
+          0.1226,
+          -0.1028
+        ]
+      },
+      "catalogue": {
+        "reference": [
+          [
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.5355
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4635
+            },
+            {
+              "sound": "Slam",
+              "cosine": 0.4509
+            }
+          ],
+          [
+            {
+              "sound": "Cupboard open or close",
+              "cosine": 0.5431
+            },
+            {
+              "sound": "Slam",
+              "cosine": 0.4541
+            },
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.451
+            }
+          ]
+        ],
+        "target": [
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.43
+            },
+            {
+              "sound": "Stomach rumble",
+              "cosine": 0.3413
+            },
+            {
+              "sound": "Heart murmur",
+              "cosine": 0.3278
+            }
+          ],
+          [
+            {
+              "sound": "Drawer open or close",
+              "cosine": 0.4303
+            },
+            {
+              "sound": "Stomach rumble",
+              "cosine": 0.3398
+            },
+            {
+              "sound": "Heart murmur",
+              "cosine": 0.3269
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "physical_check": {
+    "pcm": [
+      "ac74ab9c0bd42ad03b2d0a96b00282b7a33cc9322272b887f023ca41c43fa601",
+      "e7461a413dc7fbd96bfb43a47c328aae01a45fa5a8994e4d646952ef377588d8"
+    ],
+    "similarity": {
+      "status": "available",
+      "model": "laion/clap-htsat-unfused",
+      "cosines": [
+        [
+          0.9629
+        ]
+      ],
+      "basis": "Rows follow the reference channels and columns the target channels in recording order. Each encoder input contains one channel of one excerpt at its recorded level, played once with zero padding. Null means no signal at the encoder rate. A higher cosine indicates more similar whole-clip audio features. Background sound can contribute. The score does not identify an object, speaker or word.",
+      "description_comparison": {
+        "descriptions": [
+          "something rattling",
+          "a steady tone",
+          "a voice speaking"
+        ],
+        "reference": [
+          [
+            0.163,
+            0.2821,
+            0.182
+          ]
+        ],
+        "target": [
+          [
+            0.1573,
+            0.2573,
+            0.1865
+          ]
+        ],
+        "target_minus_reference": [
+          -0.0057,
+          -0.0248,
+          0.0044
+        ],
+        "basis": "Each row is one recorded channel. Columns follow the supplied descriptions. The change subtracts the reference from the target after averaging the active channels of each recording. A positive change means greater similarity to that description in the target. Either sound may occur twice or in neither recording. The catalogue lists the closest AudioSet terms on the same recording and encoder, independently of your descriptions. These scores are uncalibrated. Use them to check whether either description fits what you heard.",
+        "catalogue": {
+          "status": "available",
+          "reference": [
+            [
+              {
+                "sound": "Telephone dialing, DTMF",
+                "cosine": 0.7087
+              },
+              {
+                "sound": "Ringtone",
+                "cosine": 0.5732
+              },
+              {
+                "sound": "Busy signal",
+                "cosine": 0.538
+              }
+            ]
+          ],
+          "target": [
+            [
+              {
+                "sound": "Telephone dialing, DTMF",
+                "cosine": 0.6752
+              },
+              {
+                "sound": "Ringtone",
+                "cosine": 0.5691
+              },
+              {
+                "sound": "Sine wave",
+                "cosine": 0.5629
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "images": [
+      "731df8be7902cabd28430c41b03a091c25de2989017746a82d3647e9ef06ee85",
+      "23b417e8fb441a572b6ddc7d90c454ce87cccb4fb78a7dd0b355f4970129afa3"
+    ]
+  },
+  "resources": {
+    "scored_sessions": 168,
+    "attempts": 169,
+    "peak_single_tree_kib": 4386672,
+    "min_system_free_pct": 63,
+    "surviving_processes": 0
+  },
+  "catalogue_method": "A third fresh session per case received the same description scores and signed changes, plus the three closest of 527 AudioSet catalogue labels per active channel from the same CLAP recording embeddings. These labels are not restricted to the suggestions. Other tools, media, instructions and choices match the two initial runs. This is extra context from the same encoder, not corroboration by a second model.",
+  "catalogue_distinct_both_correct_difference": {
+    "fraction": 0.0,
+    "interval_95": [
+      0.0,
+      0.0
+    ],
+    "method": "vs existing comparison; 20,000 paired film bootstrap draws, seed 7035",
+    "scope": "The same six films had both answers correct in these two runs. Resampling these observed pairs gives a constant zero difference; it does not measure repeat-session variability or establish equivalence on other films."
+  },
+  "source_manifest": {
+    "source_panel_commit": "53f2cc8",
+    "components": {
+      "previous": {
+        "compare_sounds.py": "790d61f27d2f1d32a433701952aa2a6833313241b4992907708a474ccb4b2171",
+        "compare_heard.py": "e8f54505bb65494f5af8ddfa876e0b6baaf4e59be911a9a9153be75cff07af0e",
+        "mcp_server.py": "cd470fb270e2a0568c0070d1ff0096802ee1fb6c8142f6a25ab4558f55ae2c30"
+      },
+      "measured": {
+        "compare_sounds.py": "790d61f27d2f1d32a433701952aa2a6833313241b4992907708a474ccb4b2171",
+        "compare_heard.py": "e8f54505bb65494f5af8ddfa876e0b6baaf4e59be911a9a9153be75cff07af0e",
+        "mcp_server.py": "59b21191bd53570458108087552fdacbfce575e6b412481dc009d170ac76222a"
+      },
+      "grounded": {
+        "compare_sounds.py": "5cef7fd2d1d65777dbf1126362badd0cf77fb29cfac260f1945caee3f966c2e8",
+        "compare_heard.py": "e8f54505bb65494f5af8ddfa876e0b6baaf4e59be911a9a9153be75cff07af0e",
+        "mcp_server.py": "5687a0c566f6c48a526018c746159d498452a161838d802a744e27e0c82a2550"
+      }
+    }
+  },
+  "held_out_esc50": {
+    "tree": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+    "method": "Fixed RNG seed 9064773. Select 32 distinct fold-4 recordings from the existing 50-category local panel. Each pair uses full 5 s waveforms from different official supercategories. Supply the gold name for one recording and a distractor from a third supercategory. Randomize label and clip order independently, no full-score or negative count told to reader. Verified original WAV Git blob hashes and annotation CSV against the official tree.",
+    "protocol": "Audio only. Two consecutive full five-second recordings on the same playback clock, no native WAV. Present exactly the same choices and question to both readers. The source labels come from ESC-50. A secondary sound may be audible. No human re-rated these edited pairs. These are different source recordings and categories from the filmed comparison.",
+    "results": {
+      "previous": {
+        "pairs": 16,
+        "both_correct": 15,
+        "unlisted_correctly_abstained": 15,
+        "named_correct": 16,
+        "false_name_on_unlisted": 1
+      },
+      "grounded": {
+        "pairs": 16,
+        "both_correct": 15,
+        "unlisted_correctly_abstained": 15,
+        "named_correct": 16,
+        "false_name_on_unlisted": 1
+      }
+    },
+    "by_pair": [
+      {
+        "film": "outside-00",
+        "options": [
+          "footsteps",
+          "car horn"
+        ],
+        "answers": [
+          "?",
+          "A"
+        ],
+        "parts": [
+          {
+            "file": "4-172366-A-37.wav",
+            "label": "clock_alarm",
+            "wav_sha256": "b6d260c3b1823bdd45c9d8968b87a9bc6d57c0b99bfef07362cae506ae38b32a",
+            "git_blob": "38d2ffebffcce266299cbfe53e7f467ef6da2ddd"
+          },
+          {
+            "file": "4-198962-B-25.wav",
+            "label": "footsteps",
+            "wav_sha256": "4a9fd033241d235416314dcc577acb6f62c7de290ea706fed597aaf15d323971",
+            "git_blob": "3ac1c532293d8405f4220835ceefa31fa779ee27"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "27309be6fa5559bc718a2ecc727aef7e3ebc0c6c18e2b1d3f6ef4e60046e15bc",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "A"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ],
+              [
+                0.0,
+                5.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "A"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "footsteps",
+            "car horn"
+          ],
+          "reference": [
+            [
+              0.0465,
+              0.1624
+            ]
+          ],
+          "target": [
+            [
+              0.1571,
+              -0.1406
+            ]
+          ],
+          "target_minus_reference": [
+            0.1105,
+            -0.303
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Smoke detector, smoke alarm",
+                  "cosine": 0.624
+                },
+                {
+                  "sound": "Alarm clock",
+                  "cosine": 0.5856
+                },
+                {
+                  "sound": "Beep, bleep",
+                  "cosine": 0.4903
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Walk, footsteps",
+                  "cosine": 0.3915
+                },
+                {
+                  "sound": "Rowboat, canoe, kayak",
+                  "cosine": 0.3155
+                },
+                {
+                  "sound": "Sailboat, sailing ship",
+                  "cosine": 0.3043
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-01",
+        "options": [
+          "insects",
+          "water drops"
+        ],
+        "answers": [
+          "?",
+          "B"
+        ],
+        "parts": [
+          {
+            "file": "4-184434-A-21.wav",
+            "label": "sneezing",
+            "wav_sha256": "3df4211c5afd73ca0e85d282f84313b73ccb8d3993af59a9f368e91da274d020",
+            "git_blob": "a7037e5ee570f777cb121bcaad682a32101a9015"
+          },
+          {
+            "file": "4-174797-A-15.wav",
+            "label": "water_drops",
+            "wav_sha256": "acdd567a1d75cf635a94d4566916b950b34ca9d153b13b601c659a9b86be69b4",
+            "git_blob": "51b0fd5293e4b21a7e02e8940d9eff6a2323aca7"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "bd6bb0ea8df66f39b437d5a2fa58dd42234603bdf92b0a4de2bbd375b85c5a54",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": [
+              [
+                0.0,
+                5.0
+              ],
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "insects",
+            "water drops"
+          ],
+          "reference": [
+            [
+              -0.0447,
+              0.0608
+            ]
+          ],
+          "target": [
+            [
+              -0.1577,
+              0.2267
+            ]
+          ],
+          "target_minus_reference": [
+            -0.113,
+            0.1659
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Sneeze",
+                  "cosine": 0.7519
+                },
+                {
+                  "sound": "Wheeze",
+                  "cosine": 0.6563
+                },
+                {
+                  "sound": "Cough",
+                  "cosine": 0.5344
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Splash, splatter",
+                  "cosine": 0.5103
+                },
+                {
+                  "sound": "Slam",
+                  "cosine": 0.4723
+                },
+                {
+                  "sound": "Cupboard open or close",
+                  "cosine": 0.4178
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-02",
+        "options": [
+          "clock alarm",
+          "hand saw"
+        ],
+        "answers": [
+          "B",
+          "?"
+        ],
+        "parts": [
+          {
+            "file": "4-198360-A-49.wav",
+            "label": "hand_saw",
+            "wav_sha256": "da1175ae1546391f81a565f0eb22a39772a7d658652974b8c889fb990ac15b21",
+            "git_blob": "f8297e638f524f684306950a7398a946a1452e60"
+          },
+          {
+            "file": "4-185575-C-20.wav",
+            "label": "crying_baby",
+            "wav_sha256": "7cdd46d701197c99ab637a10bc37e61a9859fd88218d339d4699a46f748c0200",
+            "git_blob": "f69cbca4bfa35ef07c8dc807369c245548d5d107"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "427a4556d344a692b856587450193bb263270f1eeff4c67ff428cd49b1aad43a",
+        "readers": {
+          "previous": {
+            "answers": [
+              "B",
+              "?"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "B",
+              "?"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "clock alarm",
+            "hand saw"
+          ],
+          "reference": [
+            [
+              0.1727,
+              0.5569
+            ]
+          ],
+          "target": [
+            [
+              0.0414,
+              -0.0445
+            ]
+          ],
+          "target_minus_reference": [
+            -0.1313,
+            -0.6014
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Sawing",
+                  "cosine": 0.636
+                },
+                {
+                  "sound": "Filing (rasp)",
+                  "cosine": 0.588
+                },
+                {
+                  "sound": "Sanding",
+                  "cosine": 0.4919
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Baby cry, infant cry",
+                  "cosine": 0.5467
+                },
+                {
+                  "sound": "Babbling",
+                  "cosine": 0.4848
+                },
+                {
+                  "sound": "Baby laughter",
+                  "cosine": 0.4255
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-03",
+        "options": [
+          "sheep",
+          "vacuum cleaner"
+        ],
+        "answers": [
+          "B",
+          "?"
+        ],
+        "parts": [
+          {
+            "file": "4-172736-A-36.wav",
+            "label": "vacuum_cleaner",
+            "wav_sha256": "3a1ee8ca78c888284dcf58aa5d2e029862b0ef16352edc8126e232942ca01e29",
+            "git_blob": "69f805c061af3661351eec5099b06e8a50d1429d"
+          },
+          {
+            "file": "4-164661-A-12.wav",
+            "label": "crackling_fire",
+            "wav_sha256": "5dba3d3689ad470168a93c321674fb1d0e152a939bc034dcfe88c7a055e6d5f5",
+            "git_blob": "e34562c51fd01da6433faa64d3f4ce7aeaec5eaf"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "394099557bfb6e75862b91028c0abbc039aa6cb0f7e02d5eab2ab40dc9d34f37",
+        "readers": {
+          "previous": {
+            "answers": [
+              "B",
+              "?"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ],
+              [
+                0.0,
+                5.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "B",
+              "?"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "sheep",
+            "vacuum cleaner"
+          ],
+          "reference": [
+            [
+              -0.1315,
+              0.4961
+            ]
+          ],
+          "target": [
+            [
+              0.0273,
+              0.0423
+            ]
+          ],
+          "target_minus_reference": [
+            0.1587,
+            -0.4538
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Hair dryer",
+                  "cosine": 0.4518
+                },
+                {
+                  "sound": "Vacuum cleaner",
+                  "cosine": 0.435
+                },
+                {
+                  "sound": "Power windows, electric windows",
+                  "cosine": 0.4042
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Fire",
+                  "cosine": 0.6194
+                },
+                {
+                  "sound": "Crackle",
+                  "cosine": 0.4653
+                },
+                {
+                  "sound": "Boiling",
+                  "cosine": 0.4425
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-04",
+        "options": [
+          "mouse click",
+          "rain"
+        ],
+        "answers": [
+          "?",
+          "B"
+        ],
+        "parts": [
+          {
+            "file": "4-111671-A-42.wav",
+            "label": "siren",
+            "wav_sha256": "365e4a2a7fcb455894d3b0a7b7ad08ac9725f6565fc4d3ace32876b5afc4c2cd",
+            "git_blob": "64d477b1cb10b15d7ff08d4c3ebbc4a3b3f5e94d"
+          },
+          {
+            "file": "4-166661-A-10.wav",
+            "label": "rain",
+            "wav_sha256": "a958fd56bfff6c34c896c8ca4e5f69705b47a446edcb57060c492f65007d277d",
+            "git_blob": "b3a24e8044c5ca20ff46ee546b71c315eed12a85"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "b8f193be954fcd4ff535367d0a71e291c2be70e8b309ae43a4add087fabd4b2e",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "mouse click",
+            "rain"
+          ],
+          "reference": [
+            [
+              -0.1148,
+              0.1033
+            ]
+          ],
+          "target": [
+            [
+              -0.0815,
+              0.567
+            ]
+          ],
+          "target_minus_reference": [
+            0.0333,
+            0.4638
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Fire engine, fire truck (siren)",
+                  "cosine": 0.6762
+                },
+                {
+                  "sound": "Civil defense siren",
+                  "cosine": 0.6206
+                },
+                {
+                  "sound": "Police car (siren)",
+                  "cosine": 0.61
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Rain on surface",
+                  "cosine": 0.3651
+                },
+                {
+                  "sound": "Waterfall",
+                  "cosine": 0.3645
+                },
+                {
+                  "sound": "Rain",
+                  "cosine": 0.3454
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-05",
+        "options": [
+          "crickets",
+          "train"
+        ],
+        "answers": [
+          "B",
+          "?"
+        ],
+        "parts": [
+          {
+            "file": "4-178881-A-45.wav",
+            "label": "train",
+            "wav_sha256": "f9c68f75599c22c1ec196d1754081cb8df5535234b4ee40f414452e59f48f2b1",
+            "git_blob": "422d5b6549d460797325a7451acf0fe18ae3231f"
+          },
+          {
+            "file": "4-250864-A-8.wav",
+            "label": "sheep",
+            "wav_sha256": "61588f6390e01538119eff6ca23c9c0c9ead0ea8dc77d07cfff1ab77ab078872",
+            "git_blob": "61042c01856898e8aed2b079ef59863e12a5407f"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "729137c2ace46190d42abb54fb5e53fa53b626070096aca07c0e25f0a462d64e",
+        "readers": {
+          "previous": {
+            "answers": [
+              "B",
+              "?"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "B",
+              "?"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "crickets",
+            "train"
+          ],
+          "reference": [
+            [
+              -0.0733,
+              0.4564
+            ]
+          ],
+          "target": [
+            [
+              -0.1598,
+              -0.0879
+            ]
+          ],
+          "target_minus_reference": [
+            -0.0865,
+            -0.5443
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Railroad car, train wagon",
+                  "cosine": 0.5826
+                },
+                {
+                  "sound": "Subway, metro, underground",
+                  "cosine": 0.5313
+                },
+                {
+                  "sound": "Rail transport",
+                  "cosine": 0.5141
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Livestock, farm animals, working animals",
+                  "cosine": 0.6566
+                },
+                {
+                  "sound": "Bleat",
+                  "cosine": 0.5895
+                },
+                {
+                  "sound": "Moo",
+                  "cosine": 0.5499
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-06",
+        "options": [
+          "cat",
+          "clock tick"
+        ],
+        "answers": [
+          "?",
+          "B"
+        ],
+        "parts": [
+          {
+            "file": "4-157611-A-41.wav",
+            "label": "chainsaw",
+            "wav_sha256": "9a71c693e78177287023ad26d3192535104f8a5fa45290150a3f4db647ae5226",
+            "git_blob": "17f808c7fdee59a8419aed0e45c16f23152ed8b4"
+          },
+          {
+            "file": "4-188033-A-38.wav",
+            "label": "clock_tick",
+            "wav_sha256": "7a76b052b1344dfdebd234ed10b1e4a7d167e4bc7575dc2938fef7f9e1ad1a06",
+            "git_blob": "1cb17870081499e01bb490ac3b67d291e8d00381"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "2cd2045ef4f3894c92d66c447fd7e3020b5184fe6b0935fd64847482c89471cf",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": [
+              [
+                0.0,
+                5.0
+              ],
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "cat",
+            "clock tick"
+          ],
+          "reference": [
+            [
+              -0.0565,
+              -0.2423
+            ]
+          ],
+          "target": [
+            [
+              0.0794,
+              0.6695
+            ]
+          ],
+          "target_minus_reference": [
+            0.1359,
+            0.9118
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Propeller, airscrew",
+                  "cosine": 0.5579
+                },
+                {
+                  "sound": "Lawn mower",
+                  "cosine": 0.524
+                },
+                {
+                  "sound": "Motorboat, speedboat",
+                  "cosine": 0.5231
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Tick-tock",
+                  "cosine": 0.6384
+                },
+                {
+                  "sound": "Tick",
+                  "cosine": 0.5946
+                },
+                {
+                  "sound": "Clickety-clack",
+                  "cosine": 0.5941
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-07",
+        "options": [
+          "frog",
+          "siren"
+        ],
+        "answers": [
+          "?",
+          "A"
+        ],
+        "parts": [
+          {
+            "file": "4-144468-B-27.wav",
+            "label": "brushing_teeth",
+            "wav_sha256": "2fa690f12d994168413f962ccff9a6936d430b0dc0cf4dcd337e4434a3bd0e58",
+            "git_blob": "301d1e409e5b0a32ff3b85706ec744353131e7ab"
+          },
+          {
+            "file": "4-154793-A-4.wav",
+            "label": "frog",
+            "wav_sha256": "70848cc5cfe7f2c5f3ef1266f47901c50463a4887ff6ffa8910cba9b22c89d4f",
+            "git_blob": "54520993de4fa9ddd65cc5cf19448c90455f9690"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "783a139aa7665f8c47c1c3df6201d5b139eb129250876130999c405f3c898e3a",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "A"
+            ],
+            "independent_replays": [
+              [
+                0.0,
+                5.0
+              ],
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "A"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "frog",
+            "siren"
+          ],
+          "reference": [
+            [
+              0.0452,
+              0.0501
+            ]
+          ],
+          "target": [
+            [
+              0.6126,
+              0.0067
+            ]
+          ],
+          "target_minus_reference": [
+            0.5674,
+            -0.0434
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Toothbrush",
+                  "cosine": 0.5898
+                },
+                {
+                  "sound": "Electric toothbrush",
+                  "cosine": 0.3755
+                },
+                {
+                  "sound": "Filing (rasp)",
+                  "cosine": 0.3323
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Frog",
+                  "cosine": 0.5811
+                },
+                {
+                  "sound": "Croak",
+                  "cosine": 0.4728
+                },
+                {
+                  "sound": "Pig",
+                  "cosine": 0.3792
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-08",
+        "options": [
+          "church bells",
+          "cat"
+        ],
+        "answers": [
+          "A",
+          "?"
+        ],
+        "parts": [
+          {
+            "file": "4-125825-B-46.wav",
+            "label": "church_bells",
+            "wav_sha256": "c6a4d689547aa3ac03eb683104f00f8be7b6eed00b57c9a7a64e06a935f9d9a4",
+            "git_blob": "094efdbdad829c0d4432e815a089a8595793831c"
+          },
+          {
+            "file": "4-188595-A-29.wav",
+            "label": "drinking_sipping",
+            "wav_sha256": "7354cd541de26c223c02d61ba157d8b25e465ea11768d730e074b668011d301f",
+            "git_blob": "926ae3496ce45632097b04744a10ff61db197a87"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "654c1c615480c979a5da7d5b2b194d4cc833655e13e1f9efb315d9deb5604d40",
+        "readers": {
+          "previous": {
+            "answers": [
+              "A",
+              "B"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "A",
+              "B"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "church bells",
+            "cat"
+          ],
+          "reference": [
+            [
+              0.5415,
+              -0.1198
+            ]
+          ],
+          "target": [
+            [
+              0.0317,
+              0.2512
+            ]
+          ],
+          "target_minus_reference": [
+            -0.5099,
+            0.371
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Church bell",
+                  "cosine": 0.5303
+                },
+                {
+                  "sound": "Tubular bells",
+                  "cosine": 0.4569
+                },
+                {
+                  "sound": "Bell",
+                  "cosine": 0.4493
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Snort",
+                  "cosine": 0.4935
+                },
+                {
+                  "sound": "Chewing, mastication",
+                  "cosine": 0.4806
+                },
+                {
+                  "sound": "Throat clearing",
+                  "cosine": 0.4739
+                }
+              ]
+            ]
+          }
+        },
+        "annotation_note": "Both readers answered cat for drinking_sipping. Cat was a supplied distractor."
+      },
+      {
+        "film": "outside-09",
+        "options": [
+          "cat",
+          "airplane"
+        ],
+        "answers": [
+          "A",
+          "?"
+        ],
+        "parts": [
+          {
+            "file": "4-120160-A-5.wav",
+            "label": "cat",
+            "wav_sha256": "5828c0621dddd37ba88c08d99edb9c3860bf2e7f9c3b8adcc02f845bbf6e7211",
+            "git_blob": "0eaac7b954346af364420795a5228ec5ae55c212"
+          },
+          {
+            "file": "4-186693-A-17.wav",
+            "label": "pouring_water",
+            "wav_sha256": "717ccdb41c6aa068f5cd6976b309ec2c2f81041838151892cba281dac90b7092",
+            "git_blob": "7497cb11c849aaf11ce42c7360f364a85d94ab93"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "824fcccfdf9d9c93a605b6885ec3c3bda200ee7477c65035adf49b5b5a1b5644",
+        "readers": {
+          "previous": {
+            "answers": [
+              "A",
+              "?"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "A",
+              "?"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "cat",
+            "airplane"
+          ],
+          "reference": [
+            [
+              0.6178,
+              0.0046
+            ]
+          ],
+          "target": [
+            [
+              0.0131,
+              0.0579
+            ]
+          ],
+          "target_minus_reference": [
+            -0.6047,
+            0.0533
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Meow",
+                  "cosine": 0.5787
+                },
+                {
+                  "sound": "Caterwaul",
+                  "cosine": 0.5152
+                },
+                {
+                  "sound": "Crowing, cock-a-doodle-doo",
+                  "cosine": 0.4217
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Pour",
+                  "cosine": 0.628
+                },
+                {
+                  "sound": "Fill (with liquid)",
+                  "cosine": 0.4848
+                },
+                {
+                  "sound": "Glass",
+                  "cosine": 0.3692
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-10",
+        "options": [
+          "keyboard typing",
+          "engine"
+        ],
+        "answers": [
+          "?",
+          "B"
+        ],
+        "parts": [
+          {
+            "file": "4-132383-B-2.wav",
+            "label": "pig",
+            "wav_sha256": "92f93d980ba878821c57255190f591d3936030cdfeb3ea205524d8d5e5ef24d3",
+            "git_blob": "2bea1d81787f4cfa45e9610a40c8c921f7a16dcc"
+          },
+          {
+            "file": "4-186935-A-44.wav",
+            "label": "engine",
+            "wav_sha256": "d5fa3e05bb7222e031cf0fde1866e20aee5f3686d45a69337757930c46769bf4",
+            "git_blob": "be400b36e24779347a7a964621157ab8a1ab07ad"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "a3528d1b7ceb5490e3bc32d7e240df2d841e7bfdf84429fcb5e5d8752dd00f05",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ],
+              [
+                0.0,
+                5.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "keyboard typing",
+            "engine"
+          ],
+          "reference": [
+            [
+              -0.0152,
+              -0.1923
+            ]
+          ],
+          "target": [
+            [
+              -0.01,
+              0.5423
+            ]
+          ],
+          "target_minus_reference": [
+            0.0052,
+            0.7347
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Pig",
+                  "cosine": 0.4415
+                },
+                {
+                  "sound": "Livestock, farm animals, working animals",
+                  "cosine": 0.4264
+                },
+                {
+                  "sound": "Oink",
+                  "cosine": 0.3733
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Medium engine (mid frequency)",
+                  "cosine": 0.6386
+                },
+                {
+                  "sound": "Lawn mower",
+                  "cosine": 0.476
+                },
+                {
+                  "sound": "Engine knocking",
+                  "cosine": 0.4614
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-11",
+        "options": [
+          "laughing",
+          "door wood knock"
+        ],
+        "answers": [
+          "A",
+          "?"
+        ],
+        "parts": [
+          {
+            "file": "4-181599-A-26.wav",
+            "label": "laughing",
+            "wav_sha256": "e414fc3ba7dea88437d0be3c0dd1101177cfcc0052e2a2b2cb8973cad984e178",
+            "git_blob": "37e606108a49d8e987cde7ee71d100ef4aaad6ae"
+          },
+          {
+            "file": "4-200330-B-6.wav",
+            "label": "hen",
+            "wav_sha256": "af0d92d01bcbc7f5dadd012f05a1f3d52197432ea927e29c084198127c8a0d15",
+            "git_blob": "a375dc8bd38b288fb722dada9099bee871b6d88b"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "37464808fcfc1331528cd7f805bc74d4a65fab33b96838749fdcc117d8113b70",
+        "readers": {
+          "previous": {
+            "answers": [
+              "A",
+              "?"
+            ],
+            "independent_replays": [
+              [
+                0.0,
+                5.0
+              ],
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "A",
+              "?"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "laughing",
+            "door wood knock"
+          ],
+          "reference": [
+            [
+              0.5096,
+              -0.1117
+            ]
+          ],
+          "target": [
+            [
+              0.1423,
+              0.0878
+            ]
+          ],
+          "target_minus_reference": [
+            -0.3673,
+            0.1995
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Giggle",
+                  "cosine": 0.5387
+                },
+                {
+                  "sound": "Chuckle, chortle",
+                  "cosine": 0.5301
+                },
+                {
+                  "sound": "Belly laugh",
+                  "cosine": 0.4208
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Chicken, rooster",
+                  "cosine": 0.6165
+                },
+                {
+                  "sound": "Crowing, cock-a-doodle-doo",
+                  "cosine": 0.4496
+                },
+                {
+                  "sound": "Goose",
+                  "cosine": 0.4288
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-12",
+        "options": [
+          "door wood creaks",
+          "car horn"
+        ],
+        "answers": [
+          "?",
+          "B"
+        ],
+        "parts": [
+          {
+            "file": "4-183882-B-28.wav",
+            "label": "snoring",
+            "wav_sha256": "d534fe2cac853e387fb2a400d8dbb2daa51a03282169983cdf1bc2f069b71071",
+            "git_blob": "d7607085201fd2d3c15e8e1447ad6e6c76291b78"
+          },
+          {
+            "file": "4-176638-A-43.wav",
+            "label": "car_horn",
+            "wav_sha256": "6e2cf0e0671f26167772c0aa34bcdeb711fec40b62b79311433bf4dd9497ce5a",
+            "git_blob": "bb468f411368b04ce798182735ae2b4b4ea4b74a"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "d7a0477c320588f0b0ae54615083da8d7958db04e68940b2d50de0edd12fdd1e",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": [
+              [
+                0.0,
+                5.0
+              ],
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "door wood creaks",
+            "car horn"
+          ],
+          "reference": [
+            [
+              0.1661,
+              0.1533
+            ]
+          ],
+          "target": [
+            [
+              0.0407,
+              0.4921
+            ]
+          ],
+          "target_minus_reference": [
+            -0.1253,
+            0.3388
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Snoring",
+                  "cosine": 0.6374
+                },
+                {
+                  "sound": "Snicker",
+                  "cosine": 0.5474
+                },
+                {
+                  "sound": "Snort",
+                  "cosine": 0.4438
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Vehicle horn, car horn, honking",
+                  "cosine": 0.677
+                },
+                {
+                  "sound": "Honk",
+                  "cosine": 0.6461
+                },
+                {
+                  "sound": "Air horn, truck horn",
+                  "cosine": 0.5782
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-13",
+        "options": [
+          "drinking sipping",
+          "dog"
+        ],
+        "answers": [
+          "?",
+          "B"
+        ],
+        "parts": [
+          {
+            "file": "4-177243-A-32.wav",
+            "label": "keyboard_typing",
+            "wav_sha256": "e2163c61a24be93d31a3e6b1c87191f87eb0d7cebda85b110b7f2a115f0b86fa",
+            "git_blob": "2e60a566b80c7a9ba161a8bb8a8344710671456f"
+          },
+          {
+            "file": "4-199261-A-0.wav",
+            "label": "dog",
+            "wav_sha256": "527a52b5cd50b5171b45ea0dd3c5efe5d11fb75a0c29cdd777c6f17255ac8262",
+            "git_blob": "102410afc607e42c6af917f402c975834405283f"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "5013ed5525fe6d5049c748229787c7b3c7f01fb9a60b87fbb4abee1c2bb49098",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "drinking sipping",
+            "dog"
+          ],
+          "reference": [
+            [
+              0.0021,
+              0.0171
+            ]
+          ],
+          "target": [
+            [
+              -0.1006,
+              0.6054
+            ]
+          ],
+          "target_minus_reference": [
+            -0.1027,
+            0.5883
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Keyboard (musical)",
+                  "cosine": 0.4285
+                },
+                {
+                  "sound": "Typewriter",
+                  "cosine": 0.4223
+                },
+                {
+                  "sound": "Computer keyboard",
+                  "cosine": 0.3637
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Bark",
+                  "cosine": 0.5166
+                },
+                {
+                  "sound": "Canidae, dogs, wolves",
+                  "cosine": 0.5158
+                },
+                {
+                  "sound": "Whimper (dog)",
+                  "cosine": 0.438
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-14",
+        "options": [
+          "cow",
+          "coughing"
+        ],
+        "answers": [
+          "?",
+          "A"
+        ],
+        "parts": [
+          {
+            "file": "4-218199-C-35.wav",
+            "label": "washing_machine",
+            "wav_sha256": "790f81a05aa5b9bc891dafc90059fd24a48a8301d0abaeca7285cf4b9673b6e4",
+            "git_blob": "4b9d223d3e4a063dfac77ed4ddcb701ff23a512c"
+          },
+          {
+            "file": "4-181955-A-3.wav",
+            "label": "cow",
+            "wav_sha256": "4de46673260781a776ea7fb08d7057c104b0f1c181170488445d1841fba24472",
+            "git_blob": "4635e7d585099f87b6193e7cb4e15889fd74dc09"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "9a710c14a936c51fdcd6a9ec1f64531248af75d50d2f20ad82a77024ad333ada",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "A"
+            ],
+            "independent_replays": [
+              [
+                0.0,
+                5.0
+              ]
+            ]
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "A"
+            ],
+            "independent_replays": []
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "cow",
+            "coughing"
+          ],
+          "reference": [
+            [
+              0.0503,
+              0.1411
+            ]
+          ],
+          "target": [
+            [
+              0.6408,
+              0.0676
+            ]
+          ],
+          "target_minus_reference": [
+            0.5906,
+            -0.0735
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Vibration",
+                  "cosine": 0.4488
+                },
+                {
+                  "sound": "Medium engine (mid frequency)",
+                  "cosine": 0.4429
+                },
+                {
+                  "sound": "Mains hum",
+                  "cosine": 0.4277
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Cattle, bovinae",
+                  "cosine": 0.5951
+                },
+                {
+                  "sound": "Livestock, farm animals, working animals",
+                  "cosine": 0.5356
+                },
+                {
+                  "sound": "Moo",
+                  "cosine": 0.5177
+                }
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "film": "outside-15",
+        "options": [
+          "laughing",
+          "thunderstorm"
+        ],
+        "answers": [
+          "?",
+          "B"
+        ],
+        "parts": [
+          {
+            "file": "4-173865-B-9.wav",
+            "label": "crow",
+            "wav_sha256": "0d60307a21da185856f712a327b56b16ef2444d8455d67d55595d931d3a68af3",
+            "git_blob": "a0d6f15b7711851e04e389cf248f5218464503a6"
+          },
+          {
+            "file": "4-125070-A-19.wav",
+            "label": "thunderstorm",
+            "wav_sha256": "61b68a9eb06ee056826f8ce06e56558bc46301a2f4df43b92d7619cd6b2e8475",
+            "git_blob": "66bf601eec608021ae21ae5fdc762b37ccdf1b52"
+          }
+        ],
+        "first_end": 5.0,
+        "second_end": 10.0,
+        "rate": 44100,
+        "samples": 220500,
+        "sha256": "834ca3e55213da9223cb801af5f90bcdfd2c3a8ecab3777772e8d7e38f81e507",
+        "readers": {
+          "previous": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": []
+          },
+          "grounded": {
+            "answers": [
+              "?",
+              "B"
+            ],
+            "independent_replays": [
+              [
+                5.0,
+                10.0
+              ]
+            ]
+          }
+        },
+        "description_comparison": {
+          "descriptions": [
+            "laughing",
+            "thunderstorm"
+          ],
+          "reference": [
+            [
+              0.0215,
+              0.1333
+            ]
+          ],
+          "target": [
+            [
+              0.2095,
+              0.5486
+            ]
+          ],
+          "target_minus_reference": [
+            0.1881,
+            0.4152
+          ],
+          "catalogue": {
+            "status": "available",
+            "reference": [
+              [
+                {
+                  "sound": "Crow",
+                  "cosine": 0.5186
+                },
+                {
+                  "sound": "Caw",
+                  "cosine": 0.5158
+                },
+                {
+                  "sound": "Bird",
+                  "cosine": 0.4312
+                }
+              ]
+            ],
+            "target": [
+              [
+                {
+                  "sound": "Thunder",
+                  "cosine": 0.5477
+                },
+                {
+                  "sound": "Explosion",
+                  "cosine": 0.5435
+                },
+                {
+                  "sound": "Thunderstorm",
+                  "cosine": 0.5302
+                }
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "protocol_retries": [
+    "11-measured-1/two-11-measured.events"
+  ],
+  "release_method": "When the two active recordings have different encoder features, the returned text and numbers match the with_catalogue condition. If a waveform has no encoder-rate signal, no sound-identity change can be measured. If features are identical in channel order there is zero measured change. In these two situations the released comparison returns its status and change without proposing a source; readers can ask_scene with either released interval. All 16 affected controls were rerun after this change. The 24 distinct film and 16 ESC-50 comparisons were replayed through the released comparator to verify identical report values (including option order) to those actually received by their readers. Their existing with_catalogue answers are used without counting additional sessions.",
+  "parity": {
+    "distinct_films": 24,
+    "esc50_pairs": 16,
+    "rerun_controls": 16
+  },
+  "release_components": {
+    "mcp_server.py": "5687a0c566f6c48a526018c746159d498452a161838d802a744e27e0c82a2550",
+    "compare_heard.py": "3a5e818d0a4897712da48923cddc011788e06fa306257a136f3127b78d6b1ceb",
+    "compare_sounds.py": "bdc76f59e4fe3e884ebe607e88b57a024e9c9241128655544840abee0e725f82",
+    "cli.py": "420caf7fa383a4a1bc083525e3108485edba249f2cdc35d3b88a177c3b544ecf"
+  },
+  "release_decision": "Expose this evidence when a reader explicitly supplies descriptions. Existing unnamed comparisons continue to return the original recording similarities. Overall two-sound identification did not increase on the 24 distinct films. The open-set and control measurements describe the limits of source naming."
+}

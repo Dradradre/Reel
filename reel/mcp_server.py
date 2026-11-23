@@ -664,7 +664,8 @@ class Viewing:
             blocks.extend(audio_block(path) for path in paths)
         return [text_block(result), *blocks]
 
-    def compare_heard(self, turn, reference, target, question=None, native_audio=False, describe=True, similarity=False):
+    def compare_heard(self, turn, reference, target, question=None, native_audio=False, describe=True, similarity=False,
+                      alternatives=None):
         if question is not None and not describe:
             raise ValueError("enable the local description to ask a listening question")
         with self.lock:
@@ -676,8 +677,8 @@ class Viewing:
             if native_audio and sum(path.stat().st_size for path in paths) > MAX_INLINE_PCM_BYTES:
                 raise ValueError("both WAVs together exceed the inline limit; shorten the ranges or disable native_audio")
             report = {name: {k: v for k, v in clip.items() if k != "wav"} for name, clip in clips.items()}
-            if similarity:
-                report["sound_similarity"] = sound_similarity(clips, self.matcher)
+            if similarity or alternatives is not None:
+                report["sound_similarity"] = sound_similarity(clips, self.matcher, alternatives)
             if describe:
                 with self.sound_session(replay=True) as sound:
                     report["independent_readings"] = describe_recordings(sound, clips, question)
@@ -929,14 +930,17 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,
-                                native_audio: bool = not image_client, describe: bool = True, similarity: bool = False):
+                                native_audio: bool = not image_client, describe: bool = True, similarity: bool = False,
+                                alternatives: list[str] | None = None):
             """Compare two previously heard film-time ranges, each [start_s, end_s] up to eight seconds.
             Listen for a recurring sound, a new sound, or a change in the background. Both original
             channel spectra are included. native_audio adds the two WAVs in reference, target order.
             Set similarity=true to compare how the recordings sound even if you cannot name them.
-            This returns a CLAP cosine per channel pair and works with describe=false.
+            This returns a CLAP cosine per channel pair and works with describe=false. Supply alternatives to
+            measure how the match to each sound description changes from the first recording to the second.
             describe reads each recording independently, to keep its sounds tied to that interval. Only the audio enters the reader."""
-            return await asyncio.to_thread(reader.compare_heard, turn, reference, target, question, native_audio, describe, similarity)
+            return await asyncio.to_thread(reader.compare_heard, turn, reference, target, question, native_audio,
+                                           describe, similarity, alternatives)
 
         @server.tool(annotations=hints, structured_output=False)
         async def listen_layer(turn: int, start_s: float, end_s: float, layer: int | None = None,

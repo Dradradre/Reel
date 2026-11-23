@@ -133,6 +133,47 @@ class PlaybackSoundTests(unittest.TestCase):
         np.testing.assert_array_equal(signals[0], -signals[1])
         np.testing.assert_array_equal(signals[0], signals[3])
 
+    def test_comparing_descriptions_preserves_channels_and_an_unmeasurable_change(self):
+        matcher = Comparator.__new__(Comparator)
+        terms = ["running water", "metal tapping"]
+        matcher.text_features = Mock()
+        matcher.text_features.return_value.cpu.return_value.numpy.return_value = np.eye(2)
+        matcher.references = (["running water", "tap"], matcher.text_features.return_value)
+
+        def encode(channels, padding):
+            vector = Mock()
+            vector.cpu.return_value.numpy.return_value = np.array([1., 0.] if channels[0][0] > 0 else [0., 1.])
+            return [vector]
+
+        matcher.audio_features = Mock(side_effect=encode)
+        with tempfile.TemporaryDirectory() as tmp:
+            ref, target = (Path(tmp) / name for name in ("ref.wav", "target.wav"))
+            left, quiet = np.ones(100, dtype=np.float32) * .1, np.zeros(100, dtype=np.float32)
+            sf.write(ref, np.column_stack((left, quiet)), 48000)
+            sf.write(target, np.column_stack((left, -left)), 48000)
+            result = matcher.compare_recordings(ref, target, terms)["description_comparison"]
+            self.assertEqual(result["descriptions"], terms)
+            self.assertEqual(result["reference"], [[1., 0.], None])
+            self.assertEqual(result["target"], [[1., 0.], [0., 1.]])
+            self.assertEqual(result["target_minus_reference"], [-.5, .5])
+            self.assertEqual(result["catalogue"]["reference"][1], [])
+            self.assertEqual(result["catalogue"]["target"][1][0], {"sound": "tap", "cosine": 1.0})
+            repeat = matcher.compare_recordings(target, target, terms)["description_comparison"]
+            self.assertEqual(repeat["status"], "identical_encoder_features")
+            self.assertEqual(repeat["target_minus_reference"], [0., 0.])
+            self.assertNotIn("catalogue", repeat)
+            with patch.object(matcher, "reference_labels", side_effect=OSError("no local vocabulary")):
+                missing = matcher.compare_recordings(ref, target, terms)["description_comparison"]
+            self.assertEqual(missing["catalogue"]["status"], "unavailable")
+            self.assertEqual(missing["target"], result["target"])
+            sf.write(ref, quiet, 48000)
+            silent = matcher.compare_recordings(ref, target, terms)["description_comparison"]
+            self.assertEqual(silent["status"], "no_signal_at_encoder_rate_in_one_or_both")
+            self.assertIsNone(silent["target_minus_reference"])
+            self.assertNotIn("catalogue", silent)
+            both_silent = matcher.compare_recordings(ref, ref, terms)["description_comparison"]
+            self.assertIn("Neither interval", both_silent["basis"])
+
     def test_future_and_empty_hypotheses_do_not_start_the_model(self):
         with SoundMatcher() as reader, patch.object(reader, "request") as request:
             with self.assertRaises(ValueError):

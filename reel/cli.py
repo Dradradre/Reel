@@ -7,7 +7,7 @@
   reel frame DIR --t0 S --t1 S     read every frame displayed in the interval
   reel listen DIR --t0 S --t1 S [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
-  reel compare-heard DIR --reference START END --target START END [--similarity] [--question TEXT]
+  reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second] ["sound description" ...]    compare descriptions with the recorded channels
   reel observe DIR --t0 S --t1 S [--joint] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
   reel speech TURN [--lang CODE] [--verify]               read words from a delivered audio interval
@@ -18,6 +18,7 @@
   reel doctor            which senses are available on this machine
   reel setup [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--compare-sounds] [--describe-sounds]    fetch models for the selected senses
 """
+import shlex
 import sys as _sys, pathlib as _pl
 _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
 import argparse, importlib, json, pathlib, re, shutil, subprocess, sys
@@ -190,6 +191,7 @@ def main():
             ap.add_argument(flag, nargs=2, type=float, metavar=("START", "END"), required=True)
         ap.add_argument("--question", help="ask about an audible difference or similarity")
         ap.add_argument("--similarity", action="store_true", help="compare the two original recordings directly with CLAP")
+        ap.add_argument("--alternatives", nargs="+", metavar="DESCRIPTION", help="compare each description across both recordings")
         ap.add_argument("--recordings-only", action="store_true", help="return both original WAVs without worded descriptions")
         x = ap.parse_args(sys.argv[2:])
         if x.recordings_only and x.question is not None:
@@ -197,8 +199,8 @@ def main():
         try:
             clips = recordings(x.out, x.reference, x.target)
             report = dict(clips)
-            if x.similarity:
-                report["sound_similarity"] = sound_similarity(clips)
+            if x.similarity or x.alternatives is not None:
+                report["sound_similarity"] = sound_similarity(clips, alternatives=x.alternatives)
             if not x.recordings_only:
                 with SoundReader() as sound:
                     report["independent_readings"] = describe_recordings(sound, clips, x.question)
@@ -336,18 +338,25 @@ def main():
                     if command[:1] == ["compare-heard"]:
                         from compare_heard import describe_recordings, recordings, sound_similarity
                         try:
-                            similarity = command[1:2] == ["--similarity"]
+                            compare_terms = command[1:2] == ["--alternatives"]
+                            similarity = compare_terms or command[1:2] == ["--similarity"]
                             # Split only numeric positions; preserve the reader's question verbatim.
                             fields = line.strip().split(maxsplit=6 if similarity else 5)[2 if similarity else 1:]
                             if len(fields) < 4:
-                                raise ValueError("use compare-heard [--similarity] START END START END [QUESTION]")
+                                raise ValueError("give reference START END and target START END after compare-heard")
                             times = [float(t) for t in fields[:4]]
                             clips = recordings(path.parent, times[:2], times[2:])
-                            with sound_reader.for_replay():
-                                reading = describe_recordings(sound_reader, clips, fields[4] if len(fields) == 5 else None)
-                            report = {**clips, "independent_readings": reading}
-                            if similarity:
-                                report["sound_similarity"] = sound_similarity(clips)
+                            report = dict(clips)
+                            if compare_terms:
+                                if len(fields) != 5:
+                                    raise ValueError("supply sound descriptions after the four times, quoting each phrase")
+                                report["sound_similarity"] = sound_similarity(clips, alternatives=shlex.split(fields[4]))
+                            else:
+                                with sound_reader.for_replay():
+                                    report["independent_readings"] = describe_recordings(
+                                        sound_reader, clips, fields[4] if len(fields) == 5 else None)
+                                if similarity:
+                                    report["sound_similarity"] = sound_similarity(clips)
                             print(json.dumps(report, ensure_ascii=False), flush=True)
                         except (ValueError, OSError, subprocess.CalledProcessError) as error:
                             print(json.dumps({"error": str(error)}), flush=True)

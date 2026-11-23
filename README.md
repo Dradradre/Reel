@@ -58,9 +58,11 @@ order, with nothing left out.
 | in sync? | where the sound sits against the picture, from 2 s early to 2 s late, moment by moment | lips moving before the words, a ball struck before its sound |
 | crowd stem | estimated audience sound on the same band-power scale as the mix, with repeated rhythms marked | the timing of a possible chant and its relation to the recorded mix |
 | said | On replay, `heard_words` can check just the selected interval. Playback marks possible voices found only after amplification and keeps their times separate from the transcript. The page shows words that agree in two listening windows, checked against the mix when only the stem suggests speech. Gain-assisted candidates are available in `reel listen` | what is said; whether it matches the subtitles |
-| heard again | the very same recording played again, in red (an echo within 3 s or a stretch pasted from far back), or a similar voice from earlier. During replay, `compare_heard(similarity=true)` compares the sound of two original excerpts | an edit echo, a recycled crowd recording |
+| heard again | the very same recording played again, in red (an echo within 3 s or a stretch pasted from far back), or a similar voice from earlier. During replay, `compare_heard(similarity=true)` compares two original excerpts. Pass `alternatives` to compare each description across them | an edit echo, a recycled crowd recording |
 
 ## Does it work?
+
+When GPT heard both recordings in sequence and could compare its own descriptions across them, it identified **25/48** sounds, up from **22/48**. Both versions identified both sounds on **6/24 films**. In a separate environmental test, each version named 16/16 sounds present in the choices and abstained on 15/16 sounds outside them. [Paired listening and false identifications](docs/listening-check.md#두-구간에서-어떤-소리가-달라졌는지-비교)
 
 Across 24 filmed scenes, we gave local GPT three independent plays of the same moving picture with the original sound, another sound from the same film, or silence. GPT identified both recordings on **5/24 films** and named a sound on **0/24** silent controls. [Soundtrack swaps, individual answers and reproduction](docs/listening-check.md#같은-화면에서-실제-소리만-바꿨을-때)
 
@@ -204,6 +206,8 @@ When sounds overlap, `reel setup --layers` prepares a local MixIT separator. At 
 To seek a sound by ear, prepare CLAP with `reel setup --compare-sounds` and pass `focus="a distant voice"` in place of the layer number. CLAP compares the description with the mix and all eight estimates. The waveform reader hears its inputs without that description. Audio clients can receive both WAVs. Image clients get the spectra and independent readings. [Overlapping sound checks](docs/listening-check.md#겹친-생활음을-하나씩-다시-들었을-때)
 
 To hear what changed against an earlier background, type `compare-heard 0 2 4 6` at a playback pause. It replays the original channels from 0–2 and 4–6 seconds and reads each excerpt independently, so a sound in the second cannot affect the first description. In MCP, call `compare_heard(turn=3, reference=[0,2], target=[4,6])` once that turn has reached six seconds. Both ranges must already have played. Each can be up to eight seconds long. Audio clients can receive both WAVs. Image clients receive the spectra and a separate description for each recording. If you recognize a sound from earlier but cannot name it, set `similarity=true` (CLI `--similarity`) to compare both recordings with the local CLAP audio encoder. A similar background can also raise the score.
+
+To check whether a sound became more like running water or metal tapping, pass `alternatives=["running water","metal tapping"]` to `compare_heard`. For distinct active recordings it reports each channel’s matches, the change between the two recordings, and nearby catalogue sounds. Identical encoder features or missing signal give no basis for naming a change. At a playback pause use `compare-heard --alternatives 0 2 4 6 "running water" "metal tapping"`.
 
 To hear a moment in its surroundings, replay up to eight seconds with `ask_scene(start_s=2, end_s=4, mark_sound=[2.91,3.14])`. A spectrogram of the original channels shows the marked interval and the sound on either side. The same window is available from `reel listen DIR --t0 2 --t1 4 --mark-sound 2.91 3.14`.
 

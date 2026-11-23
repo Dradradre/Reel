@@ -54,9 +54,10 @@ def recordings(directory, reference, target):
     return clips
 
 
-def sound_similarity(clips, matcher=None):
+def sound_similarity(clips, matcher=None, alternatives=None):
+    options = {} if alternatives is None else {"alternatives": alternatives}
     with (matcher or SoundMatcher()).for_replay() as reader:
-        return reader.compare_recordings(clips["reference"]["wav"], clips["target"]["wav"])
+        return reader.compare_recordings(clips["reference"]["wav"], clips["target"]["wav"], **options)
 
 
 def describe_recordings(reader, clips, question=None):

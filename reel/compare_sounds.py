@@ -61,6 +61,10 @@ def match_windows(wav, start, end, per_second, first_sample):
         yield {"start_s": min(end, left), "end_s": min(end, left + len(block) / RATE)}, block
 
 
+def nearest_labels(labels, scores):
+    return [{"sound": labels[i], "cosine": round(float(scores[i]), 4)} for i in np.argsort(-scores)[:3]]
+
+
 class Comparator:
     def __init__(self, download=False):
         import torch
@@ -97,8 +101,14 @@ class Comparator:
     def similarities(self, channels, text, *, padding="repeatpad"):
         return (self.audio_features(channels, padding) @ text.T).cpu().numpy()
 
-    def compare_recordings(self, reference, target):
-        """Compare original channel waveforms independently of any words or pictures."""
+    def reference_labels(self):
+        if self.references is None:
+            labels = vocabulary()
+            self.references = labels, self.text_features(["the sound of " + label.lower() for label in labels])
+        return self.references
+
+    def compare_recordings(self, reference, target, alternatives=None):
+        """Encode the unaltered channels once, then compare recordings and any supplied descriptions."""
         vectors = []
         for wav in (reference, target):
             with open_recording(wav) as recording:
@@ -112,15 +122,69 @@ class Comparator:
                 channels.append(vector)
             vectors.append(channels)
         reference_channels, target_channels = vectors
-        return {"status": "available", "model": CLAP_NAME,
-                "cosines": [[round(float(np.clip(left @ right, -1, 1)), 4)
-                             if left is not None and right is not None else None
-                             for right in target_channels] for left in reference_channels],
-                "basis": "Rows follow the reference channels and columns the target channels in recording order. "
-                         "Each encoder input contains one channel of one excerpt at its recorded level, played "
-                         "once with zero padding. Null means no signal at the encoder rate. A higher cosine "
-                         "indicates more similar whole-clip audio features. Background sound can contribute. "
-                         "The score does not identify an object, speaker or word."}
+        report = {
+            "status": "available", "model": CLAP_NAME,
+            "cosines": [[round(float(np.clip(left @ right, -1, 1)), 4)
+                         if left is not None and right is not None else None
+                         for right in target_channels] for left in reference_channels],
+            "basis": ("Rows follow the reference channels and columns the target channels in recording order. "
+                      "Each encoder input contains one channel of one excerpt at its recorded level, played "
+                      "once with zero padding. Null means no signal at the encoder rate. A higher cosine "
+                      "indicates more similar whole-clip audio features. Background sound can contribute. "
+                      "The score does not identify an object, speaker or word."),
+        }
+        if alternatives is not None:
+            report["description_comparison"] = self.compare_descriptions(vectors, alternatives)
+        return report
+
+    def compare_descriptions(self, vectors, alternatives):
+        reference, target = vectors
+        active_recordings = [any(ch is not None for ch in channels) for channels in vectors]
+        if not all(active_recordings):
+            basis = "A change in sound identity cannot be measured without two active recordings. "
+            basis += ("Replay the active interval separately to identify what you heard." if any(active_recordings)
+                      else "Neither interval has a signal at the encoder rate.")
+            return {"descriptions": alternatives, "status": "no_signal_at_encoder_rate_in_one_or_both",
+                    "target_minus_reference": None, "basis": basis}
+        if len(reference) == len(target) and all(np.array_equal(a, b) for a, b in zip(reference, target, strict=True)):
+            return {"descriptions": alternatives, "status": "identical_encoder_features",
+                    "target_minus_reference": [0.0] * len(alternatives),
+                    "basis": "All corresponding channels have identical encoder features. This comparison "
+                             "has no change to attribute to a sound. Each excerpt can be replayed for identification."}
+        text = self.text_features(alternatives).cpu().numpy()
+        comparison = {"descriptions": alternatives}
+        means = []
+        for name, channels in zip(("reference", "target"), vectors, strict=True):
+            scores = [None if ch is None else np.clip(ch @ text.T, -1, 1) for ch in channels]
+            comparison[name] = [None if row is None else [round(float(v), 4) for v in row] for row in scores]
+            active = [row for row in scores if row is not None]
+            means.append(np.mean(active, axis=0) if active else None)
+        comparison["target_minus_reference"] = (
+            [round(float(v), 4) for v in means[1] - means[0]] if all(v is not None for v in means) else None)
+        comparison["basis"] = ("Each row is one recorded channel. Columns follow the supplied descriptions. "
+                               "The change subtracts the reference from the target after averaging the active "
+                               "channels of each recording. A positive change means greater similarity to that "
+                               "description in the target. Either sound may occur twice or in neither recording.")
+        try:
+            labels, references = self.reference_labels()
+        except OSError:
+            comparison["catalogue"] = {"status": "unavailable", "reason": "AudioSet label vocabulary unavailable"}
+        else:
+            catalogue = {"status": "available"}
+            label_vectors = references.cpu().numpy()
+            for name, channels in zip(("reference", "target"), vectors, strict=True):
+                neighbours = []
+                for ch in channels:
+                    if ch is None:
+                        neighbours.append([])
+                        continue
+                    neighbours.append(nearest_labels(labels, ch @ label_vectors.T))
+                catalogue[name] = neighbours
+            comparison["catalogue"] = catalogue
+            comparison["basis"] += (" The catalogue lists the closest AudioSet terms on the same recording and "
+                                    "encoder, independently of your descriptions. These scores are uncalibrated. "
+                                    "Use them to check whether either description fits what you heard.")
+        return comparison
 
     def choose_layer(self, wavs, focus):
         signals = [read_audio(wav, RATE, channels=1)[:, 0] for wav in wavs]
@@ -138,10 +202,7 @@ class Comparator:
 
     def match(self, wav, start, end, descriptions, per_second=False, first_sample=None):
         import torch
-        if self.references is None:
-            labels = vocabulary()
-            self.references = labels, self.text_features(["the sound of " + label.lower() for label in labels])
-        labels, references = self.references
+        labels, references = self.reference_labels()
         text = torch.cat([self.text_features(descriptions), references]) if descriptions else references
         def compare(stamp, block, padding):
             ids = [i for i, channel in enumerate(block.T) if np.any(channel)]
@@ -151,9 +212,7 @@ class Comparator:
                 for i, scores in zip(ids, values, strict=True):
                     rows[i]["cosines"] = [round(float(v), 4) for v in scores[:len(descriptions)]]
                     background = scores[len(descriptions):]
-                    rows[i]["reference_neighbours"] = [
-                        {"sound": labels[j], "cosine": round(float(background[j]), 4)}
-                        for j in np.argsort(-background)[:3]]
+                    rows[i]["reference_neighbours"] = nearest_labels(labels, background)
             return {**stamp, "channels": rows}
 
         windows = [compare(stamp, block, "repeatpad")
@@ -189,9 +248,15 @@ class SoundMatcher(LocalReader):
             job.update(per_second=True, first_sample=first_sample)
         return self.request(job)
 
-    def compare_recordings(self, reference, target):
-        return self.request({"operation": "compare_recordings", "reference": str(Path(reference).resolve()),
-                             "target": str(Path(target).resolve())})
+    def compare_recordings(self, reference, target, alternatives=None):
+        job = {"operation": "compare_recordings", "reference": str(Path(reference).resolve()),
+               "target": str(Path(target).resolve())}
+        if alternatives is not None:
+            if (not isinstance(alternatives, (list, tuple)) or not alternatives
+                    or any(not isinstance(s, str) or not s.strip() for s in alternatives)):
+                raise ValueError("supply one or more nonempty sound descriptions")
+            job["alternatives"] = list(alternatives)
+        return self.request(job)
 
     def choose_layer(self, wavs, focus):
         return self.request({"operation": "choose_layer", "wavs": wavs, "focus": focus})

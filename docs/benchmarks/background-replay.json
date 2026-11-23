@@ -1,0 +1,319 @@
+{
+  "source": "https://zenodo.org/records/1040179",
+  "baseline": "TUT 2017 evaluation archive digests and frozen source-to-label mapping in short-sound-events.json; the same street recordings were used there.",
+  "method_source": "https://doi.org/10.1109/TASSP.1979.1163209",
+  "protocol": "Offline paired listening check. Use all eight street recordings of TUT Sound Events 2017 Evaluation, the shipping YAMNet weights, label crosswalk and 0.5 reporting threshold from short-sound-events.json. Score the first 0.975 s of every human-labelled onset lasting at least 0.975 s with no overlap by the same label in the preceding 3 s. Score an equally long control immediately before that onset. For both windows use exactly the same 2.025 s of earlier audio as the reference, with no samples from either test window. Keep all simultaneous other sources and unmapped classes. Compare unmodified samples with a conservative spectral subtraction replay of each window. Freeze settings before scoring. Use 512-point Hann windows at 16 kHz, hop 128, arithmetic mean reference power and a shared stereo mask. Retain at least 25% amplitude in each bin. Both conditions receive the same channels, sample count, original gain and classifier. Primary measure: count correct target-label detections and false detections on the matched pre-onset controls at the shipped threshold; also report rescued/lost decisions and how often the target label scores higher in the event than in the matched control. Treat tied scores as half on the latter metric. A filtered version can be considered for a product trial only if it increases correct detections without increasing pre-onset detections. No source identity, annotated timestamps or human description enter the classifier. Annotated timestamps guide our choice of comparison windows; this is an oracle-timed aid check, not streaming or end-to-end GPT perception.",
+  "reproduce": "python -m examples.check_background_replay PATH_TO_ARCHIVES",
+  "reporting": "For a label, a detection requires a matching label among the shipped top three candidates scoring at least 0.5 on either channel. For the secondary rank use the largest raw mapped label score across both channels. No mapped brake label exists, so that category ties. Event and pre-onset decisions are paired within recording. No individual-listener sensitivity or human-relative percentage is estimated here.",
+  "file_count": 8,
+  "n": 131,
+  "results": {
+    "original": {
+      "event_hits": 2,
+      "control_hits": 1,
+      "event_scores_higher": 67,
+      "tied": 32
+    },
+    "filtered": {
+      "event_hits": 4,
+      "control_hits": 0,
+      "event_scores_higher": 65,
+      "tied": 39
+    },
+    "event_changed": {
+      "gained": 3,
+      "lost": 1
+    },
+    "control_changed": {
+      "gained": 0,
+      "lost": 1
+    }
+  },
+  "by_class": {
+    "brakes squeaking": {
+      "n": 15,
+      "original": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 0,
+        "tied": 15
+      },
+      "filtered": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 0,
+        "tied": 15
+      },
+      "event_changed": {
+        "gained": 0,
+        "lost": 0
+      },
+      "control_changed": {
+        "gained": 0,
+        "lost": 0
+      }
+    },
+    "car": {
+      "n": 50,
+      "original": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 27,
+        "tied": 8
+      },
+      "filtered": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 32,
+        "tied": 8
+      },
+      "event_changed": {
+        "gained": 0,
+        "lost": 0
+      },
+      "control_changed": {
+        "gained": 0,
+        "lost": 0
+      }
+    },
+    "children": {
+      "n": 6,
+      "original": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 4,
+        "tied": 2
+      },
+      "filtered": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 4,
+        "tied": 2
+      },
+      "event_changed": {
+        "gained": 0,
+        "lost": 0
+      },
+      "control_changed": {
+        "gained": 0,
+        "lost": 0
+      }
+    },
+    "large vehicle": {
+      "n": 10,
+      "original": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 6,
+        "tied": 1
+      },
+      "filtered": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 7,
+        "tied": 1
+      },
+      "event_changed": {
+        "gained": 0,
+        "lost": 0
+      },
+      "control_changed": {
+        "gained": 0,
+        "lost": 0
+      }
+    },
+    "people speaking": {
+      "n": 22,
+      "original": {
+        "event_hits": 2,
+        "control_hits": 1,
+        "event_scores_higher": 15,
+        "tied": 2
+      },
+      "filtered": {
+        "event_hits": 4,
+        "control_hits": 0,
+        "event_scores_higher": 15,
+        "tied": 1
+      },
+      "event_changed": {
+        "gained": 3,
+        "lost": 1
+      },
+      "control_changed": {
+        "gained": 0,
+        "lost": 1
+      }
+    },
+    "people walking": {
+      "n": 28,
+      "original": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 15,
+        "tied": 4
+      },
+      "filtered": {
+        "event_hits": 0,
+        "control_hits": 0,
+        "event_scores_higher": 7,
+        "tied": 12
+      },
+      "event_changed": {
+        "gained": 0,
+        "lost": 0
+      },
+      "control_changed": {
+        "gained": 0,
+        "lost": 0
+      }
+    }
+  },
+  "decision": "Keep as an offline experiment. All three newly detected events and the lost event are speech. The 109 other event onsets gained no new detections. This does not establish a broader benefit of filtering for a viewer.",
+  "row_columns": [
+    "file",
+    "onset_s",
+    "label",
+    "original_control",
+    "filtered_control",
+    "original_event",
+    "filtered_event"
+  ],
+  "cell": [
+    "label reported at shipped threshold",
+    "maximum raw score for the annotated category"
+  ],
+  "rows": [
+    ["a002", 67.081531, "people walking", [false, 0.0], [false, 0.0], [false, 0.01953125], [false, 0.00390625]],
+    ["a002", 77.08201, "people walking", [false, 0.0078125], [false, 0.0], [false, 0.33203125], [false, 0.19921875]],
+    ["a002", 138.771716, "people walking", [false, 0.0078125], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 5.027725, "car", [false, 0.05859375], [false, 0.03125], [false, 0.1484375], [false, 0.05859375]],
+    ["a005", 31.745306, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 31.953063, "car", [false, 0.05859375], [false, 0.04296875], [false, 0.03125], [false, 0.01171875]],
+    ["a005", 42.777216, "large vehicle", [false, 0.015625], [false, 0.015625], [false, 0.05859375], [false, 0.01953125]],
+    ["a005", 48.739848, "car", [false, 0.01953125], [false, 0.04296875], [false, 0.03125], [false, 0.05859375]],
+    ["a005", 58.005821, "people speaking", [false, 0.015625], [false, 0.01953125], [false, 0.33203125], [true, 0.66796875]],
+    ["a005", 69.120833, "car", [false, 0.01953125], [false, 0.015625], [false, 0.08203125], [false, 0.05859375]],
+    ["a005", 85.699861, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 92.55585, "car", [false, 0.109375], [false, 0.03125], [false, 0.01953125], [false, 0.00390625]],
+    ["a005", 103.089142, "children", [false, 0.0], [false, 0.0], [false, 0.05859375], [false, 0.04296875]],
+    ["a005", 106.434034, "people speaking", [true, 0.73828125], [false, 0.33203125], [false, 0.26171875], [false, 0.4140625]],
+    ["a005", 111.274777, "children", [false, 0.00390625], [false, 0.0], [false, 0.109375], [false, 0.109375]],
+    ["a005", 116.468708, "car", [false, 0.03125], [false, 0.01953125], [false, 0.109375], [false, 0.05859375]],
+    ["a005", 128.165441, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 133.525578, "large vehicle", [false, 0.04296875], [false, 0.04296875], [false, 0.04296875], [false, 0.05859375]],
+    ["a005", 134.522812, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 153.137861, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 157.916277, "car", [false, 0.015625], [false, 0.03125], [false, 0.01953125], [false, 0.05859375]],
+    ["a005", 177.798645, "large vehicle", [false, 0.05859375], [false, 0.01953125], [false, 0.04296875], [false, 0.015625]],
+    ["a005", 184.467653, "car", [false, 0.04296875], [false, 0.0078125], [false, 0.05859375], [false, 0.01171875]],
+    ["a005", 191.323641, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 215.942874, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 222.383349, "car", [false, 0.01953125], [false, 0.015625], [false, 0.08203125], [false, 0.05859375]],
+    ["a005", 227.598055, "people speaking", [false, 0.0078125], [false, 0.05859375], [true, 0.5859375], [false, 0.109375]],
+    ["a005", 238.609189, "large vehicle", [false, 0.03125], [false, 0.01171875], [false, 0.01953125], [false, 0.015625]],
+    ["a005", 241.725548, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a005", 242.972091, "people speaking", [false, 0.03125], [false, 0.015625], [false, 0.03125], [false, 0.04296875]],
+    ["a005", 246.171553, "car", [false, 0.05859375], [false, 0.01171875], [false, 0.03125], [false, 0.08203125]],
+    ["a005", 248.082919, "children", [false, 0.0], [false, 0.0], [false, 0.00390625], [false, 0.00390625]],
+    ["a009", 7.656921, "large vehicle", [false, 0.015625], [false, 0.0], [false, 0.03125], [false, 0.01953125]],
+    ["a009", 18.851414, "car", [false, 0.0078125], [false, 0.01953125], [false, 0.01171875], [false, 0.01953125]],
+    ["a009", 79.919109, "people walking", [false, 0.00390625], [false, 0.00390625], [false, 0.00390625], [false, 0.00390625]],
+    ["a009", 90.97285, "car", [false, 0.0], [false, 0.0], [false, 0.00390625], [false, 0.0]],
+    ["a009", 106.812166, "car", [false, 0.0], [false, 0.0078125], [false, 0.0], [false, 0.015625]],
+    ["a009", 137.158344, "car", [false, 0.00390625], [false, 0.01953125], [false, 0.00390625], [false, 0.01953125]],
+    ["a009", 164.85838, "car", [false, 0.00390625], [false, 0.00390625], [false, 0.0078125], [false, 0.00390625]],
+    ["a009", 165.017899, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a009", 198.864116, "people speaking", [false, 0.01953125], [false, 0.0078125], [false, 0.03125], [false, 0.01171875]],
+    ["a011", 6.173002, "car", [false, 0.01953125], [false, 0.03125], [false, 0.04296875], [false, 0.08203125]],
+    ["a011", 6.853004, "people speaking", [false, 0.03125], [false, 0.015625], [false, 0.1484375], [false, 0.015625]],
+    ["a011", 21.406806, "car", [false, 0.00390625], [false, 0.0], [false, 0.0078125], [false, 0.04296875]],
+    ["a011", 25.363179, "people speaking", [false, 0.03125], [false, 0.109375], [false, 0.26171875], [false, 0.33203125]],
+    ["a011", 32.19852, "car", [false, 0.015625], [false, 0.00390625], [false, 0.03125], [false, 0.00390625]],
+    ["a011", 46.125308, "people walking", [false, 0.0], [false, 0.0078125], [false, 0.00390625], [false, 0.00390625]],
+    ["a011", 66.878605, "car", [false, 0.01171875], [false, 0.015625], [false, 0.0078125], [false, 0.01171875]],
+    ["a011", 79.330584, "car", [false, 0.01953125], [false, 0.00390625], [false, 0.05859375], [false, 0.05859375]],
+    ["a011", 92.029835, "car", [false, 0.015625], [false, 0.00390625], [false, 0.03125], [false, 0.0078125]],
+    ["a011", 107.192989, "people walking", [false, 0.03125], [false, 0.00390625], [false, 0.01953125], [false, 0.0]],
+    ["a011", 108.261563, "car", [false, 0.015625], [false, 0.00390625], [false, 0.08203125], [false, 0.01171875]],
+    ["a011", 120.015878, "car", [false, 0.04296875], [false, 0.01953125], [false, 0.00390625], [false, 0.0]],
+    ["a011", 136.062151, "people speaking", [false, 0.03125], [false, 0.05859375], [false, 0.19921875], [true, 0.73828125]],
+    ["a011", 160.347924, "people walking", [false, 0.01953125], [false, 0.00390625], [false, 0.01171875], [false, 0.0]],
+    ["a011", 178.734463, "people speaking", [false, 0.26171875], [false, 0.1484375], [false, 0.05859375], [false, 0.109375]],
+    ["a011", 189.808776, "car", [false, 0.015625], [false, 0.00390625], [false, 0.04296875], [false, 0.015625]],
+    ["a011", 196.74126, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a011", 202.322572, "car", [false, 0.01171875], [false, 0.00390625], [false, 0.01953125], [false, 0.0078125]],
+    ["a011", 206.738168, "large vehicle", [false, 0.08203125], [false, 0.0078125], [false, 0.015625], [false, 0.00390625]],
+    ["a123", 8.557776, "people walking", [false, 0.04296875], [false, 0.00390625], [false, 0.01953125], [false, 0.00390625]],
+    ["a123", 18.878898, "car", [false, 0.01171875], [false, 0.00390625], [false, 0.00390625], [false, 0.0]],
+    ["a123", 31.727893, "people speaking", [false, 0.05859375], [false, 0.04296875], [false, 0.33203125], [true, 0.66796875]],
+    ["a123", 36.968606, "car", [false, 0.00390625], [false, 0.0], [false, 0.0], [false, 0.00390625]],
+    ["a123", 43.763037, "people walking", [false, 0.00390625], [false, 0.00390625], [false, 0.01171875], [false, 0.0078125]],
+    ["a123", 45.279761, "people speaking", [false, 0.05859375], [false, 0.08203125], [false, 0.4140625], [false, 0.1484375]],
+    ["a123", 49.23804, "large vehicle", [false, 0.0078125], [false, 0.00390625], [false, 0.04296875], [false, 0.00390625]],
+    ["a123", 54.577402, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a123", 58.239736, "people speaking", [false, 0.03125], [false, 0.19921875], [false, 0.03125], [false, 0.109375]],
+    ["a123", 59.904433, "car", [false, 0.0], [false, 0.0], [false, 0.04296875], [false, 0.0078125]],
+    ["a123", 83.888402, "large vehicle", [false, 0.00390625], [false, 0.01171875], [false, 0.0078125], [false, 0.01953125]],
+    ["a123", 98.340439, "car", [false, 0.04296875], [false, 0.05859375], [false, 0.01953125], [false, 0.03125]],
+    ["a123", 112.607509, "people walking", [false, 0.01171875], [false, 0.00390625], [false, 0.015625], [false, 0.00390625]],
+    ["a123", 124.445355, "people speaking", [false, 0.05859375], [false, 0.04296875], [false, 0.04296875], [false, 0.1484375]],
+    ["a123", 140.253812, "car", [false, 0.01171875], [false, 0.0078125], [false, 0.1484375], [false, 0.05859375]],
+    ["a123", 144.865639, "people walking", [false, 0.0078125], [false, 0.00390625], [false, 0.04296875], [false, 0.00390625]],
+    ["a123", 167.764473, "children", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a123", 169.392177, "people walking", [false, 0.109375], [false, 0.0], [false, 0.109375], [false, 0.00390625]],
+    ["a123", 182.759078, "people walking", [false, 0.01953125], [false, 0.00390625], [false, 0.01171875], [false, 0.00390625]],
+    ["a123", 195.299796, "large vehicle", [false, 0.03125], [false, 0.0], [false, 0.05859375], [false, 0.015625]],
+    ["a123", 196.48358, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["a123", 204.40014, "car", [false, 0.109375], [false, 0.01171875], [false, 0.1484375], [false, 0.08203125]],
+    ["a123", 209.702508, "people walking", [false, 0.01171875], [false, 0.00390625], [false, 0.00390625], [false, 0.00390625]],
+    ["a123", 232.490362, "people walking", [false, 0.00390625], [false, 0.00390625], [false, 0.01171875], [false, 0.0]],
+    ["a123", 233.538504, "car", [false, 0.04296875], [false, 0.00390625], [false, 0.03125], [false, 0.0078125]],
+    ["a123", 276.290391, "car", [false, 0.01953125], [false, 0.0], [false, 0.109375], [false, 0.00390625]],
+    ["a123", 289.447664, "people walking", [false, 0.01953125], [false, 0.00390625], [false, 0.0078125], [false, 0.00390625]],
+    ["a123", 293.02368, "people speaking", [false, 0.05859375], [false, 0.05859375], [false, 0.08203125], [false, 0.109375]],
+    ["b002", 5.389458, "car", [false, 0.00390625], [false, 0.0], [false, 0.00390625], [false, 0.00390625]],
+    ["b002", 33.304914, "people walking", [false, 0.03125], [false, 0.0], [false, 0.08203125], [false, 0.0]],
+    ["b002", 52.434263, "people walking", [false, 0.015625], [false, 0.0], [false, 0.0078125], [false, 0.0]],
+    ["b002", 71.829858, "car", [false, 0.0], [false, 0.0], [false, 0.00390625], [false, 0.00390625]],
+    ["b002", 88.546859, "people walking", [false, 0.00390625], [false, 0.00390625], [false, 0.0078125], [false, 0.0]],
+    ["b002", 114.542119, "car", [false, 0.00390625], [false, 0.00390625], [false, 0.00390625], [false, 0.0]],
+    ["b002", 156.899387, "car", [false, 0.00390625], [false, 0.0], [false, 0.00390625], [false, 0.00390625]],
+    ["b002", 158.456521, "people walking", [false, 0.01171875], [false, 0.00390625], [false, 0.00390625], [false, 0.0078125]],
+    ["b002", 160.957617, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["b002", 165.524133, "people walking", [false, 0.0], [false, 0.00390625], [false, 0.0], [false, 0.0]],
+    ["b004", 9.955146, "car", [false, 0.0], [false, 0.00390625], [false, 0.0], [false, 0.0]],
+    ["b004", 15.181917, "people speaking", [false, 0.08203125], [false, 0.04296875], [false, 0.03125], [false, 0.015625]],
+    ["b004", 48.670313, "people walking", [false, 0.0078125], [false, 0.0], [false, 0.05859375], [false, 0.00390625]],
+    ["b004", 64.548707, "children", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["b004", 64.91931, "people speaking", [false, 0.01953125], [false, 0.015625], [false, 0.03125], [false, 0.01953125]],
+    ["b004", 78.292943, "people speaking", [false, 0.109375], [false, 0.05859375], [true, 0.5], [true, 0.5859375]],
+    ["b004", 95.966842, "people walking", [false, 0.00390625], [false, 0.00390625], [false, 0.00390625], [false, 0.0]],
+    ["b004", 99.596189, "car", [false, 0.00390625], [false, 0.0], [false, 0.0], [false, 0.00390625]],
+    ["b004", 109.481048, "people speaking", [false, 0.015625], [false, 0.03125], [false, 0.4140625], [false, 0.04296875]],
+    ["b004", 120.35631, "people speaking", [false, 0.109375], [false, 0.33203125], [false, 0.05859375], [false, 0.109375]],
+    ["b004", 120.445766, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["b004", 134.394472, "car", [false, 0.01171875], [false, 0.01171875], [false, 0.01171875], [false, 0.1484375]],
+    ["b004", 142.745805, "people speaking", [false, 0.05859375], [false, 0.109375], [false, 0.19921875], [false, 0.08203125]],
+    ["b004", 149.186618, "children", [false, 0.00390625], [false, 0.0], [false, 0.01171875], [false, 0.01171875]],
+    ["b092", 4.853172, "car", [false, 0.08203125], [false, 0.03125], [false, 0.08203125], [false, 0.01171875]],
+    ["b092", 22.711465, "people walking", [false, 0.0], [false, 0.00390625], [false, 0.00390625], [false, 0.0]],
+    ["b092", 28.246845, "car", [false, 0.01171875], [false, 0.00390625], [false, 0.05859375], [false, 0.03125]],
+    ["b092", 39.144894, "car", [false, 0.04296875], [false, 0.00390625], [false, 0.08203125], [false, 0.01171875]],
+    ["b092", 46.329661, "car", [false, 0.109375], [false, 0.0078125], [false, 0.05859375], [false, 0.01953125]],
+    ["b092", 60.163793, "car", [false, 0.01953125], [false, 0.01953125], [false, 0.015625], [false, 0.00390625]],
+    ["b092", 66.139585, "people walking", [false, 0.0], [false, 0.0], [false, 0.01171875], [false, 0.00390625]],
+    ["b092", 76.303614, "people walking", [false, 0.01953125], [false, 0.00390625], [false, 0.03125], [false, 0.00390625]],
+    ["b092", 85.094591, "people walking", [false, 0.01171875], [false, 0.00390625], [false, 0.03125], [false, 0.00390625]],
+    ["b092", 86.225847, "car", [false, 0.015625], [false, 0.00390625], [false, 0.04296875], [false, 0.00390625]],
+    ["b092", 120.094427, "people speaking", [false, 0.01953125], [false, 0.015625], [false, 0.04296875], [false, 0.00390625]],
+    ["b092", 129.748958, "car", [false, 0.05859375], [false, 0.00390625], [false, 0.00390625], [false, 0.015625]],
+    ["b092", 131.501972, "people walking", [false, 0.015625], [false, 0.00390625], [false, 0.03125], [false, 0.0]],
+    ["b092", 133.617679, "people speaking", [false, 0.04296875], [false, 0.0078125], [false, 0.4140625], [false, 0.08203125]],
+    ["b092", 143.436286, "car", [false, 0.01171875], [false, 0.00390625], [false, 0.04296875], [false, 0.00390625]],
+    ["b092", 165.949133, "car", [false, 0.05859375], [false, 0.0], [false, 0.01171875], [false, 0.0]],
+    ["b092", 171.51042, "brakes squeaking", [false, 0.0], [false, 0.0], [false, 0.0], [false, 0.0]],
+    ["b092", 188.082017, "large vehicle", [false, 0.015625], [false, 0.00390625], [false, 0.109375], [false, 0.05859375]],
+    ["b092", 198.634645, "car", [false, 0.03125], [false, 0.00390625], [false, 0.01953125], [false, 0.05859375]]
+  ]
+}

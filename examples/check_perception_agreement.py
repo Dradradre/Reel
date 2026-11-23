@@ -4,6 +4,7 @@ Usage: python examples/check_perception_agreement.py answers.json
 Supply a JSON report with a by_film list. Each row contains video_id and answers,
 e.g. {"video_id": "video_1775", "answers": ["C", "?", "N"]}. The letters and
 their order are specific to each film. Give the reader only the questions and media.
+Use --panel followed by the panel files when a run spans multiple sets of films.
 """
 import argparse
 import json
@@ -51,10 +52,11 @@ def score(films, responses):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("report", type=Path)
-    parser.add_argument("--panel", type=Path, default=PANEL)
+    parser.add_argument("--panel", type=Path, nargs="+", default=[PANEL])
     args = parser.parse_args()
     try:
-        result = score(json.loads(args.panel.read_text())["films"], json.loads(args.report.read_text())["by_film"])
+        films = [film for panel in args.panel for film in json.loads(panel.read_text())["films"]]
+        result = score(films, json.loads(args.report.read_text())["by_film"])
     except (KeyError, TypeError, ValueError) as error:
         parser.error(str(error))
     print(json.dumps(result, indent=2))

@@ -1,0 +1,617 @@
+{
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "revision": "8571f9a121325812f5a9fe8b9e2bb655bc3f8136",
+  "panels": [
+    "perception-agreement-v1.json",
+    "perception-agreement-holdout-v1.json",
+    "perception-agreement-holdout-v2.json"
+  ],
+  "protocol": "All 28 films were newly read at this revision, including both earlier panels. One new session per film, fixed original question and alternatives, anonymous footage, no human answers, 8-second playback requests, complete ordered release through end_of_view, requested exact sound interval, native WAV and the optional 30B model off. The audio readings used the available speech, AudioSet, CoNeTTE and CLAP helpers. Each session received only its own film. Score against the original human reference with abstention worth zero. The panels cover selected object-interaction videos, with 12 speech, 10 hitting, two clapping, two dropping and two opening/closing targets. This is a repeated fixed panel, not an independent sample from all video.",
+  "protocol_retries": [
+    {
+      "video_id": "video_6226",
+      "reason": "One initial session answered three question marks without any MCP call; it was excluded by the prespecified playback audit and rerun with the identical instructions."
+    }
+  ],
+  "score": {
+    "correct": 63,
+    "wrong": 12,
+    "abstained": 9,
+    "total": 84,
+    "fraction": 0.75,
+    "films": 28,
+    "all_three_correct": 14,
+    "by_question": {
+      "picture": {
+        "correct": 25,
+        "wrong": 3,
+        "abstained": 0
+      },
+      "sound": {
+        "correct": 20,
+        "wrong": 3,
+        "abstained": 5
+      },
+      "visible_source": {
+        "correct": 18,
+        "wrong": 6,
+        "abstained": 4
+      }
+    }
+  },
+  "by_panel": {
+    "perception-agreement-v1": {
+      "correct": 29,
+      "wrong": 3,
+      "abstained": 4,
+      "total": 36,
+      "fraction": 0.8055555555555556,
+      "films": 12,
+      "all_three_correct": 8,
+      "by_question": {
+        "picture": {
+          "correct": 12,
+          "wrong": 0,
+          "abstained": 0
+        },
+        "sound": {
+          "correct": 9,
+          "wrong": 1,
+          "abstained": 2
+        },
+        "visible_source": {
+          "correct": 8,
+          "wrong": 2,
+          "abstained": 2
+        }
+      }
+    },
+    "perception-agreement-holdout-v1": {
+      "correct": 15,
+      "wrong": 3,
+      "abstained": 0,
+      "total": 18,
+      "fraction": 0.8333333333333334,
+      "films": 6,
+      "all_three_correct": 3,
+      "by_question": {
+        "picture": {
+          "correct": 5,
+          "wrong": 1,
+          "abstained": 0
+        },
+        "sound": {
+          "correct": 6,
+          "wrong": 0,
+          "abstained": 0
+        },
+        "visible_source": {
+          "correct": 4,
+          "wrong": 2,
+          "abstained": 0
+        }
+      }
+    },
+    "perception-agreement-holdout-v2": {
+      "correct": 19,
+      "wrong": 6,
+      "abstained": 5,
+      "total": 30,
+      "fraction": 0.6333333333333333,
+      "films": 10,
+      "all_three_correct": 3,
+      "by_question": {
+        "picture": {
+          "correct": 8,
+          "wrong": 2,
+          "abstained": 0
+        },
+        "sound": {
+          "correct": 5,
+          "wrong": 2,
+          "abstained": 3
+        },
+        "visible_source": {
+          "correct": 6,
+          "wrong": 2,
+          "abstained": 2
+        }
+      }
+    }
+  },
+  "view_turns": 100,
+  "by_film": [
+    {
+      "video_id": "video_1775",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 567373,
+        "sample_count": 33277,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_2134",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 163821,
+        "sample_count": 21085,
+        "rate_hz": 48000,
+        "recorded_voice": true,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_11193",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "target": {
+        "first_sample": 1316661,
+        "sample_count": 363217,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": true
+      }
+    },
+    {
+      "video_id": "video_9705",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "B",
+        "B",
+        "N"
+      ],
+      "turns": 2,
+      "target": {
+        "first_sample": 534006,
+        "sample_count": 79439,
+        "rate_hz": 44100,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_2291",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 5,
+      "target": {
+        "first_sample": 1234171,
+        "sample_count": 310124,
+        "rate_hz": 48000,
+        "recorded_voice": true,
+        "voice_with_gain": true
+      }
+    },
+    {
+      "video_id": "video_2212",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 1143043,
+        "sample_count": 11286,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_3228",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 518985,
+        "sample_count": 14241,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_6694",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "target": {
+        "first_sample": 1460545,
+        "sample_count": 57362,
+        "rate_hz": 44100,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_282",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "turns": 5,
+      "target": {
+        "first_sample": 797537,
+        "sample_count": 154505,
+        "rate_hz": 44100,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_11498",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 2,
+      "target": {
+        "first_sample": 329557,
+        "sample_count": 59193,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_4253",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 0,
+        "sample_count": 5880,
+        "rate_hz": 44100,
+        "recorded_voice": true,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_2138",
+      "panel": "perception-agreement-v1",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 2,
+      "target": {
+        "first_sample": 415904,
+        "sample_count": 91179,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_6226",
+      "panel": "perception-agreement-holdout-v1",
+      "answers": [
+        "C",
+        "B",
+        "Y"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 1108544,
+        "sample_count": 67185,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_1244",
+      "panel": "perception-agreement-holdout-v1",
+      "answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 307332,
+        "sample_count": 124853,
+        "rate_hz": 48000,
+        "recorded_voice": true,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_8408",
+      "panel": "perception-agreement-holdout-v1",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 38215,
+        "sample_count": 107295,
+        "rate_hz": 44100,
+        "recorded_voice": true,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_8110",
+      "panel": "perception-agreement-holdout-v1",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 2,
+      "target": {
+        "first_sample": 231393,
+        "sample_count": 21184,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_9456",
+      "panel": "perception-agreement-holdout-v1",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 68783,
+        "sample_count": 139164,
+        "rate_hz": 48000,
+        "recorded_voice": true,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_6611",
+      "panel": "perception-agreement-holdout-v1",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "target": {
+        "first_sample": 426605,
+        "sample_count": 186823,
+        "rate_hz": 44100,
+        "recorded_voice": true,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_5603",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "A",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "target": {
+        "first_sample": 32024,
+        "sample_count": 27220,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_8093",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 46515,
+        "sample_count": 178038,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_9056",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "B",
+        "A",
+        "Y"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 236732,
+        "sample_count": 285375,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_2795",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 816266,
+        "sample_count": 284336,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": true
+      }
+    },
+    {
+      "video_id": "video_8297",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "B",
+        "?",
+        "N"
+      ],
+      "turns": 4,
+      "target": {
+        "first_sample": 300464,
+        "sample_count": 70321,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_4558",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 390351,
+        "sample_count": 14399,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_5695",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "C",
+        "?",
+        "?"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 936390,
+        "sample_count": 11760,
+        "rate_hz": 44100,
+        "recorded_voice": false,
+        "voice_with_gain": true
+      }
+    },
+    {
+      "video_id": "video_8910",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "B",
+        "?",
+        "?"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 631991,
+        "sample_count": 13227,
+        "rate_hz": 44100,
+        "recorded_voice": false,
+        "voice_with_gain": true
+      }
+    },
+    {
+      "video_id": "video_7223",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 449422,
+        "sample_count": 23990,
+        "rate_hz": 48000,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    },
+    {
+      "video_id": "video_1219",
+      "panel": "perception-agreement-holdout-v2",
+      "answers": [
+        "C",
+        "A",
+        "Y"
+      ],
+      "turns": 3,
+      "target": {
+        "first_sample": 510091,
+        "sample_count": 32339,
+        "rate_hz": 44100,
+        "recorded_voice": false,
+        "voice_with_gain": false
+      }
+    }
+  ],
+  "changes_from_immediately_preceding_ten": [
+    {
+      "video_id": "video_4558",
+      "previous": [
+        "C",
+        "?",
+        "?"
+      ],
+      "current": [
+        "C",
+        "A",
+        "N"
+      ],
+      "voice_with_gain": false
+    }
+  ]
+}

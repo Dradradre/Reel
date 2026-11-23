@@ -62,7 +62,7 @@ order, with nothing left out.
 
 ## Does it work?
 
-On ten filmed scenes, local Codex GPT matched the human annotations **18/30 times (60.0%)** on its latest run. It scored 8/10 for the picture, 4/10 for the sound and 6/10 for source visibility. It answered 5 questions incorrectly and abstained on 7. The previous run scored 16/30. Both newly correct answers came from one film and the previous version also got them right on a repeat. Eighteen other scenes scored 44/54 before this change. These runs used pictures and local sound readings with direct WAV input and the 30B reader off. [Paired responses and repeats](docs/perception-check.md#같은-10편에서-녹음을-이어-비교한-결과)
+On all 28 filmed scenes, local Codex GPT matched the human annotations on **63/84 questions (75.0%)**. It matched 25/28 for the picture, 20/28 for the sound in a specific interval and 18/28 for whether the sound source was visible. It gave 12 wrong answers and abstained on 9. Each film ran in a fresh session of the same version with pictures and local sound readings. The three panels used the original questions and choices. [Film-by-film answers and scoring](docs/perception-check.md#같은-버전으로-다시-본-실사-영상-28편)
 
 On 23 urban recordings, GPT and individual listeners overlapped on **56.3%** of the sound categories either picked. Two people listening to the same recording averaged **59.0%**. GPT missed children’s voices in all three recordings where a majority marked them. [Individual recordings and listener comparison](docs/listening-check.md#도시-녹음에서-gpt와-청취자가-고른-소리)
 

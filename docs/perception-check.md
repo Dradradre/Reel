@@ -1292,3 +1292,24 @@ Perception Test 검증 자료에서 기존 18편을 빼고 같은 소리의 출�
 오답은 6개에서 5개로, 유보는 8개에서 7개로 줄었다. 달라진 답은 두 영상에서 나왔다. `video_8093`에서는 말소리가 들렸고 화자가 보이지 않는다고 맞혔다. 예전 첫 실행에서는 두 답을 모두 유보했다. `video_8910`에서는 사람이 말한 구간을 예전에는 타격음으로 골랐고 이번에는 유보했다.
 
 답이 달라진 두 영상은 각 버전으로 한 번씩 더 봤다. `video_8093`의 말소리와 화자 위치는 두 버전 모두 맞혔고, `video_8910`의 말소리는 두 버전 모두 타격음으로 잘못 골랐다. 같은 영상을 같은 버전으로 봐도 답이 달라져서, 이번에 늘어난 두 정답을 연속 녹음 덕으로 돌릴 근거는 부족하다. [영상별 응답과 반복 측정](benchmarks/perception-agreement-continuous-sound.json)
+
+## 같은 버전으로 다시 본 실사 영상 28편
+
+로컬 Codex의 GPT-6.1 Terra가 지금까지 쓴 세 시험의 영상 28편을 모두 다시 봤다. 영상마다 별도 세션에서 끝까지 보면서 100개 재생 구간을 받았고 지정한 소리를 정확한 시각에 다시 확인했다. 세 시험 모두 같은 코드와 문항 순서로 진행했다. 사람의 답과 영상 이름은 가렸고 원음 직접 입력과 30B 청취 모델은 껐다. 한 세션에서는 GPT가 영상을 재생하지 않고 세 답을 모두 유보해 같은 조건으로 다시 실행했다.
+
+| 실사 영상 | 화면 내용 | 지정 구간의 소리 | 소리 낸 대상이 보였는지 | 전체 |
+|---|---:|---:|---:|---:|
+| 첫 12편 | 12/12 | 9/12 | 8/12 | 29/36 |
+| 다음 6편 | 5/6 | 6/6 | 4/6 | 15/18 |
+| 최근 10편 | 8/10 | 5/10 | 6/10 | 19/30 |
+| 28편 전체 | 25/28 | 20/28 | 18/28 | 63/84 |
+
+세 답 모두 사람 주석과 일치한 영상은 14편이었고 전체 84문항에서 오답은 12개, 유보는 9개였다. 소리 문항 28개 중 말소리가 12개, 타격음이 10개를 차지했고 박수, 물건을 떨어뜨리는 소리, 여닫는 소리가 각각 두 개였다. 개발 중 여러 차례 본 영상들이므로 이 점수를 임의의 영상에 그대로 적용하기는 어렵다. [문항별 답](benchmarks/perception-agreement-gain-assisted.json)
+
+최근 10편에서는 직전 버전의 18/30에서 19/30이 됐다. 달라진 답은 타격음 영상 한 편에 몰렸다. GPT가 타격음을 맞혔지만 소리를 낸 대상이 보이지 않는다고 잘못 답했다. 이 구간에는 소리를 키워 새로 검출한 목소리가 없었다. 말소리 단서가 추가된 세 구간에서는 GPT의 답이 모두 지난번과 같았다. [같은 10편의 직전 결과](benchmarks/perception-agreement-continuous-sound.json), [목소리 검출기만 따로 잰 결과](benchmarks/gain-assisted-voice.json)
+
+세 시험의 원래 문항 파일을 이어서 다시 채점할 수 있다.
+
+```bash
+python examples/check_perception_agreement.py docs/benchmarks/perception-agreement-gain-assisted.json --panel docs/benchmarks/perception-agreement-v1.json docs/benchmarks/perception-agreement-holdout-v1.json docs/benchmarks/perception-agreement-holdout-v2.json
+```

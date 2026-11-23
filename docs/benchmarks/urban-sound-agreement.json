@@ -654,5 +654,34 @@
       0.021739130434782605
     ],
     "method": "Resample the 23 whole recordings with replacement 20,000 times, seed 1802. Does not capture repeat-reader variability."
-  }
+  },
+  "gpt_bird_tags_with_no_matching_listener_tag": [
+    {
+      "id": "park-lisbon-1198-45301-a.wav",
+      "listeners": 5,
+      "caption_mentions_bird": true,
+      "audioset_labels_shown": []
+    },
+    {
+      "id": "park-london-97-2731-a.wav",
+      "listeners": 5,
+      "caption_mentions_bird": true,
+      "audioset_labels_shown": [
+        "Cat",
+        "Meow"
+      ]
+    },
+    {
+      "id": "public_square-milan-1168-44797-a.wav",
+      "listeners": 4,
+      "caption_mentions_bird": true,
+      "audioset_labels_shown": []
+    },
+    {
+      "id": "airport-stockholm-12-481-a.wav",
+      "listeners": 5,
+      "caption_mentions_bird": true,
+      "audioset_labels_shown": []
+    }
+  ]
 }

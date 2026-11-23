@@ -1,0 +1,315 @@
+{
+  "scored_revision": "a3f59258a60b180cd9373c2600f1ec631fac9d3d",
+  "reader": "gpt-6.1-terra via local Codex CLI",
+  "panel": "perception-agreement-v1.json",
+  "unit": "one exact human-reference match per answer; abstentions count as misses",
+  "correct": 28,
+  "wrong": 3,
+  "abstained": 5,
+  "total": 36,
+  "fraction": 0.7777777777777778,
+  "by_question": {
+    "picture": {
+      "correct": 12,
+      "wrong": 0,
+      "abstained": 0,
+      "total": 12
+    },
+    "sound": {
+      "correct": 9,
+      "wrong": 1,
+      "abstained": 2,
+      "total": 12
+    },
+    "visible_source": {
+      "correct": 7,
+      "wrong": 2,
+      "abstained": 3,
+      "total": 12
+    }
+  },
+  "by_film": [
+    {
+      "video_id": "video_1775",
+      "gpt_answers": [
+        "C",
+        "?",
+        "?"
+      ],
+      "turns": 3,
+      "last_end_s": 19.285,
+      "audioset_turns_available": 3,
+      "conette_turns_available": 3,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "opening or closing something",
+        "hitting"
+      ]
+    },
+    {
+      "video_id": "video_2134",
+      "gpt_answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 3,
+      "last_end_s": 20.565,
+      "audioset_turns_available": 3,
+      "conette_turns_available": 3,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "A",
+        "B",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "hitting",
+        "speech"
+      ]
+    },
+    {
+      "video_id": "video_11193",
+      "gpt_answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "last_end_s": 35.051,
+      "audioset_turns_available": 5,
+      "conette_turns_available": 5,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "A",
+        "B",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "hitting",
+        "speech"
+      ]
+    },
+    {
+      "video_id": "video_9705",
+      "gpt_answers": [
+        "B",
+        "B",
+        "N"
+      ],
+      "turns": 2,
+      "last_end_s": 15.766009070294784,
+      "audioset_turns_available": 2,
+      "conette_turns_available": 2,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "C",
+        "A",
+        "Y"
+      ],
+      "target_sound_alternatives_used": [
+        "opening or closing something",
+        "clapping"
+      ]
+    },
+    {
+      "video_id": "video_2291",
+      "gpt_answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 5,
+      "last_end_s": 34.88,
+      "audioset_turns_available": 1,
+      "conette_turns_available": 1,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "hitting",
+        "opening or closing something"
+      ]
+    },
+    {
+      "video_id": "video_2212",
+      "gpt_answers": [
+        "A",
+        "B",
+        "?"
+      ],
+      "turns": 4,
+      "last_end_s": 31.723,
+      "audioset_turns_available": 4,
+      "conette_turns_available": 4,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "B",
+        "B",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "rolling",
+        "hitting"
+      ]
+    },
+    {
+      "video_id": "video_3228",
+      "gpt_answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "last_end_s": 28.757,
+      "audioset_turns_available": 4,
+      "conette_turns_available": 4,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "A",
+        "A",
+        "Y"
+      ],
+      "target_sound_alternatives_used": [
+        "hitting",
+        "animal sound"
+      ]
+    },
+    {
+      "video_id": "video_6694",
+      "gpt_answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "last_end_s": 35.03900226757369,
+      "audioset_turns_available": 5,
+      "conette_turns_available": 5,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "hitting",
+        "speech"
+      ]
+    },
+    {
+      "video_id": "video_282",
+      "gpt_answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "turns": 5,
+      "last_end_s": 33.55299319727891,
+      "audioset_turns_available": 5,
+      "conette_turns_available": 5,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "B",
+        "A",
+        "Y"
+      ],
+      "target_sound_alternatives_used": [
+        "hitting",
+        "dropping"
+      ]
+    },
+    {
+      "video_id": "video_11498",
+      "gpt_answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 2,
+      "last_end_s": 9.451,
+      "audioset_turns_available": 2,
+      "conette_turns_available": 2,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "B",
+        "B",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "dropping",
+        "rolling"
+      ]
+    },
+    {
+      "video_id": "video_4253",
+      "gpt_answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "last_end_s": 27.700997732426305,
+      "audioset_turns_available": 4,
+      "conette_turns_available": 4,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "B",
+        "A",
+        "N"
+      ],
+      "target_sound_alternatives_used": [
+        "speech",
+        "animal sound"
+      ]
+    },
+    {
+      "video_id": "video_2138",
+      "gpt_answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 2,
+      "last_end_s": 14.144,
+      "audioset_turns_available": 2,
+      "conette_turns_available": 2,
+      "target_match_available": true,
+      "wording_only_answers": [
+        "B",
+        "B",
+        "Y"
+      ],
+      "target_sound_alternatives_used": [
+        "animal sound",
+        "clapping"
+      ]
+    }
+  ],
+  "film_bootstrap_95": [
+    0.61111,
+    0.91667
+  ],
+  "wording_only_control": {
+    "method": "Same model, fresh session for each film, the same questions and options, no media or tools. Required to guess.",
+    "correct": 15,
+    "total": 36,
+    "by_question": {
+      "picture": 1,
+      "sound": 8,
+      "visible_source": 6
+    }
+  },
+  "film_bootstrap_method": "Percentiles of 20,000 means after resampling the twelve films with replacement, seed 231126. Describes sensitivity to the films in this panel.",
+  "all_three_correct_films": 7,
+  "verified_turns": 44,
+  "verified_target_intervals": 12
+}

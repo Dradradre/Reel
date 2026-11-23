@@ -124,6 +124,26 @@ def end_of(path):
     return json.loads(path.read_text())["end_s"]
 
 
+def available_sound_description(report):
+    """Use an independently prepared waveform caption when the other reader failed."""
+    primary = report.get("sound_descriptions", {})
+    track = report.get("audio") or {}
+    scene = track.get("scene") or {}
+    if (primary.get("status") not in ("unavailable", "not_prepared") or scene.get("status") != "available"
+            or track.get("signal") == "digital_silence" or not scene.get("model") or not scene.get("basis")):
+        return primary
+    current = {}
+    for window in [*scene.get("windows", []), *scene.get("recent_windows", [])]:
+        start, end = window["start_s"], window["end_s"]
+        if (report["start_s"] <= start < end <= report["end_s"]
+                and any(ch.get("impression") for ch in window["channels"])):
+            current.setdefault((start, end), window)
+    if not current:
+        return primary
+    return {"status": "available", "model": scene["model"], "basis": scene["basis"],
+            "windows": [current[k] for k in sorted(current)], "other_reader": primary}
+
+
 def first_view_report(report):
     """Keep the timed readings in front of the pictures on a text-and-image client."""
     result = {key: report[key] for key in ("status", "turn", "start_s", "end_s")}
@@ -522,6 +542,8 @@ class Viewing:
             report["joint"] = joint
         if not full_detail:
             report = first_view_report(report)
+        if "sound_descriptions" in report:
+            report["sound_descriptions"] = available_sound_description(report)
         return [text_block(report), *blocks]
 
     def frames(self, turn, page):

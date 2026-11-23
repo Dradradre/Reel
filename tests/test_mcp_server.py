@@ -213,6 +213,44 @@ class TransportTests(unittest.TestCase):
             return bytes(result)
         self.assertEqual(asyncio.run(read()), self.wav)
 
+    def test_sound_description_uses_only_alternative_windows_inside_this_turn(self):
+        from reel.mcp_server import available_sound_description
+        primary = {"status": "unavailable", "reason": "reader offline"}
+        def window(start, end, impression):
+            return {"start_s": start, "end_s": end, "channels": [{"channels": [1], "impression": impression}]}
+        earlier = window(0, 10, "footsteps")
+        latest = window(8, 10, "a tap")
+        scene = {"status": "available", "model": "captioner", "basis": "channel waveform",
+                 "windows": [earlier], "recent_windows": [latest, latest, window(8, 11, "later")]}
+        track = {"signal": "nonzero", "scene": scene}
+        report = {"sound_descriptions": primary, "audio": track, "start_s": 8, "end_s": 10}
+        fallback = available_sound_description(report)
+        self.assertEqual(fallback["windows"], [latest])
+        self.assertEqual((fallback["model"], fallback["other_reader"]), ("captioner", primary))
+        self.assertIs(available_sound_description({**report, "start_s": 9}), primary)
+        self.assertIs(available_sound_description({**report, "audio": {**track, "signal": "digital_silence"}}), primary)
+        available = {"model": "other", "status": "available", "windows": []}
+        self.assertIs(available_sound_description({**report, "sound_descriptions": available}), available)
+
+    def test_wav_and_image_readers_get_the_same_current_waveform_caption(self):
+        sound, words = Mock(), Mock()
+        primary = {"status": "unavailable", "model": "primary"}
+        sound.read.return_value = primary
+        self.turn["speech"] = {"status": "available", "windows": []}
+        window = {"start_s": 0, "end_s": 1, "channels": [{"channels": [1], "impression": "a low hum"}]}
+        self.turn["audio"]["scene"] = {"status": "available", "model": "captioner",
+                                       "basis": "waveform only", "windows": [window]}
+        self.path.write_text(json.dumps(self.turn))
+        reader = Viewing(iter([self.path]), sound, words, None)
+        for wav in (False, True):
+            reply = reader.advance(1, wav, full_detail=wav, image_hearing=True)
+            report = json.loads(reply[0].text)
+            self.assertEqual(report["sound_descriptions"]["windows"], [window])
+            self.assertEqual(report["sound_descriptions"]["other_reader"], primary)
+            self.assertEqual(report["audio"]["wav_attached"], wav)
+        muted = reader.advance(1, False, False, image_hearing=True)
+        self.assertNotIn("sound_descriptions", json.loads(muted[0].text))
+
     def test_first_view_keeps_reported_disagreement_and_full_detail_replays_the_same_turn(self):
         channels = [{"channels": [i], "status": "read", "audio_only": sound, "with_picture": "figure moves"}
                     for i, sound in enumerate(["brief rattle", "brief rattle", "steady hiss"], 1)]

@@ -1,0 +1,2408 @@
+{
+  "source": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+  "baseline": "faec01b",
+  "reproduce": {
+    "score": "python examples/check_track_recall.py docs/benchmarks/track-recall.json test_captions.json",
+    "reference_file": "https://huggingface.co/datasets/TUT-ARG/AVCaps/resolve/main/test_captions.json",
+    "reference_sha256": "162185e4adefaac50d0be361550f3477650bbdf5c24b0b8a04fdd338bd8ad126",
+    "selection": "Of the 200 test films, remove previous experiment film IDs, require at least three distinct human descriptions for each track and combined view, duration 12-65 seconds, both streams starting within 0.15 s of zero and ending within 0.5 s of file duration. Among the 59 eligible sources form all pairs differing at most 0.75 s in file duration. In lexicographic filename order for each pair, rank the SHA-256 bytes of reel-track-recall-1/<first id>/<second id> and take the first six pairs without source reuse. No selection by described content. Present lossless FFV1 pictures and float PCM audio to the shared cutoff in 8 s turns.",
+    "uncertainty": "Use examples/check_first_impressions.py for natural picture and sound recall. For crossover gaps and changes use paired whole-source-pair resampling with 20,000 draws; all four assignments and both conditions travel together. One complete response per condition; the interval does not capture run-to-run model variance. Failed reader traces for one candidate case were discarded, and the complete original prompt was replayed after the log reader was repaired."
+  },
+  "reader": "Local authenticated Codex CLI gpt-6.1-terra. Each session views every turn in order on an anonymous MCP server with no shell, filenames, sound-source options or human captions. Science prompt and delayed recall use examples/watch_first_impression.py. No raw WAV supplied to GPT. Every condition includes AST, YAMNet, CoNeTTE and the local speech reader. The optional Qwen3-Omni helper is unavailable by design in both conditions.",
+  "design": "Pair six sets of two previously untested AVCaps films, selecting by SHA-256 of the names alone among pairs with original durations within 0.75s. For all four picture/sound assignments in a pair play to the common floor eighth-second cutoff. No time stretch. Confirm decoded PCM identity for each soundtrack and decoded picture/timing identity for each picture across its two assignments. No source names or human captions enter the reader. For each assignment get a first impression and separate open picture and sound recall through end_of_view in a fresh local gpt-6.1-terra session. Compare the same packets with the shipped first view and a candidate emphasizing the available acoustic readings in the first JSON fields; preserve their provenance, original image payloads, source descriptions and the presented words. Keep the optional large generative waveform reader unavailable in both arms as in the preceding recall benchmark. Do not treat an unavailable optional reader as absent sound. Primary: with the same picture fixed, does a change from recording A to B move GPT's sound description toward the independent human audio-only captions for B and away from A? Calculate the mean of 0.5 * (A-A - A-B + B-B - B-A) over pictures, equal pair weights. Also test picture identity under sound swap, open recall on the twelve natural films, and resample source pairs together. Label exploratory breakdowns separately. Test silence, absent speech and suffix changes using real stdio. Do not promote merely for improving boilerplate wording or scores on one example.\nBefore interpreting the crossover scores, inspection of delivered media showed that ordinary Reel additionally displays pictures near changes in the soundtrack. Keep that ordinary presentation as an end-to-end measurement. In a separate isolation run choose the first picture in each predetermined pair and present only its fixed-time overview and current frame, plus the actual recording's spectrum and readings. Verify identical picture pixels, frame times, and complete viewing time across the two recordings before each reader is called. Run this arm using the shipped unavailability behavior, independently of the proposed fallback.",
+  "endpoint": "For a fixed picture, compare each heard sentence with the human audio-only captions of its actual recording and the other recording in its pair. Average actual-minus-other cosine over all four assignments, then over pairs equally. An answer that follows only the picture has zero expected discrimination when its text is held fixed. Repeat with the seen sentence while holding the recording fixed. Human baseline compares one held-out person to other people describing the same source and all people describing the other source. Source films were originally viewed at full length by annotators, up to 0.75 seconds longer than a pair, plus rounding down to an eighth-second. No human watched the exchanged tracks. No known perceptual ceiling on these remixes.",
+  "reader_conditions": {
+    "current": "Original unavailability and the recorded source estimates, including CoNeTTE, in audio.scene.",
+    "candidate": "If the primary reader is unavailable, also expose the available CoNeTTE windows contained within the presented interval as sound_descriptions, with model identity, basis, and other_reader status. No score filtering or change to reader instruction, sound, sources, or images."
+  },
+  "quote_check": "For perceived-sound recall only, scan paired curly or straight double quotation marks. Case-fold words and compare the quoted token sequence with contiguous published confirmed words on any one recorded channel. Exclude possible_words. Counts describe evidence in the speech reader, not human transcription accuracy. Paraphrases and unquoted claims are unscored.",
+  "scorer": "sentence-transformers/all-MiniLM-L6-v2, pinned in examples/check_first_impressions.py. Paired uncertainty resamples complete two-film pairs together. The natural-film equal-weight total follows the previous sight/sound recall calculation. Scores compare short descriptions. Percentages do not measure agreement of every sight or sound.",
+  "upstream": {
+    "method": "On each natural source pool only the fully in-turn CoNeTTE captions used for the fallback. Weight window cosine by its duration and number of channels represented, then take the difference to the paired recording’s human audio-only captions. This diagnostic scores a stream of local estimates and a free one-sentence GPT recall under different tasks.",
+    "by_pair": [
+      [
+        {
+          "source": "11636217844",
+          "seconds_covered": 35.5,
+          "gap": -0.0452055704425758
+        },
+        {
+          "source": "4622219704",
+          "seconds_covered": 35.5,
+          "gap": 0.13184994690015284
+        }
+      ],
+      [
+        {
+          "source": "4633647136",
+          "seconds_covered": 53.0,
+          "gap": 0.15845351202308006
+        },
+        {
+          "source": "4680621645",
+          "seconds_covered": 53.0,
+          "gap": 0.21462900880372748
+        }
+      ],
+      [
+        {
+          "source": "11301174465",
+          "seconds_covered": 37.625,
+          "gap": 0.03759797862993918
+        },
+        {
+          "source": "11402789396",
+          "seconds_covered": 37.625,
+          "gap": 0.18408018449612235
+        }
+      ],
+      [
+        {
+          "source": "4518113460",
+          "seconds_covered": 62.25,
+          "gap": -0.06451819176564973
+        },
+        {
+          "source": "4657452456",
+          "seconds_covered": 62.25,
+          "gap": 0.09513216121608474
+        }
+      ],
+      [
+        {
+          "source": "4637804560",
+          "seconds_covered": 50.625,
+          "gap": 0.24959368847402524
+        },
+        {
+          "source": "4874416538",
+          "seconds_covered": 50.625,
+          "gap": -0.023969049512604135
+        }
+      ],
+      [
+        {
+          "source": "4520112789",
+          "seconds_covered": 54.75,
+          "gap": 0.44345900729366633
+        },
+        {
+          "source": "4892615149",
+          "seconds_covered": 54.75,
+          "gap": 0.07834671502380067
+        }
+      ]
+    ],
+    "mean_gap": 0.12162078259498077
+  },
+  "fixed_pictures": {
+    "pairs": [
+      {
+        "ids": [
+          "11636217844",
+          "4622219704"
+        ],
+        "picture": "11636217844",
+        "picture_and_clock_sha256": "870545b483c4f75b3419ef345af75e429a9d19171827812be114acc8a903a02f",
+        "responses": [
+          {
+            "heard": "The speech reader identified people calling the dog over and saying phrases including “good boy” and “look at the camera,” though I could not directly hear the audio.",
+            "seen": "A woman pets and hugs a large brown dog beside a Christmas tree, then helps it face the camera and lift a paw.",
+            "caption": "A woman pets and hugs a large brown dog beside a Christmas tree, then helps it face the camera and wave a paw.",
+            "turns": 5
+          },
+          {
+            "heard": "The audio readings indicated people talking, including the words “I'll be right over there.”",
+            "seen": "A woman hugs and pets a large brown dog on the floor beside a lit Christmas tree.",
+            "caption": "A woman sits on the living room floor, hugging and petting a large brown dog beside a lit Christmas tree.",
+            "turns": 5
+          }
+        ],
+        "same_minus_other": 0.026567580178380013
+      },
+      {
+        "ids": [
+          "4633647136",
+          "4680621645"
+        ],
+        "picture": "4633647136",
+        "picture_and_clock_sha256": "185e941e36579f98daab99ff4bc21b63a17049f8c14dffc351ea1316cef54eb3",
+        "responses": [
+          {
+            "heard": "The audio analysis indicated clapping, voices, and laughter, though I could not directly hear the recording.",
+            "seen": "Three adults gather around a young child and a birthday cake with a number two candle, clapping and celebrating.",
+            "caption": "Adults clap and celebrate a young child's birthday around a cake with a number two candle.",
+            "turns": 7
+          },
+          {
+            "heard": "The audio readings suggest laughter and speech, but I could not hear the recording directly.",
+            "seen": "Three adults gathered around a young child and a chocolate cake with a number two candle, clapping and helping the child stand.",
+            "caption": "Three adults celebrate a young child's birthday around a chocolate cake with a number two candle, clapping and helping the child stand by the table.",
+            "turns": 7
+          }
+        ],
+        "same_minus_other": 0.020793814212083817
+      },
+      {
+        "ids": [
+          "11301174465",
+          "11402789396"
+        ],
+        "picture": "11301174465",
+        "picture_and_clock_sha256": "bb832335288b9dc8ed682da2ae0116cbed9a2059354c0c362134028cb368d3fe",
+        "responses": [
+          {
+            "heard": "I could not directly hear the clip, but the audio analysis indicated speech and possible crying.",
+            "seen": "A young boy rides a red toy car around a hardwood floor and down a hallway.",
+            "caption": "A young boy smiles as he rides a red toy car around a hardwood floor and down a hallway.",
+            "turns": 5
+          },
+          {
+            "heard": "The recording was not available to listen to, though the audio readings indicated speech.",
+            "seen": "A young boy smiles while riding a red toy car around a room and down a hallway.",
+            "caption": "A young boy smiles as he rides a red toy car around a hardwood-floored room and down a hallway.",
+            "turns": 5
+          }
+        ],
+        "same_minus_other": -0.018178604543209076
+      },
+      {
+        "ids": [
+          "4518113460",
+          "4657452456"
+        ],
+        "picture": "4518113460",
+        "picture_and_clock_sha256": "1757aa1a61571cccab713547d3639e7d6541af0ccb2905684dda6969476dbff0",
+        "responses": [
+          {
+            "heard": "I could not directly hear the audio.",
+            "seen": "A baby in a striped outfit crawled around a tiled kitchen near an adult and pulled up against a chair.",
+            "caption": "A baby in a striped outfit crawls around a tiled kitchen near an adult, then pulls up to stand against a chair.",
+            "turns": 8
+          },
+          {
+            "heard": "The audio analysis indicated speech, including “She's ready,” but I could not hear the recording directly.",
+            "seen": "A baby in a striped outfit crawled around a tiled kitchen near an adult and pulled up against a wooden chair.",
+            "caption": "A baby in a striped outfit crawls around a tiled kitchen near an adult, then pulls up to stand against a wooden chair.",
+            "turns": 8
+          }
+        ],
+        "same_minus_other": -0.031786651350557804
+      },
+      {
+        "ids": [
+          "4637804560",
+          "4874416538"
+        ],
+        "picture": "4637804560",
+        "picture_and_clock_sha256": "850e5da8ec2c882a3420fd1821995eb768c0ef78a85c8284772dc84bf3c2af5a",
+        "responses": [
+          {
+            "heard": "The audio analysis indicated speech, but I could not directly hear the recording.",
+            "seen": "A woman sat in an armchair with a baby on her lap and held an open, colorful book.",
+            "caption": "A woman sits in an armchair reading a colorful book aloud to a baby on her lap.",
+            "turns": 7
+          },
+          {
+            "heard": "The audio analysis indicated speech, including “Ready?”, “Yeah,” and “a big swing,” but I could not listen to the recording directly.",
+            "seen": "A woman sat in an armchair with a baby on her lap and a colorful book open in front of them.",
+            "caption": "A woman sits in an armchair reading a colorful picture book to a baby on her lap.",
+            "turns": 7
+          }
+        ],
+        "same_minus_other": 0.019782643765211105
+      },
+      {
+        "ids": [
+          "4520112789",
+          "4892615149"
+        ],
+        "picture": "4520112789",
+        "picture_and_clock_sha256": "f2cdf0207e33ae86713c44a1adb886334b6e22ce774159efefddc4623bc63911",
+        "responses": [
+          {
+            "heard": "The audio analysis suggested people talking and birds chirping, but I could not hear the recording directly.",
+            "seen": "A person pets a spotted serval outdoors as it rubs against their legs, holds their shoe, and walks away.",
+            "caption": "A person pets a spotted serval outdoors as it rubs against their legs, grabs their shoe, and then walks away.",
+            "turns": 7
+          },
+          {
+            "heard": "The audio readings suggest speech and high-pitched vocalizations, but I could not tell their sources reliably.",
+            "seen": "A person pets a spotted serval as it rubs against their legs and lies on their shoe in a grassy enclosure.",
+            "caption": "A person pets a spotted serval as it rubs against their legs and lies on their shoe in a grassy enclosure.",
+            "turns": 7
+          }
+        ],
+        "same_minus_other": 0.05803970247507095
+      }
+    ],
+    "score": {
+      "mean_change": 0.012536414122829834,
+      "bootstrap_95_percent": [
+        -0.01103374057759841,
+        0.03496517054736614
+      ],
+      "increased": 4,
+      "decreased": 2,
+      "tied": 0,
+      "by_film": {
+        "11636217844/4622219704": 0.026567580178380013,
+        "4633647136/4680621645": 0.020793814212083817,
+        "11301174465/11402789396": -0.018178604543209076,
+        "4518113460/4657452456": -0.031786651350557804,
+        "4637804560/4874416538": 0.019782643765211105,
+        "4520112789/4892615149": 0.05803970247507095
+      }
+    }
+  },
+  "pairs": [
+    {
+      "ids": [
+        "11636217844",
+        "4622219704"
+      ],
+      "original_durations_s": [
+        35.583991,
+        36.060567
+      ],
+      "original_sha256": [
+        "c7d247a812dca4f9ce81ac61eb3c6caecba9174d9bd51d8c905dd23bf6d6926d",
+        "627a9bc9d5cfedc290d902e4f7555a908c57503a12ed1c4923b4fc6593562e79"
+      ],
+      "assignments": [
+        {
+          "picture": "11636217844",
+          "recording": "11636217844",
+          "responses": {
+            "current": {
+              "caption": "A large brown dog approaches the camera, then a woman kneels beside a Christmas tree and cuddles him while encouraging him to look at the camera.",
+              "turns": 5,
+              "seen": "A large brown dog approaches the camera, then a woman cuddles him beside a Christmas tree and encourages him to look at the camera.",
+              "heard": "The speech reader identified phrases including “come here,” “good boy,” and “look at the camera.”"
+            },
+            "candidate": {
+              "caption": "A large brown dog approaches the camera, then sits with a woman who hugs and pets him beside a Christmas tree.",
+              "turns": 5,
+              "seen": "A large brown dog approaches the camera and then sits with a woman who hugs him beside a Christmas tree.",
+              "heard": "The speech reader detected people saying phrases including “come here” and “good boy.”"
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 3,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 2,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "11636217844",
+          "recording": "4622219704",
+          "responses": {
+            "current": {
+              "caption": "A large brown dog approaches the camera, then sits beside a woman who cuddles and pets it near a lit Christmas tree.",
+              "turns": 5,
+              "seen": "A large brown dog approaches the camera and then sits with a woman who pets and hugs it beside a lit Christmas tree.",
+              "heard": "The speech reader identified someone saying, “I'll be right over there,” but I could not directly hear the recording."
+            },
+            "candidate": {
+              "caption": "A large brown dog approaches the camera, then sits with a woman who hugs and pets it beside a Christmas tree.",
+              "turns": 5,
+              "seen": "A large brown dog approaches the camera and then sits with a woman who hugs and pets it beside a Christmas tree.",
+              "heard": "The audio analysis suggested people talking and laughing, though I could not hear the recording directly."
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 1,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4622219704",
+          "recording": "11636217844",
+          "responses": {
+            "current": {
+              "caption": "A young child in pink plays among the jets of an outdoor splash fountain while a woman takes photographs.",
+              "turns": 5,
+              "seen": "A young child in pink plays among outdoor fountain jets while a woman takes photographs nearby.",
+              "heard": "The speech reader recorded someone saying, “Come here,” “Good boy,” and “How you doing?”"
+            },
+            "candidate": {
+              "caption": "A young child in pink plays among the spraying fountains at an outdoor splash pad while a woman takes photos.",
+              "turns": 5,
+              "seen": "A young child in pink plays among water jets at an outdoor splash pad while a woman takes photos.",
+              "heard": "The speech reader identified someone saying “Come here,” “Good boy,” and “How you doing?”"
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 3,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 3,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4622219704",
+          "recording": "4622219704",
+          "responses": {
+            "current": {
+              "caption": "A young child in pink plays among the water jets at an outdoor splash pad while a woman photographs her.",
+              "turns": 5,
+              "seen": "A young child in pink plays among water jets at an outdoor splash pad while a woman photographs her.",
+              "heard": "The speech reader detected the words “I'll be right over there,” but I could not directly hear the clip."
+            },
+            "candidate": {
+              "caption": "A young child in pink plays among the water jets at a splash pad while a woman photographs her.",
+              "turns": 5,
+              "seen": "A young child in pink played among the water jets at a splash pad while a woman photographed her.",
+              "heard": "The audio was not directly available to me, but the sound readings suggested people talking and children laughing."
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 1,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        }
+      ],
+      "cutoff_s": 35.5,
+      "media_verification": [
+        {
+          "source": "11636217844",
+          "pictures_sha256": "50e22ddcec25392c17aeefad66a085dafb8f73ef93cb02afa1c8361c7fed0aa2",
+          "pcm_sha256": "e357c2f99feacb88d48847a628bfeb9b4082c4bd9c7b7eace99093429dc7350e",
+          "published_overview_and_current_images": 10,
+          "published_spectra": 5
+        },
+        {
+          "source": "4622219704",
+          "pictures_sha256": "4711db37dcc07a885498667b390fc5e8000631940a748b50e074a1be1d7a1d72",
+          "pcm_sha256": "0f74d538c79b267be9d2b22596d9a41adca555a304b822da0fca0c34d9b70a62",
+          "published_overview_and_current_images": 10,
+          "published_spectra": 5
+        }
+      ]
+    },
+    {
+      "ids": [
+        "4633647136",
+        "4680621645"
+      ],
+      "original_durations_s": [
+        53.684512,
+        53.057574
+      ],
+      "original_sha256": [
+        "b71c93396f66edc70483dbc6d00223c10f3fbf215bccd43d6e4edf8b242c8185",
+        "54646231d5ff8bec305755a361a5b0f87866af1d8eb67159b703ddfbd89e7084"
+      ],
+      "assignments": [
+        {
+          "picture": "4633647136",
+          "recording": "4633647136",
+          "responses": {
+            "current": {
+              "caption": "A family claps and celebrates a young child's birthday around a chocolate cake with a number two candle.",
+              "turns": 7,
+              "seen": "Adults gathered around a young child and a chocolate birthday cake, clapping and helping the child near the candle.",
+              "heard": "The audio analysis suggested clapping and people talking, but I could not hear the recording directly."
+            },
+            "candidate": {
+              "caption": "Adults clap and celebrate a young child's birthday around a chocolate cake with a number two candle.",
+              "turns": 7,
+              "seen": "Adults gather around a young child and a chocolate cake with a number two candle, clapping and celebrating.",
+              "heard": "The audio readings indicated clapping and people talking, though I could not make out any words."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4633647136",
+          "recording": "4680621645",
+          "responses": {
+            "current": {
+              "caption": "Three adults gather around a young child, clapping and celebrating beside a birthday cake with a number two candle.",
+              "turns": 7,
+              "seen": "Three adults clapped around a young child at a table with a birthday cake and a number two candle.",
+              "heard": "I could not directly hear the recording, but the audio analysis indicated laughter and speech."
+            },
+            "candidate": {
+              "caption": "Three adults gather around a toddler at a birthday cake, clapping and helping her with the candle.",
+              "turns": 7,
+              "seen": "Three adults gather around a toddler and clap beside a birthday cake with a number two candle.",
+              "heard": "The audio readings suggested laughter and speech, though I could not directly hear the recording."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4680621645",
+          "recording": "4633647136",
+          "responses": {
+            "current": {
+              "caption": "A toddler carries a red, black, and white ball from a bedroom and plays with an adult on the stairs before crawling down toward them.",
+              "turns": 7,
+              "seen": "A toddler carries a red, black, and white ball from a bedroom and plays with an adult on the stairs before crawling down toward them.",
+              "heard": "I could not directly hear the audio, though the audio analysis suggested voices and clapping-like sounds."
+            },
+            "candidate": {
+              "caption": "A toddler carries a red, black and white ball from a bedroom and plays with an adult on the stairs before crawling down toward them.",
+              "turns": 7,
+              "seen": "A toddler carried a red, black and white ball from a bedroom, played with an adult on the stairs, and crawled down toward them.",
+              "heard": "I could not directly hear the audio, though a sound reader indicated speech and clapping."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4680621645",
+          "recording": "4680621645",
+          "responses": {
+            "current": {
+              "caption": "A toddler carries a red, black, and white ball from a bedroom to a staircase, where an adult plays with the ball and helps the child on the stairs.",
+              "turns": 7,
+              "seen": "A toddler carries a red, black, and white ball from a bedroom to a staircase, where an adult plays with the ball and helps the child on the stairs.",
+              "heard": "I could not tell what was heard."
+            },
+            "candidate": {
+              "caption": "A toddler carries a red, black, and white ball from a bedroom, plays with an adult across a staircase, and then crawls down the steps with the adult nearby.",
+              "turns": 7,
+              "seen": "A toddler carries a red, black, and white ball from a bedroom, plays with an adult across a staircase, and crawls down the steps with the adult nearby.",
+              "heard": "The sound readings suggest laughter and speech, including the words “go slow monkey,” along with possible footsteps."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 1,
+              "unmatched": []
+            }
+          }
+        }
+      ],
+      "cutoff_s": 53.0,
+      "media_verification": [
+        {
+          "source": "4633647136",
+          "pictures_sha256": "a16fc1e71216ee91fe9659caaace2da671e38fc022531daf76c7dde5d1418043",
+          "pcm_sha256": "747b95bd7759afcea65e969944757ca6b5b1116a0a32035506302c4aa3e80735",
+          "published_overview_and_current_images": 7,
+          "published_spectra": 7
+        },
+        {
+          "source": "4680621645",
+          "pictures_sha256": "21cc7faa0928402c17559ec3cd518c55cb059feab53e54197e0a803163744a5d",
+          "pcm_sha256": "df70ed3064540b9e3389e7e0b8fd1c7aa68b3fa8296eba4f92b7e2b6dcfb99a5",
+          "published_overview_and_current_images": 12,
+          "published_spectra": 7
+        }
+      ]
+    },
+    {
+      "ids": [
+        "11301174465",
+        "11402789396"
+      ],
+      "original_durations_s": [
+        37.895011,
+        37.704371
+      ],
+      "original_sha256": [
+        "7873da48f74f1f1f41a594c8a45b2a0012af64711dba0b392744dbe3bd861f0f",
+        "a90d296133ee04dedb1ae839ca8e6c04c9401fc0430fd61603c6a8b72ad3ab67"
+      ],
+      "assignments": [
+        {
+          "picture": "11301174465",
+          "recording": "11301174465",
+          "responses": {
+            "current": {
+              "caption": "A young child rides a red toy car back and forth between a living room and a dark hallway, smiling at the camera.",
+              "turns": 5,
+              "seen": "A young child rides a red toy car back and forth between a living room and a dark hallway, smiling at the camera.",
+              "heard": "I could not hear the clip directly, though the audio analysis suggested speech and possible crying."
+            },
+            "candidate": {
+              "caption": "A young child rides a red toy car back and forth between a dark hallway and a living room, smiling at the camera.",
+              "turns": 5,
+              "seen": "A young child rides a red toy car back and forth between a hallway and a living room, smiling at the camera.",
+              "heard": "The sound readings suggest speech and crying or squealing, but I could not listen to the audio directly."
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "11301174465",
+          "recording": "11402789396",
+          "responses": {
+            "current": {
+              "caption": "A young child happily rides a red toy car back and forth through a house and down a hallway.",
+              "turns": 5,
+              "seen": "A young child rides a red toy car through a house and down a hallway, then returns smiling.",
+              "heard": "The audio analysis detected speech, but I could not hear the recording directly."
+            },
+            "candidate": {
+              "caption": "A young boy rides a red toy car back and forth across a hardwood floor and down a hallway, smiling at the camera.",
+              "turns": 5,
+              "seen": "A young boy rides a red toy car across a hardwood floor and down a hallway, smiling at the camera.",
+              "heard": "Speech was detected, but I could not directly hear the audio."
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "11402789396",
+          "recording": "11301174465",
+          "responses": {
+            "current": {
+              "caption": "A man puts on a red Santa suit in a living room while a woman helps him adjust it.",
+              "turns": 5,
+              "seen": "A man puts on a red Santa suit in a living room while a woman helps him adjust it.",
+              "heard": "The audio analysis suggested speech and possible crying, but I could not hear the recording directly."
+            },
+            "candidate": {
+              "caption": "A man puts on a red Santa suit in a living room while a woman helps him adjust it.",
+              "turns": 5,
+              "seen": "A man puts on a red Santa suit in a living room while a woman helps him adjust it.",
+              "heard": "The audio descriptions indicated speech and possible crying, but I could not hear the recording directly."
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "11402789396",
+          "recording": "11402789396",
+          "responses": {
+            "current": {
+              "caption": "A man puts on a Santa suit in a living room while a woman helps adjust it and looks through the accessories.",
+              "turns": 5,
+              "seen": "A man puts on a Santa suit in a living room while a woman helps adjust it and looks through the accessories.",
+              "heard": "The speech reader identified conversation about the beard and another hat, but I could not hear the audio directly."
+            },
+            "candidate": {
+              "caption": "A man puts on a red Santa suit in a living room while a woman helps him adjust the coat.",
+              "turns": 5,
+              "seen": "A man puts on a red Santa suit in a living room while a woman helps him adjust the coat.",
+              "heard": "Speech was detected, but I could not hear the audio directly."
+            }
+          },
+          "turns": 5,
+          "turns_with_current_caption": 5,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        }
+      ],
+      "cutoff_s": 37.625,
+      "media_verification": [
+        {
+          "source": "11301174465",
+          "pictures_sha256": "40f5375f039ce5d252862080c3a46346aed050ebfaaab36a9e953cc1279abda5",
+          "pcm_sha256": "07932ccdec8b2d74d4a548ddf4a8be2fcfca9de957acca3100af1d1acb22983c",
+          "published_overview_and_current_images": 9,
+          "published_spectra": 5
+        },
+        {
+          "source": "11402789396",
+          "pictures_sha256": "66541d92176fa51c49bf3e9fab1c97313fa2ff61946f138b88a5f8d3aba14e70",
+          "pcm_sha256": "9a5d2e3f446db5c6c2b50eb8a03d16a39e8b9b9ae6c791b9fbb2bf6d52b32ca7",
+          "published_overview_and_current_images": 8,
+          "published_spectra": 5
+        }
+      ]
+    },
+    {
+      "ids": [
+        "4518113460",
+        "4657452456"
+      ],
+      "original_durations_s": [
+        62.322336,
+        62.322336
+      ],
+      "original_sha256": [
+        "38209d64c79c95cd6e86af2359e8edeb1564e91dd4e57ef402dbea22020010e1",
+        "7d8f1c07e6825cf97014f06b0d0455a73c72cdc808c927ef5ca0523ec4290ecc"
+      ],
+      "assignments": [
+        {
+          "picture": "4518113460",
+          "recording": "4518113460",
+          "responses": {
+            "current": {
+              "caption": "A baby in a striped outfit crawls around a tiled kitchen, then pulls up on a wooden chair and pushes it across the floor.",
+              "turns": 8,
+              "seen": "A baby in a striped outfit crawled around a tiled kitchen and pulled up on a chair.",
+              "heard": "I could not tell what sounds were heard."
+            },
+            "candidate": {
+              "caption": "A baby in a striped outfit crawls around a tiled kitchen, then pulls up on a chair and pushes it across the floor.",
+              "turns": 8,
+              "seen": "A baby in a striped outfit crawls around a tiled kitchen, then stands and pushes a chair across the floor.",
+              "heard": "The audio descriptions suggested background talking and movement, but I could not directly hear the recording."
+            }
+          },
+          "turns": 8,
+          "turns_with_current_caption": 8,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4518113460",
+          "recording": "4657452456",
+          "responses": {
+            "current": {
+              "caption": "A baby in a striped outfit crawls across a tiled kitchen, then pulls up on a chair and pushes it along the floor.",
+              "turns": 8,
+              "seen": "A baby in a striped outfit crawls across a tiled kitchen, pulls up on a chair, and pushes it along the floor.",
+              "heard": "The speech reader detected conversation, including the words “She's ready” and “to count every dog,” but I could not directly hear the audio."
+            },
+            "candidate": {
+              "caption": "A baby in a striped outfit crawls around a kitchen, then pulls up on a chair and pushes it across the floor.",
+              "turns": 8,
+              "seen": "A baby in a striped outfit crawled around a kitchen, then stood up holding a chair and pushed it across the floor.",
+              "heard": "The audio readings indicated speech and possible music, but I could not listen to the recording directly."
+            }
+          },
+          "turns": 8,
+          "turns_with_current_caption": 8,
+          "quoted_hearing": {
+            "current": {
+              "matched": 2,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4657452456",
+          "recording": "4518113460",
+          "responses": {
+            "current": {
+              "caption": "A woman sits on a couch holding a young child, talking and smiling as she adjusts the child's bib beside an IV stand.",
+              "turns": 8,
+              "seen": "A woman sat on a couch holding a young child, adjusting the child's bib and smiling beside an IV stand.",
+              "heard": "I could not tell what the recording sounded like."
+            },
+            "candidate": {
+              "caption": "A woman sits on a couch holding a young child, talking and smiling as she adjusts the child's bib, with medical equipment beside them.",
+              "turns": 8,
+              "seen": "A woman sits on a couch holding a young child, adjusting the child's bib and smiling, with medical equipment beside them.",
+              "heard": "I could not directly hear the clip, though the audio readings indicated speech and other indistinct sounds."
+            }
+          },
+          "turns": 8,
+          "turns_with_current_caption": 8,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4657452456",
+          "recording": "4657452456",
+          "responses": {
+            "current": {
+              "caption": "A woman sits on a couch holding a young child beside medical equipment, talking and smiling as the child looks around.",
+              "turns": 8,
+              "seen": "A woman sat on a couch holding a young child beside medical equipment, talking and smiling as the child looked around.",
+              "heard": "The speech reader detected conversation, including the words “She's ready” and “count every dog,” but I could not directly hear the audio."
+            },
+            "candidate": {
+              "caption": "A woman sits on a couch with a young child on her lap, talking and smiling as she holds the child beside an IV stand.",
+              "turns": 8,
+              "seen": "A woman sat on a couch holding a young child beside an IV stand, talking and smiling.",
+              "heard": "The audio was not available to me, though a speech reader detected fragments of conversation."
+            }
+          },
+          "turns": 8,
+          "turns_with_current_caption": 8,
+          "quoted_hearing": {
+            "current": {
+              "matched": 2,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        }
+      ],
+      "cutoff_s": 62.25,
+      "media_verification": [
+        {
+          "source": "4518113460",
+          "pictures_sha256": "47275b9897eeff47e45b3a99fce90ccf9c1a7236af146c664c129860e1329ead",
+          "pcm_sha256": "64e28cd7a49ec4ca9b1ed4ed4444a791ffe8de31a03a2833bd68c21c807aea6e",
+          "published_overview_and_current_images": 11,
+          "published_spectra": 8
+        },
+        {
+          "source": "4657452456",
+          "pictures_sha256": "a9b92f8a28d4bf65432b94be4354b5d7a67c9134508e54f21e32e69649a9effc",
+          "pcm_sha256": "0e151d130fdb6715523e6bd8aecca255d916eeccd3a5273e82bbe162a57c49c3",
+          "published_overview_and_current_images": 10,
+          "published_spectra": 8
+        }
+      ]
+    },
+    {
+      "ids": [
+        "4637804560",
+        "4874416538"
+      ],
+      "original_durations_s": [
+        50.689138,
+        50.874898
+      ],
+      "original_sha256": [
+        "f61154fe8f49294e6e5056173ff22fc53638565ec69e76c72c92a485ad38bfb9",
+        "28a49439264ef1afe9298faa888d29e13c06d029a7e19b070707cd62213d0650"
+      ],
+      "assignments": [
+        {
+          "picture": "4637804560",
+          "recording": "4637804560",
+          "responses": {
+            "current": {
+              "caption": "A woman sits in an armchair and reads a colorful book aloud to a baby resting on her lap.",
+              "turns": 7,
+              "seen": "A woman sat in an armchair with a baby on her lap and held an open book.",
+              "heard": "The speech reading indicated a woman reading aloud, with phrases about a blindfolded bowman and the knees of three birds."
+            },
+            "candidate": {
+              "caption": "A woman sits in an armchair reading a colorful book aloud to a baby on her lap.",
+              "turns": 7,
+              "seen": "A woman sits in an armchair with a baby on her lap and reads a colorful book.",
+              "heard": "A woman reads aloud while the baby cries intermittently."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4637804560",
+          "recording": "4874416538",
+          "responses": {
+            "current": {
+              "caption": "A woman sits in an armchair reading a colorful children's book aloud to a baby on her lap.",
+              "turns": 7,
+              "seen": "A woman sat in an armchair with a baby on her lap and read a colorful book.",
+              "heard": "The speech reader detected conversation, including “Ready?” and “Yeah,” but I could not directly hear the audio."
+            },
+            "candidate": {
+              "caption": "A woman sits in an armchair reading a colorful book aloud to a baby on her lap.",
+              "turns": 7,
+              "seen": "A woman sits in an armchair with a baby on her lap and reads a colorful book.",
+              "heard": "Speech is heard, including “Ready?” and “Yeah,” though I could not clearly identify all the speakers."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 2,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 2,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4874416538",
+          "recording": "4637804560",
+          "responses": {
+            "current": {
+              "caption": "A man pushes a young child in a blue swing back and forth in a wooded backyard.",
+              "turns": 7,
+              "seen": "A man pushes a young child in a blue swing in a wooded backyard.",
+              "heard": "Speech was detected, but I could not reliably tell what was being said."
+            },
+            "candidate": {
+              "caption": "A man pushes a young child in a blue swing back and forth in a wooded yard.",
+              "turns": 7,
+              "seen": "A man pushes a young child in a blue swing back and forth in a wooded yard.",
+              "heard": "I could not hear the audio, but the speech reader detected a woman speaking."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4874416538",
+          "recording": "4874416538",
+          "responses": {
+            "current": {
+              "caption": "A man pushes a young child in a blue swing hanging from a tree in a wooded yard.",
+              "turns": 7,
+              "seen": "A man pushes a young child in a blue swing hanging from a tree in a wooded yard.",
+              "heard": "The speech reader reported the words “Ready?”, “Yeah,” and “a big swing,” but I could not hear the audio directly."
+            },
+            "candidate": {
+              "caption": "A man pushes a young child in a blue swing hanging from a tree in a sunny backyard.",
+              "turns": 7,
+              "seen": "A man pushes a young child in a blue swing hanging from a tree in a sunny yard.",
+              "heard": "People speak, and the recorded speech reader identified the words “Ready?” and “Yeah.”"
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 3,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 2,
+              "unmatched": []
+            }
+          }
+        }
+      ],
+      "cutoff_s": 50.625,
+      "media_verification": [
+        {
+          "source": "4637804560",
+          "pictures_sha256": "b7826d022c4a4639de20b417832a36750c380e3fece4980ae7e468edf13e7668",
+          "pcm_sha256": "cd5a166f4f528af4fa232296b4cd10c59718a79cefdccaf5dd5a960d91288c65",
+          "published_overview_and_current_images": 11,
+          "published_spectra": 7
+        },
+        {
+          "source": "4874416538",
+          "pictures_sha256": "da5685e55564c2ee521f490ad9c9368329f183571abb72065eeaf12fb9b4f7de",
+          "pcm_sha256": "5bd42a54b0165d32602f7811290780d1b6b8ebf20fa1b089fa9d99dd169b569d",
+          "published_overview_and_current_images": 8,
+          "published_spectra": 7
+        }
+      ]
+    },
+    {
+      "ids": [
+        "4520112789",
+        "4892615149"
+      ],
+      "original_durations_s": [
+        54.82229,
+        55.333129
+      ],
+      "original_sha256": [
+        "60ae8850d93d6cee460d25b196bc0b52c7260a0ba47f2fc20d20b52d8023dacc",
+        "b6a81befc15c755f649afbac04be825f0caed2803bc0d5e24590fad262a561eb"
+      ],
+      "assignments": [
+        {
+          "picture": "4520112789",
+          "recording": "4520112789",
+          "responses": {
+            "current": {
+              "caption": "A person pets a spotted serval outdoors as it rubs against their legs, lies on their shoe, and then walks around the enclosure.",
+              "turns": 7,
+              "seen": "A person pets a spotted serval as it rubs against their legs, lies on their shoe, and walks around an outdoor enclosure.",
+              "heard": "The speech reader detected people talking, but I could not directly hear the audio."
+            },
+            "candidate": {
+              "caption": "A person pets a spotted serval outdoors as it rubs against their legs, lies on their shoe, and then walks around.",
+              "turns": 7,
+              "seen": "A person pets a spotted serval as it rubs against their legs, lies on their shoe, and walks around an outdoor enclosure.",
+              "heard": "A sound captioner described people talking and birds chirping in the background."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4520112789",
+          "recording": "4892615149",
+          "responses": {
+            "current": {
+              "caption": "A person pets a spotted serval as it rubs against their legs and lies on the grass holding their shoe.",
+              "turns": 7,
+              "seen": "A person pets a spotted serval as it rubs against their legs and lies on the grass holding their shoe.",
+              "heard": "I could not directly hear the audio, though the audio analysis suggested possible vocal sounds."
+            },
+            "candidate": {
+              "caption": "A spotted serval rubs against a person's legs and lies on the grass holding their shoe as they pet it.",
+              "turns": 7,
+              "seen": "A spotted serval rubs against a person's legs and lies on the grass holding their shoe while being petted.",
+              "heard": "The audio analysis suggested speech and high-pitched crying-like sounds, but I could not independently identify their sources."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4892615149",
+          "recording": "4520112789",
+          "responses": {
+            "current": {
+              "caption": "A baby in a high chair watches an older child move around with a red toy, then reaches upward.",
+              "turns": 7,
+              "seen": "A baby in a high chair watched an older child holding a red object and later reached upward.",
+              "heard": "I could not hear the audio, but the speech reading indicated people talking."
+            },
+            "candidate": {
+              "caption": "A baby in a high chair watches an older child play with a red object, then reaches upward as the camera moves closer.",
+              "turns": 7,
+              "seen": "A baby in a high chair watches an older child holding a red object and later reaches upward.",
+              "heard": "The audio readings indicated people speaking and possible chirping in the background."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 0,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        },
+        {
+          "picture": "4892615149",
+          "recording": "4892615149",
+          "responses": {
+            "current": {
+              "caption": "A young child holds a red object to their mouth while a baby watches from a high chair, then the baby raises a hand.",
+              "turns": 7,
+              "seen": "A young child holds a red object to their mouth while a baby watches from a high chair and later raises a hand.",
+              "heard": "The audio readings suggested child vocalizations and speech, including someone asking, “Are you one years old?”"
+            },
+            "candidate": {
+              "caption": "A young child plays with a red toy near a baby in a high chair, who watches and eventually reaches upward.",
+              "turns": 7,
+              "seen": "A young child holds a red toy near a baby in a high chair, and the baby eventually reaches upward.",
+              "heard": "The audio readings suggested child and baby vocalizations, but I could not independently hear the sounds."
+            }
+          },
+          "turns": 7,
+          "turns_with_current_caption": 7,
+          "quoted_hearing": {
+            "current": {
+              "matched": 1,
+              "unmatched": []
+            },
+            "candidate": {
+              "matched": 0,
+              "unmatched": []
+            }
+          }
+        }
+      ],
+      "cutoff_s": 54.75,
+      "media_verification": [
+        {
+          "source": "4520112789",
+          "pictures_sha256": "223c924cbfa3d0bd7702f22a317da5a54e24ad85d727ed1e66409e7c459e8b98",
+          "pcm_sha256": "a0d5e013f9bc95fa73769ee827fc4cdddae66cec7efb117961a3c8e2a0d9d7a0",
+          "published_overview_and_current_images": 13,
+          "published_spectra": 7
+        },
+        {
+          "source": "4892615149",
+          "pictures_sha256": "27f497ab83e11f465c9bd7e2ed7f5d5434845d952a99dc5f5784d9423640678e",
+          "pcm_sha256": "7e421a1e18da828a85b0a41e6f1b01fb7ae8cefc55c5f6b470746fe5c683dab3",
+          "published_overview_and_current_images": 11,
+          "published_spectra": 7
+        }
+      ]
+    }
+  ],
+  "swaps": {
+    "summary": {
+      "heard": {
+        "candidate": {
+          "same_minus_paired_source": 0.07194364309543744,
+          "pair_bootstrap_95": [
+            0.01603221190938105,
+            0.13027975164974728
+          ],
+          "percent_of_held_out_human_gap": 37.76381810808664,
+          "assignment_counts": {
+            "correct": 9,
+            "tied": 0,
+            "reversed": 3
+          }
+        },
+        "current": {
+          "same_minus_paired_source": 0.05248721114670237,
+          "pair_bootstrap_95": [
+            0.02216473113124569,
+            0.08620315526301663
+          ],
+          "percent_of_held_out_human_gap": 27.550974755551533,
+          "assignment_counts": {
+            "correct": 10,
+            "tied": 0,
+            "reversed": 2
+          }
+        },
+        "human": {
+          "same_minus_paired_source": 0.19050945243280795,
+          "pair_bootstrap_95": [
+            0.09760118269671995,
+            0.2789125346475177
+          ],
+          "percent_of_held_out_human_gap": 100.00000000000001
+        },
+        "candidate_minus_current": {
+          "mean_change": 0.01945643194873507,
+          "bootstrap_95_percent": [
+            -0.024923021420060348,
+            0.05534850185116132
+          ],
+          "increased": 4,
+          "decreased": 2,
+          "tied": 0,
+          "by_film": {
+            "11636217844/4622219704": 0.07909378595650196,
+            "4633647136/4680621645": 0.051683674566447735,
+            "11301174465/11402789396": -0.008557695895433426,
+            "4518113460/4657452456": -0.07602982281241566,
+            "4637804560/4874416538": 0.03512328863143921,
+            "4520112789/4892615149": 0.03542536124587059
+          }
+        }
+      },
+      "seen": {
+        "candidate": {
+          "same_minus_paired_source": 0.3505041605482499,
+          "pair_bootstrap_95": [
+            0.2698791728665431,
+            0.43431430620451766
+          ],
+          "percent_of_held_out_human_gap": 81.37736833871024,
+          "assignment_counts": {
+            "correct": 12,
+            "tied": 0,
+            "reversed": 0
+          }
+        },
+        "current": {
+          "same_minus_paired_source": 0.3400834519416094,
+          "pair_bootstrap_95": [
+            0.2670320676018794,
+            0.4208259272078673
+          ],
+          "percent_of_held_out_human_gap": 78.95796812016071,
+          "assignment_counts": {
+            "correct": 12,
+            "tied": 0,
+            "reversed": 0
+          }
+        },
+        "human": {
+          "same_minus_paired_source": 0.4307145434949133,
+          "pair_bootstrap_95": [
+            0.34769730427198936,
+            0.5050183953924311
+          ],
+          "percent_of_held_out_human_gap": 100.0
+        },
+        "candidate_minus_current": {
+          "mean_change": 0.010420708606640497,
+          "bootstrap_95_percent": [
+            -0.005440990130106608,
+            0.023970006654659908
+          ],
+          "increased": 5,
+          "decreased": 1,
+          "tied": 0,
+          "by_film": {
+            "11636217844/4622219704": 0.027445435523986816,
+            "4633647136/4680621645": 0.031800009310245514,
+            "11301174465/11402789396": 0.008706316351890564,
+            "4518113460/4657452456": 0.002748429775238037,
+            "4637804560/4874416538": 0.016622833907604218,
+            "4520112789/4892615149": -0.024798773229122162
+          }
+        }
+      }
+    },
+    "by_pair": [
+      {
+        "id": "11636217844/4622219704",
+        "heard": {
+          "human": 0.08263896716137728,
+          "candidate": 0.17528599873185158,
+          "current": 0.09619221277534962
+        },
+        "seen": {
+          "human": 0.5033111145099004,
+          "candidate": 0.3436666876077652,
+          "current": 0.3162212520837784
+        },
+        "assignment_counts": {
+          "heard": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          },
+          "seen": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "4633647136/4680621645",
+        "heard": {
+          "human": 0.28799751326441764,
+          "candidate": 0.06883660797029734,
+          "current": 0.017152933403849602
+        },
+        "seen": {
+          "human": 0.3388587720692158,
+          "candidate": 0.3180573582649231,
+          "current": 0.2862573489546776
+        },
+        "assignment_counts": {
+          "heard": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 1,
+              "tied": 0,
+              "reversed": 1
+            }
+          },
+          "seen": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "11301174465/11402789396",
+        "heard": {
+          "human": 0.31156528238207104,
+          "candidate": 0.007112022489309311,
+          "current": 0.015669718384742737
+        },
+        "seen": {
+          "human": 0.5136219188570976,
+          "candidate": 0.5159267336130142,
+          "current": 0.5072204172611237
+        },
+        "assignment_counts": {
+          "heard": {
+            "candidate": {
+              "correct": 1,
+              "tied": 0,
+              "reversed": 1
+            },
+            "current": {
+              "correct": 1,
+              "tied": 0,
+              "reversed": 1
+            }
+          },
+          "seen": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "4518113460/4657452456",
+        "heard": {
+          "human": 0.0367486427227656,
+          "candidate": -0.027851994731463492,
+          "current": 0.04817782808095217
+        },
+        "seen": {
+          "human": 0.2673126980662346,
+          "candidate": 0.2547434866428375,
+          "current": 0.2519950568675995
+        },
+        "assignment_counts": {
+          "heard": {
+            "candidate": {
+              "correct": 0,
+              "tied": 0,
+              "reversed": 2
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          },
+          "seen": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "4637804560/4874416538",
+        "heard": {
+          "human": 0.09368182737380266,
+          "candidate": 0.05428854376077652,
+          "current": 0.01916525512933731
+        },
+        "seen": {
+          "human": 0.4228100948035717,
+          "candidate": 0.4517008364200592,
+          "current": 0.435078002512455
+        },
+        "assignment_counts": {
+          "heard": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          },
+          "seen": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "4520112789/4892615149",
+        "heard": {
+          "human": 0.33042448169241345,
+          "candidate": 0.15399068035185337,
+          "current": 0.11856531910598278
+        },
+        "seen": {
+          "human": 0.5383726626634597,
+          "candidate": 0.21892986074090004,
+          "current": 0.2437286339700222
+        },
+        "assignment_counts": {
+          "heard": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          },
+          "seen": {
+            "candidate": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            },
+            "current": {
+              "correct": 2,
+              "tied": 0,
+              "reversed": 0
+            }
+          }
+        }
+      }
+    ]
+  },
+  "natural": {
+    "heard": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 12,
+      "human_captions": 45,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.4329377131743564,
+          "other_film_cosine": 0.2788917788200908,
+          "same_minus_other": 0.1540459343542656,
+          "top_one_film": 0.41944444444444445
+        },
+        "current": {
+          "same_film_cosine": 0.2216474790669357,
+          "other_film_cosine": 0.17826414729158083,
+          "same_minus_other": 0.04338333177535486,
+          "top_one_film": 0.13888888888888887
+        },
+        "candidate": {
+          "same_film_cosine": 0.2579455491161854,
+          "other_film_cosine": 0.19053653751810393,
+          "same_minus_other": 0.06740901159808146,
+          "top_one_film": 0.2222222222222222
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "11636217844": {
+          "human": [
+            0.24507784843444824,
+            0.2540050446987152,
+            0.0
+          ],
+          "current": [
+            0.26250279943148297,
+            0.15541817247867584,
+            0.6666666666666666
+          ],
+          "candidate": [
+            0.2572745581467946,
+            0.18757596611976624,
+            0.3333333333333333
+          ]
+        },
+        "4622219704": {
+          "human": [
+            0.2429746612906456,
+            0.21882143368323645,
+            0.3333333333333333
+          ],
+          "current": [
+            0.21002074579397836,
+            0.15444903075695038,
+            0.3333333333333333
+          ],
+          "candidate": [
+            0.34032927950223285,
+            0.22737711668014526,
+            0.3333333333333333
+          ]
+        },
+        "4633647136": {
+          "human": [
+            0.47055603563785553,
+            0.21792664378881454,
+            0.75
+          ],
+          "current": [
+            0.2459517866373062,
+            0.19361262023448944,
+            0.0
+          ],
+          "candidate": [
+            0.25269466638565063,
+            0.21031513810157776,
+            0.0
+          ]
+        },
+        "4680621645": {
+          "human": [
+            0.4351416051387787,
+            0.29747821390628815,
+            0.0
+          ],
+          "current": [
+            0.05218347609043121,
+            0.12603646516799927,
+            0.0
+          ],
+          "candidate": [
+            0.20256431102752687,
+            0.18308767676353455,
+            0.0
+          ]
+        },
+        "11301174465": {
+          "human": [
+            0.6275946199893951,
+            0.26509304344654083,
+            1.0
+          ],
+          "current": [
+            0.010329840239137411,
+            0.17922134697437286,
+            0.0
+          ],
+          "candidate": [
+            0.00929940294008702,
+            0.15440642833709717,
+            0.0
+          ]
+        },
+        "11402789396": {
+          "human": [
+            0.3708839416503906,
+            0.2690813720226288,
+            0.2
+          ],
+          "current": [
+            0.25084680914878843,
+            0.1868409514427185,
+            0.0
+          ],
+          "candidate": [
+            0.11425398886203766,
+            0.1434590220451355,
+            0.0
+          ]
+        },
+        "4518113460": {
+          "human": [
+            0.23938740293184915,
+            0.2108263522386551,
+            0.0
+          ],
+          "current": [
+            0.1496301293373108,
+            0.18077678978443146,
+            0.0
+          ],
+          "candidate": [
+            0.17098925014336905,
+            0.17347630858421326,
+            0.0
+          ]
+        },
+        "4657452456": {
+          "human": [
+            0.40941717227300006,
+            0.3265426258246104,
+            0.0
+          ],
+          "current": [
+            0.3297329346338908,
+            0.21138237416744232,
+            0.0
+          ],
+          "candidate": [
+            0.21490162114302316,
+            0.14073264598846436,
+            0.0
+          ]
+        },
+        "4637804560": {
+          "human": [
+            0.6891918540000915,
+            0.3490229189395905,
+            1.0
+          ],
+          "current": [
+            0.2726214349269867,
+            0.14586757123470306,
+            0.0
+          ],
+          "candidate": [
+            0.4984425067901611,
+            0.18645276129245758,
+            1.0
+          ]
+        },
+        "4874416538": {
+          "human": [
+            0.44540977478027344,
+            0.3560816744963328,
+            0.0
+          ],
+          "current": [
+            0.21798165639241537,
+            0.1993897408246994,
+            0.0
+          ],
+          "candidate": [
+            0.17582588394482931,
+            0.18025055527687073,
+            0.0
+          ]
+        },
+        "4520112789": {
+          "human": [
+            0.5609153906504313,
+            0.3027093708515167,
+            1.0
+          ],
+          "current": [
+            0.35849050680796307,
+            0.16976433992385864,
+            0.6666666666666666
+          ],
+          "candidate": [
+            0.586821844180425,
+            0.27580949664115906,
+            1.0
+          ]
+        },
+        "4892615149": {
+          "human": [
+            0.4587022513151169,
+            0.27911265194416046,
+            0.75
+          ],
+          "current": [
+            0.29947762936353683,
+            0.23641036450862885,
+            0.0
+          ],
+          "candidate": [
+            0.27194927632808685,
+            0.22349533438682556,
+            0.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "current": {
+          "human_same_minus_other": 0.15404593435426553,
+          "reader_same_minus_other": 0.04338333177535484,
+          "fraction_of_human": 0.28162594460678514,
+          "film_bootstrap_95": [
+            -0.0679396569275915,
+            0.730119368518125
+          ]
+        },
+        "candidate": {
+          "human_same_minus_other": 0.15404593435426553,
+          "reader_same_minus_other": 0.06740901159808144,
+          "fraction_of_human": 0.43759033226451965,
+          "film_bootstrap_95": [
+            0.009233453980021221,
+            0.936640358757118
+          ]
+        }
+      }
+    },
+    "seen": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 12,
+      "human_captions": 49,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5744220503088501,
+          "other_film_cosine": 0.17920367375740576,
+          "same_minus_other": 0.3952183765514443,
+          "top_one_film": 0.8847222222222223
+        },
+        "current": {
+          "same_film_cosine": 0.4584756477011574,
+          "other_film_cosine": 0.1537043328086535,
+          "same_minus_other": 0.30477131489250386,
+          "top_one_film": 0.9166666666666666
+        },
+        "candidate": {
+          "same_film_cosine": 0.46952407782276473,
+          "other_film_cosine": 0.15814399315665165,
+          "same_minus_other": 0.3113800846661131,
+          "top_one_film": 0.9
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "11636217844": {
+          "human": [
+            0.4553225636482239,
+            0.08564067383607228,
+            1.0
+          ],
+          "current": [
+            0.3756136894226074,
+            0.1270044595003128,
+            1.0
+          ],
+          "candidate": [
+            0.3829110562801361,
+            0.13150325417518616,
+            1.0
+          ]
+        },
+        "4622219704": {
+          "human": [
+            0.686209774017334,
+            0.2112608313560486,
+            1.0
+          ],
+          "current": [
+            0.4725284159183502,
+            0.17020708322525024,
+            1.0
+          ],
+          "candidate": [
+            0.4742045342922211,
+            0.15900856256484985,
+            1.0
+          ]
+        },
+        "4633647136": {
+          "human": [
+            0.6400913000106812,
+            0.16562537997961044,
+            1.0
+          ],
+          "current": [
+            0.4978624939918518,
+            0.16021166741847992,
+            1.0
+          ],
+          "candidate": [
+            0.5196579694747925,
+            0.1456921398639679,
+            1.0
+          ]
+        },
+        "4680621645": {
+          "human": [
+            0.44521579146385193,
+            0.25401084721088407,
+            0.6
+          ],
+          "current": [
+            0.455578076839447,
+            0.2058289498090744,
+            1.0
+          ],
+          "candidate": [
+            0.46574496626853945,
+            0.22923694550991058,
+            0.8
+          ]
+        },
+        "11301174465": {
+          "human": [
+            0.48776135593652725,
+            0.19544382765889168,
+            0.75
+          ],
+          "current": [
+            0.5199622362852097,
+            0.16397108137607574,
+            1.0
+          ],
+          "candidate": [
+            0.5182892084121704,
+            0.16550670564174652,
+            1.0
+          ]
+        },
+        "11402789396": {
+          "human": [
+            0.6641650497913361,
+            0.08982162643224001,
+            1.0
+          ],
+          "current": [
+            0.62055903673172,
+            0.06218357011675835,
+            1.0
+          ],
+          "candidate": [
+            0.6158800721168518,
+            0.06047876924276352,
+            1.0
+          ]
+        },
+        "4518113460": {
+          "human": [
+            0.5105253259340922,
+            0.2259207417567571,
+            1.0
+          ],
+          "current": [
+            0.5141654014587402,
+            0.19349707663059235,
+            1.0
+          ],
+          "candidate": [
+            0.549652636051178,
+            0.19103579223155975,
+            1.0
+          ]
+        },
+        "4657452456": {
+          "human": [
+            0.5537243982156118,
+            0.2421616663535436,
+            0.6666666666666666
+          ],
+          "current": [
+            0.4159417947133382,
+            0.1581735759973526,
+            1.0
+          ],
+          "candidate": [
+            0.4453172783056895,
+            0.18045809864997864,
+            1.0
+          ]
+        },
+        "4637804560": {
+          "human": [
+            0.6728839576244354,
+            0.19382265582680702,
+            1.0
+          ],
+          "current": [
+            0.5541974455118179,
+            0.15731050074100494,
+            1.0
+          ],
+          "candidate": [
+            0.6320951730012894,
+            0.16612431406974792,
+            1.0
+          ]
+        },
+        "4874416538": {
+          "human": [
+            0.6127750158309937,
+            0.22933087944984437,
+            0.8
+          ],
+          "current": [
+            0.5187440276145935,
+            0.1465660035610199,
+            1.0
+          ],
+          "candidate": [
+            0.508510422706604,
+            0.1410161554813385,
+            1.0
+          ]
+        },
+        "4520112789": {
+          "human": [
+            0.7822822531064352,
+            0.109534685810407,
+            1.0
+          ],
+          "current": [
+            0.2670676608880361,
+            0.03352883830666542,
+            1.0
+          ],
+          "candidate": [
+            0.2670676608880361,
+            0.03352883830666542,
+            1.0
+          ]
+        },
+        "4892615149": {
+          "human": [
+            0.3821078181266785,
+            0.14787026941776277,
+            0.8
+          ],
+          "current": [
+            0.2894874930381775,
+            0.2659691870212555,
+            0.0
+          ],
+          "candidate": [
+            0.25495795607566835,
+            0.2941383421421051,
+            0.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "current": {
+          "human_same_minus_other": 0.3952183765514443,
+          "reader_same_minus_other": 0.304771314892504,
+          "fraction_of_human": 0.7711466191219296,
+          "film_bootstrap_95": [
+            0.6000563826258978,
+            0.9403019031394156
+          ]
+        },
+        "candidate": {
+          "human_same_minus_other": 0.3952183765514443,
+          "reader_same_minus_other": 0.3113800846661131,
+          "fraction_of_human": 0.7878684371489031,
+          "film_bootstrap_95": [
+            0.596347380087236,
+            0.9723241493412428
+          ]
+        }
+      }
+    },
+    "caption": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 12,
+      "human_captions": 50,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5255113711994556,
+          "other_film_cosine": 0.16889013974513445,
+          "same_minus_other": 0.3566212314543211,
+          "top_one_film": 0.875
+        },
+        "current": {
+          "same_film_cosine": 0.4607477376858394,
+          "other_film_cosine": 0.1498551513068378,
+          "same_minus_other": 0.3108925863790016,
+          "top_one_film": 0.9166666666666666
+        },
+        "candidate": {
+          "same_film_cosine": 0.4550243186040057,
+          "other_film_cosine": 0.1534906222174565,
+          "same_minus_other": 0.30153369638654925,
+          "top_one_film": 0.9166666666666666
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "11636217844": {
+          "human": [
+            0.4455409248669942,
+            0.08949855963389079,
+            1.0
+          ],
+          "current": [
+            0.39141443371772766,
+            0.12232431769371033,
+            1.0
+          ],
+          "candidate": [
+            0.41350595156351727,
+            0.13388709723949432,
+            1.0
+          ]
+        },
+        "4622219704": {
+          "human": [
+            0.6520480364561081,
+            0.19571036472916603,
+            1.0
+          ],
+          "current": [
+            0.4548931419849396,
+            0.16677775979042053,
+            1.0
+          ],
+          "candidate": [
+            0.4500831440091133,
+            0.1699088215827942,
+            1.0
+          ]
+        },
+        "4633647136": {
+          "human": [
+            0.5863498091697693,
+            0.18148646056652068,
+            1.0
+          ],
+          "current": [
+            0.5621650815010071,
+            0.19156089425086975,
+            1.0
+          ],
+          "candidate": [
+            0.5495444774627686,
+            0.15942387282848358,
+            1.0
+          ]
+        },
+        "4680621645": {
+          "human": [
+            0.5285310745239258,
+            0.19802594929933548,
+            0.75
+          ],
+          "current": [
+            0.47735220938920975,
+            0.19717858731746674,
+            1.0
+          ],
+          "candidate": [
+            0.45606642216444016,
+            0.21782396733760834,
+            1.0
+          ]
+        },
+        "11301174465": {
+          "human": [
+            0.6529367208480835,
+            0.21324558854103087,
+            1.0
+          ],
+          "current": [
+            0.5690492153167724,
+            0.15518754720687866,
+            1.0
+          ],
+          "candidate": [
+            0.5649380922317505,
+            0.15340830385684967,
+            1.0
+          ]
+        },
+        "11402789396": {
+          "human": [
+            0.49162200689315794,
+            0.05705544762313366,
+            1.0
+          ],
+          "current": [
+            0.4910277247428894,
+            0.06405064463615417,
+            1.0
+          ],
+          "candidate": [
+            0.4868490397930145,
+            0.05642061308026314,
+            1.0
+          ]
+        },
+        "4518113460": {
+          "human": [
+            0.43420279771089554,
+            0.2300657443702221,
+            0.75
+          ],
+          "current": [
+            0.4486888125538826,
+            0.1986246556043625,
+            1.0
+          ],
+          "candidate": [
+            0.4392167702317238,
+            0.1960848718881607,
+            1.0
+          ]
+        },
+        "4657452456": {
+          "human": [
+            0.3708013817667961,
+            0.17761720716953278,
+            0.25
+          ],
+          "current": [
+            0.4667469561100006,
+            0.1357494294643402,
+            1.0
+          ],
+          "candidate": [
+            0.46798914670944214,
+            0.15634837746620178,
+            1.0
+          ]
+        },
+        "4637804560": {
+          "human": [
+            0.6446102261543274,
+            0.1875815950334072,
+            1.0
+          ],
+          "current": [
+            0.5430162101984024,
+            0.15225742757320404,
+            1.0
+          ],
+          "candidate": [
+            0.5462647825479507,
+            0.15737050771713257,
+            1.0
+          ]
+        },
+        "4874416538": {
+          "human": [
+            0.6408261507749557,
+            0.22686952352523804,
+            1.0
+          ],
+          "current": [
+            0.4464838355779648,
+            0.1342470496892929,
+            1.0
+          ],
+          "candidate": [
+            0.4516429901123047,
+            0.11817295104265213,
+            1.0
+          ]
+        },
+        "4520112789": {
+          "human": [
+            0.3439498655498028,
+            0.09274168778210878,
+            0.75
+          ],
+          "current": [
+            0.31676121056079865,
+            0.027135515585541725,
+            1.0
+          ],
+          "candidate": [
+            0.32036279141902924,
+            0.022926103323698044,
+            1.0
+          ]
+        },
+        "4892615149": {
+          "human": [
+            0.5147174596786499,
+            0.17678354866802692,
+            1.0
+          ],
+          "current": [
+            0.36137402057647705,
+            0.253167986869812,
+            0.0
+          ],
+          "candidate": [
+            0.3138282150030136,
+            0.3001119792461395,
+            0.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "current": {
+          "human_same_minus_other": 0.3566212314543211,
+          "reader_same_minus_other": 0.3108925863790015,
+          "fraction_of_human": 0.8717725108826649,
+          "film_bootstrap_95": [
+            0.731591179952691,
+            1.0191512568714725
+          ]
+        },
+        "candidate": {
+          "human_same_minus_other": 0.3566212314543211,
+          "reader_same_minus_other": 0.3015336963865492,
+          "fraction_of_human": 0.8455292893159448,
+          "film_bootstrap_95": [
+            0.6648846734779096,
+            1.0068472318305184
+          ]
+        }
+      }
+    }
+  },
+  "equal_weight_natural": {
+    "current": {
+      "percent": 52.638628186435724,
+      "cluster_bootstrap_95": [
+        43.30722344611732,
+        75.32915528022366
+      ],
+      "valid_draws": 20000
+    },
+    "candidate": {
+      "percent": 61.27293847067112,
+      "cluster_bootstrap_95": [
+        43.279296637563725,
+        91.05814954238464
+      ],
+      "valid_draws": 20000
+    },
+    "candidate_minus_current": {
+      "percentage_point_change": 8.634310284235397,
+      "paired_interval": [
+        -1.979154706916809,
+        18.054813543844325
+      ]
+    }
+  },
+  "controls": {
+    "until_s": 8.5,
+    "identical_prefix_blocks": 14,
+    "out_of_range_rejected": true,
+    "answers": {
+      "A": {
+        "current": "A brief series of high-pitched rattling or jingling sounds appears around 4.6–6.5 seconds, then fades back to a quiet background; the source is uncertain. No specific words were clear.",
+        "candidate": "A faint jingling or rattling sound seems to become more noticeable around 4.6 seconds, then fades after about 6.5 seconds; its source is uncertain. No words were clear."
+      },
+      "B": {
+        "current": "The readings suggest a very quiet, steady noise, possibly a fan-like whoosh, with no clear change in level. No words were identified.",
+        "candidate": "The readings suggest a faint, steady fan-like whoosh, with no clear change in level established. No words were clear."
+      },
+      "silence": {
+        "current": "The recording shows digital silence throughout, with no apparent sound or change. No words were audible.",
+        "candidate": "The recording was digitally silent throughout, with no apparent sound or change. No words were audible."
+      },
+      "speech": {
+        "current": "A brief voice is followed by silence. The speech reading reports, “This morning we watched the river,” though I can’t independently verify the words from the spectra alone.",
+        "candidate": "A voice briefly speaks and then the recording falls silent. The reported words are, “This morning we watched the river,” though they could not be independently checked."
+      }
+    }
+  },
+  "transport": {
+    "model": "Labbeti/conette",
+    "same_description_across_transports": true,
+    "native_samples_per_channel": 176400,
+    "rate": 44100,
+    "channels": 2,
+    "wav_sha256": "ebbd4618c62f0a6a114366908897132282e345f7f2b185c180beb2860e56e0d4"
+  },
+  "resources": {
+    "largest_recorded_job_peak_rss_kib": 4169840,
+    "peak_is_per_process_tree_not_simultaneous_system_total": true,
+    "lowest_reported_system_free_percent": 65,
+    "surviving_helper_processes_in_completed_jobs": 0
+  },
+  "missed_sound_example": {
+    "id": "4633647136",
+    "condition": "original soundtrack and picture",
+    "reference": "Three of the four independent audio-only captions explicitly mention singing, one specifies a birthday song. The fourth describes clapping at a party.",
+    "local_evidence": [
+      {
+        "sound": "A capella",
+        "start_s": 16.32,
+        "end_s": 17.77501133786848
+      },
+      {
+        "sound": "Vocal music",
+        "start_s": 16.32,
+        "end_s": 17.29501133786848
+      },
+      {
+        "sound": "A capella",
+        "start_s": 27.84,
+        "end_s": 29.29501133786848
+      },
+      {
+        "sound": "Vocal music",
+        "start_s": 27.84,
+        "end_s": 28.81501133786848
+      },
+      {
+        "sound": "Choir",
+        "start_s": 27.84,
+        "end_s": 28.81501133786848
+      }
+    ],
+    "reader": {
+      "current": "The audio analysis suggested clapping and people talking, but I could not hear the recording directly.",
+      "candidate": "The audio readings indicated clapping and people talking, though I could not make out any words."
+    },
+    "selection": "Illustrative discrepancy identified after collecting the paired cases."
+  },
+  "quote_counts": {
+    "current": {
+      "matched": 18,
+      "unmatched": 0
+    },
+    "candidate": {
+      "matched": 10,
+      "unmatched": 0
+    }
+  }
+}

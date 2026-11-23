@@ -6,6 +6,7 @@ import json
 import math
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -35,6 +36,20 @@ def watch(source, until=None, joint=False, model=None, recall=False, tracks="bot
         options = {"command": sys.executable, "args": presenter, "enabled_tools": ["view"], "tool_timeout_sec": 300,
                    "default_tools_approval_mode": "writes"}
         return read_with_codex(work, options, model, recall, max_frames=max_frames)
+
+
+def logged_view_report(text):
+    """Read the complete timed text block even if the CLI shortened later inline media."""
+    content = re.match(r'\s*\{\s*"content"\s*:\s*\[\s*', text)
+    if content:
+        block, _ = json.JSONDecoder().raw_decode(text, content.end())
+        if block.get("type") != "text":
+            raise ValueError("expected a view report before media")
+        return json.loads(block["text"])
+    report = json.loads(text)
+    if "content" in report:
+        return json.loads(report["content"][0]["text"])
+    return report
 
 
 def read_with_codex(work, options, model, recall, *, max_frames=None):
@@ -78,10 +93,7 @@ def read_with_codex(work, options, model, recall, *, max_frames=None):
             if item.get("tool") != "view" or finished:
                 raise ValueError("the reader made an unsuccessful or unexpected tool call")
             turn = item["arguments"]["turn"]
-            report = json.loads(item["result"]["content"][0]["text"])
-            # Some Codex CLI media results wrap the typed blocks in another JSON object.
-            if "content" in report:
-                report = json.loads(report["content"][0]["text"])
+            report = logged_view_report(item["result"]["content"][0]["text"])
             if report.get("status") == "end_of_view":
                 if report.get("last_turn") != len(turns) or turn != len(turns) + 1:
                     raise ValueError("the end marker did not match the released turns")

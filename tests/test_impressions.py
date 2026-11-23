@@ -8,10 +8,19 @@ import numpy as np
 
 from examples.check_first_impressions import compare, relative_separation
 from examples.check_soundtrack_pairs import compare_pairs
-from examples.watch_first_impression import read_with_codex
+from examples.watch_first_impression import logged_view_report, read_with_codex
 
 
 class CaptionComparisonTests(unittest.TestCase):
+    def test_reads_complete_text_before_truncated_logged_media(self):
+        report = {"turn": 1, "status": "view", "remark": "braces } and quotes \" in text"}
+        first = json.dumps({"type": "text", "text": json.dumps(report)})
+        partial = '{"content": [' + first + ', {"type": "image", "data": "abc'
+        self.assertEqual(logged_view_report(partial), report)
+        self.assertEqual(logged_view_report(json.dumps(report)), report)
+        with self.assertRaises(ValueError):
+            logged_view_report('{"content": [' + first[:-4])
+
     def test_human_reference_compares_same_minus_other_on_matched_films(self):
         # Different foreign-film similarities and identical retrieval ranks must not cancel the gap.
         rows = {"a": {"human": [.75, .25, 1], "reader": [.75, .125, 1]},

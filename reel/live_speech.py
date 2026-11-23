@@ -21,6 +21,8 @@ else:
     from asr import SR, speech_regions, speech_words, transcribe, word_tokens
 
 CONTEXT_SECONDS = 8
+LISTENING_PEAK = 10 ** (-3 / 20)
+MAX_LISTENING_GAIN = 100.0
 
 
 def voiced_gap(word, channel):
@@ -204,6 +206,10 @@ class LiveSpeech:
 
         channels = []
         divisor = math.gcd(SR, rate)
+        # One gain for all channels keeps the recorded balance intact. Limit the
+        # boost to 40 dB so arbitrarily small sample noise is never normalized.
+        peak = float(np.max(np.abs(samples), initial=0))
+        gain = LISTENING_PEAK / max(peak, LISTENING_PEAK / MAX_LISTENING_GAIN) if peak else 1.
         for i, channel in enumerate(samples.T):
             duplicate = next((c for c in channels if np.array_equal(channel, samples[:, c["channels"][0] - 1])), None)
             if duplicate is not None:
@@ -222,6 +228,16 @@ class LiveSpeech:
                 timed = [dict(w, t=max(start, start + w["t"]), e=min(end, start + w["e"])) for w in words]
                 timed = [w for w in timed if w["t"] < w["e"]]
             row = {"channels": [i + 1], "activity": activity, "words": timed}
+            if gain > 1 and np.any(signal):
+                # A gained pass can expose a faint voice. It never enters ASR
+                # or supplies anchors for the independent word check.
+                assisted = []
+                for a, b in speech_regions(signal * gain, pad_ms=0):
+                    begin, stop = start + a / SR, min(end, start + b / SR)
+                    if begin < stop and all(stop <= t or begin >= e for t, e in activity):
+                        assisted.append([begin, stop])
+                if assisted:
+                    row["voice_with_gain"] = {"gain_db": round(20 * math.log10(gain), 1), "activity": assisted}
             if activity and (gaps := outside_speech_activity(channel, rate, start, end, activity)):
                 row["outside_speech_activity"] = gaps
             if check_dir and timed:
@@ -235,6 +251,7 @@ class LiveSpeech:
                     row["_check"] = {"status": "unavailable"}
             matching = next((c for c in channels if "_check" not in row and "_check" not in c
                              and c["activity"] == activity and c["words"] == timed
+                             and c.get("voice_with_gain") == row.get("voice_with_gain")
                              and c.get("outside_speech_activity") == row.get("outside_speech_activity")), None)
             if matching is None:
                 channels.append(row)
@@ -275,6 +292,11 @@ class LiveSpeech:
             self.next_sample = first_sample + len(samples)
             self.rate = rate
         result = {"status": "available", "windows": windows}
+        if any("voice_with_gain" in c for w in windows for c in w.get("channels", ())):
+            result["voice_with_gain_basis"] = (
+                "The voice detector found possible speech at higher listening gain on these channels. "
+                "Intervals lie on the film clock. Background sounds may also trigger it. "
+                "No words were decoded from the amplified signal.")
         if any("outside_speech_activity" in c for w in windows for c in w.get("channels", ())):
             result["outside_speech_activity_basis"] = (
                 "Per-channel levels in the original recording, in gaps between estimated voice intervals. "

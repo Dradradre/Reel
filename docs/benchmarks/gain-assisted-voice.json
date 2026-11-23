@@ -1,0 +1,735 @@
+{
+  "method": "Same audio, same recorded-level Silero and Whisper settings. Compare both installed snapshots through the speech worker. Gain-assisted detection on the current snapshot shares a gain across channels with ceiling of +40 dB, targeting a -3 dBFS peak in each window. An amplified estimate is reported only if its unpadded interval is disjoint from all recorded-level voice intervals. No transcription is performed on amplified audio. Activity is counted once per excerpt when present on any channel. Word counts count timed words per reported channel group.",
+  "previous_film_report": "perception-agreement-continuous-sound.json",
+  "field_selection": "23 ten-second MACS recordings from different sites outside the previous listed MACS panels. Stratified across airports, parks, public squares and listener voice votes, with up to three per available stratum. Zero votes means no human marked one of the three speech tags.",
+  "controls": [
+    {
+      "id": "en_us1.audio -40",
+      "sha256": "eaededc03241e09525d54a42f25b677c50f35fe75354f040abaa572dd958b600",
+      "kind": "read_speech",
+      "peak_dbfs": -40,
+      "language": "en_us",
+      "source_sha256": "bfa2f3fb72a05cbcb7c0000a460435f2d0eedca7c5cc90f01aacc89127df7f63",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 15
+    },
+    {
+      "id": "en_us1.audio -60",
+      "sha256": "c5ad344b0fcc46e038324a7ad8edaaef195b9a251e6d4e1b62a8d5be8e2656dc",
+      "kind": "read_speech",
+      "peak_dbfs": -60,
+      "language": "en_us",
+      "source_sha256": "bfa2f3fb72a05cbcb7c0000a460435f2d0eedca7c5cc90f01aacc89127df7f63",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "es_4191.audio -40",
+      "sha256": "9fb45318d86a5d1391dbed95106d2c422a04c5d6cab6e52f1d0c890c062fb7a9",
+      "kind": "read_speech",
+      "peak_dbfs": -40,
+      "language": "es_419",
+      "source_sha256": "7df75e2c979b87c84c9d7dca23974c9f1ab8dc3d79a592f305cd1475f9cde8f6",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 17
+    },
+    {
+      "id": "es_4191.audio -60",
+      "sha256": "9d99381a18c10d3443cfadfe7a4cd04b57e977c6248af994c91d9cde8dc32222",
+      "kind": "read_speech",
+      "peak_dbfs": -60,
+      "language": "es_419",
+      "source_sha256": "7df75e2c979b87c84c9d7dca23974c9f1ab8dc3d79a592f305cd1475f9cde8f6",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 6
+    },
+    {
+      "id": "ko_kr1.audio -40",
+      "sha256": "3ca4405724b8d241dbcdda722eac0a1228157728be4aa09a14e5d4a8e33cb422",
+      "kind": "read_speech",
+      "peak_dbfs": -40,
+      "language": "ko_kr",
+      "source_sha256": "1a1cdbd21cf2c41cc7bc500bd7d8b93fad990b9c11fc87c9d5462014c0ed70e2",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 7
+    },
+    {
+      "id": "ko_kr1.audio -60",
+      "sha256": "fea35005abf4cb9dae276c9923ba7c24bd7eaf95e499da3da3980bd597bb347b",
+      "kind": "read_speech",
+      "peak_dbfs": -60,
+      "language": "ko_kr",
+      "source_sha256": "1a1cdbd21cf2c41cc7bc500bd7d8b93fad990b9c11fc87c9d5462014c0ed70e2",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "bn_in-1.wav -40",
+      "sha256": "ece107c9699cf7e81889a983c5e277cf4b2cfd83acd4a496988933630133d64e",
+      "kind": "read_speech",
+      "peak_dbfs": -40,
+      "language": "bn_in",
+      "source_sha256": "cc727ac884189f28cc069fc49d82a90f88cc001adf2482b9cc151b6e5aec0892",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 13
+    },
+    {
+      "id": "bn_in-1.wav -60",
+      "sha256": "6e933eb9d261df716e6efaada6c81621f11c8c6bf12cab369ed7c3c2d90166af",
+      "kind": "read_speech",
+      "peak_dbfs": -60,
+      "language": "bn_in",
+      "source_sha256": "cc727ac884189f28cc069fc49d82a90f88cc001adf2482b9cc151b6e5aec0892",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "hi_in-1.wav -40",
+      "sha256": "93bdb5ac4a8ae59ec34a7805d90c83b5201da67a7a33ec8760ea55e4e98871d7",
+      "kind": "read_speech",
+      "peak_dbfs": -40,
+      "language": "hi_in",
+      "source_sha256": "a8e30e9bf7c9e9ece854275692c8ca7d0a2e4045e09197220ce1bda41fc6fb09",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 21
+    },
+    {
+      "id": "hi_in-1.wav -60",
+      "sha256": "1a18d232245e80aa6891600dd1916ba4ce0ef226b394da729354679ee48ec33b",
+      "kind": "read_speech",
+      "peak_dbfs": -60,
+      "language": "hi_in",
+      "source_sha256": "a8e30e9bf7c9e9ece854275692c8ca7d0a2e4045e09197220ce1bda41fc6fb09",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "th_th-1.wav -40",
+      "sha256": "630d71c9c760fc93954e3d6168c46bf58f56d00e5b189186113e2a3b946323db",
+      "kind": "read_speech",
+      "peak_dbfs": -40,
+      "language": "th_th",
+      "source_sha256": "76bebbfbf7fa1a4701e281d18938d76221a5627d8dfa709b102ce45d9eff3c60",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 32
+    },
+    {
+      "id": "th_th-1.wav -60",
+      "sha256": "4bc17c7c52e320a01c3ffa64a1fc875c4d137bada73963769254d4a5790d673b",
+      "kind": "read_speech",
+      "peak_dbfs": -60,
+      "language": "th_th",
+      "source_sha256": "76bebbfbf7fa1a4701e281d18938d76221a5627d8dfa709b102ce45d9eff3c60",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "silenceNone",
+      "sha256": "36e41cd8b55ebf335857248d041e7b449d1b2366676e16369040ef46c2a27c75",
+      "kind": "silence",
+      "peak_dbfs": null,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "stationary_noise-40",
+      "sha256": "2e0f365dd6968214d96e0594d5c1e3522b6d0f6b24f76b779e5b2c4ed211931e",
+      "kind": "stationary_noise",
+      "peak_dbfs": -40,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "stationary_noise-60",
+      "sha256": "7c753e7f40148bdeaec9c4bb6d6e7e57fcb429b18b2c7808efa4a30d15a693fe",
+      "kind": "stationary_noise",
+      "peak_dbfs": -60,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "tone-40",
+      "sha256": "6329f98c86bd9fe03de8587be98b7409687944522993e641d43e1831c8e18c9e",
+      "kind": "tone",
+      "peak_dbfs": -40,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "tone-60",
+      "sha256": "ff9ef87d12bb27de154ad782f39e45d15589a7a289fc18be01533a6d6da172af",
+      "kind": "tone",
+      "peak_dbfs": -60,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "clicks-40",
+      "sha256": "8786187b3060c2b957b8d8db25355233c78c6b22ebe56f77e7624a9db2e2a45a",
+      "kind": "clicks",
+      "peak_dbfs": -40,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "clicks-60",
+      "sha256": "72c0cd925b53437d0ebec9596239ea574a1115e3e5be58b5e22c4677dc97f3c9",
+      "kind": "clicks",
+      "peak_dbfs": -60,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    }
+  ],
+  "films": [
+    {
+      "id": "video_5603",
+      "sha256": "14a810901e70eb9602287b0ed3666f1034d874739ced24a101e97b3947c5e2c2",
+      "panel": "agreement-nov23",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_8093",
+      "sha256": "d6672cebb2ab08bd22bd2877b54906c8227794cc831d37488c14e4c4c2d8862e",
+      "panel": "agreement-nov23",
+      "reference": " Human:Speech",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_9056",
+      "sha256": "a94a5c4168fca0c6f53bb3774d427aa7d6491d02ef4d159413b23e2cb778e486",
+      "panel": "agreement-nov23",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_2795",
+      "sha256": "16bb50a84b9390ba63ab6ab4b4f33f8221edda2029f3bee60fe55d53fd9fd11a",
+      "panel": "agreement-nov23",
+      "reference": " Human:Speech",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_8297",
+      "sha256": "2b7f7bd9ebcf361d787430e1704869baec6ea6e792befb56dd293dbac3b66372",
+      "panel": "agreement-nov23",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_4558",
+      "sha256": "f4cce206dd9b8682cbbffcb2634777f2b11d0d96913b1810fc6575742de6f7c3",
+      "panel": "agreement-nov23",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_5695",
+      "sha256": "5b001d166bd0adc36cef849266531137dcea5c701e34cc728679b178901ea7f2",
+      "panel": "agreement-nov23",
+      "reference": " Human:Speech",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_8910",
+      "sha256": "3fb07f2725045c3e0cd261fcdf2840e4631e1c1f182bba10bb9837d6847c2f4d",
+      "panel": "agreement-nov23",
+      "reference": " Human:Speech",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_7223",
+      "sha256": "81a835ef6c2ad0822dc250e9b1432868e4a1c698c0876483be81e61b6d09be0b",
+      "panel": "agreement-nov23",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_1219",
+      "sha256": "14ea22c0a2160bc9622319939def7a62f695bf14b3ac97536a77401181df6b2c",
+      "panel": "agreement-nov23",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_1775",
+      "sha256": "b60a8cd12a783b94d9d6298e0c7239cf74a4b5eb7bc5ead0cf57f0babc753f4f",
+      "panel": "event-view",
+      "reference": "Object:opening/closing of something",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_2134",
+      "sha256": "a1da0f6203661090639dea0e95e761d8077e86f29898adba7169fb481e7d80d6",
+      "panel": "event-view",
+      "reference": " Human:Speech",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_11193",
+      "sha256": "4e3d4e30e74d08fd9d26de7269a66936b2f3795fa963c5a297a9c18dff301c89",
+      "panel": "event-view",
+      "reference": " Human:Speech",
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_9705",
+      "sha256": "f52d309da613bf285fef815333ea60ace0a6078a8b87c46f7fcfdec69566d2c5",
+      "panel": "event-view",
+      "reference": "Human:Sound(clapping)",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_2291",
+      "sha256": "ff941b78542c8a5eb593e22691411d5c11753910c1a96cb302c682de3f7e5de5",
+      "panel": "event-view",
+      "reference": "Object:opening/closing of something",
+      "recorded_activity": true,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_2212",
+      "sha256": "7fa5398920952dc8cb0bf1222b957e8b88dac1132482a9ec1372a9dc19de0006",
+      "panel": "event-view",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_3228",
+      "sha256": "308f41f992e463af463107c5ccaac5ad3b931c1a19b9c6d91d732612a1e68a49",
+      "panel": "event-view",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_6694",
+      "sha256": "34d74ecb6a51e6c2092908f55dcb82290b531ae2a0f68a3a2e756789c53b9d8e",
+      "panel": "event-view",
+      "reference": " Human:Speech",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_282",
+      "sha256": "7153a81f72dd34043b9fb3ebef1c8ac7e29d3c5b4fc06a96d394c5a9ee888954",
+      "panel": "event-view",
+      "reference": "Interaction:dropping",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_11498",
+      "sha256": "b75da2e3682a4d7d7ef9584f3f17a52ef37740d1138500b92dde3cbc4b3ae503",
+      "panel": "event-view",
+      "reference": "Interaction:dropping",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_4253",
+      "sha256": "78d6c4c3bd818be07bf9392512b47eb31245fe2d2b1bf8422c65aaf1554e9e59",
+      "panel": "event-view",
+      "reference": " Human:Speech",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_2138",
+      "sha256": "831c3aada3083df6bdd7cb36e16c1e0320300170be7ffc39d4a511d679d41248",
+      "panel": "event-view",
+      "reference": "Human:Sound(clapping)",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_6226",
+      "sha256": "593ae7793eca822ab33de3953d15a60260a0590041e1acb84b79385a73da219f",
+      "panel": "event-view-6",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_1244",
+      "sha256": "cf0e0e32ea8ec3120d7b599b77931e3427bd210af8b05584b9fc1c28a44b0dec",
+      "panel": "event-view-6",
+      "reference": " Human:Speech",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 2
+    },
+    {
+      "id": "video_8408",
+      "sha256": "6f6bf336c38ece4ce6cfe137b0b090d5a3f0e511f1793a29466646e2c56ff4fb",
+      "panel": "event-view-6",
+      "reference": " Human:Speech",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 6
+    },
+    {
+      "id": "video_8110",
+      "sha256": "ed3bda3ec5564dc4aaabb6d68c7100fd6b6931c89eb27ab69e689bde4c708c40",
+      "panel": "event-view-6",
+      "reference": "Interaction:hitting",
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_9456",
+      "sha256": "0107b057fcb4f77738042a695c80cc5c9594f755a38caccb6d6151b5f23f7598",
+      "panel": "event-view-6",
+      "reference": " Human:Speech",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "video_6611",
+      "sha256": "2471b32136e3bcf41c90e7985f7ef331009598d4e710324cdac14c269dae00db",
+      "panel": "event-view-6",
+      "reference": " Human:Speech",
+      "recorded_activity": true,
+      "assisted_activity": false,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    }
+  ],
+  "field": [
+    {
+      "id": "public_square-lisbon-1211-44820-a.wav",
+      "sha256": "1c9a4e934798f4db36f05dc25f4389140a4fb65dbb20127e6c29cd77e3d8259e",
+      "votes_for_speech": 5,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-london-250-7485-a.wav",
+      "sha256": "64839b7cf9ff59a9ceb201a70ea8e3eda0c783dba19899ac9cd2e92613af6aed",
+      "votes_for_speech": 4,
+      "listeners": 4,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "airport-lyon-1095-42121-a.wav",
+      "sha256": "942ec13c0df250f2dc835a1ff9a918538558dab7328e5c15e893fad677729fc3",
+      "votes_for_speech": 5,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-barcelona-248-7416-a.wav",
+      "sha256": "492b5e95f95c9bfcded6cb2c90b56f8d0bc66854f5bbf4e075b7b2b237b91b07",
+      "votes_for_speech": 1,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "airport-barcelona-2-101-a.wav",
+      "sha256": "f699beef2e3390d53e956f4c2e15dfc725cf5615ee9d8aefa2900c94acd18b76",
+      "votes_for_speech": 4,
+      "listeners": 4,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "airport-prague-1023-41343-a.wav",
+      "sha256": "1a49ebe9640d21c196494128c8e8c3b43427005ec3d06b7acf1903e5a85938c8",
+      "votes_for_speech": 4,
+      "listeners": 4,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-stockholm-246-7349-a.wav",
+      "sha256": "a7b788fba6e3a6abcc47378721e4760273788df3842655714400761bf6ef6024",
+      "votes_for_speech": 0,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-prague-1152-40734-a.wav",
+      "sha256": "1d397a0b30310e5bfd7ef80cae49cd006c2a430ffc30a79f3b4e3c609576d972",
+      "votes_for_speech": 5,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-lisbon-1198-45301-a.wav",
+      "sha256": "de5b4753cb3a74b73df770e9499a7f737115aa7a1eebce082a69b7a823acacee",
+      "votes_for_speech": 3,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-lisbon-1057-42299-a.wav",
+      "sha256": "d6a9e08d16eb851318f1a8f0b1b0a1bac195ec3e5a166874b14854b226723bb7",
+      "votes_for_speech": 2,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-london-97-2731-a.wav",
+      "sha256": "39fc67d7daf6d2359f1760380df9964ce8a45f49f5e15a9f1c54e0f23396cbfd",
+      "votes_for_speech": 5,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-milan-1018-41490-a.wav",
+      "sha256": "7b9900ce7f64cf6d6403c8d15e68730a463725a95dc5ecb1428125dc68f29282",
+      "votes_for_speech": 5,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-helsinki-94-2615-a.wav",
+      "sha256": "264b436fc41fb7a8d36d33db22676eebe450e52674c727b529685bb3e240c9d2",
+      "votes_for_speech": 0,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-stockholm-101-2877-a.wav",
+      "sha256": "0c57be2bab04178606a0a8112342134ac02f8eaa4f1e3dca850dbff3c19ed0e8",
+      "votes_for_speech": 0,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-helsinki-249-7429-a.wav",
+      "sha256": "0d8e230e2e37a38a539c8cded2612f72b7e8c2e20eaec6f2566e82e7c49b8a63",
+      "votes_for_speech": 0,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-barcelona-241-7157-a.wav",
+      "sha256": "c2855cbeb8a4afaa20ffec33ba37bcb2b95e73c396932338cb8e3f501666f70d",
+      "votes_for_speech": 2,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "airport-vienna-14-596-a.wav",
+      "sha256": "5a553bb96bd442663fd04b6153fae632f8b744723850d23958089d881b691c78",
+      "votes_for_speech": 2,
+      "listeners": 4,
+      "recorded_activity": false,
+      "assisted_activity": true,
+      "recorded_or_assisted": true,
+      "timed_word_count": 0
+    },
+    {
+      "id": "park-helsinki-93-2598-a.wav",
+      "sha256": "9138f8b7f4aa5783175537b3d2cbf982b55d2d1962cee3e51731641b671be4e9",
+      "votes_for_speech": 1,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-lisbon-1116-41620-a.wav",
+      "sha256": "fdbc321c87e16646e1de747b1e9b7a3f74fa1dad8dbc347001cfec1f86729c2d",
+      "votes_for_speech": 0,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-milan-1168-44797-a.wav",
+      "sha256": "2df62105d16611ce1bf552b209c81e847dc6d554b36f5c685ebe28844fff5fde",
+      "votes_for_speech": 2,
+      "listeners": 4,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-paris-116-3409-a.wav",
+      "sha256": "18080ec74b8f203ae7d88f1c8dc53c527f236791080fe6dbf95635bfc1cc2860",
+      "votes_for_speech": 1,
+      "listeners": 4,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "airport-stockholm-12-481-a.wav",
+      "sha256": "160246b4ce5668d2bcb886f3c971a9149b266bc6e2108ebdb4c23cad7cfd8f0e",
+      "votes_for_speech": 1,
+      "listeners": 5,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    },
+    {
+      "id": "public_square-lyon-1024-42038-a.wav",
+      "sha256": "6faa7410b35170279bb5a6b139cb1762cd7322afcea412957de587783ad05f17",
+      "votes_for_speech": 0,
+      "listeners": 4,
+      "recorded_activity": false,
+      "assisted_activity": false,
+      "recorded_or_assisted": false,
+      "timed_word_count": 0
+    }
+  ]
+}

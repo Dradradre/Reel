@@ -91,11 +91,11 @@ def word_tokens(text):
     return [span for span in spans if any(char.isalnum() for char in span)]
 
 
-def speech_regions(y):
+def speech_regions(y, *, pad_ms=120):
     from faster_whisper.vad import get_speech_timestamps
     if not len(y):
         return []
-    regions = get_speech_timestamps(y, min_silence_duration_ms=350, speech_pad_ms=120)
+    regions = get_speech_timestamps(y, min_silence_duration_ms=350, speech_pad_ms=pad_ms)
     return [(int(r["start"]), int(r["end"])) for r in regions]
 
 

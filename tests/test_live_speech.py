@@ -17,6 +17,32 @@ from reel.play import play
 
 
 class LiveSpeechTests(unittest.TestCase):
+    def test_faint_voice_estimates_share_gain_and_never_supply_words(self):
+        rate = 16000
+        soft = np.full(rate, .001)
+        samples = np.column_stack((soft, soft, -soft, np.zeros(rate)))
+        reads = []
+        def detect(wave, *, pad_ms=120):
+            reads.append((round(float(wave[0]), 4), pad_ms))
+            return [(8000, rate)] if wave[0] > .08 else []
+        with patch("reel.live_speech.speech_regions", side_effect=detect), \
+             patch("reel.live_speech.transcribe") as recognize:
+            window = LiveSpeech().window(samples, rate, 2., 2.99999, "en")
+        self.assertEqual(reads, [(.001, 120), (.1, 0), (-.001, 120), (-.1, 0)])
+        self.assertEqual(window["channels"], [
+            {"channels": [1, 2], "activity": [], "words": [],
+             "voice_with_gain": {"gain_db": 40., "activity": [[2.5, 2.99999]]}},
+            {"channels": [3, 4], "activity": [], "words": []}])
+        recognize.assert_not_called()
+
+        # A loud channel limits gain on every channel, including a quiet
+        # channel with the opposite polarity. The original samples stay intact.
+        samples[:, 1] = -.9
+        with patch("reel.live_speech.speech_regions", side_effect=detect):
+            window = LiveSpeech().window(samples, rate, 2., 3., "en")
+        self.assertFalse(any("voice_with_gain" in c for c in window["channels"]))
+        np.testing.assert_array_equal(samples[:, 0], soft)
+
     def test_timed_agreement_uses_spelling_and_the_occurrence_on_the_clock(self):
         def word(text, start):
             return dict(w=text, t=start, e=start + .2, p=.9)

@@ -62,7 +62,7 @@ order, with nothing left out.
 
 ## Does it work?
 
-On a pilot of two prespecified items from each of the 12 OVO-Bench tasks, local GPT with Reel answered 17 of 24 visual prompts correctly. The official three-mode average on this subset was **69.44**. [Selection, timestamps, answers and scoring](docs/benchmarks/ovo-pilot.json)
+On all 644 OVO-Bench videos, local GPT with Reel answered 2,002/3,035 visual checkpoints correctly and scored **66.08** using the official three-mode average. Each question received up to 24 pictures displayed strictly before its timestamp. [Scores, human reference and reproduction](docs/benchmarks/ovo-full.json)
 
 On eight unfamiliar films, the first sentence from GPT with Reel reached 98.2% of human same-film description separation. Picture recall reached 95.0% and sound recall 56.9%. GPT received pictures, local sound descriptions and speech readings. [Per-film responses and uncertainty](docs/benchmarks/earlier-observations.json)
 

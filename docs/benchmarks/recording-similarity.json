@@ -1,0 +1,4631 @@
+{
+  "model": "gpt-6.1-terra in signed-in local Codex",
+  "revision": "f18ce4e7966a474f2c54178e9595dfd40f3d1366",
+  "previous": "e285e5b212d794aec1cf85cb84bd3e3fde3357c9",
+  "method": "Optional compare_heard similarity for previously released intervals up to 8 seconds. No text, image, event name or library of class exemplars enters the audio encoder. Each channel of each original excerpt is analyzed separately at 48 kHz with padding=pad. Cosines describe whole recordings, including ambience. Encoder-only decision below compares the arithmetic mean of all available cross-channel cosines with each candidate. A tie or unavailable side abstains. GPT can choose its own answers. No direct human similarity judgements were collected.",
+  "sources": {
+    "encoder": "https://huggingface.co/laion/clap-htsat-unfused",
+    "environmental_labels": "https://github.com/karolpiczak/ESC-50",
+    "filmed_event_annotations": "https://github.com/google-deepmind/perception_test"
+  },
+  "environmental": {
+    "selection": "50 ESC-50 categories from the existing local archive. Sort within each of the five official supercategories using SHA256(salt reel-auditory-reference-01/). Pair neighbouring categories. For each category select one five-second example and another from a distinct source file and fold. Each of 25 pairs has two target arms. Compare with the original WAVs. For the reader, concatenate A, B and X at their recorded levels and stop at 15 s, one anonymous recording per session. Six pairs selected by hash before any response. Both arms have different target recordings; no target repeats either reference. Labels specify category agreement, not a human listener’s preference.",
+    "encoder": {
+      "correct": 50,
+      "wrong": 0,
+      "unclear": 0
+    },
+    "reader": {
+      "before": {
+        "correct": 4,
+        "wrong": 0,
+        "unclear": 8
+      },
+      "measured": {
+        "correct": 10,
+        "wrong": 0,
+        "unclear": 2
+      }
+    },
+    "both_target_arms_correct": {
+      "before": 2,
+      "measured": 4
+    },
+    "by_arm": [
+      {
+        "pair": 0,
+        "reference_a": "5-198891-B-8.wav",
+        "reference_b": "1-100032-A-0.wav",
+        "target": "2-196688-A-8.wav",
+        "categories": [
+          "sheep",
+          "dog",
+          "sheep"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7657
+            ]
+          ],
+          [
+            [
+              0.0239
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 0,
+        "reference_a": "5-198891-B-8.wav",
+        "reference_b": "1-100032-A-0.wav",
+        "target": "2-118964-A-0.wav",
+        "categories": [
+          "sheep",
+          "dog",
+          "dog"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.1255
+            ]
+          ],
+          [
+            [
+              0.7507
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 1,
+        "reference_a": "4-164021-A-1.wav",
+        "reference_b": "5-263831-A-6.wav",
+        "target": "3-107219-A-1.wav",
+        "categories": [
+          "rooster",
+          "hen",
+          "rooster"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.8637
+            ]
+          ],
+          [
+            [
+              0.772
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 1,
+        "reference_a": "4-164021-A-1.wav",
+        "reference_b": "5-263831-A-6.wav",
+        "target": "1-18074-B-6.wav",
+        "categories": [
+          "rooster",
+          "hen",
+          "hen"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.7939
+            ]
+          ],
+          [
+            [
+              0.8651
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 2,
+        "reference_a": "4-181955-A-3.wav",
+        "reference_b": "4-120160-A-5.wav",
+        "target": "5-194899-C-3.wav",
+        "categories": [
+          "cow",
+          "cat",
+          "cow"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7749
+            ]
+          ],
+          [
+            [
+              0.4121
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 2,
+        "reference_a": "4-181955-A-3.wav",
+        "reference_b": "4-120160-A-5.wav",
+        "target": "3-95698-A-5.wav",
+        "categories": [
+          "cow",
+          "cat",
+          "cat"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2052
+            ]
+          ],
+          [
+            [
+              0.8563
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 3,
+        "reference_a": "4-173865-B-9.wav",
+        "reference_b": "5-156026-C-4.wav",
+        "target": "5-261325-A-9.wav",
+        "categories": [
+          "crow",
+          "frog",
+          "crow"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.8696
+            ]
+          ],
+          [
+            [
+              0.3077
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not reliably distinguish which earlier sound matches X.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "The audio similarity comparison indicates A is closer to X.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 3,
+        "reference_a": "4-173865-B-9.wav",
+        "reference_b": "5-156026-C-4.wav",
+        "target": "4-154793-A-4.wav",
+        "categories": [
+          "crow",
+          "frog",
+          "frog"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.1678
+            ]
+          ],
+          [
+            [
+              0.6745
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available sound measurements do not reliably distinguish which earlier sound matches X.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B has a much higher audio similarity score with X.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 4,
+        "reference_a": "4-132383-B-2.wav",
+        "reference_b": "1-17585-A-7.wav",
+        "target": "5-103420-A-2.wav",
+        "categories": [
+          "pig",
+          "insects",
+          "pig"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.2664
+            ]
+          ],
+          [
+            [
+              -0.0156
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 4,
+        "reference_a": "4-132383-B-2.wav",
+        "reference_b": "1-17585-A-7.wav",
+        "target": "4-143118-A-7.wav",
+        "categories": [
+          "pig",
+          "insects",
+          "insects"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              -0.018
+            ]
+          ],
+          [
+            [
+              0.7824
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 5,
+        "reference_a": "5-242491-A-14.wav",
+        "reference_b": "5-205589-A-17.wav",
+        "target": "4-187769-A-14.wav",
+        "categories": [
+          "chirping_birds",
+          "pouring_water",
+          "chirping_birds"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7178
+            ]
+          ],
+          [
+            [
+              0.1081
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 5,
+        "reference_a": "5-242491-A-14.wav",
+        "reference_b": "5-205589-A-17.wav",
+        "target": "4-186693-A-17.wav",
+        "categories": [
+          "chirping_birds",
+          "pouring_water",
+          "pouring_water"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.151
+            ]
+          ],
+          [
+            [
+              0.9022
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 6,
+        "reference_a": "3-103051-B-19.wav",
+        "reference_b": "2-124564-A-15.wav",
+        "target": "4-125070-A-19.wav",
+        "categories": [
+          "thunderstorm",
+          "water_drops",
+          "thunderstorm"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7824
+            ]
+          ],
+          [
+            [
+              0.1113
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 6,
+        "reference_a": "3-103051-B-19.wav",
+        "reference_b": "2-124564-A-15.wav",
+        "target": "5-254832-B-15.wav",
+        "categories": [
+          "thunderstorm",
+          "water_drops",
+          "water_drops"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.1476
+            ]
+          ],
+          [
+            [
+              0.5355
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 7,
+        "reference_a": "5-181766-A-10.wav",
+        "reference_b": "4-163697-A-13.wav",
+        "target": "4-160999-A-10.wav",
+        "categories": [
+          "rain",
+          "crickets",
+          "rain"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6047
+            ]
+          ],
+          [
+            [
+              0.1187
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 7,
+        "reference_a": "5-181766-A-10.wav",
+        "reference_b": "4-163697-A-13.wav",
+        "target": "5-215179-A-13.wav",
+        "categories": [
+          "rain",
+          "crickets",
+          "crickets"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2948
+            ]
+          ],
+          [
+            [
+              0.582
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 8,
+        "reference_a": "2-109371-A-16.wav",
+        "reference_b": "3-104632-A-12.wav",
+        "target": "4-144083-B-16.wav",
+        "categories": [
+          "wind",
+          "crackling_fire",
+          "wind"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.5747
+            ]
+          ],
+          [
+            [
+              0.0209
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 8,
+        "reference_a": "2-109371-A-16.wav",
+        "reference_b": "3-104632-A-12.wav",
+        "target": "5-189212-A-12.wav",
+        "categories": [
+          "wind",
+          "crackling_fire",
+          "crackling_fire"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2821
+            ]
+          ],
+          [
+            [
+              0.4547
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 9,
+        "reference_a": "5-177034-A-18.wav",
+        "reference_b": "5-200461-A-11.wav",
+        "target": "4-126532-A-18.wav",
+        "categories": [
+          "toilet_flush",
+          "sea_waves",
+          "toilet_flush"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.8654
+            ]
+          ],
+          [
+            [
+              0.2367
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 9,
+        "reference_a": "5-177034-A-18.wav",
+        "reference_b": "5-200461-A-11.wav",
+        "target": "4-195497-A-11.wav",
+        "categories": [
+          "toilet_flush",
+          "sea_waves",
+          "sea_waves"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.3211
+            ]
+          ],
+          [
+            [
+              0.764
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 10,
+        "reference_a": "5-220939-A-27.wav",
+        "reference_b": "4-183882-B-28.wav",
+        "target": "4-144468-B-27.wav",
+        "categories": [
+          "brushing_teeth",
+          "snoring",
+          "brushing_teeth"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.4062
+            ]
+          ],
+          [
+            [
+              0.2932
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "before": {
+          "choice": "A",
+          "reason": "A and X show similar repeated broadband pulses in their spectra.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A and X have similar repeating, pulsed sound patterns.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 10,
+        "reference_a": "5-220939-A-27.wav",
+        "reference_b": "4-183882-B-28.wav",
+        "target": "5-216368-A-28.wav",
+        "categories": [
+          "brushing_teeth",
+          "snoring",
+          "snoring"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2394
+            ]
+          ],
+          [
+            [
+              0.7675
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "before": {
+          "choice": "B",
+          "reason": "B and X have a similarly sustained, low-frequency sound.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B and X have more similar low-frequency sound patterns.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 11,
+        "reference_a": "2-66205-A-23.wav",
+        "reference_b": "4-185575-A-20.wav",
+        "target": "5-233260-A-23.wav",
+        "categories": [
+          "breathing",
+          "crying_baby",
+          "breathing"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.5413
+            ]
+          ],
+          [
+            [
+              0.4422
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 11,
+        "reference_a": "2-66205-A-23.wav",
+        "reference_b": "4-185575-A-20.wav",
+        "target": "1-60997-A-20.wav",
+        "categories": [
+          "breathing",
+          "crying_baby",
+          "crying_baby"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2388
+            ]
+          ],
+          [
+            [
+              0.7521
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 12,
+        "reference_a": "5-263490-A-25.wav",
+        "reference_b": "4-189838-A-22.wav",
+        "target": "4-117630-A-25.wav",
+        "categories": [
+          "footsteps",
+          "clapping",
+          "footsteps"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6554
+            ]
+          ],
+          [
+            [
+              0.1772
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available sound measurements do not distinguish which earlier sound is more similar to X.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The second similarity result was unavailable, so I cannot reliably compare A and B.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 12,
+        "reference_a": "5-263490-A-25.wav",
+        "reference_b": "4-189838-A-22.wav",
+        "target": "5-262957-A-22.wav",
+        "categories": [
+          "footsteps",
+          "clapping",
+          "clapping"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2828
+            ]
+          ],
+          [
+            [
+              0.7872
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not reliably distinguish the sound types.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B has a much higher audio similarity to X than A.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 13,
+        "reference_a": "4-156843-A-21.wav",
+        "reference_b": "4-188595-A-29.wav",
+        "target": "2-109505-A-21.wav",
+        "categories": [
+          "sneezing",
+          "drinking_sipping",
+          "sneezing"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7331
+            ]
+          ],
+          [
+            [
+              0.4352
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 13,
+        "reference_a": "4-156843-A-21.wav",
+        "reference_b": "4-188595-A-29.wav",
+        "target": "5-207836-B-29.wav",
+        "categories": [
+          "sneezing",
+          "drinking_sipping",
+          "drinking_sipping"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.3716
+            ]
+          ],
+          [
+            [
+              0.6833
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 14,
+        "reference_a": "1-36164-B-26.wav",
+        "reference_b": "4-177835-A-24.wav",
+        "target": "5-253534-A-26.wav",
+        "categories": [
+          "laughing",
+          "coughing",
+          "laughing"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6999
+            ]
+          ],
+          [
+            [
+              0.1155
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not distinguish the sound types reliably.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A has a stronger overall sound similarity to X.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 14,
+        "reference_a": "1-36164-B-26.wav",
+        "reference_b": "4-177835-A-24.wav",
+        "target": "2-108017-A-24.wav",
+        "categories": [
+          "laughing",
+          "coughing",
+          "coughing"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.4016
+            ]
+          ],
+          [
+            [
+              0.8163
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available measurements do not distinguish which earlier sound is more similar to X.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The available comparison results do not distinguish A from B.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 15,
+        "reference_a": "5-141683-A-35.wav",
+        "reference_b": "4-177243-A-32.wav",
+        "target": "4-218199-C-35.wav",
+        "categories": [
+          "washing_machine",
+          "keyboard_typing",
+          "washing_machine"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7021
+            ]
+          ],
+          [
+            [
+              0.0297
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 15,
+        "reference_a": "5-141683-A-35.wav",
+        "reference_b": "4-177243-A-32.wav",
+        "target": "2-104168-A-32.wav",
+        "categories": [
+          "washing_machine",
+          "keyboard_typing",
+          "keyboard_typing"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.1712
+            ]
+          ],
+          [
+            [
+              0.8077
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 16,
+        "reference_a": "4-172366-A-37.wav",
+        "reference_b": "5-221528-A-39.wav",
+        "target": "2-78562-B-37.wav",
+        "categories": [
+          "clock_alarm",
+          "glass_breaking",
+          "clock_alarm"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6694
+            ]
+          ],
+          [
+            [
+              -0.0142
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 16,
+        "reference_a": "4-172366-A-37.wav",
+        "reference_b": "5-221528-A-39.wav",
+        "target": "4-212698-A-39.wav",
+        "categories": [
+          "clock_alarm",
+          "glass_breaking",
+          "glass_breaking"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              -0.0449
+            ]
+          ],
+          [
+            [
+              0.7578
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 17,
+        "reference_a": "5-188365-A-36.wav",
+        "reference_b": "5-191497-A-33.wav",
+        "target": "4-172736-A-36.wav",
+        "categories": [
+          "vacuum_cleaner",
+          "door_wood_creaks",
+          "vacuum_cleaner"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6041
+            ]
+          ],
+          [
+            [
+              0.0243
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 17,
+        "reference_a": "5-188365-A-36.wav",
+        "reference_b": "5-191497-A-33.wav",
+        "target": "3-94355-A-33.wav",
+        "categories": [
+          "vacuum_cleaner",
+          "door_wood_creaks",
+          "door_wood_creaks"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              -0.0655
+            ]
+          ],
+          [
+            [
+              0.8715
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 18,
+        "reference_a": "2-81190-A-34.wav",
+        "reference_b": "3-143933-A-38.wav",
+        "target": "5-237795-A-34.wav",
+        "categories": [
+          "can_opening",
+          "clock_tick",
+          "can_opening"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6492
+            ]
+          ],
+          [
+            [
+              0.0989
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 18,
+        "reference_a": "2-81190-A-34.wav",
+        "reference_b": "3-143933-A-38.wav",
+        "target": "4-175945-A-38.wav",
+        "categories": [
+          "can_opening",
+          "clock_tick",
+          "clock_tick"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2022
+            ]
+          ],
+          [
+            [
+              0.6466
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 19,
+        "reference_a": "5-244651-A-31.wav",
+        "reference_b": "2-140841-A-30.wav",
+        "target": "1-97793-A-31.wav",
+        "categories": [
+          "mouse_click",
+          "door_wood_knock",
+          "mouse_click"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7256
+            ]
+          ],
+          [
+            [
+              0.082
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 19,
+        "reference_a": "5-244651-A-31.wav",
+        "reference_b": "2-140841-A-30.wav",
+        "target": "4-188878-A-30.wav",
+        "categories": [
+          "mouse_click",
+          "door_wood_knock",
+          "door_wood_knock"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2131
+            ]
+          ],
+          [
+            [
+              0.8182
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 20,
+        "reference_a": "4-157611-A-41.wav",
+        "reference_b": "5-251963-A-47.wav",
+        "target": "1-116765-A-41.wav",
+        "categories": [
+          "chainsaw",
+          "airplane",
+          "chainsaw"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6883
+            ]
+          ],
+          [
+            [
+              0.2725
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available sound measurements do not reliably distinguish which earlier sound matches X.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A has a much higher audio similarity score to X than B does.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 20,
+        "reference_a": "4-157611-A-41.wav",
+        "reference_b": "5-251963-A-47.wav",
+        "target": "4-161099-A-47.wav",
+        "categories": [
+          "chainsaw",
+          "airplane",
+          "airplane"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.4179
+            ]
+          ],
+          [
+            [
+              0.7263
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not reliably distinguish which earlier sound is more similar.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B has a more similar frequency profile to X.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 21,
+        "reference_a": "5-253094-A-49.wav",
+        "reference_b": "4-186935-A-44.wav",
+        "target": "4-102844-B-49.wav",
+        "categories": [
+          "hand_saw",
+          "engine",
+          "hand_saw"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.9187
+            ]
+          ],
+          [
+            [
+              0.1917
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "before": {
+          "choice": "A",
+          "reason": "A and X share a repeating pulsed pattern; B is more continuous.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A and X have closely matching repeating sound patterns and high audio similarity.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 21,
+        "reference_a": "5-253094-A-49.wav",
+        "reference_b": "4-186935-A-44.wav",
+        "target": "3-119455-A-44.wav",
+        "categories": [
+          "hand_saw",
+          "engine",
+          "engine"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.2775
+            ]
+          ],
+          [
+            [
+              0.5976
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "before": {
+          "choice": "B",
+          "reason": "B and X have a similarly steady sound, while A is more distinctly pulsed.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B has a substantially higher audio similarity to X.",
+          "turns": 2
+        }
+      },
+      {
+        "pair": 22,
+        "reference_a": "4-178881-A-45.wav",
+        "reference_b": "4-119648-A-48.wav",
+        "target": "5-197118-A-45.wav",
+        "categories": [
+          "train",
+          "fireworks",
+          "train"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.8591
+            ]
+          ],
+          [
+            [
+              0.3504
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 22,
+        "reference_a": "4-178881-A-45.wav",
+        "reference_b": "4-119648-A-48.wav",
+        "target": "5-160614-G-48.wav",
+        "categories": [
+          "train",
+          "fireworks",
+          "fireworks"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.177
+            ]
+          ],
+          [
+            [
+              0.7824
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 23,
+        "reference_a": "4-175000-A-40.wav",
+        "reference_b": "5-184323-A-42.wav",
+        "target": "5-220955-A-40.wav",
+        "categories": [
+          "helicopter",
+          "siren",
+          "helicopter"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.4047
+            ]
+          ],
+          [
+            [
+              0.3868
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 23,
+        "reference_a": "4-175000-A-40.wav",
+        "reference_b": "5-184323-A-42.wav",
+        "target": "2-70052-A-42.wav",
+        "categories": [
+          "helicopter",
+          "siren",
+          "siren"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.1027
+            ]
+          ],
+          [
+            [
+              0.6611
+            ]
+          ]
+        ],
+        "encoder": "B"
+      },
+      {
+        "pair": 24,
+        "reference_a": "5-179866-A-43.wav",
+        "reference_b": "1-21421-A-46.wav",
+        "target": "4-176638-A-43.wav",
+        "categories": [
+          "car_horn",
+          "church_bells",
+          "car_horn"
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7853
+            ]
+          ],
+          [
+            [
+              0.2142
+            ]
+          ]
+        ],
+        "encoder": "A"
+      },
+      {
+        "pair": 24,
+        "reference_a": "5-179866-A-43.wav",
+        "reference_b": "1-21421-A-46.wav",
+        "target": "4-125825-B-46.wav",
+        "categories": [
+          "car_horn",
+          "church_bells",
+          "church_bells"
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.1451
+            ]
+          ],
+          [
+            [
+              0.7837
+            ]
+          ]
+        ],
+        "encoder": "B"
+      }
+    ]
+  },
+  "natural": {
+    "selection": "24 unmodified locally available Perception Test validation films outside the 44-film audiovisual agreement panel. Distinct films, category-balanced by cycling eligible target labels using the same fixed hash salt before inference. Two non-overlapping earlier sound events and a later X, each between 0.3 and 8 s, mutually separated by 0.1 s with no concurrent event of another class within each excerpt. Exclude generic/muted labels. A or B shares its published sound category with X. The order of A/B is hashed; X is always last. These are naturally occurring events within one staged film and may share production conditions or room noise. No claim of instance, speaker or source identity.",
+    "encoder_and_controls": {
+      "encoder": {
+        "correct": 18,
+        "wrong": 6,
+        "unclear": 0
+      },
+      "duration_only": {
+        "correct": 15,
+        "wrong": 9,
+        "unclear": 0
+      },
+      "rms_only": {
+        "correct": 13,
+        "wrong": 11,
+        "unclear": 0
+      },
+      "stationary_noise": {
+        "correct": 13,
+        "wrong": 11,
+        "unclear": 0
+      }
+    },
+    "controls_method": "Compare absolute clip length difference alone or original pooled RMS difference alone. Noise control replaces each waveform by the same stationary Gaussian noise prefix per film, with its original duration and RMS on each channel. Scores use the real audio encoder.",
+    "specified_comparisons": {
+      "before": {
+        "correct": 3,
+        "wrong": 2,
+        "unclear": 7
+      },
+      "measured": {
+        "correct": 6,
+        "wrong": 3,
+        "unclear": 3
+      }
+    },
+    "reader_choice": {
+      "before": {
+        "correct": 4,
+        "wrong": 1,
+        "unclear": 7
+      },
+      "measured": {
+        "correct": 8,
+        "wrong": 3,
+        "unclear": 1
+      }
+    },
+    "reader_choice_used_similarity": {
+      "before": 0,
+      "measured": 10
+    },
+    "by_film": [
+      {
+        "video_id": "video_7991",
+        "sha256": "628c250b834373a2c07558e7a96d16dbb329151ac0e966fa765de35143b794d6",
+        "events": [
+          {
+            "event_id": 14,
+            "label": "Interaction:hitting",
+            "interval": [
+              19.573505,
+              20.452454
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 0,
+            "label": "Human:Speech",
+            "interval": [
+              0.0,
+              2.434011
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 7,
+            "label": "Human:Speech",
+            "interval": [
+              28.734852,
+              30.256109
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.5713,
+              0.5713
+            ],
+            [
+              0.5713,
+              0.5713
+            ]
+          ],
+          [
+            [
+              0.5446,
+              0.5446
+            ],
+            [
+              0.5446,
+              0.5446
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9819,
+            0.977
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "B",
+          "reason": "B and X both lack the clear pitched pattern present in A.",
+          "turns": 4
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A has the higher audio similarity score to X.",
+          "turns": 4
+        },
+        "live_cosines": [
+          [
+            [
+              0.5713,
+              0.5713
+            ],
+            [
+              0.5713,
+              0.5713
+            ]
+          ],
+          [
+            [
+              0.5446,
+              0.5446
+            ],
+            [
+              0.5446,
+              0.5446
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_4046",
+        "sha256": "86a0487467faeaaf924f3a0201bd019b1846f8b67d2a80911ec5849a24db7f41",
+        "events": [
+          {
+            "event_id": 2,
+            "label": "Interaction:hitting",
+            "interval": [
+              2.366074,
+              2.732649
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 3,
+            "label": "Animal:sound",
+            "interval": [
+              3.332499,
+              3.932349
+            ],
+            "visible": 0
+          },
+          {
+            "event_id": 12,
+            "label": "Animal:sound",
+            "interval": [
+              11.463797,
+              12.296922
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.6949,
+              0.7363
+            ],
+            [
+              0.7189,
+              0.7904
+            ]
+          ],
+          [
+            [
+              0.7765,
+              0.8422
+            ],
+            [
+              0.7949,
+              0.8628
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9722500000000001,
+            0.93485
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "A",
+          "reason": "X resembles the cup contact sound at A.",
+          "turns": 2
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B has the higher audio similarity to X across the recorded channels.",
+          "turns": 2
+        },
+        "live_cosines": [
+          [
+            [
+              0.6949,
+              0.7363
+            ],
+            [
+              0.7189,
+              0.7904
+            ]
+          ],
+          [
+            [
+              0.7765,
+              0.8422
+            ],
+            [
+              0.7949,
+              0.8628
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_3826",
+        "sha256": "6d10760d6f879a19e059fb619a1174ab53737de2d2114552c76c356de5490610",
+        "events": [
+          {
+            "event_id": 12,
+            "label": "Human:Sound(clapping)",
+            "interval": [
+              3.567617,
+              4.06775
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 19,
+            "label": "Interaction:hitting",
+            "interval": [
+              13.970387,
+              14.270466
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 6,
+            "label": "Human:Sound(clapping)",
+            "interval": [
+              16.971186,
+              19.538536
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6879,
+              0.6741
+            ],
+            [
+              0.7077,
+              0.7013
+            ]
+          ],
+          [
+            [
+              0.5113,
+              0.499
+            ],
+            [
+              0.5304,
+              0.5535
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.92095,
+            0.828375
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "A",
+          "reason": "Both A and X coincide with repeated hand claps.",
+          "turns": 3
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A and X both coincide with repeated hand claps.",
+          "turns": 3
+        },
+        "live_cosines": [
+          [
+            [
+              0.6879,
+              0.6741
+            ],
+            [
+              0.7077,
+              0.7013
+            ]
+          ],
+          [
+            [
+              0.5113,
+              0.499
+            ],
+            [
+              0.5304,
+              0.5535
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_2481",
+        "sha256": "d42b3adaa629c61884357f784b35bb0cd15d87f319511eb0fdf0fb7501782ea6",
+        "events": [
+          {
+            "event_id": 10,
+            "label": "Interaction:hitting",
+            "interval": [
+              16.9,
+              17.5
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 13,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              21.433333,
+              21.866667
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 15,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              24.633333,
+              25.166667
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.7345,
+              0.7345
+            ],
+            [
+              0.7345,
+              0.7345
+            ]
+          ],
+          [
+            [
+              0.7793,
+              0.7793
+            ],
+            [
+              0.7793,
+              0.7793
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "B",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.8989,
+            0.9637
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available comparison does not establish which earlier sound is more similar to X.",
+          "turns": 4
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The available comparison does not establish which earlier sound is closer.",
+          "turns": 4
+        },
+        "live_cosines": [
+          [
+            [
+              0.7345,
+              0.7345
+            ],
+            [
+              0.7345,
+              0.7345
+            ]
+          ],
+          [
+            [
+              0.7793,
+              0.7793
+            ],
+            [
+              0.7793,
+              0.7793
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_10624",
+        "sha256": "625c54407a79f75f66507d1b46afdd9ca2507a4f376c94553e368b37d3de6cb4",
+        "events": [
+          {
+            "event_id": 1,
+            "label": "Interaction:dropping",
+            "interval": [
+              4.699385,
+              5.132661
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 4,
+            "label": "Interaction:hitting",
+            "interval": [
+              11.165205,
+              11.731798
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 6,
+            "label": "Interaction:dropping",
+            "interval": [
+              17.830999,
+              18.76421
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6311,
+              0.6174
+            ],
+            [
+              0.6408,
+              0.6244
+            ]
+          ],
+          [
+            [
+              0.6465,
+              0.6774
+            ],
+            [
+              0.6667,
+              0.6641
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.87495,
+            0.96735
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "B",
+          "reason": "B and X have a similar sustained, broad impact and rustling sound.",
+          "turns": 3
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B has higher audio similarity scores with X.",
+          "turns": 3
+        },
+        "live_cosines": [
+          [
+            [
+              0.6311,
+              0.6174
+            ],
+            [
+              0.6408,
+              0.6244
+            ]
+          ],
+          [
+            [
+              0.6465,
+              0.6774
+            ],
+            [
+              0.6667,
+              0.6641
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_3618",
+        "sha256": "2edb5c8a5f03a3e953665352b2d58ff3a425e1efe7595b9c08a98a56289ada50",
+        "events": [
+          {
+            "event_id": 2,
+            "label": "Interaction:rolling",
+            "interval": [
+              8.527747,
+              8.960797
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 3,
+            "label": "Interaction:hitting",
+            "interval": [
+              11.858899,
+              12.291948
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 5,
+            "label": "Interaction:rolling",
+            "interval": [
+              17.488544,
+              18.021529
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.9276,
+              0.8822
+            ],
+            [
+              0.9111,
+              0.9086
+            ]
+          ],
+          [
+            [
+              0.8476,
+              0.8019
+            ],
+            [
+              0.8822,
+              0.8765
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "B",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.97595,
+            0.97305
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available comparison does not distinguish the sounds reliably.",
+          "turns": 3
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A has higher audio similarity to X across the recorded channels.",
+          "turns": 3
+        },
+        "live_cosines": [
+          [
+            [
+              0.9276,
+              0.8822
+            ],
+            [
+              0.9111,
+              0.9086
+            ]
+          ],
+          [
+            [
+              0.8476,
+              0.8019
+            ],
+            [
+              0.8822,
+              0.8765
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_2605",
+        "sha256": "e6650be277af1970633d93290064b6f75d9c45287bc7d9c2504da1579b755797",
+        "events": [
+          {
+            "event_id": 4,
+            "label": "Interaction:dropping",
+            "interval": [
+              4.796838,
+              5.337326
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 9,
+            "label": "Interaction:hitting",
+            "interval": [
+              10.573311,
+              14.086488
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 18,
+            "label": "Interaction:hitting",
+            "interval": [
+              28.544561,
+              28.848586
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.7946
+            ]
+          ],
+          [
+            [
+              0.6173
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "B",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9715,
+            0.8931
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available measurements do not distinguish which earlier sound is more similar.",
+          "turns": 4
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A has the higher audio similarity to X.",
+          "turns": 4
+        },
+        "live_cosines": [
+          [
+            [
+              0.7946
+            ]
+          ],
+          [
+            [
+              0.6173
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_4633",
+        "sha256": "9ebc19f29520c848920472dd9cbaaf8496fa04bbe45f2e8b9cdb4441b53583a7",
+        "events": [
+          {
+            "event_id": 3,
+            "label": "Interaction: fluid",
+            "interval": [
+              11.300591,
+              16.034172
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 4,
+            "label": "Interaction:hitting",
+            "interval": [
+              18.867654,
+              19.30101
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 5,
+            "label": "Interaction: fluid",
+            "interval": [
+              23.134544,
+              24.801298
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.8377,
+              0.8377
+            ],
+            [
+              0.8377,
+              0.8377
+            ]
+          ],
+          [
+            [
+              0.5005,
+              0.5005
+            ],
+            [
+              0.5005,
+              0.5005
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.9241,
+            0.9527
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "A",
+          "reason": "Both A and X accompany water being poured into a glass.",
+          "turns": 4
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A has a much higher audio similarity score to X.",
+          "turns": 4
+        },
+        "live_cosines": [
+          [
+            [
+              0.8377,
+              0.8377
+            ],
+            [
+              0.8377,
+              0.8377
+            ]
+          ],
+          [
+            [
+              0.5005,
+              0.5005
+            ],
+            [
+              0.5005,
+              0.5005
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_1857",
+        "sha256": "a248f89668e672d41be95bdd7d068b9a63d4217be8a881912190bd30cc6e9d88",
+        "events": [
+          {
+            "event_id": 19,
+            "label": "Animal:sound",
+            "interval": [
+              22.421373,
+              22.788937
+            ],
+            "visible": 0
+          },
+          {
+            "event_id": 15,
+            "label": "Interaction:hitting",
+            "interval": [
+              23.657723,
+              24.192361
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 20,
+            "label": "Animal:sound",
+            "interval": [
+              26.564816,
+              30.073377
+            ],
+            "visible": 0
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.8671,
+              0.8671
+            ],
+            [
+              0.8671,
+              0.8671
+            ]
+          ],
+          [
+            [
+              0.4764,
+              0.4764
+            ],
+            [
+              0.4764,
+              0.4764
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.819,
+            0.888
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available comparison does not distinguish the sounds reliably.",
+          "turns": 4
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "A has a much higher measured audio similarity to X.",
+          "turns": 4
+        },
+        "live_cosines": [
+          [
+            [
+              0.8671,
+              0.8671
+            ],
+            [
+              0.8671,
+              0.8671
+            ]
+          ],
+          [
+            [
+              0.4764,
+              0.4764
+            ],
+            [
+              0.4764,
+              0.4764
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_8639",
+        "sha256": "a5e4ba0fcc97a0f5e7aeec888880c07cd1204eae67e46585af40801fc4194a3e",
+        "events": [
+          {
+            "event_id": 4,
+            "label": "Interaction:dropping",
+            "interval": [
+              8.117586,
+              8.683156
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 8,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              15.935753,
+              16.401516
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 10,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              21.092416,
+              21.52491
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.6491
+            ]
+          ],
+          [
+            [
+              0.7613
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.8494,
+            0.9681
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available measurements do not distinguish the sound reliably.",
+          "turns": 3
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "B contains a distinct sound, while A is mostly very quiet background noise.",
+          "turns": 3
+        },
+        "live_cosines": [
+          [
+            [
+              0.6491
+            ]
+          ],
+          [
+            [
+              0.7613
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_10309",
+        "sha256": "6ff886798e99ca493d28efae0d7fbf07ebe1f7ab15a5524e11377e9de72fdc5d",
+        "events": [
+          {
+            "event_id": 5,
+            "label": "Interaction:dropping",
+            "interval": [
+              15.464882,
+              16.066109
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 4,
+            "label": "Interaction:hitting",
+            "interval": [
+              9.953639,
+              12.391947
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 6,
+            "label": "Interaction:dropping",
+            "interval": [
+              16.600532,
+              17.00135
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.693,
+              0.6832
+            ],
+            [
+              0.7289,
+              0.7336
+            ]
+          ],
+          [
+            [
+              0.671,
+              0.7598
+            ],
+            [
+              0.654,
+              0.7154
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "B",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.897275,
+            0.91465
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available comparison does not distinguish the sounds reliably.",
+          "turns": 3
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The sound similarity scores are too close to distinguish reliably.",
+          "turns": 3
+        },
+        "live_cosines": [
+          [
+            [
+              0.693,
+              0.6832
+            ],
+            [
+              0.7289,
+              0.7336
+            ]
+          ],
+          [
+            [
+              0.671,
+              0.7598
+            ],
+            [
+              0.654,
+              0.7154
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_9435",
+        "sha256": "604b473e67428c20dae892dea6d2239564f840c717a2db31ff2479667d9fb389",
+        "events": [
+          {
+            "event_id": 5,
+            "label": "Interaction:rolling",
+            "interval": [
+              8.726946,
+              9.459742
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 15,
+            "label": "Interaction:hitting",
+            "interval": [
+              18.952794,
+              19.38581
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 16,
+            "label": "Interaction:rolling",
+            "interval": [
+              19.818827,
+              20.285152
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7996,
+              0.84
+            ],
+            [
+              0.7508,
+              0.806
+            ]
+          ],
+          [
+            [
+              0.7544,
+              0.7471
+            ],
+            [
+              0.7327,
+              0.7149
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9751249999999999,
+            0.968075
+          ]
+        },
+        "reader_protocol": "specified_comparisons",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available measurements do not distinguish the sounds reliably.",
+          "turns": 3
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The available comparison results do not distinguish both candidates.",
+          "turns": 3
+        },
+        "live_cosines": [
+          [
+            [
+              0.7996,
+              0.84
+            ],
+            [
+              0.7508,
+              0.806
+            ]
+          ],
+          [
+            [
+              0.7544,
+              0.7471
+            ],
+            [
+              0.7327,
+              0.7149
+            ]
+          ]
+        ]
+      },
+      {
+        "video_id": "video_4187",
+        "sha256": "23d3dcb9437561669266103bc96f60fab3da6b78da4813e703cf2a5a548beacb",
+        "events": [
+          {
+            "event_id": 11,
+            "label": "Interaction:hitting",
+            "interval": [
+              18.588807,
+              18.926172
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 7,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              8.096758,
+              11.807772
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 13,
+            "label": "Interaction:hitting",
+            "interval": [
+              22.468504,
+              22.805869
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.9076,
+              0.8821
+            ],
+            [
+              0.8485,
+              0.8189
+            ]
+          ],
+          [
+            [
+              0.609,
+              0.6549
+            ],
+            [
+              0.5486,
+              0.582
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.99965,
+            0.868725
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available audio readings do not distinguish the sounds reliably.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2,
+            "listen": 3
+          },
+          "comparisons": [
+            {
+              "ref": [
+                22.468504,
+                22.805869
+              ],
+              "target": [
+                18.588807,
+                18.926172
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                22.468504,
+                22.805869
+              ],
+              "target": [
+                8.096758,
+                11.807772
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "The audio comparison shows a closer match in sound features to A.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                22.468504,
+                22.805869
+              ],
+              "target": [
+                8.096758,
+                11.807772
+              ],
+              "matrix": [
+                [
+                  0.609,
+                  0.5486
+                ],
+                [
+                  0.6549,
+                  0.582
+                ]
+              ]
+            },
+            {
+              "ref": [
+                22.468504,
+                22.805869
+              ],
+              "target": [
+                18.588807,
+                18.926172
+              ],
+              "matrix": [
+                [
+                  0.9076,
+                  0.8485
+                ],
+                [
+                  0.8821,
+                  0.8189
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_1905",
+        "sha256": "4280fde7d43fa3afb2532cb97e2e6631902d80a5afd9f18fdcdee252ee6725c2",
+        "events": [
+          {
+            "event_id": 0,
+            "label": "Interaction: fluid",
+            "interval": [
+              3.802684,
+              5.77074
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 5,
+            "label": "Interaction:hitting",
+            "interval": [
+              10.774272,
+              11.408053
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 2,
+            "label": "Interaction: fluid",
+            "interval": [
+              14.143317,
+              16.14473
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.9156
+            ]
+          ],
+          [
+            [
+              0.5081
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9909,
+            0.9537
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "A",
+          "reason": "Both sound like liquid pouring into a container.",
+          "turns": 3,
+          "calls": {
+            "view": 3
+          },
+          "comparisons": []
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "Both resemble a sustained pouring or trickling sound.",
+          "turns": 3,
+          "calls": {
+            "view": 3
+          },
+          "comparisons": []
+        }
+      },
+      {
+        "video_id": "video_7791",
+        "sha256": "c0b410e1f8f2a63750c343a45ae733951d690c9355ba40fc9641f5fb12e8dcc0",
+        "events": [
+          {
+            "event_id": 12,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              13.466667,
+              14.1
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 4,
+            "label": "Interaction:hitting",
+            "interval": [
+              3.8,
+              4.166667
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 15,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              15.8,
+              16.433333
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.6515
+            ]
+          ],
+          [
+            [
+              0.7531
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "B",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9852,
+            0.9458
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available sound readings do not establish which interval sounds more similar.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                15.8,
+                16.433333
+              ],
+              "target": [
+                3.8,
+                4.166667
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                15.8,
+                16.433333
+              ],
+              "target": [
+                13.466667,
+                14.1
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "The audio comparison found B more similar to the target sound.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 3
+          },
+          "comparisons": [
+            {
+              "ref": [
+                13.466667,
+                14.1
+              ],
+              "target": [
+                15.8,
+                16.433333
+              ],
+              "matrix": [
+                [
+                  0.6515
+                ]
+              ]
+            },
+            {
+              "ref": [
+                3.8,
+                4.166667
+              ],
+              "target": [
+                15.8,
+                16.433333
+              ],
+              "matrix": [
+                [
+                  0.7531
+                ]
+              ]
+            },
+            {
+              "ref": [
+                3.8,
+                4.166667
+              ],
+              "target": [
+                15.8,
+                16.433333
+              ],
+              "matrix": [
+                [
+                  0.7531
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_1265",
+        "sha256": "1b4873e32cd11328a8c73736727481e9ff2301e3fa8f9e4fd0a5e2b92f097eae",
+        "events": [
+          {
+            "event_id": 2,
+            "label": "Interaction:dropping",
+            "interval": [
+              7.746056,
+              8.21349
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 0,
+            "label": "Object:breaking of something",
+            "interval": [
+              3.939804,
+              6.243588
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 3,
+            "label": "Interaction:dropping",
+            "interval": [
+              9.014807,
+              9.415465
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.9252,
+              0.8665
+            ],
+            [
+              0.9061,
+              0.8853
+            ]
+          ],
+          [
+            [
+              0.4518,
+              0.4061
+            ],
+            [
+              0.3812,
+              0.3443
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9899249999999999,
+            0.92895
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "A",
+          "reason": "Both are short, distinct impact sounds with a similar soft thud.",
+          "turns": 2,
+          "calls": {
+            "view": 2
+          },
+          "comparisons": []
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "Its brief sound has much more similar audio features to the sound at 9 seconds.",
+          "turns": 2,
+          "calls": {
+            "view": 2,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                9.014807,
+                9.415465
+              ],
+              "target": [
+                3.939804,
+                6.243588
+              ],
+              "matrix": [
+                [
+                  0.4518,
+                  0.3812
+                ],
+                [
+                  0.4061,
+                  0.3443
+                ]
+              ]
+            },
+            {
+              "ref": [
+                9.014807,
+                9.415465
+              ],
+              "target": [
+                7.746056,
+                8.21349
+              ],
+              "matrix": [
+                [
+                  0.9252,
+                  0.9061
+                ],
+                [
+                  0.8665,
+                  0.8853
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_2051",
+        "sha256": "9b84c6606546b4a8f29f7397fff67a2bd18ca6341c5eb5760a354858e0071465",
+        "events": [
+          {
+            "event_id": 2,
+            "label": "Interaction:hitting",
+            "interval": [
+              2.732783,
+              3.099376
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 4,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              3.899215,
+              4.93234
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 6,
+            "label": "Interaction:hitting",
+            "interval": [
+              7.39851,
+              7.79843
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.9393,
+              0.9283
+            ],
+            [
+              0.9203,
+              0.9501
+            ]
+          ],
+          [
+            [
+              0.8143,
+              0.7416
+            ],
+            [
+              0.7714,
+              0.6947
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9903500000000001,
+            0.94895
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "A",
+          "reason": "Both feature a short, sharp impact as a container is set down.",
+          "turns": 1,
+          "calls": {
+            "view": 1,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                2.732783,
+                3.099376
+              ],
+              "target": [
+                7.39851,
+                7.79843
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                3.899215,
+                4.93234
+              ],
+              "target": [
+                7.39851,
+                7.79843
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "Both have a brief, sharp clunk as a container is set down.",
+          "turns": 1,
+          "calls": {
+            "view": 1
+          },
+          "comparisons": []
+        }
+      },
+      {
+        "video_id": "video_6170",
+        "sha256": "bc79020395dcf4380206a41da0fb4a9551e58ef947d2ed51cc81e9e10ac7083e",
+        "events": [
+          {
+            "event_id": 12,
+            "label": "Interaction:hitting",
+            "interval": [
+              12.24266,
+              13.443575
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 3,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              18.180517,
+              21.883337
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 4,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              24.118373,
+              24.818907
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.7465,
+              0.7465
+            ],
+            [
+              0.7465,
+              0.7465
+            ]
+          ],
+          [
+            [
+              0.7872,
+              0.7872
+            ],
+            [
+              0.7872,
+              0.7872
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "B",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9827,
+            0.9335
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available sound readings do not distinguish the two intervals reliably.",
+          "turns": 4,
+          "calls": {
+            "view": 4,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                24.118373,
+                24.818907
+              ],
+              "target": [
+                12.24266,
+                13.443575
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                24.118373,
+                24.818907
+              ],
+              "target": [
+                18.180517,
+                21.883337
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "Its recorded audio features are more similar to the final sound.",
+          "turns": 4,
+          "calls": {
+            "view": 4,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                24.118373,
+                24.818907
+              ],
+              "target": [
+                12.24266,
+                13.443575
+              ],
+              "matrix": [
+                [
+                  0.7465,
+                  0.7465
+                ],
+                [
+                  0.7465,
+                  0.7465
+                ]
+              ]
+            },
+            {
+              "ref": [
+                24.118373,
+                24.818907
+              ],
+              "target": [
+                18.180517,
+                21.883337
+              ],
+              "matrix": [
+                [
+                  0.7872,
+                  0.7872
+                ],
+                [
+                  0.7872,
+                  0.7872
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_3664",
+        "sha256": "5f5b7c3b784415bd582ecdad2622eaa46640f05a13efcb06ab51e5371f2dce93",
+        "events": [
+          {
+            "event_id": 1,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              3.641425,
+              9.420934
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 2,
+            "label": "Interaction:dropping",
+            "interval": [
+              9.922047,
+              10.857459
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 5,
+            "label": "Interaction:dropping",
+            "interval": [
+              14.899775,
+              15.300666
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.3145,
+              0.3821
+            ],
+            [
+              0.2258,
+              0.3041
+            ]
+          ],
+          [
+            [
+              0.763,
+              0.72
+            ],
+            [
+              0.6997,
+              0.6853
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.8043,
+            0.946175
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "B",
+          "reason": "Both resemble brief contact and scraping sounds as objects move on the table.",
+          "turns": 2,
+          "calls": {
+            "view": 2,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                3.641425,
+                9.420934
+              ],
+              "target": [
+                14.899775,
+                15.300666
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                9.922047,
+                10.857459
+              ],
+              "target": [
+                14.899775,
+                15.300666
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "Its recorded sound features are much closer to the final sound.",
+          "turns": 2,
+          "calls": {
+            "view": 2,
+            "compare_heard": 3
+          },
+          "comparisons": [
+            {
+              "ref": [
+                3.641425,
+                9.420934
+              ],
+              "target": [
+                14.899775,
+                15.300666
+              ],
+              "matrix": [
+                [
+                  0.3145,
+                  0.3821
+                ],
+                [
+                  0.2258,
+                  0.3041
+                ]
+              ]
+            },
+            {
+              "ref": [
+                9.922047,
+                10.857459
+              ],
+              "target": [
+                14.899775,
+                15.300666
+              ],
+              "matrix": [
+                [
+                  0.763,
+                  0.72
+                ],
+                [
+                  0.6997,
+                  0.6853
+                ]
+              ]
+            },
+            {
+              "ref": [
+                9.922047,
+                10.857459
+              ],
+              "target": [
+                14.899775,
+                15.300666
+              ],
+              "matrix": [
+                [
+                  0.763,
+                  0.72
+                ],
+                [
+                  0.6997,
+                  0.6853
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_7023",
+        "sha256": "3b5c6f85ddc7948499823df9fba6cb119b752806d6a7ee7c76e62f699af91ad1",
+        "events": [
+          {
+            "event_id": 6,
+            "label": "Interaction: fluid",
+            "interval": [
+              22.863667,
+              23.462715
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 2,
+            "label": "Interaction:hitting",
+            "interval": [
+              6.156883,
+              6.922333
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 7,
+            "label": "Interaction:hitting",
+            "interval": [
+              24.228165,
+              24.993615
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.7382,
+              0.7382
+            ],
+            [
+              0.7382,
+              0.7382
+            ]
+          ],
+          [
+            [
+              0.8449,
+              0.8449
+            ],
+            [
+              0.8449,
+              0.8449
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "B",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.9449,
+            0.9918
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available audio readings do not establish which sound is more similar.",
+          "turns": 4,
+          "calls": {
+            "view": 4,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                24.228165,
+                24.993615
+              ],
+              "target": [
+                22.863667,
+                23.462715
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                24.228165,
+                24.993615
+              ],
+              "target": [
+                6.156883,
+                6.922333
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "Its overall audio features are more similar to the sound at the end.",
+          "turns": 4,
+          "calls": {
+            "view": 4,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                24.228165,
+                24.993615
+              ],
+              "target": [
+                22.863667,
+                23.462715
+              ],
+              "matrix": [
+                [
+                  0.7382,
+                  0.7382
+                ],
+                [
+                  0.7382,
+                  0.7382
+                ]
+              ]
+            },
+            {
+              "ref": [
+                24.228165,
+                24.993615
+              ],
+              "target": [
+                6.156883,
+                6.922333
+              ],
+              "matrix": [
+                [
+                  0.8449,
+                  0.8449
+                ],
+                [
+                  0.8449,
+                  0.8449
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_2048",
+        "sha256": "1d0104239fca0168b704cdd92515c69e8ffa5379609bfd8d24a22e1422affa46",
+        "events": [
+          {
+            "event_id": 8,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              19.948837,
+              20.810415
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 2,
+            "label": "Interaction:dropping",
+            "interval": [
+              4.937503,
+              5.401429
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 9,
+            "label": "Object:opening/closing of something",
+            "interval": [
+              22.53357,
+              23.328872
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "A",
+        "cosines": [
+          [
+            [
+              0.7703,
+              0.8005
+            ],
+            [
+              0.6361,
+              0.7479
+            ]
+          ],
+          [
+            [
+              0.8415,
+              0.7876
+            ],
+            [
+              0.8493,
+              0.8304
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "B",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.88555,
+            0.96065
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available audio readings do not distinguish the sound types reliably.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                22.53357,
+                23.328872
+              ],
+              "target": [
+                19.948837,
+                20.810415
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                22.53357,
+                23.328872
+              ],
+              "target": [
+                4.937503,
+                5.401429
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "Its quiet sound has more similar overall audio features to the final excerpt.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                22.53357,
+                23.328872
+              ],
+              "target": [
+                19.948837,
+                20.810415
+              ],
+              "matrix": [
+                [
+                  0.7703,
+                  0.6361
+                ],
+                [
+                  0.8005,
+                  0.7479
+                ]
+              ]
+            },
+            {
+              "ref": [
+                22.53357,
+                23.328872
+              ],
+              "target": [
+                4.937503,
+                5.401429
+              ],
+              "matrix": [
+                [
+                  0.8415,
+                  0.8493
+                ],
+                [
+                  0.7876,
+                  0.8304
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_2810",
+        "sha256": "50253e45d32634955cf5d5c02b204d37cf623d8762e089b8185bd7c762930e98",
+        "events": [
+          {
+            "event_id": 5,
+            "label": "Interaction:rolling",
+            "interval": [
+              16.508488,
+              16.80986
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 2,
+            "label": "Interaction:dropping",
+            "interval": [
+              8.63933,
+              9.007674
+            ],
+            "visible": 0
+          },
+          {
+            "event_id": 7,
+            "label": "Interaction:dropping",
+            "interval": [
+              22.937757,
+              23.239129
+            ],
+            "visible": 0
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.8419
+            ]
+          ],
+          [
+            [
+              0.7982
+            ]
+          ]
+        ],
+        "encoder": "A",
+        "controls": {
+          "duration_only": "A",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.969,
+            0.8333
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available sound readings do not establish which sound is more similar.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                22.937757,
+                23.239129
+              ],
+              "target": [
+                16.508488,
+                16.80986
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                22.937757,
+                23.239129
+              ],
+              "target": [
+                8.63933,
+                9.007674
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "The audio comparison indicates A has a more similar overall sound.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                22.937757,
+                23.239129
+              ],
+              "target": [
+                16.508488,
+                16.80986
+              ],
+              "matrix": [
+                [
+                  0.8419
+                ]
+              ]
+            },
+            {
+              "ref": [
+                22.937757,
+                23.239129
+              ],
+              "target": [
+                8.63933,
+                9.007674
+              ],
+              "matrix": [
+                [
+                  0.7982
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_6653",
+        "sha256": "dd28f3f02f62aad93663f9d4c0f3b092174b45b1b6ad13cb4080db29018eca37",
+        "events": [
+          {
+            "event_id": 16,
+            "label": "Interaction:dropping",
+            "interval": [
+              6.666667,
+              7.266667
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 22,
+            "label": "Interaction:hitting",
+            "interval": [
+              9.0,
+              9.466667
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 7,
+            "label": "Interaction:hitting",
+            "interval": [
+              13.8,
+              14.233333
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.5895
+            ]
+          ],
+          [
+            [
+              0.5988
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "A",
+          "noise_scores": [
+            0.9203,
+            0.8751
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "unclear",
+          "reason": "The available audio readings do not identify the sounds well enough to compare them.",
+          "turns": 2,
+          "calls": {
+            "view": 2,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                9,
+                9.466667
+              ],
+              "target": [
+                13.8,
+                14.233333
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                6.666667,
+                7.266667
+              ],
+              "target": [
+                13.8,
+                14.233333
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The audio comparison scores are too close to distinguish a reliable match.",
+          "turns": 2,
+          "calls": {
+            "view": 2,
+            "compare_heard": 3
+          },
+          "comparisons": [
+            {
+              "ref": [
+                13.8,
+                14.233333
+              ],
+              "target": [
+                9,
+                9.466667
+              ],
+              "matrix": [
+                [
+                  0.5988
+                ]
+              ]
+            },
+            {
+              "ref": [
+                13.8,
+                14.233333
+              ],
+              "target": [
+                6.666667,
+                7.266667
+              ],
+              "matrix": [
+                [
+                  0.5895
+                ]
+              ]
+            },
+            {
+              "ref": [
+                13.8,
+                14.233333
+              ],
+              "target": [
+                9,
+                9.466667
+              ],
+              "matrix": [
+                [
+                  0.5988
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "video_id": "video_11602",
+        "sha256": "8b0fc28d53182802e143c3f5d13e9af084a4e661aecebc908e0f3549bca9e3fb",
+        "events": [
+          {
+            "event_id": 9,
+            "label": "Animal:sound",
+            "interval": [
+              9.362859,
+              13.061355
+            ],
+            "visible": 0
+          },
+          {
+            "event_id": 1,
+            "label": "Interaction:hitting",
+            "interval": [
+              3.898415,
+              4.498171
+            ],
+            "visible": 1
+          },
+          {
+            "event_id": 3,
+            "label": "Interaction:hitting",
+            "interval": [
+              23.123929,
+              23.623726
+            ],
+            "visible": 1
+          }
+        ],
+        "truth": "B",
+        "cosines": [
+          [
+            [
+              0.6512,
+              0.6512
+            ],
+            [
+              0.6512,
+              0.6512
+            ]
+          ],
+          [
+            [
+              0.6888,
+              0.6888
+            ],
+            [
+              0.6888,
+              0.6888
+            ]
+          ]
+        ],
+        "encoder": "B",
+        "controls": {
+          "duration_only": "B",
+          "rms_only": "A",
+          "stationary_noise": "B",
+          "noise_scores": [
+            0.7522,
+            0.918
+          ]
+        },
+        "reader_protocol": "reader_choice",
+        "before": {
+          "choice": "A",
+          "reason": "The ending resembles the softer, low rustling sound during A.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                23.123929,
+                23.623726
+              ],
+              "target": [
+                9.362859,
+                13.061355
+              ],
+              "matrix": null
+            },
+            {
+              "ref": [
+                23.123929,
+                23.623726
+              ],
+              "target": [
+                3.898415,
+                4.498171
+              ],
+              "matrix": null
+            }
+          ]
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "Its overall audio features are slightly closer to the final sound.",
+          "turns": 3,
+          "calls": {
+            "view": 3,
+            "compare_heard": 2
+          },
+          "comparisons": [
+            {
+              "ref": [
+                23.123929,
+                23.623726
+              ],
+              "target": [
+                9.362859,
+                13.061355
+              ],
+              "matrix": [
+                [
+                  0.6512,
+                  0.6512
+                ],
+                [
+                  0.6512,
+                  0.6512
+                ]
+              ]
+            },
+            {
+              "ref": [
+                23.123929,
+                23.623726
+              ],
+              "target": [
+                3.898415,
+                4.498171
+              ],
+              "matrix": [
+                [
+                  0.6888,
+                  0.6888
+                ],
+                [
+                  0.6888,
+                  0.6888
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "reader_protocols": {
+    "specified_comparisons": "First 12 selected films and six ESC pairs (12 target trials). Identical instructions across versions. Watch to cutoff in consecutive view turns of up to 8 s with sound_estimates=false and native_audio=false. Call compare_heard twice for the two given reference ranges and the same target. Both spectra, timing, pitch, and recorded levels supplied each time. Disable wording-based descriptions. Request waveform similarity when offered. Hidden reference category labels, fresh session for every arm. Unclear counts as a miss.",
+    "reader_choice": "Remaining 12 distinct films. Identical instructions and five tools in both versions. Watch through cutoff with native_audio=false and regular sound estimates. Given only A/B/X times and task, free to use any replay tool or none. No mention of compare_heard, sound similarity, model or scores. New sessions on the deployed code. Fixed films and labels before any free-choice responses. Different films and first-pass sound settings from the specified-comparison group."
+  },
+  "absent_target_control": {
+    "method": "Four additional ESC reference pairs outside the six primary reader pairs. Two independent targets per pair: another recording of the same class as A or B, and a recording of a third class in the same ESC supercategory. Exactly the same prompt on matched and unmatched arms, no priors, classes or labels. As in the specified-comparison group, request both comparisons. Answer A, B, neither or unclear. New sessions on both versions; wrong and unclear score zero.",
+    "scores": {
+      "before": {
+        "matched": {
+          "correct": 0,
+          "wrong": 0,
+          "unclear": 4
+        },
+        "absent": {
+          "correct": 0,
+          "wrong": 0,
+          "unclear": 4
+        }
+      },
+      "measured": {
+        "matched": {
+          "correct": 3,
+          "wrong": 0,
+          "unclear": 1
+        },
+        "absent": {
+          "correct": 3,
+          "wrong": 1,
+          "unclear": 0
+        }
+      }
+    },
+    "by_arm": [
+      {
+        "files": [
+          "5-141683-A-35.wav",
+          "4-177243-A-32.wav",
+          "2-104168-A-32.wav"
+        ],
+        "truth": "B",
+        "categories": [
+          "washing_machine",
+          "keyboard_typing",
+          "keyboard_typing"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not reliably identify whether the sounds match."
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "X has much higher audio similarity to B than to A."
+        },
+        "matrices": [
+          [
+            [
+              0.1712
+            ]
+          ],
+          [
+            [
+              0.8077
+            ]
+          ]
+        ]
+      },
+      {
+        "files": [
+          "5-141683-A-35.wav",
+          "4-177243-A-32.wav",
+          "2-78562-B-37.wav"
+        ],
+        "truth": "neither",
+        "categories": [
+          "washing_machine",
+          "keyboard_typing",
+          "clock_alarm"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not reliably identify whether the sounds match."
+        },
+        "measured": {
+          "choice": "neither",
+          "reason": "X has low measured sound similarity to both A and B."
+        },
+        "matrices": [
+          [
+            [
+              0.1463
+            ]
+          ],
+          [
+            [
+              0.0758
+            ]
+          ]
+        ]
+      },
+      {
+        "files": [
+          "4-175000-A-40.wav",
+          "5-184323-A-42.wav",
+          "2-70052-A-42.wav"
+        ],
+        "truth": "B",
+        "categories": [
+          "helicopter",
+          "siren",
+          "siren"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available frequency measurements do not establish whether the sounds share the same source."
+        },
+        "measured": {
+          "choice": "unclear",
+          "reason": "The available comparison does not establish which reference matches X."
+        },
+        "matrices": [
+          [
+            [
+              0.1027
+            ]
+          ],
+          [
+            [
+              0.6611
+            ]
+          ]
+        ]
+      },
+      {
+        "files": [
+          "4-175000-A-40.wav",
+          "5-184323-A-42.wav",
+          "4-102844-B-49.wav"
+        ],
+        "truth": "neither",
+        "categories": [
+          "helicopter",
+          "siren",
+          "hand_saw"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not reliably establish whether the sounds are the same kind."
+        },
+        "measured": {
+          "choice": "neither",
+          "reason": "X has a distinct, broadband rhythmic sound compared with both earlier clips."
+        },
+        "matrices": [
+          [
+            [
+              0.1386
+            ]
+          ],
+          [
+            [
+              0.2223
+            ]
+          ]
+        ]
+      },
+      {
+        "files": [
+          "4-156843-A-21.wav",
+          "4-188595-A-29.wav",
+          "5-207836-B-29.wav"
+        ],
+        "truth": "B",
+        "categories": [
+          "sneezing",
+          "drinking_sipping",
+          "drinking_sipping"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available sound measurements do not identify a reliable match."
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "X has substantially higher audio similarity to B than to A."
+        },
+        "matrices": [
+          [
+            [
+              0.3716
+            ]
+          ],
+          [
+            [
+              0.6833
+            ]
+          ]
+        ]
+      },
+      {
+        "files": [
+          "4-156843-A-21.wav",
+          "4-188595-A-29.wav",
+          "4-144468-B-27.wav"
+        ],
+        "truth": "neither",
+        "categories": [
+          "sneezing",
+          "drinking_sipping",
+          "brushing_teeth"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectrum measurements do not establish which sound X matches."
+        },
+        "measured": {
+          "choice": "B",
+          "reason": "X’s audio features are more similar to B’s than A’s."
+        },
+        "matrices": [
+          [
+            [
+              0.1821
+            ]
+          ],
+          [
+            [
+              0.4199
+            ]
+          ]
+        ]
+      },
+      {
+        "files": [
+          "4-178881-A-45.wav",
+          "4-119648-A-48.wav",
+          "5-197118-A-45.wav"
+        ],
+        "truth": "A",
+        "categories": [
+          "train",
+          "fireworks",
+          "train"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available spectral measurements do not identify the sounds reliably enough to compare them."
+        },
+        "measured": {
+          "choice": "A",
+          "reason": "X has strong overall audio similarity to A."
+        },
+        "matrices": [
+          [
+            [
+              0.8591
+            ]
+          ],
+          [
+            [
+              0.3504
+            ]
+          ]
+        ]
+      },
+      {
+        "files": [
+          "4-178881-A-45.wav",
+          "4-119648-A-48.wav",
+          "4-102844-B-49.wav"
+        ],
+        "truth": "neither",
+        "categories": [
+          "train",
+          "fireworks",
+          "hand_saw"
+        ],
+        "before": {
+          "choice": "unclear",
+          "reason": "The available audio measurements do not establish which sound matches X."
+        },
+        "measured": {
+          "choice": "neither",
+          "reason": "X has a distinct rhythmic sound pattern from both A and B."
+        },
+        "matrices": [
+          [
+            [
+              0.1823
+            ]
+          ],
+          [
+            [
+              0.1237
+            ]
+          ]
+        ]
+      }
+    ]
+  },
+  "protocol_failures": [
+    "envjob-20-usage.json"
+  ],
+  "protocol_retry_note": "One baseline ESC session completed both media comparisons but timed out before returning an answer. Repeated with the same prompt, inputs and previous version. No retry for a wrong answer or an abstention.",
+  "case_selection_sha256": "c1a98fc0c1232c416c4cddd8ee081d96b450581910a685ea8ebe5d279b4fc87c",
+  "annotation_archive_sha256": "4f0e602ba8f97313aca7d84805334a73edd94fa6f56d80b945954cd32327c141",
+  "reader_inputs": "Filenames, categories and human annotations were hidden from GPT. The archived recording identifiers and event times here locate the originals. A/B orders and target IDs were fixed before the respective sessions.",
+  "runtime_check": {
+    "trial_files_with_equivalent_integration_before_refactoring": {
+      "reel/compare_heard.py": "e309828e775f54cb859cdccf0d402b608b25035cea8dc6e2bcca40c43b96abdf",
+      "reel/cli.py": "ccb98d01a23cdf52540cfc127d4284acd3f8a7f4d9a5ffccfb683ef0bfa544a4",
+      "reel/mcp_server.py": "09b109ea0691203f549d4fb7033267213c6e445317f924632533e380bf5eb5c9"
+    },
+    "cutoff_twins": {
+      "hashes": [
+        "ece2f1a27f1a2dafbe20bece32bae8e6cc6cbf9acbe5e9296f4111462dff669f",
+        "5505ccfe8f369efb3870d1dc3f0b8d2aa07723e3b9da483b8b350cf48816fd2b",
+        "973b9429a976a847fec94686cda2e75d8cc488f3ee4ac637f5c043beea14ad5d",
+        "a3727c7132da1bb8a71bcc78a5430a3790007b1f7174f79d706e59bd4ab28056",
+        "4998f391af947af703af80c4f1b33402bfa366367c41c280fc8a033f7eb93e35"
+      ],
+      "cosines": [
+        [
+          0.9498
+        ]
+      ],
+      "native_ranges": [
+        [
+          7488,
+          22992
+        ],
+        [
+          30480,
+          24240
+        ]
+      ]
+    },
+    "door": {
+      "key_recording": {
+        "answer": "A simple illustration shows a closed brown door against a plain wall, with no visible movement. The audio measurements show a louder, high-frequency change around 4.6–6.5 seconds; its source is uncertain, and the speech check found no intelligible words.",
+        "cosines": [
+          [
+            0.3561
+          ]
+        ]
+      },
+      "room_only": {
+        "answer": "A closed brown door remains still against a plain wall throughout the clip. The recording appears to contain a very faint, steady hiss-like sound, though its source is uncertain; the two compared intervals are highly similar, and no intelligible words were detected.",
+        "cosines": [
+          [
+            0.9911
+          ]
+        ]
+      }
+    },
+    "tests": 170,
+    "cli": "Validated standalone and interactive paths, optional helper unavailable, five matching MCP blocks including both original WAVs across different post-cutoff media and trial/shipped readers.",
+    "peak_individual_process_tree_kib": 4806064,
+    "surviving_owned_processes": 0
+  }
+}

@@ -64,6 +64,8 @@ order, with nothing left out.
 
 Using this version of Reel on 16 filmed scenes, local Codex GPT matched the human annotations on **36 of 48 questions (75.0%)**. Agreement was 14/16 for the picture, 11/16 for the sound and 11/16 for whether its source was visible. GPT answered 8 questions incorrectly and left 4 unresolved. [Film-by-film results and test conditions](docs/perception-check.md#같은-48문항으로-다시-잰-일치율)
 
+On 12 other films, GPT chose its own tools to decide which earlier sound belonged to the same category as a later one. It matched the human event labels 4/12 times before the recording comparison was available and 8/12 with it. [Individual responses and trials where neither sound matched](docs/listening-check.md#이름을-모르는-소리를-전에-들은-녹음과-비교)
+
 When one of two filmed actions supplied the soundtrack, GPT chose the correct picture on 9 of 14 plays. It followed both soundtrack swaps in 3 of 7 pairs. On eight separate single scenes, GPT left source visibility unresolved every time. [Responses and comparison with the previous version](docs/perception-check.md#화면-가장자리에서-난-소리)
 
 Immediately after frame-by-frame replay was introduced, local Codex GPT matched the human annotations on **35 of 48 questions (72.9%)** on the same 16 films. It matched 15/16 picture answers, 10/16 sounds and 10/16 source-visibility answers. On a separate timing control, a brief tone moved through all 12 frames of the same sequence. GPT read the number on the sounding frame **12/12** times with the option available and **6/12** with the previous replay. [Comparison and individual responses](docs/perception-check.md#소리가-난-프레임을-다시-보는-시험)

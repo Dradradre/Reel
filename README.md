@@ -45,7 +45,7 @@ order, with nothing left out.
 | frames over time | selected whole frames at their recorded presentation times. A frame can stay up across a long pause between updates. Reel maps tagged PQ and HLG pictures to sRGB with a colour-managed FFmpeg build | See who and what share the screen. During playback, extra timestamped frames can reveal a brief local change. A pair of times and a box let you inspect its original pixels with `look`. [Reading trial](docs/perception-check.md#잠깐-나타난-글자를-다시-읽을-때) |
 | follow (playback) | the point you selected in an earlier picture, followed through each released frame | compare the selected detail with the last picture in which the tracker located it |
 | subject | where the person the film is about appears, and whether the eye is predicted to land on them | the film losing its subject |
-| on screen | titles, captions and banners large enough to read | the story: dates, places, scores |
+| on screen | recognized words and numbers during the frames in which they appear | read a score or sign alongside the sound at that moment |
 | change | frame-to-frame change, brightness, freeze marks | cuts, flashes, blackouts, a frozen picture |
 | seen again | pictures that already appeared | reused footage |
 | sound | power in each frequency band on a fixed −80 to 0 dBFS scale, with changes in the sound marked | the same sound keeps its brightness across recordings and zooms. During playback you can rehear a sustained band or a brief impact alongside the original. The speech reader measures what remains in the gaps before, between and after detected voices. Playback also reports the frequency of a clearly repeating sound. |
@@ -239,7 +239,7 @@ If a separator needs its own environment, point Reel at it: `REEL_SEP_PYTHON`, `
 flowchart LR
     F[film] --> P[every frame<br/>thumbnails, change, shape, picture memory]
     F --> A[sound<br/>spectrogram, 10 ms level, scene changes]
-    F --> T[on-screen text<br/>Apple Vision, 1 fps]
+    F --> T[on-screen text<br/>Apple Vision, displayed frames]
     F --> S[separation<br/>Demucs voices + crowd model]
     S --> W[speech<br/>Whisper large-v3-turbo]
     S --> R[exact repeats<br/>sample-level correlation]
@@ -315,6 +315,8 @@ First-listen descriptions use the MIT-licensed CoNeTTE model by Étienne Labbé,
 The field listening check uses Clotho-AQA by Lipping, Sudarsanam, Drossos and Virtanen, and the captions from Clotho v2.1. The questions and answers use the MIT licence. Each Freesound recording has its own licence, and the captions use the Tampere University licence. [Clotho-AQA](https://zenodo.org/records/6473207) and [Clotho v2.1](https://zenodo.org/records/4783391)
 
 The spoken grounding check uses the voice recordings, timed descriptions and pointer traces in Localized Narratives by Pont-Tuset, Uijlings, Changpinyo, Soricut and Ferrari (CC BY 4.0) with COCO validation photographs. [Localized Narratives](https://google.github.io/localized-narratives/) and [COCO terms](https://cocodataset.org/#termsofuse)
+
+The sign-reading check uses human word transcriptions from COCO-Text V2 and COCO photographs. The source images retain their individual licences. [COCO-Text V2](https://bgshih.github.io/cocotext/) and [COCO image terms](https://cocodataset.org/dataset/termsofuse.htm)
 
 The free-viewing check uses fixation data from the DIEM Project (Mital, Smith, Hill and Henderson), available for non-commercial research under CC BY-NC-SA 3.0. [DIEM data and licence](https://jhenderson.org/vclab/DIEM.html)
 

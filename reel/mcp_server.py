@@ -37,6 +37,7 @@ if __package__:
     from .observe import observe as observe_interval
     from .play import PlaybackPace, channel_spectrum, play
     from .region_sync import published_timing, region_views, validate_regions
+    from .screen_text import read_crop
     from .sound_glimpses import SoundChanges
     from .stereo import summarize_stereo
     from .unmix import LayerReader, describe_layer
@@ -59,6 +60,7 @@ else:
     from observe import observe as observe_interval
     from play import PlaybackPace, channel_spectrum, play
     from region_sync import published_timing, region_views, validate_regions
+    from screen_text import read_crop
     from sound_glimpses import SoundChanges
     from stereo import summarize_stereo
     from unmix import LayerReader, describe_layer
@@ -534,10 +536,12 @@ class Viewing:
                 blocks.append(audio_block(wav))
         return [text_block(report), *blocks]
 
-    def look(self, turn, box, at_s=None):
+    def look(self, turn, box, at_s=None, read_text=False):
         with self.lock:
             directory, _ = self.published(turn)
             detail = inspect_turn(directory, box) if at_s is None else inspect_past(directory, self.original, at_s, box)
+        if read_text:
+            detail["screen_text"] = read_crop(detail["file"])
         return [text_block({k: v for k, v in detail.items() if k != "file"}),
                 image_block(Path(detail["file"]))]
 
@@ -865,10 +869,11 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             return await asyncio.to_thread(reader.observe, start_s, end_s, box, native_audio)
 
         @server.tool(annotations=hints, structured_output=False)
-        async def look(turn: int, box: list[float], at_s: float | None = None):
+        async def look(turn: int, box: list[float], at_s: float | None = None, read_text: bool = False):
             """Inspect original pixels in a box [left,top,right,bottom] from 0 to 1. Choose a film time before
-            the end of this published turn, or omit at_s for its final picture."""
-            return await asyncio.to_thread(reader.look, turn, box, at_s)
+            the end of this published turn, or omit at_s for its final picture. Set read_text=true to include
+            text recognized within these pixels and its position in the crop."""
+            return await asyncio.to_thread(reader.look, turn, box, at_s, read_text)
 
         @server.tool(annotations=hints, structured_output=False)
         async def listen(turn: int, question: str | None = None, start_s: float | None = None,

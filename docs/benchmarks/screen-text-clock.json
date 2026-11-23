@@ -1,0 +1,630 @@
+{
+  "model": "gpt-6.1-terra via local Codex CLI",
+  "reference": "Prior page OCR at 537f0d8",
+  "controlled_films": {
+    "exposures": {
+      "hold": [
+        [
+          0.73,
+          1.74,
+          "PLATFORM"
+        ],
+        [
+          2.09,
+          3.31,
+          "PLATFORM"
+        ],
+        [
+          3.31,
+          3.85,
+          "32"
+        ]
+      ],
+      "portrait": [
+        [
+          0.11,
+          0.445,
+          "EXIT"
+        ],
+        [
+          0.445,
+          0.695,
+          "07"
+        ],
+        [
+          1.89,
+          2.48,
+          "EXIT"
+        ]
+      ],
+      "blink": [
+        [
+          0.62,
+          0.78,
+          "NORTH"
+        ],
+        [
+          2.71,
+          3.245,
+          "NORTH"
+        ],
+        [
+          3.245,
+          3.76,
+          "WEST"
+        ]
+      ],
+      "empty": []
+    },
+    "prior": {
+      "hold": [
+        [
+          0.25,
+          1.25,
+          "PLATFORM"
+        ]
+      ],
+      "portrait": [],
+      "blink": [
+        [
+          0.25,
+          3.25,
+          "NORTH"
+        ]
+      ],
+      "empty": []
+    },
+    "current": {
+      "hold": [
+        [
+          0.73,
+          1.74,
+          "PLATFORM"
+        ],
+        [
+          2.09,
+          3.31,
+          "PLATFORM"
+        ],
+        [
+          3.31,
+          3.85,
+          "32"
+        ]
+      ],
+      "portrait": [
+        [
+          0.445,
+          0.695,
+          "07"
+        ]
+      ],
+      "blink": [
+        [
+          0.62,
+          0.78,
+          "NORTH"
+        ],
+        [
+          2.71,
+          3.245,
+          "NORTH"
+        ],
+        [
+          3.245,
+          3.76,
+          "WEST"
+        ]
+      ],
+      "empty": []
+    }
+  },
+  "photo_source": "https://bgshih.github.io/cocotext/",
+  "sampling": "Before OCR, hash-sort COCO-Text v2 validation annotation IDs using SHA256('reel-clock-words-2026/' + decimal id). First 24 distinct images and casefolded words: legible English alphanumeric strings of 1 to 15 characters, box at least 10 pixels wide and 6% of image height.",
+  "protocol": "Crop the annotated box with horizontal padding max(4px, 18% of width), vertical padding max(3px, 35% of height), clip to photo, fit inside 520x270 and center on a 640x360 frame. Two held crops per two-second movie, with blank frames between. Sound onset is the measured first PCM sample above 100/32768 after each gap. Both arms receive identical native-timestamp frame sheets and those measured onset times, plus the OCR intervals for that arm. No raw audio, annotation, filename or reference answer supplied. Four clips per fresh session, three groups per arm. Same deterministic within-group presentation and query order in both arms. Exact whole answer after NFKC, case folding and dropping non-alphanumeric characters. For OCR lines also accept a matching whitespace token. A wrong word and ? both score zero.",
+  "summary": {
+    "prior": {
+      "ocr_words": 1,
+      "ocr_blank": 12,
+      "gpt_words": 14,
+      "gpt_blank": 12,
+      "gpt_word_abstentions": 1
+    },
+    "current": {
+      "ocr_words": 4,
+      "ocr_blank": 12,
+      "gpt_words": 15,
+      "gpt_blank": 12,
+      "gpt_word_abstentions": 1
+    }
+  },
+  "word_count": 24,
+  "blank_count": 12,
+  "clips": [
+    {
+      "clip": 0,
+      "image_ids": [
+        284468,
+        155864
+      ],
+      "coco_text_annotation_ids": [
+        74081,
+        22299
+      ],
+      "target": [
+        "350",
+        null,
+        "STADIUM"
+      ],
+      "measured_cue_s": [
+        0.28,
+        0.755,
+        1.29
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "350",
+          "NONE",
+          "STADIUM"
+        ]
+      },
+      "current": {
+        "ocr": [
+          {
+            "t": 0.11,
+            "e": 0.45,
+            "text": "350"
+          },
+          {
+            "t": 1.06,
+            "e": 1.52,
+            "text": "STADIUM"
+          }
+        ],
+        "gpt": [
+          "350",
+          "NONE",
+          "STADIUM"
+        ]
+      }
+    },
+    {
+      "clip": 1,
+      "image_ids": [
+        460408,
+        419037
+      ],
+      "coco_text_annotation_ids": [
+        143632,
+        126057
+      ],
+      "target": [
+        "RICEKRISPIES",
+        null,
+        "25"
+      ],
+      "measured_cue_s": [
+        0.53,
+        0.995,
+        1.48
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "TREATS",
+          "NONE",
+          "25"
+        ]
+      },
+      "current": {
+        "ocr": [],
+        "gpt": [
+          "TREATS",
+          "NONE",
+          "25"
+        ]
+      }
+    },
+    {
+      "clip": 2,
+      "image_ids": [
+        195294,
+        19766
+      ],
+      "coco_text_annotation_ids": [
+        36626,
+        38001
+      ],
+      "target": [
+        "heart",
+        null,
+        "BiS"
+      ],
+      "measured_cue_s": [
+        0.785,
+        1.235,
+        1.67
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "heart",
+          "NONE",
+          "BS"
+        ]
+      },
+      "current": {
+        "ocr": [
+          {
+            "t": 0.54,
+            "e": 1.03,
+            "text": "162"
+          }
+        ],
+        "gpt": [
+          "heart",
+          "NONE",
+          "BS"
+        ]
+      }
+    },
+    {
+      "clip": 3,
+      "image_ids": [
+        33695,
+        322191
+      ],
+      "coco_text_annotation_ids": [
+        96219,
+        89737
+      ],
+      "target": [
+        "STUDE",
+        null,
+        "MARAZZI"
+      ],
+      "measured_cue_s": [
+        0.28,
+        0.755,
+        1.29
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "Stude",
+          "NONE",
+          "MARVEL"
+        ]
+      },
+      "current": {
+        "ocr": [
+          {
+            "t": 1.06,
+            "e": 1.52,
+            "text": "MAR"
+          }
+        ],
+        "gpt": [
+          "Stude",
+          "NONE",
+          "MAR"
+        ]
+      }
+    },
+    {
+      "clip": 4,
+      "image_ids": [
+        119047,
+        418964
+      ],
+      "coco_text_annotation_ids": [
+        6947,
+        126026
+      ],
+      "target": [
+        "NAVY",
+        null,
+        "STUNT"
+      ],
+      "measured_cue_s": [
+        0.53,
+        0.995,
+        1.48
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "NAVY",
+          "NONE",
+          "STUNT"
+        ]
+      },
+      "current": {
+        "ocr": [],
+        "gpt": [
+          "NAVY",
+          "NONE",
+          "STUNT"
+        ]
+      }
+    },
+    {
+      "clip": 5,
+      "image_ids": [
+        157295,
+        3157
+      ],
+      "coco_text_annotation_ids": [
+        22764,
+        87217
+      ],
+      "target": [
+        "SOUTH",
+        null,
+        "MA"
+      ],
+      "measured_cue_s": [
+        0.785,
+        1.235,
+        1.67
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "Yankees",
+          "NONE",
+          "MA"
+        ]
+      },
+      "current": {
+        "ocr": [],
+        "gpt": [
+          "Yankee",
+          "NONE",
+          "MA"
+        ]
+      }
+    },
+    {
+      "clip": 6,
+      "image_ids": [
+        579663,
+        519906
+      ],
+      "coco_text_annotation_ids": [
+        188982,
+        166111
+      ],
+      "target": [
+        "Izzy",
+        null,
+        "PARTS"
+      ],
+      "measured_cue_s": [
+        0.28,
+        0.755,
+        1.29
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "Izzy",
+          "NONE",
+          "PARTS"
+        ]
+      },
+      "current": {
+        "ocr": [],
+        "gpt": [
+          "Izzy",
+          "NONE",
+          "PARTS"
+        ]
+      }
+    },
+    {
+      "clip": 7,
+      "image_ids": [
+        162768,
+        109835
+      ],
+      "coco_text_annotation_ids": [
+        24773,
+        3611
+      ],
+      "target": [
+        "GERMAIN",
+        null,
+        "V"
+      ],
+      "measured_cue_s": [
+        0.53,
+        0.995,
+        1.48
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "GERMANY",
+          "NONE",
+          "A"
+        ]
+      },
+      "current": {
+        "ocr": [],
+        "gpt": [
+          "GERMANY",
+          "NONE",
+          "?"
+        ]
+      }
+    },
+    {
+      "clip": 8,
+      "image_ids": [
+        335362,
+        194742
+      ],
+      "coco_text_annotation_ids": [
+        95393,
+        36387
+      ],
+      "target": [
+        "GUNNE",
+        null,
+        "DESIGN"
+      ],
+      "measured_cue_s": [
+        0.785,
+        1.235,
+        1.67
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "GUINNESS",
+          "NONE",
+          "THE DESIGN IS"
+        ]
+      },
+      "current": {
+        "ocr": [],
+        "gpt": [
+          "GUINNESS",
+          "NONE",
+          "DESIGN"
+        ]
+      }
+    },
+    {
+      "clip": 9,
+      "image_ids": [
+        265173,
+        524679
+      ],
+      "coco_text_annotation_ids": [
+        65748,
+        168069
+      ],
+      "target": [
+        "P",
+        null,
+        "LaZOOMTOURS"
+      ],
+      "measured_cue_s": [
+        0.28,
+        0.755,
+        1.29
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "P",
+          "NONE",
+          "LaZOOMTOURS"
+        ]
+      },
+      "current": {
+        "ocr": [
+          {
+            "t": 1.06,
+            "e": 1.52,
+            "text": "LaZOOMTOURS"
+          }
+        ],
+        "gpt": [
+          "P",
+          "NONE",
+          "LaZOOMTOURS"
+        ]
+      }
+    },
+    {
+      "clip": 10,
+      "image_ids": [
+        575574,
+        320835
+      ],
+      "coco_text_annotation_ids": [
+        187222,
+        89311
+      ],
+      "target": [
+        "ntesquad",
+        null,
+        "COFFEE"
+      ],
+      "measured_cue_s": [
+        0.53,
+        0.995,
+        1.48
+      ],
+      "prior": {
+        "ocr": [],
+        "gpt": [
+          "?",
+          "NONE",
+          "COFFEE"
+        ]
+      },
+      "current": {
+        "ocr": [],
+        "gpt": [
+          "whitesquid",
+          "NONE",
+          "COFFEE"
+        ]
+      }
+    },
+    {
+      "clip": 11,
+      "image_ids": [
+        44414,
+        406414
+      ],
+      "coco_text_annotation_ids": [
+        136962,
+        122023
+      ],
+      "target": [
+        "un3n",
+        null,
+        "VETERINARY"
+      ],
+      "measured_cue_s": [
+        0.785,
+        1.235,
+        1.67
+      ],
+      "prior": {
+        "ocr": [
+          {
+            "t": 1.25,
+            "e": 2.25,
+            "text": "VETERINARY HO"
+          }
+        ],
+        "gpt": [
+          "üb3r",
+          "NONE",
+          "VETERINARY"
+        ]
+      },
+      "current": {
+        "ocr": [
+          {
+            "t": 1.44,
+            "e": 1.9,
+            "text": "VETERINARY H"
+          }
+        ],
+        "gpt": [
+          "üb3r",
+          "NONE",
+          "VETERINARY"
+        ]
+      }
+    }
+  ]
+}

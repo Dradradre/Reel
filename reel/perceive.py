@@ -26,8 +26,9 @@ from collections import deque
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np, cv2, librosa
 from PIL import Image, ImageDraw
-from common import RecordedSource, audio_timeline, display_scale, pcm_codec, probe, read_audio, reel_source, sample_boundary, video_end, font, lut, tc, polyline
+from common import RecordedSource, audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary, video_end, font, lut, tc, polyline
 from frames import native_frames, save_frame as _save_frame
+from screen_text import screen_intervals
 from config import SEP_PY, ASR_PY, GAZE_PY, GENRES
 from stereo import channel_pairs, pair_cues
 from sounds import AST_NAME, AudioTagger, recorded_context, SOURCE_SCORE
@@ -676,57 +677,11 @@ def memory_voice(vo):
 # ============================================================== reading
 
 def ocr_pass(path, dur, log, step=1.0, subject=None):
-    from ocrmac import ocrmac
-    W, H = 1920, 1080
-    scale = display_scale(path, f"{W}:{H}")
-    stream = f"0:{probe(path)['video_index']}"
-    times = np.arange(0.25, dur, step)
-    tags = []
-    def one(t):
-        raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.3f}", "-i", str(path), "-map", stream, "-frames:v", "1", "-vf",
-                              scale, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True).stdout
-        if len(raw) < W * H * 3:
-            return t, []
-        img = Image.fromarray(np.frombuffer(raw, np.uint8).reshape(H, W, 3))
-        try:
-            r = ocrmac.OCR(img, language_preference=["ko-KR", "en-US"], recognition_level="accurate").recognize()
-        except Exception:
-            r = []
-        out = []
-        for text, conf, box in r:
-            text = text.strip()
-            if subject and any(al.lower() in text.lower() for al in subject.split(",")) and len(text) <= 14 and box[3] < 0.032:
-                tags.append(dict(t=float(t), x=box[0] + box[2] / 2, y=1 - box[1] - box[3] / 2))   # the subject's name tag
-            if conf < 0.9 or box[3] < 0.032:                         # what a viewer reads: big enough to notice
-                continue
-            letters = sum(ch.isalpha() for ch in text)
-            hangul = sum("가" <= ch <= "힣" for ch in text)
-            dated = re.search(r"(19|20)\d\d", text) is not None              # years and dates carry the story
-            if hangul < 2 and letters < 4 and not dated:           # bare numbers and HUD fragments are not read
-                continue
-            out.append(dict(text=text, x=box[0], y=1 - box[1] - box[3], h=box[3], c=conf))
-        return t, out
-    with ThreadPoolExecutor(6) as ex:
-        res = list(ex.map(one, times))
-    # merge the same text across consecutive samples into one item
-    items, open_ = [], {}
-    for t, found in res:
-        seen = set()
-        for f in found:
-            key = (f["text"], round(f["x"], 1), round(f["y"], 1))
-            seen.add(key)
-            if key in open_:
-                open_[key]["e"] = t + step
-            else:
-                open_[key] = dict(t=t, e=t + step, text=f["text"], y=f["y"], h=f["h"], c=f["c"])
-        for key in list(open_):
-            if key not in seen and open_[key]["e"] < t:
-                items.append(open_.pop(key))
-    items += list(open_.values())
-    items = [it for it in items if it["e"] - it["t"] > step * 1.5 or (len(it["text"]) >= 6 and it.get("c", 1) >= 1.0)]
-    items.sort(key=lambda d: d["t"])
-    log(f"  on-screen text done, {len(items)} items, {len(tags)} sightings of {subject}")
-    return items, sorted(tags, key=lambda d: d["t"])
+    try:
+        return screen_intervals(path, dur, log, step, subject)
+    except (ImportError, RuntimeError, OSError) as error:
+        log(f"  on-screen text unavailable: {error}")
+        return [], []
 
 
 # ============================================================== pages
@@ -1001,7 +956,7 @@ def render_page(F, t0, t1, idx, total, name):
     y, h = pg.y["read"]
     lanes = [-1e9, -1e9]
     for it in F["ocr"]:
-        if it["e"] < t0 or it["t"] > t1:
+        if it["e"] <= t0 or it["t"] >= t1:
             continue
         xs = pg.x(max(it["t"], t0))
         if lanes[0] <= xs:
@@ -1601,7 +1556,8 @@ def _build(film, out, page_s, lang, title, subject, genre, until=None, *, pictur
     with ThreadPoolExecutor(3) as ex:
         fv = ex.submit(video_pass, film, info, log)
         fa = ex.submit(audio_pass, audio_src, log, has_audio=info["has_audio"])
-        fo = ex.submit(ocr_pass, film, info["dur"], log, 1.0, subject)
+        text_end = min(info["dur"], picture_stop) if picture_stop is not None else info["dur"]
+        fo = ex.submit(ocr_pass, film, text_end, log, 1.0, subject)
         v, a, (ocr, tags) = fv.result(), fa.result(), fo.result()
     a["has_audio"] = info["has_audio"]
     if not info["has_audio"]:

@@ -43,7 +43,7 @@ Reel은 영상을 재생하면서 그때까지 나온 화면과 녹음을 모델
 | frames over time | 고른 프레임을 실제 표시 시각에 배치. 다음 프레임이 늦게 나오면 앞 화면이 계속 보임. 색 변환을 지원하는 FFmpeg에서는 PQ나 HLG로 표시된 HDR 영상을 sRGB 그림으로 변환 | 누가 어떤 물체와 함께 보이는지 확인한다. 재생 중 한 부분에 변화가 두드러지면 그 위치와 전후 시각이 나온다. `look`으로 두 순간의 원본을 확대할 수 있다. [글자 읽기 실험](docs/perception-check.md#잠깐-나타난-글자를-다시-읽을-때) |
 | follow (재생 중) | 앞에서 짚은 점이 프레임마다 어디로 움직였는지 | 처음 짚은 곳과 마지막으로 찾은 곳을 확대해 같은 손이나 물건인지 확인 |
 | subject | 영상의 주인공이 화면 어디에 있는지, 시선이 거기로 가는지 | 주인공을 놓치는 장면 |
-| on screen | 읽을 수 있는 크기의 제목, 자막, 배너 | 날짜, 장소, 스코어로 이어지는 이야기 |
+| on screen | 글자와 숫자를 읽어 해당 프레임이 보이는 동안 표시한다 | 소리가 나는 순간에 어떤 점수나 표지판이 보였는지 확인한다 |
 | change | 프레임 간 변화, 밝기, 정지 표시 | 컷, 번쩍임, 암전, 멈춘 화면 |
 | seen again | 앞에서 나온 장면 | 돌려 쓴 영상 |
 | sound | 주파수 대역마다 소리의 세기를 −80~0 dBFS의 고정 눈금으로 표시 | 다른 영상이나 확대 화면에서도 같은 소리는 같은 밝기로 보인다. 재생 중에는 길게 이어지는 음이나 짧게 치는 소리를 골라 원음과 대조할 수 있다. 목소리가 끊기는 구간에는 채널별로 남은 소리의 크기도 나온다. 재생할 때는 반복이 뚜렷한 소리의 추정 주파수도 나온다 |
@@ -310,6 +310,8 @@ Synchformer를 설치하면 `reel observe`에 `--sync-region LEFT TOP RIGHT BOTT
 현장 녹음 실험에는 Lipping, Sudarsanam, Drossos, Virtanen이 공개한 Clotho-AQA의 질문과 답(MIT) 및 Clotho v2.1의 소리 묘사를 썼다. 녹음마다 Freesound 원작자가 정한 이용 조건이 있고 소리 묘사에는 탐페레 대학교의 이용 조건이 적용된다. [Clotho-AQA](https://zenodo.org/records/6473207), [Clotho v2.1](https://zenodo.org/records/4783391)
 
 화자의 설명과 화면 위치를 비교할 때는 Pont-Tuset, Uijlings, Changpinyo, Soricut, Ferrari의 Localized Narratives에서 공개한 녹음과 시각별 문장, 마우스 좌표(CC BY 4.0)를 COCO 검증 사진과 함께 사용했다. [Localized Narratives](https://google.github.io/localized-narratives/), [COCO 이용 조건](https://cocodataset.org/#termsofuse)
+
+표지판을 읽는 실험에는 COCO 사진과 COCO-Text V2의 전사를 썼다. 사진마다 원작자가 정한 이용 조건이 있다. [COCO-Text V2](https://bgshih.github.io/cocotext/), [COCO 사진 이용 조건](https://cocodataset.org/dataset/termsofuse.htm)
 
 영상을 자유롭게 보는 사람들의 시선을 비교할 때는 Mital, Smith, Hill, Henderson의 DIEM 연구 자료를 썼다. 비상업적 연구에 CC BY-NC-SA 3.0 조건으로 사용할 수 있다. [DIEM 자료와 이용 조건](https://jhenderson.org/vclab/DIEM.html)
 

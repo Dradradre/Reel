@@ -38,6 +38,22 @@ class TransportTests(unittest.TestCase):
         self.path = self.root / "view.json"
         self.path.write_text(json.dumps(self.turn))
 
+    def test_optional_text_reads_only_the_published_crop(self):
+        reader = Viewing(iter([self.path]), None, None, None)
+        reader.advance(1, False)
+        with patch("reel.mcp_server.read_crop", return_value={"status": "available", "lines": []}) as recognize:
+            plain, picture = reader.look(1, [0, 0, .5, 1])
+            self.assertNotIn("screen_text", json.loads(plain.text))
+            with self.assertRaises(ValueError):
+                reader.look(1, [0, 0, .5, 1], at_s=1, read_text=True)
+            recognize.assert_not_called()
+            text, same_picture = reader.look(1, [0, 0, .5, 1], at_s=.75, read_text=True)
+            self.assertEqual(json.loads(text.text)["screen_text"], {"status": "available", "lines": []})
+            self.assertEqual(same_picture, picture)
+            self.assertEqual(json.loads(text.text)["pts_us"], 500000)
+            with Image.open(recognize.call_args.args[0]) as crop:
+                self.assertEqual(crop.size, (9, 12))
+
     def test_selected_tracks_survive_native_replay_and_reinspection_on_the_film_clock(self):
         from reel.play import play
 

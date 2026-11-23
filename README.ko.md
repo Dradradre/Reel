@@ -1,41 +1,71 @@
-<div align="center">
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/door-at-cutoff.png">
+  <img src="assets/door-playback.gif" width="100%" alt="Reel. 8.5초 동안 같은 닫힌 문이 보인다. A의 녹음에는 4초부터 파형이 솟고 B에는 작은 배경음만 이어진다.">
+</picture>
 
-# Reel
+[English](README.md)  |  [빠른 시작](#빠른-시작)  |  [측정 결과](#시험-결과)  |  [읽기 안내서](docs/READING.md)
 
-**언어 모델에게 영상을 보는 눈과 귀를**
+# 언어 모델의 눈과 귀
 
-Reel은 영상을 재생하면서 그때까지 나온 화면과 녹음을 모델에 건넨다. 그림과 글을 읽는 모델은 같은 녹음을 들은 로컬 청취기의 설명도 읽을 수 있다. 눈에 띈 순간을 되짚거나 30초씩 페이지를 넘기며 영상을 따라갈 수 있다.
+Reel은 언어 모델에 영화를 한 구간씩 보여준다. 모델은 방금 본 얼굴을 가까이 들여다보거나 그때 화면 밖에서 난 소리를 다시 듣고 다음 장면으로 넘어갈 수 있다. `--until 8.5`로 멈추면 다시 보고 들을 수 있는 범위도 첫 8.5초까지다.
 
-![python](https://img.shields.io/badge/python-3.11%2B-3776AB)
-![platform](https://img.shields.io/badge/macOS-Apple%20Silicon-black)
-![license](https://img.shields.io/badge/license-MIT-green)
+## 문이 열리기 전
 
-[English](README.md)
+갈색 문에 금빛 손잡이가 달려 있다. **A와 B의 첫 204프레임은 모두 같다.** 위의 두 파형은 각각의 녹음을 같은 눈금으로 그린 것이다. 문이 움직이기 전에 두 영상을 멈추고 GPT에게 무엇을 보고 들었는지 물었다.
 
-<img src="assets/reel_page_1.png" alt="예시 영상의 첫 30초를 한 시간축에 펼친 Reel 페이지" width="100%">
+<details>
+<summary><strong>두 답변 펼쳐 보기</strong></summary>
 
-</div>
+| 녹음 | GPT가 소리를 묘사한 말 (한국어 번역) |
+|---|---|
+| A | "분석 결과로 보면 잠깐 짤랑거리거나 달그락거리는 소리가 난 것 같아요. 제가 직접 들을 수는 없었어요." |
+| B | "무엇이 그 희미한 배경음을 냈는지는 알 수 없었어요." |
 
-## 풀려는 문제
+GPT는 양쪽 모두 금빛 손잡이가 달린 닫힌 갈색 문을 봤다고 했다. A에는 4초부터 열쇠꾸러미 녹음을 넣었고 B에는 같은 방 소음만 남겼다.
 
-말하는 사람이 화면에 들어오기 전에 목소리가 먼저 들릴 수 있다. 두 사진에서 손의 위치가 같아도 그사이에 손은 움직였다가 돌아왔을 수 있다. 모델이 이런 순간을 따라가려면 화면과 녹음을 같은 시간축에서 보고 들을 수 있어야 한다. 소리가 어디서 났는지 아직 모를 때는 그만큼만 말할 수 있어야 한다.
+이때 로컬 Codex의 GPT는 화면을 보고 로컬 청취기가 원음을 듣고 쓴 설명을 읽었다. 짤랑거림은 알아챘고 무엇이 낸 소리인지는 단정하지 않았다. [영어 답변 원문](docs/benchmarks/short-listening-turns.json), [열쇠 소리 직접 듣기, Joao_Janz (CC0)](https://freesound.org/people/Joao_Janz/sounds/485110/), [두 영상 재현하기](docs/door-trial.md#재현)
 
-편집한 영상은 이를 시험해 볼 한 가지 방법이다. 해설 1초가 두 번 재생되거나 소리가 갑자기 끊기거나 자막이 목소리보다 먼저 뜬다면, 처음 보는 모델도 그 변화를 알아차릴 수 있을까?
+</details>
 
-## 아이디어
+## 빠른 시작
 
-글을 읽는 모델에게는 읽는 순서가 곧 시간이다. 그러니 영상 전체를 빠짐없이, 읽는 순서대로 주면 된다.
+Apple Silicon Mac에 Python 3.11 이상과 FFmpeg가 필요하다. 아래 명령의 `film.mp4`에는 보려는 영상 경로를 넣는다.
 
-- **빈틈 없음.** 모든 프레임과 10ms 단위의 모든 소리가 페이지 어딘가에 흔적을 남긴다. 표본을 뽑지 않고 픽셀 열마다 최댓값을
-  남기기 때문에 한 프레임짜리 번쩍임이나 1초짜리 반복도 사라지지 않는다.
-- **하나의 시간축.** 화면, 자막, 소리, 음량, 관중, 말이 같은 시간축에 놓이므로 목소리가 그 화면의 것인지, 컷과 소리가 같이 바뀌는지가 보인다.
-- **기억.** 앞에서 본 화면이나 들은 소리와 닮은 구간에는 당시 시각을 적는다. 어떤 화면은 축소한 컬러 이미지의 픽셀까지 같고 어떤 화면은 배치만 닮았다. 소리는 파형이나 주파수 변화가 비슷한 구간을 표시한다.
-- **읽고 나서 판단.** 페이지는 30초씩 앞으로만 진행한다. 독자는 요약을 보기 전에 한 장씩 읽으며 짧은 기록을 남기고,
-  페이지에는 판정을 적지 않는다.
+```bash
+git clone https://github.com/Dradradre/Reel.git && cd Reel
+python3 -m venv .venv && source .venv/bin/activate
+python -m pip install -e '.[mcp]'
+reel play film.mp4 --out reels/first-view --until 8.5
+```
 
-## 페이지 구성
+재생기는 멈출 때마다 방금 본 구간을 저장한 경로를 출력한다. `next`를 입력하면 다음 구간으로 넘어가고 `quit`를 입력하면 끝난다. 처음부터 다시 보려면 새 출력 폴더를 쓴다.
 
-<img src="assets/reel_page_2.png" alt="예시 영상의 두 번째 페이지" width="100%">
+**모델과 함께 보기.** Reel은 MCP(Model Context Protocol)로 영상을 건넨다. 로그인한 Codex CLI에서 보려면 가상환경을 켠 상태로 서버를 등록하고 새 채팅을 연다.
+
+```bash
+codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --image-client
+```
+
+> Reel로 영상을 봐. 뭐가 보이고 무슨 소리가 들렸어?
+
+다른 MCP 클라이언트에는 `reel mcp /절대/경로/film.mp4 --until 8.5`를 stdio 명령으로 등록한다. 오디오 입력을 받는 클라이언트에는 녹음된 채널 그대로 WAV를 건넬 수 있다. 그림과 글을 읽는 클라이언트에는 화면과 소리 측정값을 보낸다.
+
+로컬 청취기를 설치하면 원음을 듣고 쓴 설명을 받을 수 있다. 음성 인식 패키지까지 설치하면 두 번 받아써서 일치한 대사도 볼 수 있다. 원음을 듣는 모델은 약 39GB다. [클라이언트 입력과 설치 방법](#재생-옵션)
+
+## 화면과 소리가 만나는 시각
+
+| 보는 동안 | 모델이 할 수 있는 일 |
+|---|---|
+| 계속 보기 | `view(turn=1)` 다음에 `view(turn=2)`를 호출하면 다음 구간의 화면과 소리를 받는다. |
+| 가까이 보기 | `look`에 시각과 영역을 지정하면 표지판 글씨나 누군가 손에 든 물건을 원본 픽셀로 살펴볼 수 있다. |
+| 다시 듣기 | 6초까지 봤다면 `observe(start_s=4, end_s=6)`로 4초부터 6초까지의 화면을 당시 녹음과 함께 다시 확인할 수 있다. |
+
+영화를 30초씩 한 장에 펼쳐 왼쪽에서 오른쪽으로 읽을 수도 있다. 아무 시각에나 세로줄을 그으면 그 순간의 화면과 움직임, 소리, 대사를 함께 볼 수 있다. 화면 변화 그래프에는 모든 프레임이, 음량 그래프에는 10밀리초마다 측정한 소리가 들어간다. [첫 장 크게 보기](assets/reel_page_1.png), [다음 30초 보기](assets/reel_page_2.png)
+
+[![예시 영상의 첫 30초. 같은 가로 눈금 위에 화면과 움직임, 소리의 주파수와 음량, 대사가 차례로 놓여 있다.](assets/reel_page_1.png)](assets/reel_page_1.png)
+
+<details>
+<summary>페이지의 각 줄을 읽는 법</summary>
 
 | 줄 | 내용 | 시청자가 알아채는 것 |
 |---|---|---|
@@ -58,7 +88,21 @@ Reel은 영상을 재생하면서 그때까지 나온 화면과 녹음을 모델
 | said | 재생 중 소리를 키워야 검출된 목소리는 추정 시각만 표시한다. 다시 볼 때는 `heard_words`로 지정한 구간의 말소리를 따로 확인할 수 있다. 두 구간에서 단어와 시각이 일치한 대사. 분리한 트랙에서만 발화가 감지되면 원음과 대조하고 증폭해 확인한 후보는 `reel listen`에 표시 | 무슨 말인지, 자막과 맞는지 |
 | heard again | 파형이 되풀이되거나 목소리의 주파수 변화가 닮으면 앞선 시각을 적는다. 다시 들을 때는 `compare_heard(similarity=true)`로 두 구간의 원음을 비교할 수 있다. `alternatives`를 주면 각 설명이 어느 녹음에 더 가까운지도 볼 수 있다 | 메아리처럼 들린 소리, 앞에서 들은 듯한 관중 소리 |
 
+</details>
+
 ## 시험 결과
+
+| 시험 | 로컬 GPT의 결과 |
+|---|---|
+| OVO-Bench 영상 644편에서 정해진 시각에 화면을 보고 답하기 | 공식 세 영역 평균 **66.08점**. 질문 시각 전에 나온 화면만 보고 3,035문항 중 2,002개를 맞혔다. [영역별 점수와 측정 조건](docs/benchmarks/ovo-full.json) |
+| 처음 보는 영상 12편에서 화면과 소리를 각각 기억해 묘사하기 | 사람 점수를 100으로 두면 **화면 78.8%, 소리 43.8%**였다. 둘을 반씩 반영하면 61.3%이고 95% 구간은 43.3~91.1%였다. [영상별 답변과 채점 자료](docs/benchmarks/track-recall.json) |
+
+회상 점수는 묘사한 문장만으로 해당 영상을 다른 영상과 얼마나 잘 구별하는지 잰 값이다. 같은 영상을 본 사람들의 문장을 기준으로 삼았다.
+
+잔치 장면의 소리를 들은 네 명 중 세 명이 노래를 언급했다. GPT는 박수와 말소리를 기억했고 노래를 놓쳤다. [잔치 장면과 나머지 영상에서 나온 답](docs/perception-check.md#화면과-녹음을-바꿔-끼운-뒤의-자유-회상)
+
+<details>
+<summary>이전 측정과 블라인드 시험에서 맞히거나 놓친 사례</summary>
 
 OVO-Bench 영상 644개에서 로컬 GPT가 Reel을 통해 질문 시각 직전까지의 화면을 최대 24장씩 봤다. 3,035개 시점 중 2,002개에서 정답을 골라 공식 채점법으로 **66.08점**을 받았다. [영역별 점수와 사람 기준](docs/perception-check.md#ovo-bench에서-질문-시각까지의-화면을-읽은-결과)
 
@@ -136,13 +180,21 @@ Kinetics 영상 24편에서 활동이 달라진 시각을 짚는 F1은 100점 �
 
 5라운드를 종류별로 보면 레터박스 3개 중 3개, 암전 3개 중 3개, 메아리 3개 중 3개, 붙여넣은 반복 1개 중 1개, 소리 끊김 2개 중 1개, 빠르거나 늦은 소리 3개 중 1개, 정지 1개 중 0개, 볼륨 점프 1개 중 0개다. 잘못 짚은 것은 하나로, 체스 방송의 허밍을 갑작스러운 볼륨 점프로 표시했다. 다섯 라운드 내내 손대지 않은 영상에서 없는 문제를 만들어 낸 적은 없다.
 
-## 빠른 시작
+</details>
 
-Apple Silicon 맥용이다(글자 인식에 Apple Vision, 받아쓰기에 MLX를 쓴다). `ffmpeg`가 필요하다.
+## 재생 옵션
+
+원음을 듣는 모델과 받아쓰기를 설치하려면 아래 명령을 쓴다.
 
 ```bash
-git clone <이 저장소> reel && cd reel
-python3 -m venv .venv && source .venv/bin/activate
+python -m pip install -e '.[speech]'
+reel setup --speech --describe-sounds
+```
+
+<details>
+<summary>명령어 예시, 선택 모델, 클라이언트 설정</summary>
+
+```bash
 pip install -e ".[all]"           # 필요한 것만: separate, crowd, mlx, speech, ocr, gaze
 reel setup --sync                  # 시선 모델과 싱크 모델(1.1GB) 받기
 reel doctor                        # 이 맥에서 무엇을 보고 들을 수 있는지
@@ -317,7 +369,35 @@ Synchformer를 설치하면 `reel observe`에 `--sync-region LEFT TOP RIGHT BOTT
 분리 모델이 따로 가상환경을 써야 하면 `REEL_SEP_PYTHON`, `REEL_CROWD_PYTHON`, `REEL_ASR_PYTHON`, `REEL_GAZE_PYTHON`으로
 지정한다. 모델과 캐시는 `~/.cache/reel`(`REEL_HOME`)에 둔다.
 
+</details>
+
+<details>
+<summary>30초 페이지를 만드는 과정</summary>
+
+```mermaid
+flowchart LR
+    F[영상] --> P[모든 프레임<br/>화면 변화와 반복]
+    F --> A[소리<br/>주파수와 10밀리초 음량]
+    F --> T[화면 글자<br/>Apple Vision]
+    F --> S[음원 분리<br/>Demucs 음성과 관중음]
+    S --> W[대사<br/>Whisper large-v3-turbo]
+    S --> R[반복된 녹음]
+    S --> C[응원 소리]
+    F --> G[예측 시선<br/>UNISAL]
+    F --> L[소리 후보<br/>AudioSet]
+    F --> Y[화면과 소리의 시차<br/>Synchformer]
+    P & A & T & W & R & C & G & L & Y --> PG[30초 페이지와 stream.md]
+    PG --> RD[순서대로 읽기]
+```
+
+</details>
+
 ## 한계
+
+화면 밖에서 소리가 난 순간을 정확히 짚어도 무엇이 그 소리를 냈는지는 틀릴 수 있다. 함성에 파묻힌 말소리는 자주 놓친다.
+
+<details>
+<summary>화면과 소리를 읽을 때 놓치는 것</summary>
 
 - 함성 속에서 소리치는 해설은 여전히 받아쓰지 못할 때가 많다. 반복은 표시되지만 그 말은 비어 있을 수 있다.
 - 구호의 말은 화면에 나온 이름과 장르에서 흔한 이름 중 발음이 가까운 것으로 추정한다. 화면에 한 번도 안 나온 이름은 잘못 들을 수 있다.
@@ -328,7 +408,12 @@ Synchformer를 설치하면 `reel observe`에 `--sync-region LEFT TOP RIGHT BOTT
 - 부주의한 독자는 `meta.json`이나 `stream.md`를 미리 볼 수 있다. 위 시험에서 두 독자가 앞부분을 잠깐 봤다고 밝혔다. 판단에는 쓰지 않았다고 했다.
 - Reel은 보여줄 뿐 취향을 정하지 않는다.
 
+</details>
+
 ## 사용한 오픈소스
+
+<details>
+<summary>모델과 데이터 출처, 만든 사람, 이용 조건</summary>
 
 다시 들을 시각을 찾는 모델은 Meta가 Apache 2.0으로 공개한 PE-A-Frame Small이다. 비교 실험에는 MIT 라이선스의 PretrainedSED에 포함된 Frame-MN과 탐페레 공과대학교가 비상업 과학 연구용으로 배포한 TUT Sound Events 2016 평가 녹음을 썼다. [Meta 모델 카드](https://huggingface.co/facebook/pe-a-frame-small), [PretrainedSED](https://github.com/fschmid56/PretrainedSED), [TUT 2016 녹음과 이용 조건](https://zenodo.org/records/996424)
 
@@ -397,6 +482,8 @@ Synchformer를 설치하면 `reel observe`에 `--sync-region LEFT TOP RIGHT BOTT
 
 청각 실험에는 탐페레 대학교 Machine Listening Group의 MACS 주석과 탐페레 공과대학교 Audio Research Group의 TAU Urban Acoustic Scenes 2019 녹음을 비상업 실험용 라이선스로 사용했다. [청각 검증 기록](docs/listening-check.md), [MACS](https://zenodo.org/records/5114771), [TAU 녹음](https://zenodo.org/records/2589280)
 
+</details>
+
 ## 라이선스
 
-MIT
+[MIT](LICENSE)

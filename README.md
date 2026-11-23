@@ -1,43 +1,67 @@
-<div align="center">
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/door-at-cutoff.png">
+  <img src="assets/door-playback.gif" width="100%" alt="Reel. The same closed door stays on screen for 8.5 seconds. Recording A has a burst of sound starting at four seconds. Recording B stays low.">
+</picture>
 
-# Reel
+[한국어](README.ko.md)  |  [Quickstart](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md)
 
-**Let a language model watch a film.**
+# Eyes and ears for a language model
 
-Reel lets a model follow a film as it unfolds. At each pause it delivers the pictures and the recording up to that moment. A model that reads pictures and text can use a local listener’s account of the same sound. The reader can revisit something it noticed or follow the film on 30-second pages.
+Reel lets a model watch a film one moment at a time. At each pause it gets the pictures and the sound recorded alongside them. It can look closer at a face, replay a sound from offscreen, or keep watching. Set `--until 8.5` and every replay stays inside those first 8.5 seconds.
 
-![python](https://img.shields.io/badge/python-3.11%2B-3776AB)
-![platform](https://img.shields.io/badge/macOS-Apple%20Silicon-black)
-![license](https://img.shields.io/badge/license-MIT-green)
+## Before the door opens
 
-[한국어](README.ko.md)
+A closed door. A gold knob. **The first 204 frames are identical in A and B.** The two traces above come from their recordings, drawn at the same scale. We stopped both films before the door moved and asked GPT what it had seen and heard.
 
-<img src="assets/reel_page_1.png" alt="The first 30 seconds of the demo on one time axis" width="100%">
+<details>
+<summary><strong>Open the two answers</strong></summary>
 
-</div>
+| Recording | What GPT said about the sound |
+|---|---|
+| A | “The audio analysis suggested a brief jingling or rattling sound, though I could not hear it directly.” |
+| B | “I could not tell what was making the faint background sound.” |
 
-## The problem
+Both answers describe a closed brown door with a gold knob. A contains a recording of keys starting at four seconds. B contains only the same room tone. In this run local Codex GPT received pictures and a local listener’s reading of the audio. It picked up the rattle and left its source open. [Recorded answers](docs/benchmarks/short-listening-turns.json) · [Hear the original keys, Joao_Janz (CC0)](https://freesound.org/people/Joao_Janz/sounds/485110/) · [Recreate both films](docs/door-trial.md#재현)
 
-A viewer can hear a voice before its speaker comes into view. A hand can move and return to the same spot between two stills. To follow either event, the reader needs the pictures and the recording on the same clock. It also needs to know when the source of a sound is still out of sight.
+</details>
 
-Editing gives a practical test. A repeated second of commentary, a hard cut to silence or a subtitle that appears before the voice should be perceptible to a reader seeing the film for the first time.
+## Quickstart
 
-## The idea
+Reel runs on Apple Silicon Macs. Install FFmpeg and Python 3.11 or later, then replace `film.mp4` with the path to your film.
 
-A reader that only reads still lives through time: reading order is its time. So give it the whole film in reading
-order, with nothing left out.
+```bash
+git clone https://github.com/Dradradre/Reel.git && cd Reel
+python3 -m venv .venv && source .venv/bin/activate
+python -m pip install -e '.[mcp]'
+reel play film.mp4 --out reels/first-view --until 8.5
+```
 
-- **Gapless.** Every frame and every 10 ms of sound leaves a mark on a page. Values are max-pooled per pixel column,
-  never sampled, so a one-frame flash or a one-second repeat survives.
-- **One time axis.** Picture, on-screen text, sound, loudness, crowd and speech sit on the same axis, so you can see
-  whether a voice belongs to its picture or a cut lands with its sound.
-- **Memory.** The page gives the time of an earlier picture or sound. A reader can see whether two colour previews match pixel for pixel, share a layout, or whether a sound has a similar waveform or frequency pattern.
-- **Read before judging.** Pages run strictly forward, 30 seconds each, and are read in order with a short log after
-  each page, before any summary. Nothing on a page is a verdict.
+The player prints the path to each turn. Type `next` for the next interval, or type `quit`. Use a fresh output directory for another viewing.
 
-## What a page shows
+**Watch with a model.** Reel serves the film over the Model Context Protocol (MCP). For a signed-in Codex CLI, register the local server from the activated environment, then start a new chat.
 
-<img src="assets/reel_page_2.png" alt="Second page of the demo reel" width="100%">
+```bash
+codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --image-client
+```
+
+> Watch the film with Reel. What did you see and hear?
+
+For other MCP clients, use `reel mcp /absolute/path/to/film.mp4 --until 8.5` as the stdio command. Audio-capable clients can receive the original channels as a WAV. Image-and-text clients get frames and acoustic measurements. Optional local readers describe the waveform and transcribe speech. The waveform model download is about 39 GB. [Client inputs and optional setup](#playback-options)
+
+## One clock for picture and sound
+
+| While watching | What the model can do |
+|---|---|
+| Advance | Call `view(turn=1)`, then `view(turn=2)`. Each call releases the next interval of the film. |
+| Look closer | Use `look` with a time and a box to read the original pixels of a sign or see what someone held. |
+| Replay | Once the film has reached six seconds, `observe(start_s=4, end_s=6)` pairs the successive pictures with the recording from those same two seconds. |
+
+Reel can also lay out a film in 30-second pages. Read left to right. A vertical line through the page crosses the picture, motion, sound and words at the same instant. Every frame contributes to the change trace and every 10 ms of sound contributes to the level trace. [Open the first page at full size](assets/reel_page_1.png) · [Read the next 30 seconds](assets/reel_page_2.png)
+
+[![First 30 seconds of the demo. Frames, picture changes, sound frequencies, levels and words share a horizontal time axis.](assets/reel_page_1.png)](assets/reel_page_1.png)
+
+<details>
+<summary>What each lane shows</summary>
 
 | Lane | What it is | What a viewer notices there |
 |---|---|---|
@@ -60,7 +84,19 @@ order, with nothing left out.
 | said | On replay, `heard_words` can check just the selected interval. Playback marks possible voices found only after amplification and keeps their times separate from the transcript. The page shows words that agree in two listening windows, checked against the mix when only the stem suggests speech. Gain-assisted candidates are available in `reel listen` | what is said; whether it matches the subtitles |
 | heard again | A short waveform repeat or a sequence of similar voice patterns points to the earlier sound. On replay, `compare_heard(similarity=true)` compares two original excerpts. Pass `alternatives` to compare descriptions across them. | a possible echo, a recurring crowd sound |
 
+</details>
+
 ## Does it work?
+
+| Trial | Result with local GPT |
+|---|---|
+| Timed visual questions on all 644 OVO-Bench videos | **66.08** on the official three-mode average. GPT answered 2,002 of 3,035 checkpoints correctly using only pictures from before each question. [Score and protocol](docs/benchmarks/ovo-full.json) |
+| Free recall of sight and sound on 12 unfamiliar films | **78.8% for sight, 43.8% for sound** on the human-relative recall measure. Giving the two tracks equal weight yielded 61.3% (95% interval 43.3–91.1%). [Captions and scoring](docs/benchmarks/track-recall.json) |
+
+The recall test compares how well a description distinguishes its film from the others, with human descriptions as the reference. In one party scene, three of four listeners mentioned singing. GPT recalled applause and speech and missed the singing. [Film-by-film account (Korean)](docs/perception-check.md#화면과-녹음을-바꿔-끼운-뒤의-자유-회상)
+
+<details>
+<summary>Earlier viewing trials, blind reader reports and misses</summary>
 
 On all 644 OVO-Bench videos, local GPT with Reel answered 2,002/3,035 visual checkpoints correctly and scored **66.08** using the official three-mode average. Each question received up to 24 pictures displayed strictly before its timestamp. [Scores, human reference and reproduction](docs/benchmarks/ovo-full.json)
 
@@ -145,13 +181,21 @@ In round 5, by kind: letterboxing 3 of 3, blackouts 3 of 3, echoes 3 of 3, a pas
 sound early or late 1 of 3, a freeze 0 of 1, a volume jump 0 of 1. One false alarm: a hum in a chess stream marked as a
 sudden volume jump. Across all five rounds the reader never invented a fault in an untouched video.
 
-## Quickstart
+</details>
 
-Reel is built for macOS on Apple Silicon (it uses Apple Vision for text and MLX for speech). It needs `ffmpeg`.
+## Playback options
+
+Run these commands to enable local listening and speech recognition.
 
 ```bash
-git clone <this repo> reel && cd reel
-python3 -m venv .venv && source .venv/bin/activate
+python -m pip install -e '.[speech]'
+reel setup --speech --describe-sounds
+```
+
+<details>
+<summary>Commands, optional models and client configuration</summary>
+
+```bash
 pip install -e ".[all]"           # or pick extras: separate, crowd, mlx, speech, ocr, gaze
 reel setup --sync                  # fetch the gaze model and the sync model (1.1 GB)
 reel doctor                        # what this machine can see and hear
@@ -297,7 +341,10 @@ the 70-second demo above, with six faults planted in it.
 If a separator needs its own environment, point Reel at it: `REEL_SEP_PYTHON`, `REEL_CROWD_PYTHON`,
 `REEL_ASR_PYTHON`, `REEL_GAZE_PYTHON`. Models and caches live in `~/.cache/reel` (`REEL_HOME`).
 
-## How it works
+</details>
+
+<details>
+<summary>How Reel builds a page</summary>
 
 ```mermaid
 flowchart LR
@@ -315,7 +362,14 @@ flowchart LR
     PG --> RD[a reader goes through them in order]
 ```
 
+</details>
+
 ## Limits
+
+An offscreen sound can register clearly while its source stays uncertain. Voices buried in a crowd are easy to miss.
+
+<details>
+<summary>Reading limits for each sense</summary>
 
 - Commentary shouted over a roaring crowd is often still not transcribed. The repeat is marked; the words may not be.
 - A chant's word is inferred by sound from names the film shows and the genre's usual names; a name never shown can
@@ -331,7 +385,12 @@ flowchart LR
   a glimpse and said they kept it out.
 - Reel shows; it does not decide taste.
 
+</details>
+
 ## Credits
+
+<details>
+<summary>Models, datasets, authors and licences</summary>
 
 Sound location uses Meta’s Apache-2.0 PE-A-Frame Small. The timing comparison also tested Frame-MN from the MIT-licensed PretrainedSED repository and TUT Sound Events 2016 under its noncommercial scientific research agreement. [Meta model card](https://huggingface.co/facebook/pe-a-frame-small), [PretrainedSED](https://github.com/fschmid56/PretrainedSED) and [TUT 2016 evaluation data and terms](https://zenodo.org/records/996424)
 
@@ -400,6 +459,8 @@ The automatic localization experiment used the SLAVC authors’ audiovisual enco
 
 The listening experiments also use MACS annotations from the Machine Listening Group at Tampere University and TAU Urban Acoustic Scenes 2019 recordings from the Audio Research Group at Tampere University of Technology, under their non-commercial experimental licences. [Listening results (Korean)](docs/listening-check.md) · [MACS](https://zenodo.org/records/5114771) · [TAU recordings](https://zenodo.org/records/2589280)
 
+</details>
+
 ## License
 
-MIT
+[MIT](LICENSE)

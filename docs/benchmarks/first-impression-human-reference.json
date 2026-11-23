@@ -380,5 +380,295 @@
     "min_system_free_pct": 79,
     "survivors": 0
   },
-  "sound_estimate_delivery": "During ordinary viewing the reader chose whether to request optional sound estimates. The original mix was nonzero throughout. In 26 of 47 turns the reader explicitly disabled sound_estimates. It received waveform-derived measurements on those turns and local source estimates and captions on the other 21. No native waveform attachment."
+  "sound_estimate_delivery": "During ordinary viewing the reader chose whether to request optional sound estimates. The original mix was nonzero throughout. In 26 of 47 turns the reader explicitly disabled sound_estimates. It received waveform-derived measurements on those turns and local source estimates and captions on the other 21. No native waveform attachment.",
+  "full_sound_estimates_repeat": {
+    "method": "Follow-up specified after noticing 26/47 turns without optional estimates in the free run. Eight new independent local GPT sessions, one per same film. Existing neutral presenter permits only advancing in order, always supplies the same eight-second steps, measurements, local sound source estimates and sound captions. The same one-sentence task. Confirmed equal turn count, end time and both extra audio readings on all turns. Both conditions used fresh sessions. A shift in their captions alone cannot isolate the causal contribution of the information.",
+    "model_responses": [
+      {
+        "id": "4403191162",
+        "gpt": "A woman helps a blond toddler in pajamas open a toy package before the child smiles and runs off to join the other children.",
+        "turns": 7,
+        "end_s": 54.47399092970522,
+        "source_estimate_turns": 7,
+        "sound_caption_turns": 7
+      },
+      {
+        "id": "11261138255",
+        "gpt": "A toddler pushes a colorful toy walker across a carpet while a man watches and helps turn it around.",
+        "turns": 5,
+        "end_s": 36.75800453514739,
+        "source_estimate_turns": 5,
+        "sound_caption_turns": 5
+      },
+      {
+        "id": "4451729145",
+        "gpt": "In an outdoor cat enclosure, a woman holds a gray cat while a young child reaches out to pet it.",
+        "turns": 6,
+        "end_s": 41.37793650793651,
+        "source_estimate_turns": 6,
+        "sound_caption_turns": 6
+      },
+      {
+        "id": "11111957393",
+        "gpt": "A young girl twirls and dances in a living room while family members watch and a boy occasionally joins her.",
+        "turns": 6,
+        "end_s": 44.29425,
+        "source_estimate_turns": 6,
+        "sound_caption_turns": 6
+      },
+      {
+        "id": "4938937283",
+        "gpt": "A white kitten named Odo rolls around on a wooden floor, batting at a pink toy while people sit nearby.",
+        "turns": 4,
+        "end_s": 29.558979591836735,
+        "source_estimate_turns": 4,
+        "sound_caption_turns": 4
+      },
+      {
+        "id": "4564918802",
+        "gpt": "A young girl wearing new glasses eats gummies outside and beams at the camera when asked to smile.",
+        "turns": 7,
+        "end_s": 55.449229024943314,
+        "source_estimate_turns": 7,
+        "sound_caption_turns": 7
+      },
+      {
+        "id": "4657443720",
+        "gpt": "A woman sits on a couch holding a young child, smiling and talking as the child looks around and makes faces.",
+        "turns": 7,
+        "end_s": 49.71390022675737,
+        "source_estimate_turns": 7,
+        "sound_caption_turns": 7
+      },
+      {
+        "id": "4604160981",
+        "gpt": "A young child lounges on a couch, smiling and talking with a phone held to their ear.",
+        "turns": 5,
+        "end_s": 34.11009070294784,
+        "source_estimate_turns": 5,
+        "sound_caption_turns": 5
+      }
+    ],
+    "language_model_metric": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 8,
+      "human_captions": 37,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.4969663804396987,
+          "other_film_cosine": 0.19964898854959756,
+          "same_minus_other": 0.29731739189010115,
+          "top_one_film": 0.8
+        },
+        "gpt": {
+          "same_film_cosine": 0.44225162267684937,
+          "other_film_cosine": 0.1837185062468052,
+          "same_minus_other": 0.2585331164300442,
+          "top_one_film": 0.975
+        },
+        "full_sound_estimates": {
+          "same_film_cosine": 0.4376804940402508,
+          "other_film_cosine": 0.18041772674769163,
+          "same_minus_other": 0.25726276729255915,
+          "top_one_film": 0.975
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "4403191162": {
+          "human": [
+            0.5421783268451691,
+            0.2479199230670929,
+            1.0
+          ],
+          "gpt": [
+            0.39361696839332583,
+            0.2119245082139969,
+            0.8
+          ],
+          "full_sound_estimates": [
+            0.3796207427978516,
+            0.20571701228618622,
+            0.8
+          ]
+        },
+        "11261138255": {
+          "human": [
+            0.3914364352822304,
+            0.26009032875299454,
+            0.25
+          ],
+          "gpt": [
+            0.28970231860876083,
+            0.1454726606607437,
+            1.0
+          ],
+          "full_sound_estimates": [
+            0.3208811357617378,
+            0.16246069967746735,
+            1.0
+          ]
+        },
+        "4451729145": {
+          "human": [
+            0.5403695464134216,
+            0.24042739868164062,
+            0.6
+          ],
+          "gpt": [
+            0.5296741127967834,
+            0.17712567746639252,
+            1.0
+          ],
+          "full_sound_estimates": [
+            0.5287171006202698,
+            0.1833413988351822,
+            1.0
+          ]
+        },
+        "11111957393": {
+          "human": [
+            0.5371529817581177,
+            0.18748091906309128,
+            0.8
+          ],
+          "gpt": [
+            0.4458666741847992,
+            0.1901157945394516,
+            1.0
+          ],
+          "full_sound_estimates": [
+            0.4448539435863495,
+            0.18223059177398682,
+            1.0
+          ]
+        },
+        "4938937283": {
+          "human": [
+            0.6502848029136657,
+            0.18442267626523973,
+            1.0
+          ],
+          "gpt": [
+            0.5017917037010193,
+            0.18220201134681702,
+            1.0
+          ],
+          "full_sound_estimates": [
+            0.45809097290039064,
+            0.1784268170595169,
+            1.0
+          ]
+        },
+        "4564918802": {
+          "human": [
+            0.38671840727329254,
+            0.12238743249326944,
+            1.0
+          ],
+          "gpt": [
+            0.4627343937754631,
+            0.15057316422462463,
+            1.0
+          ],
+          "full_sound_estimates": [
+            0.4625350683927536,
+            0.11454349011182785,
+            1.0
+          ]
+        },
+        "4657443720": {
+          "human": [
+            0.3503934442996979,
+            0.1885208860039711,
+            0.75
+          ],
+          "gpt": [
+            0.3689533919095993,
+            0.2222234308719635,
+            1.0
+          ],
+          "full_sound_estimates": [
+            0.3680647686123848,
+            0.22052906453609467,
+            1.0
+          ]
+        },
+        "4604160981": {
+          "human": [
+            0.5771970987319947,
+            0.16594234406948088,
+            1.0
+          ],
+          "gpt": [
+            0.545673418045044,
+            0.19011080265045166,
+            1.0
+          ],
+          "full_sound_estimates": [
+            0.5386802196502686,
+            0.19609273970127106,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "gpt": {
+          "human_same_minus_other": 0.29731739189010115,
+          "reader_same_minus_other": 0.2585331164300442,
+          "fraction_of_human": 0.8695526177816298,
+          "film_bootstrap_95": [
+            0.7397567280845889,
+            1.0373223984644742
+          ]
+        },
+        "full_sound_estimates": {
+          "human_same_minus_other": 0.29731739189010115,
+          "reader_same_minus_other": 0.25726276729255915,
+          "fraction_of_human": 0.8652799140241766,
+          "film_bootstrap_95": [
+            0.7073020986107703,
+            1.0723411558213376
+          ]
+        }
+      },
+      "paired_readers": {
+        "before": "gpt",
+        "after": "full_sound_estimates",
+        "metric": "same_film_cosine",
+        "primary_panel": {
+          "mean_change": -0.004571128636598594,
+          "bootstrap_95_percent": [
+            -0.018486404605209845,
+            0.00880579352378845
+          ],
+          "increased": 1,
+          "decreased": 7,
+          "tied": 0,
+          "by_film": {
+            "4403191162": -0.013996225595474254,
+            "11261138255": 0.03117881715297699,
+            "4451729145": -0.0009570121765136719,
+            "11111957393": -0.001012730598449696,
+            "4938937283": -0.043700730800628695,
+            "4564918802": -0.00019932538270950317,
+            "4657443720": -0.0008886232972145081,
+            "4604160981": -0.006993198394775413
+          }
+        },
+        "independent_panels": {}
+      }
+    },
+    "resource_check": {
+      "max_per_job_kib": 4795792,
+      "min_system_free_pct": 75,
+      "survivors": 0
+    },
+    "protocol_retries": []
+  }
 }

@@ -82,6 +82,21 @@ class CaptionComparisonTests(unittest.TestCase):
         self.assertEqual(panel["summary"]["human"]["same_film_cosine"], .75)
         self.assertEqual(panel["summary"]["model"]["same_minus_other"], 0.)
 
+    def test_paired_change_counts_films_once_and_keeps_the_reference_panels_distinct(self):
+        a, b = np.eye(2)
+        films = [{"id": "one", "human": ["a"] * 4, "panels": {"sound": ["b"]},
+                  "readers": {"previous": "b", "current": "a"}},
+                 {"id": "two", "human": ["b", "b"], "panels": {"sound": ["b"] * 3},
+                  "readers": {"previous": "b", "current": "b"}}]
+        report = compare(films, {"a": a, "b": b}, compare_readers=("previous", "current"))
+        change = report["paired_readers"]
+        self.assertEqual(change["primary_panel"], {"mean_change": .5, "bootstrap_95_percent": [0., 1.],
+                         "increased": 1, "decreased": 0, "tied": 1, "by_film": {"one": 1., "two": 0.}})
+        sound = change["independent_panels"]["sound"]
+        self.assertEqual((sound["mean_change"], sound["bootstrap_95_percent"], sound["decreased"]), (-.5, [-1., 0.], 1))
+        with self.assertRaises(ValueError):
+            compare(films, {"a": a, "b": b}, compare_readers=("previous", "missing"))
+
     def test_indistinguishable_films_share_top_rank(self):
         films = [{"id": str(i), "human": ["scene", "scene"], "readers": {"model": "scene"}}
                  for i in range(3)]

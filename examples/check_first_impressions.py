@@ -6,6 +6,7 @@ Use the same films and reader names throughout. Optional panels such as {"sound"
 Run with python examples/check_first_impressions.py reports.json. Requires torch and transformers.
 With "picture" and "sound" human panels, --sound-effect MUTED FULL compares the two reader
 conditions on the same pictures. Only FULL should receive the original soundtrack.
+Use --compare-readers BEFORE AFTER for paired changes in similarity to the same film's human captions.
 """
 import argparse
 import json
@@ -35,12 +36,33 @@ def embeddings(sentences):
     return vectors
 
 
-def compare(films, vectors, *, sound_effect=None):
+def paired_change(films, before, after):
+    """Resample entire films, keeping both reader responses with their human references."""
+    differences = np.asarray(after, dtype=float) - before
+    rng = np.random.default_rng(1802)
+    means = np.empty(20000)
+    # Bound the temporary draw matrix even for a large collection of films.
+    batch = max(1, 262144 // len(differences))
+    for start in range(0, len(means), batch):
+        block = means[start:start + batch]
+        block[:] = rng.choice(differences, size=(len(block), len(differences))).mean(axis=1)
+    return {"mean_change": float(differences.mean()),
+            "bootstrap_95_percent": np.percentile(means, [2.5, 97.5]).tolist(),
+            "increased": int((differences > 0).sum()), "decreased": int((differences < 0).sum()),
+            "tied": int((differences == 0).sum()),
+            "by_film": {film["id"]: float(delta) for film, delta in zip(films, differences, strict=True)}}
+
+
+def compare(films, vectors, *, sound_effect=None, compare_readers=None):
     if len(films) < 2 or len({f["id"] for f in films}) != len(films):
         raise ValueError("supply at least two films with distinct IDs")
     names = list(films[0]["readers"])
     if not names or "human" in names:
         raise ValueError("give each reader a name distinct from human")
+    if compare_readers is not None:
+        before, after = compare_readers
+        if before == after or not {before, after}.issubset(names):
+            raise ValueError("choose two distinct reader names from the reports")
     references = []
     for film in films:
         if len(film["human"]) < 2 or set(film["readers"]) != set(names):
@@ -72,6 +94,12 @@ def compare(films, vectors, *, sound_effect=None):
     report = {"model": MODEL, "revision": REVISION, "films": len(films),
             "human_captions": sum(map(len, references)), "summary": summary,
             "by_film_columns": ["same_film_cosine", "other_film_cosine", "top_one_film"], "by_film": by_film}
+    if compare_readers is not None:
+        report["paired_readers"] = {
+            "before": before, "after": after, "metric": "same_film_cosine",
+            "primary_panel": paired_change(films, [r[before][0] for r in by_film.values()],
+                                           [r[after][0] for r in by_film.values()]),
+            "independent_panels": {}}
     panel_names = films[0].get("panels", {}).keys()
     if any(film.get("panels", {}).keys() != panel_names for film in films):
         raise ValueError("supply each independent panel for every film")
@@ -104,15 +132,21 @@ def compare(films, vectors, *, sound_effect=None):
                 "picture_only_reader": muted, "audiovisual_reader": full, "by_film": changes,
                 "mean": {k: float(np.mean([c[k] for c in changes.values()])) for k in ("human", "reader")}}
         scores = {}
+        paired_scores = {}
         for name in ["human", *names]:
             per_film = []
             for i, film in enumerate(films):
                 captions = film["human"] if name == "human" else [film["readers"][name]]
                 similarity = np.mean([bank @ vectors[s] for s in captions], axis=0)
                 per_film.append([similarity[i], np.delete(similarity, i).mean()])
+            if compare_readers is not None and name in compare_readers:
+                paired_scores[name] = [same for same, _ in per_film]
             same, other = np.mean(per_film, axis=0)
             scores[name] = {"same_film_cosine": float(same), "other_film_cosine": float(other),
                             "same_minus_other": float(same - other)}
+        if compare_readers is not None:
+            report["paired_readers"]["independent_panels"][panel_name] = paired_change(
+                films, paired_scores[before], paired_scores[after])
         report["independent_panels"][panel_name] = {"captions": sum(map(len, groups)), "summary": scores}
     return report
 
@@ -120,6 +154,8 @@ def compare(films, vectors, *, sound_effect=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("reports", type=Path)
+    parser.add_argument("--compare-readers", nargs=2, metavar=("BEFORE", "AFTER"),
+                        help="report changes in same-film caption similarity with a film-level bootstrap interval")
     parser.add_argument("--sound-effect", nargs=2, metavar=("MUTED", "FULL"),
                         help="compare first descriptions with and without the soundtrack against human panels")
     args = parser.parse_args()
@@ -132,5 +168,5 @@ if __name__ == "__main__":
     if not all(isinstance(s, str) and s.strip() for s in captions):
         parser.error("each response must contain a nonempty caption")
     captions = sorted(set(captions))
-    report = compare(films, embeddings(captions), sound_effect=args.sound_effect)
+    report = compare(films, embeddings(captions), sound_effect=args.sound_effect, compare_readers=args.compare_readers)
     print(json.dumps(report, ensure_ascii=False, indent=2))

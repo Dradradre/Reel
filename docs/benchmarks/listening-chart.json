@@ -1,0 +1,1289 @@
+{
+  "protocol": "Do visual readers recover sound more accurately if the same waveform classifiers can be read on a common time axis? The experimental image shows the actual support of AST and YAMNet candidates on the released film clock. Labels are possible sound sources with no quotation authority. Keep all original pictures, spectrum, audio fields, time bounds and prompts. No confidence boosting, new detector, word transcription, or hand-selected sound categories. Controls get the unmodified release. Do not draw any candidate that requires audio after the release. Do not attach a chart on silent or absent audio.\nUse the 40 source-only AVCaps recordings from the earlier caption-style holdout; remove the four with previous GPT first-view tests at short cadence. Sort the remaining by SHA-256 of \"reel-listening-chart-1/<video_id>\" and take the first eight. Keep full native picture and sound, no fixed cuts, at most eight seconds on each release. For each film use separate locally signed-in GPT sessions with consecutive blind views and delayed free picture/sound recall, alternating submission order by film. Identical recorded MCP responses in each arm except for the extra candidate chart and its image description. Do not give the viewer human references or answers. Primary outcome is change in audio-only same-film minus other-film caption similarity per film; check whether visual recall degrades and inspect ungrounded quotations. Report paired bootstrap intervals and absolute human references. For normal playback promotion require positive lower bound for sound gain and no mean decline on picture recall; otherwise evaluate as an optional inspection only when timing conveys information, or retain as an experiment. Keep the door A/B, no-audio, digital silence and shared-prefix future-swap controls independent. Analytical selection and decision fixed before collecting model predictions.",
+  "source": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+  "captions_sha256": "162185e4adefaac50d0be361550f3477650bbdf5c24b0b8a04fdd338bd8ad126",
+  "reader": "Local signed-in Codex gpt-6.1-terra. No raw audio block to GPT. No large waveform helper in either condition. Identical waveform readers, speech recognition, original pictures and spectrum.",
+  "films": [
+    {
+      "id": "10793023296",
+      "sha256": "8f45cb306226c053f05eb257b660eaae34a33e86a08d98291dd964f6709f6927",
+      "turns": 5,
+      "end_s": 35.50216883550217,
+      "replies": {
+        "chart": {
+          "turns": 5,
+          "caption": "A group of adults and children play football on a grassy field, passing the ball before a man picks it up and tosses it back.",
+          "seen": "Adults and children played football on a grassy field, and a man picked up the ball and tossed it.",
+          "heard": "The audio analysis indicated people speaking, though I could not hear the recording directly.",
+          "chart_pages": 5
+        },
+        "control": {
+          "turns": 5,
+          "caption": "A group of adults and children play football on a grassy field, passing the ball and running after it.",
+          "seen": "Adults and children played football on a grassy field, passing the ball and running after it.",
+          "heard": "I could not directly hear the audio, but the sound descriptions indicated people talking in the background.",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "0a187063e45ebd9affff0e6eeace7d41ffefb55dc894425e21da3fa589256e95"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "6d066e1f1728f27051c82d2d945e29faea94849f5c0249ac71e5ebf8e23e2102"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "92103f6945e73c50514066170d86d0334fd3e5fc82ed056ab366a01dd58b69c3"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": [
+            "0f1cd351e46b74a7a06febf6bbf00a50aa42ab83dd0329d8da1cd5280c6087d7"
+          ]
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 35.50216883550217,
+          "sha256": [
+            "1be3ee0266f10efa25455beeb1e726f88265482d624da612fff09b96e5deefb7"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": []
+      }
+    },
+    {
+      "id": "4691952596",
+      "sha256": "706e3fcd366ae40c2cd16dd4f757f0eaaaf3ff1cf2249611374dce7ce3acf93a",
+      "turns": 6,
+      "end_s": 41.00641723356009,
+      "replies": {
+        "chart": {
+          "turns": 6,
+          "caption": "A toddler points at the television, smiles, and repeatedly raises both arms as an adult talks about a goal.",
+          "seen": "A toddler points at a television, smiles, and repeatedly raises both arms.",
+          "heard": "A voice talks about a goal, with possible music in the background.",
+          "chart_pages": 6
+        },
+        "control": {
+          "turns": 6,
+          "caption": "A smiling toddler in pajamas points at the television and repeatedly raises both arms as an adult talks about a goal.",
+          "seen": "A smiling toddler in pajamas points at a television and repeatedly raises both arms.",
+          "heard": "The speech reader reported an adult saying “goal” and asking whether it was a goal.",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "902da2634a336ded6fb95eab7be8b66c693fa48858d0c278e01b95ec7a1344a6"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "657a6c7f3b1c3cbc272f8819035e5ddcefa9fec13563bf2ee623ae90c0c612f6"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "bc27ce9caa4d8d481d008417c4ecc2bebf35f36d3c57ff418eefd697b33fc873"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": [
+            "515ea5cf5322e549ac4c284428740b4cdf1a1f029a6ffa90755b743ce4903029"
+          ]
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 40.0,
+          "sha256": [
+            "d3bc95540e6ac91ee4105e5d1b38e9bad92977a162ca29896cdbfce8eaf137e7"
+          ]
+        },
+        {
+          "start_s": 40.0,
+          "end_s": 41.00641723356009,
+          "sha256": [
+            "5528969c9cffc1f5c4c5c93ba9a3a0f715e88791f69ef9956122585de45779fc"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": [
+          {
+            "text": "goal",
+            "present_in_same_channel_word_reading": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "10871643364",
+      "sha256": "95e241b8298b861ac95cdb891ac011552aecf87f35e34476103b9efdab1d7284",
+      "turns": 6,
+      "end_s": 45.12,
+      "replies": {
+        "chart": {
+          "turns": 6,
+          "caption": "A man holds a baby on a sofa while a young child hugs the baby and then runs off to play as another adult watches.",
+          "seen": "A man holds a baby on a sofa while a young child hugs the baby and then runs off to play as another adult watches.",
+          "heard": "The audio analysis indicated speech, but I could not directly hear the recording.",
+          "chart_pages": 6
+        },
+        "control": {
+          "turns": 6,
+          "caption": "A man holds a baby on the couch while a young child hugs the baby, then runs off to play as the adults watch.",
+          "seen": "A man holds a baby on a couch while a young child hugs the baby and then runs off to play as the adults watch.",
+          "heard": "I could not hear the audio, though the sound descriptions indicated people talking and laughing.",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "e4f5c5d0dc0bec7fcc1ffebbcaa139a044b54b75a6f06ea46a8a861715bd4160"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "0f7ece608fe1cc4e565a3f03b2c5e3eb474a49dbc1042af1ab841947980d6bf8"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "41b82c43a1b6708f28cd7e3bd43ff29c9ed6d16e01057c1cb035c63722b8410e"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": [
+            "cf81f596af2cd17e30284095f725e90278f356dca4d43dc61cee32bd55c549dd"
+          ]
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 40.0,
+          "sha256": [
+            "01aa51fe4de9f5d38b9fc7b689cd8ceed75f83ca7d341b9da8d3f14940526113"
+          ]
+        },
+        {
+          "start_s": 40.0,
+          "end_s": 45.12,
+          "sha256": [
+            "9f8be6ee94e55534cdf84b3dce832a6dbae818c69f62b9bc12667352ca8c4a3f"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": []
+      }
+    },
+    {
+      "id": "4567287291",
+      "sha256": "b5adc06a8f96349f666aa2cc09f07200ef71fecf869f0e689f1e1f1da99db796",
+      "turns": 8,
+      "end_s": 58.35172335600907,
+      "replies": {
+        "chart": {
+          "turns": 8,
+          "caption": "A baby in patterned pajamas sits supported by an adult, smiling and babbling while playing with a yellow toy and reaching toward the camera.",
+          "seen": "A baby in patterned pajamas played with a yellow toy while sitting supported beside an adult.",
+          "heard": "The audio descriptions indicated baby babbling and a person speaking, but I could not directly hear the recording.",
+          "chart_pages": 8
+        },
+        "control": {
+          "turns": 8,
+          "caption": "A baby in patterned pajamas babbles and smiles while playing with a yellow toy, supported by an adult on a couch.",
+          "seen": "A baby in patterned pajamas smiles and plays with a yellow toy while an adult supports them on a couch.",
+          "heard": "The audio readings suggested babbling and an adult speaking, including the words “Good reaching.”",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "c751ae5cf72cf5c07e9e5d1878021abacf3844bab8ef88e81c7b48f5a2c1e5c3"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "9c2d633cb335439183978c65de7b4f069e204163d54f05c96804841b3c789003"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "f92b784fe8584e193d7550e0defbb630e718b1542d5b51daf0e7c0051c74b8ae"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": [
+            "222c4768b66301d9039afdf677dd88b64862f9883bf36d5aba59f69a318e78a5"
+          ]
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 40.0,
+          "sha256": [
+            "8961435013912fead8cd65d5c89e0e0f2618f0b4045cd48044621b5861de797d"
+          ]
+        },
+        {
+          "start_s": 40.0,
+          "end_s": 48.0,
+          "sha256": [
+            "8ed2df7113965d074e9cb0d30a15f02202e860e0d441d8edf6a9b5233ee24122"
+          ]
+        },
+        {
+          "start_s": 48.0,
+          "end_s": 56.0,
+          "sha256": [
+            "00e9faf76d12e2571b116e9eb06248482bc2cd6ed9c99ce5e15d9590c7eca634"
+          ]
+        },
+        {
+          "start_s": 56.0,
+          "end_s": 58.35172335600907,
+          "sha256": [
+            "d97666e0af48f1f9cc81ec2fc4a114d9b4ece63a050ba75ad9088415db17e984"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": [
+          {
+            "text": "Good reaching.",
+            "present_in_same_channel_word_reading": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "4652947202",
+      "sha256": "f752d606f9e9c2ba411be2765a640ffb6d3c8d562f986243dedc0accecdb729e",
+      "turns": 7,
+      "end_s": 53.98637188208617,
+      "replies": {
+        "chart": {
+          "turns": 7,
+          "caption": "A man lounges by a window, playing a game on his phone while smiling and joking with someone off camera.",
+          "seen": "A smiling man sits by a bright window, tapping on his phone and gesturing toward the camera.",
+          "heard": "The speech reader recorded a conversation about a game and joking about being hard and unable to rap.",
+          "chart_pages": 7
+        },
+        "control": {
+          "turns": 7,
+          "caption": "A man sits by a window, smiling and joking with someone while playing a game on his phone.",
+          "seen": "A smiling man sits in an armchair by a bright window, tapping on his phone and gesturing as he talks.",
+          "heard": "The speech reader indicated a conversation about growing up on the streets and playing a phone game.",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "786cbf2d47e967906f633f7c9e0f11d5649faca61c16f28937f9109cf5bcbfd4"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "6d35ffbb82deaf2468f06b3d9f17a8a451a10b37f45fa57a3ca371a3faa2a186"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "b4929f093aa91d2cd2b4e33a62a2fa35be04357ccfc3b76904765cff1ee64f41"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": [
+            "f7ab52d3961f0e2bf7e8f6c54b257fd485a155486f137ca4124f330aa72d5a81"
+          ]
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 40.0,
+          "sha256": [
+            "fecb8eec3a06f69572cfbff2e0263cda55b5e1412cfd9c63f0cf907c055637f8"
+          ]
+        },
+        {
+          "start_s": 40.0,
+          "end_s": 48.0,
+          "sha256": [
+            "4780d09c1b571a2527e88ac371b0b4c7ce8ff56b3d03c1b9286ca6559476a3ad"
+          ]
+        },
+        {
+          "start_s": 48.0,
+          "end_s": 53.98637188208617,
+          "sha256": [
+            "ee8f85fc7bea0c59cf6eb6b9d80e187cfeb6c5d61f5adb6c70252b6053fd8481"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": []
+      }
+    },
+    {
+      "id": "10130549263",
+      "sha256": "b6a7ba0d01848856f1a538132274104e118c375feb2802754aea780209cd3f97",
+      "turns": 5,
+      "end_s": 36.83683683683684,
+      "replies": {
+        "chart": {
+          "turns": 5,
+          "caption": "A person cuts and serves a savory pancake from a tabletop griddle while a diner uses a phone, and the camera ends on a plated portion.",
+          "seen": "Someone cuts and serves a savory pancake from a tabletop griddle while a diner uses a phone, and the camera moves to a plated portion.",
+          "heard": "I could not directly hear the audio; a sound reader suggested background conversation and dishes moving.",
+          "chart_pages": 5
+        },
+        "control": {
+          "turns": 5,
+          "caption": "At a restaurant, someone cuts a sauced savory pancake on a tabletop griddle and serves a portion while a diner looks at a phone.",
+          "seen": "Someone cut a sauced savory pancake on a restaurant griddle while a diner looked at a phone, and a portion appeared on a plate.",
+          "heard": "The audio descriptions suggested background conversation and dishes being moved, though I could not hear the recording directly.",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "efc66eccbe9ffbf4ba4298d7f2a0353348b2d4f73629d5073ac91a8ce6810e58"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "1701335be0c6a72f63c4aca7a573d1a67905a4168a3f77efed9fe6733fa2e1f3"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "8aaa181ac37e0573f2822761dc443fa49e286449ec8c4ffcac448862d6116f9e"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": [
+            "b073b41495a2d0e72133f5aba5c8d5c1b8df994e9ff5e2892b5e6c6f9a0d4de5"
+          ]
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 36.83683683683684,
+          "sha256": [
+            "312186c178ad406c77ae82517def38ec1064be35c69f3c76148016aa9d9c6a6c"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": []
+      }
+    },
+    {
+      "id": "11633816836",
+      "sha256": "1dd6632c7727fdfb0b51712e625c8c4c94327adb521f0cb69430ed8f532246ba",
+      "turns": 8,
+      "end_s": 58.82549215882549,
+      "replies": {
+        "chart": {
+          "turns": 8,
+          "caption": "A woman in sunglasses dances and smiles on a sunny street before the camera pans around the quiet neighborhood, showing small houses, shops, and palm trees.",
+          "seen": "A woman in sunglasses dances on a sunny street, and the camera pans around a quiet neighborhood of small buildings and palm trees.",
+          "heard": "The audio readings suggested music, but I could not hear the recording directly.",
+          "chart_pages": 7
+        },
+        "control": {
+          "turns": 8,
+          "caption": "A smiling woman in sunglasses dances beside a sunny street before the camera pans around the quiet neighborhood's houses and palm trees.",
+          "seen": "A smiling woman in sunglasses dances beside a sunny street, and the camera pans around a quiet neighborhood of small houses and palm trees.",
+          "heard": "The audio analysis suggests music was playing, though I could not hear it directly.",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "43e914a45df49479aa1f493833978555f6b9626b89d48e86c687adca83fb3b90"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "00e952d13ba3f74647b7aaeb34b2aa330b9a1d5dd02110bb66fd63829c1f7ad1"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "42a52c0ea839dfa9677eb74df36f27cd8e5cd446d45cc66443217a5dffcc1c80"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": []
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 40.0,
+          "sha256": [
+            "55a5a4c3aa90ab1dafa9fead34467a535a19e86e00b4e348330990b2c0760b59"
+          ]
+        },
+        {
+          "start_s": 40.0,
+          "end_s": 48.0,
+          "sha256": [
+            "63bc899ca997d913d66c65e9b64e76e0141614ca9715f27fc7e6034579819d42"
+          ]
+        },
+        {
+          "start_s": 48.0,
+          "end_s": 56.0,
+          "sha256": [
+            "15089ea9893b7fb72d82f3df47903316638d8a7032137a5fa0ae7fa62f898239"
+          ]
+        },
+        {
+          "start_s": 56.0,
+          "end_s": 58.82549215882549,
+          "sha256": [
+            "4a376b8ebad5cdf3af487fd72efbe96b7037265f0f5611e95be6b9b411291287"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": []
+      }
+    },
+    {
+      "id": "11587211476",
+      "sha256": "c1ba3d2382af7630d3a19beaa530c7f0bbb730d2ae18717c556fedf2ba016f06",
+      "turns": 7,
+      "end_s": 49.1309977324263,
+      "replies": {
+        "chart": {
+          "turns": 7,
+          "caption": "A handler guides a black and white dog over jumps and through obstacles on an outdoor agility course.",
+          "seen": "A handler guides a black and white dog through an outdoor agility course with jumps and tunnels.",
+          "heard": "The audio analysis suggested background conversation and possible dog barking, but I could not hear the recording directly.",
+          "chart_pages": 7
+        },
+        "control": {
+          "turns": 7,
+          "caption": "A handler guides a black and white dog through jumps and tunnels on an outdoor agility course.",
+          "seen": "A handler guided a black and white dog through an outdoor agility course with jumps and tunnels.",
+          "heard": "I could not directly hear the audio, but the sound readings indicated background speech.",
+          "chart_pages": 0
+        }
+      },
+      "chart_per_turn": [
+        {
+          "start_s": 0.0,
+          "end_s": 8.0,
+          "sha256": [
+            "22e39069f70094200d213489587a7be4344b74fccda7874cd24af95bc1ddab82"
+          ]
+        },
+        {
+          "start_s": 8.0,
+          "end_s": 16.0,
+          "sha256": [
+            "def6db4a7a8cfc2c48580b694f088bc0e06db5c9f4f6655262c9899f2bc0bf8e"
+          ]
+        },
+        {
+          "start_s": 16.0,
+          "end_s": 24.0,
+          "sha256": [
+            "75870ea3ae2c64bb922af93f649bbfd32575b2a78ac35aa3a33c9ffa7301f914"
+          ]
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 32.0,
+          "sha256": [
+            "e881a911c54b3e95f204ec580932e686b515586e4377373888c6fac3e0716997"
+          ]
+        },
+        {
+          "start_s": 32.0,
+          "end_s": 40.0,
+          "sha256": [
+            "6bf8a8f5f8a1bef3538f80c8ef4720eba8d08feec536a7ba9c1154d1d7de6396"
+          ]
+        },
+        {
+          "start_s": 40.0,
+          "end_s": 48.0,
+          "sha256": [
+            "ffaebf917cbecf7d16ee0cd2c49b9311d188cc91b84d424cbf48249ec7f73824"
+          ]
+        },
+        {
+          "start_s": 48.0,
+          "end_s": 49.1309977324263,
+          "sha256": [
+            "644e59d3d7b28f34e348f2e0d0dfc4c2a13ca059b55c8201a59eff9a47075515"
+          ]
+        }
+      ],
+      "quotes": {
+        "chart": [],
+        "control": []
+      }
+    }
+  ],
+  "scores": {
+    "heard": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 8,
+      "human_captions": 31,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.4802207098652919,
+          "other_film_cosine": 0.27888410035520794,
+          "same_minus_other": 0.20133660951008397,
+          "top_one_film": 0.6458333333333333
+        },
+        "chart": {
+          "same_film_cosine": 0.26717260126024484,
+          "other_film_cosine": 0.21741787437349558,
+          "same_minus_other": 0.049754726886749256,
+          "top_one_film": 0.4166666666666667
+        },
+        "control": {
+          "same_film_cosine": 0.2946889236569405,
+          "other_film_cosine": 0.22980789467692375,
+          "same_minus_other": 0.06488102898001674,
+          "top_one_film": 0.25
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "10793023296": {
+          "human": [
+            0.5217094421386719,
+            0.28382258613904315,
+            1.0
+          ],
+          "chart": [
+            0.10597133139769237,
+            0.24574092030525208,
+            0.0
+          ],
+          "control": [
+            0.2743247052033742,
+            0.3317163288593292,
+            0.0
+          ]
+        },
+        "4691952596": {
+          "human": [
+            0.5532725354035696,
+            0.31849148372809094,
+            0.3333333333333333
+          ],
+          "chart": [
+            0.19760021070639291,
+            0.28829124569892883,
+            0.0
+          ],
+          "control": [
+            0.18209480245908102,
+            0.1565873622894287,
+            0.0
+          ]
+        },
+        "10871643364": {
+          "human": [
+            0.45380998849868776,
+            0.3380305409431458,
+            0.0
+          ],
+          "chart": [
+            0.06130579859018326,
+            0.18813090026378632,
+            0.0
+          ],
+          "control": [
+            0.2744132161140442,
+            0.3074154257774353,
+            0.0
+          ]
+        },
+        "4567287291": {
+          "human": [
+            0.5855490788817406,
+            0.30242615938186646,
+            0.75
+          ],
+          "chart": [
+            0.48421115428209305,
+            0.3119855225086212,
+            1.0
+          ],
+          "control": [
+            0.34083715826272964,
+            0.23483192920684814,
+            0.0
+          ]
+        },
+        "4652947202": {
+          "human": [
+            0.4842640161514282,
+            0.19128723740577697,
+            1.0
+          ],
+          "chart": [
+            0.2747336268424988,
+            0.2440745085477829,
+            0.0
+          ],
+          "control": [
+            0.24825578927993774,
+            0.260040819644928,
+            0.0
+          ]
+        },
+        "10130549263": {
+          "human": [
+            0.47364749759435654,
+            0.3266066014766693,
+            0.75
+          ],
+          "chart": [
+            0.3916125074028969,
+            0.20899398624897003,
+            1.0
+          ],
+          "control": [
+            0.33828479796648026,
+            0.1695038229227066,
+            1.0
+          ]
+        },
+        "11633816836": {
+          "human": [
+            0.4235480725765228,
+            0.2152600809931755,
+            1.0
+          ],
+          "chart": [
+            0.3188929706811905,
+            0.08522122353315353,
+            1.0
+          ],
+          "control": [
+            0.43767283856868744,
+            0.15891103446483612,
+            1.0
+          ]
+        },
+        "11587211476": {
+          "human": [
+            0.345965047677358,
+            0.25514811277389526,
+            0.3333333333333333
+          ],
+          "chart": [
+            0.30305321017901105,
+            0.16690468788146973,
+            0.3333333333333333
+          ],
+          "control": [
+            0.26162808140118915,
+            0.21945643424987793,
+            0.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "chart": {
+          "human_same_minus_other": 0.20133660951008397,
+          "reader_same_minus_other": 0.04975472688674927,
+          "fraction_of_human": 0.24712210565092135,
+          "film_bootstrap_95": [
+            -0.24561800389159572,
+            0.7628892948443302
+          ]
+        },
+        "control": {
+          "human_same_minus_other": 0.20133660951008397,
+          "reader_same_minus_other": 0.0648810289800167,
+          "fraction_of_human": 0.3222515226510116,
+          "film_bootstrap_95": [
+            -0.01679938290211686,
+            0.7459857052749614
+          ]
+        }
+      },
+      "chart_minus_control": {
+        "mean_change": -0.01512630209326743,
+        "bootstrap_95_percent": [
+          -0.06623097614695628,
+          0.03565121342738471
+        ],
+        "increased": 4,
+        "decreased": 4,
+        "tied": 0,
+        "by_film": {
+          "10793023296": -0.08237796525160468,
+          "4691952596": -0.11619847516218823,
+          "10871643364": -0.09382289201021193,
+          "4567287291": 0.06622040271759033,
+          "4652947202": 0.04244414865970614,
+          "10130549263": 0.013837546110153198,
+          "11633816836": -0.04509005695581436,
+          "11587211476": 0.0939768751462301
+        }
+      }
+    },
+    "seen": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 8,
+      "human_captions": 32,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.48665181677788494,
+          "other_film_cosine": 0.07073361288251666,
+          "same_minus_other": 0.41591820389536827,
+          "top_one_film": 0.94375
+        },
+        "chart": {
+          "same_film_cosine": 0.46723173794647055,
+          "other_film_cosine": 0.07892940658166481,
+          "same_minus_other": 0.38830233136480574,
+          "top_one_film": 0.9
+        },
+        "control": {
+          "same_film_cosine": 0.4749396972358227,
+          "other_film_cosine": 0.0793400254478911,
+          "same_minus_other": 0.3955996717879316,
+          "top_one_film": 0.9
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "10793023296": {
+          "human": [
+            0.421799769004186,
+            0.032182666628311075,
+            1.0
+          ],
+          "chart": [
+            0.41593249638875324,
+            0.06866355240345001,
+            1.0
+          ],
+          "control": [
+            0.4669083058834076,
+            0.06508824229240417,
+            1.0
+          ]
+        },
+        "4691952596": {
+          "human": [
+            0.45353103429079056,
+            0.14045653119683266,
+            0.75
+          ],
+          "chart": [
+            0.5084012225270271,
+            0.14680294692516327,
+            1.0
+          ],
+          "control": [
+            0.475962370634079,
+            0.13822795450687408,
+            1.0
+          ]
+        },
+        "10871643364": {
+          "human": [
+            0.4515969932079315,
+            0.10001906901597976,
+            1.0
+          ],
+          "chart": [
+            0.29560560584068296,
+            0.15072719752788544,
+            0.2
+          ],
+          "control": [
+            0.28572452664375303,
+            0.1538171023130417,
+            0.2
+          ]
+        },
+        "4567287291": {
+          "human": [
+            0.5548670987288157,
+            0.131694495677948,
+            1.0
+          ],
+          "chart": [
+            0.5632148583730062,
+            0.1432986706495285,
+            1.0
+          ],
+          "control": [
+            0.5424627363681793,
+            0.15080153942108154,
+            1.0
+          ]
+        },
+        "4652947202": {
+          "human": [
+            0.5705193132162094,
+            0.048406824469566345,
+            1.0
+          ],
+          "chart": [
+            0.5041530057787895,
+            0.040966201573610306,
+            1.0
+          ],
+          "control": [
+            0.5645379424095154,
+            0.04170984774827957,
+            1.0
+          ]
+        },
+        "10130549263": {
+          "human": [
+            0.445154070854187,
+            0.06021954827010632,
+            0.8
+          ],
+          "chart": [
+            0.48382251262664794,
+            0.08295108377933502,
+            1.0
+          ],
+          "control": [
+            0.4910840392112732,
+            0.059415075927972794,
+            1.0
+          ]
+        },
+        "11633816836": {
+          "human": [
+            0.545576848089695,
+            -0.0023078143130987883,
+            1.0
+          ],
+          "chart": [
+            0.4675111919641495,
+            -0.0020966562442481518,
+            1.0
+          ],
+          "control": [
+            0.47238893806934357,
+            0.024300936609506607,
+            1.0
+          ]
+        },
+        "11587211476": {
+          "human": [
+            0.4501694068312645,
+            0.055197582114487886,
+            1.0
+          ],
+          "chart": [
+            0.49921301007270813,
+            0.00012225603859405965,
+            1.0
+          ],
+          "control": [
+            0.5004487186670303,
+            0.001359504763968289,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "chart": {
+          "human_same_minus_other": 0.4159182038953683,
+          "reader_same_minus_other": 0.38830233136480574,
+          "fraction_of_human": 0.9336026356338328,
+          "film_bootstrap_95": [
+            0.7846710747709563,
+            1.0737586159786907
+          ]
+        },
+        "control": {
+          "human_same_minus_other": 0.4159182038953683,
+          "reader_same_minus_other": 0.3955996717879316,
+          "fraction_of_human": 0.9511477691595625,
+          "film_bootstrap_95": [
+            0.7853997268342378,
+            1.0951220280919125
+          ]
+        }
+      },
+      "chart_minus_control": {
+        "mean_change": -0.0072973404231258115,
+        "bootstrap_95_percent": [
+          -0.031055446108439362,
+          0.014300135962654776
+        ],
+        "increased": 5,
+        "decreased": 3,
+        "tied": 0,
+        "by_film": {
+          "10793023296": -0.054551119605700193,
+          "4691952596": 0.023863859474658966,
+          "10871643364": 0.012970983982086182,
+          "4567287291": 0.02825499077637994,
+          "4652947202": -0.059641290456056595,
+          "10130549263": -0.030797534435987484,
+          "11633816836": 0.021519846748560667,
+          "11587211476": 1.5401310520246625e-06
+        }
+      }
+    },
+    "caption": {
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "films": 8,
+      "human_captions": 33,
+      "summary": {
+        "human": {
+          "same_film_cosine": 0.5086709414298336,
+          "other_film_cosine": 0.0925404973134088,
+          "same_minus_other": 0.4161304441164248,
+          "top_one_film": 0.9583333333333333
+        },
+        "chart": {
+          "same_film_cosine": 0.4410851649319132,
+          "other_film_cosine": 0.10665514681022614,
+          "same_minus_other": 0.33443001812168704,
+          "top_one_film": 0.875
+        },
+        "control": {
+          "same_film_cosine": 0.4429628392060598,
+          "other_film_cosine": 0.10546574904583395,
+          "same_minus_other": 0.33749709016022583,
+          "top_one_film": 0.875
+        }
+      },
+      "by_film_columns": [
+        "same_film_cosine",
+        "other_film_cosine",
+        "top_one_film"
+      ],
+      "by_film": {
+        "10793023296": {
+          "human": [
+            0.4594366252422333,
+            0.06333176046609879,
+            1.0
+          ],
+          "chart": [
+            0.4046013832092285,
+            0.11148799955844879,
+            1.0
+          ],
+          "control": [
+            0.4010619640350342,
+            0.08700884878635406,
+            1.0
+          ]
+        },
+        "4691952596": {
+          "human": [
+            0.4828110754489899,
+            0.14644127190113068,
+            1.0
+          ],
+          "chart": [
+            0.40274704098701475,
+            0.1502244621515274,
+            1.0
+          ],
+          "control": [
+            0.36368805170059204,
+            0.1505226194858551,
+            1.0
+          ]
+        },
+        "10871643364": {
+          "human": [
+            0.3760571281115214,
+            0.13316327333450317,
+            0.6666666666666666
+          ],
+          "chart": [
+            0.2868647873401642,
+            0.21868929266929626,
+            0.0
+          ],
+          "control": [
+            0.26975756883621216,
+            0.21763849258422852,
+            0.0
+          ]
+        },
+        "4567287291": {
+          "human": [
+            0.5752288103103638,
+            0.12434787799914677,
+            1.0
+          ],
+          "chart": [
+            0.5461291074752808,
+            0.16452176868915558,
+            1.0
+          ],
+          "control": [
+            0.565339207649231,
+            0.17661747336387634,
+            1.0
+          ]
+        },
+        "4652947202": {
+          "human": [
+            0.6431981722513834,
+            0.10010357201099396,
+            1.0
+          ],
+          "chart": [
+            0.4886646072069804,
+            0.1497201919555664,
+            1.0
+          ],
+          "control": [
+            0.4996921519438426,
+            0.15705789625644684,
+            1.0
+          ]
+        },
+        "10130549263": {
+          "human": [
+            0.5350812137126922,
+            0.1168958991765976,
+            1.0
+          ],
+          "chart": [
+            0.5429111361503601,
+            0.08060665428638458,
+            1.0
+          ],
+          "control": [
+            0.5443769693374634,
+            0.08152800053358078,
+            1.0
+          ]
+        },
+        "11633816836": {
+          "human": [
+            0.3992830887436867,
+            -0.0184904090128839,
+            1.0
+          ],
+          "chart": [
+            0.37746164947748184,
+            -0.03373932093381882,
+            1.0
+          ],
+          "control": [
+            0.41453292965888977,
+            -0.03722716122865677,
+            1.0
+          ]
+        },
+        "11587211476": {
+          "human": [
+            0.5982714176177979,
+            0.07453073263168335,
+            1.0
+          ],
+          "chart": [
+            0.47930160760879514,
+            0.011730126105248928,
+            1.0
+          ],
+          "control": [
+            0.48525387048721313,
+            0.010579822584986687,
+            1.0
+          ]
+        }
+      },
+      "human_relative_description_separation": {
+        "chart": {
+          "human_same_minus_other": 0.41613044411642475,
+          "reader_same_minus_other": 0.33443001812168704,
+          "fraction_of_human": 0.8036663090867737,
+          "film_bootstrap_95": [
+            0.6659121629337662,
+            0.9294529280011724
+          ]
+        },
+        "control": {
+          "human_same_minus_other": 0.41613044411642475,
+          "reader_same_minus_other": 0.33749709016022583,
+          "fraction_of_human": 0.8110367672733915,
+          "film_bootstrap_95": [
+            0.6529938106311465,
+            0.9513134717932751
+          ]
+        }
+      },
+      "chart_minus_control": {
+        "mean_change": -0.0030670720385387595,
+        "bootstrap_95_percent": [
+          -0.017975869720685298,
+          0.012729925476014606
+        ],
+        "increased": 2,
+        "decreased": 6,
+        "tied": 0,
+        "by_film": {
+          "10793023296": -0.020939731597900413,
+          "4691952596": 0.039357146620750405,
+          "10871643364": 0.016056418418884277,
+          "4567287291": -0.007114395499229431,
+          "4652947202": -0.0036898404359817505,
+          "10130549263": -0.0005444869399070518,
+          "11633816836": -0.04055912047624588,
+          "11587211476": -0.007102566398680232
+        }
+      }
+    }
+  },
+  "equal_weight": {
+    "control": {
+      "percent": 63.66996459052871,
+      "bootstrap_95": [
+        43.7653222729413,
+        86.06638522385781
+      ],
+      "valid": 20000
+    },
+    "chart": {
+      "percent": 59.03623706423771,
+      "bootstrap_95": [
+        29.799431933378084,
+        88.94647871820223
+      ],
+      "valid": 20000
+    }
+  },
+  "controls": {
+    "until_s": 8.5,
+    "identical_prefix_blocks": 14,
+    "future_swap_identical": true,
+    "charts_per_turn": {
+      "A": [
+        0,
+        0
+      ],
+      "C": [
+        0,
+        0
+      ],
+      "B": [
+        0,
+        0
+      ],
+      "silent": [
+        0,
+        0
+      ],
+      "picture": [
+        0,
+        0
+      ]
+    },
+    "out_of_bounds_listen_rejected_for_audio": true,
+    "interpretation": "Both door conditions returned no candidate chart. All original observation blocks remained available. This check compares the transport at the cutoff. No new door GPT answers were collected in this experiment."
+  },
+  "quote_check": "Look for contiguous words in any one published speech-reader channel; this checks quoted wording against local transcriptions, not their correctness. Does not check unquoted source identifications.",
+  "decision": "Do not add this chart to normal playback. It did not meet either prespecified first-view promotion condition. Retain the renderer and round as a reproducible experiment only.",
+  "reproduce": {
+    "baseline": "7807293d2418e83cd4fe0b85b7ef2937bfa65c3e",
+    "selection": "40-source panel of caption-styles.json minus the four short-listening-turns.json films; select the first eight by ascending SHA-256 as in protocol. Full original recordings, 8 s continuous steps. No human captions passed to either reader.",
+    "renderer": "python -m examples.draw_sound_estimates SINGLE_VIEW_JSON OUTPUT_DIR",
+    "readers": "examples/watch_first_impression.py read_with_codex, same independent image/text MCP packets in both arms; append chart PNGs if present and append their image description in order.",
+    "scorer": "examples/check_first_impressions.py compare with human_reference=True and paired_change on same-minus-other per-film margins. Equal weight sight and hearing normalized against their corresponding held-out human gaps; whole-film resampling with fixed reference panel, seed 3719, 20000 draws."
+  }
+}

@@ -63,6 +63,8 @@ order, with nothing left out.
 
 ## Does it work?
 
+On 24 field recordings, adding stereo descriptions to the first view changed GPT’s agreement with individual listeners from 55.9% to 54.8%. On a 12-recording subset, comparing proposed sounds with the original, mid and side signals scored 63.1%, versus 57.3% with the original alone. The paired 95% interval for the difference was −3.1 to +16.6 percentage points. On 12 mixes designed to separate the sources, GPT identified both sounds in 1/12 with the original and 11/12 with all three signals. [Listening conditions and individual responses](docs/listening-check.md#좌우-채널을-나눠-들었을-때)
+
 Across 32 real recordings, a 16 kHz mono excerpt matched an independently cut WAV in length and waveform within 0.000001 of full scale for **32/32** excerpts. In a separate test of 16 films, the final picture at a frame boundary and just after it matched all **32/32** reference images. [Signal and picture checks](docs/perception-check.md#멈춘-순간의-화면과-원음을-원본과-대조한-결과)
 
 On 12 unedited recordings, GPT matched the annotated sound at **15 of 24 marked moments**. Adding a separate source comparison for just the bracketed samples reduced that to **11/24**. Reel keeps the surrounding recording on replay. [Paired readings and controls](docs/listening-check.md#표시한-순간의-소리만-따로-비교한-시험)

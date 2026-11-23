@@ -1,0 +1,1420 @@
+{
+  "method": {
+    "baseline_commit": "8f9d25e",
+    "replay_commit": "cfcc710",
+    "reader": "gpt-6.1-terra, signed-in local Codex CLI with API key unset, fresh session for each recording and condition. No shell, client plugins, audio attachment, picture of the scene, file name or human labels. The reader received reports and spectrograms from an anonymous MCP tool.",
+    "field_recordings": "https://zenodo.org/records/2589280",
+    "field_annotations": "https://zenodo.org/records/5114771",
+    "annotations_sha256": "eabd6ba36abf52a1c3034b96208729346022d7283db583681997729203f44329",
+    "control_sources": "https://github.com/karolpiczak/ESC-50",
+    "selection": "Rank MACS file names by SHA-256 of reel-stereo-perspective-01/ plus file name. Take eight distinct previously untested sites each for airport, park and public_square with at least four annotators. Exclude previously used sites by scene, city and location ID. For the replay subset, take four per scene type by SHA-256 of reel-focused-replay-01/ plus file name. The same controls occur in both comparisons.",
+    "controls": "Rank the available ESC-50 source recordings (one per category) by SHA-256 of reel-stereo-mixes-01/ plus file name. For the first 12 pairs set RMS to 0.15 and 0.06 respectively, alternating assignment to M and S, with L=M+S and R=M-S. Apply one common gain if peak exceeds 0.85. For four further trials mute the second source. Source names and choice order are in the controls; the setups intentionally permit exact spatial separation.",
+    "first_look": "Two consecutive released views and an end response. previous_tags: original first-view report with AST, CoNeTTE and spectra. reader_tags: also supply CoNeTTE descriptions of the mid and side waveforms when both contain signal. The original reports and spectrum PNGs matched an independent run at the baseline commit for all 80 views. This automatic caption experiment was not enabled in the product.",
+    "first_look_prompt": "Call view with consecutive turn numbers starting at 1, through end_of_view. Each view carries observations of a recording. Which of the listed sounds were audible at any point in the whole recording? Return a JSON object {\"heard\":[...]} with only supported items from the list, using their exact spelling. Return an empty list if none. List: <ordered options as a JSON array>",
+    "requested_replay": "Same question in both arms. The MCP replay returned one or three genuine listen results together: original only, or original, mid and side. It was prescribed, not a test of self-initiated tool use. Each included its spectrum and CLAP comparisons with the same names prefixed by \"the sound of \" and underscores replaced by spaces. Original scores matched in all three reports. describe=false; no generative audio captions in this comparison.",
+    "requested_replay_prompt": "Call listen once. Which of these sounds were audible in the original recording? Choose all supported items and use their exact spelling. You may return an empty list. Reply only with {\"heard\":[...]}. List: <ordered options as a JSON array>",
+    "scoring": "For each recording calculate the Jaccard overlap of chosen tags with each listener and average, then average over recordings. listener_listener uses distinct pairs on the same recording. different_recording pairs model and listener across recordings in the panel. Majority means strictly more than half; no_listener_chose need not mean physically absent. Intervals are percentile 95% intervals on the paired difference in percentage points, resampling recordings with replacement 25000 times (NumPy default_rng seed 7491). One model session per condition per item; intervals do not reflect repeat-run or shared-listener variability.",
+    "fields": "Top-level categories, recordings, controls and summary refer to the first look. requested_replay contains the replay subset with its own denominator. Control IDs are local to each experiment; the recording hash identifies the same control across both. Summary proportions are on [0,1].",
+    "direct_product_mcp_checks": "Two mixed controls, same CLI model, real Reel stdio MCP, until=5 and --image-client. Prompt explicitly requested mid and side. Tools list includes retries. IDs refer to first-look control IDs."
+  },
+  "categories": [
+    "adults_talking",
+    "announcement_jingle",
+    "announcement_speech",
+    "birds_singing",
+    "children_voices",
+    "dog_barking",
+    "footsteps",
+    "music",
+    "siren",
+    "traffic_noise"
+  ],
+  "recordings": [
+    {
+      "id": "airport-prague-1034-40148-a.wav",
+      "sha256": "62f8d823ff7448d689c07e5024ef38092272413277b6cff645b1762193325d69",
+      "previous_tags": [
+        "adults_talking"
+      ],
+      "reader_tags": [
+        "adults_talking"
+      ]
+    },
+    {
+      "id": "public_square-milan-1014-40674-a.wav",
+      "sha256": "8cefd3b365558fe83ebca3589a23c9a151e230e669672196a9ca93a340a67949",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps",
+        "traffic_noise"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "traffic_noise"
+      ]
+    },
+    {
+      "id": "public_square-london-114-3315-a.wav",
+      "sha256": "f22299478291beb1ce3337ecfcdad436b6b5bd15dc21246aa58366fa3ca8754d",
+      "previous_tags": [
+        "adults_talking"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "announcement_speech"
+      ]
+    },
+    {
+      "id": "airport-prague-1015-42783-a.wav",
+      "sha256": "fb1e62d72f496b462cf0f8af059a9019e62d4ec6ae474e1f314fd2eda2af1fca",
+      "previous_tags": [
+        "adults_talking"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "airport-barcelona-1-32-a.wav",
+      "sha256": "e9ac3e41296bbd8c3c303c711dbb58c6ffda02ecc962f038a6a1eff6e95ec122",
+      "previous_tags": [
+        "adults_talking",
+        "children_voices",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "children_voices",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "park-paris-100-2851-a.wav",
+      "sha256": "7da26022d4372a125dd4bd10624e3b2042f0a372ceff30b6fffbf46513092487",
+      "previous_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ],
+      "reader_tags": [
+        "birds_singing",
+        "traffic_noise"
+      ]
+    },
+    {
+      "id": "airport-prague-1173-44997-a.wav",
+      "sha256": "c0859d18bdf5d7943cf473e26b348490bacd7fc2ea30b107018224e76d32f5da",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "public_square-milan-1074-41632-a.wav",
+      "sha256": "d344babf46c13adb154550d42993a60b39f6f55233df90f21877ca7a5c3ce131",
+      "previous_tags": [
+        "adults_talking",
+        "music"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "music"
+      ]
+    },
+    {
+      "id": "public_square-vienna-122-3624-a.wav",
+      "sha256": "9143a725d66941d120bde2aa6c9e6df6f41f679829c6b449d21f82dd338040b6",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "airport-milan-1108-41898-a.wav",
+      "sha256": "52d722e7825b6e776b73d53119ac49fdcc0ca717ed9ba4c6177c293da3dfbb67",
+      "previous_tags": [
+        "adults_talking",
+        "dog_barking"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "dog_barking"
+      ]
+    },
+    {
+      "id": "airport-lisbon-1000-42904-a.wav",
+      "sha256": "1f849aefb816f63c79a7f676465f1c70c43c6c03e617464f843c4ce8204ce08e",
+      "previous_tags": [
+        "adults_talking"
+      ],
+      "reader_tags": [
+        "adults_talking"
+      ]
+    },
+    {
+      "id": "park-prague-1105-40340-a.wav",
+      "sha256": "4bd53cb650b12d47085611da6e8a1536bcfb6f5436a4d98941e5b64e0d9a6522",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "children_voices"
+      ]
+    },
+    {
+      "id": "public_square-london-113-3279-a.wav",
+      "sha256": "ab5a60af705853b332a7f3c008eda1f6afa7f18d34c3e5e38722341ddac96588",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking"
+      ]
+    },
+    {
+      "id": "airport-london-5-254-a.wav",
+      "sha256": "a17ec2c10ad951f8a59f6fd758aff963c1454674f1b53a562e0575544aedd590",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "park-helsinki-242-7202-a.wav",
+      "sha256": "c4b60224e20a0c5939f9be0ce949ce3241617e4519b3c819350f23ab04a9a079",
+      "previous_tags": [
+        "adults_talking",
+        "birds_singing"
+      ],
+      "reader_tags": [
+        "birds_singing"
+      ]
+    },
+    {
+      "id": "public_square-paris-118-3464-a.wav",
+      "sha256": "45303a8af739215814fa5e4191e6ff94eaf7a6f1e28dc5446e8650271604cf21",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "public_square-vienna-253-7582-a.wav",
+      "sha256": "56601858daf46664963ec3d5ef86a0a18dbfb10ec966627e72552af406b23e9a",
+      "previous_tags": [
+        "adults_talking",
+        "birds_singing",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "birds_singing"
+      ]
+    },
+    {
+      "id": "airport-lyon-1041-42257-a.wav",
+      "sha256": "2c0b287b52f54805086496e7c12df06f3a1414016c7c48eec201760bfe461111",
+      "previous_tags": [
+        "adults_talking",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "public_square-barcelona-109-3152-a.wav",
+      "sha256": "b1a6dd7210c95ee4e3f991f17bb454bf822c99f8c84f1a9e69849beb8e498818",
+      "previous_tags": [
+        "adults_talking",
+        "children_voices",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "adults_talking",
+        "children_voices"
+      ]
+    },
+    {
+      "id": "park-milan-1133-40322-a.wav",
+      "sha256": "b9eb6842c82935a2a137b36361046e30b185174b5c1a3cc7c3e58fcfc939ac28",
+      "previous_tags": [
+        "footsteps",
+        "traffic_noise"
+      ],
+      "reader_tags": [
+        "footsteps",
+        "traffic_noise"
+      ]
+    },
+    {
+      "id": "park-helsinki-92-2576-a.wav",
+      "sha256": "482d5d71f7601ea8668a14c994c77d6b4986d7ef794c468b42978bbe6edb8923",
+      "previous_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "birds_singing"
+      ]
+    },
+    {
+      "id": "park-stockholm-245-7314-a.wav",
+      "sha256": "bceebbc862137c67efb37e17f5ff30d57e16be59f68afcf71a81bad33a19cfd2",
+      "previous_tags": [
+        "birds_singing",
+        "footsteps"
+      ],
+      "reader_tags": [
+        "birds_singing",
+        "footsteps"
+      ]
+    },
+    {
+      "id": "park-vienna-106-3021-a.wav",
+      "sha256": "5f4467a8f29410583f648796c0ed3132915bd70a14807fb66c2da54b2cb5fd1e",
+      "previous_tags": [
+        "birds_singing"
+      ],
+      "reader_tags": [
+        "birds_singing"
+      ]
+    },
+    {
+      "id": "park-london-95-2674-a.wav",
+      "sha256": "c83f88e88b10d0dc9de30f74cd0f161f78abcfb048d8dcc6e0fe8c1daa73ccb8",
+      "previous_tags": [
+        "birds_singing"
+      ],
+      "reader_tags": [
+        "birds_singing"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": 24,
+      "sha256": "f8f900756621e39a4553e0a09e49658521556cde7ef9579d14ce9a516ffd373b",
+      "previous_tags": [],
+      "reader_tags": [
+        "train"
+      ],
+      "type": "overlap",
+      "truth": [
+        "mouse click",
+        "train"
+      ],
+      "options": [
+        "mouse click",
+        "engine",
+        "train",
+        "laughing"
+      ],
+      "sources": [
+        "5-244651-A-31.wav",
+        "5-197118-A-45.wav"
+      ]
+    },
+    {
+      "id": 25,
+      "sha256": "5777bde0f21f8cab0f6dab30da2a5b2590c112d918df3b1219541a84ecd23e7c",
+      "previous_tags": [
+        "brushing teeth"
+      ],
+      "reader_tags": [
+        "brushing teeth"
+      ],
+      "type": "overlap",
+      "truth": [
+        "brushing teeth",
+        "wind"
+      ],
+      "options": [
+        "thunderstorm",
+        "dog",
+        "wind",
+        "brushing teeth"
+      ],
+      "sources": [
+        "5-220939-A-27.wav",
+        "5-217186-A-16.wav"
+      ]
+    },
+    {
+      "id": 26,
+      "sha256": "dcdcfadd68bbcd86b7f24457c9a615acc5396cb0391339178c57120a0da8138a",
+      "previous_tags": [
+        "car horn"
+      ],
+      "reader_tags": [
+        "car horn"
+      ],
+      "type": "overlap",
+      "truth": [
+        "helicopter",
+        "car horn"
+      ],
+      "options": [
+        "car horn",
+        "helicopter",
+        "hen",
+        "sheep"
+      ],
+      "sources": [
+        "5-177957-D-40.wav",
+        "5-179866-A-43.wav"
+      ]
+    },
+    {
+      "id": 27,
+      "sha256": "2013eb703549a9834749b7fd98e76e02268d7e81b4dd7708386dde72ea784612",
+      "previous_tags": [
+        "coughing",
+        "chirping birds"
+      ],
+      "reader_tags": [
+        "coughing",
+        "chirping birds"
+      ],
+      "type": "overlap",
+      "truth": [
+        "coughing",
+        "chirping birds"
+      ],
+      "options": [
+        "coughing",
+        "crow",
+        "laughing",
+        "chirping birds"
+      ],
+      "sources": [
+        "5-178997-A-24.wav",
+        "5-257839-A-14.wav"
+      ]
+    },
+    {
+      "id": 28,
+      "sha256": "6b3f345d4d3286d36dc5e79304e2b250d4dabc81e347a4fee904bdbbf431e707",
+      "previous_tags": [
+        "door wood knock"
+      ],
+      "reader_tags": [
+        "door wood knock"
+      ],
+      "type": "overlap",
+      "truth": [
+        "door wood knock",
+        "drinking sipping"
+      ],
+      "options": [
+        "door wood knock",
+        "drinking sipping",
+        "chainsaw",
+        "thunderstorm"
+      ],
+      "sources": [
+        "5-251426-B-30.wav",
+        "5-207836-B-29.wav"
+      ]
+    },
+    {
+      "id": 29,
+      "sha256": "93eaa8d4100b37619683942d8001d82c3b2958ee42c0ffb857220d0c6074bc61",
+      "previous_tags": [
+        "frog"
+      ],
+      "reader_tags": [
+        "frog"
+      ],
+      "type": "overlap",
+      "truth": [
+        "frog",
+        "crackling fire"
+      ],
+      "options": [
+        "frog",
+        "keyboard typing",
+        "crackling fire",
+        "hen"
+      ],
+      "sources": [
+        "5-156026-C-4.wav",
+        "5-189212-A-12.wav"
+      ]
+    },
+    {
+      "id": 30,
+      "sha256": "c11b98ae4d03b13b71eb0c555505faac5d0a86d767b3dcf109293d988638ebe7",
+      "previous_tags": [
+        "rooster"
+      ],
+      "reader_tags": [
+        "rooster"
+      ],
+      "type": "overlap",
+      "truth": [
+        "rooster",
+        "sneezing"
+      ],
+      "options": [
+        "rooster",
+        "cat",
+        "sneezing",
+        "crow"
+      ],
+      "sources": [
+        "5-200339-A-1.wav",
+        "5-220026-A-21.wav"
+      ]
+    },
+    {
+      "id": 31,
+      "sha256": "8224e3288aea1ff28c8caa4253e98252eb0c5b4a0902d6daf897234d45250878",
+      "previous_tags": [
+        "clock alarm"
+      ],
+      "reader_tags": [
+        "clock alarm"
+      ],
+      "type": "overlap",
+      "truth": [
+        "clock alarm",
+        "crickets"
+      ],
+      "options": [
+        "clapping",
+        "chainsaw",
+        "clock alarm",
+        "crickets"
+      ],
+      "sources": [
+        "5-219242-B-37.wav",
+        "5-215179-A-13.wav"
+      ]
+    },
+    {
+      "id": 32,
+      "sha256": "fca6a79b0a4fd5d1edf0eb957bd997b7812f14423d1aa1bd75d7b4b57cd4c1fb",
+      "previous_tags": [
+        "door wood creaks"
+      ],
+      "reader_tags": [
+        "door wood creaks"
+      ],
+      "type": "overlap",
+      "truth": [
+        "clock tick",
+        "door wood creaks"
+      ],
+      "options": [
+        "clock tick",
+        "keyboard typing",
+        "pouring water",
+        "door wood creaks"
+      ],
+      "sources": [
+        "5-235671-A-38.wav",
+        "5-191497-A-33.wav"
+      ]
+    },
+    {
+      "id": 33,
+      "sha256": "997eab8acd3a0c4a2faf6bcccb6ec72d14a9c7cc75f17765062bf4469ea36e95",
+      "previous_tags": [
+        "crying baby",
+        "church bells"
+      ],
+      "reader_tags": [
+        "crying baby",
+        "church bells"
+      ],
+      "type": "overlap",
+      "truth": [
+        "church bells",
+        "crying baby"
+      ],
+      "options": [
+        "crying baby",
+        "fireworks",
+        "cat",
+        "church bells"
+      ],
+      "sources": [
+        "5-197988-A-46.wav",
+        "5-151085-A-20.wav"
+      ]
+    },
+    {
+      "id": 34,
+      "sha256": "abf33a19de77e6f37421a4ef84d7deda89134533e814f56592ca3e2f5ef7a9a1",
+      "previous_tags": [
+        "snoring"
+      ],
+      "reader_tags": [
+        "snoring"
+      ],
+      "type": "overlap",
+      "truth": [
+        "snoring",
+        "airplane"
+      ],
+      "options": [
+        "snoring",
+        "clapping",
+        "hand saw",
+        "airplane"
+      ],
+      "sources": [
+        "5-216368-A-28.wav",
+        "5-251963-A-47.wav"
+      ]
+    },
+    {
+      "id": 35,
+      "sha256": "671dd03120c79671b21a5204a6264e1e9ef1f6edee84c519448b8f554f273948",
+      "previous_tags": [],
+      "reader_tags": [
+        "siren"
+      ],
+      "type": "overlap",
+      "truth": [
+        "washing machine",
+        "siren"
+      ],
+      "options": [
+        "siren",
+        "washing machine",
+        "water drops",
+        "pouring water"
+      ],
+      "sources": [
+        "5-141683-A-35.wav",
+        "5-184323-A-42.wav"
+      ]
+    },
+    {
+      "id": 36,
+      "sha256": "f4246ba39bf88cda9a6407261be2eb731e72f3e26d2f9a63c6dafeb3e06a360d",
+      "previous_tags": [],
+      "reader_tags": [],
+      "type": "one",
+      "truth": [
+        "pig"
+      ],
+      "options": [
+        "vacuum cleaner",
+        "pig",
+        "insects",
+        "fireworks"
+      ],
+      "sources": [
+        "5-103420-A-2.wav",
+        null
+      ]
+    },
+    {
+      "id": 37,
+      "sha256": "864fd18bb379c02e2def550fa809d2109467a951dcda99cccccc877957a62a92",
+      "previous_tags": [
+        "glass breaking"
+      ],
+      "reader_tags": [
+        "glass breaking"
+      ],
+      "type": "one",
+      "truth": [
+        "glass breaking"
+      ],
+      "options": [
+        "rain",
+        "engine",
+        "glass breaking",
+        "hand saw"
+      ],
+      "sources": [
+        "5-221528-A-39.wav",
+        null
+      ]
+    },
+    {
+      "id": 38,
+      "sha256": "0de453c451f0c8babf3872f15895efd503983d44a12dd2d8c7c8146d29d3b406",
+      "previous_tags": [
+        "sea waves"
+      ],
+      "reader_tags": [
+        "sea waves"
+      ],
+      "type": "one",
+      "truth": [
+        "sea waves"
+      ],
+      "options": [
+        "water drops",
+        "sea waves",
+        "dog",
+        "footsteps"
+      ],
+      "sources": [
+        "5-219379-A-11.wav",
+        null
+      ]
+    },
+    {
+      "id": 39,
+      "sha256": "fb1093e2fc07888d7335f711467978eb883d07413545c4f8a2bcecc9400e227e",
+      "previous_tags": [
+        "breathing"
+      ],
+      "reader_tags": [
+        "breathing"
+      ],
+      "type": "one",
+      "truth": [
+        "breathing"
+      ],
+      "options": [
+        "cow",
+        "vacuum cleaner",
+        "breathing",
+        "sheep"
+      ],
+      "sources": [
+        "5-233260-A-23.wav",
+        null
+      ]
+    }
+  ],
+  "summary": {
+    "previous_tags": {
+      "reader_listener": 0.5593055555555555,
+      "listener_listener": 0.6174768518518519,
+      "different_recording": 0.3202083333333333,
+      "majority_labels": 41,
+      "majority_chosen": 33,
+      "no_listener_chose": 8,
+      "overlap": {
+        "n": 12,
+        "exact": 2,
+        "all_sources": 2,
+        "not_in_mix": 0,
+        "quiet_source": 4
+      },
+      "one": {
+        "n": 4,
+        "exact": 3,
+        "all_sources": 3,
+        "not_in_mix": 0,
+        "quiet_source": 0
+      }
+    },
+    "reader_tags": {
+      "reader_listener": 0.5484375,
+      "listener_listener": 0.6174768518518519,
+      "different_recording": 0.2829302536231884,
+      "majority_labels": 41,
+      "majority_chosen": 29,
+      "no_listener_chose": 5,
+      "overlap": {
+        "n": 12,
+        "exact": 2,
+        "all_sources": 2,
+        "not_in_mix": 0,
+        "quiet_source": 6
+      },
+      "one": {
+        "n": 4,
+        "exact": 3,
+        "all_sources": 3,
+        "not_in_mix": 0,
+        "quiet_source": 0
+      }
+    }
+  },
+  "ratings": 111,
+  "participants": 70,
+  "paired_difference_95pct_points": [
+    -6.42,
+    4.18
+  ],
+  "requested_replay": {
+    "categories": [
+      "adults_talking",
+      "announcement_jingle",
+      "announcement_speech",
+      "birds_singing",
+      "children_voices",
+      "dog_barking",
+      "footsteps",
+      "music",
+      "siren",
+      "traffic_noise"
+    ],
+    "recordings": [
+      {
+        "id": "airport-lisbon-1000-42904-a.wav",
+        "sha256": "1f849aefb816f63c79a7f676465f1c70c43c6c03e617464f843c4ce8204ce08e",
+        "previous_tags": [
+          "adults_talking",
+          "announcement_speech"
+        ],
+        "reader_tags": [
+          "adults_talking"
+        ]
+      },
+      {
+        "id": "airport-prague-1173-44997-a.wav",
+        "sha256": "c0859d18bdf5d7943cf473e26b348490bacd7fc2ea30b107018224e76d32f5da",
+        "previous_tags": [
+          "adults_talking",
+          "announcement_speech",
+          "footsteps"
+        ],
+        "reader_tags": [
+          "adults_talking",
+          "announcement_speech",
+          "footsteps"
+        ]
+      },
+      {
+        "id": "airport-barcelona-1-32-a.wav",
+        "sha256": "e9ac3e41296bbd8c3c303c711dbb58c6ffda02ecc962f038a6a1eff6e95ec122",
+        "previous_tags": [
+          "adults_talking",
+          "children_voices"
+        ],
+        "reader_tags": [
+          "adults_talking",
+          "children_voices"
+        ]
+      },
+      {
+        "id": "airport-london-5-254-a.wav",
+        "sha256": "a17ec2c10ad951f8a59f6fd758aff963c1454674f1b53a562e0575544aedd590",
+        "previous_tags": [
+          "adults_talking"
+        ],
+        "reader_tags": [
+          "adults_talking"
+        ]
+      },
+      {
+        "id": "public_square-vienna-122-3624-a.wav",
+        "sha256": "9143a725d66941d120bde2aa6c9e6df6f41f679829c6b449d21f82dd338040b6",
+        "previous_tags": [
+          "adults_talking",
+          "children_voices",
+          "footsteps"
+        ],
+        "reader_tags": [
+          "adults_talking",
+          "footsteps"
+        ]
+      },
+      {
+        "id": "public_square-vienna-253-7582-a.wav",
+        "sha256": "56601858daf46664963ec3d5ef86a0a18dbfb10ec966627e72552af406b23e9a",
+        "previous_tags": [
+          "birds_singing",
+          "dog_barking",
+          "traffic_noise",
+          "adults_talking"
+        ],
+        "reader_tags": [
+          "birds_singing",
+          "dog_barking",
+          "traffic_noise"
+        ]
+      },
+      {
+        "id": "public_square-paris-118-3464-a.wav",
+        "sha256": "45303a8af739215814fa5e4191e6ff94eaf7a6f1e28dc5446e8650271604cf21",
+        "previous_tags": [
+          "adults_talking",
+          "footsteps"
+        ],
+        "reader_tags": [
+          "adults_talking",
+          "footsteps"
+        ]
+      },
+      {
+        "id": "public_square-barcelona-109-3152-a.wav",
+        "sha256": "b1a6dd7210c95ee4e3f991f17bb454bf822c99f8c84f1a9e69849beb8e498818",
+        "previous_tags": [
+          "adults_talking"
+        ],
+        "reader_tags": [
+          "adults_talking"
+        ]
+      },
+      {
+        "id": "park-stockholm-245-7314-a.wav",
+        "sha256": "bceebbc862137c67efb37e17f5ff30d57e16be59f68afcf71a81bad33a19cfd2",
+        "previous_tags": [
+          "footsteps"
+        ],
+        "reader_tags": [
+          "footsteps",
+          "traffic_noise"
+        ]
+      },
+      {
+        "id": "park-milan-1133-40322-a.wav",
+        "sha256": "b9eb6842c82935a2a137b36361046e30b185174b5c1a3cc7c3e58fcfc939ac28",
+        "previous_tags": [
+          "siren"
+        ],
+        "reader_tags": [
+          "siren"
+        ]
+      },
+      {
+        "id": "park-london-95-2674-a.wav",
+        "sha256": "c83f88e88b10d0dc9de30f74cd0f161f78abcfb048d8dcc6e0fe8c1daa73ccb8",
+        "previous_tags": [
+          "birds_singing",
+          "dog_barking"
+        ],
+        "reader_tags": [
+          "birds_singing",
+          "dog_barking"
+        ]
+      },
+      {
+        "id": "park-helsinki-92-2576-a.wav",
+        "sha256": "482d5d71f7601ea8668a14c994c77d6b4986d7ef794c468b42978bbe6edb8923",
+        "previous_tags": [
+          "footsteps",
+          "traffic_noise"
+        ],
+        "reader_tags": [
+          "footsteps",
+          "traffic_noise"
+        ]
+      }
+    ],
+    "controls": [
+      {
+        "id": 12,
+        "sha256": "f8f900756621e39a4553e0a09e49658521556cde7ef9579d14ce9a516ffd373b",
+        "previous_tags": [
+          "mouse click"
+        ],
+        "reader_tags": [
+          "mouse click",
+          "train"
+        ],
+        "type": "overlap",
+        "truth": [
+          "mouse click",
+          "train"
+        ],
+        "options": [
+          "mouse click",
+          "engine",
+          "train",
+          "laughing"
+        ],
+        "sources": [
+          "5-244651-A-31.wav",
+          "5-197118-A-45.wav"
+        ]
+      },
+      {
+        "id": 13,
+        "sha256": "5777bde0f21f8cab0f6dab30da2a5b2590c112d918df3b1219541a84ecd23e7c",
+        "previous_tags": [
+          "brushing teeth"
+        ],
+        "reader_tags": [
+          "wind",
+          "brushing teeth"
+        ],
+        "type": "overlap",
+        "truth": [
+          "brushing teeth",
+          "wind"
+        ],
+        "options": [
+          "thunderstorm",
+          "dog",
+          "wind",
+          "brushing teeth"
+        ],
+        "sources": [
+          "5-220939-A-27.wav",
+          "5-217186-A-16.wav"
+        ]
+      },
+      {
+        "id": 14,
+        "sha256": "dcdcfadd68bbcd86b7f24457c9a615acc5396cb0391339178c57120a0da8138a",
+        "previous_tags": [
+          "car horn"
+        ],
+        "reader_tags": [
+          "car horn",
+          "helicopter"
+        ],
+        "type": "overlap",
+        "truth": [
+          "helicopter",
+          "car horn"
+        ],
+        "options": [
+          "car horn",
+          "helicopter",
+          "hen",
+          "sheep"
+        ],
+        "sources": [
+          "5-177957-D-40.wav",
+          "5-179866-A-43.wav"
+        ]
+      },
+      {
+        "id": 15,
+        "sha256": "2013eb703549a9834749b7fd98e76e02268d7e81b4dd7708386dde72ea784612",
+        "previous_tags": [
+          "coughing"
+        ],
+        "reader_tags": [
+          "coughing",
+          "chirping birds"
+        ],
+        "type": "overlap",
+        "truth": [
+          "coughing",
+          "chirping birds"
+        ],
+        "options": [
+          "coughing",
+          "crow",
+          "laughing",
+          "chirping birds"
+        ],
+        "sources": [
+          "5-178997-A-24.wav",
+          "5-257839-A-14.wav"
+        ]
+      },
+      {
+        "id": 16,
+        "sha256": "6b3f345d4d3286d36dc5e79304e2b250d4dabc81e347a4fee904bdbbf431e707",
+        "previous_tags": [
+          "door wood knock"
+        ],
+        "reader_tags": [
+          "door wood knock",
+          "drinking sipping"
+        ],
+        "type": "overlap",
+        "truth": [
+          "door wood knock",
+          "drinking sipping"
+        ],
+        "options": [
+          "door wood knock",
+          "drinking sipping",
+          "chainsaw",
+          "thunderstorm"
+        ],
+        "sources": [
+          "5-251426-B-30.wav",
+          "5-207836-B-29.wav"
+        ]
+      },
+      {
+        "id": 17,
+        "sha256": "93eaa8d4100b37619683942d8001d82c3b2958ee42c0ffb857220d0c6074bc61",
+        "previous_tags": [
+          "frog",
+          "crackling fire"
+        ],
+        "reader_tags": [
+          "frog",
+          "crackling fire"
+        ],
+        "type": "overlap",
+        "truth": [
+          "frog",
+          "crackling fire"
+        ],
+        "options": [
+          "frog",
+          "keyboard typing",
+          "crackling fire",
+          "hen"
+        ],
+        "sources": [
+          "5-156026-C-4.wav",
+          "5-189212-A-12.wav"
+        ]
+      },
+      {
+        "id": 18,
+        "sha256": "c11b98ae4d03b13b71eb0c555505faac5d0a86d767b3dcf109293d988638ebe7",
+        "previous_tags": [
+          "rooster"
+        ],
+        "reader_tags": [
+          "rooster",
+          "sneezing"
+        ],
+        "type": "overlap",
+        "truth": [
+          "rooster",
+          "sneezing"
+        ],
+        "options": [
+          "rooster",
+          "cat",
+          "sneezing",
+          "crow"
+        ],
+        "sources": [
+          "5-200339-A-1.wav",
+          "5-220026-A-21.wav"
+        ]
+      },
+      {
+        "id": 19,
+        "sha256": "8224e3288aea1ff28c8caa4253e98252eb0c5b4a0902d6daf897234d45250878",
+        "previous_tags": [
+          "clock alarm"
+        ],
+        "reader_tags": [
+          "clock alarm",
+          "crickets"
+        ],
+        "type": "overlap",
+        "truth": [
+          "clock alarm",
+          "crickets"
+        ],
+        "options": [
+          "clapping",
+          "chainsaw",
+          "clock alarm",
+          "crickets"
+        ],
+        "sources": [
+          "5-219242-B-37.wav",
+          "5-215179-A-13.wav"
+        ]
+      },
+      {
+        "id": 20,
+        "sha256": "fca6a79b0a4fd5d1edf0eb957bd997b7812f14423d1aa1bd75d7b4b57cd4c1fb",
+        "previous_tags": [
+          "door wood creaks"
+        ],
+        "reader_tags": [
+          "clock tick",
+          "door wood creaks"
+        ],
+        "type": "overlap",
+        "truth": [
+          "clock tick",
+          "door wood creaks"
+        ],
+        "options": [
+          "clock tick",
+          "keyboard typing",
+          "pouring water",
+          "door wood creaks"
+        ],
+        "sources": [
+          "5-235671-A-38.wav",
+          "5-191497-A-33.wav"
+        ]
+      },
+      {
+        "id": 21,
+        "sha256": "997eab8acd3a0c4a2faf6bcccb6ec72d14a9c7cc75f17765062bf4469ea36e95",
+        "previous_tags": [
+          "church bells"
+        ],
+        "reader_tags": [
+          "crying baby",
+          "church bells"
+        ],
+        "type": "overlap",
+        "truth": [
+          "church bells",
+          "crying baby"
+        ],
+        "options": [
+          "crying baby",
+          "fireworks",
+          "cat",
+          "church bells"
+        ],
+        "sources": [
+          "5-197988-A-46.wav",
+          "5-151085-A-20.wav"
+        ]
+      },
+      {
+        "id": 22,
+        "sha256": "abf33a19de77e6f37421a4ef84d7deda89134533e814f56592ca3e2f5ef7a9a1",
+        "previous_tags": [
+          "snoring"
+        ],
+        "reader_tags": [
+          "snoring",
+          "airplane"
+        ],
+        "type": "overlap",
+        "truth": [
+          "snoring",
+          "airplane"
+        ],
+        "options": [
+          "snoring",
+          "clapping",
+          "hand saw",
+          "airplane"
+        ],
+        "sources": [
+          "5-216368-A-28.wav",
+          "5-251963-A-47.wav"
+        ]
+      },
+      {
+        "id": 23,
+        "sha256": "671dd03120c79671b21a5204a6264e1e9ef1f6edee84c519448b8f554f273948",
+        "previous_tags": [
+          "washing machine"
+        ],
+        "reader_tags": [
+          "siren"
+        ],
+        "type": "overlap",
+        "truth": [
+          "washing machine",
+          "siren"
+        ],
+        "options": [
+          "siren",
+          "washing machine",
+          "water drops",
+          "pouring water"
+        ],
+        "sources": [
+          "5-141683-A-35.wav",
+          "5-184323-A-42.wav"
+        ]
+      },
+      {
+        "id": 24,
+        "sha256": "f4246ba39bf88cda9a6407261be2eb731e72f3e26d2f9a63c6dafeb3e06a360d",
+        "previous_tags": [
+          "pig"
+        ],
+        "reader_tags": [
+          "pig"
+        ],
+        "type": "one",
+        "truth": [
+          "pig"
+        ],
+        "options": [
+          "vacuum cleaner",
+          "pig",
+          "insects",
+          "fireworks"
+        ],
+        "sources": [
+          "5-103420-A-2.wav",
+          null
+        ]
+      },
+      {
+        "id": 25,
+        "sha256": "864fd18bb379c02e2def550fa809d2109467a951dcda99cccccc877957a62a92",
+        "previous_tags": [
+          "glass breaking"
+        ],
+        "reader_tags": [
+          "glass breaking"
+        ],
+        "type": "one",
+        "truth": [
+          "glass breaking"
+        ],
+        "options": [
+          "rain",
+          "engine",
+          "glass breaking",
+          "hand saw"
+        ],
+        "sources": [
+          "5-221528-A-39.wav",
+          null
+        ]
+      },
+      {
+        "id": 26,
+        "sha256": "0de453c451f0c8babf3872f15895efd503983d44a12dd2d8c7c8146d29d3b406",
+        "previous_tags": [
+          "sea waves"
+        ],
+        "reader_tags": [
+          "sea waves"
+        ],
+        "type": "one",
+        "truth": [
+          "sea waves"
+        ],
+        "options": [
+          "water drops",
+          "sea waves",
+          "dog",
+          "footsteps"
+        ],
+        "sources": [
+          "5-219379-A-11.wav",
+          null
+        ]
+      },
+      {
+        "id": 27,
+        "sha256": "fb1093e2fc07888d7335f711467978eb883d07413545c4f8a2bcecc9400e227e",
+        "previous_tags": [
+          "breathing"
+        ],
+        "reader_tags": [
+          "breathing"
+        ],
+        "type": "one",
+        "truth": [
+          "breathing"
+        ],
+        "options": [
+          "cow",
+          "vacuum cleaner",
+          "breathing",
+          "sheep"
+        ],
+        "sources": [
+          "5-233260-A-23.wav",
+          null
+        ]
+      }
+    ],
+    "summary": {
+      "previous_tags": {
+        "reader_listener": 0.5727777777777777,
+        "listener_listener": 0.6598611111111111,
+        "different_recording": 0.2622537878787879,
+        "majority_labels": 21,
+        "majority_chosen": 17,
+        "no_listener_chose": 5,
+        "overlap": {
+          "n": 12,
+          "exact": 1,
+          "all_sources": 1,
+          "not_in_mix": 0,
+          "quiet_source": 3
+        },
+        "one": {
+          "n": 4,
+          "exact": 4,
+          "all_sources": 4,
+          "not_in_mix": 0,
+          "quiet_source": 0
+        }
+      },
+      "reader_tags": {
+        "reader_listener": 0.6308333333333334,
+        "listener_listener": 0.6598611111111111,
+        "different_recording": 0.26676767676767676,
+        "majority_labels": 21,
+        "majority_chosen": 16,
+        "no_listener_chose": 3,
+        "overlap": {
+          "n": 12,
+          "exact": 11,
+          "all_sources": 11,
+          "not_in_mix": 0,
+          "quiet_source": 12
+        },
+        "one": {
+          "n": 4,
+          "exact": 4,
+          "all_sources": 4,
+          "not_in_mix": 0,
+          "quiet_source": 0
+        }
+      }
+    },
+    "ratings": 56,
+    "participants": 46,
+    "paired_difference_95pct_points": [
+      -3.07,
+      16.57
+    ]
+  },
+  "waveform_reconstruction": {
+    "recordings": 40,
+    "frames_per_channel_total": 15048002,
+    "maximum_absolute_error_full_scale": 2.9802322387695312e-08,
+    "single_source_controls_with_silent_complement": 4
+  },
+  "direct_product_mcp_checks": [
+    {
+      "id": 24,
+      "heard": [
+        "mouse click",
+        "train"
+      ],
+      "truth": [
+        "mouse click",
+        "train"
+      ],
+      "tools": [
+        "view",
+        "listen",
+        "listen",
+        "listen"
+      ]
+    },
+    {
+      "id": 25,
+      "heard": [
+        "wind",
+        "brushing teeth"
+      ],
+      "truth": [
+        "brushing teeth",
+        "wind"
+      ],
+      "tools": [
+        "view",
+        "listen",
+        "listen"
+      ]
+    }
+  ]
+}

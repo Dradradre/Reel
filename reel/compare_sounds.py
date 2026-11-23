@@ -200,37 +200,22 @@ class Comparator:
                 "basis": "Closest audio to the supplied description among the mix (0) and its estimates. "
                          "The requested sound can be absent from every recording."}
 
-    def score_window(self, stamp, block, padding, descriptions, labels, text):
-        ids = [i for i, channel in enumerate(block.T) if np.any(channel)]
-        rows = [{"channel": i + 1, "cosines": [], "reference_neighbours": []} for i in range(block.shape[1])]
-        if ids:
-            values = self.similarities([block[:, i] for i in ids], text, padding=padding)
-            for i, scores in zip(ids, values, strict=True):
-                rows[i]["cosines"] = [round(float(v), 4) for v in scores[:len(descriptions)]]
-                background = scores[len(descriptions):]
-                rows[i]["reference_neighbours"] = nearest_labels(labels, background)
-        return {**stamp, "channels": rows}
-
-    def marked_match(self, wav, samples, first_sample, descriptions, labels, text):
-        left, right = samples
-        with open_recording(wav) as recording:
-            rate = recording.samplerate
-            if not 0 <= left <= right <= len(recording) or right - left > WINDOW_SECONDS * rate:
-                raise ValueError("marked samples must fit inside the recording and encoder window")
-            stamp = {"wav_samples": [left, right], "first_sample_on_film": first_sample + left,
-                     "samples_per_channel": right - left, "rate_hz": rate}
-            if left == right:
-                return {**stamp, "status": "no_samples", "channels": []}
-            recording.seek(left)
-            pcm = recording.read(right - left, dtype="float32", always_2d=True)
-        return self.score_window({**stamp, "status": "available"}, resample_channels(pcm, rate, RATE),
-                                 "pad", descriptions, labels, text)
-
-    def match(self, wav, start, end, descriptions, per_second=False, first_sample=None, mark_samples=None):
+    def match(self, wav, start, end, descriptions, per_second=False, first_sample=None):
         import torch
         labels, references = self.reference_labels()
         text = torch.cat([self.text_features(descriptions), references]) if descriptions else references
-        windows = [self.score_window(stamp, block, "repeatpad", descriptions, labels, text)
+        def compare(stamp, block, padding):
+            ids = [i for i, channel in enumerate(block.T) if np.any(channel)]
+            rows = [{"channel": i + 1, "cosines": [], "reference_neighbours": []} for i in range(block.shape[1])]
+            if ids:
+                values = self.similarities([block[:, i] for i in ids], text, padding=padding)
+                for i, scores in zip(ids, values, strict=True):
+                    rows[i]["cosines"] = [round(float(v), 4) for v in scores[:len(descriptions)]]
+                    background = scores[len(descriptions):]
+                    rows[i]["reference_neighbours"] = nearest_labels(labels, background)
+            return {**stamp, "channels": rows}
+
+        windows = [compare(stamp, block, "repeatpad")
                    for stamp, block in match_windows(wav, start, end, per_second, first_sample)]
         basis = ("Audio-only cosine similarities, in the supplied text order. Empty scores mean no signal "
                  "at the encoder rate. Reference neighbours are the closest of 527 independent AudioSet labels "
@@ -243,18 +228,11 @@ class Comparator:
         if per_second:
             # Take the entire acoustic phrase from native PCM. Joining independently resampled seconds
             # would insert filter edges and can change the number of samples at fractional rate ratios.
-            result["continuous_windows"] = [
-                self.score_window(stamp, block, "pad", descriptions, labels, text)
-                for stamp, block in native_windows(wav, start, end, first_sample, WINDOW_SECONDS)
-            ]
+            result["continuous_windows"] = [compare(stamp, block, "pad") for stamp, block in
+                                            native_windows(wav, start, end, first_sample, WINDOW_SECONDS)]
             basis += (" The one-second windows can locate changes in similarity. In continuous_windows the "
                       "encoder hears up to ten seconds in their original order once, then pads unused input "
                       "with zeros. Only the recorded part has film times. Neither score locates an onset.")
-        if mark_samples is not None:
-            if first_sample is None:
-                first_sample = sample_boundary(start, probe(wav)["audio_rate"])
-            result["marked_interval"] = self.marked_match(wav, mark_samples, first_sample, descriptions, labels, text)
-            basis += " marked_interval compares only the bracketed original samples, played once with zero padding."
         return {**result, "basis": basis}
 
 
@@ -262,14 +240,12 @@ class SoundMatcher(LocalReader):
     def __init__(self):
         super().__init__([COMPARE_PY, str(Path(__file__).resolve()), "--serve"], CLAP_NAME)
 
-    def read(self, wav, start, end, descriptions, *, per_second=False, first_sample=None, mark_samples=None):
+    def read(self, wav, start, end, descriptions, *, per_second=False, first_sample=None):
         if any(not s.strip() for s in descriptions):
             raise ValueError("each supplied sound description must contain text")
         job = {"wav": str(Path(wav).resolve()), "start": start, "end": end, "descriptions": list(descriptions)}
         if per_second:
             job.update(per_second=True, first_sample=first_sample)
-        if mark_samples is not None:
-            job.update(mark_samples=mark_samples, first_sample=first_sample)
         return self.request(job)
 
     def compare_recordings(self, reference, target, alternatives=None):
@@ -300,7 +276,7 @@ class SoundMatcher(LocalReader):
         return self.read(wav, start, end, descriptions, per_second=per_second, first_sample=first)
 
 
-def neighbours(wav, windows, *, original_mark=None):
+def neighbours(wav, windows):
     labels = vocabulary()
     model = Comparator()
     text = model.text_features(["the sound of " + label.lower() for label in labels])
@@ -315,9 +291,6 @@ def neighbours(wav, windows, *, original_mark=None):
         scores = model.similarities(active, text).mean(axis=0)
         result.append([{"sound": labels[j], "cosine": round(float(scores[j]), 4)}
                        for j in np.argsort(-scores)[:3]])
-    if original_mark is not None:
-        marked = model.marked_match(**original_mark, descriptions=[], labels=labels, text=text)
-        return {"windows": result, "marked_interval": marked}
     return result
 
 
@@ -363,7 +336,4 @@ if __name__ == "__main__":
         else:
             Comparator(download=True)
     else:
-        request = json.load(sys.stdin)
-        if isinstance(request, list):
-            request = {"windows": request}
-        print(json.dumps(neighbours(args.wav, **request)))
+        print(json.dumps(neighbours(args.wav, json.load(sys.stdin))))

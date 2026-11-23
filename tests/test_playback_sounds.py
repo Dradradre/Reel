@@ -93,37 +93,6 @@ class PlaybackSoundTests(unittest.TestCase):
         self.assertEqual(whole["wav_samples"], [0, len(pcm)])
         self.assertEqual((whole["start_s"], whole["end_s"]), (first / rate, end))
 
-    def test_mark_slices_original_channels_before_resampling_and_excludes_the_next_sample(self):
-        rate, first = 11025, 501
-        pcm = np.zeros((1800, 2), dtype=np.int16)
-        pcm[547, 0] = pcm[811, 0] = 30000
-        pcm[600, 1] = 14000
-        matcher = Comparator.__new__(Comparator)
-        matcher.references = (["impact"], object())
-        matcher.similarities = Mock(side_effect=lambda channels, text, **kw: np.full((len(channels), 1), .35))
-        with tempfile.TemporaryDirectory() as tmp:
-            wav = Path(tmp) / "native.wav"
-            sf.write(wav, pcm, rate)
-            def score(left, right):
-                return matcher.match(wav, first / rate, (first + len(pcm)) / rate, [],
-                                     per_second=True, first_sample=first, mark_samples=[left, right])
-            report = score(548, 811)
-            mark = report["marked_interval"]
-            self.assertEqual(mark["wav_samples"], [548, 811])
-            self.assertEqual(mark["first_sample_on_film"], first + 548)
-            self.assertEqual(mark["samples_per_channel"], 263)
-            self.assertEqual([bool(ch["reference_neighbours"]) for ch in mark["channels"]], [False, True])
-            call = matcher.similarities.call_args_list[-1]
-            self.assertEqual(call.kwargs["padding"], "pad")
-            actual, = call.args[0]
-            expected = resample_channels(pcm[548:811].astype(np.float32) / 32768, rate, 48000)
-            np.testing.assert_array_equal(actual, expected[:, 1])
-            empty = score(601, 601)["marked_interval"]
-            self.assertEqual((empty["status"], empty["channels"]), ("no_samples", []))
-            quiet = score(601, 811)["marked_interval"]
-            self.assertEqual(quiet["status"], "available")
-            self.assertTrue(all(not ch["reference_neighbours"] for ch in quiet["channels"]))
-
     def test_continuous_matches_bound_the_encoder_and_keep_a_silent_tail(self):
         from reel.compare_sounds import native_windows
         rate = 8000

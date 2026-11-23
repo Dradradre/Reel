@@ -1,0 +1,1018 @@
+{
+  "baseline": "5e6b618",
+  "marked_match": "a82b01c",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "protocol": "Twenty-four marked sounds in 12 unedited recordings plus six controls per arm, one isolated read-only Codex session per item, fixed query. Both arms used the production MCP listen payload with identical bracketed channel plots, per-second and continuous CLAP scores. Verified all 30 baseline payloads including PNG bytes against the baseline revision. The treatment also included one independent comparison with the bracketed original PCM per channel. The model received text and plots through MCP. No filenames, waveform attachments, label keys or other tools were supplied. Choices were randomized once per original and kept fixed between marks and arms.",
+  "selection": "12 available Perception Test source films selected by seeded hash and category balancing, excluding films in the previous 56-film marked-spectrogram and 16-film sound-transition panels. Paired annotated events of different kinds, durations 0.16–1.6 s, gap at most 2.3 s, neither overlaps another named kind. Excerpt extends 180 ms on either side. Marks were supplied from the original human annotations. Controls use three out-of-menu and three digital-silence second intervals cropped from the ESC-50 switch panel.",
+  "prompt": "Call listen once. What sound can you identify INSIDE the marked interval [mark] seconds? The rest of the replay is context. Choose one of [options], \"none of these\" if another sound is identifiable, \"silence\" if there is no signal, or \"unsure\" if there is signal but you cannot tell what it is. Return only {\"heard\":[\"your choice\"]}.",
+  "sources": [
+    "https://github.com/google-deepmind/perception_test",
+    "https://github.com/karolpiczak/ESC-50"
+  ],
+  "sound_annotations_zip_sha256": "4f0e602ba8f97313aca7d84805334a73edd94fa6f56d80b945954cd32327c141",
+  "summary": {
+    "natural": {
+      "before": {
+        "correct": 15,
+        "total": 24,
+        "unsure": 0,
+        "none_of_these": 4,
+        "silence": 0,
+        "wrong_listed": 5,
+        "both_marks_right": 5
+      },
+      "after": {
+        "correct": 11,
+        "total": 24,
+        "unsure": 1,
+        "none_of_these": 3,
+        "silence": 0,
+        "wrong_listed": 9,
+        "both_marks_right": 2
+      }
+    },
+    "silence": {
+      "before": {
+        "correct": 3,
+        "total": 3,
+        "unsure": 0,
+        "none_of_these": 0,
+        "silence": 3,
+        "wrong_listed": 0
+      },
+      "after": {
+        "correct": 3,
+        "total": 3,
+        "unsure": 0,
+        "none_of_these": 0,
+        "silence": 3,
+        "wrong_listed": 0
+      }
+    },
+    "unlisted": {
+      "before": {
+        "correct": 3,
+        "total": 3,
+        "unsure": 0,
+        "none_of_these": 3,
+        "silence": 0,
+        "wrong_listed": 0
+      },
+      "after": {
+        "correct": 3,
+        "total": 3,
+        "unsure": 0,
+        "none_of_these": 3,
+        "silence": 0,
+        "wrong_listed": 0
+      }
+    }
+  },
+  "natural_paired_difference_95pct_points_by_film": [
+    -37.5,
+    8.3
+  ],
+  "readings": [
+    {
+      "type": "natural",
+      "source": "video_3794",
+      "id": 9,
+      "source_range": [
+        9.82279,
+        11.31644
+      ],
+      "event": [
+        10.00279,
+        10.336217
+      ],
+      "mark": [
+        0.18,
+        0.513427
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "truth": "hitting",
+      "sha256": "c69b387a9ffd9d48753a5508d44dafae7364f66aedbd83f69434f46b5429671f",
+      "before": "hitting",
+      "after": "none of these",
+      "samples": [
+        8640,
+        24645
+      ],
+      "rate": 48000,
+      "image_sha256": "04ae8bdaece971aaa145c0ac9f5027903b19770776079c53ac799012f183a8d5"
+    },
+    {
+      "type": "natural",
+      "source": "video_3794",
+      "id": 10,
+      "source_range": [
+        9.82279,
+        11.31644
+      ],
+      "event": [
+        10.803014,
+        11.13644
+      ],
+      "mark": [
+        0.980224,
+        1.31365
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "truth": "opening or closing something",
+      "sha256": "c69b387a9ffd9d48753a5508d44dafae7364f66aedbd83f69434f46b5429671f",
+      "before": "opening or closing something",
+      "after": "opening or closing something",
+      "samples": [
+        47051,
+        63056
+      ],
+      "rate": 48000,
+      "image_sha256": "8fbfaae624c78f60562c322b5a234c40b25f6ac956cb1d24bf16601fa489005b"
+    },
+    {
+      "type": "natural",
+      "source": "video_3664",
+      "id": 2,
+      "source_range": [
+        9.742047,
+        12.741245
+      ],
+      "event": [
+        9.922047,
+        10.857459
+      ],
+      "mark": [
+        0.18,
+        1.115412
+      ],
+      "options": [
+        "dropping",
+        "rolling"
+      ],
+      "truth": "dropping",
+      "sha256": "bd547c77dc16da11f42994747f5f0608ca15d737e043e95a970bea38709255d2",
+      "before": "none of these",
+      "after": "dropping",
+      "samples": [
+        8640,
+        53540
+      ],
+      "rate": 48000,
+      "image_sha256": "4824f686079fd40d80fb9ae86a38efb03f1f3ff0a3dd4121759c8b98476351fb"
+    },
+    {
+      "type": "natural",
+      "source": "video_3664",
+      "id": 4,
+      "source_range": [
+        9.742047,
+        12.741245
+      ],
+      "event": [
+        11.792871,
+        12.561245
+      ],
+      "mark": [
+        2.050824,
+        2.819198
+      ],
+      "options": [
+        "dropping",
+        "rolling"
+      ],
+      "truth": "rolling",
+      "sha256": "bd547c77dc16da11f42994747f5f0608ca15d737e043e95a970bea38709255d2",
+      "before": "none of these",
+      "after": "rolling",
+      "samples": [
+        98440,
+        135322
+      ],
+      "rate": 48000,
+      "image_sha256": "57c431605b69e70a61fe82f63b83f34976d9470df51bc7cb132038bf846414ae"
+    },
+    {
+      "type": "natural",
+      "source": "video_7791",
+      "id": 17,
+      "source_range": [
+        19.086667,
+        20.346667
+      ],
+      "event": [
+        19.266667,
+        19.533333
+      ],
+      "mark": [
+        0.18,
+        0.446666
+      ],
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "truth": "opening or closing something",
+      "sha256": "8ce9e3e0e5f0e17e41f19696eab9135f8477c6e00db867e3f38d38d069ecf918",
+      "before": "hitting",
+      "after": "opening or closing something",
+      "samples": [
+        7938,
+        19698
+      ],
+      "rate": 44100,
+      "image_sha256": "cbfd17c118b4f176059986c0b97bf7a5b72914126ff611c5e017c6c657533702"
+    },
+    {
+      "type": "natural",
+      "source": "video_7791",
+      "id": 18,
+      "source_range": [
+        19.086667,
+        20.346667
+      ],
+      "event": [
+        19.666667,
+        20.166667
+      ],
+      "mark": [
+        0.58,
+        1.08
+      ],
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "truth": "hitting",
+      "sha256": "8ce9e3e0e5f0e17e41f19696eab9135f8477c6e00db867e3f38d38d069ecf918",
+      "before": "hitting",
+      "after": "opening or closing something",
+      "samples": [
+        25578,
+        47628
+      ],
+      "rate": 44100,
+      "image_sha256": "64ab242e6fd322b8dc3497c63d3ce937a69c61701e64ba0eb88384a442585efa"
+    },
+    {
+      "type": "natural",
+      "source": "video_9435",
+      "id": 16,
+      "source_range": [
+        19.638827,
+        22.030673
+      ],
+      "event": [
+        19.818827,
+        20.285152
+      ],
+      "mark": [
+        0.18,
+        0.646325
+      ],
+      "options": [
+        "dropping",
+        "rolling"
+      ],
+      "truth": "rolling",
+      "sha256": "0fae0f0a66ff4f924d0a9f0b5643b5cebfc3ea1c0e38e3607fa4635c01a6299c",
+      "before": "dropping",
+      "after": "dropping",
+      "samples": [
+        8640,
+        31024
+      ],
+      "rate": 48000,
+      "image_sha256": "f8a4fac94544ef26093d4334b8bb224a3bf29267332051d7b63eb1fb090cd100"
+    },
+    {
+      "type": "natural",
+      "source": "video_9435",
+      "id": 18,
+      "source_range": [
+        19.638827,
+        22.030673
+      ],
+      "event": [
+        21.650819,
+        21.850673
+      ],
+      "mark": [
+        2.011992,
+        2.211846
+      ],
+      "options": [
+        "dropping",
+        "rolling"
+      ],
+      "truth": "dropping",
+      "sha256": "0fae0f0a66ff4f924d0a9f0b5643b5cebfc3ea1c0e38e3607fa4635c01a6299c",
+      "before": "dropping",
+      "after": "unsure",
+      "samples": [
+        96576,
+        106169
+      ],
+      "rate": 48000,
+      "image_sha256": "9b1a390a390bf296e70d6ff570c321ac0e02224f43c3dd8d30584c16b6ff318b"
+    },
+    {
+      "type": "natural",
+      "source": "video_1488",
+      "id": 4,
+      "source_range": [
+        9.881394,
+        11.566204
+      ],
+      "event": [
+        10.061394,
+        11.028147
+      ],
+      "mark": [
+        0.18,
+        1.146753
+      ],
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "truth": "rolling",
+      "sha256": "eecf2c1de007dfd0e34f9ef51e03e66494e3c5980f677a01cc44444f341a94c4",
+      "before": "hitting",
+      "after": "hitting",
+      "samples": [
+        8640,
+        55045
+      ],
+      "rate": 48000,
+      "image_sha256": "7f6a1534aa70fd31580d09cec32061711ec509bc98b3b80a338a37d3c5771ada"
+    },
+    {
+      "type": "natural",
+      "source": "video_1488",
+      "id": 5,
+      "source_range": [
+        9.881394,
+        11.566204
+      ],
+      "event": [
+        11.028147,
+        11.386204
+      ],
+      "mark": [
+        1.146753,
+        1.50481
+      ],
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "truth": "hitting",
+      "sha256": "eecf2c1de007dfd0e34f9ef51e03e66494e3c5980f677a01cc44444f341a94c4",
+      "before": "hitting",
+      "after": "hitting",
+      "samples": [
+        55045,
+        72231
+      ],
+      "rate": 48000,
+      "image_sha256": "7c404f67d4063254bec6c4c8a0f5532a28ab8573f99ad63335539349479e466c"
+    },
+    {
+      "type": "natural",
+      "source": "video_8939",
+      "id": 3,
+      "source_range": [
+        6.885541,
+        9.378534
+      ],
+      "event": [
+        7.065541,
+        8.398662
+      ],
+      "mark": [
+        0.18,
+        1.513121
+      ],
+      "options": [
+        "opening or closing something",
+        "speech"
+      ],
+      "truth": "speech",
+      "sha256": "987c055d93901b7aa246123102f77668d2b726445a53173832128126530ee9e9",
+      "before": "speech",
+      "after": "speech",
+      "samples": [
+        8640,
+        72630
+      ],
+      "rate": 48000,
+      "image_sha256": "6447cb105919091b621551c1103edc0f254803b0918b7599010ed3cf2458e2a3"
+    },
+    {
+      "type": "natural",
+      "source": "video_8939",
+      "id": 4,
+      "source_range": [
+        6.885541,
+        9.378534
+      ],
+      "event": [
+        8.798598,
+        9.198534
+      ],
+      "mark": [
+        1.913057,
+        2.312993
+      ],
+      "options": [
+        "opening or closing something",
+        "speech"
+      ],
+      "truth": "opening or closing something",
+      "sha256": "987c055d93901b7aa246123102f77668d2b726445a53173832128126530ee9e9",
+      "before": "opening or closing something",
+      "after": "opening or closing something",
+      "samples": [
+        91827,
+        111024
+      ],
+      "rate": 48000,
+      "image_sha256": "f48e6e526a392d65cd54d69a995f21c12836bedc06c46c959018290e4d337b93"
+    },
+    {
+      "type": "natural",
+      "source": "video_7023",
+      "id": 3,
+      "source_range": [
+        11.368315,
+        13.924824
+      ],
+      "event": [
+        11.548315,
+        12.513448
+      ],
+      "mark": [
+        0.18,
+        1.145133
+      ],
+      "options": [
+        "dropping",
+        "breaking of something"
+      ],
+      "truth": "breaking of something",
+      "sha256": "38db0b89effdae794232d5b864e220db46e5f04bb970b9018772c8151bc91893",
+      "before": "none of these",
+      "after": "none of these",
+      "samples": [
+        8640,
+        54967
+      ],
+      "rate": 48000,
+      "image_sha256": "e3bd10e04c3d5e2cd58c7892a2ba50663f1400324b771fbeb85ed0b4352d113a"
+    },
+    {
+      "type": "natural",
+      "source": "video_7023",
+      "id": 4,
+      "source_range": [
+        11.368315,
+        13.924824
+      ],
+      "event": [
+        13.4453,
+        13.744824
+      ],
+      "mark": [
+        2.076985,
+        2.376509
+      ],
+      "options": [
+        "dropping",
+        "breaking of something"
+      ],
+      "truth": "dropping",
+      "sha256": "38db0b89effdae794232d5b864e220db46e5f04bb970b9018772c8151bc91893",
+      "before": "none of these",
+      "after": "none of these",
+      "samples": [
+        99696,
+        114073
+      ],
+      "rate": 48000,
+      "image_sha256": "d6b3264a95d61aa8c6930d9777e2f039eadd4e6558b67169f1eb2606339acb86"
+    },
+    {
+      "type": "natural",
+      "source": "video_7730",
+      "id": 8,
+      "source_range": [
+        28.282207,
+        31.156536
+      ],
+      "event": [
+        28.462207,
+        28.696878
+      ],
+      "mark": [
+        0.18,
+        0.414671
+      ],
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "truth": "hitting",
+      "sha256": "0d7503b2e744ac9a17af07332482382ee3b25945bcb77f9657035e697f06c35e",
+      "before": "hitting",
+      "after": "opening or closing something",
+      "samples": [
+        8640,
+        19905
+      ],
+      "rate": 48000,
+      "image_sha256": "64e0396ead448fbe63868c2813b7b71715d5070c1a26b45d3619b3061a1ce500"
+    },
+    {
+      "type": "natural",
+      "source": "video_7730",
+      "id": 4,
+      "source_range": [
+        28.282207,
+        31.156536
+      ],
+      "event": [
+        29.568512,
+        30.976536
+      ],
+      "mark": [
+        1.286305,
+        2.694329
+      ],
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "truth": "opening or closing something",
+      "sha256": "0d7503b2e744ac9a17af07332482382ee3b25945bcb77f9657035e697f06c35e",
+      "before": "opening or closing something",
+      "after": "opening or closing something",
+      "samples": [
+        61743,
+        129328
+      ],
+      "rate": 48000,
+      "image_sha256": "992127c00163539bdb5ce108fb5bb24da5e184c47423b14898acd25499616645"
+    },
+    {
+      "type": "natural",
+      "source": "video_2810",
+      "id": 4,
+      "source_range": [
+        15.3574,
+        16.98986
+      ],
+      "event": [
+        15.5374,
+        15.972715
+      ],
+      "mark": [
+        0.18,
+        0.615315
+      ],
+      "options": [
+        "rolling",
+        "dropping"
+      ],
+      "truth": "dropping",
+      "sha256": "e9315708622bd9900d6da3d304934e2b4c04aad9503036e8cdb3f792e5e05226",
+      "before": "rolling",
+      "after": "rolling",
+      "samples": [
+        8640,
+        29536
+      ],
+      "rate": 48000,
+      "image_sha256": "258921a9dbfd93756b8f9d1a6ec0076e9efb0b2fa56fe6f07406f58b413dc28f"
+    },
+    {
+      "type": "natural",
+      "source": "video_2810",
+      "id": 5,
+      "source_range": [
+        15.3574,
+        16.98986
+      ],
+      "event": [
+        16.508488,
+        16.80986
+      ],
+      "mark": [
+        1.151088,
+        1.45246
+      ],
+      "options": [
+        "rolling",
+        "dropping"
+      ],
+      "truth": "rolling",
+      "sha256": "e9315708622bd9900d6da3d304934e2b4c04aad9503036e8cdb3f792e5e05226",
+      "before": "rolling",
+      "after": "dropping",
+      "samples": [
+        55253,
+        69719
+      ],
+      "rate": 48000,
+      "image_sha256": "1b096d0d8bf7df2c05ed326c41acfabfd1aec3371e8f977a57d41b45684e23aa"
+    },
+    {
+      "type": "natural",
+      "source": "video_2051",
+      "id": 2,
+      "source_range": [
+        2.552783,
+        5.11234
+      ],
+      "event": [
+        2.732783,
+        3.099376
+      ],
+      "mark": [
+        0.18,
+        0.546593
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "truth": "hitting",
+      "sha256": "1835a070352b2671750aa08f619b9972b5563135cce144de1ca46922f351ae77",
+      "before": "hitting",
+      "after": "opening or closing something",
+      "samples": [
+        8640,
+        26237
+      ],
+      "rate": 48000,
+      "image_sha256": "1065e030dce92ca19322d27afe983b7aeed5b33e788cb1198d02e0e0c8faf990"
+    },
+    {
+      "type": "natural",
+      "source": "video_2051",
+      "id": 4,
+      "source_range": [
+        2.552783,
+        5.11234
+      ],
+      "event": [
+        3.899215,
+        4.93234
+      ],
+      "mark": [
+        1.346432,
+        2.379557
+      ],
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "truth": "opening or closing something",
+      "sha256": "1835a070352b2671750aa08f619b9972b5563135cce144de1ca46922f351ae77",
+      "before": "opening or closing something",
+      "after": "opening or closing something",
+      "samples": [
+        64629,
+        114219
+      ],
+      "rate": 48000,
+      "image_sha256": "3e652bad781a38f41eec5e1c99cd07585d0aad276051a548ea9b1fc3f547bf23"
+    },
+    {
+      "type": "natural",
+      "source": "video_4187",
+      "id": 8,
+      "source_range": [
+        14.832739,
+        19.106172
+      ],
+      "event": [
+        15.012739,
+        16.497145
+      ],
+      "mark": [
+        0.18,
+        1.664406
+      ],
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "truth": "opening or closing something",
+      "sha256": "7db5ec1c394a14342ddecddbb0b9d555b308685d52619cb12cfd6c7c38ed48cb",
+      "before": "opening or closing something",
+      "after": "opening or closing something",
+      "samples": [
+        8640,
+        79892
+      ],
+      "rate": 48000,
+      "image_sha256": "0a9e1bc2050f226dddbc5496ef2b16fdde37e0fc2e4f9829d976d047a609da44"
+    },
+    {
+      "type": "natural",
+      "source": "video_4187",
+      "id": 11,
+      "source_range": [
+        14.832739,
+        19.106172
+      ],
+      "event": [
+        18.588807,
+        18.926172
+      ],
+      "mark": [
+        3.756068,
+        4.093433
+      ],
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "truth": "hitting",
+      "sha256": "7db5ec1c394a14342ddecddbb0b9d555b308685d52619cb12cfd6c7c38ed48cb",
+      "before": "hitting",
+      "after": "opening or closing something",
+      "samples": [
+        180292,
+        196485
+      ],
+      "rate": 48000,
+      "image_sha256": "bc956d2b3e57a93ea7e97dcd1e9ad28d6b027de469beb25d5ecd2e04136f8a30"
+    },
+    {
+      "type": "natural",
+      "source": "video_6653",
+      "id": 16,
+      "source_range": [
+        6.486667,
+        9.646667
+      ],
+      "event": [
+        6.666667,
+        7.266667
+      ],
+      "mark": [
+        0.18,
+        0.78
+      ],
+      "options": [
+        "dropping",
+        "hitting"
+      ],
+      "truth": "dropping",
+      "sha256": "50a6ad33aa78bb5cece09660d75d2454f31ab39e6231175418e188bc52f20f87",
+      "before": "dropping",
+      "after": "hitting",
+      "samples": [
+        7938,
+        34398
+      ],
+      "rate": 44100,
+      "image_sha256": "a4d112f2488cf77218f5290905e1d37135e3076cec91f1ad620486d08fc15383"
+    },
+    {
+      "type": "natural",
+      "source": "video_6653",
+      "id": 22,
+      "source_range": [
+        6.486667,
+        9.646667
+      ],
+      "event": [
+        9.0,
+        9.466667
+      ],
+      "mark": [
+        2.513333,
+        2.98
+      ],
+      "options": [
+        "dropping",
+        "hitting"
+      ],
+      "truth": "hitting",
+      "sha256": "50a6ad33aa78bb5cece09660d75d2454f31ab39e6231175418e188bc52f20f87",
+      "before": "dropping",
+      "after": "hitting",
+      "samples": [
+        110838,
+        131418
+      ],
+      "rate": 44100,
+      "image_sha256": "09e372a1ed397ebf851b0da50d5ac13931cad6f88e556df3b5dae35a6796adc9"
+    },
+    {
+      "type": "silence",
+      "source": "ESC50-21",
+      "source_range": [
+        3,
+        6.5
+      ],
+      "mark": [
+        2,
+        3.5
+      ],
+      "options": [
+        "thunderstorm",
+        "breathing",
+        "insects",
+        "cow"
+      ],
+      "truth": "silence",
+      "sha256": "c291115c4dc8d5b96caf57b3fba45921cd02bd9ae67c06e9d5f31bc4df144c76",
+      "before": "silence",
+      "after": "silence",
+      "samples": [
+        88200,
+        154350
+      ],
+      "rate": 44100,
+      "image_sha256": "e1fba79a61605990201343c3e7a34e5ee1e8a54689d459c9cdf5990c768fa5d1",
+      "prior_file": "5-195518-A-7.wav",
+      "target_file": null
+    },
+    {
+      "type": "silence",
+      "source": "ESC50-22",
+      "source_range": [
+        3,
+        6.5
+      ],
+      "mark": [
+        2,
+        3.5
+      ],
+      "options": [
+        "brushing teeth",
+        "thunderstorm",
+        "pouring water",
+        "cow"
+      ],
+      "truth": "silence",
+      "sha256": "cbc934739548b979d305666d08c969ec247c92d86161ac3b5f4421b32c15258f",
+      "before": "silence",
+      "after": "silence",
+      "samples": [
+        88200,
+        154350
+      ],
+      "rate": 44100,
+      "image_sha256": "99164154da724c98c698d7496d6562628fb079b8c6ec26992ab4f25118ea936b",
+      "prior_file": "5-220939-A-27.wav",
+      "target_file": null
+    },
+    {
+      "type": "silence",
+      "source": "ESC50-23",
+      "source_range": [
+        3,
+        6.5
+      ],
+      "mark": [
+        2,
+        3.5
+      ],
+      "options": [
+        "rain",
+        "pouring water",
+        "clock alarm",
+        "thunderstorm"
+      ],
+      "truth": "silence",
+      "sha256": "46b218b2b5b8baf833a2f678ffd94b5c2a9a2ebc181272ddd5d25ceb36e9add0",
+      "before": "silence",
+      "after": "silence",
+      "samples": [
+        88200,
+        154350
+      ],
+      "rate": 44100,
+      "image_sha256": "0b3e51e02451bed39067ccbfc59a75e85025b652c6b74596943ce1a2181dac24",
+      "prior_file": "5-202898-A-10.wav",
+      "target_file": null
+    },
+    {
+      "type": "unlisted",
+      "source": "ESC50-18",
+      "source_range": [
+        3,
+        6.5
+      ],
+      "mark": [
+        2,
+        3.5
+      ],
+      "options": [
+        "car horn",
+        "church bells",
+        "clock tick",
+        "door wood creaks"
+      ],
+      "truth": "none of these",
+      "sha256": "1cc7c54e8065191b9d7eb72800752fbf35cb6a89a57ccd3c4a7513789a1725d9",
+      "before": "none of these",
+      "after": "none of these",
+      "samples": [
+        88200,
+        154350
+      ],
+      "rate": 44100,
+      "image_sha256": "7171eeb184076bcfa10b1af856280cfcc65af356fe9d93f50ce8cb6320ecf3a7",
+      "prior_file": "5-191497-A-33.wav",
+      "target_file": "5-177957-D-40.wav"
+    },
+    {
+      "type": "unlisted",
+      "source": "ESC50-19",
+      "source_range": [
+        3,
+        6.5
+      ],
+      "mark": [
+        2,
+        3.5
+      ],
+      "options": [
+        "chainsaw",
+        "car horn",
+        "church bells",
+        "breathing"
+      ],
+      "truth": "none of these",
+      "sha256": "ed717774fe77d5ab0762f0cd24e30f8393e3b73299e134e8815a356be4a70adc",
+      "before": "none of these",
+      "after": "none of these",
+      "samples": [
+        88200,
+        154350
+      ],
+      "rate": 44100,
+      "image_sha256": "4abe64618cce3c51e8ca7b93c37da1c5cca8bdf9769281b30f09f7e0089bc0f9",
+      "prior_file": "5-185579-B-41.wav",
+      "target_file": "5-189212-A-12.wav"
+    },
+    {
+      "type": "unlisted",
+      "source": "ESC50-20",
+      "source_range": [
+        3,
+        6.5
+      ],
+      "mark": [
+        2,
+        3.5
+      ],
+      "options": [
+        "cow",
+        "snoring",
+        "breathing",
+        "car horn"
+      ],
+      "truth": "none of these",
+      "sha256": "612e94c0f37d58245576b27351a79ba571f65958a04e40e2d39da488d1dccc82",
+      "before": "none of these",
+      "after": "none of these",
+      "samples": [
+        88200,
+        154350
+      ],
+      "rate": 44100,
+      "image_sha256": "db37cd245cb29cb3b49d636f069558efa16b48e86e7fa5ef1ccc2768e6d8f485",
+      "prior_file": "5-216368-A-28.wav",
+      "target_file": "5-251963-A-47.wav"
+    }
+  ],
+  "decision": "Keep the contextual replay on main. The added comparison reduced correct source selections on this panel. The experimental implementation remains in the marked_match revision.",
+  "classification_check": "Taking the higher mean CLAP cosine across active channels (one required choice), whole replay and marked samples each matched the event label 12/24 times.",
+  "doors": {
+    "until_s": 8.5,
+    "mark_s": [
+      4.3,
+      6.8
+    ],
+    "alternatives": [
+      "a metallic jingle",
+      "a voice speaking",
+      "steady room noise"
+    ],
+    "A": "A metallic jingle or rattling, uncertain source. No intelligible words.",
+    "B": "Very quiet steady hiss or fan-like noise, uncertain source. No intelligible words.",
+    "same_past_different_future": "All text, images and attached WAVs were identical for A and C across the released views and marked replay."
+  }
+}

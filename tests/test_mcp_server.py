@@ -499,16 +499,6 @@ class TransportTests(unittest.TestCase):
             via_listen = viewer.listen(1, None, .1, .7, describe=False, mark_sound=[.35001, .45001])
             self.assertEqual(json.loads(via_listen[0].text)["images_in_order"], json.loads(marked.text)["images_in_order"])
             self.assertEqual(via_listen[1].data, marked_plot.data)
-            viewer.matcher = Mock()
-            viewer.matcher.read.return_value = {"status": "available"}
-            viewer.ask_scene(.1, .7, alternatives=[], mark_sound=[.35001, .45001])
-            scene_call = viewer.matcher.read.call_args
-            self.assertEqual(scene_call.kwargs, dict(per_second=True, first_sample=800, mark_samples=[2001, 2801]))
-            viewer.listen(1, None, .1, .7, describe=False, component="harmonic",
-                          alternatives=["a tap"], mark_sound=[.35001, .45001])
-            listen_call = viewer.matcher.read.call_args
-            self.assertEqual(listen_call.args[0], scene_call.args[0])
-            self.assertEqual(listen_call.kwargs, dict(per_second=False, first_sample=800, mark_samples=[2001, 2801]))
             for invalid in ([0, .3], [.3, .3], [.2, .8], [.3], []):
                 with self.assertRaises(ValueError):
                     viewer.ask_scene(.1, .7, mark_sound=invalid)

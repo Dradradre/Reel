@@ -188,7 +188,7 @@ class Viewing:
             return self.sound.for_replay()
         return nullcontext(self.sound)
 
-    def match_original(self, wav, start, end, alternatives, *, per_second, first_sample, marked_window=None):
+    def match_original(self, wav, start, end, alternatives, *, per_second, first_sample):
         if self.matcher is None:
             manager = SoundMatcher()
         elif isinstance(self.matcher, SoundMatcher):
@@ -196,10 +196,8 @@ class Viewing:
         else:
             manager = nullcontext(self.matcher)
         with manager as matcher:
-            if per_second or marked_window is not None:
-                bounds = {"mark_samples": marked_window["mark_samples"]} if marked_window is not None else {}
-                return matcher.read(wav, start, end, alternatives, per_second=per_second,
-                                    first_sample=first_sample, **bounds)
+            if per_second:
+                return matcher.read(wav, start, end, alternatives, per_second=True, first_sample=first_sample)
             return matcher.read(wav, start, end, alternatives)
 
     def read_scene(self, key, directory, *, seconds=None, question=None, interval=None, native_audio=False):
@@ -239,14 +237,10 @@ class Viewing:
                 with self.words.for_replay():
                     speech = self.words.read_excerpt(scene["wav"], scene["rate_hz"], scene["channels"],
                                                      scene["first_sample"], end_s, self.lang)
-            marked = None
-            if scene.get("wav") and mark_sound is not None:
-                marked = sound_window_block(directory, scene["wav"], start_s, end_s, scene["first_sample"], mark_sound)
             match = None
             if scene.get("wav") and alternatives is not None:
                 match = self.match_original(scene["wav"], start_s, end_s, alternatives, per_second=True,
-                                            first_sample=scene["first_sample"],
-                                            marked_window=marked[0]["recorded_sound_window"] if marked else None)
+                                            first_sample=scene["first_sample"])
             if sync_regions:
                 timing = published_timing(scene, sync_regions)
         report = {"start_s": start_s, "end_s": end_s, "joint": joint, "images_in_order": [], "audio": None}
@@ -287,8 +281,8 @@ class Viewing:
                     path = Path(tmp) / page.pop("file")
                     report["images_in_order"].append({"region_motion_and_channel_peaks": page})
                     blocks.append(image_block(path))
-        if marked or (wav and not blocks and not native_audio):
-            row, image = marked or sound_window_block(directory, wav, start_s, end_s, scene["first_sample"], None)
+        if wav and (mark_sound is not None or (not blocks and not native_audio)):
+            row, image = sound_window_block(directory, wav, start_s, end_s, scene["first_sample"], mark_sound)
             report["images_in_order"].append(row)
             blocks.append(image)
         if native_audio and wav:
@@ -650,13 +644,9 @@ class Viewing:
             result = {**result, "start_s": start, "end_s": stop, "next_start_s": stop if stop < end else None,
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first)}
-            marked = None
-            if mark_sound is not None:
-                marked = sound_window_block(directory, original, start, stop, first, mark_sound)
             if alternatives is not None or per_second:
-                result["original_sound_match"] = self.match_original(
-                    original, start, stop, alternatives or [], per_second=per_second, first_sample=first,
-                    marked_window=marked[0]["recorded_sound_window"] if marked else None)
+                result["original_sound_match"] = self.match_original(original, start, stop, alternatives or [],
+                                                                     per_second=per_second, first_sample=first)
             if focus:
                 result["component"] = focus
         blocks = []
@@ -666,8 +656,8 @@ class Viewing:
                 channel_spectrum(wav, spectrum, track["channels"])
                 blocks.append(image_block(spectrum))
             result["images_in_order"] = [f"{component} component spectrum" if focus else "recorded channel spectrum"]
-        if marked:
-            row, image = marked
+        if mark_sound is not None:
+            row, image = sound_window_block(directory, original, start, stop, first, mark_sound)
             result.setdefault("images_in_order", []).append(row)
             blocks.append(image)
         if native_audio:
@@ -926,9 +916,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             With only start_s and end_s, get pictures, channel levels and times of frequency-band changes
             without starting a model. To hear a moment among nearby sounds, replay the wider interval
             and set mark_sound=[from_s,to_s] inside it. A channel spectrogram marks those bounds on the
-            original recording. With alternatives, a separate comparison uses only the marked samples.
-            Speech estimates cover the wider interval. To see which picture coincided with a brief sound,
-            set exposure_detail=true.
+            original recording. Any words and source estimates still cover the wider interval. To see which picture coincided with a brief sound, set exposure_detail=true.
             Up to 12 consecutive exposures appear with their recorded peaks. Longer scenes show up to six frames
             around the strongest measured rise in a frequency band. Identical pictures need no extra sheet.
             Asking a question or giving alternatives also checks this exact recording for voice activity and
@@ -970,9 +958,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             to emphasize sustained frequency bands or "percussive" to emphasize short broadband changes.
             Use "mix" for the original. The local reader compares a selected component with the original.
             Supply alternatives to compare proposed sounds against the original recording without pictures.
-            With mark_sound the same comparison also runs on the marked original samples alone. An empty list
-            retrieves the closest catalogue sounds. Set per_second=true to compare each second independently,
-            including the last partial second. The scores do not certify a source.
+            An empty list retrieves the closest catalogue sounds. Set per_second=true to compare each second
+            independently, including the last partial second. The scores do not certify a source.
             native_audio includes the selected WAV.
             Set describe=false to use the recording and spectrum without the local waveform reader.
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""

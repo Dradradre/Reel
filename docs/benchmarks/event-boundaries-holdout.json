@@ -1,0 +1,1069 @@
+{
+  "source": "Kinetics-GEBD (Shou et al.), official raw Kinetics-400 validation annotations, CC BY-NC 4.0. Each original annotation range becomes its midpoint. Sorted only for one-to-one matching. The authors’ processed release merges nearby changes; this study keeps individual marks.",
+  "annotations": "https://github.com/StanLei52/GEBD",
+  "raw_sha256": "2ecd5a1f8366b6d86dec56a39d95db96b2adc9fb9badc6d9a26615d5bef92a3b",
+  "recordings": "https://github.com/cvdfoundation/kinetics-dataset",
+  "source_revision": "12b1109",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "selection": "Complete matching MP4 members of the first 50331648 compressed bytes from Kinetics-400 validation parts 4 and 10. Require five GEBD observers, matching file stem and video frame count, at least nine seconds, video duration within one frame plus 1 ms of the annotation, video start zero and audio start within 0.1 s of zero. Sort by SHA-256 of reel-motion-holdout-02/ followed by the stem. Take the first eligible film in each category until 12, excluding the 24 original categories. No reader answers used in selection.",
+  "conditions": "The model reported its marks after each consecutive two-second interval, before seeing the next one. Four intervals from the start. It saw the picture and evidence derived from recorded channels, without a native WAV. Humans originally annotated the whole film. One model session per film.",
+  "prompt": "Watch the activity as it unfolds. Mark the times when one meaningful part of the main activity ends and another begins, one level below the overall activity. Include a change of shot. An ongoing activity may continue across many pictures. It is fine to mark several changes in an interval or none. Use advance with consecutive turn numbers starting at 1. At each call submit your changes in the preceding interval in seconds from the start of the film. Finish when the server returns end_of_view.",
+  "scoring": "Fixed scoring clock [0.3,8) s. Each GPT list is compared with all five human lists, each human with the other four. One-to-one temporal matches within 0.5s, F1=2*matches/(marks+reference marks); two empty lists score 1. Equal weight per pair inside film and per film. Human observers annotated the full original clip with their annotation interface; readers see the eight-second prefix, with online decisions irrevocable. The study does not document human audio playback settings. Rotated control preserves within-film relative marks and count on the circular scoring interval. Intervals resample films (10,000 draws). Observers received visual examples and a 100-video qualification exam. GPT received a written request. Each condition has one scored run per film. The film bootstrap does not describe within-reader rerun variability. This is a study-specific all-rater metric, different from the published best-rater benchmark.",
+  "films": [
+    {
+      "id": "WEhwJ0Ee1RM_000039_000049",
+      "category": "eating_watermelon",
+      "archive_part": 10,
+      "sha256": "15ff1eed1aadc56c9a08ed1a2c817fb6c6026586501818215510ab4dc8435227",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          4.08015,
+          4.994665,
+          6.78582
+        ],
+        [
+          4.96761,
+          3.695945,
+          4.25331,
+          6.01741
+        ],
+        [
+          5.1961,
+          4.08516,
+          6.08907,
+          6.77111
+        ],
+        [
+          3.7216,
+          1.44523,
+          4.922445,
+          6.43856
+        ],
+        [
+          5.01566
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": []
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "VTgqhdA7OMg_000209_000219",
+      "category": "making_bed",
+      "archive_part": 10,
+      "sha256": "668e4a20cf1201979ad408d3baad4c76e03fa19c30cc0608fe8d104cea4f87e2",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.48044,
+          1.89775,
+          3.84353,
+          5.47704,
+          6.78624
+        ],
+        [
+          0.6792,
+          3.52236,
+          6.19178
+        ],
+        [
+          0.39251,
+          2.67933,
+          4.36032,
+          5.4184,
+          6.27169,
+          7.65402
+        ],
+        [
+          0.39414,
+          1.82995,
+          2.65343,
+          4.21593,
+          6.47522,
+          7.81249
+        ],
+        [
+          0.34621,
+          1.31179,
+          2.5966,
+          4.21915,
+          5.61155,
+          6.54718,
+          7.48068
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          3.1
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "Df2texc092Y_000042_000052",
+      "category": "bouncing_on_trampoline",
+      "archive_part": 4,
+      "sha256": "8a5897231382569ab61196592c7475feaae78b1c74b1adc6811948353027068e",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          2.03629,
+          6.1309,
+          7.20201,
+          3.28365
+        ],
+        [
+          2.03792,
+          7.59124,
+          3.02291,
+          5.9609
+        ],
+        [
+          0.98928,
+          2.40549,
+          3.76183,
+          6.29337,
+          7.88308
+        ],
+        [
+          0.61137,
+          3.36256,
+          6.4534
+        ],
+        [
+          0.58597,
+          1.93396,
+          3.14997,
+          7.40132
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          0.5,
+          1.8,
+          3,
+          6.2
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "C3EwcscJQ1I_000002_000012",
+      "category": "climbing_ladder",
+      "archive_part": 4,
+      "sha256": "f37aa395221ed28e206eb65d7f5ed18a7acf3004783efe84b46ffe650871b783",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          3.12361,
+          7.24759
+        ],
+        [
+          3.51005,
+          4.20339,
+          7.29093
+        ],
+        [
+          1.52502,
+          3.77346,
+          7.2472,
+          3.47442,
+          6.58129,
+          7.72976
+        ],
+        [
+          0.83298,
+          4.1309,
+          7.10582
+        ],
+        [
+          1.21762,
+          7.21423,
+          3.22353
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": []
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "CnsOEEuyrrI_000144_000154",
+      "category": "tai_chi",
+      "archive_part": 4,
+      "sha256": "badc2d07cc769041c826469cded0b412ec8891364de3971b0ac5f5091995281c",
+      "original_duration": 10.0,
+      "frames": 250,
+      "human": [
+        [
+          2.81305,
+          3.25632,
+          4.00647,
+          5.44709
+        ],
+        [
+          0.59683,
+          1.13539,
+          1.86621,
+          2.9048,
+          3.29911,
+          5.51084,
+          7.4823
+        ],
+        [
+          1.44877,
+          2.69058,
+          4.16482,
+          5.68533,
+          6.96526
+        ],
+        [
+          0.80192,
+          1.70408,
+          3.0072,
+          4.31032,
+          5.91416,
+          7.21728
+        ],
+        [
+          1.05592,
+          2.74779,
+          4.03169,
+          6.65949
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          3.1,
+          4.4,
+          6.1,
+          7
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "XNYvNRBgcFo_000001_000011",
+      "category": "riding_a_bike",
+      "archive_part": 10,
+      "sha256": "250d44bb0d3b4a1477ad89d05c54e4d5892d5bea449e63f79fd2e2c672ae6063",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          3.28251,
+          6.54721,
+          7.80823
+        ],
+        [
+          2.76191,
+          6.51264
+        ],
+        [
+          0.40509,
+          2.97371,
+          6.46609,
+          5.1376
+        ],
+        [
+          2.73602,
+          6.48538
+        ],
+        [
+          0.432905,
+          2.759785,
+          4.88644,
+          6.58019,
+          7.732805
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          2.8,
+          7.1
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "CDIyErzttyg_000079_000089",
+      "category": "cartwheeling",
+      "archive_part": 4,
+      "sha256": "57395924abc1b0b090a4f42a59e9fde06e3f2c7e93ac9ae04acfe2fc069d4737",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          2.85117,
+          5.32337
+        ],
+        [
+          0.63324,
+          1.31254,
+          2.08394,
+          2.84383,
+          3.46556,
+          5.16955,
+          5.820065,
+          6.706605,
+          7.56436
+        ],
+        [
+          2.85,
+          5.59559,
+          3.14616
+        ],
+        [
+          2.82754,
+          5.35597,
+          6.60571,
+          7.44523
+        ],
+        [
+          2.85263,
+          5.19529,
+          0.66582
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          2.87,
+          5.5
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "W5sJXu657wY_000010_000020",
+      "category": "shredding_paper",
+      "archive_part": 10,
+      "sha256": "005d06147b04ac0c82c04ab83f71d04846d1fbf2f30155c2d1287550ab569dc6",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.99016,
+          2.00334,
+          3.75339,
+          4.40966,
+          4.93928,
+          5.65312,
+          6.97717
+        ],
+        [
+          1.01532,
+          1.99305,
+          4.734525,
+          5.64515,
+          6.85294,
+          7.9409
+        ],
+        [
+          0.451315,
+          1.01667,
+          1.59505,
+          3.52395,
+          4.78516,
+          5.65,
+          6.75116,
+          7.993815
+        ],
+        [
+          0.5589,
+          1.01542,
+          3.62649,
+          5.64879,
+          6.77513,
+          6.99698,
+          4.86802,
+          7.974
+        ],
+        [
+          1.00297,
+          3.50191,
+          5.09987,
+          5.60986,
+          6.79983
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          1.03,
+          5.64
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "B7PqtWRQNbo_000316_000326",
+      "category": "baking_cookies",
+      "archive_part": 4,
+      "sha256": "2bf751d26c332aee6827e20a702b4ab84d9fa6f1ab3e7277bedc398dab6c47f1",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          0.81493,
+          1.84525,
+          3.03775,
+          4.52599,
+          6.88237
+        ],
+        [
+          2.2735,
+          4.61223,
+          7.04553,
+          0.60972
+        ],
+        [
+          2.39044,
+          4.86859,
+          5.86048,
+          0.84518
+        ],
+        [
+          0.65001,
+          2.405035,
+          3.07129,
+          4.83715
+        ],
+        [
+          0.97977,
+          3.1135,
+          6.10725
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": []
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "VD8g_9pocxk_000077_000087",
+      "category": "cleaning_pool",
+      "archive_part": 10,
+      "sha256": "3b9db9b1aff44948e2f27ccd44005ff538f6aa5ac90f217927414c620406d800",
+      "original_duration": 10.032160514568233,
+      "frames": 209,
+      "human": [
+        [
+          1.1167,
+          7.79983,
+          4.87954,
+          0.40065
+        ],
+        [
+          0.39449,
+          3.07702,
+          7.62155
+        ],
+        [
+          0.89493,
+          2.99618,
+          4.676105,
+          7.00512
+        ],
+        [
+          0.3355,
+          1.66669,
+          4.713275,
+          6.41785
+        ],
+        [
+          0.8521,
+          4.654985
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          4.8,
+          7
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 3,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "C15qK3MFWLk_000001_000011",
+      "category": "tying_tie",
+      "archive_part": 4,
+      "sha256": "f3903ba2fbb563032f6076e9577cf6fbc36690445c39750c15348c9a5383aa02",
+      "original_duration": 10.01,
+      "frames": 300,
+      "human": [
+        [
+          6.46114,
+          6.98063
+        ],
+        [
+          4.02674,
+          6.49219,
+          7.14597
+        ],
+        [
+          5.94151,
+          6.32511,
+          7.08378
+        ],
+        [
+          6.09606,
+          6.54464,
+          7.24627,
+          0.31055
+        ],
+        [
+          7.57099,
+          6.4681
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          6.2
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 4,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    },
+    {
+      "id": "Wv02oSoS3vw_000367_000377",
+      "category": "scuba_diving",
+      "archive_part": 10,
+      "sha256": "3e9e2a420a3f0ea4a7c958aa0c841e09ae33da3c306c978d32df3d4bda10de56",
+      "original_duration": 10.0,
+      "frames": 300,
+      "human": [
+        [
+          4.11566,
+          5.40405,
+          7.93262
+        ],
+        [
+          1.21424,
+          2.94711,
+          3.69265,
+          3.56667,
+          4.58323,
+          7.54595
+        ],
+        [
+          3.01421,
+          3.72301,
+          7.7809
+        ],
+        [
+          3.05915
+        ],
+        [
+          2.94805,
+          7.463585
+        ]
+      ],
+      "interval": [
+        0.3,
+        8
+      ],
+      "readers": {
+        "clock": [
+          7.6
+        ]
+      },
+      "view_windows": [
+        {
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 2.0,
+          "end_s": 4.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 4.0,
+          "end_s": 6.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        },
+        {
+          "start_s": 6.0,
+          "end_s": 8.0,
+          "images": 5,
+          "audio": true,
+          "source_estimates": "available",
+          "signal": "nonzero"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "human_f1": {
+      "mean": 0.6221899165649166,
+      "film_bootstrap_95": [
+        0.572392102110852,
+        0.6695483538452288
+      ]
+    },
+    "readers": {
+      "clock": {
+        "f1": {
+          "mean": 0.37349687349687355,
+          "film_bootstrap_95": [
+            0.22317294973544974,
+            0.5170333994708993
+          ]
+        },
+        "fraction_of_human_f1": {
+          "mean": 0.6002939995539199,
+          "film_bootstrap_95": [
+            0.36139383278284765,
+            0.8231264092268328
+          ]
+        },
+        "marks": 19,
+        "marks_near_majority": 16,
+        "matched_per_film_per_viewer": 1.1833333333333333,
+        "rotated_f1": {
+          "mean": 0.22622455018939394,
+          "film_bootstrap_95": [
+            0.1307910867886454,
+            0.3235356344321188
+          ]
+        },
+        "above_rotation": {
+          "mean": 0.14727232330747955,
+          "film_bootstrap_95": [
+            0.07024595377134439,
+            0.2316315656095929
+          ]
+        },
+        "minus_human": {
+          "mean": -0.24869304306804307,
+          "film_bootstrap_95": [
+            -0.39982352369852364,
+            -0.11079173777611284
+          ]
+        }
+      }
+    },
+    "paired": []
+  }
+}

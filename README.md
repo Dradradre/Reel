@@ -62,7 +62,7 @@ order, with nothing left out.
 
 ## Does it work?
 
-On 24 Kinetics films, GPT marked changes in the main activity as it watched. Its one-to-one timing F1 against individual human annotators was **39.2** on a 0–100 scale. Two people averaged **65.7**. GPT marked 40 changes, with 35 within half a second of at least three of the five observers. [Film times, reader instructions and controls](docs/perception-check.md#활동이-달라졌다고-느낀-시각)
+On 24 Kinetics films, GPT marked changes in the main activity as it watched. Its one-to-one timing F1 against individual human annotators was **39.2** on a 0–100 scale. Two people averaged **65.7**. GPT marked 40 changes, with 35 within half a second of at least three of the five observers. In 12 further films from different activity categories, GPT and human observers averaged 37.3 and two humans averaged 62.2 with the same protocol. [Film times, reader instructions and controls](docs/perception-check.md#활동이-달라졌다고-느낀-시각)
 
 When GPT heard both recordings in sequence and could compare its own descriptions across them, it identified **25/48** sounds, up from **22/48**. Both versions identified both sounds on **6/24 films**. In a separate environmental test, each version named 16/16 sounds present in the choices and abstained on 15/16 sounds outside them. [Paired listening and false identifications](docs/listening-check.md#두-구간에서-어떤-소리가-달라졌는지-비교)
 

@@ -1,0 +1,3206 @@
+{
+  "base_revision": "3884d56e8deac80f6072673f84e59e58cb095bb8",
+  "model": "gpt-6.1-terra via signed-in local Codex CLI",
+  "panels": [
+    "perception-agreement-holdout-v4.json",
+    "perception-agreement-holdout-v3.json"
+  ],
+  "skipped": [
+    [
+      "video_6400",
+      "less than 200 ms"
+    ],
+    [
+      "video_5230",
+      "no separately annotated alternate"
+    ],
+    [
+      "video_1075",
+      "less than 200 ms"
+    ],
+    [
+      "video_6614",
+      "no separately annotated alternate"
+    ]
+  ],
+  "methods": {
+    "selection": "Two published panels, 28 different original and hashed Perception Test films. For each frozen pair of answer choices, find the longest separately annotated interval for the alternate class and the longest interval in the original event not overlapping that alternate. Use the central portion of each at the same native sample length, from 200 ms to 4 seconds. Excluded four ineligible films before reading. Other sound classes can coexist with the annotated events. No new people rated these altered movies.",
+    "movies": "Use the moving pictures of the selected original interval for all three arms. Sound is original, a different equal-length annotated event from the same film, or exact digital silence. Keep original levels, rate and channels. Verify the same decoded video frame/PTS digest and the native audio hashes. Trim on replay at the reported sample boundary for every arm.",
+    "gpt": "One new ephemeral text/image session per arm, no filename, no key, no prior answers. Watch all released media with view, then ask_scene on the exact whole interval with alternatives. Only the comparison and visual tools are available; GPT receives the images, acoustic measurements and local sound estimates, without a native WAV or the 30B optional reader. One answer A, B or ? when unresolved. Digital silence is scored separately from the source cases.",
+    "compact": "Separate audio-only diagnostic using Gemma 4 E2B IT, MLX 4-bit checkpoint 238767527555cb75a05732a84dff5d6ba0dd6809. At the first answer token take the highest log probability among A, B, ?. Average log probabilities over distinct recorded channels. Repeat with the descriptions in reverse order, then map the letters back. These are constrained predictions of a different model. The GPT sessions never received them.",
+    "clap": "Raw CLAP embeddings computed from each released waveform played once with zero padding, averaged across active channels. Independent picks the higher cosine on each recording. Forced one each picks the assignment with the larger sum, assuming both labels occur exactly once. This assumption is true by construction for the distinct pairs only, and is not a general decision rule.",
+    "picture_digest": "SHA-256 of FFmpeg framemd5 output with the software-version header removed, lines joined with LF and no trailing LF. Covers decoded frame hashes and timestamps."
+  },
+  "summary": {
+    "gpt": {
+      "correct": 20,
+      "wrong": 5,
+      "abstained": 23,
+      "both_correct_pairs": 5,
+      "false_names_on_silence": 0
+    },
+    "compact_original_order": {
+      "correct": 23,
+      "wrong": 20,
+      "abstained": 5,
+      "both_correct_pairs": 0,
+      "false_names_on_silence": 21
+    },
+    "compact_reversed_order": {
+      "correct": 21,
+      "wrong": 22,
+      "abstained": 5,
+      "both_correct_pairs": 0,
+      "false_names_on_silence": 22
+    },
+    "compact_agrees_on_both_orders": {
+      "correct": 0,
+      "wrong": 0,
+      "abstained": 48,
+      "both_correct_pairs": 0,
+      "false_names_on_silence": 0
+    },
+    "clap_independent": {
+      "correct": 30,
+      "wrong": 18,
+      "abstained": 0,
+      "both_correct_pairs": 6,
+      "false_names_on_silence": null
+    },
+    "clap_forced_one_each": {
+      "correct": 36,
+      "wrong": 12,
+      "abstained": 0,
+      "both_correct_pairs": 18,
+      "false_names_on_silence": null
+    }
+  },
+  "compact_resource": {
+    "code": 0,
+    "peak_kib": 4381152,
+    "min_free_pct": 84,
+    "seconds": 18.76,
+    "status": "ok",
+    "mlx_peak_bytes": 3909105702
+  },
+  "gpt_resources": {
+    "sessions": 72,
+    "peak_single_tree_kib": 3398768,
+    "min_system_free_pct": 83,
+    "surviving_processes": 0
+  },
+  "pairs": [
+    {
+      "video_id": "video_10368",
+      "original_sha256": "97a9f70b0af75236bfc42bf8ef61f894917e91565487c0d97bc00eb89c52d766",
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 10,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            10761967,
+            11831479
+          ],
+          "first_sample": 519783,
+          "native_pcm_sha256": "ccadaba2017ab04be341932cb9a6dc897ee92cb3f2b70d77455e4557698a0f4f"
+        },
+        {
+          "event_id": 7,
+          "label": "Animal:sound",
+          "human_letter": "A",
+          "annotation_us": [
+            12834147,
+            13769970
+          ],
+          "first_sample": 616040,
+          "native_pcm_sha256": "31bcd65a6f956b30f155621fdad480528b386b5b45de9a916e76af18ff31ab93"
+        }
+      ],
+      "samples": 44919,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "372919e53b4484e61db15c76302d5e304e5488c874f7aaa616849362b9504759",
+      "until_s": 0.9358072916666667,
+      "answers": [
+        "B",
+        "B",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -1.02622,
+            -4.58872,
+            -0.46372
+          ],
+          [
+            -2.698032,
+            -8.041782,
+            -0.073032
+          ]
+        ],
+        [
+          [
+            -0.211062,
+            -4.679813,
+            -1.804813
+          ],
+          [
+            -0.199848,
+            -7.731098,
+            -1.918598
+          ]
+        ],
+        [
+          [
+            -0.432291,
+            -3.807291,
+            -1.119791
+          ],
+          [
+            -0.696733,
+            -6.259233,
+            -0.696733
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "?",
+            "?"
+          ],
+          [
+            "?",
+            "?"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "?",
+          "A",
+          "A"
+        ],
+        [
+          "?",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.08530999720096588,
+          0.4019800126552582
+        ],
+        [
+          0.22338999807834625,
+          0.34466999769210815
+        ]
+      ]
+    },
+    {
+      "video_id": "video_8861",
+      "original_sha256": "ee5a8b9273c4fd287c1aa981bede63a29b7838b932d5094cecbf31638e0b5052",
+      "options": [
+        "dropping",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 2,
+          "label": "Interaction:dropping",
+          "human_letter": "A",
+          "annotation_us": [
+            2468148,
+            2768328
+          ],
+          "first_sample": 108846,
+          "native_pcm_sha256": "4053311f8c91afb0fc472d5287fad6c8d38adfb9b44d651dc4f3d42cd1af541f"
+        },
+        {
+          "event_id": 7,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            6570611,
+            8705225
+          ],
+          "first_sample": 330213,
+          "native_pcm_sha256": "0e772172deb875f9fec4e61a5313c1e5aaf1bf4ad811df783a6255d43331283e"
+        }
+      ],
+      "samples": 13238,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "3c1c94c27867cb38680d1753692374efd2e8ba1adc741ef7a821ec5faaf99854",
+      "until_s": 0.3001757369614512,
+      "answers": [
+        "?",
+        "B",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.012004,
+            -6.387004,
+            -4.637004
+          ],
+          [
+            -0.009803,
+            -6.822303,
+            -4.822303
+          ]
+        ],
+        [
+          [
+            -0.010439,
+            -7.072939,
+            -4.697939
+          ],
+          [
+            -0.022035,
+            -7.147035,
+            -3.897035
+          ]
+        ],
+        [
+          [
+            -0.011227,
+            -6.604977,
+            -4.698727
+          ],
+          [
+            -0.015778,
+            -6.984528,
+            -4.265778
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.17103999853134155,
+          0.24788999557495117
+        ],
+        [
+          0.13204999268054962,
+          0.1485300064086914
+        ]
+      ]
+    },
+    {
+      "video_id": "video_10303",
+      "original_sha256": "234a0e694741c1508ec14686a1ab6b79bb8023dec5d4ec9cb7e353b05ea423a7",
+      "options": [
+        "hitting",
+        "liquid movement"
+      ],
+      "parts": [
+        {
+          "event_id": 3,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            18230556,
+            19197076
+          ],
+          "first_sample": 803968,
+          "native_pcm_sha256": "5420b52551721ec84a30fb28e1ce24cc7c91f3eab0a16fdabaa3879477135f3a"
+        },
+        {
+          "event_id": 2,
+          "label": "Interaction: fluid",
+          "human_letter": "B",
+          "annotation_us": [
+            11198294,
+            15997563
+          ],
+          "first_sample": 578357,
+          "native_pcm_sha256": "2fe1cc29ba911325115289c37a0d52f873bb2bddb587d788c4f37e857ef1f223"
+        }
+      ],
+      "samples": 42624,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "73e27c3ffd54f97f7b45cf2acc9e5486b1cceed4a80053fbde51d33a9696b37b",
+      "until_s": 0.9665249433106576,
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.090879,
+            -6.778379,
+            -2.465879
+          ],
+          [
+            -0.035492,
+            -5.722992,
+            -3.472992
+          ]
+        ],
+        [
+          [
+            -0.146048,
+            -6.271048,
+            -2.021048
+          ],
+          [
+            -0.024872,
+            -5.587372,
+            -3.899872
+          ]
+        ],
+        [
+          [
+            -0.09766,
+            -6.22266,
+            -2.41016
+          ],
+          [
+            -0.025764,
+            -5.713264,
+            -3.838264
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.4020099937915802,
+          0.17461000382900238
+        ],
+        [
+          0.1667100042104721,
+          0.24984000623226166
+        ]
+      ]
+    },
+    {
+      "video_id": "video_4471",
+      "original_sha256": "87c6e180b9c376414ee60eb1919333428ebbb1907ca1020144d0ea36e0c0fdc3",
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 40,
+          "label": "Object:opening/closing of something",
+          "human_letter": "A",
+          "annotation_us": [
+            31133333,
+            31366667
+          ],
+          "first_sample": 1372980,
+          "native_pcm_sha256": "454e5d4b27e06c3c4b1e18f5cfc9e198edf0178c3ea51b63b2f6691ef5957400"
+        },
+        {
+          "event_id": 5,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            6300000,
+            7100000
+          ],
+          "first_sample": 290324,
+          "native_pcm_sha256": "3a5ce0bf3b2570c9dd7066c04fd00c3c9c64d2a25c34d97b01e4c206f6417c0c"
+        }
+      ],
+      "samples": 10291,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "af4088c28ac55608cb94eff0ef1d81a0a00de7eff00310d2aac86b4189daa2db",
+      "until_s": 0.23335034013605443,
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.044193,
+            -4.762943,
+            -3.419193
+          ],
+          [
+            -0.014394,
+            -6.326894,
+            -4.451894
+          ]
+        ],
+        [
+          [
+            -0.026215,
+            -4.463715,
+            -4.338715
+          ],
+          [
+            -0.016416,
+            -6.141416,
+            -4.328916
+          ]
+        ],
+        [
+          [
+            -0.041421,
+            -5.010171,
+            -3.478921
+          ],
+          [
+            -0.010426,
+            -6.791676,
+            -4.791676
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.41326001286506653,
+          0.20381000638008118
+        ],
+        [
+          0.41571998596191406,
+          0.3006100058555603
+        ]
+      ]
+    },
+    {
+      "video_id": "video_8407",
+      "original_sha256": "e6565f64c7f9de4efffd5c9ce4604eee3b3c5c7372c7ee12fd196f1bc6ae1832",
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 2,
+          "label": "Object:opening/closing of something",
+          "human_letter": "A",
+          "annotation_us": [
+            4033333,
+            4400000
+          ],
+          "first_sample": 177870,
+          "native_pcm_sha256": "80c14b50fa18c82268d792c8336cd659a841652f34c6ecfa40eebcbbaccd21a3"
+        },
+        {
+          "event_id": 8,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            7733333,
+            12033333
+          ],
+          "first_sample": 425565,
+          "native_pcm_sha256": "15c779ef5a3c885eff9ca0aa0d57cda0a134929a31d6c1b42a4aaee20ea6c5c6"
+        }
+      ],
+      "samples": 16170,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "cb96cab02b4579c1993e85796aae220bdc4520907c441f92cf8d9408a8041e8c",
+      "until_s": 0.36666099773242633,
+      "answers": [
+        "A",
+        "A",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.063709,
+            -4.126209,
+            -3.126209
+          ],
+          [
+            -0.029117,
+            -5.716617,
+            -3.716617
+          ]
+        ],
+        [
+          [
+            -0.110726,
+            -4.235726,
+            -2.423226
+          ],
+          [
+            -0.032881,
+            -6.157881,
+            -3.532881
+          ]
+        ],
+        [
+          [
+            -0.133753,
+            -3.821253,
+            -2.321253
+          ],
+          [
+            -0.040604,
+            -5.821854,
+            -3.353104
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.4748600125312805,
+          0.21107999980449677
+        ],
+        [
+          0.31036999821662903,
+          0.1100199967622757
+        ]
+      ]
+    },
+    {
+      "video_id": "video_4022",
+      "original_sha256": "4b5c36b4441d755afd5e19906e141fc082287ac6325571cb80aa2e2e50d0812b",
+      "options": [
+        "animal sound",
+        "liquid movement"
+      ],
+      "parts": [
+        {
+          "event_id": 16,
+          "label": "Animal:sound",
+          "human_letter": "A",
+          "annotation_us": [
+            17190509,
+            18025000
+          ],
+          "first_sample": 758838,
+          "native_pcm_sha256": "7350a33a7fca6796ca32c45eb7ce46dedc637a5cb81357daf37c9cd41af7cf0c"
+        },
+        {
+          "event_id": 19,
+          "label": "Interaction: fluid",
+          "human_letter": "B",
+          "annotation_us": [
+            9413056,
+            10214167
+          ],
+          "first_sample": 415116,
+          "native_pcm_sha256": "2222c533bb0ec8efd0ba0f56df984367831c4ebe41c38be77a3375e7d5958311"
+        }
+      ],
+      "samples": 35329,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "ee84f7b49387a5918a8f5c16aa99f3c202f9634144949e50219d2400a84e9a82",
+      "until_s": 0.8011054421768707,
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.285015,
+            -5.972515,
+            -1.410015
+          ],
+          [
+            -0.07132,
+            -7.25882,
+            -2.69632
+          ]
+        ],
+        [
+          [
+            -1.860647,
+            -6.235647,
+            -0.173147
+          ],
+          [
+            -1.362,
+            -6.737,
+            -0.2995
+          ]
+        ],
+        [
+          [
+            -0.866955,
+            -5.741955,
+            -0.554455
+          ],
+          [
+            -0.636385,
+            -6.073885,
+            -0.761385
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "?"
+          ],
+          [
+            "?"
+          ]
+        ],
+        [
+          [
+            "?"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "?",
+          "?"
+        ],
+        [
+          "B",
+          "?",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.14388999342918396,
+          0.15851999819278717
+        ],
+        [
+          0.05511999875307083,
+          0.2336599975824356
+        ]
+      ]
+    },
+    {
+      "video_id": "video_8768",
+      "original_sha256": "3717357813f882eac21c4f9035deba23019df850f7cd7a2af7ea343a9e004a7d",
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 6,
+          "label": "Animal:sound",
+          "human_letter": "A",
+          "annotation_us": [
+            15808938,
+            18207303
+          ],
+          "first_sample": 793690,
+          "native_pcm_sha256": "bf81dff3d8fdd4c880819888275e415e41fdcfc5dcc07f5ac17719a27edb91d4"
+        },
+        {
+          "event_id": 8,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            2465924,
+            3411758
+          ],
+          "first_sample": 118365,
+          "native_pcm_sha256": "6b416dc76973c487ad55a68db9ac6877a6a317b19c8d06aaa41091a7f5513f21"
+        }
+      ],
+      "samples": 45400,
+      "rate": 48000,
+      "channels": 1,
+      "video_framemd5_sha256": "89a9016b23f1b58cbf3c0e529c1aa11e988047200e0f53b8ee43563bf9fafb17",
+      "until_s": 0.945828125,
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.084257,
+            -4.334257,
+            -2.709257
+          ],
+          [
+            -0.090496,
+            -7.215496,
+            -2.465496
+          ]
+        ],
+        [
+          [
+            -0.228014,
+            -4.353014,
+            -1.665514
+          ],
+          [
+            -0.315502,
+            -7.003002,
+            -1.315502
+          ]
+        ],
+        [
+          [
+            -0.306194,
+            -3.806194,
+            -1.431194
+          ],
+          [
+            -0.728498,
+            -6.322248,
+            -0.665998
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "?"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "?"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.43641000986099243,
+          0.032099999487400055
+        ],
+        [
+          0.1265300065279007,
+          0.10655000060796738
+        ]
+      ]
+    },
+    {
+      "video_id": "video_7267",
+      "original_sha256": "33dc5d06c20c5c65da8fe7f55fbef36bda1919d9331f8558ca774588be2c2599",
+      "options": [
+        "hitting",
+        "rolling"
+      ],
+      "parts": [
+        {
+          "event_id": 5,
+          "label": "Interaction:rolling",
+          "human_letter": "B",
+          "annotation_us": [
+            3165033,
+            3527693
+          ],
+          "first_sample": 151922,
+          "native_pcm_sha256": "20994eeef9eaadcbf5974fee435a4196df1723e9f356992b841660395579a5b0"
+        },
+        {
+          "event_id": 3,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            10055573,
+            11835904
+          ],
+          "first_sample": 516692,
+          "native_pcm_sha256": "87decc80ca6da4313bccab8fc35d7a1b185a7e578ee91410c64a97704e941ce6"
+        }
+      ],
+      "samples": 17408,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "9f78b606776e756dc875f52f0506c1b64cd6c6871a3638764fc989ac1d827e4e",
+      "until_s": 0.36266145833333335,
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.119582,
+            -5.869582,
+            -2.525832
+          ],
+          [
+            -0.036642,
+            -5.974142,
+            -3.724142
+          ]
+        ],
+        [
+          [
+            -0.04005,
+            -6.41505,
+            -3.5088
+          ],
+          [
+            -0.016072,
+            -6.297322,
+            -4.484822
+          ]
+        ],
+        [
+          [
+            -0.044097,
+            -5.919097,
+            -3.231597
+          ],
+          [
+            -0.012085,
+            -6.074585,
+            -4.699585
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.12205000221729279,
+          0.004800000227987766
+        ],
+        [
+          0.18565000593662262,
+          0.05920000001788139
+        ]
+      ]
+    },
+    {
+      "video_id": "video_7359",
+      "original_sha256": "8ede549a8f5ac77f0a8052422ac161732105961316a33609d8a099533553beea",
+      "options": [
+        "hitting",
+        "speech"
+      ],
+      "parts": [
+        {
+          "event_id": 6,
+          "label": " Human:Speech",
+          "human_letter": "B",
+          "annotation_us": [
+            9000000,
+            9800000
+          ],
+          "first_sample": 404250,
+          "native_pcm_sha256": "dda7769c173eaf47eaa85b2a31a7dc96069e69ab36bf5cd7cec52cd14bb9cc6a"
+        },
+        {
+          "event_id": 4,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            6733333,
+            7200000
+          ],
+          "first_sample": 296940,
+          "native_pcm_sha256": "9e54f30528ceee69d1c94d41d2e66ad6d30d33147014e583c25d8bb250742b25"
+        }
+      ],
+      "samples": 20580,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "3d9fb2d7fd3409078eea9a54796a25f2d38bd2a0fda1bb60eaf11d5efed5d72e",
+      "until_s": 0.4666609977324263,
+      "answers": [
+        "?",
+        "A",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.021309,
+            -5.958809,
+            -4.021309
+          ],
+          [
+            -0.025175,
+            -4.775175,
+            -4.150175
+          ]
+        ],
+        [
+          [
+            -0.147975,
+            -5.647975,
+            -2.022975
+          ],
+          [
+            -0.052561,
+            -4.802561,
+            -3.177561
+          ]
+        ],
+        [
+          [
+            -0.189185,
+            -5.064185,
+            -1.814185
+          ],
+          [
+            -0.022335,
+            -5.241085,
+            -4.147335
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.2764900028705597,
+          0.09870000183582306
+        ],
+        [
+          0.24748000502586365,
+          -0.00687999976798892
+        ]
+      ]
+    },
+    {
+      "video_id": "video_5058",
+      "original_sha256": "529289d2853ee4f1e054736e3200eed54af883dd816169024ac8044fa2f993bf",
+      "options": [
+        "animal sound",
+        "speech"
+      ],
+      "parts": [
+        {
+          "event_id": 3,
+          "label": " Human:Speech",
+          "human_letter": "B",
+          "annotation_us": [
+            34309352,
+            34712596
+          ],
+          "first_sample": 1646849,
+          "native_pcm_sha256": "7e2f334db905096c3d186fb69aa7a4e6cb0ee13155954efc6450decc6ae5bb53"
+        },
+        {
+          "event_id": 6,
+          "label": "Animal:sound",
+          "human_letter": "A",
+          "annotation_us": [
+            5679021,
+            8669748
+          ],
+          "first_sample": 381469,
+          "native_pcm_sha256": "1982898c9adeb774db03e80ba3b2782fbe760c865bbeeafe779249a07f5eb4e1"
+        }
+      ],
+      "samples": 19356,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "f955f2f26d4157cd2cb14751456a92bd4b36141bec40e66d88c6ec6266f9430a",
+      "until_s": 0.40324479166666666,
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.928808,
+            -5.241309,
+            -0.553808
+          ],
+          [
+            -0.514762,
+            -6.671012,
+            -0.921012
+          ]
+        ],
+        [
+          [
+            -0.155962,
+            -4.874712,
+            -2.124712
+          ],
+          [
+            -0.218406,
+            -5.968406,
+            -1.905906
+          ]
+        ],
+        [
+          [
+            -0.343372,
+            -4.655872,
+            -1.280872
+          ],
+          [
+            -0.479764,
+            -5.823514,
+            -0.979764
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "?",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "?",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.25826001167297363,
+          0.06831000000238419
+        ],
+        [
+          0.24921000003814697,
+          -0.0386199988424778
+        ]
+      ]
+    },
+    {
+      "video_id": "video_833",
+      "original_sha256": "bb42f148282d999f929abde43b5ab12b774e90a00d1430e51f60efd1d1af57e0",
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 9,
+          "label": "Interaction:rolling",
+          "human_letter": "A",
+          "annotation_us": [
+            19986633,
+            20854167
+          ],
+          "first_sample": 881411,
+          "native_pcm_sha256": "8dad9ea7000a300362f9acd01789ade0ccdff0e4fab259ad2575b1146a0cef75"
+        },
+        {
+          "event_id": 7,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            6039367,
+            8208200
+          ],
+          "first_sample": 295030,
+          "native_pcm_sha256": "5d9dee42a1b3a00f3355b9b1ee8a83e5ab6b29ed196988d774a0c2571e3acf9c"
+        }
+      ],
+      "samples": 38258,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "03b85c8cd9fd2e7c3fc95906e89cef0ed6b532159973b29f8d54676db01c79f2",
+      "until_s": 0.8675226757369614,
+      "answers": [
+        "A",
+        "B",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.040342,
+            -6.415342,
+            -3.290342
+          ],
+          [
+            -0.102787,
+            -6.415287,
+            -2.352787
+          ]
+        ],
+        [
+          [
+            -0.053215,
+            -6.990715,
+            -2.990715
+          ],
+          [
+            -0.063786,
+            -6.938786,
+            -2.813786
+          ]
+        ],
+        [
+          [
+            -0.00642,
+            -6.69392,
+            -5.31892
+          ],
+          [
+            -0.017855,
+            -6.705355,
+            -4.142855
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.2576799988746643,
+          0.2446800023317337
+        ],
+        [
+          0.07344000041484833,
+          0.17831000685691833
+        ]
+      ]
+    },
+    {
+      "video_id": "video_8223",
+      "original_sha256": "2edb77ab6385ef6ec21b3363fa9279abe900f897dc2233563c1fe18dbcc51c02",
+      "options": [
+        "speech",
+        "animal sound"
+      ],
+      "parts": [
+        {
+          "event_id": 4,
+          "label": "Animal:sound",
+          "human_letter": "B",
+          "annotation_us": [
+            22959596,
+            23259504
+          ],
+          "first_sample": 1102061,
+          "native_pcm_sha256": "2d6980e16271d14cae4d3ae91c9921030c3a26b90193daa3098b7186d86bcdb1"
+        },
+        {
+          "event_id": 0,
+          "label": " Human:Speech",
+          "human_letter": "A",
+          "annotation_us": [
+            2599200,
+            2999076
+          ],
+          "first_sample": 127161,
+          "native_pcm_sha256": "4fe6468669f8964536593bb2d8d0a6f71fbff05e59177ab7449acd9b40693a78"
+        }
+      ],
+      "samples": 14396,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "7604f35c295afcfaaa7f0695ad965144680808108de976a736e52b7d88f0deef",
+      "until_s": 0.2999114583333333,
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.069003,
+            -6.694003,
+            -2.756503
+          ],
+          [
+            -0.162901,
+            -4.725401,
+            -1.975401
+          ]
+        ],
+        [
+          [
+            -0.352607,
+            -6.290107,
+            -1.227607
+          ],
+          [
+            -0.509873,
+            -4.759873,
+            -0.947373
+          ]
+        ],
+        [
+          [
+            -0.103362,
+            -6.540862,
+            -2.353362
+          ],
+          [
+            -0.222518,
+            -4.972518,
+            -1.660018
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.13142000138759613,
+          0.3190299868583679
+        ],
+        [
+          0.18296000361442566,
+          0.2037999927997589
+        ]
+      ]
+    },
+    {
+      "video_id": "video_4956",
+      "original_sha256": "7309ad91d1e21bbb3a5aaa68612af1b7a96050cec112b8983efb2754433e54dd",
+      "options": [
+        "opening or closing something",
+        "liquid movement"
+      ],
+      "parts": [
+        {
+          "event_id": 9,
+          "label": "Interaction: fluid",
+          "human_letter": "B",
+          "annotation_us": [
+            7199812,
+            9433087
+          ],
+          "first_sample": 392790,
+          "native_pcm_sha256": "98e35bb6efe9bd63953fadf4f30022c7a801b9d21f5aab2fd26ad40fe25b40da"
+        },
+        {
+          "event_id": 2,
+          "label": "Object:opening/closing of something",
+          "human_letter": "A",
+          "annotation_us": [
+            2199943,
+            2466602
+          ],
+          "first_sample": 105598,
+          "native_pcm_sha256": "98075533f32de16a7567fd815389ea7d8cb4266e7f7841b5d7cb77b5d3486998"
+        }
+      ],
+      "samples": 12799,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "7c37e051a43ea9302aee23843862498ac92bb950b024623c6ae62abcb467af14",
+      "until_s": 0.266640625,
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.115475,
+            -4.646724,
+            -2.334224
+          ],
+          [
+            -0.019152,
+            -5.175402,
+            -4.362902
+          ]
+        ],
+        [
+          [
+            -0.225812,
+            -4.600812,
+            -1.663312
+          ],
+          [
+            -0.029047,
+            -5.404047,
+            -3.779047
+          ]
+        ],
+        [
+          [
+            -0.365864,
+            -4.928364,
+            -1.240864
+          ],
+          [
+            -0.033994,
+            -5.658994,
+            -3.533994
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.38161998987197876,
+          0.23291000723838806
+        ],
+        [
+          0.3927200138568878,
+          0.17750999331474304
+        ]
+      ]
+    },
+    {
+      "video_id": "video_2983",
+      "original_sha256": "cc78781e479c2fbe8c152951ae33f454f86fd3a533a5e12436628cfb1ea7223d",
+      "options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "parts": [
+        {
+          "event_id": 7,
+          "label": "Object:opening/closing of something",
+          "human_letter": "B",
+          "annotation_us": [
+            21554887,
+            21860389
+          ],
+          "first_sample": 1034635,
+          "native_pcm_sha256": "d8eaa8dbc01c34fd44f27e56a705a3134089a24f1aa334208c5bec7934df7d4a"
+        },
+        {
+          "event_id": 10,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            23931016,
+            33707091
+          ],
+          "first_sample": 1375983,
+          "native_pcm_sha256": "1cdc128f2a888744983eac2c6f667db543eea3ace405980e298d38f686793195"
+        }
+      ],
+      "samples": 14664,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "f0f31c90d23d25d36d2101d9028e24ba39a15d80512a39da60ce8a9a52d51b6c",
+      "until_s": 0.30549479166666665,
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.023051,
+            -6.023051,
+            -3.929301
+          ],
+          [
+            -0.109126,
+            -3.765376,
+            -2.546626
+          ]
+        ],
+        [
+          [
+            -0.020304,
+            -5.895304,
+            -4.145304
+          ],
+          [
+            -0.060536,
+            -4.123036,
+            -3.248037
+          ]
+        ],
+        [
+          [
+            -0.025252,
+            -5.994002,
+            -3.837752
+          ],
+          [
+            -0.116474,
+            -4.210224,
+            -2.397724
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.29938000440597534,
+          0.32214000821113586
+        ],
+        [
+          0.25543999671936035,
+          0.3051699995994568
+        ]
+      ]
+    },
+    {
+      "video_id": "video_82",
+      "original_sha256": "c41765c7c358316929f73151e513c99e11324dd1ad50380a905a7d8dbf36ee24",
+      "options": [
+        "opening or closing something",
+        "liquid movement"
+      ],
+      "parts": [
+        {
+          "event_id": 4,
+          "label": "Interaction: fluid",
+          "human_letter": "B",
+          "annotation_us": [
+            10821129,
+            12519213
+          ],
+          "first_sample": 536196,
+          "native_pcm_sha256": "e82765d249ecd5d964d2d1a72870229a0217dbc71d450b15bd22a66f46c9ab65"
+        },
+        {
+          "event_id": 0,
+          "label": "Object:opening/closing of something",
+          "human_letter": "A",
+          "annotation_us": [
+            965578,
+            1964451
+          ],
+          "first_sample": 46348,
+          "native_pcm_sha256": "e3ea92c1870fd83dc27088f6e2133d74d19ed6b606a8fa024954aee90c32d8ff"
+        }
+      ],
+      "samples": 47946,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "eacfa03b134a6d6f365889ab18682cebea3747a686677939001c88569914167d",
+      "until_s": 0.9988697916666667,
+      "answers": [
+        "?",
+        "A",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.370283,
+            -4.870283,
+            -1.214033
+          ],
+          [
+            -0.035298,
+            -5.222798,
+            -3.566548
+          ]
+        ],
+        [
+          [
+            -0.675818,
+            -5.582068,
+            -0.738318
+          ],
+          [
+            -0.168211,
+            -5.136961,
+            -1.918211
+          ]
+        ],
+        [
+          [
+            -1.606294,
+            -5.793794,
+            -0.231294
+          ],
+          [
+            -0.178111,
+            -5.053111,
+            -1.865611
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "?"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "?"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "?"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.49807998538017273,
+          0.19220000505447388
+        ],
+        [
+          0.563480019569397,
+          0.1050100028514862
+        ]
+      ]
+    },
+    {
+      "video_id": "video_762",
+      "original_sha256": "fa62047c2cbb1930b2a2e0d1d37403a31246ffce5b6fff36f59a0656cfd989af",
+      "options": [
+        "speech",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 5,
+          "label": " Human:Speech",
+          "human_letter": "A",
+          "annotation_us": [
+            6137480,
+            7143624
+          ],
+          "first_sample": 294600,
+          "native_pcm_sha256": "1d7cceddd1153e2996e8385502a1cc3268578a2274cdf49ae4ed59d5de2060a0"
+        },
+        {
+          "event_id": 12,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            18915513,
+            21967484
+          ],
+          "first_sample": 957045,
+          "native_pcm_sha256": "8c0f25dd63cc710de667f36fb94fd2af04fb0b2b97bb57b06610c9eb037ed384"
+        }
+      ],
+      "samples": 48294,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "5595f0df315dca30dffead41147b5f4d9373fe5ff81025dc8d6c02abafb835c3",
+      "until_s": 1.0061197916666667,
+      "answers": [
+        "A",
+        "B",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.238938,
+            -4.707688,
+            -1.832688
+          ],
+          [
+            -2.641121,
+            -5.891122,
+            -0.078622
+          ]
+        ],
+        [
+          [
+            -0.579654,
+            -4.704654,
+            -1.110904
+          ],
+          [
+            -0.614928,
+            -5.958678,
+            -0.833678
+          ]
+        ],
+        [
+          [
+            -0.143467,
+            -4.987217,
+            -2.080967
+          ],
+          [
+            -1.022079,
+            -5.178329,
+            -0.459579
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "?",
+            "?"
+          ]
+        ],
+        [
+          [
+            "?",
+            "A"
+          ],
+          [
+            "?",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "?"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "?",
+          "B",
+          "?"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.24839000403881073,
+          0.08182000368833542
+        ],
+        [
+          -0.010730000212788582,
+          0.213809996843338
+        ]
+      ]
+    },
+    {
+      "video_id": "video_918",
+      "original_sha256": "4e1b9429d7d19e84cd215d24332e5dce4060e274313d039175d3e9529bff1c00",
+      "options": [
+        "hitting",
+        "dropping"
+      ],
+      "parts": [
+        {
+          "event_id": 6,
+          "label": "Interaction:dropping",
+          "human_letter": "B",
+          "annotation_us": [
+            12829939,
+            14062947
+          ],
+          "first_sample": 630234,
+          "native_pcm_sha256": "e3f30a737e238c253324535474d446eec48f511a151dcf7819bc8a33664f447f"
+        },
+        {
+          "event_id": 8,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            27992595,
+            28625761
+          ],
+          "first_sample": 1343645,
+          "native_pcm_sha256": "bee350596659988821418950957106bf3fc03db8e314d62b0708eaf937991c97"
+        }
+      ],
+      "samples": 30392,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "1e3594f1b8cc7447bb8f5823babc962e0567f92b1f1ee9160ed63595b5e079bf",
+      "until_s": 0.6331614583333334,
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.053544,
+            -7.084794,
+            -3.053544
+          ],
+          [
+            -0.069434,
+            -6.475684,
+            -2.756934
+          ]
+        ],
+        [
+          [
+            -0.01731,
+            -7.07981,
+            -4.173559
+          ],
+          [
+            -0.00956,
+            -6.837685,
+            -4.88456
+          ]
+        ],
+        [
+          [
+            -0.00797,
+            -7.25797,
+            -5.00797
+          ],
+          [
+            -0.003101,
+            -7.284351,
+            -6.159351
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.4463300108909607,
+          0.29510998725891113
+        ],
+        [
+          0.24404999613761902,
+          0.21461999416351318
+        ]
+      ]
+    },
+    {
+      "video_id": "video_5560",
+      "original_sha256": "1673811807fd4f436deacb2aea0993d7c5e18cb0c088147cfd110ada452f291c",
+      "options": [
+        "clapping",
+        "opening or closing something"
+      ],
+      "parts": [
+        {
+          "event_id": 7,
+          "label": "Human:Sound(clapping)",
+          "human_letter": "A",
+          "annotation_us": [
+            12341864,
+            15143801
+          ],
+          "first_sample": 553102,
+          "native_pcm_sha256": "e07a404744263f8208273891138fc53a5122d533009e8ca74ce07babf443aa33"
+        },
+        {
+          "event_id": 6,
+          "label": "Object:opening/closing of something",
+          "human_letter": "B",
+          "annotation_us": [
+            9539928,
+            11941588
+          ],
+          "first_sample": 420711,
+          "native_pcm_sha256": "803aa79dded03b161cb76a31679a7831dfcd14ed3547bb433b0e709db596cce9"
+        }
+      ],
+      "samples": 105914,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "0cdd54691598337bb1acc9483e86d9e548ff5d788e34fa85adb81aed805e1202",
+      "until_s": 2.401672335600907,
+      "answers": [
+        "A",
+        "B",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -4.086142,
+            -5.617392,
+            -0.023642
+          ],
+          [
+            -3.352598,
+            -6.540098,
+            -0.040098
+          ]
+        ],
+        [
+          [
+            -4.700035,
+            -6.200035,
+            -0.012535
+          ],
+          [
+            -1.809901,
+            -5.903651,
+            -0.184901
+          ]
+        ],
+        [
+          [
+            -1.471985,
+            -3.003235,
+            -0.346985
+          ],
+          [
+            -0.429805,
+            -4.617305,
+            -1.117305
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "?"
+          ],
+          [
+            "?"
+          ]
+        ],
+        [
+          [
+            "?"
+          ],
+          [
+            "?"
+          ]
+        ],
+        [
+          [
+            "?"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "?",
+          "?",
+          "?"
+        ],
+        [
+          "?",
+          "?",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.5910099744796753,
+          -0.11641000211238861
+        ],
+        [
+          0.03265000134706497,
+          0.4384100139141083
+        ]
+      ]
+    },
+    {
+      "video_id": "video_10592",
+      "original_sha256": "874c358405393e3c86e26cf81785de8a450e7ccb6083a7165a9289664277d876",
+      "options": [
+        "animal sound",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 0,
+          "label": "Animal:sound",
+          "human_letter": "A",
+          "annotation_us": [
+            1901445,
+            3169075
+          ],
+          "first_sample": 91270,
+          "native_pcm_sha256": "dfa4e292912bc79c3a8da706f6de1fdbff93925f62b45af74eee980409dfa09d"
+        },
+        {
+          "event_id": 5,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            13410190,
+            14877972
+          ],
+          "first_sample": 648493,
+          "native_pcm_sha256": "6fe9af245e35fb0b1a1466af3baf30a2ab94a1bf2aa2121b6f76a5521dac7184"
+        }
+      ],
+      "samples": 60846,
+      "rate": 48000,
+      "channels": 1,
+      "video_framemd5_sha256": "abcb18e1156a8590d2ead5f29f446654494c2a85748da80795bd333d7064e9b2",
+      "until_s": 1.2676197916666667,
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.226444,
+            -4.476444,
+            -1.663944
+          ],
+          [
+            -0.52573,
+            -6.96323,
+            -0.90073
+          ]
+        ],
+        [
+          [
+            -0.236238,
+            -3.861238,
+            -1.673738
+          ],
+          [
+            -0.181595,
+            -7.056595,
+            -1.806595
+          ]
+        ],
+        [
+          [
+            -0.193093,
+            -3.880593,
+            -1.880593
+          ],
+          [
+            -0.334201,
+            -6.271701,
+            -1.271701
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.27195999026298523,
+          0.25161999464035034
+        ],
+        [
+          0.2861199975013733,
+          0.25036001205444336
+        ]
+      ]
+    },
+    {
+      "video_id": "video_152",
+      "original_sha256": "0adc290aaa8a5e3e6ac24c28e49e9b2deda27cc42f5973391f8fb13b0ce06ce7",
+      "options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 10,
+          "label": "Object:opening/closing of something",
+          "human_letter": "A",
+          "annotation_us": [
+            25544486,
+            27376229
+          ],
+          "first_sample": 1260506,
+          "native_pcm_sha256": "a0e14fef0c98d56cf061842a79539505f3c49061989293edfacd32442424bf4e"
+        },
+        {
+          "event_id": 8,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            20049258,
+            20448911
+          ],
+          "first_sample": 962365,
+          "native_pcm_sha256": "3ef615bd1f7bcdec73abd2262fd0fd17ec2c50f8bdd82c8ed712daf20bfa9534"
+        }
+      ],
+      "samples": 19183,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "b2f1978b7d165cb073d5bc02873d5c58457fbd0ac1cd8f44a0b56f6093762bf3",
+      "until_s": 0.399640625,
+      "answers": [
+        "A",
+        "A",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.115588,
+            -4.365588,
+            -2.459338
+          ],
+          [
+            -0.042404,
+            -6.245529,
+            -3.354904
+          ]
+        ],
+        [
+          [
+            -0.101889,
+            -4.570639,
+            -2.476889
+          ],
+          [
+            -0.029932,
+            -6.248682,
+            -3.623682
+          ]
+        ],
+        [
+          [
+            -0.13613,
+            -3.60488,
+            -2.35488
+          ],
+          [
+            -0.027404,
+            -5.933654,
+            -3.777404
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.26903998851776123,
+          0.2387000024318695
+        ],
+        [
+          0.4566099941730499,
+          0.28968000411987305
+        ]
+      ]
+    },
+    {
+      "video_id": "video_6540",
+      "original_sha256": "e2dbc5c2b09afd8ab86599070c9b3c3731f3a67642640c5e14923f69d6f7e8e1",
+      "options": [
+        "hitting",
+        "clapping"
+      ],
+      "parts": [
+        {
+          "event_id": 0,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            5270429,
+            5537286
+          ],
+          "first_sample": 232426,
+          "native_pcm_sha256": "b16fffaff4c9ff13b83a603177645d67698c99b897f7d76b436d9918cc445501"
+        },
+        {
+          "event_id": 7,
+          "label": "Human:Sound(clapping)",
+          "human_letter": "B",
+          "annotation_us": [
+            27953286,
+            31522501
+          ],
+          "first_sample": 1305557,
+          "native_pcm_sha256": "9b02a666fda24ba1e66029084cdeb05cb49cb2176648973c6065775db7d23359"
+        }
+      ],
+      "samples": 11769,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "c6f2c106b98ce9e72e0c539f3e5518268a9a2188ced93744d238e81c9595cb51",
+      "until_s": 0.26686507936507936,
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.031741,
+            -7.094241,
+            -3.531741
+          ],
+          [
+            -0.029148,
+            -5.654148,
+            -3.716648
+          ]
+        ],
+        [
+          [
+            -0.030738,
+            -6.905738,
+            -3.593238
+          ],
+          [
+            -0.09128,
+            -5.43503,
+            -2.52878
+          ]
+        ],
+        [
+          [
+            -0.028359,
+            -7.231484,
+            -3.684609
+          ],
+          [
+            -0.041309,
+            -5.635059,
+            -3.385059
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.24518999457359314,
+          0.10949999839067459
+        ],
+        [
+          0.34455999732017517,
+          0.164450004696846
+        ]
+      ]
+    },
+    {
+      "video_id": "video_5626",
+      "original_sha256": "9f6ae2b0d4eb60789dcc4dcce79ad45b174699e351a4301de3b817ec183c2f76",
+      "options": [
+        "hitting",
+        "clapping"
+      ],
+      "parts": [
+        {
+          "event_id": 3,
+          "label": "Human:Sound(clapping)",
+          "human_letter": "B",
+          "annotation_us": [
+            3566667,
+            3866667
+          ],
+          "first_sample": 157291,
+          "native_pcm_sha256": "402f6eab2b6e78c70cf712139ba0c3b4dfe97bc41390718153cbcd0b26de642b"
+        },
+        {
+          "event_id": 7,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            6600000,
+            9600000
+          ],
+          "first_sample": 350595,
+          "native_pcm_sha256": "14d32e479ecd8544a7bfceac53e1a1abddf7619432455bed7d91dc0ca2b17e53"
+        }
+      ],
+      "samples": 13230,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "76475906fadfb92557f9f763f2e6ceb7d0717fd1abecca94e934d79f51a1de6d",
+      "until_s": 0.2999943310657596,
+      "answers": [
+        "B",
+        "A",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.045113,
+            -7.357613,
+            -3.170113
+          ],
+          [
+            -0.098387,
+            -6.223387,
+            -2.410887
+          ]
+        ],
+        [
+          [
+            -0.022172,
+            -7.490922,
+            -3.897172
+          ],
+          [
+            -0.075618,
+            -5.731868,
+            -2.700618
+          ]
+        ],
+        [
+          [
+            -0.028426,
+            -6.997176,
+            -3.684676
+          ],
+          [
+            -0.059741,
+            -5.278491,
+            -2.997241
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.22472000122070312,
+          0.4378499984741211
+        ],
+        [
+          0.2453099936246872,
+          0.13947999477386475
+        ]
+      ]
+    },
+    {
+      "video_id": "video_2371",
+      "original_sha256": "9ecf6f1550470a0f24f99997a811c1595bbb9982a0d8231181c0ce4c26a202de",
+      "options": [
+        "hitting",
+        "dropping"
+      ],
+      "parts": [
+        {
+          "event_id": 4,
+          "label": "Interaction:dropping",
+          "human_letter": "B",
+          "annotation_us": [
+            6907350,
+            9443381
+          ],
+          "first_sample": 311973,
+          "native_pcm_sha256": "52e761049b93494eac32566c07c2953cf94bd184a24ee4d8844440d414ffebca"
+        },
+        {
+          "event_id": 3,
+          "label": "Interaction:hitting",
+          "human_letter": "A",
+          "annotation_us": [
+            3837416,
+            6039760
+          ],
+          "first_sample": 169231,
+          "native_pcm_sha256": "30a2243b186ec2e0c4e73b7cde627130a384e40d9103ca179e013c7a1a572eab"
+        }
+      ],
+      "samples": 97123,
+      "rate": 44100,
+      "channels": 1,
+      "video_framemd5_sha256": "4cc0e2bbe91f127e13b37d38c5374d61ddb2778a51697da2abdbca7ce4dba868",
+      "until_s": 2.202329931972789,
+      "answers": [
+        "?",
+        "?",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.115913,
+            -6.428413,
+            -2.240913
+          ],
+          [
+            -0.051292,
+            -6.426292,
+            -3.051292
+          ]
+        ],
+        [
+          [
+            -0.037922,
+            -6.850422,
+            -3.350422
+          ],
+          [
+            -0.021202,
+            -6.771202,
+            -3.958702
+          ]
+        ],
+        [
+          [
+            -0.139929,
+            -6.014929,
+            -2.077429
+          ],
+          [
+            -0.026388,
+            -6.557638,
+            -3.776388
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.1448799967765808,
+          0.19050000607967377
+        ],
+        [
+          0.08963999897241592,
+          0.131290003657341
+        ]
+      ]
+    },
+    {
+      "video_id": "video_6480",
+      "original_sha256": "82531c576080b7f69bdc9d111428272759d0fabc3c8d09e6bb28de1169d5e705",
+      "options": [
+        "rolling",
+        "hitting"
+      ],
+      "parts": [
+        {
+          "event_id": 5,
+          "label": "Interaction:rolling",
+          "human_letter": "A",
+          "annotation_us": [
+            11445625,
+            13027815
+          ],
+          "first_sample": 574436,
+          "native_pcm_sha256": "81ec008e8d6ad14120ac1414a15a8729ede6cc80630f91dc73572f9033bc27e4"
+        },
+        {
+          "event_id": 1,
+          "label": "Interaction:hitting",
+          "human_letter": "B",
+          "annotation_us": [
+            3164379,
+            3702996
+          ],
+          "first_sample": 151891,
+          "native_pcm_sha256": "13c29501e124804729a2eeaf8d6f6fea72e611ac20f2bafaaac6e4a732e38d01"
+        }
+      ],
+      "samples": 25853,
+      "rate": 48000,
+      "channels": 2,
+      "video_framemd5_sha256": "d18c75027dc31f4543e3191e10e4f8756c831b28a7d5ad3d42d339c2d71ee878",
+      "until_s": 0.5385989583333334,
+      "answers": [
+        "A",
+        "B",
+        "?"
+      ],
+      "compact_logprobs_by_order": [
+        [
+          [
+            -0.010046,
+            -6.541296,
+            -4.822546
+          ],
+          [
+            -0.017776,
+            -6.767776,
+            -4.142776
+          ]
+        ],
+        [
+          [
+            -0.02126,
+            -6.70876,
+            -3.99001
+          ],
+          [
+            -0.04802,
+            -6.61052,
+            -3.11052
+          ]
+        ],
+        [
+          [
+            -0.012912,
+            -5.887912,
+            -4.700412
+          ],
+          [
+            -0.03306,
+            -6.06431,
+            -3.53306
+          ]
+        ]
+      ],
+      "compact_raw_top1_tokens": [
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A",
+            "A"
+          ],
+          [
+            "A",
+            "A"
+          ]
+        ],
+        [
+          [
+            "A"
+          ],
+          [
+            "A"
+          ]
+        ]
+      ],
+      "compact_choices_original_then_reversed": [
+        [
+          "A",
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B",
+          "B"
+        ]
+      ],
+      "clap_cosines": [
+        [
+          0.2589299976825714,
+          0.23608000576496124
+        ],
+        [
+          0.13628999888896942,
+          0.33886000514030457
+        ]
+      ]
+    }
+  ]
+}

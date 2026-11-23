@@ -62,6 +62,8 @@ order, with nothing left out.
 
 ## Does it work?
 
+Across 24 filmed scenes, we gave local GPT three independent plays of the same moving picture with the original sound, another sound from the same film, or silence. GPT identified both recordings on **5/24 films** and named a sound on **0/24** silent controls. [Soundtrack swaps, individual answers and reproduction](docs/listening-check.md#같은-화면에서-실제-소리만-바꿨을-때)
+
 On two sets of real films, we tested including the interval spectrogram whenever GPT replayed a scene to compare sound choices. The earlier runs matched **57/84** human annotations across 28 films. The new run matched **58/84**. On 12 films the count rose from 21/36 to 23/36, and on the other 16 it fell from 36/48 to 35/48. [Answers and protocol for all 28 films](docs/perception-check.md#소리를-다시-확인할-때-그림을-자동으로-보여준-결과)
 
 With the marked sound replay available, local GPT matched **21/36** human annotations on the same 12 films (picture 10/12, sound 6/12, visible source 5/12). None of the readers requested a mark. When explicitly shown a sound interval in a separate timing task, GPT matched annotated starts and continuations on **9/24** natural excerpts, up from 2/24. Wrong answers rose from 1 to 3, and abstentions fell from 21 to 12. [Ordinary viewing](docs/perception-check.md#소리-구간-표시를-추가한-뒤-같은-12편을-본-결과) · [Timing trial](docs/listening-check.md#짧은-소리가-시작되는-순간)

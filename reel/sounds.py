@@ -72,9 +72,9 @@ class PlaybackSounds:
         import numpy as np
         from scipy.signal import resample_poly
         if __package__:
-            from .common import open_recording
+            from .common import open_recording, sample_boundary
         else:
-            from common import open_recording
+            from common import open_recording, sample_boundary
 
         windows = []
         with open_recording(wav) as recording:
@@ -85,8 +85,9 @@ class PlaybackSounds:
                 self.tail = np.empty((0, recording.channels), dtype=np.float64)
             self.rate = rate
             cursor = first_sample
-            while recording.tell() < len(recording):
-                block = recording.read(width, dtype="float64", always_2d=True)
+            available = min(len(recording), max(0, sample_boundary(end_s, rate) - first_sample))
+            while recording.tell() < available:
+                block = recording.read(min(width, available - recording.tell()), dtype="float64", always_2d=True)
                 keep = width - len(block)
                 context = np.concatenate((self.tail[-keep:], block)) if keep and len(self.tail) else block
                 end = cursor + len(block)

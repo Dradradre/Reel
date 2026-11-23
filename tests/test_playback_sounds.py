@@ -42,6 +42,29 @@ class PlaybackSoundTests(unittest.TestCase):
         self.assertEqual(window["channels"], [{"channel": 1, "signal": "nonzero", "candidates": []}])
         tagger.scores.assert_not_called()
 
+    def test_later_samples_never_enter_source_estimates_or_the_next_turns_history(self):
+        rate = 16000
+        tagger = Mock(labels=["Music"])
+        tagger.scores.side_effect = lambda clips: np.ones((len(clips), 1))
+        reader = PlaybackSounds(tagger)
+        with tempfile.TemporaryDirectory() as tmp:
+            wav = Path(tmp) / "recording.wav"
+            prefix = np.zeros(8001)
+            # The sample at 1.5 s belongs to a release ending half a sample later.
+            prefix[-1] = .125
+            sf.write(wav, np.r_[prefix, np.ones(rate * 5) * .5], rate, subtype="FLOAT")
+            cutoff = 1.50003125
+            windows = reader.read(wav, rate, cutoff)["windows"]
+            self.assertEqual([(w["start_s"], w["end_s"]) for w in windows], [(1., cutoff)])
+            tagger.scores.assert_called_once()
+            np.testing.assert_array_equal(tagger.scores.call_args.args[0][0], prefix)
+            next_sample = rate + len(prefix)
+            self.assertEqual(reader.read(wav, next_sample, cutoff)["windows"], [])
+            sf.write(wav, np.full(400, .25), rate, subtype="FLOAT")
+            window, = reader.read(wav, next_sample, (next_sample + 400) / rate)["windows"]
+            self.assertEqual(window["context_start_s"], 1.)
+            np.testing.assert_array_equal(tagger.scores.call_args.args[0][0], np.r_[prefix, np.full(400, .25)])
+
     def test_sound_matches_keep_every_description_and_silent_channels(self):
         matcher = Comparator.__new__(Comparator)
         texts = ["a rattle", "water rushing", "a distant electric hum"]

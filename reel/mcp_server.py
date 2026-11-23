@@ -371,6 +371,11 @@ class Viewing:
                 description["additional_frames"] = page["additional_frames"]
             report["images_in_order"].append(description)
             blocks.append(image_block(directory / page["file"]))
+        if detail := packet.get("local_picture_change"):
+            report["local_picture_change"] = dict(detail)
+            if self.original is not None:
+                report["local_picture_change"]["inspect"] = (
+                    "Use look with this box at either at_s time to inspect the changed region in the original picture.")
         if follow_from_s is not None:
             report["follow"] = {key: value for key, value in followed.items() if key != "trajectory"}
             with TemporaryDirectory() as tmp:

@@ -6,7 +6,8 @@ from pathlib import Path
 import tempfile
 from fractions import Fraction
 
-from PIL import Image, ImageDraw
+import numpy as np
+from PIL import Image, ImageChops, ImageDraw
 
 if __package__:
     from .action_view import action_frames, action_views
@@ -45,6 +46,36 @@ def focus_motion(out, source, packet, box, directory):
 def pixel_box(box, size):
     w, h = size
     return [math.floor(box[0] * w), math.floor(box[1] * h), math.ceil(box[2] * w), math.ceil(box[3] * h)]
+
+
+def local_change(frames, size, start):
+    """Locate one concentrated change between successive displayed pictures."""
+    cols, rows = 16, 12
+    previous = best = None
+    best_score = 0.
+    for i, (pts, _, pixels) in enumerate(frames):
+        if i + 1 < len(frames) and pts == frames[i + 1][0]:
+            continue  # This exposure was replaced before it reached the screen.
+        if previous is not None and previous[1] == pixels:
+            previous = (pts, pixels, previous[2])
+            continue
+        picture = Image.frombytes("RGB", size, pixels)
+        if previous is not None:
+            diff = ImageChops.difference(previous[2], picture).resize((cols, rows), Image.Resampling.BOX)
+            tiles = np.asarray(diff).mean(axis=2)
+            y, x = np.unravel_index(tiles.argmax(), tiles.shape)
+            peak, background = tiles[y, x], tiles.mean()
+            # On a full-field cut even its brightest patch may have a large peak.
+            # Require a local excess and keep broad changes in the overview.
+            score = peak - 5 * background
+            if score >= 8 and score > best_score:
+                best_score = score
+                times = [previous[0], pts]
+                point = [(int(x) + .5) / cols, (int(y) + .5) / rows]
+                best = {"pts_us": times, "at_s": [max(float(start), t / 1_000_000) for t in times],
+                        "box": fixation_box(point)}
+        previous = (pts, pixels, picture)
+    return best
 
 
 def focus_still(path, point, box, dest):

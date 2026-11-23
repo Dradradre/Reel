@@ -1,4 +1,5 @@
 import json
+from importlib.util import find_spec
 import os
 from pathlib import Path
 import subprocess
@@ -10,11 +11,67 @@ from unittest.mock import patch
 import numpy as np
 from PIL import Image
 
-from reel.attention import fixation_box, focus_still, inspect_turn
+from reel.attention import fixation_box, focus_still, inspect_turn, local_change
 from reel.play import play
 
 
 class AttentionTests(unittest.TestCase):
+    def test_local_change_uses_only_adjacent_displayed_exposures(self):
+        size = (192, 120)
+        plain = Image.new("RGB", size)
+        patch = plain.copy()
+        patch.paste("white", (140, 32, 164, 52))
+        blank, marked = plain.tobytes(), patch.tobytes()
+        full = Image.new("RGB", size, "white").tobytes()
+        # The white patch at 60 ms was immediately replaced. A full-screen cut follows.
+        frames = [(0, 0, blank), (60000, 0, marked), (60000, 0, blank), (90000, 0, full)]
+        self.assertIsNone(local_change(frames, size, 0))
+        # The previous native frame is carried across a turn boundary at 50 ms.
+        change = local_change([(0, 0, blank), (60000, 0, marked)], size, .05)
+        self.assertEqual(change["pts_us"], [0, 60000])
+        self.assertEqual(change["at_s"], [.05, .06])
+        left, top, right, bottom = change["box"]
+        self.assertTrue(left <= 152 / 192 < right and top <= 42 / 120 < bottom)
+
+    @unittest.skipUnless(find_spec("mcp"), "MCP extra is not installed")
+    def test_same_prefix_gives_same_hint_and_native_pictures_via_look(self):
+        from reel.mcp_server import Viewing
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            blank = Image.new("RGB", (768, 432))
+            signal = blank.copy()
+            signal.paste("white", (90, 80, 135, 116))
+            prefixes = []
+            for i, suffix in enumerate(("red", "green")):
+                source = root / f"s{i}.mkv"
+                pixels = b"".join(pic.tobytes() for pic in (blank, signal, blank, Image.new("RGB", blank.size, suffix)))
+                subprocess.run(["ffmpeg", "-v", "error", "-f", "rawvideo", "-s", "768x432", "-pix_fmt", "rgb24",
+                                "-r", "10", "-i", "-", "-c:v", "ffv1", "-threads", "2", str(source)],
+                               input=pixels, check=True)
+                stream = play(source, root / f"p{i}", until=.3, continuous=True)
+                try:
+                    reader = Viewing(stream, None, None, None, source)
+                    blocks = reader.advance(1, False, sound_estimates=False)
+                    report = json.loads(blocks[0].text)
+                    hint = report["local_picture_change"]
+                    self.assertEqual(report["end_s"], .3)
+                    self.assertEqual(hint["pts_us"], [0, 100000])
+                    self.assertEqual(len(blocks) - 1, len(report["images_in_order"]))
+                    crops = []
+                    for at, pts in zip(hint["at_s"], hint["pts_us"]):
+                        meta, image = reader.look(1, hint["box"], at)
+                        self.assertEqual(json.loads(meta.text)["pts_us"], pts)
+                        crops.append(image.data)
+                    self.assertNotEqual(*crops)
+                    with self.assertRaisesRegex(ValueError, "within the delivered viewing"):
+                        reader.look(1, hint["box"], .3)
+                    self.assertEqual(len(reader.paths), 1)
+                    prefixes.append((hint, crops))
+                finally:
+                    stream.close()
+            self.assertEqual(*prefixes)
+
     def test_fixation_guides_point_at_unmarked_pixels_in_clamped_crop(self):
         with tempfile.TemporaryDirectory() as tmp:
             frame = Image.fromarray(np.random.default_rng(1).integers(0, 256, (48, 100, 3), dtype=np.uint8))

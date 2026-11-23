@@ -17,7 +17,7 @@ import numpy as np
 from PIL import Image
 
 if __package__:
-    from .attention import gaze_detail
+    from .attention import gaze_detail, local_change
     from .scene_audio import READY as CAPTIONS_READY, SceneReader
     from .sounds import AST_NAME
     from .config import GAZE_PY, PY
@@ -32,7 +32,7 @@ if __package__:
     from .common import audio_timeline, hdr_display_available, hdr_picture, pcm_codec, playback_tracks, probe, reel_source, sample_boundary, video_end
     from .frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, save_frame, sheet_size
 else:
-    from attention import gaze_detail
+    from attention import gaze_detail, local_change
     from scene_audio import READY as CAPTIONS_READY, SceneReader
     from sounds import AST_NAME
     from config import GAZE_PY, PY
@@ -308,6 +308,10 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                                                          dest / audio["wav"] if audio else None,
                                                          audio["first_sample_on_film"] if audio else 0,
                                                          previous_pixels=prior_picture[2] if prior_picture else None)
+                    if info["w"] * info["h"] > w * h:
+                        detail = local_change(shown, (w, h), start)
+                        if detail:
+                            packet["local_picture_change"] = detail
                     if pace.max_frames is None:
                         sequence = missing_sequence(dest, shown, (w, h), sheets, packet["action_view"], current)
                         if sequence:
@@ -334,6 +338,8 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                             selected.update(sheet["pts_us"])
                         if current:
                             selected.add(current["pts_us"])
+                        if detail := packet.get("local_picture_change"):
+                            selected.update(detail["pts_us"])
                         for event in packet["sound_views"]["events"]:
                             selected.update(frame["pts_us"] for frame in event["frames"])
                         audio["during_pictures"] = sound_during_pictures(

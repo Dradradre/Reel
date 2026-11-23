@@ -2853,5 +2853,110 @@
     "peak_tree_rss_kib": 416048,
     "min_free_pct": 70,
     "survivors": 0
+  },
+  "natural_source_audit": {
+    "video_10309": {
+      "archive_crc32": "abd90c3a",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 21.419,
+      "annotated_audio_duration_s": 21.418666666666667,
+      "video_frames": 641,
+      "annotated_video_frames": 641
+    },
+    "video_11602": {
+      "archive_crc32": "1ef63ed5",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 33.536,
+      "annotated_audio_duration_s": 33.57866666666666,
+      "video_frames": 1006,
+      "annotated_video_frames": 1006
+    },
+    "video_1736": {
+      "archive_crc32": "ec56ae75",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 34.944,
+      "annotated_audio_duration_s": 35.029333333333334,
+      "video_frames": 1048,
+      "annotated_video_frames": 1048
+    },
+    "video_3076": {
+      "archive_crc32": "e73f6b7b",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 12.213991,
+      "annotated_audio_duration_s": 12.212270833333333,
+      "video_frames": 366,
+      "annotated_video_frames": 366
+    },
+    "video_3144": {
+      "archive_crc32": "1d84f4b3",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 34.539,
+      "annotated_audio_duration_s": 34.56,
+      "video_frames": 1036,
+      "annotated_video_frames": 1036
+    },
+    "video_3826": {
+      "archive_crc32": "20d22385",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 32.363,
+      "annotated_audio_duration_s": 32.29866666666667,
+      "video_frames": 970,
+      "annotated_video_frames": 970
+    },
+    "video_5741": {
+      "archive_crc32": "1d8b2cdf",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 24.704,
+      "annotated_audio_duration_s": 24.682666666666666,
+      "video_frames": 741,
+      "annotated_video_frames": 741
+    },
+    "video_5983": {
+      "archive_crc32": "f55ce6c8",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 30.251,
+      "annotated_audio_duration_s": 30.229333333333333,
+      "video_frames": 907,
+      "annotated_video_frames": 907
+    },
+    "video_6355": {
+      "archive_crc32": "ad787ae4",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 21.85,
+      "annotated_audio_duration_s": 21.85,
+      "video_frames": 655,
+      "annotated_video_frames": 543
+    },
+    "video_665": {
+      "archive_crc32": "f3a04fd8",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 27.817007,
+      "annotated_audio_duration_s": 27.817520833333333,
+      "video_frames": 834,
+      "annotated_video_frames": 786
+    },
+    "video_7260": {
+      "archive_crc32": "bb68cd13",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 27.392,
+      "annotated_audio_duration_s": 27.370666666666665,
+      "video_frames": 822,
+      "annotated_video_frames": 822
+    },
+    "video_8241": {
+      "archive_crc32": "7126b042",
+      "audio_start_s": 0.0,
+      "audio_duration_s": 26.24,
+      "annotated_audio_duration_s": 26.112,
+      "video_frames": 782,
+      "annotated_video_frames": 782
+    }
+  },
+  "natural_source_audit_note": "The twelve source files match the official validation archive CRC and byte length. In two films the picture frame count differs from the annotation metadata. The test uses the original soundtrack and published audio event timestamps. The following sensitivity score drops both films in their entirety.",
+  "matching_picture_frame_count_only": {
+    "films": 10,
+    "clips": 20,
+    "before": 1,
+    "measured": 5
   }
 }

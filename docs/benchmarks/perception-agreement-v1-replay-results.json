@@ -1,0 +1,190 @@
+{
+  "reader": "gpt-6.1-terra via local Codex CLI",
+  "scored_revision": "22189c02c91249ea2f79b57877ca45ea579ae28a",
+  "panel": "perception-agreement-v1.json",
+  "by_film": [
+    {
+      "video_id": "video_1775",
+      "answers": [
+        "C",
+        "?",
+        "?"
+      ],
+      "turns": 3,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_2134",
+      "answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 3,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_11193",
+      "answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 5,
+      "target_replay_pages": 4,
+      "complete_target_pngs_in_cli_log": 2,
+      "cli_log_truncated": true,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_9705",
+      "answers": [
+        "B",
+        "B",
+        "N"
+      ],
+      "turns": 2,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_2291",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 5,
+      "target_replay_pages": 4,
+      "complete_target_pngs_in_cli_log": 2,
+      "cli_log_truncated": true,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_2212",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 4,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_3228",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_6694",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_282",
+      "answers": [
+        "A",
+        "?",
+        "?"
+      ],
+      "turns": 5,
+      "target_replay_pages": 2,
+      "complete_target_pngs_in_cli_log": 2,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_11498",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 2,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_4253",
+      "answers": [
+        "C",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_2138",
+      "answers": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "turns": 2,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    }
+  ],
+  "correct": 29,
+  "wrong": 3,
+  "abstained": 4,
+  "total": 36,
+  "fraction": 0.8055555555555556,
+  "films": 12,
+  "all_three_correct": 8,
+  "by_question": {
+    "picture": {
+      "correct": 12,
+      "wrong": 0,
+      "abstained": 0
+    },
+    "sound": {
+      "correct": 9,
+      "wrong": 1,
+      "abstained": 2
+    },
+    "visible_source": {
+      "correct": 8,
+      "wrong": 2,
+      "abstained": 2
+    }
+  },
+  "verified_turns": 44,
+  "audioset_turns": 44,
+  "conette_turns": 44
+}

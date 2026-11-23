@@ -1,0 +1,112 @@
+{
+  "reader": "gpt-6.1-terra via local Codex CLI",
+  "scored_revision": "22189c02c91249ea2f79b57877ca45ea579ae28a",
+  "panel": "perception-agreement-holdout-v1.json",
+  "by_film": [
+    {
+      "video_id": "video_6226",
+      "answers": [
+        "C",
+        "B",
+        "Y"
+      ],
+      "turns": 4,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_1244",
+      "answers": [
+        "C",
+        "B",
+        "N"
+      ],
+      "turns": 4,
+      "target_replay_pages": 2,
+      "complete_target_pngs_in_cli_log": 2,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_8408",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 3,
+      "target_replay_pages": 2,
+      "complete_target_pngs_in_cli_log": 2,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_8110",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 2,
+      "target_replay_pages": 1,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_9456",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 4,
+      "target_replay_pages": 2,
+      "complete_target_pngs_in_cli_log": 2,
+      "cli_log_truncated": false,
+      "sound_match": "available"
+    },
+    {
+      "video_id": "video_6611",
+      "answers": [
+        "A",
+        "A",
+        "N"
+      ],
+      "turns": 5,
+      "target_replay_pages": 3,
+      "complete_target_pngs_in_cli_log": 1,
+      "cli_log_truncated": true,
+      "sound_match": "available"
+    }
+  ],
+  "correct": 15,
+  "wrong": 3,
+  "abstained": 0,
+  "total": 18,
+  "fraction": 0.8333333333333334,
+  "films": 6,
+  "all_three_correct": 3,
+  "by_question": {
+    "picture": {
+      "correct": 5,
+      "wrong": 1,
+      "abstained": 0
+    },
+    "sound": {
+      "correct": 6,
+      "wrong": 0,
+      "abstained": 0
+    },
+    "visible_source": {
+      "correct": 4,
+      "wrong": 2,
+      "abstained": 0
+    }
+  },
+  "verified_turns": 22,
+  "audioset_turns": 22,
+  "conette_turns": 22
+}

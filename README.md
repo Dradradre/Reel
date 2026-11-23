@@ -62,7 +62,7 @@ order, with nothing left out.
 
 ## Does it work?
 
-On 12 filmed scenes, local Codex GPT matched human annotations on **28 of 36 questions (77.8%)** about the picture, a timed sound and whether its source was visible. It abstained 5 times. The local 30B listener was off. [Questions, controls and results](docs/perception-check.md#실제-촬영-영상-12편에서-사람-주석과-대조)
+On 18 filmed scenes, local Codex GPT matched human annotations on **44 of 54 questions (81.5%)** about the picture, a timed sound and whether its source was visible. It gave 6 wrong answers and abstained 4 times. The local 30B listener was off. [Questions, individual responses and the before-and-after comparison](docs/perception-check.md#12편을-다시-보고-6편을-추가한-측정)
 
 Fresh readers (a model given only the [reading guide](docs/READING.md) and the reel, never told what was wrong)
 watched real fan edits that a person had already reviewed:

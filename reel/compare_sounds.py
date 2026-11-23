@@ -20,6 +20,7 @@ else:
 
 CLAP_NAME = "laion/clap-htsat-unfused"
 RATE = 48000
+WINDOW_SECONDS = 10
 
 
 def cache_options(repo, download=False):
@@ -36,18 +37,22 @@ def vocabulary(download=False):
     return [config.id2label[i] for i in range(config.num_labels)]
 
 
+def native_windows(wav, start, end, first_sample, seconds):
+    with open_recording(wav) as recording:
+        rate = recording.samplerate
+        origin = sample_boundary(start, rate) if first_sample is None else first_sample
+        offset = 0
+        for pcm in recording.blocks(blocksize=seconds * rate, dtype="float32", always_2d=True):
+            stop = offset + len(pcm)
+            stamp = {"start_s": min(end, (origin + offset) / rate),
+                     "end_s": min(end, (origin + stop) / rate), "wav_samples": [offset, stop]}
+            yield stamp, resample_channels(pcm, rate, RATE)
+            offset = stop
+
+
 def match_windows(wav, start, end, per_second, first_sample):
     if per_second:
-        with open_recording(wav) as recording:
-            rate = recording.samplerate
-            origin = sample_boundary(start, rate) if first_sample is None else first_sample
-            offset = 0
-            for pcm in recording.blocks(blocksize=rate, dtype="float32", always_2d=True):
-                stop = offset + len(pcm)
-                stamp = {"start_s": min(end, (origin + offset) / rate),
-                         "end_s": min(end, (origin + stop) / rate), "wav_samples": [offset, stop]}
-                yield stamp, resample_channels(pcm, rate, RATE)
-                offset = stop
+        yield from native_windows(wav, start, end, first_sample, 1)
         return
     rate = probe(wav)["audio_rate"]
     origin = sample_boundary(start, rate) / rate
@@ -82,10 +87,11 @@ class Comparator:
                 parts.append(self.unit(self.model.get_text_features(**tokens)))
         return torch.cat(parts)
 
-    def similarities(self, channels, text):
+    def similarities(self, channels, text, *, padding="repeatpad"):
         import torch
         with torch.inference_mode():
-            batch = self.proc.feature_extractor(channels, sampling_rate=RATE, return_tensors="pt").to(self.device)
+            batch = self.proc.feature_extractor(channels, sampling_rate=RATE, padding=padding,
+                                                return_tensors="pt").to(self.device)
             return (self.unit(self.model.get_audio_features(**batch)) @ text.T).cpu().numpy()
 
     def choose_layer(self, wavs, focus):
@@ -109,28 +115,38 @@ class Comparator:
             self.references = labels, self.text_features(["the sound of " + label.lower() for label in labels])
         labels, references = self.references
         text = torch.cat([self.text_features(descriptions), references]) if descriptions else references
-        windows = []
-        for stamp, block in match_windows(wav, start, end, per_second, first_sample):
+        def compare(stamp, block, padding):
             ids = [i for i, channel in enumerate(block.T) if np.any(channel)]
             rows = [{"channel": i + 1, "cosines": [], "reference_neighbours": []} for i in range(block.shape[1])]
             if ids:
-                values = self.similarities([block[:, i] for i in ids], text)
+                values = self.similarities([block[:, i] for i in ids], text, padding=padding)
                 for i, scores in zip(ids, values, strict=True):
                     rows[i]["cosines"] = [round(float(v), 4) for v in scores[:len(descriptions)]]
                     background = scores[len(descriptions):]
                     rows[i]["reference_neighbours"] = [
                         {"sound": labels[j], "cosine": round(float(background[j]), 4)}
                         for j in np.argsort(-background)[:3]]
-            windows.append({**stamp, "channels": rows})
+            return {**stamp, "channels": rows}
+
+        windows = [compare(stamp, block, "repeatpad")
+                   for stamp, block in match_windows(wav, start, end, per_second, first_sample)]
         basis = ("Audio-only cosine similarities, in the supplied text order. Empty scores mean no signal "
                  "at the encoder rate. Reference neighbours are the closest of 527 independent AudioSet labels "
                  "on the same scale. All suggestions, including the neighbours, can be poor. Use a relative "
                  "match to choose what to inspect. Identifying a source, visible object or word needs "
-                 "independent evidence.")
+                 "independent evidence. For windows, the encoder repeats short inputs as many whole times "
+                 "as fit in ten seconds and zero-pads the rest. Repetition inside the encoder does not "
+                 "establish repetition in the recording.")
+        result = {"status": "available", "model": CLAP_NAME, "descriptions": descriptions, "windows": windows}
         if per_second:
-            basis += (" Each window was cut before resampling. Scores compare the whole window with the text. "
-                      "They do not locate an onset.")
-        return {"status": "available", "model": CLAP_NAME, "descriptions": descriptions, "windows": windows, "basis": basis}
+            # Take the entire acoustic phrase from native PCM. Joining independently resampled seconds
+            # would insert filter edges and can change the number of samples at fractional rate ratios.
+            result["continuous_windows"] = [compare(stamp, block, "pad") for stamp, block in
+                                            native_windows(wav, start, end, first_sample, WINDOW_SECONDS)]
+            basis += (" The one-second windows can locate changes in similarity. In continuous_windows the "
+                      "encoder hears up to ten seconds in their original order once, then pads unused input "
+                      "with zeros. Only the recorded part has film times. Neither score locates an onset.")
+        return {**result, "basis": basis}
 
 
 class SoundMatcher(LocalReader):

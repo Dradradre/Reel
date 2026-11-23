@@ -1,0 +1,752 @@
+{
+  "model": "gpt-6.1-terra, signed-in local Codex CLI",
+  "source": "https://github.com/karolpiczak/ESC-50",
+  "protocol": "One 5-second fold-4 recording in each ESC-50 category, fixed by the earlier layer separation test. Sort the 50 files by SHA256 of reel-whole-sound-field-v1/ plus filename. For each file, seed Python random.Random with SHA256 of reel-whole-sound-field-v1/options/ plus filename, sample four distractors from the same ESC-50 ten-class family and shuffle with the true class. No filenames, annotations or waveform supplied to GPT. Each arm receives the same per-channel cosine values in candidate order and three nearest AudioSet classes from each one-second window. Current also receives the continuous recording scores and an explanation of the two padding policies. Five independent items per fresh session, alternating arm order across ten sessions per arm. An abstention scores zero. Each recording contributed one question.",
+  "correct": {
+    "previous": {
+      "correct": 47,
+      "wrong": 3
+    },
+    "current": {
+      "correct": 47,
+      "wrong": 3
+    }
+  },
+  "items": [
+    {
+      "file": "4-132383-B-2.wav",
+      "key": "B",
+      "alternatives": [
+        "dog",
+        "pig",
+        "frog",
+        "rooster",
+        "insects"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "92f93d980ba878821c57255190f591d3936030cdfeb3ea205524d8d5e5ef24d3"
+    },
+    {
+      "file": "4-198962-B-25.wav",
+      "key": "A",
+      "alternatives": [
+        "footsteps",
+        "laughing",
+        "drinking sipping",
+        "clapping",
+        "breathing"
+      ],
+      "previous": "A",
+      "current": "A",
+      "sha256": "4a9fd033241d235416314dcc577acb6f62c7de290ea706fed597aaf15d323971"
+    },
+    {
+      "file": "4-186935-A-44.wav",
+      "key": "B",
+      "alternatives": [
+        "fireworks",
+        "engine",
+        "hand saw",
+        "siren",
+        "chainsaw"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "d5fa3e05bb7222e031cf0fde1866e20aee5f3686d45a69337757930c46769bf4"
+    },
+    {
+      "file": "4-218199-C-35.wav",
+      "key": "C",
+      "alternatives": [
+        "clock tick",
+        "door wood creaks",
+        "washing machine",
+        "glass breaking",
+        "clock alarm"
+      ],
+      "previous": "C",
+      "current": "C",
+      "sha256": "790f81a05aa5b9bc891dafc90059fd24a48a8301d0abaeca7285cf4b9673b6e4"
+    },
+    {
+      "file": "4-177243-A-32.wav",
+      "key": "C",
+      "alternatives": [
+        "clock alarm",
+        "glass breaking",
+        "keyboard typing",
+        "door wood knock",
+        "can opening"
+      ],
+      "previous": "C",
+      "current": "C",
+      "sha256": "e2163c61a24be93d31a3e6b1c87191f87eb0d7cebda85b110b7f2a115f0b86fa"
+    },
+    {
+      "file": "4-125070-A-19.wav",
+      "key": "B",
+      "alternatives": [
+        "wind",
+        "thunderstorm",
+        "water drops",
+        "pouring water",
+        "sea waves"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "61b68a9eb06ee056826f8ce06e56558bc46301a2f4df43b92d7619cd6b2e8475"
+    },
+    {
+      "file": "4-172736-A-36.wav",
+      "key": "C",
+      "alternatives": [
+        "can opening",
+        "mouse click",
+        "vacuum cleaner",
+        "glass breaking",
+        "door wood creaks"
+      ],
+      "previous": "C",
+      "current": "C",
+      "sha256": "3a1ee8ca78c888284dcf58aa5d2e029862b0ef16352edc8126e232942ca01e29"
+    },
+    {
+      "file": "4-172366-A-37.wav",
+      "key": "A",
+      "alternatives": [
+        "clock alarm",
+        "glass breaking",
+        "can opening",
+        "door wood knock",
+        "keyboard typing"
+      ],
+      "previous": "A",
+      "current": "A",
+      "sha256": "b6d260c3b1823bdd45c9d8968b87a9bc6d57c0b99bfef07362cae506ae38b32a"
+    },
+    {
+      "file": "4-132839-A-33.wav",
+      "key": "A",
+      "alternatives": [
+        "door wood creaks",
+        "washing machine",
+        "vacuum cleaner",
+        "glass breaking",
+        "door wood knock"
+      ],
+      "previous": "A",
+      "current": "A",
+      "sha256": "ab878de418072908402b3c1f808e6e8966b92424e1361c4bf0b75c627f5b1cbd"
+    },
+    {
+      "file": "4-173865-B-9.wav",
+      "key": "D",
+      "alternatives": [
+        "frog",
+        "pig",
+        "sheep",
+        "crow",
+        "rooster"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "0d60307a21da185856f712a327b56b16ef2444d8455d67d55595d931d3a68af3"
+    },
+    {
+      "file": "4-189828-A-22.wav",
+      "key": "E",
+      "alternatives": [
+        "snoring",
+        "laughing",
+        "crying baby",
+        "sneezing",
+        "clapping"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "13a9c47cba0d2dab78358fa78a6ffe10d7fd209b94b4f062b260dd7ea1b67243"
+    },
+    {
+      "file": "4-184434-A-21.wav",
+      "key": "A",
+      "alternatives": [
+        "sneezing",
+        "footsteps",
+        "breathing",
+        "laughing",
+        "brushing teeth"
+      ],
+      "previous": "A",
+      "current": "A",
+      "sha256": "3df4211c5afd73ca0e85d282f84313b73ccb8d3993af59a9f368e91da274d020"
+    },
+    {
+      "file": "4-111671-A-42.wav",
+      "key": "B",
+      "alternatives": [
+        "chainsaw",
+        "siren",
+        "helicopter",
+        "train",
+        "fireworks"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "365e4a2a7fcb455894d3b0a7b7ad08ac9725f6565fc4d3ace32876b5afc4c2cd"
+    },
+    {
+      "file": "4-177835-A-24.wav",
+      "key": "D",
+      "alternatives": [
+        "crying baby",
+        "footsteps",
+        "brushing teeth",
+        "coughing",
+        "breathing"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "107f49aa987e3155662f7713709ebfc7665202f42cd0e4adaefa57eff4b89208"
+    },
+    {
+      "file": "4-185575-C-20.wav",
+      "key": "E",
+      "alternatives": [
+        "breathing",
+        "clapping",
+        "drinking sipping",
+        "sneezing",
+        "crying baby"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "7cdd46d701197c99ab637a10bc37e61a9859fd88218d339d4699a46f748c0200"
+    },
+    {
+      "file": "4-157611-A-41.wav",
+      "key": "A",
+      "alternatives": [
+        "chainsaw",
+        "hand saw",
+        "train",
+        "airplane",
+        "engine"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "9a71c693e78177287023ad26d3192535104f8a5fa45290150a3f4db647ae5226"
+    },
+    {
+      "file": "4-199261-A-0.wav",
+      "key": "D",
+      "alternatives": [
+        "hen",
+        "cow",
+        "sheep",
+        "dog",
+        "cat"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "527a52b5cd50b5171b45ea0dd3c5efe5d11fb75a0c29cdd777c6f17255ac8262"
+    },
+    {
+      "file": "4-188595-A-29.wav",
+      "key": "D",
+      "alternatives": [
+        "breathing",
+        "sneezing",
+        "footsteps",
+        "drinking sipping",
+        "crying baby"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "7354cd541de26c223c02d61ba157d8b25e465ea11768d730e074b668011d301f"
+    },
+    {
+      "file": "4-181955-A-3.wav",
+      "key": "B",
+      "alternatives": [
+        "dog",
+        "cow",
+        "sheep",
+        "rooster",
+        "pig"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "4de46673260781a776ea7fb08d7057c104b0f1c181170488445d1841fba24472"
+    },
+    {
+      "file": "4-120160-A-5.wav",
+      "key": "D",
+      "alternatives": [
+        "hen",
+        "pig",
+        "rooster",
+        "cat",
+        "crow"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "5828c0621dddd37ba88c08d99edb9c3860bf2e7f9c3b8adcc02f845bbf6e7211"
+    },
+    {
+      "file": "4-212698-A-39.wav",
+      "key": "B",
+      "alternatives": [
+        "clock alarm",
+        "glass breaking",
+        "door wood knock",
+        "vacuum cleaner",
+        "door wood creaks"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "4491d08becad3c0074b46fbe25eeb7536a458036ecd5eed77f5709ed77313ef8"
+    },
+    {
+      "file": "4-163697-A-13.wav",
+      "key": "D",
+      "alternatives": [
+        "rain",
+        "toilet flush",
+        "thunderstorm",
+        "crickets",
+        "pouring water"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "8b02f23af70a2035464c83a3da2c7d1424cd0af658f4c8c20c40e8abdc1a0444"
+    },
+    {
+      "file": "4-183882-B-28.wav",
+      "key": "D",
+      "alternatives": [
+        "breathing",
+        "brushing teeth",
+        "sneezing",
+        "snoring",
+        "drinking sipping"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "d534fe2cac853e387fb2a400d8dbb2daa51a03282169983cdf1bc2f069b71071"
+    },
+    {
+      "file": "4-174797-A-15.wav",
+      "key": "A",
+      "alternatives": [
+        "water drops",
+        "thunderstorm",
+        "rain",
+        "crickets",
+        "toilet flush"
+      ],
+      "previous": "A",
+      "current": "E",
+      "sha256": "acdd567a1d75cf635a94d4566916b950b34ca9d153b13b601c659a9b86be69b4"
+    },
+    {
+      "file": "4-125825-B-46.wav",
+      "key": "B",
+      "alternatives": [
+        "train",
+        "church bells",
+        "car horn",
+        "helicopter",
+        "siren"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "c6a4d689547aa3ac03eb683104f00f8be7b6eed00b57c9a7a64e06a935f9d9a4"
+    },
+    {
+      "file": "4-187769-A-14.wav",
+      "key": "C",
+      "alternatives": [
+        "crackling fire",
+        "toilet flush",
+        "chirping birds",
+        "wind",
+        "water drops"
+      ],
+      "previous": "C",
+      "current": "C",
+      "sha256": "03884ce6ca8ef10ced57c11be0066dc190a6349ab403c213b4c7276a254c461a"
+    },
+    {
+      "file": "4-183487-A-1.wav",
+      "key": "D",
+      "alternatives": [
+        "crow",
+        "cow",
+        "cat",
+        "rooster",
+        "dog"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "0cb40e860a07d9ef3843375df34033fcc7a655ffd01f1d693ae58f9ecfa0e1a3"
+    },
+    {
+      "file": "4-186693-A-17.wav",
+      "key": "D",
+      "alternatives": [
+        "crickets",
+        "rain",
+        "water drops",
+        "pouring water",
+        "thunderstorm"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "717ccdb41c6aa068f5cd6976b309ec2c2f81041838151892cba281dac90b7092"
+    },
+    {
+      "file": "4-192068-A-31.wav",
+      "key": "D",
+      "alternatives": [
+        "can opening",
+        "clock alarm",
+        "vacuum cleaner",
+        "mouse click",
+        "door wood knock"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "fad199981761a1aa7392db104c045f6091986c26f549f6ef59d3f12425fd13dd"
+    },
+    {
+      "file": "4-154793-A-4.wav",
+      "key": "E",
+      "alternatives": [
+        "insects",
+        "sheep",
+        "dog",
+        "cow",
+        "frog"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "70848cc5cfe7f2c5f3ef1266f47901c50463a4887ff6ffa8910cba9b22c89d4f"
+    },
+    {
+      "file": "4-144468-B-27.wav",
+      "key": "A",
+      "alternatives": [
+        "brushing teeth",
+        "snoring",
+        "sneezing",
+        "crying baby",
+        "clapping"
+      ],
+      "previous": "A",
+      "current": "A",
+      "sha256": "2fa690f12d994168413f962ccff9a6936d430b0dc0cf4dcd337e4434a3bd0e58"
+    },
+    {
+      "file": "4-176914-A-23.wav",
+      "key": "C",
+      "alternatives": [
+        "clapping",
+        "footsteps",
+        "breathing",
+        "coughing",
+        "sneezing"
+      ],
+      "previous": "C",
+      "current": "C",
+      "sha256": "f48da96a4e3491e42c6b2d13e4086c3b81c9cf21fb2c188fd50fd9de9329c885"
+    },
+    {
+      "file": "4-166661-A-10.wav",
+      "key": "D",
+      "alternatives": [
+        "toilet flush",
+        "sea waves",
+        "crickets",
+        "rain",
+        "crackling fire"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "a958fd56bfff6c34c896c8ca4e5f69705b47a446edcb57060c492f65007d277d"
+    },
+    {
+      "file": "4-200330-B-6.wav",
+      "key": "B",
+      "alternatives": [
+        "cow",
+        "hen",
+        "cat",
+        "pig",
+        "rooster"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "af0d92d01bcbc7f5dadd012f05a1f3d52197432ea927e29c084198127c8a0d15"
+    },
+    {
+      "file": "4-143118-A-7.wav",
+      "key": "A",
+      "alternatives": [
+        "insects",
+        "frog",
+        "crow",
+        "hen",
+        "cow"
+      ],
+      "previous": "A",
+      "current": "A",
+      "sha256": "60f56e656e795a8916258b85a5485fff61199f99a3c9f1dde9eaedaebd4d2f61"
+    },
+    {
+      "file": "4-119648-A-48.wav",
+      "key": "E",
+      "alternatives": [
+        "car horn",
+        "chainsaw",
+        "hand saw",
+        "engine",
+        "fireworks"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "c205760c87ea392acd3300d75ab6a1f6185cce1f2cd38884041340c2f578dddb"
+    },
+    {
+      "file": "4-161099-A-47.wav",
+      "key": "A",
+      "alternatives": [
+        "airplane",
+        "train",
+        "siren",
+        "car horn",
+        "engine"
+      ],
+      "previous": "A",
+      "current": "A",
+      "sha256": "2264c8830b42634fb6df30886667ea375dd988d38c005662b1218adbd46755dd"
+    },
+    {
+      "file": "4-212728-A-34.wav",
+      "key": "B",
+      "alternatives": [
+        "door wood creaks",
+        "can opening",
+        "washing machine",
+        "glass breaking",
+        "clock alarm"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "a652b5e90dc99a8b9b69854cd54bec0be47872dc98b44306ff883e970f0b8f9e"
+    },
+    {
+      "file": "4-188033-A-38.wav",
+      "key": "D",
+      "alternatives": [
+        "glass breaking",
+        "vacuum cleaner",
+        "can opening",
+        "clock tick",
+        "door wood knock"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "7a76b052b1344dfdebd234ed10b1e4a7d167e4bc7575dc2938fef7f9e1ad1a06"
+    },
+    {
+      "file": "4-164661-A-12.wav",
+      "key": "D",
+      "alternatives": [
+        "crickets",
+        "water drops",
+        "pouring water",
+        "crackling fire",
+        "toilet flush"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "5dba3d3689ad470168a93c321674fb1d0e152a939bc034dcfe88c7a055e6d5f5"
+    },
+    {
+      "file": "4-198360-A-49.wav",
+      "key": "C",
+      "alternatives": [
+        "church bells",
+        "fireworks",
+        "hand saw",
+        "car horn",
+        "siren"
+      ],
+      "previous": "C",
+      "current": "C",
+      "sha256": "da1175ae1546391f81a565f0eb22a39772a7d658652974b8c889fb990ac15b21"
+    },
+    {
+      "file": "4-144083-B-16.wav",
+      "key": "D",
+      "alternatives": [
+        "crickets",
+        "rain",
+        "water drops",
+        "wind",
+        "sea waves"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "6295c5592ebaa83de1109be26a2473912d15565d5594abb24784b89cb17d29ae"
+    },
+    {
+      "file": "4-161579-B-40.wav",
+      "key": "E",
+      "alternatives": [
+        "hand saw",
+        "fireworks",
+        "engine",
+        "church bells",
+        "helicopter"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "4f110f1d5c7d4185c7ed5f5a678f9233871126a826698b9eec1e4b2f3768aa1d"
+    },
+    {
+      "file": "4-176638-A-43.wav",
+      "key": "B",
+      "alternatives": [
+        "church bells",
+        "car horn",
+        "hand saw",
+        "engine",
+        "airplane"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "6e2cf0e0671f26167772c0aa34bcdeb711fec40b62b79311433bf4dd9497ce5a"
+    },
+    {
+      "file": "4-181599-A-26.wav",
+      "key": "D",
+      "alternatives": [
+        "sneezing",
+        "footsteps",
+        "clapping",
+        "laughing",
+        "brushing teeth"
+      ],
+      "previous": "D",
+      "current": "D",
+      "sha256": "e414fc3ba7dea88437d0be3c0dd1101177cfcc0052e2a2b2cb8973cad984e178"
+    },
+    {
+      "file": "4-195497-A-11.wav",
+      "key": "E",
+      "alternatives": [
+        "wind",
+        "toilet flush",
+        "chirping birds",
+        "pouring water",
+        "sea waves"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "754ff6b164f369e9bcda1b0d2ea28552a8097f8042a450f4987b79d916872dea"
+    },
+    {
+      "file": "4-188878-A-30.wav",
+      "key": "C",
+      "alternatives": [
+        "vacuum cleaner",
+        "keyboard typing",
+        "door wood knock",
+        "mouse click",
+        "can opening"
+      ],
+      "previous": "C",
+      "current": "C",
+      "sha256": "072852ce3b23b40d58774570a5758fae5b114be54a3d8242cf26a722ff735a07"
+    },
+    {
+      "file": "4-126532-A-18.wav",
+      "key": "E",
+      "alternatives": [
+        "chirping birds",
+        "sea waves",
+        "pouring water",
+        "water drops",
+        "toilet flush"
+      ],
+      "previous": "E",
+      "current": "E",
+      "sha256": "62382bad73223d77cf7f93ae423af872396279fa89f6a8247abf891d0a5aead0"
+    },
+    {
+      "file": "4-178881-A-45.wav",
+      "key": "B",
+      "alternatives": [
+        "engine",
+        "train",
+        "chainsaw",
+        "helicopter",
+        "siren"
+      ],
+      "previous": "B",
+      "current": "B",
+      "sha256": "f9c68f75599c22c1ec196d1754081cb8df5535234b4ee40f414452e59f48f2b1"
+    },
+    {
+      "file": "4-250864-A-8.wav",
+      "key": "C",
+      "alternatives": [
+        "crow",
+        "cow",
+        "sheep",
+        "rooster",
+        "hen"
+      ],
+      "previous": "B",
+      "current": "C",
+      "sha256": "61588f6390e01538119eff6ca23c9c0c9ead0ea8dc77d07cfff1ab77ab078872"
+    }
+  ],
+  "encoder_only_ablation": {
+    "protocol": "Raw CLAP cosine top-1, without GPT. All 50 ESC labels supplied at once as the sound of plus the human category string. For the filmed questions use the same two alternatives as MCP. Average all nonzero channels and duration-weight the nonempty one-second windows; full conditions encode each complete selected span. Both padding modes use ten seconds of encoder input. repeatpad tiles the recording, pad supplies it once. Padding is excluded from all film time ranges. These are different measures from the five-choice GPT trial.",
+    "ESC50_top1_out_of_50": {
+      "full_repeatpad": 45,
+      "seconds_repeatpad": 34,
+      "full_pad": 44,
+      "seconds_pad": 38
+    },
+    "filmed_two_choices_out_of_28": {
+      "full_repeatpad": 21,
+      "seconds_repeatpad": 22,
+      "full_pad": 21,
+      "seconds_pad": 20
+    },
+    "by_panel": {
+      "agreement-nov23": {
+        "full_repeatpad": 5,
+        "seconds_repeatpad": 5,
+        "full_pad": 5,
+        "seconds_pad": 5
+      },
+      "event-view": {
+        "full_repeatpad": 11,
+        "seconds_repeatpad": 11,
+        "full_pad": 10,
+        "seconds_pad": 9
+      },
+      "event-view-6": {
+        "full_repeatpad": 5,
+        "seconds_repeatpad": 6,
+        "full_pad": 6,
+        "seconds_pad": 6
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import numpy as np
 import soundfile as sf
 
 from reel.compare_sounds import Comparator, SoundMatcher
+from reel.common import resample_channels
 from reel.sounds import PlaybackSounds
 
 
@@ -68,7 +69,7 @@ class PlaybackSoundTests(unittest.TestCase):
         pcm[rate, 1] = -24000
         matcher = Comparator.__new__(Comparator)
         matcher.references = (["impact"], object())
-        matcher.similarities = Mock(return_value=np.array([[.35]]))
+        matcher.similarities = Mock(side_effect=lambda channels, text, **kw: np.full((len(channels), 1), .35))
         with tempfile.TemporaryDirectory() as tmp:
             wav = Path(tmp) / "native.wav"
             sf.write(wav, pcm, rate)
@@ -81,9 +82,30 @@ class PlaybackSoundTests(unittest.TestCase):
         self.assertEqual(right["end_s"], end)
         self.assertEqual([bool(c["reference_neighbours"]) for c in left["channels"]], [True, False])
         self.assertEqual([bool(c["reference_neighbours"]) for c in right["channels"]], [False, True])
-        calls = matcher.similarities.call_args_list
+        *calls, continuous = matcher.similarities.call_args_list
         self.assertEqual([len(call.args[0]) for call in calls], [1, 1])
         self.assertEqual([len(call.args[0][0]) for call in calls], [48000, 254])
+        self.assertEqual([call.kwargs["padding"] for call in calls], ["repeatpad", "repeatpad"])
+        self.assertEqual(continuous.kwargs["padding"], "pad")
+        expected = resample_channels(pcm.astype(np.float32) / 32768, rate, 48000)
+        np.testing.assert_array_equal(np.stack(continuous.args[0], axis=1), expected)
+        whole, = report["continuous_windows"]
+        self.assertEqual(whole["wav_samples"], [0, len(pcm)])
+        self.assertEqual((whole["start_s"], whole["end_s"]), (first / rate, end))
+
+    def test_continuous_matches_bound_the_encoder_and_keep_a_silent_tail(self):
+        from reel.compare_sounds import native_windows
+        rate = 8000
+        with tempfile.TemporaryDirectory() as tmp:
+            wav = Path(tmp) / "tail.wav"
+            pcm = np.zeros(10 * rate + 13, dtype=np.int16)
+            pcm[10 * rate - 1] = 20000
+            sf.write(wav, pcm, rate)
+            spans = list(native_windows(wav, 3, 13 + 13 / rate, 3 * rate, 10))
+        self.assertEqual([s["wav_samples"] for s, _ in spans], [[0, 80000], [80000, 80013]])
+        self.assertEqual([s["start_s"] for s, _ in spans], [3, 13])
+        self.assertTrue(np.any(spans[0][1]))
+        self.assertFalse(np.any(spans[1][1]))
 
     def test_future_and_empty_hypotheses_do_not_start_the_model(self):
         with SoundMatcher() as reader, patch.object(reader, "request") as request:

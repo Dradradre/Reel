@@ -1,0 +1,325 @@
+{
+  "name": "Reel audiovisual question agreement, panel 1",
+  "dataset": "Perception Test validation split (CC BY 4.0)",
+  "source": "https://github.com/google-deepmind/perception_test",
+  "measured_revision": "a3f59258a60b180cd9373c2600f1ec631fac9d3d",
+  "model": "gpt-6.1-terra via local Codex CLI",
+  "conditions": [
+    "Use a fresh session per film. Withhold the film ID, annotation IDs, reference answers and other responses. Show questions and alternatives in the order supplied.",
+    "Use reel mcp --image-client --lang en. Watch all consecutive view turns through end_of_view at continuous_seconds=8 and native_audio=false. Use ask_scene at the specified interval with the two sound alternatives. The reader may also use look.",
+    "The local AudioSet, CoNeTTE and CLAP readers are enabled. The optional Qwen3-Omni 30B waveform reader is disabled in this run. GPT receives the rendered pictures and local readings.",
+    "Give one letter per question. A question mark abstains. Score an exact match as 1 and every other answer as 0. Each film and each of its three questions has equal weight."
+  ],
+  "questions": [
+    "The film's published descriptive multiple-choice question (A/B/C).",
+    "Which of the two sounds occurs in the specified interval (A/B)? Both sounds have annotations in this film. The alternatives do not overlap in the target interval.",
+    "Is the source producing the sound in that interval visible (Y/N)?"
+  ],
+  "sampling": [
+    "Use locally available validation originals with a sound track, matching frame count and resolution, 4 to 45 seconds, without a cup game or a required benchmark cutoff. Exclude the eight sample videos used for the earlier multiple-choice page test.",
+    "Require a descriptive question with three options and a labelled sound of at least 0.1 seconds. Exclude unspecified sounds. Require exactly one distinct annotated sound label overlapping the target and a different labelled sound elsewhere in the film.",
+    "Order candidates by SHA-256 with the salt reel-human-agreement-v1/. Pair two different films with the same target sound category and opposite source visibility. Select six such pairs, balancing visibility at 6/6. This is a local diagnostic panel."
+  ],
+  "films": [
+    {
+      "video_id": "video_1775",
+      "question_id": 0,
+      "picture_question": "Is the camera moving or static?",
+      "picture_options": [
+        "static or shaking",
+        "I don't know",
+        "moving"
+      ],
+      "target_sound_id": 8,
+      "alternative_sound_id": 7,
+      "sound_interval_s": [
+        11.820256,
+        12.513527
+      ],
+      "sound_options": [
+        "opening or closing something",
+        "hitting"
+      ],
+      "human_reference": [
+        "C",
+        "A",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_2134",
+      "question_id": 0,
+      "picture_question": "Where is the person?",
+      "picture_options": [
+        "Indoors in the kitchen",
+        "Indoors in the bathroom",
+        "Indoors in the living room or bedroom"
+      ],
+      "target_sound_id": 4,
+      "alternative_sound_id": 3,
+      "sound_interval_s": [
+        3.412922,
+        3.852208
+      ],
+      "sound_options": [
+        "hitting",
+        "speech"
+      ],
+      "human_reference": [
+        "C",
+        "B",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_11193",
+      "question_id": 2,
+      "picture_question": "Where is the person?",
+      "picture_options": [
+        "Indoors in the living room or bedroom",
+        "Indoors in the bathroom",
+        "Indoors in the kitchen"
+      ],
+      "target_sound_id": 5,
+      "alternative_sound_id": 2,
+      "sound_interval_s": [
+        27.430426,
+        34.99744
+      ],
+      "sound_options": [
+        "hitting",
+        "speech"
+      ],
+      "human_reference": [
+        "C",
+        "B",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_9705",
+      "question_id": 1,
+      "picture_question": "How many objects did you see the person placing in the door area?",
+      "picture_options": [
+        "4",
+        "0",
+        "3"
+      ],
+      "target_sound_id": 5,
+      "alternative_sound_id": 4,
+      "sound_interval_s": [
+        12.108973,
+        13.910308
+      ],
+      "sound_options": [
+        "opening or closing something",
+        "clapping"
+      ],
+      "human_reference": [
+        "B",
+        "B",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_2291",
+      "question_id": 0,
+      "picture_question": "Is the camera moving or static?",
+      "picture_options": [
+        "moving",
+        "I don't know",
+        "static or shaking"
+      ],
+      "target_sound_id": 13,
+      "alternative_sound_id": 8,
+      "sound_interval_s": [
+        25.711878,
+        32.172811
+      ],
+      "sound_options": [
+        "hitting",
+        "opening or closing something"
+      ],
+      "human_reference": [
+        "A",
+        "B",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_2212",
+      "question_id": 0,
+      "picture_question": "Is the camera moving or static?",
+      "picture_options": [
+        "static or shaking",
+        "moving",
+        "I don't know"
+      ],
+      "target_sound_id": 10,
+      "alternative_sound_id": 1,
+      "sound_interval_s": [
+        23.813395,
+        24.048506
+      ],
+      "sound_options": [
+        "rolling",
+        "hitting"
+      ],
+      "human_reference": [
+        "A",
+        "B",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_3228",
+      "question_id": 1,
+      "picture_question": "Does the object placed on the slanted plane fall off the table at least once?",
+      "picture_options": [
+        "yes",
+        "I don't know",
+        "no"
+      ],
+      "target_sound_id": 3,
+      "alternative_sound_id": 8,
+      "sound_interval_s": [
+        10.812185,
+        11.108861
+      ],
+      "sound_options": [
+        "hitting",
+        "animal sound"
+      ],
+      "human_reference": [
+        "C",
+        "A",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_6694",
+      "question_id": 2,
+      "picture_question": "Are the letters that the person shuffled in the same order at the end of the video compared to the beginning of the video?",
+      "picture_options": [
+        "Yes",
+        "I don't know",
+        "No"
+      ],
+      "target_sound_id": 7,
+      "alternative_sound_id": 10,
+      "sound_interval_s": [
+        33.118915,
+        34.419658
+      ],
+      "sound_options": [
+        "hitting",
+        "speech"
+      ],
+      "human_reference": [
+        "A",
+        "B",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_282",
+      "question_id": 0,
+      "picture_question": "Is the camera moving or static?",
+      "picture_options": [
+        "static or shaking",
+        "moving",
+        "I don't know"
+      ],
+      "target_sound_id": 8,
+      "alternative_sound_id": 2,
+      "sound_interval_s": [
+        18.084733,
+        21.588233
+      ],
+      "sound_options": [
+        "hitting",
+        "dropping"
+      ],
+      "human_reference": [
+        "A",
+        "B",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_11498",
+      "question_id": 3,
+      "picture_question": "With which object does the launched object collide after being launched the first time?",
+      "picture_options": [
+        "fork",
+        "red lid",
+        "coffee jar"
+      ],
+      "target_sound_id": 4,
+      "alternative_sound_id": 1,
+      "sound_interval_s": [
+        6.865769,
+        8.098941
+      ],
+      "sound_options": [
+        "dropping",
+        "rolling"
+      ],
+      "human_reference": [
+        "C",
+        "A",
+        "N"
+      ]
+    },
+    {
+      "video_id": "video_4253",
+      "question_id": 5,
+      "picture_question": "What is the person preparing?",
+      "picture_options": [
+        "a salad",
+        "a sandwich",
+        "a tea"
+      ],
+      "target_sound_id": 0,
+      "alternative_sound_id": 7,
+      "sound_interval_s": [
+        0.0,
+        0.133333
+      ],
+      "sound_options": [
+        "speech",
+        "animal sound"
+      ],
+      "human_reference": [
+        "C",
+        "A",
+        "Y"
+      ]
+    },
+    {
+      "video_id": "video_2138",
+      "question_id": 0,
+      "picture_question": "Which statement describes better the actions done by the person?",
+      "picture_options": [
+        "The person claps once, pretends to clap twice, claps three times.",
+        "The person claps once, pretends to clap once, claps twice, pretends to clap twice, claps three times.",
+        "The person claps once, claps twice, claps three times."
+      ],
+      "target_sound_id": 2,
+      "alternative_sound_id": 0,
+      "sound_interval_s": [
+        8.664656,
+        10.564216
+      ],
+      "sound_options": [
+        "animal sound",
+        "clapping"
+      ],
+      "human_reference": [
+        "A",
+        "B",
+        "Y"
+      ]
+    }
+  ]
+}

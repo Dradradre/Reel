@@ -79,7 +79,7 @@ codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --ima
 |---|---|---|
 | frames over time | 고른 프레임을 실제 표시 시각에 배치. 다음 프레임이 늦게 나오면 앞 화면이 계속 보인다. 밝기를 전체 범위로 기록한 영상은 특정 시점에서 잘라도 그 범위를 유지한다. 색 변환을 지원하는 FFmpeg에서는 PQ나 HLG로 표시된 HDR 영상을 sRGB 그림으로 변환 | 누가 어떤 물체와 함께 보이는지 확인한다. 재생 중 한 부분에 변화가 두드러지면 그 위치와 전후 시각이 나온다. `look`으로 두 순간의 원본을 확대할 수 있다. [글자 읽기 실험](docs/perception-check.md#잠깐-나타난-글자를-다시-읽을-때) |
 | motion point (재생 중) | 화면에서 한 점을 고르면 그곳을 지나는 가로줄과 세로줄의 색을 모든 프레임에서 읽어 시간순으로 표시 | 물체가 선을 몇 번, 어느 방향으로 지났는지 본다. `view(motion_point=[x,y])`로 위치를 고른다. |
-| 재생 중 사건 기록 | 주파수 성분, 화면의 무늬, 비슷한 목소리와 처음 보고한 시각 | 문이 열리기 전에 들린 소리를 다시 듣고, 처음 짐작과 나중에 확인한 내용을 함께 남긴다 |
+| 재생 중 사건 기록 | 주파수 성분, 화면의 무늬, 비슷한 목소리와 처음 보고한 시각 | 문이 열리기 전에 들린 소리를 다시 듣고 처음 짐작과 나중에 확인한 내용을 함께 남긴다 |
 | follow (재생 중) | 앞에서 짚은 점이 프레임마다 어디로 움직였는지 | 처음 짚은 곳과 마지막으로 찾은 곳을 확대해 같은 손이나 물건인지 확인 |
 | subject | 영상의 주인공이 화면 어디에 있는지, 시선이 거기로 가는지 | 주인공을 놓치는 장면 |
 | on screen | 글자와 숫자를 읽어 해당 프레임이 보이는 동안 표시한다 | 소리가 나는 순간에 어떤 점수나 표지판이 보였는지 확인한다 |
@@ -101,7 +101,9 @@ codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --ima
 
 ## 시험 결과
 
-GPT는 재생 중 정체를 모르는 소리에도 번호를 붙여 기억하고, 같은 녹음이 다른 채널에서 다시 들리면 원음을 찾아갈 수 있다. 실제 녹음 96개를 다른 소리와 섞고 위치를 바꾼 시험에서 96개 모두 50ms 이내로 찾았다. 14명이 다른 문장을 읽은 시험에서는 아홉 명의 목소리를 다시 알아봤다. [사용법과 시험 조건](docs/event-paths.md)
+사람 다섯 명씩 묘사를 남긴 녹음 16개에서 GPT의 소리 자유 회상 지표는 **사람 기준 43.5%**였다. 이전 측정은 42.7%였고 이번 추정의 95% 구간은 19.6~66.0%다. 현장 녹음에서 짧은 소리의 정체를 맞힌 구간은 **51개 중 3개**였다. 화면에서 어느 지점이 더 가까운지 묻는 시험은 127쌍 중 115쌍을 맞혔다. [시험 조건과 개별 결과](docs/event-paths.md)
+
+GPT는 재생 중 정체를 모르는 소리에도 번호를 붙여 기억하고 같은 녹음이 다른 채널에서 다시 들리면 원음을 찾아갈 수 있다. 실제 녹음 96개를 다른 소리와 섞고 위치를 바꾼 시험에서 96개 모두 50ms 이내로 찾았다. 14명이 다른 문장을 읽은 시험에서는 아홉 명의 목소리를 다시 알아봤다. [사용법과 시험 조건](docs/event-paths.md)
 
 | 시험 | 로컬 GPT의 결과 |
 |---|---|
@@ -470,6 +472,8 @@ flowchart LR
 </details>
 
 ## 사용한 오픈소스
+
+화면의 상대 깊이는 Depth Anything V2 Small로 추정한다. DA-2K의 두 지점 중 카메라에 더 가까운 곳을 표시한 자료로 결과를 확인했다. 둘 다 Apache 2.0을 따른다. [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf) · [DA-2K](https://huggingface.co/datasets/depth-anything/DA-2K)
 
 재생 중 목소리를 비교할 때 WeSpeaker VoxCeleb ResNet34(Apache 2.0)를 쓴다. 화자 시험에는 LibriSpeech test-clean 녹음(CC BY 4.0)을 사용했다. [WeSpeaker](https://huggingface.co/Wespeaker/wespeaker-voxceleb-resnet34) · [LibriSpeech](https://www.openslr.org/12/)
 

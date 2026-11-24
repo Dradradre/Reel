@@ -92,6 +92,8 @@ Reel también puede distribuir el vídeo en páginas de 30 segundos que se leen 
 
 ## Resultados
 
+Con `recall_events` se puede recuperar un sonido anterior, con `hear_change` se puede comparar con el fondo y con `depth_at` se puede estimar cuál de dos puntos está más cerca. En 16 grabaciones, el recuerdo libre alcanzó el 43,5 % de la referencia humana. GPT identificó una fuente breve anotada en 3 de 51 fragmentos de campo. [Método y resultados por prueba](docs/event-paths.md)
+
 | Prueba | Resultado de GPT en Codex local |
 |---|---|
 | Preguntas visuales en instantes concretos de los 644 vídeos de OVO-Bench | **66,08 puntos** en la media oficial de las tres modalidades. GPT acertó 2.002 de 3.035 preguntas utilizando solo imágenes anteriores a cada pregunta. [Puntuación y método](docs/benchmarks/ovo-full.json) |

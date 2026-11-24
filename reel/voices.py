@@ -1,4 +1,5 @@
 """Session-local voice continuity in speech-active released channels."""
+
 import importlib.util
 import json
 import os
@@ -28,8 +29,9 @@ PYTHON = os.environ.get("REEL_VOICE_PYTHON", sys.executable)
 
 
 def ready():
-    return WEIGHTS.is_file() and all(importlib.util.find_spec(m) for m in
-                                     ("onnxruntime", "kaldi_native_fbank", "faster_whisper"))
+    return WEIGHTS.is_file() and all(
+        importlib.util.find_spec(m) for m in ("onnxruntime", "kaldi_native_fbank", "faster_whisper")
+    )
 
 
 def setup():
@@ -41,6 +43,7 @@ class VoiceEncoder:
     def __init__(self):
         import kaldi_native_fbank as knf
         import onnxruntime as ort
+
         options = ort.SessionOptions()
         options.intra_op_num_threads = 2
         options.inter_op_num_threads = 1
@@ -52,6 +55,7 @@ class VoiceEncoder:
 
     def __call__(self, speech):
         import kaldi_native_fbank as knf
+
         bank = knf.OnlineFbank(self.options)
         bank.accept_waveform(16000, (speech * 32768).tolist())
         bank.input_finished()
@@ -72,22 +76,22 @@ class VoiceHistory:
     def match(self, vector):
         scores = np.array([v @ vector for v in self.profiles])
         order = np.argsort(-scores)
-        if not len(scores) or scores[order[0]] < .35:
+        if not len(scores) or scores[order[0]] < 0.35:
             if len(scores) == 64:
                 return {"status": "unresolved"}
             self.profiles.append(vector)
             return {"status": "new_voice_candidate", "track": f"voice-{len(self.profiles)}"}
         best = int(order[0])
         row = {"cosine": round(float(scores[best]), 4)}
-        if scores[best] < .55 or (len(order) > 1 and scores[best]-scores[order[1]] < .08):
+        if scores[best] < 0.55 or (len(order) > 1 and scores[best] - scores[order[1]] < 0.08):
             return {**row, "status": "unresolved"}
-        return {**row, "status": "similar_voice", "track": f"voice-{best+1}"}
+        return {**row, "status": "similar_voice", "track": f"voice-{best + 1}"}
 
     def read(self, wav, first):
         rows = []
         with open_recording(wav) as recording:
             rate, channels = recording.samplerate, recording.channels
-            hop = round(.75 * rate)
+            hop = round(0.75 * rate)
             width = 2 * hop
             if self.format != (rate, channels) or self.next_sample != first:
                 self.tail = np.empty((0, channels), np.float32)
@@ -98,31 +102,40 @@ class VoiceHistory:
                 pcm = np.concatenate((self.tail, block))
                 offset = 0
                 while offset + width <= len(pcm):
-                    window = resample_channels(pcm[offset:offset+width], rate, 16000)
+                    window = resample_channels(pcm[offset : offset + width], rate, 16000)
                     seen = {}
                     for i, x in enumerate(window.T, 1):
                         key = x.tobytes()
                         if key in seen:
-                            seen[key]['channels'].append(i)
+                            seen[key]["channels"].append(i)
                             continue
                         if not np.any(x):
                             continue
                         spans = speech_regions(x, pad_ms=0)
-                        count = sum(b-a for a,b in spans)
+                        count = sum(b - a for a, b in spans)
                         if count < 12000:
                             continue
-                        speech = np.concatenate([x[a:b] for a,b in spans])
-                        row = dict(kind="voice", channels=[i], start_s=(origin+offset)/rate,
-                                   end_s=(origin+offset+width)/rate, speech_seconds=round(count/16000, 3),
-                                   **self.match(self.encode(speech)))
+                        speech = np.concatenate([x[a:b] for a, b in spans])
+                        row = dict(
+                            kind="voice",
+                            channels=[i],
+                            start_s=(origin + offset) / rate,
+                            end_s=(origin + offset + width) / rate,
+                            speech_seconds=round(count / 16000, 3),
+                            **self.match(self.encode(speech)),
+                        )
                         seen[key] = row
                         rows.append(row)
                     offset += hop
                 origin += offset
                 self.tail = pcm[offset:].copy()
-        return {"status": "available", "model": MODEL, "windows": rows,
-                "basis": "Anonymous voice resemblance over speech-active samples. Overlapping voices may merge. "
-                         "Labels belong to this playback. Words require separate timed speech evidence."}
+        return {
+            "status": "available",
+            "model": MODEL,
+            "windows": rows,
+            "basis": "Anonymous voice resemblance over speech-active samples. Overlapping voices may merge. "
+            "Labels belong to this playback. Words require separate timed speech evidence.",
+        }
 
 
 class VoiceReader(LocalReader):
@@ -143,6 +156,11 @@ if __name__ == "__main__":
                     history = VoiceHistory(VoiceEncoder())
                 result = history.read(**json.loads(line))
             except Exception as error:
-                result = {"status": "unavailable", "model": MODEL, "reason": str(error), "startup_failure": history is None}
+                result = {
+                    "status": "unavailable",
+                    "model": MODEL,
+                    "reason": str(error),
+                    "startup_failure": history is None,
+                }
                 # Keep established anonymous IDs after an unreadable turn.
             print(json.dumps(result), flush=True)

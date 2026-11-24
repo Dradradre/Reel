@@ -296,6 +296,21 @@ def read_audio(path, sr=48000, ss=None, t=None, channels=2):
     return np.frombuffer(raw, np.float32).reshape(-1, channels).copy()
 
 
+def recorded_channel(wav, channel, max_seconds=None):
+    """Read one channel, bounding the multichannel buffer independently of clip length."""
+    with open_recording(wav) as recording:
+        if not 1 <= channel <= recording.channels:
+            raise ValueError(f"choose a channel from 1 to {recording.channels}")
+        if max_seconds is not None and len(recording) > math.ceil(recording.samplerate * max_seconds):
+            raise ValueError(f"choose a recording up to {max_seconds} seconds")
+        mono = np.empty(len(recording), dtype=np.float32)
+        offset = 0
+        for block in recording.blocks(blocksize=16384, dtype="float32", always_2d=True):
+            mono[offset:offset+len(block)] = block[:, channel-1]
+            offset += len(block)
+        return mono, recording.samplerate
+
+
 def resample_channels(pcm, rate, target_rate):
     """Resample just these samples for an encoder, keeping the recorded channels separate."""
     from scipy.signal import resample_poly

@@ -20,7 +20,9 @@ from mcp.server.fastmcp.resources import FunctionResource
 from PIL import Image
 
 if __package__:
+    from .depth import DepthReader
     from .foreground import render as render_foreground
+    from .event_journal import EventJournal
     from .event_memory import EventMemory, attention
     from .recognition import channel_audio, recognize
     from .action_view import action_views, exposure_view
@@ -55,7 +57,9 @@ if __package__:
     from .unmix import LayerReader, describe_layer
     from .turn_audio import released_samples, sample_at
 else:
+    from depth import DepthReader
     from foreground import render as render_foreground
+    from event_journal import EventJournal
     from event_memory import EventMemory, attention
     from recognition import channel_audio, recognize
     from action_view import action_views, exposure_view
@@ -249,7 +253,7 @@ def first_view_report(report):
 
 
 class Viewing:
-    def __init__(self, playback, sound, words, lang, source=None, layers=None, tracker=None, matcher=None, identity=None, examples=None):
+    def __init__(self, playback, sound, words, lang, source=None, layers=None, tracker=None, matcher=None, identity=None, examples=None, journal=None):
         self.examples = examples
         self.identity = identity
         self.matcher = matcher
@@ -264,7 +268,7 @@ class Viewing:
         self.failed = False
         self.last_joint = None
         self.lock = RLock()
-        self.memory = EventMemory(self.paths)
+        self.memory = EventMemory(self.paths, journal)
 
     def deliver(self, operation, *args, **kwargs):
         # A read and its receipt share a lock. A concurrent note cannot be marked
@@ -273,10 +277,15 @@ class Viewing:
             blocks = operation(*args, **kwargs)
             if operation == self.advance:
                 turn = args[0]
-                directed = bool(kwargs.get("follow_from_s") is not None or kwargs.get("question")
-                                or kwargs.get("motion_point") is not None
-                                or kwargs.get("focus") is not None or kwargs.get("joint_seconds") is not None
-                                or (len(args) > 3 and args[3] is not None) or (len(args) > 6 and args[6] is not None))
+                directed = bool(
+                    kwargs.get("follow_from_s") is not None
+                    or kwargs.get("question")
+                    or kwargs.get("motion_point") is not None
+                    or kwargs.get("focus") is not None
+                    or kwargs.get("joint_seconds") is not None
+                    or (len(args) > 3 and args[3] is not None)
+                    or (len(args) > 6 and args[6] is not None)
+                )
             elif isinstance(getattr(operation, "__self__", None), TurnMedia):
                 turn, directed = args[1], False
             else:
@@ -289,6 +298,7 @@ class Viewing:
     def recall_events(self, *args):
         with self.lock:
             result = self.memory.recall(*args)
+            self.memory.reviewed_through = len(self.paths)
             return [text_block(result)]
 
     def remember_event(self, *args):
@@ -298,36 +308,54 @@ class Viewing:
     def find_sound(self, turn, reference, search, reference_channel=1, channel=1):
         with self.lock:
             directory, packet = self.published(turn)
-            if (len(reference)!=2 or len(search)!=2 or not
-                    0 <= reference[0] < reference[1] <= search[0] < search[1] <= packet["end_s"] or
-                    reference[1]-reference[0] > 8 or search[1]-search[0] > 30):
-                raise ValueError("give a released reference up to eight seconds and a later search up to thirty seconds")
+            if (
+                len(reference) != 2
+                or len(search) != 2
+                or not 0 <= reference[0] < reference[1] <= search[0] < search[1] <= packet["end_s"]
+                or reference[1] - reference[0] > 8
+                or search[1] - search[0] > 30
+            ):
+                raise ValueError(
+                    "give a released reference up to eight seconds and a later search up to thirty seconds"
+                )
             ref_dir, ref_packet = self.published(1 + bisect_left(self.paths, reference[1], hi=turn, key=end_of))
             dst_dir, dst_packet = self.published(1 + bisect_left(self.paths, search[1], hi=turn, key=end_of))
             if not ref_packet.get("audio") or not dst_packet.get("audio"):
                 return [text_block({"status": "no_audio"})]
             ref, *_ = released_samples(ref_dir, *reference, 8)
             target, _, _, left, _ = released_samples(dst_dir, *search, 30)
-            result = recognize(channel_audio(ref, reference_channel), channel_audio(target, channel),
-                               left / dst_packet["audio"]["rate_hz"])
+            result = recognize(
+                channel_audio(ref, reference_channel),
+                channel_audio(target, channel),
+                left / dst_packet["audio"]["rate_hz"],
+            )
             # The last fraction of a resampled sample cannot extend the release clock.
             for row in result["matches"]:
                 row["end_s"] = min(row["end_s"], search[1])
-            return [text_block(dict(result, reference=reference, search=search, reference_channel=reference_channel,
-                                    channel=channel))]
+            return [
+                text_block(
+                    dict(
+                        result, reference=reference, search=search, reference_channel=reference_channel, channel=channel
+                    )
+                )
+            ]
 
     def hear_change(self, turn, reference, target, channel=1, native_audio=False, describe=True):
         _, latest = self.published(turn)
-        if (len(reference) != 2 or len(target) != 2 or not
-                0 <= reference[0] < reference[1] <= target[0] < target[1] <= latest["end_s"] or
-                reference[1]-reference[0] > 8 or target[1]-target[0] > 10):
+        if (
+            len(reference) != 2
+            or len(target) != 2
+            or not 0 <= reference[0] < reference[1] <= target[0] < target[1] <= latest["end_s"]
+            or reference[1] - reference[0] > 8
+            or target[1] - target[0] > 10
+        ):
             raise ValueError("give an earlier background up to eight seconds and a released target up to ten seconds")
         excerpts = []
         for left, right in (reference, target):
             index = bisect_left(self.paths, right, hi=turn, key=end_of)
             directory, packet = self.published(index + 1)
             if not packet.get("audio"):
-                return [text_block({"status":"no_audio"})]
+                return [text_block({"status": "no_audio"})]
             excerpts.append(released_samples(directory, left, right, 10)[0])
         with TemporaryDirectory() as temp:
             result = render_foreground(*excerpts, channel, temp)
@@ -337,11 +365,12 @@ class Viewing:
                 raise ValueError("shorten the intervals to fit inline audio")
             blocks = []
             if paths:
-                intervals = [reference,target,target]
+                intervals = [reference, target, target]
                 if describe:
                     with self.sound_session(replay=True) as sound:
-                        result["waveform_readings"] = {path.stem:sound.read(path,*span)
-                                                       for path,span in zip(paths,intervals)}
+                        result["waveform_readings"] = {
+                            path.stem: sound.read(path, *span) for path, span in zip(paths, intervals)
+                        }
                 for path, span in zip(paths, intervals):
                     spectrum = path.with_suffix(".png")
                     channel_spectrum(path, spectrum, 1)
@@ -355,7 +384,7 @@ class Viewing:
     def inspect_event(self, turn, event_id, sense, question=None, native_audio=False):
         with self.lock:
             e = self.memory.event(turn, event_id)
-            start, end = e["start_s"], min(e["end_s"], e["start_s"]+8)
+            start, end = e["start_s"], min(e["end_s"], e["start_s"] + 8)
             directory, packet = self.published(turn)
             # Include only measured coincidences the specified turn has already released.
             owner = bisect_left(self.paths, start, hi=turn, key=end_of)
@@ -364,19 +393,51 @@ class Viewing:
                 other = json.loads(path.read_text())
                 if other["start_s"] >= end:
                     break
-                related.extend(r["id"] for r in other.get("observations", [])
-                               if r["id"] != e["id"] and r["start_s"] < end and r["end_s"] > start)
+                related.extend(
+                    r["id"]
+                    for r in other.get("observations", [])
+                    if r["id"] != e["id"]
+                    and any(
+                        a < d and b > c
+                        for a, b in r.get("visible_spans") or r.get("detected_spans") or [[r["start_s"], r["end_s"]]]
+                        for c, d in e.get("visible_spans") or e.get("detected_spans") or [[start, end]]
+                    )
+                )
             if sense == "sound":
                 blocks = self.listen(turn, question, start, end, native_audio, independent_caption=question is not None)
             elif sense == "foreground":
-                left, right = max(0, start-.20), min(packet["end_s"], end+.40)
-                if left < .24:
-                    return [text_block({"status":"too_little_earlier_background", "event":e})]
-                blocks = self.hear_change(turn, [max(0,left-1.5),left], [left,right],
-                                          (e.get("channels") or [1])[0], native_audio)
+                left, right = max(0, start - 0.20), min(packet["end_s"], end + 0.40)
+                if left < 0.24:
+                    return [text_block({"status": "too_little_earlier_background", "event": e})]
+                blocks = self.hear_change(
+                    turn, [max(0, left - 1.5), left], [left, right], (e.get("channels") or [1])[0], native_audio
+                )
+            elif sense == "binding":
+                # Establish the sound impression before presenting the possible visual source.
+                # The display time is inside the selected interval even at the cutoff.
+                left = min(start, max(0.0, end - 3.0))
+                heard = self.listen(turn, None, left, end, native_audio)
+                at = math.nextafter(end, start)
+                picture_turn = 1 + bisect_left(self.paths, end, hi=turn, key=end_of)
+                _, picture_packet = self.published(picture_turn)
+                visible = picture_packet.get("pages") and at < picture_packet.get(
+                    "picture_end_s", picture_packet["end_s"]
+                )
+                picture = self.look(turn, [0, 0, 1, 1], at) if visible else []
+                hearing = json.loads(heard[0].text)
+                report = {
+                    "status": "evidence",
+                    "sound_only": hearing,
+                    "sound_interval_s": [left, end],
+                    "picture": json.loads(picture[0].text) if picture else None,
+                    "comparison": "Locate the audible source only when visible evidence supports it. An unseen "
+                    "source is possible. For moving sources compare released regions with ask_scene.",
+                }
+                blocks = [text_block(report), *heard[1:], *picture[1:]]
             elif sense == "sources":
-                blocks = self.listen(turn, None, start, end, native_audio, describe=False,
-                                     source_examples=True, sound_events=True)
+                blocks = self.listen(
+                    turn, None, start, end, native_audio, describe=False, source_examples=True, sound_events=True
+                )
             elif sense == "words":
                 blocks = self.speech(turn, None, start, end)
             elif sense == "layers":
@@ -385,16 +446,24 @@ class Viewing:
                 blocks = self.listen_layer(turn, start, end, channel, None, native_audio, False)
             elif sense == "scene":
                 blocks = self.ask_scene(start, end, question, native_audio)
+            elif sense == "depth":
+                at = max(start, min(e.get("last_pts_us", round(start * 1e6)) / 1e6, math.nextafter(end, start)))
+                blocks = self.depth_at(turn, at, [e["last_point"]] if "last_point" in e else [])
             elif sense == "picture":
-                at = max(start, min(e.get("last_pts_us", round(start*1e6))/1e6, math.nextafter(end, start)))
+                at = max(start, min(e.get("last_pts_us", round(start * 1e6)) / 1e6, math.nextafter(end, start)))
                 box = e.get("box") or (fixation_box(e["last_point"]) if "last_point" in e else [0, 0, 1, 1])
                 blocks = self.look(turn, box, at)
             else:
-                raise ValueError("choose sound, foreground, sources, words, layers, scene or picture")
+                raise ValueError("choose sound, foreground, sources, words, layers, scene, binding, depth or picture")
             data = json.loads(blocks[0].text)
-            data["observation"] = {"event": e, "replayed_s": [start, end], "through_turn": turn,
-                                   "overlapping_ids": related[:24], "total_overlapping": len(related),
-                                   "basis": "Time overlap alone leaves the cause unresolved."}
+            data["observation"] = {
+                "event": e,
+                "replayed_s": [start, end],
+                "through_turn": turn,
+                "overlapping_ids": related[:24],
+                "total_overlapping": len(related),
+                "basis": "Time overlap alone leaves the cause unresolved.",
+            }
             return [text_block(data), *blocks[1:]]
 
     def published(self, turn):
@@ -818,6 +887,28 @@ class Viewing:
                 blocks.append(audio_block(wav))
         return [text_block(report), *blocks]
 
+    def depth_at(self, turn, at_s=None, points=()):
+        with self.lock:
+            directory, _ = self.published(turn)
+            if len(points) > 24 or any(len(p) != 2 or not all(0 <= v <= 1 for v in p) for p in points):
+                raise ValueError("choose up to 24 normalized picture points")
+            full = [0, 0, 1, 1]
+            frame = (
+                inspect_turn(directory, full) if at_s is None else inspect_past(directory, self.original, at_s, full)
+            )
+            original = Path(frame["file"])
+            with TemporaryDirectory() as tmp, DepthReader() as reader:
+                image = Path(tmp) / "relative-depth.png"
+                result = reader.request(dict(picture=str(original), output=str(image), points=points))
+                result.update(pts_us=frame["pts_us"], images_in_order=["released picture"])
+                blocks = [image_block(original, preview=True)]
+                if result["status"] == "available":
+                    blocks.append(image_block(image))
+                    result["images_in_order"].append("estimated relative nearness")
+                else:
+                    result["setup"] = "reel setup --depth"
+                return [text_block(result), *blocks]
+
     def look(self, turn, box, at_s=None, read_text=False):
         with self.lock:
             directory, _ = self.published(turn)
@@ -941,6 +1032,8 @@ class Viewing:
             directory, packet = self.published(turn)
             if not 0 <= start_s < end_s <= packet["end_s"]:
                 raise ValueError("choose an interval within the time viewed by this turn")
+            if end_s <= packet["start_s"]:
+                directory, packet = self.published(1 + bisect_left(self.paths, end_s, hi=turn, key=end_of))
             if not packet.get("audio"):
                 return [text_block({"status": "no_audio"})]
             with (nullcontext(self.layers) if self.layers is not None else LayerReader()) as layers:
@@ -1000,6 +1093,8 @@ class Viewing:
     def speech(self, turn, lang=None, start_s=None, end_s=None):
         with self.lock:
             directory, packet = self.published(turn)
+            if end_s is not None and 0 < end_s <= packet["start_s"]:
+                directory, packet = self.published(1 + bisect_left(self.paths, end_s, hi=turn, key=end_of))
             if not packet["audio"]:
                 return [text_block({"status": "no_audio"})]
             if start_s is not None or end_s is not None:
@@ -1084,7 +1179,7 @@ class TurnMedia:
 
 
 def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=False, describe_sounds=False,
-          pause_on_sound_change=False, image_client=False, tracks="both", verify_sounds=False, identify_sounds=False, voices=False):
+          pause_on_sound_change=False, image_client=False, tracks="both", verify_sounds=False, identify_sounds=False, voices=False, journal=None):
     server = FastMCP("reel", instructions="Start with view on turn 1, then request consecutive turns. "
                      "Use view_media instead if the host can read MCP resources and play a movie with its sound. "
                      "Choose continuous_seconds to follow an action or conversation through cuts. "
@@ -1127,7 +1222,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                 return None
 
         layers = stack.enter_context(LayerReader())
-        reader = Viewing(next_turn, sound, words, lang, source, layers, stack.enter_context(PointReader()), layers.matcher, identity, examples)
+        reader = Viewing(next_turn, sound, words, lang, source, layers, stack.enter_context(PointReader()), layers.matcher, identity, examples,
+                         EventJournal(journal) if journal else None)
 
         media = TurnMedia(server, reader.original)
 
@@ -1184,8 +1280,15 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                                            motion_point=motion_point)
 
         @server.tool(annotations=hints, structured_output=False)
-        async def recall_events(turn: int, first_turn: int = 1, track: str | None = None, after: str | None = None,
-                                limit: int = 32, revision: int | None = None, after_revision: int = 0):
+        async def recall_events(
+            turn: int,
+            first_turn: int = 1,
+            track: str | None = None,
+            after: str | None = None,
+            limit: int = 32,
+            revision: int | None = None,
+            after_revision: int = 0,
+        ):
             """Read measured landmarks and prior reader reports as known by turn, without replaying media.
             First views show a short attention selection. Page through all measured events using next_after.
             A track connects similar spectral peaks, local picture textures or voice impressions. Several
@@ -1193,41 +1296,73 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             return await asyncio.to_thread(reader.recall_events, turn, first_turn, track, after, limit, revision, after_revision)
 
         @server.tool(annotations=hints, structured_output=False)
-        async def inspect_event(turn: int, event_id: str, sense: str = "scene", question: str | None = None,
-                                native_audio: bool = False):
+        async def inspect_event(
+            turn: int, event_id: str, sense: str = "scene", question: str | None = None, native_audio: bool = False
+        ):
             """Return to the recorded evidence of a measured event or reader-selected interval.
-            Choose scene, picture, sound, foreground, sources, layers or words. For a sound question the first impression
+            Choose scene, binding, picture, depth, sound, foreground, sources, layers or words. Binding returns an independent
+            sound impression followed by the complete released picture near the end of the event. For a sound question the first impression
             and the question-directed waveform reading stay separate. Overlap supplies no causal attribution."""
             return await asyncio.to_thread(reader.deliver, reader.inspect_event, turn, event_id, sense, question, native_audio)
 
         @server.tool(annotations=types.ToolAnnotations(readOnlyHint=False, destructiveHint=False, idempotentHint=False,
                                                       openWorldHint=False), structured_output=False)
-        async def remember_event(turn: int, claim: str, judgment: str, event_id: str | None = None,
-                                 interval: list[float] | None = None, channel: int | None = None,
-                                 box: list[float] | None = None, revises: int | None = None, recalled: bool = False,
-                                 confidence: float | None = None, related_id: str | None = None,
-                                 relation: str | None = None):
+        async def remember_event(
+            turn: int,
+            claim: str,
+            judgment: str,
+            event_id: str | None = None,
+            interval: list[float] | None = None,
+            channel: int | None = None,
+            box: list[float] | None = None,
+            revises: int | None = None,
+            recalled: bool = False,
+            confidence: float | None = None,
+            related_id: str | None = None,
+            relation: str | None = None,
+        ):
             """Append your impression to this viewing. Cite an event or select any released time range, optionally
             a channel and/or a normalized picture box. Use detected, unidentified, identified, uncertain, no_signal,
             words_unclear or prediction. Set recalled for a response from memory. Keep the original report when
             correcting it by setting revises to its revision and using the same event ID. For two observed events
             use same_source, different_source, possible_cause, followed_by, supports_prediction or contradicts_prediction.
             confidence is your probability from 0 to 1. Links and predictions are reader claims."""
-            return await asyncio.to_thread(reader.remember_event, turn, claim, judgment, event_id, interval, channel,
-                                           box, revises, recalled, confidence, related_id, relation)
+            return await asyncio.to_thread(
+                reader.remember_event,
+                turn,
+                claim,
+                judgment,
+                event_id,
+                interval,
+                channel,
+                box,
+                revises,
+                recalled,
+                confidence,
+                related_id,
+                relation,
+            )
 
         @server.tool(annotations=hints, structured_output=False)
-        async def hear_change(turn: int, reference: list[float], target: list[float], channel: int = 1,
-                              native_audio: bool = False, describe: bool = True):
+        async def hear_change(
+            turn: int,
+            reference: list[float],
+            target: list[float],
+            channel: int = 1,
+            native_audio: bool = False,
+            describe: bool = True,
+        ):
             """Listen to a channel before and during a change, then hear that target with the earlier background
             attenuated. Supply two published, nonoverlapping intervals. Pictures and local waveform readings
             label the earlier channel, original channel and filtered estimate individually. Set native_audio for WAVs."""
-            return await asyncio.to_thread(reader.deliver, reader.hear_change, turn, reference, target, channel,
-                                           native_audio, describe)
+            return await asyncio.to_thread(
+                reader.deliver, reader.hear_change, turn, reference, target, channel, native_audio, describe
+            )
 
         @server.tool(annotations=hints, structured_output=False)
-        async def find_sound(turn: int, reference: list[float], search: list[float], reference_channel: int = 1,
-                             channel: int = 1):
+        async def find_sound(
+            turn: int, reference: list[float], search: list[float], reference_channel: int = 1, channel: int = 1
+        ):
             """Find up to three nonoverlapping similar passages on the original clock, using an earlier sound
             as the example. No name or model download needed. Reference up to eight seconds, later search up to
             thirty. Compare the ordered spectrum and level-independent waveform, then listen to the indicated times."""
@@ -1270,6 +1405,12 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             spans share a clock. motion_point=[x,y] shows both lines through that point in the whole picture
             over time, also when a box is magnified. If next_start_s is present and non-null, continue there with the same end_s."""
             return await asyncio.to_thread(reader.deliver, reader.observe, start_s, end_s, box, native_audio, motion_point)
+
+        @server.tool(annotations=hints, structured_output=False)
+        async def depth_at(turn: int, at_s: float | None = None, points: list[list[float]] | None = None):
+            """See the released picture alongside its optional relative depth map. Pass two normalized [x,y]
+            points to compare which looks closer to the camera. Scale is local to this exposure."""
+            return await asyncio.to_thread(reader.deliver, reader.depth_at, turn, at_s, points or [])
 
         @server.tool(annotations=hints, structured_output=False)
         async def look(turn: int, box: list[float], at_s: float | None = None, read_text: bool = False):

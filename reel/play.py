@@ -373,7 +373,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                             dest / audio["wav"], audio["first_sample_on_film"], times, selected, min(position, picture_stop))
                 # From here on readers use published sheets and WAVs. Keep only the carried
                 # picture and decoder lookahead while waiting for the viewer's next action.
-                landmarks = event_stream.read(dest, packet, shown, (w, h) if shown else None, serial)
+                landmarks = event_stream.read(dest, packet, shown, (w, h) if shown else None)
                 shown.clear()
                 if audio and not pace.recording_only:
                     # Feed silent intervals into the same history so old sources expire on the film clock.

@@ -99,6 +99,8 @@ Reel can also lay out a film in 30-second pages. Read left to right. A vertical 
 
 ## Does it work?
 
+On 16 recordings with five human descriptions each, the new playback reached **43.5%** of the human reference on free sound recall (previously 42.7%, with a wide interval). GPT named a short annotated source in **3/51** field excerpts. The relative-depth reader ordered 115/127 annotated point pairs correctly. [Tests, controls and individual results](docs/event-paths.md)
+
 On playback, GPT can keep a sound it cannot name, find it later on another recorded channel and return to the original evidence. On 96 real recordings mixed at new positions it located all 96 repeated excerpts within 50 ms. On new utterances from 14 speakers it reidentified nine voices. [Tools, controls and misses](docs/event-paths.md)
 
 | Trial | Result with local GPT |
@@ -431,6 +433,8 @@ An offscreen sound can register clearly while its source stays uncertain. Voices
 </details>
 
 ## Credits
+
+The optional relative-depth reader uses Depth Anything V2 Small. The DA-2K evaluation supplies annotated pairs of picture points. Both are distributed under Apache 2.0. [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf) · [DA-2K](https://huggingface.co/datasets/depth-anything/DA-2K)
 
 Anonymous voice embeddings use WeSpeaker’s VoxCeleb ResNet34 (Apache 2.0). The voice trial uses LibriSpeech test-clean recordings (CC BY 4.0). [WeSpeaker](https://huggingface.co/Wespeaker/wespeaker-voxceleb-resnet34) · [LibriSpeech](https://www.openslr.org/12/)
 

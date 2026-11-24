@@ -30,6 +30,22 @@ class SoundIdentityTests(unittest.TestCase):
             np.testing.assert_array_equal(signals[0], np.full(2 * rate, .125))
             np.testing.assert_array_equal(signals[1], -signals[0])
 
+    def test_two_models_can_decline_their_shared_choice_without_a_score_threshold(self):
+        with tempfile.TemporaryDirectory() as folder:
+            wav = Path(folder) / "sound.wav"
+            sf.write(wav, np.ones(8000) * .25, 8000)
+            enc = Mock()
+            enc.prepare.return_value = ["tapping", "rubbing", "water"]
+            enc.scores.return_value = (np.array([.3, .1, .5]), np.array([.4, .1, .6]))
+            win, = read_identity(wav, 0, 1, None, ["tapping", "rubbing"], lambda: enc)["windows"]
+            ch, = win["channels"]
+            self.assertEqual((ch["status"], ch["nearest_shared_alternative"], ch["shared_choice"]),
+                             ("unresolved", "tapping", None))
+            self.assertTrue(ch["outside_choices"]["both_prefer_outside"])
+            enc.scores.return_value = (np.array([.6, .2, .4]), np.array([.4, .1, .6]))
+            win, = read_identity(wav, 0, 1, None, ["tapping", "rubbing"], lambda: enc)["windows"]
+            self.assertEqual(win["channels"][0]["shared_choice"], "tapping")
+
     def test_unheard_future_does_not_give_silence_a_source(self):
         with tempfile.TemporaryDirectory() as folder:
             wav = Path(folder) / "quiet.wav"
@@ -39,6 +55,17 @@ class SoundIdentityTests(unittest.TestCase):
             self.assertEqual(result["windows"], [{"start_s": 0., "end_s": 2., "status": "digital_silence", "channels": []}])
             with self.assertRaisesRegex(ValueError, "two or more"):
                 read_identity(wav, 0, 2, None, ["hum", " hum "], get)
+            get.assert_not_called()
+
+    def test_subframe_signal_is_retained_without_naming_a_source(self):
+        with tempfile.TemporaryDirectory() as folder:
+            wav = Path(folder) / "impulse.wav"
+            sf.write(wav, np.r_[.5, np.zeros(319)], 8000)
+            get = Mock(side_effect=AssertionError("insufficient real acoustic context"))
+            win, = read_identity(wav, 0, .039875, None, ["hum", "tap"], get)["windows"]
+            self.assertEqual((win["status"], win["end_s"]), ("signal", .039875))
+            self.assertEqual(win["channels"], [{"channels": [1], "status": "shorter_than_encoder_frame",
+                                                "shared_choice": None}])
             get.assert_not_called()
 
     def test_tied_or_invalid_scores_cannot_name_a_source(self):

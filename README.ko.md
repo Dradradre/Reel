@@ -294,9 +294,9 @@ codex mcp add reel -- "$(command -v reel)" mcp /path/to/film.mp4 --until 8.5 --i
 
 애매한 소리를 다시 들으려면 `reel setup --captions --compare-sounds`로 모델을 준비하고 `reel listen TURN --t0 2 --t1 5 --verify-sounds`를 실행한다. CoNeTTE가 낸 설명 최대 여섯 개를 CLAP이 같은 채널의 원음과 대조해서 하나를 고른다. `play`나 `mcp`에 `--verify-sounds`를 붙이면 재생할 때마다 대조한다. 처음 보는 영상 12편에서 사람의 설명을 100점으로 잡았을 때 로컬 GPT의 소리 설명은 54.6점에서 68.2점으로 올랐다. 개선 폭의 신뢰구간에는 0이 들어갔다. [영상별 답변과 채점 결과](docs/benchmarks/verified-hearing.json)
 
-`reel setup --identify-sounds`를 한 번 실행하면 소리 이름을 두 개 이상 주고 다시 들을 때 Meta의 PE-AV와 LAION의 CLAP이 원음의 같은 채널을 각각 듣는다. 두 모델이 다른 소리를 고르면 `unresolved`로 표시한다. 예를 들어 `reel match TURN --t0 2 --t1 5 --identify "metal rattling" "fabric rubbing"`으로 금속이 달그락거리는 소리와 천이 스치는 소리를 대조할 수 있다. `play`나 `mcp`에 `--identify-sounds`를 붙이면 재생 중에도 AudioSet에서 후보를 찾는다. PE-AV 모델을 받을 때 8.9GB가 필요하다.
+`reel setup --identify-sounds`를 한 번 실행하면 소리 이름을 두 개 이상 주고 다시 들을 때 Meta의 PE-AV와 LAION의 CLAP이 원음의 같은 채널을 각각 듣는다. 두 모델의 답이 갈리거나 둘 다 보기 밖의 소리를 더 가깝게 평가하면 `unresolved`로 표시한다. 예를 들어 `reel match TURN --t0 2 --t1 5 --identify "metal rattling" "fabric rubbing"`으로 금속이 달그락거리는 소리와 천이 스치는 소리를 대조할 수 있다. `play`나 `mcp`에 `--identify-sounds`를 붙이면 재생 중에도 AudioSet에서 후보를 찾는다. PE-AV 모델을 받을 때 8.9GB가 필요하다.
 
-생활음 50종을 담은 녹음 99개에서 소리의 정체를 맞힌 횟수는 기존 CLAP이 85번, PE-AV가 94번이었다. 두 모델이 같은 답을 고른 81개는 모두 맞았다. 다만 보기에서 정답을 빼자 99개 중 40개에서는 두 모델이 같은 오답을 골랐다. [녹음별 후보와 순위](docs/benchmarks/source-identity-agreement.json)
+생활음 50종을 담은 녹음 99개에서 소리의 정체를 맞힌 횟수는 기존 CLAP이 85번, PE-AV가 94번이었다. 두 모델이 같은 답을 고른 81개는 모두 맞았다. 다만 보기에서 정답을 빼자 99개 중 40개에서는 두 모델이 같은 오답을 골랐다. 새 녹음 49개에서 보기 밖의 소리까지 대조하자 이런 오답이 16개에서 0개로 줄었다. 정답을 보기에 돌려놓으면 원래 둘 다 맞히던 39개 중 21개에서 답을 유지했다. [녹음별 순위](docs/benchmarks/source-identity-agreement.json), [정답을 뺀 실험](docs/benchmarks/source-outside-choices.json)
 
 실제 촬영한 영상 16편에서 두 번째 소리를 맞힌 경우는 긴 설명만 받았을 때 5편, 최근 설명도 받았을 때 7편이었다. [소리가 바뀐 구간의 청취 결과](docs/listening-check.md#방금-들린-소리와-앞서-들은-소리)
 

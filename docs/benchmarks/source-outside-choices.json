@@ -1,0 +1,5014 @@
+{
+  "protocol": "Development: use the 50 feasibility sources. Hold fixed the two original encoders. Compare the strongest supplied option with the strongest AudioSet option outside the list in each encoder. If both prefer outside alternatives, expose those and withhold a specific shared source. No thresholds and no manual aliases. Count shared candidate choices before/after withholding, with and without the primary label. Primary control for loss of useful correct selections and reduction of erroneous consensus when the target is omitted. Confirm on the 99 existing controlled recordings if practically valuable; disclose the re-use of this panel after the original 40 false agreements were known. Do not infer actual source presence from this rule.",
+  "source": "https://github.com/karolpiczak/ESC-50",
+  "source_revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+  "rule": "Each model compares its strongest offered description to its strongest AudioSet description outside the offered list, on the same unmodified channel. If both prefer an outside phrase, return unresolved. No fitted threshold. Synonyms may cause withholding even when the proposed name is correct.",
+  "selection": "After the rule was fixed, select up to one unused Freesound source per class. Prefer fold 1; within the eligible pool sort by SHA256 of reel-source-outside-transfer/ + filename. Exclude source IDs in the previous two panels and prior project media/manifests. One class had no eligible source. No known source ID overlap across the three panels. Pretraining overlap unknown.",
+  "descriptions": [
+    "dog",
+    "rooster",
+    "pig",
+    "cow",
+    "frog",
+    "cat",
+    "hen",
+    "insects",
+    "sheep",
+    "crow",
+    "rain",
+    "sea waves",
+    "crackling fire",
+    "crickets",
+    "chirping birds",
+    "water drops",
+    "wind",
+    "pouring water",
+    "toilet flush",
+    "thunderstorm",
+    "crying baby",
+    "sneezing",
+    "clapping",
+    "breathing",
+    "coughing",
+    "footsteps",
+    "laughing",
+    "brushing teeth",
+    "snoring",
+    "drinking sipping",
+    "door wood knock",
+    "mouse click",
+    "keyboard typing",
+    "door wood creaks",
+    "can opening",
+    "washing machine",
+    "vacuum cleaner",
+    "clock alarm",
+    "clock tick",
+    "glass breaking",
+    "helicopter",
+    "chainsaw",
+    "siren",
+    "car horn",
+    "engine",
+    "train",
+    "church bells",
+    "airplane",
+    "fireworks",
+    "hand saw"
+  ],
+  "development": {
+    "included": {
+      "clips": 50,
+      "shared": 37,
+      "retained": 24,
+      "retained_wrong": 0
+    },
+    "omitted": {
+      "clips": 50,
+      "shared": 19,
+      "retained": 1,
+      "retained_wrong": 1
+    }
+  },
+  "reused_99": {
+    "included": {
+      "clips": 99,
+      "shared": 81,
+      "retained": 44,
+      "retained_wrong": 0
+    },
+    "omitted": {
+      "clips": 99,
+      "shared": 40,
+      "retained": 1,
+      "retained_wrong": 1
+    }
+  },
+  "transfer_summary": {
+    "included": {
+      "clips": 49,
+      "shared_before": 39,
+      "retained_after": 21,
+      "correct_before": 39,
+      "correct_after": 21,
+      "paired_change_in_claim_rate": {
+        "mean_change": -0.3673469387755102,
+        "bootstrap_95_percent": [
+          -0.5102040816326531,
+          -0.24489795918367346
+        ],
+        "increased": 0,
+        "decreased": 18,
+        "tied": 31,
+        "by_film": {
+          "1-97392-A-0.wav": 0.0,
+          "1-40730-A-1.wav": 0.0,
+          "1-208757-D-2.wav": 0.0,
+          "1-58277-A-3.wav": 0.0,
+          "1-15689-B-4.wav": 0.0,
+          "1-56380-A-5.wav": -1.0,
+          "1-72229-A-6.wav": 0.0,
+          "1-80785-A-7.wav": -1.0,
+          "1-196660-B-8.wav": 0.0,
+          "1-103298-A-9.wav": 0.0,
+          "1-63871-A-10.wav": 0.0,
+          "1-91359-B-11.wav": -1.0,
+          "1-17808-A-12.wav": 0.0,
+          "1-80841-A-13.wav": 0.0,
+          "1-46040-A-14.wav": 0.0,
+          "1-23094-B-15.wav": 0.0,
+          "1-51035-A-16.wav": 0.0,
+          "1-50625-A-17.wav": -1.0,
+          "1-28005-A-18.wav": 0.0,
+          "1-24524-A-19.wav": 0.0,
+          "3-152007-A-20.wav": 0.0,
+          "1-59324-A-21.wav": -1.0,
+          "1-94036-A-22.wav": -1.0,
+          "1-36402-A-23.wav": -1.0,
+          "1-63679-A-24.wav": 0.0,
+          "1-155858-B-25.wav": -1.0,
+          "1-30039-A-26.wav": -1.0,
+          "1-17092-A-27.wav": 0.0,
+          "1-53444-A-28.wav": 0.0,
+          "1-32579-A-29.wav": 0.0,
+          "1-103995-A-30.wav": 0.0,
+          "1-18655-A-31.wav": 0.0,
+          "1-84393-A-32.wav": 0.0,
+          "1-51805-B-33.wav": 0.0,
+          "1-68734-A-34.wav": -1.0,
+          "1-27165-A-35.wav": -1.0,
+          "1-19840-A-36.wav": -1.0,
+          "1-74517-A-37.wav": -1.0,
+          "1-62849-A-38.wav": -1.0,
+          "1-977-A-39.wav": 0.0,
+          "1-47250-A-41.wav": 0.0,
+          "1-76831-C-42.wav": -1.0,
+          "1-254507-A-43.wav": 0.0,
+          "1-50455-A-44.wav": -1.0,
+          "1-62509-A-45.wav": -1.0,
+          "1-54747-A-46.wav": 0.0,
+          "1-36929-A-47.wav": 0.0,
+          "1-25781-A-48.wav": 0.0,
+          "1-46353-A-49.wav": -1.0
+        }
+      }
+    },
+    "omitted": {
+      "clips": 49,
+      "shared_before": 16,
+      "retained_after": 0,
+      "correct_before": 0,
+      "correct_after": 0,
+      "paired_change_in_claim_rate": {
+        "mean_change": -0.32653061224489793,
+        "bootstrap_95_percent": [
+          -0.46938775510204084,
+          -0.20408163265306123
+        ],
+        "increased": 0,
+        "decreased": 16,
+        "tied": 33,
+        "by_film": {
+          "1-97392-A-0.wav": 0.0,
+          "1-40730-A-1.wav": -1.0,
+          "1-208757-D-2.wav": 0.0,
+          "1-58277-A-3.wav": 0.0,
+          "1-15689-B-4.wav": -1.0,
+          "1-56380-A-5.wav": 0.0,
+          "1-72229-A-6.wav": -1.0,
+          "1-80785-A-7.wav": -1.0,
+          "1-196660-B-8.wav": -1.0,
+          "1-103298-A-9.wav": 0.0,
+          "1-63871-A-10.wav": 0.0,
+          "1-91359-B-11.wav": 0.0,
+          "1-17808-A-12.wav": -1.0,
+          "1-80841-A-13.wav": 0.0,
+          "1-46040-A-14.wav": 0.0,
+          "1-23094-B-15.wav": 0.0,
+          "1-51035-A-16.wav": -1.0,
+          "1-50625-A-17.wav": 0.0,
+          "1-28005-A-18.wav": 0.0,
+          "1-24524-A-19.wav": 0.0,
+          "3-152007-A-20.wav": 0.0,
+          "1-59324-A-21.wav": -1.0,
+          "1-94036-A-22.wav": 0.0,
+          "1-36402-A-23.wav": 0.0,
+          "1-63679-A-24.wav": 0.0,
+          "1-155858-B-25.wav": 0.0,
+          "1-30039-A-26.wav": 0.0,
+          "1-17092-A-27.wav": -1.0,
+          "1-53444-A-28.wav": 0.0,
+          "1-32579-A-29.wav": 0.0,
+          "1-103995-A-30.wav": 0.0,
+          "1-18655-A-31.wav": -1.0,
+          "1-84393-A-32.wav": 0.0,
+          "1-51805-B-33.wav": 0.0,
+          "1-68734-A-34.wav": -1.0,
+          "1-27165-A-35.wav": -1.0,
+          "1-19840-A-36.wav": 0.0,
+          "1-74517-A-37.wav": 0.0,
+          "1-62849-A-38.wav": -1.0,
+          "1-977-A-39.wav": 0.0,
+          "1-47250-A-41.wav": 0.0,
+          "1-76831-C-42.wav": 0.0,
+          "1-254507-A-43.wav": 0.0,
+          "1-50455-A-44.wav": 0.0,
+          "1-62509-A-45.wav": 0.0,
+          "1-54747-A-46.wav": -1.0,
+          "1-36929-A-47.wav": -1.0,
+          "1-25781-A-48.wav": 0.0,
+          "1-46353-A-49.wav": -1.0
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "1-97392-A-0.wav",
+      "target": "dog",
+      "sha256": "9ec2eb304d2a1ab3a50150a2a558dce0771e4ffc920d074e107fd76cb7b5d28c",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "dog",
+            "score": 1.74742
+          },
+          {
+            "description": "cat",
+            "score": 0.97616
+          },
+          {
+            "description": "pig",
+            "score": 0.81135
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clock alarm",
+            "score": 0.20267
+          },
+          {
+            "description": "dog",
+            "score": 0.20065
+          },
+          {
+            "description": "toilet flush",
+            "score": 0.16325
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Bark",
+            "score": 1.81887
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Canidae, dogs, wolves",
+            "score": 0.39107
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "cat",
+            "score": 0.97616
+          },
+          {
+            "description": "pig",
+            "score": 0.81135
+          },
+          {
+            "description": "rooster",
+            "score": 0.78594
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clock alarm",
+            "score": 0.20267
+          },
+          {
+            "description": "toilet flush",
+            "score": 0.16325
+          },
+          {
+            "description": "pig",
+            "score": 0.147
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Bark",
+            "score": 1.81887
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Canidae, dogs, wolves",
+            "score": 0.39107
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-40730-A-1.wav",
+      "target": "rooster",
+      "sha256": "5b6f2f3795ac7b2711c39742a77ae7b81017aad43d0a226896cc5d78c87c1b92",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rooster",
+            "score": 2.17871
+          },
+          {
+            "description": "hen",
+            "score": 1.58586
+          },
+          {
+            "description": "crow",
+            "score": 1.24314
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hen",
+            "score": 0.52691
+          },
+          {
+            "description": "rooster",
+            "score": 0.45882
+          },
+          {
+            "description": "cow",
+            "score": 0.25568
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Crowing, cock-a-doodle-doo",
+            "score": 2.29166
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Crowing, cock-a-doodle-doo",
+            "score": 0.71362
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "hen",
+            "score": 1.58586
+          },
+          {
+            "description": "crow",
+            "score": 1.24314
+          },
+          {
+            "description": "sheep",
+            "score": 1.07983
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hen",
+            "score": 0.52691
+          },
+          {
+            "description": "cow",
+            "score": 0.25568
+          },
+          {
+            "description": "pig",
+            "score": 0.2222
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Crowing, cock-a-doodle-doo",
+            "score": 2.29166
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Crowing, cock-a-doodle-doo",
+            "score": 0.71362
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "hen",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-208757-D-2.wav",
+      "target": "pig",
+      "sha256": "776ae2c1dadcb914f31fa033cf99a26bdb2f01295bd29159092b6d88ae83f9e8",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "pig",
+            "score": 1.79314
+          },
+          {
+            "description": "cow",
+            "score": 0.97936
+          },
+          {
+            "description": "sheep",
+            "score": 0.83346
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "pig",
+            "score": 0.50957
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.12899
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.10013
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Oink",
+            "score": 2.03116
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Livestock, farm animals, working animals",
+            "score": 0.37591
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "pig"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "cow",
+            "score": 0.97936
+          },
+          {
+            "description": "sheep",
+            "score": 0.83346
+          },
+          {
+            "description": "snoring",
+            "score": 0.64712
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "brushing teeth",
+            "score": 0.12899
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.10013
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.09908
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Oink",
+            "score": 2.03116
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Pig",
+            "score": 0.50957
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-58277-A-3.wav",
+      "target": "cow",
+      "sha256": "0b91b847564bf0092d4b61157949cfb3d8e3215be9a041e16aaca6b3c2a60e5c",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "cow",
+            "score": 2.22283
+          },
+          {
+            "description": "sheep",
+            "score": 1.02226
+          },
+          {
+            "description": "pig",
+            "score": 0.74661
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "cow",
+            "score": 0.45912
+          },
+          {
+            "description": "pig",
+            "score": 0.38293
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.34604
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Moo",
+            "score": 2.00029
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Moo",
+            "score": 0.60437
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "cow"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sheep",
+            "score": 1.02226
+          },
+          {
+            "description": "pig",
+            "score": 0.74661
+          },
+          {
+            "description": "rooster",
+            "score": 0.68154
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "pig",
+            "score": 0.38293
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.34604
+          },
+          {
+            "description": "car horn",
+            "score": 0.27588
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Moo",
+            "score": 2.00029
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Moo",
+            "score": 0.60437
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-15689-B-4.wav",
+      "target": "frog",
+      "sha256": "db7a1d190931f1101d533661852e3cdebaa2b89c4b743385b201391be7de003d",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "frog",
+            "score": 2.03123
+          },
+          {
+            "description": "pig",
+            "score": 0.79637
+          },
+          {
+            "description": "hen",
+            "score": 0.72234
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "frog",
+            "score": 0.69182
+          },
+          {
+            "description": "pig",
+            "score": 0.29041
+          },
+          {
+            "description": "hen",
+            "score": 0.24112
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Croak",
+            "score": 1.80241
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Croak",
+            "score": 0.47198
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "frog"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "pig",
+            "score": 0.79637
+          },
+          {
+            "description": "hen",
+            "score": 0.72234
+          },
+          {
+            "description": "rooster",
+            "score": 0.69256
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "pig",
+            "score": 0.29041
+          },
+          {
+            "description": "hen",
+            "score": 0.24112
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.19635
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Frog",
+            "score": 2.03122
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Frog",
+            "score": 0.69182
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "pig",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-56380-A-5.wav",
+      "target": "cat",
+      "sha256": "41b7fa6bca14e3f8571c238ddc06256c57c377ca510caeab136b9145294a416a",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "cat",
+            "score": 1.8693
+          },
+          {
+            "description": "sheep",
+            "score": 0.7464
+          },
+          {
+            "description": "rooster",
+            "score": 0.70897
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "cat",
+            "score": 0.40603
+          },
+          {
+            "description": "frog",
+            "score": 0.20661
+          },
+          {
+            "description": "cow",
+            "score": 0.19582
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Meow",
+            "score": 1.91293
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Meow",
+            "score": 0.57623
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "cat",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sheep",
+            "score": 0.7464
+          },
+          {
+            "description": "rooster",
+            "score": 0.70897
+          },
+          {
+            "description": "crying baby",
+            "score": 0.67098
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "frog",
+            "score": 0.20661
+          },
+          {
+            "description": "cow",
+            "score": 0.19582
+          },
+          {
+            "description": "hen",
+            "score": 0.19131
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Meow",
+            "score": 1.91293
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Meow",
+            "score": 0.57623
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-72229-A-6.wav",
+      "target": "hen",
+      "sha256": "d6d876c24c6c41d7e7f2a12433b7225340237b0f6f77ad0c07cdfadfdba16041",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rooster",
+            "score": 1.6145
+          },
+          {
+            "description": "hen",
+            "score": 1.60654
+          },
+          {
+            "description": "chirping birds",
+            "score": 1.12967
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hen",
+            "score": 0.43534
+          },
+          {
+            "description": "rooster",
+            "score": 0.41423
+          },
+          {
+            "description": "cow",
+            "score": 0.27431
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Chicken, rooster",
+            "score": 1.97794
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Chicken, rooster",
+            "score": 0.56621
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rooster",
+            "score": 1.6145
+          },
+          {
+            "description": "chirping birds",
+            "score": 1.12967
+          },
+          {
+            "description": "crow",
+            "score": 1.05122
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "rooster",
+            "score": 0.41423
+          },
+          {
+            "description": "cow",
+            "score": 0.27431
+          },
+          {
+            "description": "pig",
+            "score": 0.26059
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Chicken, rooster",
+            "score": 1.97794
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Chicken, rooster",
+            "score": 0.56621
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "rooster",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-80785-A-7.wav",
+      "target": "insects",
+      "sha256": "c150869a185f1a5d95c0593e2ff248b78219eb9831aeff2dc31d7a241bc18238",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "insects",
+            "score": 1.18014
+          },
+          {
+            "description": "crickets",
+            "score": 0.90073
+          },
+          {
+            "description": "rain",
+            "score": 0.64429
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "insects",
+            "score": 0.24223
+          },
+          {
+            "description": "crickets",
+            "score": 0.16065
+          },
+          {
+            "description": "helicopter",
+            "score": 0.11235
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Bee, wasp, etc.",
+            "score": 2.04488
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Mosquito",
+            "score": 0.4965
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "insects",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "crickets",
+            "score": 0.90073
+          },
+          {
+            "description": "rain",
+            "score": 0.64429
+          },
+          {
+            "description": "cow",
+            "score": 0.57727
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "crickets",
+            "score": 0.16065
+          },
+          {
+            "description": "helicopter",
+            "score": 0.11235
+          },
+          {
+            "description": "snoring",
+            "score": 0.0991
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Bee, wasp, etc.",
+            "score": 2.04488
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Mosquito",
+            "score": 0.4965
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "crickets",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-196660-B-8.wav",
+      "target": "sheep",
+      "sha256": "5b1895203de8d4392ae851a498973b07b38b915e9b0e001f8a46743a06981aa2",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sheep",
+            "score": 1.90585
+          },
+          {
+            "description": "cow",
+            "score": 1.25123
+          },
+          {
+            "description": "pig",
+            "score": 0.76128
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "cow",
+            "score": 0.43532
+          },
+          {
+            "description": "sheep",
+            "score": 0.39153
+          },
+          {
+            "description": "pig",
+            "score": 0.23237
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Livestock, farm animals, working animals",
+            "score": 1.82943
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Livestock, farm animals, working animals",
+            "score": 0.6167
+          },
+          "both_prefer_outside": false
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "cow",
+            "score": 1.25123
+          },
+          {
+            "description": "pig",
+            "score": 0.76128
+          },
+          {
+            "description": "rooster",
+            "score": 0.59095
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "cow",
+            "score": 0.43532
+          },
+          {
+            "description": "pig",
+            "score": 0.23237
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.17354
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Sheep",
+            "score": 1.90585
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Livestock, farm animals, working animals",
+            "score": 0.6167
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "cow",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-103298-A-9.wav",
+      "target": "crow",
+      "sha256": "e75bd5e27e7d68b15bf17bc348d8cf4ab338e9089dc1a1564f2c434ce22db27c",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "crow",
+            "score": 2.31216
+          },
+          {
+            "description": "frog",
+            "score": 1.09925
+          },
+          {
+            "description": "chirping birds",
+            "score": 1.07166
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "crow",
+            "score": 0.39902
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.38621
+          },
+          {
+            "description": "hen",
+            "score": 0.30322
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Caw",
+            "score": 2.14117
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Caw",
+            "score": 0.41463
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "crow"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "frog",
+            "score": 1.09925
+          },
+          {
+            "description": "chirping birds",
+            "score": 1.07166
+          },
+          {
+            "description": "thunderstorm",
+            "score": 1.00899
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "chainsaw",
+            "score": 0.38621
+          },
+          {
+            "description": "hen",
+            "score": 0.30322
+          },
+          {
+            "description": "wind",
+            "score": 0.29409
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Crow",
+            "score": 2.31216
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Caw",
+            "score": 0.41463
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-63871-A-10.wav",
+      "target": "rain",
+      "sha256": "9ae1461223eaecf2df3818b51e0d7b5987ef497b17038594455bbcee6673d350",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rain",
+            "score": 1.70703
+          },
+          {
+            "description": "thunderstorm",
+            "score": 1.70103
+          },
+          {
+            "description": "helicopter",
+            "score": 1.3015
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "rain",
+            "score": 0.44781
+          },
+          {
+            "description": "crackling fire",
+            "score": 0.36547
+          },
+          {
+            "description": "thunderstorm",
+            "score": 0.35552
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Pink noise",
+            "score": 1.52997
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Waterfall",
+            "score": 0.46792
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "rain"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "thunderstorm",
+            "score": 1.70103
+          },
+          {
+            "description": "helicopter",
+            "score": 1.3015
+          },
+          {
+            "description": "airplane",
+            "score": 1.16484
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "crackling fire",
+            "score": 0.36547
+          },
+          {
+            "description": "thunderstorm",
+            "score": 0.35552
+          },
+          {
+            "description": "washing machine",
+            "score": 0.29778
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Rain",
+            "score": 1.70703
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Waterfall",
+            "score": 0.46792
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-91359-B-11.wav",
+      "target": "sea waves",
+      "sha256": "119e12872a9ec159c255ddaab2c8382439a97815ce90552273529d53f86ee8ff",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sea waves",
+            "score": 1.91791
+          },
+          {
+            "description": "wind",
+            "score": 0.8905
+          },
+          {
+            "description": "helicopter",
+            "score": 0.88363
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "sea waves",
+            "score": 0.3984
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.26355
+          },
+          {
+            "description": "pouring water",
+            "score": 0.26235
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Waves, surf",
+            "score": 2.07569
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Waves, surf",
+            "score": 0.48927
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "sea waves",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "wind",
+            "score": 0.8905
+          },
+          {
+            "description": "helicopter",
+            "score": 0.88363
+          },
+          {
+            "description": "airplane",
+            "score": 0.78417
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "vacuum cleaner",
+            "score": 0.26355
+          },
+          {
+            "description": "pouring water",
+            "score": 0.26235
+          },
+          {
+            "description": "washing machine",
+            "score": 0.20862
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Waves, surf",
+            "score": 2.07569
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Waves, surf",
+            "score": 0.48927
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-17808-A-12.wav",
+      "target": "crackling fire",
+      "sha256": "e6a90f134fe2f2eaa759b2b01ec831d6f86e300522fb0a5d19e050df16c606af",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "crackling fire",
+            "score": 2.26507
+          },
+          {
+            "description": "rain",
+            "score": 1.47966
+          },
+          {
+            "description": "fireworks",
+            "score": 1.32323
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "crackling fire",
+            "score": 0.56263
+          },
+          {
+            "description": "rain",
+            "score": 0.29005
+          },
+          {
+            "description": "fireworks",
+            "score": 0.22743
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Boiling",
+            "score": 1.87047
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fire",
+            "score": 0.59983
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "crackling fire"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rain",
+            "score": 1.47966
+          },
+          {
+            "description": "fireworks",
+            "score": 1.32323
+          },
+          {
+            "description": "thunderstorm",
+            "score": 1.09594
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "rain",
+            "score": 0.29005
+          },
+          {
+            "description": "fireworks",
+            "score": 0.22743
+          },
+          {
+            "description": "thunderstorm",
+            "score": 0.22133
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Boiling",
+            "score": 1.87047
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fire",
+            "score": 0.59983
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "rain",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-80841-A-13.wav",
+      "target": "crickets",
+      "sha256": "dea6239d0ea4995f0f6103bc060541b70a5b514523d5a68187363ff16ea385d9",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "crickets",
+            "score": 1.59642
+          },
+          {
+            "description": "insects",
+            "score": 1.37407
+          },
+          {
+            "description": "frog",
+            "score": 1.02845
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "frog",
+            "score": 0.41111
+          },
+          {
+            "description": "insects",
+            "score": 0.38929
+          },
+          {
+            "description": "crickets",
+            "score": 0.37837
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Cricket",
+            "score": 1.61139
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Insect",
+            "score": 0.50461
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "insects",
+            "score": 1.37407
+          },
+          {
+            "description": "frog",
+            "score": 1.02845
+          },
+          {
+            "description": "fireworks",
+            "score": 0.73028
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "frog",
+            "score": 0.41111
+          },
+          {
+            "description": "insects",
+            "score": 0.38929
+          },
+          {
+            "description": "crackling fire",
+            "score": 0.21874
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Cricket",
+            "score": 1.61139
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Insect",
+            "score": 0.50461
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-46040-A-14.wav",
+      "target": "chirping birds",
+      "sha256": "065fe905f87b0a21efaebb6cd88ecee9fe407eb72bad3b43c52d2e099d262d72",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "chirping birds",
+            "score": 1.45696
+          },
+          {
+            "description": "crow",
+            "score": 1.35317
+          },
+          {
+            "description": "hen",
+            "score": 0.98391
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hen",
+            "score": 0.36962
+          },
+          {
+            "description": "chirping birds",
+            "score": 0.36307
+          },
+          {
+            "description": "rooster",
+            "score": 0.28655
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Bird vocalization, bird call, bird song",
+            "score": 1.50833
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fowl",
+            "score": 0.38021
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "crow",
+            "score": 1.35317
+          },
+          {
+            "description": "hen",
+            "score": 0.98391
+          },
+          {
+            "description": "sheep",
+            "score": 0.65934
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hen",
+            "score": 0.36962
+          },
+          {
+            "description": "rooster",
+            "score": 0.28655
+          },
+          {
+            "description": "crow",
+            "score": 0.25062
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Bird vocalization, bird call, bird song",
+            "score": 1.50833
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fowl",
+            "score": 0.38021
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-23094-B-15.wav",
+      "target": "water drops",
+      "sha256": "a2b8e98255f517cdacd61cf1a3f35f8c6f15a71e4cc51d0bc1044938f627dd58",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clock alarm",
+            "score": 1.66255
+          },
+          {
+            "description": "clock tick",
+            "score": 1.65944
+          },
+          {
+            "description": "chirping birds",
+            "score": 1.13398
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "water drops",
+            "score": 0.31943
+          },
+          {
+            "description": "clock tick",
+            "score": 0.31527
+          },
+          {
+            "description": "frog",
+            "score": 0.31387
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Tick-tock",
+            "score": 2.00258
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Trickle, dribble",
+            "score": 0.47963
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clock alarm",
+            "score": 1.66255
+          },
+          {
+            "description": "clock tick",
+            "score": 1.65944
+          },
+          {
+            "description": "chirping birds",
+            "score": 1.13398
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clock tick",
+            "score": 0.31527
+          },
+          {
+            "description": "frog",
+            "score": 0.31387
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.23525
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Tick-tock",
+            "score": 2.00258
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Trickle, dribble",
+            "score": 0.47963
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-51035-A-16.wav",
+      "target": "wind",
+      "sha256": "d8b851e1a4210e2a8ef92ce603b4dabe12743a51318a59d3b1d393e856de12b0",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "wind",
+            "score": 1.70345
+          },
+          {
+            "description": "sea waves",
+            "score": 1.34576
+          },
+          {
+            "description": "thunderstorm",
+            "score": 1.31707
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "sea waves",
+            "score": 0.29069
+          },
+          {
+            "description": "wind",
+            "score": 0.28274
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.2331
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Outside, rural or natural",
+            "score": 1.5647
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Waves, surf",
+            "score": 0.37094
+          },
+          "both_prefer_outside": false
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sea waves",
+            "score": 1.34576
+          },
+          {
+            "description": "thunderstorm",
+            "score": 1.31707
+          },
+          {
+            "description": "train",
+            "score": 1.29669
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "sea waves",
+            "score": 0.29069
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.2331
+          },
+          {
+            "description": "breathing",
+            "score": 0.19861
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Wind",
+            "score": 1.70345
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Waves, surf",
+            "score": 0.37094
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "sea waves",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-50625-A-17.wav",
+      "target": "pouring water",
+      "sha256": "267bc4a3836dfc673e404bd12d8655a1e00f01e07078cb9d404d2b82cbd3aa07",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "pouring water",
+            "score": 1.76733
+          },
+          {
+            "description": "drinking sipping",
+            "score": 1.35023
+          },
+          {
+            "description": "water drops",
+            "score": 0.82645
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "pouring water",
+            "score": 0.45719
+          },
+          {
+            "description": "can opening",
+            "score": 0.38835
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.37337
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Pour",
+            "score": 1.98206
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Pour",
+            "score": 0.62575
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "pouring water",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "drinking sipping",
+            "score": 1.35023
+          },
+          {
+            "description": "water drops",
+            "score": 0.82645
+          },
+          {
+            "description": "rain",
+            "score": 0.53525
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "can opening",
+            "score": 0.38835
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.37337
+          },
+          {
+            "description": "water drops",
+            "score": 0.27713
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Pour",
+            "score": 1.98206
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Pour",
+            "score": 0.62575
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-28005-A-18.wav",
+      "target": "toilet flush",
+      "sha256": "691ee5a062f2ef54b1ef77fd235a6800b847a7b256b7f08b18fc240e99916d0d",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "toilet flush",
+            "score": 1.63359
+          },
+          {
+            "description": "pouring water",
+            "score": 1.45835
+          },
+          {
+            "description": "washing machine",
+            "score": 1.11057
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "toilet flush",
+            "score": 0.52324
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.24989
+          },
+          {
+            "description": "washing machine",
+            "score": 0.17378
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Gurgling",
+            "score": 1.73997
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Sink (filling or washing)",
+            "score": 0.33302
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "toilet flush"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "pouring water",
+            "score": 1.45835
+          },
+          {
+            "description": "washing machine",
+            "score": 1.11057
+          },
+          {
+            "description": "drinking sipping",
+            "score": 1.04179
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "brushing teeth",
+            "score": 0.24989
+          },
+          {
+            "description": "washing machine",
+            "score": 0.17378
+          },
+          {
+            "description": "pouring water",
+            "score": 0.1557
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Gurgling",
+            "score": 1.73997
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Toilet flush",
+            "score": 0.52324
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-24524-A-19.wav",
+      "target": "thunderstorm",
+      "sha256": "a0a8af38dc93186bdaef63b0eff44853604d4c2ba8a2f329109c784a8fab3f67",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "thunderstorm",
+            "score": 1.73235
+          },
+          {
+            "description": "rain",
+            "score": 0.59008
+          },
+          {
+            "description": "train",
+            "score": 0.49678
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "thunderstorm",
+            "score": 0.56973
+          },
+          {
+            "description": "fireworks",
+            "score": 0.42016
+          },
+          {
+            "description": "wind",
+            "score": 0.38635
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Thunder",
+            "score": 1.74193
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Thunder",
+            "score": 0.56705
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "thunderstorm"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rain",
+            "score": 0.59008
+          },
+          {
+            "description": "train",
+            "score": 0.49678
+          },
+          {
+            "description": "wind",
+            "score": 0.49653
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "fireworks",
+            "score": 0.42016
+          },
+          {
+            "description": "wind",
+            "score": 0.38635
+          },
+          {
+            "description": "rain",
+            "score": 0.36198
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Thunder",
+            "score": 1.74193
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Thunderstorm",
+            "score": 0.56973
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "3-152007-A-20.wav",
+      "target": "crying baby",
+      "sha256": "dff786672fb70a78c6ddcde9935d1327fcb6704251844753c3a28b73ad2eef44",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "crying baby",
+            "score": 1.8414
+          },
+          {
+            "description": "sheep",
+            "score": 0.8831
+          },
+          {
+            "description": "sneezing",
+            "score": 0.85426
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "crying baby",
+            "score": 0.51569
+          },
+          {
+            "description": "breathing",
+            "score": 0.27284
+          },
+          {
+            "description": "sneezing",
+            "score": 0.24227
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Baby cry, infant cry",
+            "score": 1.83303
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Baby cry, infant cry",
+            "score": 0.62906
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "crying baby"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sheep",
+            "score": 0.8831
+          },
+          {
+            "description": "sneezing",
+            "score": 0.85426
+          },
+          {
+            "description": "hen",
+            "score": 0.72101
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "breathing",
+            "score": 0.27284
+          },
+          {
+            "description": "sneezing",
+            "score": 0.24227
+          },
+          {
+            "description": "coughing",
+            "score": 0.23513
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Baby cry, infant cry",
+            "score": 1.83303
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Baby cry, infant cry",
+            "score": 0.62906
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-59324-A-21.wav",
+      "target": "sneezing",
+      "sha256": "fe73df75398008f02288e9b4dfeb267814e357d9290339e5cea3dfaf03fdce74",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sneezing",
+            "score": 2.00269
+          },
+          {
+            "description": "coughing",
+            "score": 1.37802
+          },
+          {
+            "description": "can opening",
+            "score": 1.06609
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "sneezing",
+            "score": 0.63584
+          },
+          {
+            "description": "coughing",
+            "score": 0.41334
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.36675
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Sneeze",
+            "score": 2.31419
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Sneeze",
+            "score": 0.64457
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "sneezing",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "coughing",
+            "score": 1.37802
+          },
+          {
+            "description": "can opening",
+            "score": 1.06609
+          },
+          {
+            "description": "pig",
+            "score": 0.9482
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "coughing",
+            "score": 0.41334
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.36675
+          },
+          {
+            "description": "pig",
+            "score": 0.34212
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Sneeze",
+            "score": 2.31419
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Sneeze",
+            "score": 0.64457
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "coughing",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-94036-A-22.wav",
+      "target": "clapping",
+      "sha256": "33c1225c50c7819dc5110271a1fdfde802925a3606cae438270e8e3c1c95400d",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clapping",
+            "score": 1.38418
+          },
+          {
+            "description": "fireworks",
+            "score": 0.78316
+          },
+          {
+            "description": "crackling fire",
+            "score": 0.73877
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clapping",
+            "score": 0.51852
+          },
+          {
+            "description": "frog",
+            "score": 0.22462
+          },
+          {
+            "description": "hen",
+            "score": 0.20438
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Applause",
+            "score": 2.02203
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Applause",
+            "score": 0.53266
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "clapping",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "fireworks",
+            "score": 0.78316
+          },
+          {
+            "description": "crackling fire",
+            "score": 0.73877
+          },
+          {
+            "description": "pouring water",
+            "score": 0.52689
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "frog",
+            "score": 0.22462
+          },
+          {
+            "description": "hen",
+            "score": 0.20438
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.17685
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Applause",
+            "score": 2.02203
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Applause",
+            "score": 0.53266
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-36402-A-23.wav",
+      "target": "breathing",
+      "sha256": "cfc297b839a7ee0518fd7cb1e9a0cc5cb2a293bea181bd89ea50eb65b09e3918",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "breathing",
+            "score": 1.98683
+          },
+          {
+            "description": "sneezing",
+            "score": 1.25556
+          },
+          {
+            "description": "drinking sipping",
+            "score": 1.13157
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "breathing",
+            "score": 0.40216
+          },
+          {
+            "description": "coughing",
+            "score": 0.28811
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.24217
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Gasp",
+            "score": 2.07252
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Sniff",
+            "score": 0.47504
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "breathing",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sneezing",
+            "score": 1.25556
+          },
+          {
+            "description": "drinking sipping",
+            "score": 1.13157
+          },
+          {
+            "description": "sea waves",
+            "score": 0.96983
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "coughing",
+            "score": 0.28811
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.24217
+          },
+          {
+            "description": "sneezing",
+            "score": 0.20884
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Gasp",
+            "score": 2.07252
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Sniff",
+            "score": 0.47504
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-63679-A-24.wav",
+      "target": "coughing",
+      "sha256": "d6905ec0b2937aae9bf3a2bcb35950d2d5dec0c7dcd8414af9a45f3116d3272a",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "coughing",
+            "score": 2.02087
+          },
+          {
+            "description": "sneezing",
+            "score": 1.22969
+          },
+          {
+            "description": "laughing",
+            "score": 0.77544
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "coughing",
+            "score": 0.55552
+          },
+          {
+            "description": "pig",
+            "score": 0.33645
+          },
+          {
+            "description": "sneezing",
+            "score": 0.32757
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Cough",
+            "score": 1.99005
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Cough",
+            "score": 0.63665
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "coughing"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "sneezing",
+            "score": 1.22969
+          },
+          {
+            "description": "laughing",
+            "score": 0.77544
+          },
+          {
+            "description": "pig",
+            "score": 0.54267
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "pig",
+            "score": 0.33645
+          },
+          {
+            "description": "sneezing",
+            "score": 0.32757
+          },
+          {
+            "description": "laughing",
+            "score": 0.2975
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Cough",
+            "score": 1.99005
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Cough",
+            "score": 0.63665
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-155858-B-25.wav",
+      "target": "footsteps",
+      "sha256": "234358f787b98c5903fcf56f7fc4c97fda2b4f0ad5311bd35f9c6c6c9a4b2277",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "footsteps",
+            "score": 1.68599
+          },
+          {
+            "description": "rain",
+            "score": 0.65057
+          },
+          {
+            "description": "fireworks",
+            "score": 0.64038
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "footsteps",
+            "score": 0.44739
+          },
+          {
+            "description": "clapping",
+            "score": 0.25053
+          },
+          {
+            "description": "water drops",
+            "score": 0.17406
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Walk, footsteps",
+            "score": 1.7374
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Walk, footsteps",
+            "score": 0.52452
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "footsteps",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rain",
+            "score": 0.65057
+          },
+          {
+            "description": "fireworks",
+            "score": 0.64038
+          },
+          {
+            "description": "water drops",
+            "score": 0.61849
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clapping",
+            "score": 0.25053
+          },
+          {
+            "description": "water drops",
+            "score": 0.17406
+          },
+          {
+            "description": "clock tick",
+            "score": 0.16904
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Walk, footsteps",
+            "score": 1.7374
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Walk, footsteps",
+            "score": 0.52452
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-30039-A-26.wav",
+      "target": "laughing",
+      "sha256": "dcb1b2c6686b090bf63775eb79a64d96c243987e6ae66cbb96a4a66610b37809",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "laughing",
+            "score": 1.0022
+          },
+          {
+            "description": "coughing",
+            "score": 0.44538
+          },
+          {
+            "description": "breathing",
+            "score": 0.35276
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "laughing",
+            "score": 0.26261
+          },
+          {
+            "description": "toilet flush",
+            "score": 0.1356
+          },
+          {
+            "description": "rooster",
+            "score": 0.05051
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Laughter",
+            "score": 1.24467
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Belly laugh",
+            "score": 0.3342
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "laughing",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "coughing",
+            "score": 0.44538
+          },
+          {
+            "description": "breathing",
+            "score": 0.35276
+          },
+          {
+            "description": "hen",
+            "score": 0.35095
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "toilet flush",
+            "score": 0.1356
+          },
+          {
+            "description": "rooster",
+            "score": 0.05051
+          },
+          {
+            "description": "pig",
+            "score": 0.04913
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Laughter",
+            "score": 1.24467
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Belly laugh",
+            "score": 0.3342
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-17092-A-27.wav",
+      "target": "brushing teeth",
+      "sha256": "e33131d7061ffa8e8fa234083dfd5c95b7da7d233f4d5ffaf2c34758f936964e",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "brushing teeth",
+            "score": 2.6157
+          },
+          {
+            "description": "drinking sipping",
+            "score": 1.27967
+          },
+          {
+            "description": "hand saw",
+            "score": 1.17737
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "brushing teeth",
+            "score": 0.72366
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.38855
+          },
+          {
+            "description": "pig",
+            "score": 0.33901
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Toothbrush",
+            "score": 2.39133
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Toothbrush",
+            "score": 0.66024
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "brushing teeth"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "drinking sipping",
+            "score": 1.27967
+          },
+          {
+            "description": "hand saw",
+            "score": 1.17737
+          },
+          {
+            "description": "clapping",
+            "score": 1.13863
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "drinking sipping",
+            "score": 0.38855
+          },
+          {
+            "description": "pig",
+            "score": 0.33901
+          },
+          {
+            "description": "breathing",
+            "score": 0.30295
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Toothbrush",
+            "score": 2.39133
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Toothbrush",
+            "score": 0.66024
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "drinking sipping",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-53444-A-28.wav",
+      "target": "snoring",
+      "sha256": "b21b1fe023878bf47832f5b20d3dd58b6ba6ab0e785300a1388ca76847a524dc",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "snoring",
+            "score": 2.15067
+          },
+          {
+            "description": "engine",
+            "score": 1.11355
+          },
+          {
+            "description": "breathing",
+            "score": 0.98178
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "snoring",
+            "score": 0.58632
+          },
+          {
+            "description": "breathing",
+            "score": 0.2739
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.20084
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Snort",
+            "score": 1.76314
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Snicker",
+            "score": 0.49419
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "snoring"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "engine",
+            "score": 1.11355
+          },
+          {
+            "description": "breathing",
+            "score": 0.98178
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.94841
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "breathing",
+            "score": 0.2739
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.20084
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.178
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Snoring",
+            "score": 2.15067
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Snoring",
+            "score": 0.58632
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-32579-A-29.wav",
+      "target": "drinking sipping",
+      "sha256": "09aadaee91c6b1d80037cc2772e3504346af133331d18357c68b9d0ae2d96f76",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "drinking sipping",
+            "score": 1.81242
+          },
+          {
+            "description": "pouring water",
+            "score": 1.27008
+          },
+          {
+            "description": "water drops",
+            "score": 1.18615
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "drinking sipping",
+            "score": 0.486
+          },
+          {
+            "description": "coughing",
+            "score": 0.28721
+          },
+          {
+            "description": "frog",
+            "score": 0.27724
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Gurgling",
+            "score": 1.77717
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Gurgling",
+            "score": 0.58926
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "drinking sipping"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "pouring water",
+            "score": 1.27008
+          },
+          {
+            "description": "water drops",
+            "score": 1.18615
+          },
+          {
+            "description": "toilet flush",
+            "score": 1.0023
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "coughing",
+            "score": 0.28721
+          },
+          {
+            "description": "frog",
+            "score": 0.27724
+          },
+          {
+            "description": "pouring water",
+            "score": 0.26949
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Gurgling",
+            "score": 1.77717
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Gurgling",
+            "score": 0.58926
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-103995-A-30.wav",
+      "target": "door wood knock",
+      "sha256": "1c1d3e65b7a58658766180d2faeeb9bdd1fe7405119bf100d9cd2f671a6e2b11",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "door wood knock",
+            "score": 2.21181
+          },
+          {
+            "description": "door wood creaks",
+            "score": 1.15472
+          },
+          {
+            "description": "hen",
+            "score": 0.99514
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "door wood knock",
+            "score": 0.52191
+          },
+          {
+            "description": "frog",
+            "score": 0.26054
+          },
+          {
+            "description": "hen",
+            "score": 0.18752
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Knock",
+            "score": 2.15998
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Knock",
+            "score": 0.51869
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "door wood knock"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "door wood creaks",
+            "score": 1.15472
+          },
+          {
+            "description": "hen",
+            "score": 0.99514
+          },
+          {
+            "description": "clapping",
+            "score": 0.95448
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "frog",
+            "score": 0.26054
+          },
+          {
+            "description": "hen",
+            "score": 0.18752
+          },
+          {
+            "description": "clapping",
+            "score": 0.17184
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Knock",
+            "score": 2.15998
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Knock",
+            "score": 0.51869
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-18655-A-31.wav",
+      "target": "mouse click",
+      "sha256": "fe84ff9cb5831e21fb8cbcaa56f6e3a477daad8ffe93999e490d442bc0150e45",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "mouse click",
+            "score": 1.96121
+          },
+          {
+            "description": "keyboard typing",
+            "score": 1.51278
+          },
+          {
+            "description": "clock tick",
+            "score": 1.03341
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "mouse click",
+            "score": 0.49578
+          },
+          {
+            "description": "keyboard typing",
+            "score": 0.36935
+          },
+          {
+            "description": "clock tick",
+            "score": 0.20691
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Clicking",
+            "score": 1.75626
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Mouse",
+            "score": 0.51648
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "mouse click"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "keyboard typing",
+            "score": 1.51278
+          },
+          {
+            "description": "clock tick",
+            "score": 1.03341
+          },
+          {
+            "description": "water drops",
+            "score": 0.7372
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "keyboard typing",
+            "score": 0.36935
+          },
+          {
+            "description": "clock tick",
+            "score": 0.20691
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.16504
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Clicking",
+            "score": 1.75626
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Mouse",
+            "score": 0.51648
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "keyboard typing",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-84393-A-32.wav",
+      "target": "keyboard typing",
+      "sha256": "48f3964c939192128456567e9b8150638194650fb5241d02dda6b970774325fb",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "keyboard typing",
+            "score": 1.8949
+          },
+          {
+            "description": "clapping",
+            "score": 1.27001
+          },
+          {
+            "description": "mouse click",
+            "score": 1.07709
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "keyboard typing",
+            "score": 0.3735
+          },
+          {
+            "description": "helicopter",
+            "score": 0.25617
+          },
+          {
+            "description": "mouse click",
+            "score": 0.21567
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Typing",
+            "score": 1.85922
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Keyboard (musical)",
+            "score": 0.43881
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "keyboard typing"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clapping",
+            "score": 1.27001
+          },
+          {
+            "description": "mouse click",
+            "score": 1.07709
+          },
+          {
+            "description": "water drops",
+            "score": 0.84366
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "helicopter",
+            "score": 0.25617
+          },
+          {
+            "description": "mouse click",
+            "score": 0.21567
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.19132
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Typing",
+            "score": 1.85922
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Keyboard (musical)",
+            "score": 0.43881
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-51805-B-33.wav",
+      "target": "door wood creaks",
+      "sha256": "b38f246af1e037ac5abb6e3f68164bd95a2d98c8c93383b01fe811a8085d0be0",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "door wood creaks",
+            "score": 1.69842
+          },
+          {
+            "description": "rooster",
+            "score": 0.93542
+          },
+          {
+            "description": "cat",
+            "score": 0.87447
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "door wood creaks",
+            "score": 0.48397
+          },
+          {
+            "description": "door wood knock",
+            "score": 0.22003
+          },
+          {
+            "description": "snoring",
+            "score": 0.16986
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Trumpet",
+            "score": 1.45284
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Creak",
+            "score": 0.46904
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "door wood creaks"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rooster",
+            "score": 0.93542
+          },
+          {
+            "description": "cat",
+            "score": 0.87447
+          },
+          {
+            "description": "pig",
+            "score": 0.72761
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "door wood knock",
+            "score": 0.22003
+          },
+          {
+            "description": "snoring",
+            "score": 0.16986
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.14256
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Trumpet",
+            "score": 1.45284
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Creak",
+            "score": 0.46904
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-68734-A-34.wav",
+      "target": "can opening",
+      "sha256": "121ac4bd64ee4295536a9f99f6d676bdacc1d71dd4c57dd05f9ac1e3ba651589",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "can opening",
+            "score": 1.8446
+          },
+          {
+            "description": "clapping",
+            "score": 1.42761
+          },
+          {
+            "description": "water drops",
+            "score": 1.25191
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "can opening",
+            "score": 0.53245
+          },
+          {
+            "description": "clapping",
+            "score": 0.25423
+          },
+          {
+            "description": "sneezing",
+            "score": 0.20465
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Cap gun",
+            "score": 2.14031
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Cap gun",
+            "score": 0.55698
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "can opening",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clapping",
+            "score": 1.42761
+          },
+          {
+            "description": "water drops",
+            "score": 1.25191
+          },
+          {
+            "description": "crackling fire",
+            "score": 1.23957
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clapping",
+            "score": 0.25423
+          },
+          {
+            "description": "sneezing",
+            "score": 0.20465
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.18987
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Cap gun",
+            "score": 2.14031
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Cap gun",
+            "score": 0.55698
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "clapping",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-27165-A-35.wav",
+      "target": "washing machine",
+      "sha256": "e6cad0b77f3204159226c4b12003156401f284a32351b9eacd2051df7f6e8237",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "washing machine",
+            "score": 1.63045
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 1.31993
+          },
+          {
+            "description": "engine",
+            "score": 0.932
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "washing machine",
+            "score": 0.41624
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.35933
+          },
+          {
+            "description": "engine",
+            "score": 0.25961
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Blender",
+            "score": 1.88664
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Microwave oven",
+            "score": 0.46437
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "washing machine",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "vacuum cleaner",
+            "score": 1.31993
+          },
+          {
+            "description": "engine",
+            "score": 0.932
+          },
+          {
+            "description": "drinking sipping",
+            "score": 0.91553
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "vacuum cleaner",
+            "score": 0.35933
+          },
+          {
+            "description": "engine",
+            "score": 0.25961
+          },
+          {
+            "description": "toilet flush",
+            "score": 0.19954
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Blender",
+            "score": 1.88664
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Microwave oven",
+            "score": 0.46437
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "vacuum cleaner",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-19840-A-36.wav",
+      "target": "vacuum cleaner",
+      "sha256": "d6d58e48005b976207cd6030de5d8976e9e7f4377eab86f790c5473c95ad2dd1",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "vacuum cleaner",
+            "score": 1.32992
+          },
+          {
+            "description": "engine",
+            "score": 1.15028
+          },
+          {
+            "description": "helicopter",
+            "score": 1.08949
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "vacuum cleaner",
+            "score": 0.40459
+          },
+          {
+            "description": "washing machine",
+            "score": 0.29922
+          },
+          {
+            "description": "engine",
+            "score": 0.20234
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Air conditioning",
+            "score": 1.49082
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Hair dryer",
+            "score": 0.46892
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "vacuum cleaner",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "engine",
+            "score": 1.15028
+          },
+          {
+            "description": "helicopter",
+            "score": 1.08949
+          },
+          {
+            "description": "airplane",
+            "score": 1.06031
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "washing machine",
+            "score": 0.29922
+          },
+          {
+            "description": "engine",
+            "score": 0.20234
+          },
+          {
+            "description": "helicopter",
+            "score": 0.184
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Air conditioning",
+            "score": 1.49082
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Hair dryer",
+            "score": 0.46892
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-74517-A-37.wav",
+      "target": "clock alarm",
+      "sha256": "119c27838962b7aee90e1d26fbad8a7da2977da8f788d79a1ada43d27f15e4aa",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clock alarm",
+            "score": 1.91308
+          },
+          {
+            "description": "dog",
+            "score": 0.80509
+          },
+          {
+            "description": "washing machine",
+            "score": 0.74777
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clock alarm",
+            "score": 0.46604
+          },
+          {
+            "description": "footsteps",
+            "score": 0.19114
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.1599
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Alarm clock",
+            "score": 2.00451
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Smoke detector, smoke alarm",
+            "score": 0.50622
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "clock alarm",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "dog",
+            "score": 0.80509
+          },
+          {
+            "description": "washing machine",
+            "score": 0.74777
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.65556
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "footsteps",
+            "score": 0.19114
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.1599
+          },
+          {
+            "description": "clock tick",
+            "score": 0.15464
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Alarm clock",
+            "score": 2.00451
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Smoke detector, smoke alarm",
+            "score": 0.50622
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-62849-A-38.wav",
+      "target": "clock tick",
+      "sha256": "a78412e271e9bac017201211a97f8e67278d157f980c62a9680bdab90d444785",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clock tick",
+            "score": 1.86782
+          },
+          {
+            "description": "clock alarm",
+            "score": 1.11005
+          },
+          {
+            "description": "mouse click",
+            "score": 1.06369
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clock tick",
+            "score": 0.48534
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.30102
+          },
+          {
+            "description": "mouse click",
+            "score": 0.21173
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Tick-tock",
+            "score": 1.95854
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Tick-tock",
+            "score": 0.61813
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "clock tick",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "clock alarm",
+            "score": 1.11005
+          },
+          {
+            "description": "mouse click",
+            "score": 1.06369
+          },
+          {
+            "description": "breathing",
+            "score": 0.73281
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clock alarm",
+            "score": 0.30102
+          },
+          {
+            "description": "mouse click",
+            "score": 0.21173
+          },
+          {
+            "description": "crackling fire",
+            "score": 0.21105
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Tick-tock",
+            "score": 1.95854
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Tick-tock",
+            "score": 0.61813
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "clock alarm",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-977-A-39.wav",
+      "target": "glass breaking",
+      "sha256": "67c88e07db9e2dd7a7551f0c5b99da315ce7df041f83ed57b479d8fda8fbfe27",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "glass breaking",
+            "score": 1.90231
+          },
+          {
+            "description": "water drops",
+            "score": 1.11275
+          },
+          {
+            "description": "pouring water",
+            "score": 0.86994
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "glass breaking",
+            "score": 0.49076
+          },
+          {
+            "description": "cat",
+            "score": 0.34926
+          },
+          {
+            "description": "can opening",
+            "score": 0.24491
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Glass",
+            "score": 1.53541
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Shatter",
+            "score": 0.57711
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "glass breaking"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "water drops",
+            "score": 1.11275
+          },
+          {
+            "description": "pouring water",
+            "score": 0.86994
+          },
+          {
+            "description": "can opening",
+            "score": 0.6714
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "cat",
+            "score": 0.34926
+          },
+          {
+            "description": "can opening",
+            "score": 0.24491
+          },
+          {
+            "description": "dog",
+            "score": 0.18102
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Glass",
+            "score": 1.53541
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Shatter",
+            "score": 0.57711
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-47250-A-41.wav",
+      "target": "chainsaw",
+      "sha256": "81312e10f426ae6312c29a97fd4227ef36bcae323c520ddff4b8e890d458772d",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "chainsaw",
+            "score": 1.82741
+          },
+          {
+            "description": "helicopter",
+            "score": 1.08666
+          },
+          {
+            "description": "engine",
+            "score": 1.0226
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "chainsaw",
+            "score": 0.28294
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.12361
+          },
+          {
+            "description": "hand saw",
+            "score": 0.06912
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Lawn mower",
+            "score": 1.52713
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Accelerating, revving, vroom",
+            "score": 0.45757
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "chainsaw"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "helicopter",
+            "score": 1.08666
+          },
+          {
+            "description": "engine",
+            "score": 1.0226
+          },
+          {
+            "description": "hand saw",
+            "score": 0.87202
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "vacuum cleaner",
+            "score": 0.12361
+          },
+          {
+            "description": "hand saw",
+            "score": 0.06912
+          },
+          {
+            "description": "helicopter",
+            "score": 0.04871
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Chainsaw",
+            "score": 1.82741
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Accelerating, revving, vroom",
+            "score": 0.45757
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-76831-C-42.wav",
+      "target": "siren",
+      "sha256": "bed7848fd5b111ba310961c15e6a89520f14f5f3207178035a0807f5f60ab841",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "siren",
+            "score": 1.75044
+          },
+          {
+            "description": "car horn",
+            "score": 1.05785
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.75257
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "siren",
+            "score": 0.45162
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.33773
+          },
+          {
+            "description": "car horn",
+            "score": 0.18428
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Police car (siren)",
+            "score": 1.95209
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fire engine, fire truck (siren)",
+            "score": 0.63008
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "siren",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "car horn",
+            "score": 1.05785
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.75257
+          },
+          {
+            "description": "engine",
+            "score": 0.54365
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "clock alarm",
+            "score": 0.33773
+          },
+          {
+            "description": "car horn",
+            "score": 0.18428
+          },
+          {
+            "description": "clapping",
+            "score": 0.16943
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Police car (siren)",
+            "score": 1.95209
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fire engine, fire truck (siren)",
+            "score": 0.63008
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-254507-A-43.wav",
+      "target": "car horn",
+      "sha256": "ebe976ccd285cb44e6585d889f2a8759c5de47e9940f638ecaa300def46e544a",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "car horn",
+            "score": 1.2545
+          },
+          {
+            "description": "siren",
+            "score": 0.93225
+          },
+          {
+            "description": "engine",
+            "score": 0.80992
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hand saw",
+            "score": 0.24243
+          },
+          {
+            "description": "car horn",
+            "score": 0.23223
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.19984
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Car passing by",
+            "score": 1.65527
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Race car, auto racing",
+            "score": 0.4473
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "siren",
+            "score": 0.93225
+          },
+          {
+            "description": "engine",
+            "score": 0.80992
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.70399
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hand saw",
+            "score": 0.24243
+          },
+          {
+            "description": "clock alarm",
+            "score": 0.19984
+          },
+          {
+            "description": "siren",
+            "score": 0.17714
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Car passing by",
+            "score": 1.65527
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Race car, auto racing",
+            "score": 0.4473
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-50455-A-44.wav",
+      "target": "engine",
+      "sha256": "cb823cc6d4de1cf3e8173938ffb4ab754a84bd858f9ac180f37a89e695c95f7a",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "engine",
+            "score": 1.51954
+          },
+          {
+            "description": "washing machine",
+            "score": 1.19491
+          },
+          {
+            "description": "train",
+            "score": 1.06976
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "engine",
+            "score": 0.33751
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.28929
+          },
+          {
+            "description": "helicopter",
+            "score": 0.276
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Heavy engine (low frequency)",
+            "score": 1.84244
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Medium engine (mid frequency)",
+            "score": 0.51671
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "engine",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "washing machine",
+            "score": 1.19491
+          },
+          {
+            "description": "train",
+            "score": 1.06976
+          },
+          {
+            "description": "helicopter",
+            "score": 1.04359
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "chainsaw",
+            "score": 0.28929
+          },
+          {
+            "description": "helicopter",
+            "score": 0.276
+          },
+          {
+            "description": "washing machine",
+            "score": 0.25317
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Heavy engine (low frequency)",
+            "score": 1.84244
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Medium engine (mid frequency)",
+            "score": 0.51671
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-62509-A-45.wav",
+      "target": "train",
+      "sha256": "03b1aeb6ccec6537abb404a569ec44c53d0f9eaada3f1d97f396293e9757cb24",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "train",
+            "score": 1.61707
+          },
+          {
+            "description": "engine",
+            "score": 0.62818
+          },
+          {
+            "description": "thunderstorm",
+            "score": 0.62617
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "train",
+            "score": 0.5132
+          },
+          {
+            "description": "airplane",
+            "score": 0.27914
+          },
+          {
+            "description": "thunderstorm",
+            "score": 0.22229
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Railroad car, train wagon",
+            "score": 1.92757
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Railroad car, train wagon",
+            "score": 0.64527
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "train",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "engine",
+            "score": 0.62818
+          },
+          {
+            "description": "thunderstorm",
+            "score": 0.62617
+          },
+          {
+            "description": "washing machine",
+            "score": 0.62234
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "airplane",
+            "score": 0.27914
+          },
+          {
+            "description": "thunderstorm",
+            "score": 0.22229
+          },
+          {
+            "description": "engine",
+            "score": 0.20123
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Railroad car, train wagon",
+            "score": 1.92757
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Railroad car, train wagon",
+            "score": 0.64527
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-54747-A-46.wav",
+      "target": "church bells",
+      "sha256": "a0664359aa21e7b44f8de962632c9ed2bca9f86728056ae8dd14ae7ac5cd0330",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "church bells",
+            "score": 1.76883
+          },
+          {
+            "description": "crow",
+            "score": 0.88059
+          },
+          {
+            "description": "helicopter",
+            "score": 0.80791
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "church bells",
+            "score": 0.50656
+          },
+          {
+            "description": "crow",
+            "score": 0.22407
+          },
+          {
+            "description": "siren",
+            "score": 0.21397
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Church bell",
+            "score": 1.67033
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Church bell",
+            "score": 0.46503
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "church bells"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "crow",
+            "score": 0.88059
+          },
+          {
+            "description": "helicopter",
+            "score": 0.80791
+          },
+          {
+            "description": "siren",
+            "score": 0.79594
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "crow",
+            "score": 0.22407
+          },
+          {
+            "description": "siren",
+            "score": 0.21397
+          },
+          {
+            "description": "chirping birds",
+            "score": 0.19535
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Church bell",
+            "score": 1.67033
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Church bell",
+            "score": 0.46503
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "crow",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-36929-A-47.wav",
+      "target": "airplane",
+      "sha256": "72360c7f354882ce449334f83b2e4f498b2b92a95a6c42bc4fc9b9a011e0db48",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "airplane",
+            "score": 1.92776
+          },
+          {
+            "description": "helicopter",
+            "score": 1.69521
+          },
+          {
+            "description": "engine",
+            "score": 1.38557
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "helicopter",
+            "score": 0.52309
+          },
+          {
+            "description": "airplane",
+            "score": 0.49103
+          },
+          {
+            "description": "engine",
+            "score": 0.35044
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Propeller, airscrew",
+            "score": 2.12945
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fixed-wing aircraft, airplane",
+            "score": 0.64453
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "helicopter",
+            "score": 1.69521
+          },
+          {
+            "description": "engine",
+            "score": 1.38557
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.82193
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "helicopter",
+            "score": 0.52309
+          },
+          {
+            "description": "engine",
+            "score": 0.35044
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.32674
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Propeller, airscrew",
+            "score": 2.12945
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fixed-wing aircraft, airplane",
+            "score": 0.64453
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "helicopter",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-25781-A-48.wav",
+      "target": "fireworks",
+      "sha256": "7a3a19a4d9c8eda970c76dd5c04fa9bb030475625aa94431bb5710ce59a028e4",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "fireworks",
+            "score": 2.0506
+          },
+          {
+            "description": "rooster",
+            "score": 0.55686
+          },
+          {
+            "description": "airplane",
+            "score": 0.53801
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "fireworks",
+            "score": 0.45202
+          },
+          {
+            "description": "siren",
+            "score": 0.2012
+          },
+          {
+            "description": "crackling fire",
+            "score": 0.19941
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Firecracker",
+            "score": 1.91782
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Steam whistle",
+            "score": 0.40999
+          },
+          "both_prefer_outside": false
+        },
+        "status": "same_choice",
+        "shared_choice": "fireworks"
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "rooster",
+            "score": 0.55686
+          },
+          {
+            "description": "airplane",
+            "score": 0.53801
+          },
+          {
+            "description": "siren",
+            "score": 0.49136
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "siren",
+            "score": 0.2012
+          },
+          {
+            "description": "crackling fire",
+            "score": 0.19941
+          },
+          {
+            "description": "crying baby",
+            "score": 0.19574
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Fireworks",
+            "score": 2.0506
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Fireworks",
+            "score": 0.45202
+          },
+          "both_prefer_outside": true
+        },
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    },
+    {
+      "id": "1-46353-A-49.wav",
+      "target": "hand saw",
+      "sha256": "0a1d6325dc5bb88e18e18295cb7beb5a074ae34ea062df2d8f06013412a6aedc",
+      "included": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "hand saw",
+            "score": 1.91457
+          },
+          {
+            "description": "chainsaw",
+            "score": 1.45332
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.61287
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "hand saw",
+            "score": 0.48038
+          },
+          {
+            "description": "chainsaw",
+            "score": 0.36741
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.19521
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Sawing",
+            "score": 2.22684
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Sawing",
+            "score": 0.60168
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "hand saw",
+        "status": "unresolved",
+        "shared_choice": null
+      },
+      "omitted": {
+        "channels": [
+          1
+        ],
+        "facebook/pe-av-large": [
+          {
+            "description": "chainsaw",
+            "score": 1.45332
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.61287
+          },
+          {
+            "description": "glass breaking",
+            "score": 0.58563
+          }
+        ],
+        "laion/clap-htsat-unfused": [
+          {
+            "description": "chainsaw",
+            "score": 0.36741
+          },
+          {
+            "description": "brushing teeth",
+            "score": 0.19521
+          },
+          {
+            "description": "vacuum cleaner",
+            "score": 0.13996
+          }
+        ],
+        "outside_choices": {
+          "facebook/pe-av-large": {
+            "description": "Sawing",
+            "score": 2.22684
+          },
+          "laion/clap-htsat-unfused": {
+            "description": "Sawing",
+            "score": 0.60168
+          },
+          "both_prefer_outside": true
+        },
+        "nearest_shared_alternative": "chainsaw",
+        "status": "unresolved",
+        "shared_choice": null
+      }
+    }
+  ]
+}

@@ -24,7 +24,8 @@ from reel.identify_sound import CLAP_NAME, MODEL, IdentityReader
 def score(rows):
     target = [r["target"] for r in rows]
     pe, clap = [np.array([int(r[model][0]["description"] == r["target"]) for r in rows]) for model in (MODEL, CLAP_NAME)]
-    agreed = [r for r in rows if r["status"] == "same_choice"]
+    agreed = [(r.get("shared_choice") or r.get("nearest_shared_alternative"), r["target"]) for r in rows]
+    agreed = [(choice, gold) for choice, gold in agreed if choice is not None]
     omitted = 0
     for row in rows:
         # Removing an option does not change the pairwise scores of the other options.
@@ -37,9 +38,27 @@ def score(rows):
     draws = np.random.default_rng(1802).integers(len(categories), size=(20000, len(categories)))
     interval = np.percentile(difference[draws].sum(axis=1) / size[draws].sum(axis=1), [2.5, 97.5])
     return {"clips": len(rows), "clap_correct": int(clap.sum()), "pe_correct": int(pe.sum()),
-            "agreed": len(agreed), "agreed_correct": sum(r["shared_choice"] == r["target"] for r in agreed),
+            "agreed": len(agreed), "agreed_correct": sum(choice == gold for choice, gold in agreed),
             "agreed_with_target_removed": omitted, "paired_change": paired_change(rows, clap, pe),
             "category_bootstrap_95": interval.tolist()}
+
+
+def score_outside(rows):
+    result = {}
+    for condition in ("included", "omitted"):
+        before, after, before_correct, after_correct = [], [], [], []
+        for row in rows:
+            ch = row[condition]
+            first = ch[MODEL][0]["description"]
+            agreed = first == ch[CLAP_NAME][0]["description"]
+            before.append(int(agreed))
+            after.append(int(ch["shared_choice"] is not None))
+            before_correct.append(int(agreed and first == row["target"]))
+            after_correct.append(int(ch["shared_choice"] == row["target"]))
+        result[condition] = {"clips": len(rows), "shared_before": sum(before), "retained_after": sum(after),
+                             "correct_before": sum(before_correct), "correct_after": sum(after_correct),
+                             "paired_change_in_claim_rate": paired_change(rows, np.array(before), after)}
+    return result
 
 
 def main():
@@ -49,6 +68,7 @@ def main():
     args = parser.parse_args()
     report = json.loads(args.report.read_text())
     rows = report["rows"]
+    outside = "omitted" in rows[0]
     if args.audio:
         # Equal treatment for every class; labels enter only as the same supplied vocabulary on every file.
         labels = report["descriptions"]
@@ -60,13 +80,18 @@ def main():
                 if hashlib.sha256(data).hexdigest() != row["sha256"]:
                     raise ValueError(f"source differs from published recording: {source.name}")
                 anonymous.write_bytes(data)
-                result = ear.read(anonymous, 0., 5., 0, labels)
-                if result["status"] != "available":
-                    raise RuntimeError(result)
-                window, = result["windows"]
-                channel, = window["channels"]
-                row.update(channel)
-    print(json.dumps(score(rows), indent=2))
+                conditions = (("included", labels), ("omitted", [s for s in labels if s != row["target"]])) if outside else [(None, labels)]
+                for key, choices in conditions:
+                    result = ear.read(anonymous, 0., 5., 0, choices)
+                    if result["status"] != "available":
+                        raise RuntimeError(result)
+                    window, = result["windows"]
+                    channel, = window["channels"]
+                    if key is None:
+                        row.update(channel)
+                    else:
+                        row[key] = channel
+    print(json.dumps(score_outside(rows) if outside else score(rows), indent=2))
 
 
 if __name__ == "__main__":

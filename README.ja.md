@@ -160,7 +160,7 @@ flowchart LR
 
 </details>
 
-`reel setup --identify-sounds` を実行すると、PE-AV と CLAP が同じチャンネルの原音を聴き、それぞれ音源の候補を選ぶ。生活音の録音99件のうち、正解は PE-AV が94件、CLAP が85件だった。正解を選択肢から外すと、40件で両者が同じ誤答を選んだ。[録音ごとの結果](docs/benchmarks/source-identity-agreement.json)
+`reel setup --identify-sounds` を実行すると、PE-AV と CLAP が同じチャンネルの原音を聴き、それぞれ音源の候補を選ぶ。生活音の録音99件のうち、正解は PE-AV が94件、CLAP が85件だった。正解を選択肢から外すと、40件で両者が同じ誤答を選んだ。別の49件では、選択肢の外も調べると、この誤答は16件から0件に減った。正解を戻した場合、もともと両者が正解した39件のうち21件で回答を維持した。[選択肢から正解を外した試験](docs/benchmarks/source-outside-choices.json)、[録音ごとの結果](docs/benchmarks/source-identity-agreement.json)
 
 ## わかりにくいこと
 

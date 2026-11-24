@@ -160,7 +160,7 @@ flowchart LR
 
 </details>
 
-執行 `reel setup --identify-sounds` 後，PE-AV 與 CLAP 會各自以同一聲道的原始錄音比對候選聲源。在 99 段環境錄音中，PE-AV 答對 94 段，CLAP 答對 85 段。移除正確選項後，兩者有 40 次選了同一個錯誤聲源。[逐段結果](docs/benchmarks/source-identity-agreement.json)
+執行 `reel setup --identify-sounds` 後，PE-AV 與 CLAP 會各自以同一聲道的原始錄音比對候選聲源。在 99 段環境錄音中，PE-AV 答對 94 段，CLAP 答對 85 段。移除正確選項後，兩者有 40 次選了同一個錯誤聲源。在另外 49 段錄音中，加入選項以外的聲音比對後，這類誤報從 16 次降到 0 次。放回正確選項時，原本兩者都答對的 39 次保留了 21 次。[移除正確選項的實驗](docs/benchmarks/source-outside-choices.json)，[逐段結果](docs/benchmarks/source-identity-agreement.json)
 
 ## 使用限制
 

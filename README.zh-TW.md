@@ -166,6 +166,8 @@ flowchart LR
 
 遇到與背景明顯不同的聲音，Reel 會重聽那一小段原始錄音。只在短片段裡出現的聲源名稱還需由另一個音訊模型核對。即使認不出聲源，重播時也能查看時間、聲道、音量和頻帶。
 
+在 24 段沒有畫面的錄音上，GPT 與多數聽眾回答一致的題數從 96 題中的 58 題增至 64 題。請它自由描述聽到的場景時，以人類得分為 100 分，得分從 51.9 變為 51.4。[逐段回答與評分方法](docs/benchmarks/focused-listening.json)
+
 在這 244 段錄音中，候選名稱包含正確聲源的錄音從 84 段增至 121 段，也多了 6 個錯誤名稱。讓 GPT 自由作答時，22 段錄音在改動前後各答對 10 段。[逐題回答與對照實驗](docs/benchmarks/reference-source-listeners.json)
 
 執行 `reel setup --identify-sounds` 後，PE-AV 與 CLAP 會各自以同一聲道的原始錄音比對候選聲源。在 99 段環境錄音中，PE-AV 答對 94 段，CLAP 答對 85 段。移除正確選項後，兩者有 40 次選了同一個錯誤聲源。在另外 49 段錄音中，加入選項以外的聲音比對後，這類誤報從 16 次降到 0 次。放回正確選項時，原本兩者都答對的 39 次保留了 21 次。[移除正確選項的實驗](docs/benchmarks/source-outside-choices.json)，[逐段結果](docs/benchmarks/source-identity-agreement.json)

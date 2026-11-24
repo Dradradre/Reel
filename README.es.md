@@ -166,6 +166,8 @@ Con `reel setup --sound-examples`, Reel compara lo que acaba de oír con 942 gra
 
 Reel vuelve a escuchar el fragmento que sobresale del fondo. Si aparece un nombre nuevo en ese fragmento, lo contrasta con otro modelo de audio. Aunque la fuente quede sin identificar, se pueden consultar el intervalo, el canal, el nivel y la banda de frecuencias.
 
+En 24 grabaciones sin imagen, GPT coincidió con la mayoría de los oyentes en 64 de 96 preguntas, frente a 58 antes del cambio. Al describir las escenas libremente obtuvo el 51,4 % de la puntuación humana, frente al 51,9 % anterior. [Respuestas y método](docs/benchmarks/focused-listening.json)
+
 En esas 244 grabaciones, el nombre correcto aparecía entre las etiquetas de 84 clips antes del cambio y de 121 después. Se añadieron también seis nombres incorrectos. En las respuestas libres de GPT, los aciertos fueron 10 de 22 en ambas versiones. [Respuestas y controles](docs/benchmarks/reference-source-listeners.json)
 
 Con `reel setup --identify-sounds`, Reel compara las fuentes propuestas con la grabación usando PE-AV y CLAP. En 99 grabaciones, PE-AV acertó 94 veces y CLAP 85. Al retirar la opción correcta, los dos coincidieron en otra fuente 40 veces. En otras 49 grabaciones, comprobar también las fuentes fuera de la lista redujo esos errores de 16 a 0. Con la opción correcta presente, conservó 21 de los 39 aciertos compartidos. [Prueba con la fuente omitida](docs/benchmarks/source-outside-choices.json). [Resultados por grabación](docs/benchmarks/source-identity-agreement.json)

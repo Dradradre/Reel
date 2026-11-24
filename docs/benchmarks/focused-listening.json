@@ -1,0 +1,589 @@
+{
+  "title": "Can a local GPT identify a sound without seeing its source?",
+  "baseline": "3df58a8",
+  "after": "b64e7cb",
+  "model": "gpt-6.1-terra via signed-in Codex CLI, low reasoning effort",
+  "method": {
+    "clotho": "24 full, anonymous, audio-only recordings in Clotho v2.1 evaluation and Clotho-AQA test. Of 99 candidates outside a previous panel, take SHA-256 order of reel-causal-audio-v1/ + filename, skip previously published files, reference bank IDs and duplicate uploaders. Five human captions and four binary questions with three individual votes per recording. Evaluation uploaders and files are distinct within this panel. Model pretraining overlap is unknown.",
+    "delivery": "MCP --tracks sound --image-client, view with continuous_seconds=8 and native_audio=false. The GPT receives compact reports and the recorded-channel spectrograms from the whole clip. No video frames, original filename, human descriptions or answer key. Both arms use local audio helpers including CoNeTTE, with the optional 30B waveform reader disabled. The GPT reader runs in a fresh session per recording and task. Each task uses one response per condition. Identical captures reuse their already blind response. For final capture, replayed the changed source reader on released PCM and replaced its field in the captured reports. Two complete real MCP recaptures reproduced all report fields and spectrograms.",
+    "caption_prompt": "Describe what you heard in the recording in one or two short English sentences for someone who could not hear it. Include the most distinctive sounds and how they change. Identify sources only as precisely as the sound supports. Do not discuss the tools or repeat the question.",
+    "caption_score": "Pinned all-MiniLM-L6-v2 as in examples/check_first_impressions.py. In each of five leave-one-human-out folds compare the reader (or held-out human) to the other four matching captions and the mean for each of the 23 other clips. Mean matching minus other cosine divided by the held-out human gap. Per-clip arrays contain matching cosine, other cosine, and top-one retrieval credit. The 95% interval resamples 24 recordings 10,000 times. It conditions on these captions, recordings and replies.",
+    "qa": "Questions are fixed before model inference. Yes or no scores one per matching human vote. Unknown scores zero. Each human-human unordered pair counts once. The comparison with a different recording rotates audio by seven clips while keeping the same questions. Paired change intervals resample entire recordings 20,000 times.",
+    "foreground": "FSD50K (Fonseca et al., CC BY 4.0), CC0 source originals. Four-second mono 24 kHz colored-noise and hum bed plus an energy-selected 0.5–1.6 s excerpt (shorter for short originals) at -3, 3, 9 or 15 dB. Exact recipe is in examples/check_focused_listening.py. Offsets and ranges in confirmation rows use 24 kHz samples. Human label applies to the source recording and can be ambiguous in the mixture. No known source or event boundary is passed to either reader.",
+    "development": "64 development mixtures. An initial PE-only focused rule (reference cosine >=0.65) on 128 further clips raised correct names from 12 to 13 and unmatched names from 6 to 10. Rejected. Calibrated the final PE text + reference audio + CLAP text check on the 64 development mixtures. Before confirmation, froze raw channel, top three in each ranking, rank product margin above 8, minimum scores 0.10/0.55/0.25. A matching broad label can be refined without CLAP. No class-specific thresholds.",
+    "confirmation": "128 other FSD50K evaluation recordings, distinct uploaders from the first 192 and from each other. At most three per class, no recording ID in the reference bank. Same final production SourceReader for all 128 mixtures and 128 matching background-only controls. The wide window gives the baseline name. Count each distinct claimed name per clip once. A clip may have both a hit and an unmatched name. Timing compares automatic excerpt versus known insertion using intersection over union, zero when no excerpt was picked.",
+    "gpt_sources": "48 fixed hash-selected foreground cases and 12 different beds from the first 128-case panel, chosen without model predictions. Each GPT receives the exact 4 s MCP listen report (describe=false, source_examples=true) and spectrogram. No choices. A separate blind gpt-6.1-terra grader rated unique answer/target pairs in hash order, without version labels. Compatible is reported separately. These are different recordings from the fresh confirmation set.",
+    "source_prompt": "What made the brief foreground sound in this recording? Name the most specific sound source or sound action you can support in a few English words. If the source cannot be identified or only background is audible, answer unknown. Answer only with that name or unknown.",
+    "grading": "Grade how well a blind listener named the inserted foreground source. The target is the human leaf label on the source recording. Exact = the same source/action or an ordinary synonym. Compatible = correct family, or an unverified more specific subtype. Wrong = different source/action. Unknown = explicit unidentified or no foreground answer. For null target (background only), use unknown for no foreground, wrong for an asserted new foreground; a generic description of the steady bed without a claimed new sound is unknown. Extra invented details must not promote compatible to exact. Return JSON {\"items\":[{\"id\":0,\"grade\":\"exact|compatible|wrong|unknown\"},...]} with all IDs.",
+    "field": "Ten original TUT Sound Events 2016 evaluation field recordings. First recorded channel. Use up to eight hash-selected non-overlapping 4 s windows per recording with a directly mapped human event 0.15–2.5 s completely inside. 51 eligible windows. An unmatched name need not be absent from the real scene. For oracle_matched, give the original wide reader samples from one annotated event and compare against that event only. Natural field rows omit source annotations and waveform.",
+    "door": "Same door film and 8.5 s cutoff. A contains the metallic cue, B has the bed alone, C shares A’s prefix and differs afterwards. Silent-track and picture-only controls. A/C compact reports and image bytes were hashed in streaming order. MCP rejected replay extending to 8.6 s for all cases with sound.",
+    "sources": {
+      "Clotho v2.1, Drossos et al.": "https://zenodo.org/records/4783391",
+      "Clotho-AQA, Lipping et al.": "https://zenodo.org/records/6473207",
+      "TUT Sound Events 2016 evaluation, Mesaros et al.": "https://zenodo.org/records/996424",
+      "FSD50K, Fonseca et al.": "https://zenodo.org/records/4060432"
+    }
+  },
+  "clotho": [
+    {"id": "248259", "file": "Water in a canal.wav", "focused_readings": 0, "reference_sha256": "d3626d1bb6d4cfd27540f230b5c86946c5dd1575d7c14c5f084f14a85e238d35", "descriptions": {"before": "A continuous, distant rumbling sound has a rough, chattering quality, with overlapping bursts that rise and fall slightly. It stays fairly steady throughout.", "after": "A sustained, distant rumble is filled with overlapping, irregular sounds resembling a group of dogs barking. The noise fluctuates slightly but continues at a fairly steady level throughout."}, "caption_scores": {"human": [0.2633867606520653, 0.20352581441402434, 0.4], "before": [0.23604082465171813, 0.25103530287742615, 0.0], "after": [0.23358438909053802, 0.27006053924560547, 0.0]}, "questions": [{"question": "Does the sound come from an enclosed environment?", "votes": ["yes", "yes", "no"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is the sound being made constant?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}, {"question": "Is the sound static?", "votes": ["yes", "yes", "no"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is this a thunderstorm?", "votes": ["no", "yes", "yes"], "before": "unknown", "after": "unknown", "other_recording": "no"}]},
+    {"id": "245833", "file": "Afternoon Suburb Calm.wav", "focused_readings": 1, "reference_sha256": "9d0128868ece087e03ed603dc113562a088dbd58673049c072a1b1519e5ce3b9", "descriptions": {"before": "Crickets chirp steadily as a low traffic rumble swells and fades in the background. The rumble gradually recedes, leaving the chirping more noticeable.", "after": "High-pitched cricket chirping continues as the low rumble of passing traffic swells and fades. A few brief clunks occur later in the recording."}, "caption_scores": {"human": [0.5940468907356262, 0.2866788417100906, 0.8], "before": [0.3811470091342926, 0.25544339418411255, 0.0], "after": [0.38480514883995054, 0.28065794706344604, 0.0]}, "questions": [{"question": "Can a human be heard?", "votes": ["yes", "yes", "no"], "before": "no", "after": "no", "other_recording": "yes"}, {"question": "Is there a dog barking?", "votes": ["no", "yes", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is there more than one sound?", "votes": ["yes", "no", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}, {"question": "Is this outside?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}]},
+    {"id": "191744", "file": "Tiergarten birds early morning.wav", "focused_readings": 8, "reference_sha256": "dd5d0e0d076fd1858dcef6249c744b79f31afe5c220665576c8eb859ba72a954", "descriptions": {"before": "Birds chirp and whistle in short, varying bursts over a steady, soft background noise. The calls continue throughout, sometimes overlapping and becoming more prominent.", "after": "Birds chirp and whistle in repeated bursts, with the calls varying in pitch and coming and going over a soft background hiss."}, "caption_scores": {"human": [0.624040174484253, 0.2780731737613678, 0.6], "before": [0.6227461338043213, 0.35001829266548157, 0.0], "after": [0.6008401870727539, 0.35419559478759766, 0.0]}, "questions": [{"question": "are the birds being yelled at by humans?", "votes": ["no", "yes", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Are the birds chirping over each other?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}, {"question": "are there many birds?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}, {"question": "Does it sound like the birds are being attacked?", "votes": ["yes", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}]},
+    {"id": "17578", "file": "luffy_earth5.wav", "focused_readings": 0, "reference_sha256": "adf55676f4cb5e0eae9e45cc56c440b819dd92b99e4ec5c830f73c9a0aa3beef", "descriptions": {"before": "A steady, low engine-like rumble runs throughout, with a rough mechanical hum. It fluctuates slightly but remains fairly constant.", "after": "A low, steady engine-like rumble runs throughout, with a rough mechanical buzzing sound. It fluctuates slightly but remains fairly constant."}, "caption_scores": {"human": [0.4204752743244171, 0.15046053528785705, 0.8], "before": [0.2870466113090515, 0.2347945123910904, 0.0], "after": [0.2886845886707306, 0.2573622465133667, 0.0]}, "questions": [{"question": "Can the sound be caused by weather?", "votes": ["no", "yes", "no"], "before": "no", "after": "no", "other_recording": "yes"}, {"question": "Has this object been turned on?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is the sound caused by a man-made object?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is this a naturally occurring object?", "votes": ["yes", "yes", "no"], "before": "no", "after": "no", "other_recording": "unknown"}]},
+    {"id": "153422", "file": "vending machine action.wav", "focused_readings": 3, "reference_sha256": "820404aaa2cf237d01818ec78f7938e01bc2a00a1608f5b022fbd612bcee1f05", "descriptions": {"before": "A series of rattling clicks and clunks comes in uneven bursts, with pauses between them, like a drawer or latch being opened and closed. The sounds grow louder and heavier toward the end.", "after": "A series of small clicks and rattling clacks comes in uneven bursts, with quieter pauses between them. Toward the end, louder, heavier clunks sound like a door or drawer being opened and closed."}, "caption_scores": {"human": [0.43628568649291993, 0.11361496970057487, 0.8], "before": [0.1754920780658722, 0.26149222254753113, 0.0], "after": [0.15408124327659606, 0.25199446082115173, 0.0]}, "questions": [{"question": "Does the machine beep?", "votes": ["no", "yes", "yes"], "before": "unknown", "after": "no", "other_recording": "unknown"}, {"question": "Does the person want a snack?", "votes": ["yes", "yes", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is there a dog?", "votes": ["no", "yes", "no"], "before": "unknown", "after": "no", "other_recording": "yes"}, {"question": "Was a coin put into the machine?", "votes": ["yes", "yes", "yes"], "before": "unknown", "after": "yes", "other_recording": "unknown"}]},
+    {"id": "328076", "file": "WOOD CHOPPING_ Chopping hard wood with metal Axe (SFX).wav", "focused_readings": 3, "reference_sha256": "daf45daf1ecd165f103dfc039d60e8c2610d65d9ae11b81f79678773e0b1d20e", "descriptions": {"before": "A series of sharp, woody chopping impacts repeats at a steady pace, each followed by a brief fading rattle. The strikes continue with short pauses between them.", "after": "A series of sharp, heavy chopping impacts repeats at a steady pace, each followed by a short, softer decay. The strikes continue with slight variations in force and spacing."}, "caption_scores": {"human": [0.6889416694641113, 0.12594268769025802, 1.0], "before": [0.29586870670318605, 0.23677954077720642, 0.0], "after": [0.2799571692943573, 0.17135514318943024, 0.8]}, "questions": [{"question": "Does the noise repeat steadily?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Is a boy whimpering?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is something being hit?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Is there a car?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}]},
+    {"id": "318615", "file": "turning pages book slow quickly.wav", "focused_readings": 3, "reference_sha256": "9bdd00125907dd2c3843ce6917c4bad610eb15771ac80589322e01a346d3298c", "descriptions": {"before": "A series of soft, papery rustles and flicks sounds like pages being turned. The sounds repeat in uneven bursts, with brief pauses between them.", "after": "A series of dry, papery rustles and flicks sounds like pages being turned. The bursts repeat with brief pauses, becoming somewhat louder and closer together as the recording goes on."}, "caption_scores": {"human": [0.7624002575874329, 0.1099397897720337, 1.0], "before": [0.48185970187187194, 0.24133625626564026, 1.0], "after": [0.3951882481575012, 0.2362460494041443, 1.0]}, "questions": [{"question": "Are the page being turned quickly?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Is someone banging on metal?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is the sound constant and unchanging?", "votes": ["no", "yes", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is there a book's pages being turned?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}]},
+    {"id": "43805", "file": "SilverStarSearchAndRescue.wav", "focused_readings": 0, "reference_sha256": "a717821dc72969139d3e0c60514b17dab3d5a63f2cf0aabfc6564930cc3ac129", "descriptions": {"before": "A steady, low mechanical rumble grows louder, then gradually fades. Faint, high-pitched chirping can be heard in the background at first.", "after": "A steady, low mechanical rumble grows louder, then fades toward the end. Faint, high-pitched chirping can be heard in the background at first."}, "caption_scores": {"human": [0.49394071102142334, 0.221858149766922, 0.8], "before": [0.28349908590316775, 0.2993888854980469, 0.0], "after": [0.3013603508472443, 0.3064706325531006, 0.0]}, "questions": [{"question": "Does the buzzing get louder before dying off?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is the sound constant?", "votes": ["yes", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is this an animal?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "yes"}, {"question": "Is this outdoors?", "votes": ["yes", "yes", "no"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}]},
+    {"id": "71333", "file": "20090412.bell.strikes.12.wav", "focused_readings": 5, "reference_sha256": "163bf9ca6ebe616fb9eabb7aed3ba8ca9b55d7cb4fbd9a25f64d378f68356dab", "descriptions": {"before": "Bells ring repeatedly, their resonant tones rising and fading over indistinct background chatter. Faint bird chirps can also be heard.", "after": "Bells ring repeatedly, their resonant tones swelling and fading over indistinct background chatter. Faint bird chirps can also be heard."}, "caption_scores": {"human": [0.6446291446685791, 0.2343656212091446, 1.0], "before": [0.5333828926086426, 0.3224148452281952, 0.0], "after": [0.5171141028404236, 0.31402578949928284, 0.0]}, "questions": [{"question": "Are the streets empty?", "votes": ["no", "no", "no"], "before": "unknown", "after": "no", "other_recording": "unknown"}, {"question": "Can dogs be heard barking?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is there a bell tower nearby?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is this outside?", "votes": ["yes", "no", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}]},
+    {"id": "53769", "file": "spring morning birds oiseaux reveil printemps #1.wav", "focused_readings": 4, "reference_sha256": "8e7e7cfdc6f06d9930b67840fe98d38c35e8945821ccdd017553c6a88313a1b3", "descriptions": {"before": "A rooster crows repeatedly while smaller birds chirp in the background. The calls continue throughout, overlapping and varying in intensity.", "after": "A rooster crows repeatedly over a background of smaller birds chirping and singing. The calls come and go throughout the recording."}, "caption_scores": {"human": [0.6878521800041199, 0.2917442411184311, 0.8], "before": [0.6094008326530457, 0.3233738839626312, 0.4], "after": [0.5940956234931946, 0.3200376629829407, 0.2]}, "questions": [{"question": "Can a rooster be heard?", "votes": ["yes", "no", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Can birds be heard flying?", "votes": ["yes", "no", "no"], "before": "unknown", "after": "unknown", "other_recording": "no"}, {"question": "Can thunder be heard?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "unknown"}, {"question": "Does an animal make the sound?", "votes": ["no", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}]},
+    {"id": "221638", "file": "drip rhythm1.wav", "focused_readings": 3, "reference_sha256": "afdd4488223d8911deb710c195062d7a234571902086c04d924c1f3895678458", "descriptions": {"before": "Water drips repeatedly with light, hollow plinks and splashes. The drops vary in pace, sometimes coming in quick clusters, and continue throughout.", "after": "Water drips and splashes repeatedly, with the drops coming in uneven clusters. The dripping continues throughout, becoming a little quieter near the end."}, "caption_scores": {"human": [0.5827147126197815, 0.1520496502518654, 1.0], "before": [0.4878935694694519, 0.16960552334785461, 1.0], "after": [0.49463521838188174, 0.1978650987148285, 1.0]}, "questions": [{"question": "Do the drops stop falling at any time?", "votes": ["no", "no", "yes"], "before": "no", "after": "no", "other_recording": "unknown"}, {"question": "Does the drop fall in water?", "votes": ["yes", "yes", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is it thundering?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is something dripping?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}]},
+    {"id": "124400", "file": "dragged-glass-object.wav", "focused_readings": 2, "reference_sha256": "8ed2943ac9efcbd57ff9b7945f6bff558636d13c56655f713ee6fc938ddcaaf4", "descriptions": {"before": "A dog barks and growls rapidly in rough, uneven bursts, with brief pauses between them. The sounds continue throughout, becoming more insistent toward the end.", "after": "A dog barks and growls rapidly in repeated bursts, with brief pauses between them. The barking continues at a fairly steady pace through the end."}, "caption_scores": {"human": [0.4341407775878906, 0.1645969644188881, 1.0], "before": [0.2294983059167862, 0.27151474356651306, 0.0], "after": [0.1979715943336487, 0.2619463801383972, 0.0]}, "questions": [{"question": "Does the sound continue?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}, {"question": "Is someone using a hammer?", "votes": ["no", "no", "yes"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is the thing doing the scratching continuously in connection with the surface for the entire clip?", "votes": ["no", "no", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is the thing doing the scratching moving in different directions?", "votes": ["yes", "yes", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}]},
+    {"id": "237217", "file": "Blackbird tweet with waterfall background.wav", "focused_readings": 3, "reference_sha256": "b1d7c6368cffaf5ebfeeabded0f1332186b0e0646aa4e5f32e58b11ed1efbc42", "descriptions": {"before": "A steady rush of flowing water fills the recording, with occasional faint bird chirps above it. The rushing sound continues throughout, fluctuating slightly in intensity.", "after": "A steady rush of water roars throughout, swelling and softening slightly. Faint bird chirps occasionally rise above it."}, "caption_scores": {"human": [0.6973293662071228, 0.3082370638847351, 1.0], "before": [0.5808519959449768, 0.3214435279369354, 1.0], "after": [0.6205368757247924, 0.33357545733451843, 1.0]}, "questions": [{"question": "Are birds present?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}, {"question": "Can water be heard?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Is this a sound one would associate with machinery?", "votes": ["no", "no", "yes"], "before": "no", "after": "no", "other_recording": "yes"}, {"question": "Was the sound recorded inside?", "votes": ["no", "yes", "no"], "before": "no", "after": "no", "other_recording": "no"}]},
+    {"id": "156105", "file": "SonicSnap_GPSUK_Cockerel.wav", "focused_readings": 3, "reference_sha256": "914366daafa5bdb0df6a3dcc27e19bb803a19a60425e25fa19f217a6623a09e7", "descriptions": {"before": "Birds chirp intermittently over a low, windy rumble. Near the end, a much louder rooster-like crow breaks through, then fades back to the quieter background sounds.", "after": "Birds chirp in the distance over a steady, low windy rush. Near the end, a much louder series of chicken-like clucks and calls breaks out, then fades."}, "caption_scores": {"human": [0.5998408734798432, 0.28760414719581606, 0.6], "before": [0.5649177312850953, 0.3583240211009979, 0.0], "after": [0.5608325362205505, 0.37185657024383545, 0.0]}, "questions": [{"question": "Can a dog be heard barking?", "votes": ["yes", "no", "no"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Is a pig squealing?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is there a siren?", "votes": ["yes", "yes", "yes"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is this recording a repetition of just one distinctive noise?", "votes": ["yes", "no", "no"], "before": "no", "after": "no", "other_recording": "yes"}]},
+    {"id": "234107", "file": "Canada Geese Squawk on a Pond with a Fountain.wav", "focused_readings": 2, "reference_sha256": "9a5d914c0a63fdfbdd7a108f77311dd8d5ea1a9e402f7b82c17e2364dc22a20f", "descriptions": {"before": "Distant birds chirp and cackle, followed by louder, repeated goose-like honks and quacks. The calls continue in bursts, then fade toward the end.", "after": "Distant birds chirp and cackle as louder, raspy honking and quacking calls join in. The calls overlap in bursts, then fade toward the end."}, "caption_scores": {"human": [0.6008374691009521, 0.28951582312583923, 0.8], "before": [0.6058315634727478, 0.3466772139072418, 0.0], "after": [0.5846370339393616, 0.3373805284500122, 0.0]}, "questions": [{"question": "Can birds be heard?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Is there traffic?", "votes": ["yes", "yes", "no"], "before": "unknown", "after": "no", "other_recording": "no"}, {"question": "Is this in nature?", "votes": ["yes", "yes", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is this in the city?", "votes": ["no", "no", "no"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}]},
+    {"id": "366259", "file": "Glass bottles in and out of a basket.wav", "focused_readings": 3, "reference_sha256": "c471b77250090d314384fdd30abdfa73b80a5963792080b83a24432939edd2be", "descriptions": {"before": "A few sharp glassy clinks give way to softer, repeated scraping and rattling sounds. More bright clinks and taps occur toward the end.", "after": "A few bright glassy clinks are followed by a rough, repeated scraping or rasping sound that starts and stops. More sharp clinks and taps sound near the end."}, "caption_scores": {"human": [0.3715349644422531, 0.13735368102788925, 0.6], "before": [0.320899760723114, 0.21429219841957092, 0.2], "after": [0.33870763778686525, 0.25421491265296936, 0.2]}, "questions": [{"question": "Does any glass break?", "votes": ["no", "no", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is an object snapped?", "votes": ["no", "no", "no"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is glass tapped on a hard surface?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is something hard dragged over another hard surface?", "votes": ["yes", "no", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}]},
+    {"id": "105360", "file": "windroar_constant_1m12s.wav", "focused_readings": 2, "reference_sha256": "e17dbac842ed0898acd2e51b04b69a1c80386d7c36caf30d23402ca72299f3b6", "descriptions": {"before": "A steady, windy roar accompanies waves rushing and crashing, then receding with a softer hiss. The sound swells and fades repeatedly throughout the recording.", "after": "A steady windy roar accompanies waves crashing and washing back. The rushing sound swells and softens repeatedly throughout."}, "caption_scores": {"human": [0.46039345264434817, 0.2237896740436554, 1.0], "before": [0.388427734375, 0.2926606237888336, 0.0], "after": [0.49340544939041137, 0.3213462829589844, 0.0]}, "questions": [{"question": "Can any cars be heard in the background?", "votes": ["no", "no", "yes"], "before": "unknown", "after": "no", "other_recording": "yes"}, {"question": "Can wind be heard?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is there rain?", "votes": ["yes", "yes", "yes"], "before": "unknown", "after": "unknown", "other_recording": "yes"}, {"question": "Is there thunder?", "votes": ["yes", "no", "yes"], "before": "unknown", "after": "unknown", "other_recording": "yes"}]},
+    {"id": "62591", "file": "Arch Leaf.wav", "focused_readings": 2, "reference_sha256": "b3d9724e8b142c0034f810b4b5faf70aee6369a5496d2049e5228140860c1d51", "descriptions": {"before": "Slow, steady footsteps crunch and rustle against a soft surface. The crunching becomes less regular and more swishy toward the end, then fades away.", "after": "Slow, rhythmic footsteps crunch and rustle, as if someone is walking through dry leaves. The steps become less regular and quieter toward the end."}, "caption_scores": {"human": [0.6298000156879425, 0.17998868227005005, 1.0], "before": [0.29522517919540403, 0.1903393715620041, 0.4], "after": [0.3406268239021301, 0.22030740976333618, 0.2]}, "questions": [{"question": "Are the footsteps on a waxed floor?", "votes": ["yes", "no", "no"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Does the steady, dry shuffling sound change near the end?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is it walking that is causing the dry shuffling sound?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is there someone moving around?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}]},
+    {"id": "149487", "file": "MISC_Int_Cat_Purring_002.wav", "focused_readings": 5, "reference_sha256": "4244a7c1ec5eed415d3b84839d14b9ede2b0e692092cefef36c338c40d659dbf", "descriptions": {"before": "A cat purrs with a low, rough, rhythmic rumble. The sound continues steadily, with slight variations in intensity.", "after": "A cat purrs with a low, raspy rumble that pulses steadily, occasionally deepening into a growl. The sound continues much the same throughout."}, "caption_scores": {"human": [0.659374737739563, 0.18664135932922363, 1.0], "before": [0.7027483344078064, 0.21118149161338806, 1.0], "after": [0.7004213809967041, 0.24645091593265533, 1.0]}, "questions": [{"question": "Does the cat let out a growl at any point as he is being groomed?", "votes": ["no", "yes", "no"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is a lion roaring?", "votes": ["no", "yes", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is the cat in a good mood?", "votes": ["yes", "no", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is the cat purring as it is being groomed?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}]},
+    {"id": "153535", "file": "Air raid siren_rising.wav", "focused_readings": 2, "reference_sha256": "4ce0054219f76bb8d11d3c23d211afc43652aba61ba4b6bd82efa4abc9048941", "descriptions": {"before": "A loud siren wails, rising and then gradually falling in pitch before rising again. Faint birds chirp in the background.", "after": "A loud siren wails, dropping in pitch before rising and winding down again. Faint birds chirp in the background."}, "caption_scores": {"human": [0.7628794550895691, 0.32310367822647096, 1.0], "before": [0.7509886741638183, 0.37243035435676575, 1.0], "after": [0.759886360168457, 0.37403953075408936, 1.0]}, "questions": [{"question": "Are people screaming?", "votes": ["no", "no", "yes"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Are the birds singing?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "yes"}, {"question": "Is a storm coming in?", "votes": ["yes", "no", "yes"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}, {"question": "Is it raining?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}]},
+    {"id": "94398", "file": "TIKTOK_1.wav", "focused_readings": 5, "reference_sha256": "428012520babfc272a0fdd3379fe769dd2935ddf6184b35902a3c5436f4cd812", "descriptions": {"before": "A clock-like tick-tock repeats at a steady pace throughout, with little change.", "after": "A clock ticks steadily in a repeating tick-tock rhythm, continuing at much the same pace throughout."}, "caption_scores": {"human": [0.748017156124115, 0.2558482259511948, 1.0], "before": [0.5886446118354798, 0.21524907648563385, 1.0], "after": [0.602571439743042, 0.18734483420848846, 1.0]}, "questions": [{"question": "Is a cat meowing?", "votes": ["no", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is something keeping time?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Is something vibrating?", "votes": ["no", "yes", "yes"], "before": "unknown", "after": "unknown", "other_recording": "yes"}, {"question": "Is there an alarm?", "votes": ["yes", "yes", "no"], "before": "no", "after": "no", "other_recording": "no"}]},
+    {"id": "234148", "file": "Lluvia 1.wav", "focused_readings": 2, "reference_sha256": "3fe03c92a19426756f6f3259d3f9974e691d5610d5948661f4c3cc3a5cce4903", "descriptions": {"before": "Heavy rain patters and rushes steadily, with a low rumble in the background at first. The sound continues with small fluctuations in intensity.", "after": "Heavy rain patters and rushes steadily against a surface, with a low rumble in the background at the start. The rain continues with slight fluctuations in intensity."}, "caption_scores": {"human": [0.7426817655563355, 0.2715891271829605, 1.0], "before": [0.7124623656272888, 0.30336979031562805, 1.0], "after": [0.6696114301681518, 0.27679505944252014, 1.0]}, "questions": [{"question": "Does the sound come from outside?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "unknown"}, {"question": "Is it drizzling?", "votes": ["no", "no", "yes"], "before": "no", "after": "no", "other_recording": "unknown"}, {"question": "Is this a naturally occurring phenomenon?", "votes": ["yes", "yes", "no"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Would a person need to wear sunscreen on a day like this?", "votes": ["no", "no", "no"], "before": "unknown", "after": "unknown", "other_recording": "unknown"}]},
+    {"id": "39651", "file": "070821_flsp_bog01.wav", "focused_readings": 2, "reference_sha256": "28529c0d1c0fbd7823cea81dcaa511b15da214ff03f72de11cd84ddd8756d695", "descriptions": {"before": "High-pitched chirping continues in the background as a loud, low vehicle-like sound swells and then fades away.", "after": "A loud, sustained horn-like sound gives way to the rumble of a vehicle passing and fading. High-pitched chirping continues in the background."}, "caption_scores": {"human": [0.6097134590148926, 0.31008227467536925, 0.6], "before": [0.47282213568687437, 0.28496024012565613, 0.0], "after": [0.527305293083191, 0.3043645918369293, 0.2]}, "questions": [{"question": "Are animals making noise?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}, {"question": "Are people talking?", "votes": ["no", "yes", "yes"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Are the animal noises occurring indoors?", "votes": ["yes", "no", "yes"], "before": "unknown", "after": "no", "other_recording": "unknown"}, {"question": "Are there insects buzzing in the background?", "votes": ["yes", "yes", "yes"], "before": "yes", "after": "yes", "other_recording": "no"}]},
+    {"id": "120710", "file": "tornado day 1.wav", "focused_readings": 2, "reference_sha256": "6b3970194ed427a327d7dd882451733566b7ba5108eb564ea1cd3ecb4b836ddf", "descriptions": {"before": "A steady rushing, rumbling sound continues throughout, with a louder siren-like tone that swells, fades, and grows prominent again toward the end.", "after": "A steady rushing, rain-like sound is accompanied by a low rumble. A louder, horn-like tone swells and fades over it, becoming more prominent toward the end."}, "caption_scores": {"human": [0.5183684945106506, 0.26695291996002196, 0.2], "before": [0.5322806894779205, 0.31689730286598206, 0.6], "after": [0.5840888261795044, 0.3208265006542206, 0.0]}, "questions": [{"question": "Is a person speaking?", "votes": ["yes", "no", "no"], "before": "no", "after": "no", "other_recording": "no"}, {"question": "Is the machine heard starting up and shutting down?", "votes": ["no", "no", "no"], "before": "unknown", "after": "no", "other_recording": "unknown"}, {"question": "Is the machine in constant operation?", "votes": ["yes", "yes", "yes"], "before": "unknown", "after": "yes", "other_recording": "unknown"}, {"question": "Is the sound at a constant pitch?", "votes": ["no", "no", "yes"], "before": "unknown", "after": "yes", "other_recording": "no"}]}
+  ],
+  "gpt_sources": [
+    {"id": "412559", "target": "Tick-tock", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "257996", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "37248", "target": "Electric guitar", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "254973", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "421030", "target": "Drawer open or close", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "48076", "target": "Electric guitar", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "39070", "target": "Gunshot, gunfire", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "Gunfire", "grade": "exact"}},
+    {"id": "127196", "target": "Whoosh, swoosh, swish", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "114251", "target": "Packing tape, duct tape", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "119500", "target": "Raindrop", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "330395", "target": "Slam", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "383334", "target": "Splash, splatter", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "169855", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "214465", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "346147", "target": "Burping, eructation", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "159768", "target": "Cowbell", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "371224", "target": "Female speech, woman speaking", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "121200", "target": "Tearing", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "178612", "target": "Burping, eructation", "material": "mix", "before": {"answer": "Burping", "grade": "exact"}, "after": {"answer": "Burping", "grade": "exact"}},
+    {"id": "243376", "target": "Screaming", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "325157", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "154470", "target": "Cutlery, silverware", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "401604", "target": "Tearing", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "248073", "target": "Scratching (performance technique)", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "118072", "target": "Bark", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "Dog barking", "grade": "exact"}},
+    {"id": "266949", "target": "Dishes, pots, and pans", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "328751", "target": "Sawing", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "97769", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "432204", "target": "Tambourine", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "Chink, clink", "grade": "wrong"}},
+    {"id": "199925", "target": "Crumpling, crinkling", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "203107", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "123816", "target": "Waves, surf", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "156907", "target": "Drip", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "321268", "target": "Electric guitar", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "405425", "target": "Hiss", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "119076", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "96137", "target": "Thump, thud", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "339141", "target": "Train", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "244226", "target": "Purr", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "234860", "target": "Walk, footsteps", "material": "mix", "before": {"answer": "Knocking", "grade": "wrong"}, "after": {"answer": "Footsteps", "grade": "exact"}},
+    {"id": "408649", "target": "Screech", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "210362", "target": "Printer", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "190462", "target": "Drawer open or close", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "416203", "target": "Snare drum", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "Snare drum hit", "grade": "exact"}},
+    {"id": "149453", "target": "Run", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "222674", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "245958", "target": "Fart", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "Footstep", "grade": "wrong"}},
+    {"id": "235613", "target": "Tap", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "181605", "target": "Cowbell", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "395830", "target": "Chirp, tweet", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "Bird chirping", "grade": "exact"}},
+    {"id": "419161", "target": "Female singing", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "82610", "target": "Writing", "material": "mix", "before": {"answer": "Writing with a pen", "grade": "compatible"}, "after": {"answer": "Writing with a pen.", "grade": "compatible"}},
+    {"id": "427684", "target": "Walk, footsteps", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "427134", "target": "Frying (food)", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "426921", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "402416", "target": "Accordion", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "406594", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "135428", "target": null, "material": "bed", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "212981", "target": "Trumpet", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}},
+    {"id": "317093", "target": "Hi-hat", "material": "mix", "before": {"answer": "unknown", "grade": "unknown"}, "after": {"answer": "unknown", "grade": "unknown"}}
+  ],
+  "confirmation": [
+    {"id": "235602", "target": "Chink, clink", "start": 21648, "end": 43418, "snr_db": 15.0, "offset": 7256, "sha256": "49dd5d8c9ad86af119eea2bcc1e66cd54c733e3f8d2d8c8813f0fa0096cae81c", "mix": {"wide": ["Chink, clink"], "focus": [], "bounds": [29280, 45120]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "94934", "target": "Wind instrument, woodwind instrument", "start": 40994, "end": 68989, "snr_db": 9.0, "offset": 37324, "sha256": "0063acfc40ff8bcdd25beb9779e1e11a9bc9ce7d3caec99fa6ff3c83a61bf1ef", "mix": {"wide": [], "focus": [], "bounds": [38880, 71520]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "347647", "target": "Gunshot, gunfire", "start": 42550, "end": 65573, "snr_db": -3.0, "offset": 0, "sha256": "6c019e6f1079851153b955a7f84f83364612bb11c7fc635229a326f439fd4086", "mix": {"wide": [], "focus": [], "bounds": [41760, 55200]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "270346", "target": "Writing", "start": 23215, "end": 52399, "snr_db": 3.0, "offset": 671232, "sha256": "1ae07ff06df1e7e6c9dcd94bcd49c3aeef7df757f6167c2059e8ddf0e6e60845", "mix": {"wide": [], "focus": [], "bounds": [30720, 41760]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "173117", "target": "Meow", "start": 40499, "end": 75555, "snr_db": -3.0, "offset": 46740, "sha256": "8399d754cfc70a0eb1491e29d3b60d64ab81597a7eda1a76a5d74b3c9178bd86", "mix": {"wide": ["Meow"], "focus": [], "bounds": [51840, 60480]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "156558", "target": "Sneeze", "start": 49056, "end": 75897, "snr_db": 9.0, "offset": 0, "sha256": "44f86b6ced3001b1433c31302e0558d32c640d16c8ee640f1faf8a1a6a49a297", "mix": {"wide": ["Cough"], "focus": [], "bounds": [50400, 77280]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "175196", "target": "Electric guitar", "start": 41874, "end": 71919, "snr_db": -3.0, "offset": 20030, "sha256": "8a45f881a8d94e4a6b402d1ab11ff7e8e2bbcc8a7522d51c012321ece41d19ce", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "390710", "target": "Sawing", "start": 28306, "end": 56919, "snr_db": 3.0, "offset": 209814, "sha256": "53daa22a3a3a9541437817ce5d21b6dc7e615c24ddd586ce2cbd214d97f98ed3", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "11072", "target": "Glockenspiel", "start": 25045, "end": 54860, "snr_db": 3.0, "offset": 0, "sha256": "ae3ec5fe68ee85a8f3c789b01061639090dbb84f5ab21dce24122f9902f6c169", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "341564", "target": "Skateboard", "start": 52250, "end": 68153, "snr_db": 15.0, "offset": 58311, "sha256": "aa6f553a34e6ab7f06749779d985c3a58a31fbf2e0ea7451ad55fb4f7aa867bb", "mix": {"wide": [], "focus": [], "bounds": [49920, 71040]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "192553", "target": "Waves, surf", "start": 7915, "end": 24521, "snr_db": 3.0, "offset": 315495, "sha256": "f725d1c3f8cb8b4c3a804c6f4527ebc50ac242c88efa23ff864cbe8d5db2d8ce", "mix": {"wide": [], "focus": [], "bounds": [5760, 26880]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "108530", "target": "Coin (dropping)", "start": 13654, "end": 38123, "snr_db": 3.0, "offset": 97872, "sha256": "9f65de91fb4fde0d149efe089f6d27d0ce03ea0a6a81e1ea5f7255cb2cba2cba", "mix": {"wide": ["Coin (dropping)"], "focus": [], "bounds": [16320, 28320]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "74198", "target": "Acoustic guitar", "start": 15639, "end": 43417, "snr_db": 9.0, "offset": 18518, "sha256": "7ebfe8699d1f6f341725eb4cd2828eaaccd07e047e6b0e0433860939c31af279", "mix": {"wide": [], "focus": [], "bounds": [13440, 23520]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "368174", "target": "Male speech, man speaking", "start": 56319, "end": 83631, "snr_db": 3.0, "offset": 91040, "sha256": "d2be1fc9da2cb3dcbb44ae67abd924aa5662e4c15aaae759ba7a554394bcb26c", "mix": {"wide": [], "focus": [], "bounds": [58560, 69600]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "330925", "target": "Electric guitar", "start": 33099, "end": 54809, "snr_db": -3.0, "offset": 7236, "sha256": "159cdd6b34dc147d53370729ae7f9248656d20d1c3de0b279bc8c5b036ac4bca", "mix": {"wide": [], "focus": [], "bounds": [0, 7680]}, "bed": {"wide": [], "focus": [], "bounds": [0, 7680]}},
+    {"id": "337435", "target": "Cricket", "start": 9663, "end": 27324, "snr_db": 9.0, "offset": 5887, "sha256": "d507644d70914fa5191989e1f7b7b09150d77d83fa5a4a1edc65671bef693b1e", "mix": {"wide": [], "focus": [], "bounds": [7680, 30240]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "160964", "target": "Chuckle, chortle", "start": 12936, "end": 45968, "snr_db": -3.0, "offset": 132120, "sha256": "135f688ce79b7925342ac344e2305314ef8fe85ae6e3bccecb64c009ffec1bf4", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "399079", "target": "Acoustic guitar", "start": 49787, "end": 88008, "snr_db": 9.0, "offset": 0, "sha256": "d5d4291cca7f7f72f98463276c62f1050571a7b985c4cb1d357f126fe6d033e3", "mix": {"wide": [], "focus": [], "bounds": [48960, 71520]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "194432", "target": "Gong", "start": 12116, "end": 47015, "snr_db": 3.0, "offset": 11633, "sha256": "dab22f4f9a73877c010722e6c356702e9a8426a3791262d2ce79238db3340b8b", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "412768", "target": "Chewing, mastication", "start": 9938, "end": 43792, "snr_db": -3.0, "offset": 338520, "sha256": "07ce91e583ff633a43ba6607d8d4d79205a49e47ad6783b5d487c84418653813", "mix": {"wide": [], "focus": [], "bounds": [15840, 26400]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "36111", "target": "Snare drum", "start": 58399, "end": 86873, "snr_db": 3.0, "offset": 0, "sha256": "c9ce31c6c3b56b699da2241011b76a35b5ead28acef47bf93ce234ff069e6edb", "mix": {"wide": ["Snare drum"], "focus": [], "bounds": [75360, 83040]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "260219", "target": "Squeak", "start": 74449, "end": 89798, "snr_db": 3.0, "offset": 127900, "sha256": "332f52290a73077cbbeb5e212e2b0bdc838e672b9fe78c78beacf1a9bc5aaf26", "mix": {"wide": [], "focus": [], "bounds": [76080, 83760]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "386717", "target": "Finger snapping", "start": 22934, "end": 53932, "snr_db": -3.0, "offset": 0, "sha256": "3e1aee10ddc9133204552564d597947b9621cd303140759703e66be1f48805bc", "mix": {"wide": [], "focus": [], "bounds": [30240, 55680]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "424600", "target": "Walk, footsteps", "start": 27726, "end": 52767, "snr_db": -3.0, "offset": 141899, "sha256": "0a6fea983b2ac46901e02761d1f4440d2c6fb17858c2f6711d53da9306e83b47", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "7979", "target": "Electric guitar", "start": 37447, "end": 61756, "snr_db": -3.0, "offset": 0, "sha256": "dcccc24c181fdf61d9ada5bf94cbcd842d337c7ca96347bfd45240e530472d55", "mix": {"wide": [], "focus": [], "bounds": [88320, 96000]}, "bed": {"wide": [], "focus": [], "bounds": [88320, 96000]}},
+    {"id": "343169", "target": "Yell", "start": 26422, "end": 57869, "snr_db": 15.0, "offset": 73374, "sha256": "781bd946aabe77f85e75f19050c78f2656daafa6eba5667eb368825f0544e1b6", "mix": {"wide": [], "focus": [], "bounds": [24480, 58560]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "321741", "target": "Female singing", "start": 28497, "end": 63244, "snr_db": -3.0, "offset": 0, "sha256": "90c3112709bb0f733e95e5484ce88a96cdfd3ca51374a81297e5dfe530e225f7", "mix": {"wide": [], "focus": [], "bounds": [46800, 54480]}, "bed": {"wide": [], "focus": [], "bounds": [46800, 54480]}},
+    {"id": "149140", "target": "Camera", "start": 30243, "end": 63189, "snr_db": 3.0, "offset": 263568, "sha256": "808984a1f77991477de8d42cb876a57eee8c945251ff3f78e76381f706470172", "mix": {"wide": ["Camera"], "focus": [], "bounds": [43680, 53280]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "234739", "target": "Acoustic guitar", "start": 49652, "end": 85681, "snr_db": -3.0, "offset": 0, "sha256": "8a67b71aec433369eddfb96e3a24f449d1db12d21f94a1812e38886beec24c65", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "389170", "target": "Whoosh, swoosh, swish", "start": 38078, "end": 52478, "snr_db": 15.0, "offset": 0, "sha256": "6b750b8c210cf820703732c0d312ffc8d331535a9cc647cfa00c1a040b852f70", "mix": {"wide": [], "focus": [], "bounds": [39360, 49440]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "331704", "target": "Tick-tock", "start": 58732, "end": 70853, "snr_db": 3.0, "offset": 113120, "sha256": "a46c952259021063510876d343ffa08ce56b0dca1a55070016ea9499d525509b", "mix": {"wide": [], "focus": [], "bounds": [59040, 71040]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "266776", "target": "Computer keyboard", "start": 49621, "end": 67871, "snr_db": 15.0, "offset": 42581, "sha256": "986e9bd66e166eb82c91e8b9b5622b271d09889b37794460275c1ce26be927b1", "mix": {"wide": [], "focus": ["Computer keyboard"], "bounds": [47520, 70560]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "251300", "target": "Harmonica", "start": 7343, "end": 36314, "snr_db": 9.0, "offset": 0, "sha256": "bca4c130b724c538abdda32e8d5cb18434022efe4178f1f9882d44ca328dbe44", "mix": {"wide": [], "focus": [], "bounds": [5280, 38880]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "364702", "target": "Walk, footsteps", "start": 28013, "end": 55780, "snr_db": 3.0, "offset": 92550, "sha256": "555388ed9740b5b3479f611012548b824a9fc89fcaa84e1526a0ec3a3253bd3c", "mix": {"wide": [], "focus": [], "bounds": [26400, 58080]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "394840", "target": "Crumpling, crinkling", "start": 47588, "end": 78982, "snr_db": 15.0, "offset": 0, "sha256": "494afbaead880fe7adbdb6b96fb4482eac73c8f67a9f369c56629cd6248eb145", "mix": {"wide": [], "focus": [], "bounds": [46560, 66240]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "353138", "target": "Yell", "start": 52553, "end": 66554, "snr_db": 3.0, "offset": 51337, "sha256": "ac3a4a3e5c56dfa9ae187e39e7863103eab456d82b16556bfa48dea654230af5", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": [0, 7680]}},
+    {"id": "334983", "target": "Zipper (clothing)", "start": 17496, "end": 32206, "snr_db": 15.0, "offset": 24515, "sha256": "44f7fb45f20b5fee762320be57fafbcba0da8ecc4bbdce59be809012aa362308", "mix": {"wide": ["Zipper (clothing)"], "focus": ["Zipper (clothing)"], "bounds": [15360, 35520]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "263534", "target": "Female speech, woman speaking", "start": 32028, "end": 51683, "snr_db": 9.0, "offset": 39306, "sha256": "512477aa35ed5ae5e8295fc41852d478b6eaa5136e4874c235d6065b274903fd", "mix": {"wide": [], "focus": [], "bounds": [29760, 53760]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "351770", "target": "Crying, sobbing", "start": 57828, "end": 88254, "snr_db": 9.0, "offset": 365112, "sha256": "6757f3356b61ddb93b488960b6cb528b750823a707e62320d3f9d0b9582fb009", "mix": {"wide": [], "focus": [], "bounds": [56640, 90720]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "423990", "target": "Vehicle horn, car horn, honking", "start": 20453, "end": 37253, "snr_db": 9.0, "offset": 0, "sha256": "1f5af22c245d22f3896dda97c01f78b1d16f1241da92556ebef2e4ccf188c83f", "mix": {"wide": [], "focus": [], "bounds": [21120, 28800]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "391301", "target": "Sneeze", "start": 7927, "end": 28920, "snr_db": 15.0, "offset": 0, "sha256": "ba4cd8ffae6b88fafcbe6fdcdd0dd07c0d87759a0a09980ab0c4d91700e1292d", "mix": {"wide": ["Sneeze"], "focus": ["Sneeze"], "bounds": [12960, 26880]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "175520", "target": "Cutlery, silverware", "start": 32429, "end": 51124, "snr_db": -3.0, "offset": 0, "sha256": "763a3a57abaab16f9b1647e7dc4c66e195c6a36670294cc4ee59aba020dea49c", "mix": {"wide": [], "focus": [], "bounds": [31680, 41760]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "365635", "target": "Child speech, kid speaking", "start": 16329, "end": 43565, "snr_db": -3.0, "offset": 36312, "sha256": "e0e224b5fed6e33ace0ab86205a48207416d931186d5380e66826a8993489c67", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "70890", "target": "Trumpet", "start": 52833, "end": 82176, "snr_db": 3.0, "offset": 9781, "sha256": "f4b489fa98bcaa40dd3601eb5fe0664c135edefaa82ad5dc13e8b70736d92da9", "mix": {"wide": [], "focus": [], "bounds": [57600, 81600]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "274471", "target": "Bark", "start": 34380, "end": 72406, "snr_db": 3.0, "offset": 12675, "sha256": "fe099e663e209feea36f0f77ab2dc684888088d465b70b85a0a25d7dcc0af3b7", "mix": {"wide": [], "focus": ["Bark"], "bounds": [34080, 42720]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "165321", "target": "Hi-hat", "start": 30801, "end": 51681, "snr_db": 15.0, "offset": 0, "sha256": "334b2e8148de0c05d2c0c6168b22b47121d7c24258162db3d0c1bf662b3e9006", "mix": {"wide": ["Cutlery, silverware"], "focus": [], "bounds": [28320, 40320]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "53933", "target": "Trumpet", "start": 35536, "end": 65368, "snr_db": -3.0, "offset": 0, "sha256": "0f2d3d4e19af0d8486d481eeb62aa0fd15125e38a2680282bf54779e3dd52a00", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "132742", "target": "Ringtone", "start": 9308, "end": 44947, "snr_db": -3.0, "offset": 0, "sha256": "de2521aea457642d87f964e124396d57ac47767d762c3d0ac1908801423682d5", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "345807", "target": "Ringtone", "start": 46750, "end": 83279, "snr_db": 15.0, "offset": 158288, "sha256": "21098f2c8f6d39fb9653ed6951e066d17676867512b9b170a9b9bf5de3e63f8e", "mix": {"wide": [], "focus": [], "bounds": [44640, 85440]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "267711", "target": "Keys jangling", "start": 33685, "end": 50893, "snr_db": 3.0, "offset": 17208, "sha256": "df2f431488d06663fb1ac68e346c0361918f972ef2d58d97c7c4821f1c0c6f5a", "mix": {"wide": [], "focus": [], "bounds": [40560, 48240]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "168732", "target": "Skateboard", "start": 32157, "end": 59198, "snr_db": 15.0, "offset": 36052, "sha256": "abf0e8d71d59ae673c69d69b30c201b3f8939e53a2f1de11ab0da958cb7070b6", "mix": {"wide": [], "focus": [], "bounds": [30240, 61440]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "367669", "target": "Wind chime", "start": 24771, "end": 61034, "snr_db": 9.0, "offset": 265914, "sha256": "0552f6d79a7680e8f08cf13fffa26d59151e59b0600f1bb3db68acff187b0cb4", "mix": {"wide": [], "focus": [], "bounds": [23040, 63840]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "393444", "target": "Frying (food)", "start": 28389, "end": 42249, "snr_db": 15.0, "offset": 180180, "sha256": "64b00e73a9abc5de79eeb83908bc111459fc5d3bf9f8a18788ca3ad54d650f2f", "mix": {"wide": [], "focus": [], "bounds": [27840, 44160]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "50285", "target": "Crowd", "start": 26305, "end": 48646, "snr_db": 9.0, "offset": 0, "sha256": "45ea870d9aad252f59d874af4843b9d7b729e73f664104158345975ca5c28ea9", "mix": {"wide": [], "focus": [], "bounds": [28800, 45120]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "348134", "target": "Cough", "start": 59191, "end": 87092, "snr_db": 15.0, "offset": 27900, "sha256": "36dcfedad0eface68ab6518c564a96850f087912536567435b36f70dfe20356a", "mix": {"wide": ["Cough"], "focus": ["Cough"], "bounds": [60960, 83040]}, "bed": {"wide": [], "focus": [], "bounds": [49680, 57360]}},
+    {"id": "382735", "target": "Gunshot, gunfire", "start": 44164, "end": 70084, "snr_db": 15.0, "offset": 0, "sha256": "6b63f40bf351c1654ceb7debb97ae17fc88f59811ceb8f138da5e280afb0a3a9", "mix": {"wide": ["Gunshot, gunfire"], "focus": ["Gunshot, gunfire"], "bounds": [43200, 57120]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "26762", "target": "Burping, eructation", "start": 21303, "end": 34660, "snr_db": 15.0, "offset": 0, "sha256": "50b58549900de26dd60dfb1c78f840aec9aae19a5746845fbee765847c0c6c1e", "mix": {"wide": ["Burping, eructation"], "focus": ["Burping, eructation"], "bounds": [19200, 37440]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "266526", "target": "Slam", "start": 23314, "end": 45874, "snr_db": 9.0, "offset": 0, "sha256": "4310b2c70eb29b82c4472c0eff07bfc695307ebe4db119cabd2efe2bbd91d97f", "mix": {"wide": [], "focus": [], "bounds": [34560, 44160]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "180738", "target": "Crumpling, crinkling", "start": 36631, "end": 67140, "snr_db": 9.0, "offset": 0, "sha256": "df854dfd699adcbe64e83ae90111f0cff7fb6cfe8d19a42c5c1c3d14c5c5ebd6", "mix": {"wide": [], "focus": [], "bounds": [35520, 69600]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "348317", "target": "Skateboard", "start": 44197, "end": 65597, "snr_db": 9.0, "offset": 99862, "sha256": "ca1456fcfe7275a719e020300a920ab47c294daadae6d7ca815ad7ca0528db38", "mix": {"wide": [], "focus": ["Growling"], "bounds": [42240, 68160]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "420018", "target": "Screaming", "start": 48664, "end": 66043, "snr_db": 3.0, "offset": 17379, "sha256": "fa6118875480841f5d2f7130dc72e7cff294ebc5050c4ca9e65a9f2cc8664efc", "mix": {"wide": [], "focus": [], "bounds": [46080, 68640]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "360469", "target": "Gasp", "start": 30973, "end": 63574, "snr_db": 3.0, "offset": 0, "sha256": "c2bfd968f6625a67d9e2bb5032d86a90da8c7db71e6099a1fb96d94b8aec003c", "mix": {"wide": [], "focus": [], "bounds": [35040, 49920]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "394354", "target": "Camera", "start": 30535, "end": 61315, "snr_db": 15.0, "offset": 30780, "sha256": "d87db13095fb0be7d88972a16b08c109ec53f43508949ff28ca913a37e682467", "mix": {"wide": [], "focus": [], "bounds": [44160, 53760]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "236294", "target": "Rattle", "start": 41439, "end": 77639, "snr_db": -3.0, "offset": 24132, "sha256": "09b2ddfda49803db9e62ecaba8381bea32265e9a6e4812b0cab728f1868842a0", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "181599", "target": "Giggle", "start": 68393, "end": 80933, "snr_db": 15.0, "offset": 71060, "sha256": "39276d5b397c6009a7660e861d396a496b8ee580d6de253b796194ad1d5d059f", "mix": {"wide": [], "focus": [], "bounds": [66240, 83520]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "333779", "target": "Meow", "start": 33450, "end": 52028, "snr_db": 15.0, "offset": 68112, "sha256": "2a73c7355de10175ae2f31108e7ebc4735b7fb76d7ec5aed9400e09194659e45", "mix": {"wide": [], "focus": ["Meow"], "bounds": [34560, 54240]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "404684", "target": "Waves, surf", "start": 21755, "end": 56197, "snr_db": 3.0, "offset": 516600, "sha256": "06d8800fb1ee01c83e934c354cd2fdbe8c598da659221da5bf6561bb7dfd8110", "mix": {"wide": ["Waves, surf"], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "161326", "target": "Finger snapping", "start": 48082, "end": 69461, "snr_db": 9.0, "offset": 92638, "sha256": "0c31a1ce576b2e3accffdb1ce5d9270573a9c74b5a7dd6efd86ae0b602a6a035", "mix": {"wide": [], "focus": ["Finger snapping"], "bounds": [46080, 72000]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "82420", "target": "Screaming", "start": 22028, "end": 54641, "snr_db": 9.0, "offset": 43484, "sha256": "2e59e7c3344d79a514fb1abbac8cd68980ba49ce119b94f7804d22372cc8dc80", "mix": {"wide": [], "focus": [], "bounds": [23040, 57120]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "352631", "target": "Train", "start": 47516, "end": 61898, "snr_db": -3.0, "offset": 268464, "sha256": "06f981e410617064f73c00f517ba78ab0f73d6b6a928671b569d509129bc3bd0", "mix": {"wide": [], "focus": [], "bounds": [47040, 64320]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "346168", "target": "Coin (dropping)", "start": 37248, "end": 70857, "snr_db": 15.0, "offset": 0, "sha256": "0247fa01ff017ded28a0af4fc8057286ffd3edc13584e7fa0f4c5d4ce54ad710", "mix": {"wide": ["Coin (dropping)"], "focus": ["Coin (dropping)"], "bounds": [36480, 63360]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "243659", "target": "Printer", "start": 32659, "end": 65920, "snr_db": 3.0, "offset": 266088, "sha256": "ecc6fa40b680880243a716ad24368b260b2eae6514437edfe5d6f88c7415657c", "mix": {"wide": [], "focus": [], "bounds": [49920, 61440]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "426237", "target": "Chirp, tweet", "start": 53864, "end": 72423, "snr_db": -3.0, "offset": 18558, "sha256": "97e7396e730d3182eee933d0500d65573d51b1e2b60d3f1cc63694be123da4bc", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "345022", "target": "Giggle", "start": 10051, "end": 43286, "snr_db": -3.0, "offset": 77546, "sha256": "0f79dc32d3fd613033dbdc2d65123bd581cba387d652c16f88ad3ed968f19877", "mix": {"wide": [], "focus": [], "bounds": [9600, 24480]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "409234", "target": "Packing tape, duct tape", "start": 10692, "end": 39662, "snr_db": -3.0, "offset": 28968, "sha256": "e487d8177ec20322a39ad06fce9d58350a98e908eafff7060b5d957925bddd97", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "133823", "target": "Cupboard open or close", "start": 54830, "end": 85443, "snr_db": -3.0, "offset": 40816, "sha256": "af0e8b3dadab00ea8f7461f13b23404d1070be34eb26e3ce9c2ecd295a1309cf", "mix": {"wide": [], "focus": [], "bounds": [60720, 68400]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "377891", "target": "Sliding door", "start": 70338, "end": 89421, "snr_db": 3.0, "offset": 57249, "sha256": "25c184e4abb01afc31e1869f73e38f10bb07ca982101fde56d002640c7dd1c83", "mix": {"wide": [], "focus": [], "bounds": [68160, 92160]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "257436", "target": "Microwave oven", "start": 52346, "end": 79712, "snr_db": 9.0, "offset": 118586, "sha256": "945d50f8b29dd9cf937e0c23589b105ebc9c4f69946d82a3297a65e11180997e", "mix": {"wide": [], "focus": [], "bounds": [50880, 82560]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "155462", "target": "Gong", "start": 11437, "end": 49508, "snr_db": 3.0, "offset": 0, "sha256": "fd81969444f8bfde4517e91487f58bad82e728645239fde6a56d2e3a036bf120", "mix": {"wide": [], "focus": [], "bounds": [10560, 51360]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "405585", "target": "Siren", "start": 13041, "end": 31010, "snr_db": 9.0, "offset": 263516, "sha256": "87d768321ed90e72230b3009b1787f573407d5e042c4deca47db69f6cb2b082f", "mix": {"wide": [], "focus": [], "bounds": [11040, 33600]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "248258", "target": "Squeak", "start": 32648, "end": 51549, "snr_db": 15.0, "offset": 6300, "sha256": "53ba2d01eb7d4bb07c416e4c7d1aa2c8d04bf3d7b736181ff444521089c5eab5", "mix": {"wide": [], "focus": [], "bounds": [39840, 54240]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "268227", "target": "Whoosh, swoosh, swish", "start": 23252, "end": 49730, "snr_db": 3.0, "offset": 0, "sha256": "43186b14adf3c049f87a5453b91d09eb032e5d0cbb42a9f6bc7488cc665a7dab", "mix": {"wide": [], "focus": [], "bounds": [29280, 46080]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "332047", "target": "Female speech, woman speaking", "start": 48104, "end": 85391, "snr_db": -3.0, "offset": 248580, "sha256": "4897cd9e2aa6fa6b5059320fc706b843ced1dff2693fa2ab7b6ec69cf78ba3db", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "368265", "target": "Cupboard open or close", "start": 46642, "end": 82497, "snr_db": -3.0, "offset": 35853, "sha256": "d5cbf0cdafa7dfec6ac6854092f9b517d9769b1b62de420337b3aff0f1319119", "mix": {"wide": [], "focus": [], "bounds": [48000, 68160]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "331428", "target": "Computer keyboard", "start": 28687, "end": 63137, "snr_db": 15.0, "offset": 34449, "sha256": "d1558b65f5fc69cbbe6d23cb773cd1b8ae5d0b0f37cf869beb4eb7a54dce9b35", "mix": {"wide": ["Computer keyboard"], "focus": ["Computer keyboard"], "bounds": [26880, 60000]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "275103", "target": "Finger snapping", "start": 19749, "end": 49659, "snr_db": 9.0, "offset": 59820, "sha256": "c77613c8484fe6e7029e30890ad2800fe2c677bf24cec0d52eef82c9c5fcb002", "mix": {"wide": [], "focus": [], "bounds": [18240, 25920]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "148447", "target": "Tearing", "start": 18340, "end": 29033, "snr_db": -3.0, "offset": 0, "sha256": "629e691fceff101fa75acee676e0a23c6403e0f406f70a3df92c71885aa2665f", "mix": {"wide": [], "focus": [], "bounds": [16320, 24000]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "351367", "target": "Cutlery, silverware", "start": 21801, "end": 34444, "snr_db": -3.0, "offset": 0, "sha256": "e4d85ffdf5606742906003592f43e49f6bdc44cb98552e861bea266092a074dc", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "206143", "target": "Drawer open or close", "start": 37953, "end": 69839, "snr_db": -3.0, "offset": 0, "sha256": "e8ec90810bcaac1ff75c853c8ddc85eaaff7b900a58a70cb8414f9e025a70769", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "378688", "target": "Cutlery, silverware", "start": 71764, "end": 84662, "snr_db": 9.0, "offset": 55887, "sha256": "10ec365dc08cdd3b92bd5379fdc6df11bc9d14298108153916a68e85391a1dde", "mix": {"wide": [], "focus": [], "bounds": [75840, 85920]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "416196", "target": "Computer keyboard", "start": 12735, "end": 39298, "snr_db": 9.0, "offset": 61978, "sha256": "33cf1b18a4a3c1cb7f7fcd5c50d0538ce4fd4781c419455267a7f92edaeec44d", "mix": {"wide": [], "focus": ["Computer keyboard"], "bounds": [12000, 27360]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "255174", "target": "Wind instrument, woodwind instrument", "start": 11784, "end": 44866, "snr_db": 15.0, "offset": 77189, "sha256": "d15244f7832c94d07accd74e368823af834e58f83f9953a83b6573137cad6194", "mix": {"wide": [], "focus": [], "bounds": [28800, 47520]}, "bed": {"wide": [], "focus": [], "bounds": [480, 8160]}},
+    {"id": "31949", "target": "Tick-tock", "start": 60366, "end": 78741, "snr_db": -3.0, "offset": 226625, "sha256": "92a95c5feafa2f6bb21d02c7154a92aa4c23777a13319b80e9e241bedc9831e6", "mix": {"wide": [], "focus": [], "bounds": [60000, 81120]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "218847", "target": "Drawer open or close", "start": 34295, "end": 60010, "snr_db": -3.0, "offset": 8571, "sha256": "5cb7cdfb75493ce6517970ee4895238784299efd77c412e98a7960568550d602", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "235369", "target": "Wind chime", "start": 8104, "end": 42520, "snr_db": 9.0, "offset": 34416, "sha256": "9d2d6b12f702985f7a279840d826360192b47a286010b9bbf80e829d6d3754db", "mix": {"wide": [], "focus": ["Wind chime"], "bounds": [6240, 44640]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "332225", "target": "Packing tape, duct tape", "start": 38809, "end": 72883, "snr_db": -3.0, "offset": 34074, "sha256": "5c4908a81ac0a02ea009cf64ce2e1c487b7b80a4b88edecc715235515d152932", "mix": {"wide": [], "focus": [], "bounds": [56160, 65280]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "389214", "target": "Microwave oven", "start": 21292, "end": 43527, "snr_db": 9.0, "offset": 103754, "sha256": "04ac504d372d6558f7cb264a5cc8393ffacec640ea6f3974935c1c5d148de84e", "mix": {"wide": [], "focus": [], "bounds": [26880, 36480]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "119850", "target": "Crumpling, crinkling", "start": 23822, "end": 41522, "snr_db": 9.0, "offset": 47200, "sha256": "5ee4a9afe2881c17ff3701f19aefb0803d2536fe6dded9ba558b278d268a21f5", "mix": {"wide": [], "focus": [], "bounds": [21600, 44160]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "154757", "target": "Bark", "start": 56757, "end": 85604, "snr_db": 9.0, "offset": 28845, "sha256": "042ba5a4462ed758d2e458f93b11e39449bfd6f403342bfecdce7b35a4d7b881", "mix": {"wide": [], "focus": [], "bounds": [54720, 87840]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "412132", "target": "Bass guitar", "start": 47929, "end": 68006, "snr_db": 9.0, "offset": 20076, "sha256": "2e5a4202c482ca0a1a217594f3397c3413b0df151cc440d05dcbe0cb72e4b9d2", "mix": {"wide": [], "focus": [], "bounds": [48480, 70560]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "171519", "target": "Sneeze", "start": 40020, "end": 75879, "snr_db": 15.0, "offset": 0, "sha256": "892ba2bad9c49de4130e2973c836f47e3d26d3b18e668653e80b0d15880eeb0c", "mix": {"wide": ["Cough"], "focus": ["Cough"], "bounds": [41280, 60960]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "186391", "target": "Coin (dropping)", "start": 22301, "end": 59583, "snr_db": -3.0, "offset": 62135, "sha256": "5634003bcc8c491ac3b195e6373959e0d30edbbd4ca0e5fdeacbd427d4f43548", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "347550", "target": "Whoosh, swoosh, swish", "start": 11811, "end": 33962, "snr_db": 9.0, "offset": 0, "sha256": "10d5c819ba0775cc63c8c55d7a3b57e23a2a37285c50c10eb29e7d9ac43f7307", "mix": {"wide": [], "focus": [], "bounds": [10560, 18720]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "35843", "target": "Bass guitar", "start": 56877, "end": 82794, "snr_db": 3.0, "offset": 0, "sha256": "62e0691f0193bbec815c4c3439cc25558b61c9a4893fb10bd29aa9eafc4f5c90", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "391923", "target": "Writing", "start": 52904, "end": 67714, "snr_db": -3.0, "offset": 0, "sha256": "9835b8537ea88168ca6a5275051bd5c89c073e9aa548b071c147eec9230543b7", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "332558", "target": "Crackle", "start": 47118, "end": 62339, "snr_db": 3.0, "offset": 101460, "sha256": "32dafd90401979ea727c731a97f39fa45439fad77fdd116510e3cc2c446e90a3", "mix": {"wide": [], "focus": [], "bounds": [48480, 56160]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "351598", "target": "Yell", "start": 47294, "end": 84658, "snr_db": -3.0, "offset": 74724, "sha256": "09bfceae425c0d92515e634938983d991834cae7a08ba3d9ac3531576df528af", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "431621", "target": "Fart", "start": 43063, "end": 68113, "snr_db": -3.0, "offset": 0, "sha256": "d796c97bdd1d33c6fc0962b78589de871b250c3a4bbe7b58335853812d11debe", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "379323", "target": "Run", "start": 33033, "end": 51397, "snr_db": -3.0, "offset": 122420, "sha256": "1caec603cd8e2e0527f984a177b85004b9f5fc90693616d95116d667c571b240", "mix": {"wide": [], "focus": [], "bounds": [31200, 40800]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "393733", "target": "Cough", "start": 37795, "end": 60730, "snr_db": 9.0, "offset": 7645, "sha256": "246204772e29adb169c6592e6ffa3383c7abd2ad0ea08ad6a8ca2aafaa2b30b0", "mix": {"wide": ["Cough"], "focus": ["Cough"], "bounds": [36960, 58080]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "352716", "target": "Squeak", "start": 19027, "end": 51252, "snr_db": 3.0, "offset": 0, "sha256": "4727cd5187f19c1ba9dbc373b2d617f95b0bfa1592c77d173234e00f0e186ddb", "mix": {"wide": [], "focus": [], "bounds": [24960, 47040]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "350706", "target": "Cowbell", "start": 14518, "end": 32553, "snr_db": -3.0, "offset": 0, "sha256": "7ee75f276ddcc354cb7c40f41c14dd31655a50fd5b74086c5599cac2965d411c", "mix": {"wide": [], "focus": [], "bounds": [14880, 22560]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "188040", "target": "Glockenspiel", "start": 62053, "end": 85288, "snr_db": 9.0, "offset": 0, "sha256": "53a6dca459ad17fe324942cfe05e293bb1af849f5e579cdbbde2d42f4d7746e6", "mix": {"wide": [], "focus": [], "bounds": [60480, 87840]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "430049", "target": "Glockenspiel", "start": 40301, "end": 68298, "snr_db": 3.0, "offset": 438604, "sha256": "547a0b22d96a41f236c3c8861465cf173786da0f04ca1b1434fafc0bea2e380f", "mix": {"wide": [], "focus": [], "bounds": [38400, 70560]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "119545", "target": "Gong", "start": 12521, "end": 33619, "snr_db": -3.0, "offset": 14064, "sha256": "e1ed3f2a6014d6b60d1e6fc631faa35c2c96a968690fc9d295d81cd1703608b8", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "345582", "target": "Tabla", "start": 36853, "end": 48875, "snr_db": 9.0, "offset": 0, "sha256": "ebad5338aff97c5e1ac4a38f18f66ca6ac559244d469d1c29056c82c85dd92c0", "mix": {"wide": [], "focus": [], "bounds": [33600, 51840]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "429994", "target": "Cupboard open or close", "start": 32098, "end": 58447, "snr_db": -3.0, "offset": 87830, "sha256": "19a512fc06ef6cbdeadf810c44a5aa2cbfa705a07c47226a0519e76b9d70c9c8", "mix": {"wide": [], "focus": [], "bounds": [34560, 44640]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "91558", "target": "Train", "start": 23571, "end": 45274, "snr_db": 9.0, "offset": 7234, "sha256": "3032c4761547ecb9c9240f0ac439cb18feb142c1dd762b5b1af86c05ebe08d9d", "mix": {"wide": [], "focus": [], "bounds": [21600, 48000]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "277741", "target": "Tearing", "start": 29841, "end": 44725, "snr_db": 15.0, "offset": 44649, "sha256": "fc45473512ec84f3bcc3b204c7c662d30e002221456dba70eacf833c0646a5b9", "mix": {"wide": [], "focus": [], "bounds": [34560, 43200]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "232895", "target": "Slam", "start": 68286, "end": 88073, "snr_db": 3.0, "offset": 13190, "sha256": "e5bfc6eb068ea0dd8409eb2dd5d5ee41d92f708c1e01c1d4ff048a2fa7c2b5fa", "mix": {"wide": [], "focus": [], "bounds": [71040, 90240]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "157153", "target": "Dishes, pots, and pans", "start": 15311, "end": 42814, "snr_db": 9.0, "offset": 0, "sha256": "7e5defbb353024fd8ef1604a1d252b9198fda5072b4bb36f1a832c24560d244d", "mix": {"wide": [], "focus": [], "bounds": [12960, 39360]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "219685", "target": "Screaming", "start": 13913, "end": 46144, "snr_db": 15.0, "offset": 10743, "sha256": "1e21defc02993f7181e5f7378bafb1b5c11864bf74dbec749793f7dfb5180edd", "mix": {"wide": [], "focus": [], "bounds": [12000, 46080]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "242006", "target": "Microwave oven", "start": 30107, "end": 57897, "snr_db": -3.0, "offset": 92630, "sha256": "b8b12a16fe04b112f1acface8585aaab995a47468a594923e3e10a59af29511b", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "421690", "target": "Female speech, woman speaking", "start": 35458, "end": 51491, "snr_db": 3.0, "offset": 10688, "sha256": "97d4533ddea082742f8c8fc1bfa3ebdb3a41e140a5add60bfcda88268f931a11", "mix": {"wide": [], "focus": [], "bounds": [35040, 50880]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "122618", "target": "Chirp, tweet", "start": 31042, "end": 59309, "snr_db": -3.0, "offset": 226128, "sha256": "ab8ceb5c154d5124df6cd8841becf9e9e906cbc4dcc920d828c877398782d93b", "mix": {"wide": [], "focus": [], "bounds": [37920, 46560]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "277267", "target": "Rattle (instrument)", "start": 57404, "end": 75910, "snr_db": 9.0, "offset": 43176, "sha256": "4de3af4c137ccf4f0f93c6706ecf70bf78f09982e3bcfcab4af118f885c0fa5f", "mix": {"wide": [], "focus": [], "bounds": [60960, 78720]}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "328856", "target": "Wind instrument, woodwind instrument", "start": 60227, "end": 75204, "snr_db": 3.0, "offset": 84864, "sha256": "58f8f80173ee89737e2ccb515dbd88a81128ed422802f8cb73d41f83f463e4d5", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}},
+    {"id": "380133", "target": "Typewriter", "start": 29457, "end": 57700, "snr_db": -3.0, "offset": 0, "sha256": "7d162ccdfce3f54b6bb3912801013621b24cedd3732ea6c9c3b8827ddc33b2f5", "mix": {"wide": [], "focus": [], "bounds": null}, "bed": {"wide": [], "focus": [], "bounds": null}}
+  ],
+  "field": [
+    {"file": "a029", "start_s": 96, "focused_interval": [96.2, 96.68], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a029", "start_s": 68, "focused_interval": [71.52, 72.0], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a029", "start_s": 120, "focused_interval": [120.22, 120.86], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a029", "start_s": 176, "focused_interval": [178.66, 179.06], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a029", "start_s": 148, "focused_interval": [149.98, 150.3], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a029", "start_s": 108, "focused_interval": null, "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a029", "start_s": 12, "focused_interval": [15.1, 15.76], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a029", "start_s": 104, "focused_interval": [106.02, 106.64], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": ["Microwave oven"], "hit": false, "unmatched": 1}, "oracle_matched": false},
+    {"file": "a033", "start_s": 116, "focused_interval": [116.58, 117.26], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a033", "start_s": 12, "focused_interval": [14.24, 14.68], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a033", "start_s": 48, "focused_interval": [49.44, 49.98], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a033", "start_s": 152, "focused_interval": [152.1, 153.56], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a033", "start_s": 160, "focused_interval": [162.96, 163.68], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a033", "start_s": 148, "focused_interval": [148.0, 148.32], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": ["Snare drum"], "hit": false, "unmatched": 1}, "oracle_matched": false},
+    {"file": "a033", "start_s": 140, "focused_interval": [140.62, 141.44], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a033", "start_s": 132, "focused_interval": [134.46, 135.24], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 160, "focused_interval": [160.3, 161.6], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 164, "focused_interval": [165.96, 166.74], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 132, "focused_interval": [133.78, 134.56], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 36, "focused_interval": [38.66, 39.14], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 156, "focused_interval": [159.22, 159.82], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 148, "focused_interval": [148.78, 149.34], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 176, "focused_interval": [176.0, 176.52], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a035", "start_s": 0, "focused_interval": [2.68, 3.0], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a037", "start_s": 64, "focused_interval": [64.14, 64.92], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a037", "start_s": 4, "focused_interval": [7.32, 8.0], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a037", "start_s": 144, "focused_interval": [145.6, 146.18], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a037", "start_s": 132, "focused_interval": [135.14, 136.0], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a037", "start_s": 68, "focused_interval": [70.32, 70.78], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a037", "start_s": 8, "focused_interval": [8.0, 8.48], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a037", "start_s": 148, "focused_interval": [150.46, 151.14], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": ["Cupboard open or close"], "hit": false, "unmatched": 1}, "oracle_matched": false},
+    {"file": "a037", "start_s": 28, "focused_interval": [28.58, 28.96], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 72, "focused_interval": [72.94, 73.34], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 272, "focused_interval": [272.9, 274.44], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 268, "focused_interval": [268.62, 269.34], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 180, "focused_interval": [183.46, 183.94], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": ["Cupboard open or close"], "hit": true, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 48, "focused_interval": [49.04, 49.58], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 76, "focused_interval": [76.0, 76.36], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 156, "focused_interval": [159.0, 159.56], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b043", "start_s": 8, "focused_interval": [8.0, 8.42], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a008", "start_s": 116, "focused_interval": [117.88, 118.5], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "a009", "start_s": 188, "focused_interval": null, "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b005", "start_s": 32, "focused_interval": null, "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b005", "start_s": 12, "focused_interval": [12.52, 13.04], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b005", "start_s": 4, "focused_interval": [4.92, 5.64], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b005", "start_s": 8, "focused_interval": [9.98, 10.52], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b005", "start_s": 92, "focused_interval": [92.0, 92.84], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b006", "start_s": 164, "focused_interval": null, "before": {"names": ["Car passing by"], "hit": true, "unmatched": 0}, "after": {"names": ["Car passing by"], "hit": true, "unmatched": 0}, "oracle_matched": true},
+    {"file": "b006", "start_s": 196, "focused_interval": null, "before": {"names": ["Car passing by"], "hit": true, "unmatched": 0}, "after": {"names": ["Car passing by"], "hit": true, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b006", "start_s": 124, "focused_interval": null, "before": {"names": ["Car passing by"], "hit": true, "unmatched": 0}, "after": {"names": ["Car passing by"], "hit": true, "unmatched": 0}, "oracle_matched": false},
+    {"file": "b008", "start_s": 12, "focused_interval": [14.26, 14.8], "before": {"names": [], "hit": false, "unmatched": 0}, "after": {"names": [], "hit": false, "unmatched": 0}, "oracle_matched": false}
+  ],
+  "door": {
+    "A": {
+      "released_until": 8.5,
+      "turns": 2,
+      "output_hashes_sha256": "cbbb8e2ea6d6e72e5104fdbd5d6d7b96cfdbbc775eaa9dbd2679bbc531b9d369",
+      "answer": "A brief series of light metallic jingles and rattles, like keys being moved, breaks the quiet before fading away."
+    },
+    "C": {
+      "released_until": 8.5,
+      "turns": 2,
+      "output_hashes_sha256": "cbbb8e2ea6d6e72e5104fdbd5d6d7b96cfdbbc775eaa9dbd2679bbc531b9d369"
+    },
+    "B": {
+      "released_until": 8.5,
+      "turns": 2,
+      "output_hashes_sha256": "ca56959b3da84d62f98abac49d48d31d784f4aa1a0cd6a26ad71ee35e56db89c",
+      "answer": "A faint, steady airy hiss or fan-like noise continues until playback stops, with no intelligible speech or distinct brief sound."
+    },
+    "silent": {
+      "released_until": 8.5,
+      "turns": 2,
+      "output_hashes_sha256": "441ed27728731c59e65641b49cb5c5a3fb7f662427a1d886eaffd1da9b0a9038",
+      "answer": "There was silence throughout, with no audible sounds or speech."
+    },
+    "picture": {
+      "released_until": 8.499,
+      "turns": 2,
+      "output_hashes_sha256": "03917f24e846b42bd1b9abe1fc87dddb668e3bfa998bc19c137a84f14cdd899b",
+      "answer": "No audio was available, so I can’t describe any sounds or words."
+    }
+  },
+  "source_reader_time": {
+    "hardware": "Apple M4 Pro, 64 GiB, local cached weights",
+    "method": "Two successive isolated SourceReader runs on the same first 25 confirmation mixtures, before then after. Time includes IPC and waveform encoding, excludes GPT, playback, captions and other helpers. The first recording warms the process and is excluded from the median. One pass per condition.",
+    "ids": [
+      "235602",
+      "94934",
+      "347647",
+      "270346",
+      "173117",
+      "156558",
+      "175196",
+      "390710",
+      "11072",
+      "341564",
+      "192553",
+      "108530",
+      "74198",
+      "368174",
+      "330925",
+      "337435",
+      "160964",
+      "399079",
+      "194432",
+      "412768",
+      "36111",
+      "260219",
+      "386717",
+      "424600",
+      "7979"
+    ],
+    "before_s": [
+      3.103891457983991,
+      0.6202106670243666,
+      0.6290572500147391,
+      0.6325397919863462,
+      0.6318120830110274,
+      0.6276114159845747,
+      0.6195121670025401,
+      0.61760829098057,
+      0.6206967080070172,
+      0.6146701249817852,
+      0.6144521670066752,
+      0.6568519159918651,
+      0.6587176249886397,
+      0.6283354169863742,
+      0.633674125012476,
+      0.6201446249906439,
+      0.6204430829966441,
+      0.6241654170153197,
+      0.6167878340056632,
+      0.6199002499924973,
+      0.658950624987483,
+      0.6312647919985466,
+      0.633873249986209,
+      0.6264558749971911,
+      0.6137767909967806
+    ],
+    "after_s": [
+      4.440165541978786,
+      0.8990952919994015,
+      0.7911402499885298,
+      0.7796405410044827,
+      0.8354275829915423,
+      0.8776009170105681,
+      0.6225502090237569,
+      0.6231376249925233,
+      0.6144865000096615,
+      0.8224877920001745,
+      0.870261833013501,
+      0.8170059580006637,
+      0.7715554999886081,
+      0.7752207499870565,
+      0.8303131249849685,
+      0.880511541996384,
+      0.6225676249887329,
+      0.8399166669987608,
+      0.6219051670050249,
+      0.80953062500339,
+      0.8304653750092257,
+      0.8273377500008792,
+      0.8308451670163777,
+      0.6461738340149168,
+      0.8002660000056494
+    ],
+    "median_before_s": 0.6253106460062554,
+    "median_after_s": 0.8132682915020268
+  },
+  "summary": {
+    "descriptions": {
+      "before": {
+        "human_same_minus_other": 0.3608361813860635,
+        "reader_same_minus_other": 0.18728974635402362,
+        "fraction_of_human": 0.5190436990952406,
+        "film_bootstrap_95": [
+          0.3712662808465924,
+          0.6555007389207084
+        ]
+      },
+      "after": {
+        "human_same_minus_other": 0.3608361813860635,
+        "reader_same_minus_other": 0.18559286718567214,
+        "fraction_of_human": 0.5143410687718808,
+        "film_bootstrap_95": [
+          0.36427548462350623,
+          0.6525605047800437
+        ]
+      },
+      "paired_gap_change": {
+        "mean_change": -0.0016968791683514932,
+        "bootstrap_95_percent": [
+          -0.014958853234226507,
+          0.011955984833960721
+        ],
+        "increased": 9,
+        "decreased": 15,
+        "tied": 0
+      }
+    },
+    "questions": {
+      "before": {
+        "individual_votes_matched": 160,
+        "majority_matched": 58,
+        "majority_wrong": 7,
+        "unknown": 31
+      },
+      "after": {
+        "individual_votes_matched": 180,
+        "majority_matched": 64,
+        "majority_wrong": 11,
+        "unknown": 21
+      },
+      "other_recording": {
+        "individual_votes_matched": 94,
+        "majority_matched": 33,
+        "majority_wrong": 24,
+        "unknown": 39
+      },
+      "constant_answer": {
+        "yes": {
+          "majority_matched": 57,
+          "individual_votes_matched": 174
+        },
+        "no": {
+          "majority_matched": 39,
+          "individual_votes_matched": 114
+        }
+      },
+      "questions": 96,
+      "votes": 288,
+      "split_votes": 45,
+      "human_pairs_agree": 198,
+      "paired_vote_change": {
+        "mean_change": 0.06944444444444443,
+        "bootstrap_95_percent": [
+          0.01388888888888889,
+          0.1388888888888889
+        ],
+        "increased": 6,
+        "decreased": 0,
+        "tied": 18
+      },
+      "correct_vs_swapped_change": {
+        "mean_change": 0.2986111111111111,
+        "bootstrap_95_percent": [
+          0.19444444444444442,
+          0.40277777777777773
+        ],
+        "increased": 18,
+        "decreased": 3,
+        "tied": 3
+      }
+    },
+    "gpt_sources": {
+      "before": {
+        "mix": {
+          "unknown": 45,
+          "exact": 1,
+          "wrong": 1,
+          "compatible": 1
+        },
+        "bed": {
+          "unknown": 12
+        }
+      },
+      "after": {
+        "mix": {
+          "unknown": 39,
+          "exact": 6,
+          "wrong": 2,
+          "compatible": 1
+        },
+        "bed": {
+          "unknown": 12
+        }
+      },
+      "paired_exact_change": {
+        "mean_change": 0.10416666666666667,
+        "bootstrap_95_percent": [
+          0.020833333333333332,
+          0.20833333333333334
+        ],
+        "increased": 5,
+        "decreased": 0,
+        "tied": 43
+      }
+    },
+    "confirmation": {
+      "mix": {
+        "before": {
+          "hit_clips": 14,
+          "unmatched_names": 3,
+          "unnamed_clips": 111
+        },
+        "after": {
+          "hit_clips": 20,
+          "unmatched_names": 4,
+          "unnamed_clips": 104
+        }
+      },
+      "bed": {
+        "before": {
+          "hit_clips": 0,
+          "unmatched_names": 0,
+          "unnamed_clips": 128
+        },
+        "after": {
+          "hit_clips": 0,
+          "unmatched_names": 0,
+          "unnamed_clips": 128
+        }
+      },
+      "localization": {
+        "mean_4s_iou": 0.26503157552083334,
+        "mean_focus_iou": 0.49123277626214135,
+        "paired_change": {
+          "mean_change": 0.22620120074130795,
+          "bootstrap_95_percent": [
+            0.163250759549695,
+            0.28722510812837976
+          ],
+          "increased": 86,
+          "decreased": 42,
+          "tied": 0
+        },
+        "mean_duration_matched_random_iou": 0.15060850130468958,
+        "found_excerpt": 100,
+        "bed_excerpt": 6
+      }
+    },
+    "annotated_field": {
+      "before": {
+        "hit_windows": 3,
+        "unmatched_names": 0
+      },
+      "after": {
+        "hit_windows": 4,
+        "unmatched_names": 3
+      }
+    }
+  }
+}

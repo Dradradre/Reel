@@ -16,7 +16,7 @@
   reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
   reel mcp FILM [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
-  reel setup [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
+  reel setup [--sound-examples] [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
 """
 import shlex
 import sys as _sys, pathlib as _pl
@@ -52,6 +52,7 @@ def doctor():
     from unmix import PYTHON as unmix_py, ready as layers_ready
     from point_reader import PYTHON as follow_py, ready as follow_ready
     import identify_sound
+    from source_examples import ready as examples_ready
     from scene_audio import READY as captions_ready
     from localize_sound import ready as location_ready
     from sound_events import ready as events_ready
@@ -73,6 +74,7 @@ def doctor():
             ("short sound events: YAMNet", events_ready() and subprocess.run(
                 [sys.executable, str(HERE / "sound_events.py"), "--check"], capture_output=True).returncode == 0,
              "pip install -e '.[events]' and reel setup --sound-events"),
+            ("recognize sources from reference recordings", examples_ready(), "reel setup --sound-examples"),
             ("sound identity: PE-AV and CLAP", identify_sound.READY.is_file() and pathlib.Path(identify_sound.PYTHON).is_file(), "reel setup --identify-sounds"),
             ("first-listen descriptions: CoNeTTE", captions, "reel setup --captions"),
             ("waveform and optional joint picture/sound readings: Qwen3-Omni", hearing, "reel setup --describe-sounds"),
@@ -106,6 +108,10 @@ def setup():
     if "--speech" in sys.argv:
         subprocess.run([ASR_PY, str(HERE / "live_speech.py"), "--setup"], check=True)
         print("local speech activity and transcription ready")
+    if "--sound-examples" in sys.argv:
+        from source_examples import prepare_environment
+        prepare_environment()
+        print("reference recordings ready for source recognition")
     if "--identify-sounds" in sys.argv:
         from identify_sound import prepare_environment
         prepare_environment()
@@ -138,7 +144,7 @@ def setup():
         from localize_sound import prepare_environment
         prepare_environment()
         print("sound location ready")
-    optional_models = {"--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
+    optional_models = {"--sound-examples", "--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
     if "--sync" not in sys.argv and optional_models.intersection(sys.argv):
         return
     if not UNISAL.exists():

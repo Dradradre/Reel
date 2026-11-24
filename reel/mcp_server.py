@@ -26,6 +26,7 @@ if __package__:
     from .common import RecordedSource
     from .replay import replay
     from .pitch import PitchTrace
+    from .source_examples import SourceReader, ready as source_examples_ready
     from .onsets import recorded_attacks
     from .compare_sounds import SoundMatcher
     from .compare_heard import describe_recordings, recordings, sound_similarity
@@ -56,6 +57,7 @@ else:
     from common import RecordedSource
     from replay import replay
     from pitch import PitchTrace
+    from source_examples import SourceReader, ready as source_examples_ready
     from onsets import recorded_attacks
     from compare_sounds import SoundMatcher
     from compare_heard import describe_recordings, recordings, sound_similarity
@@ -215,12 +217,15 @@ def first_view_report(report):
                 "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. "
                          "Background activity can also produce a run.",
                 "runs": [{"channels": channels, "times_s": list(times)} for times, channels in sorted(shared.items())]}
+        matches = report["audio"].get("source_examples", {})
+        if matches.get("windows"):
+            audio["source_examples"] = matches
         if "sound_events" in report["audio"]:
             audio["sound_events"] = report["audio"]["sound_events"]
         stereo = report["audio"].get("stereo_cues")
         if stereo and stereo.get("pairs") and stereo.get("windows"):
             audio["stereo_summary"] = summarize_stereo(stereo)
-        audio.update({k: v for k, v in report["audio"].items() if k not in ("band_changes", "stereo_cues", "attacks")})
+        audio.update({k: v for k, v in report["audio"].items() if k not in ("band_changes", "stereo_cues", "attacks", "source_examples")})
         if "band_changes" in report["audio"]:
             audio["band_change_times_s"] = list(dict.fromkeys(c["time_s"] for c in report["audio"]["band_changes"]))
         result["audio"] = audio
@@ -230,7 +235,8 @@ def first_view_report(report):
 
 
 class Viewing:
-    def __init__(self, playback, sound, words, lang, source=None, layers=None, tracker=None, matcher=None, identity=None):
+    def __init__(self, playback, sound, words, lang, source=None, layers=None, tracker=None, matcher=None, identity=None, examples=None):
+        self.examples = examples
         self.identity = identity
         self.matcher = matcher
         self.tracker = tracker
@@ -564,7 +570,7 @@ class Viewing:
             fields = ("rate_hz", "channels", "first_sample_on_film", "sample_count", "signal", "recorded_spectrum",
                       "band_changes", "stereo_cues", "during_pictures", "pitch_contour", "attacks")
             if sound_estimates:
-                fields += ("source_estimates", "scene", "sound_events", "sound_identity")
+                fields += ("source_estimates", "scene", "sound_events", "sound_identity", "source_examples")
             report["audio"] = {key: audio[key] for key in fields if key in audio}
             if image_hearing:
                 report["audio"]["wav_attached"] = native_audio
@@ -731,6 +737,9 @@ class Viewing:
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first),
                       "attacks": recorded_attacks(wav, first)}
+            if describe and self.examples is not None:
+                with self.examples.for_replay() as examples:
+                    result["source_examples"] = examples.read(original, first, stop, isolated=True)
             if verify_sounds or (describe and result.get("status") == "unavailable"):
                 # A failed question reader can still return timed, open-ended evidence from the mix.
                 # Keep its question status separate: a caption is not an answer or a transcript.
@@ -930,6 +939,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
     with ExitStack() as stack:
         directory = Path(stack.enter_context(TemporaryDirectory(prefix="reel-view-")))
         identity = stack.enter_context(IdentityReader())
+        examples = stack.enter_context(SourceReader()) if source_examples_ready() else None
         sound = stack.enter_context(SoundReader())  # Starts on the first request that needs the waveform model.
         words = stack.enter_context(SpeechReader(sound))
         playback = None
@@ -941,7 +951,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                 playback = stack.enter_context(closing(play(source, directory / "turns", until=until, step=pace.seconds,
                                                            continuous=pace.continuous, max_frames=pace.max_frames,
                                                            recording_only=pace.recording_only, verify_sounds=verify_sounds,
-                                                           identify_sounds=identify_sounds, identity_reader=identity,
+                                                           identify_sounds=identify_sounds, identity_reader=identity, example_reader=examples,
                                                            max_continuous_pcm_bytes=MAX_INLINE_PCM_BYTES, tracks=tracks,
                                                            speech=speech, gaze=gaze, lang=lang, joint=joint,
                                                            describe_sounds=describe_sounds, sound_reader=sound,
@@ -953,7 +963,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                 return None
 
         layers = stack.enter_context(LayerReader())
-        reader = Viewing(next_turn, sound, words, lang, source, layers, stack.enter_context(PointReader()), layers.matcher, identity)
+        reader = Viewing(next_turn, sound, words, lang, source, layers, stack.enter_context(PointReader()), layers.matcher, identity, examples)
 
         media = TurnMedia(server, reader.original)
 

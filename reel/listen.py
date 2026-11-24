@@ -19,6 +19,7 @@ if __package__:
     from .scene_audio import inspect_scene
     from .sound_events import inspect_events, ready as events_ready
     from .pitch import PitchTrace
+    from .source_examples import SourceReader, ready as source_examples_ready
     from .onsets import recorded_attacks
     from .stereo import StereoHistory
 else:
@@ -32,6 +33,7 @@ else:
     from scene_audio import inspect_scene
     from sound_events import inspect_events, ready as events_ready
     from pitch import PitchTrace
+    from source_examples import SourceReader, ready as source_examples_ready
     from onsets import recorded_attacks
     from stereo import StereoHistory
 
@@ -217,6 +219,9 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
         if volume:
             report["playback_sound_events"] = (report["sound_events"] if playback == original else
                                               inspect_events(playback, first_sample, end))
+    if source_examples_ready():
+        with SourceReader() as examples:
+            report["source_examples"] = examples.read(original, first_sample, end, isolated=True)
     report["scene"] = inspect_scene(original, first_sample, end, verify_sounds=verify_sounds)
     if focus:
         report["scene_basis"] = "The scene reader heard the original mix."

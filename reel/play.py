@@ -25,6 +25,7 @@ if __package__:
     from .config import GAZE_PY, PY
     from .live_speech import SpeechReader
     from .pitch import PitchTrace
+    from .source_examples import SourceReader, ready as source_examples_ready
     from .onsets import OnsetTrace, attack_report
     from .local_reader import LocalReader
     from .action_view import action_views, missing_sequence, sound_during_pictures
@@ -43,6 +44,7 @@ else:
     from config import GAZE_PY, PY
     from live_speech import SpeechReader
     from pitch import PitchTrace
+    from source_examples import SourceReader, ready as source_examples_ready
     from onsets import OnsetTrace, attack_report
     from local_reader import LocalReader
     from action_view import action_views, missing_sequence, sound_during_pictures
@@ -155,7 +157,7 @@ def save_sound(dest, chunks, info, wave_format, dtype):
 def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=False, gaze=False, speech=False,
          lang=None, sound_reader=None, joint=False, pause_on_sound_change=False, continuous=False,
          max_continuous_pcm_bytes=None, tracks="both", max_frames=None, recording_only=False, verify_sounds=False, identify_sounds=False,
-         identity_reader=None):
+         identity_reader=None, example_reader=None):
     """Yield one published interval per pull. The reader sees no later intervals or source path."""
     source, out = Path(source), Path(out)
     if not math.isfinite(step) or step <= 0:
@@ -195,6 +197,9 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
         identity = None
         if identify_sounds and info["has_audio"]:
             identity = identity_reader if identity_reader is not None else stack.enter_context(IdentityReader())
+        examples = example_reader
+        if examples is None and info["has_audio"] and source_examples_ready():
+            examples = stack.enter_context(SourceReader())
         event_reader = stack.enter_context(EventReader()) if info["has_audio"] and events_ready() else None
         reader = None
         if info["has_audio"] and (describe_sounds or joint):
@@ -368,6 +373,9 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                     if identity is not None:
                         audio["sound_identity"] = identity.read(dest / audio["wav"], float(start), float(position),
                                                                audio["first_sample_on_film"])
+                    if examples is not None:
+                        audio["source_examples"] = examples.read(dest / audio["wav"], audio["first_sample_on_film"],
+                                                                float(position))
                     if event_reader is not None:
                         audio["sound_events"] = event_reader.read(dest / audio["wav"], audio["first_sample_on_film"], float(position))
                     if scene is not None:

@@ -36,7 +36,7 @@ BASIS = ("Two audio encoders independently rank the same descriptions on the sam
          "Different choices leave the source unresolved. No speech text was decoded.")
 
 
-class Encoders:
+class PerceptionEncoder:
     def __init__(self, download=False):
         import torch
         from huggingface_hub import snapshot_download
@@ -53,12 +53,6 @@ class Encoders:
             raise ValueError("incomplete weights for the audio or text encoder")
         self.model.eval()
         self.model.text_model.config.output_hidden_states = True
-        self.clap = Comparator(download=download, device="cpu")
-        self.catalogue = vocabulary(download=download)
-        self.catalogue_text = None
-        self.last = None
-        self.labels = None
-        self.text = None
 
     def encode_text(self, labels):
         import torch
@@ -69,7 +63,32 @@ class Encoders:
                 batch = self.processor.tokenizer(phrases[start:start + 8], padding=True, truncation=True,
                                                  return_tensors="pt")
                 parts.append(self.model.get_text_audio_embeds(batch.input_ids, batch.attention_mask))
-            return torch.cat(parts), self.clap.text_features(phrases)
+            return torch.cat(parts)
+
+    def audio_only(self):
+        del self.model.text_model, self.model.text_audio_head
+
+    def audio(self, channel, rate):
+        import torch
+        wave = resample_channels(channel, rate, RATE)
+        batch = self.processor.feature_extractor([wave], sampling_rate=RATE, padding=True, return_tensors="pt")
+        with torch.inference_mode():
+            return self.model.get_audio_embeds(**batch)
+
+
+class Encoders:
+    def __init__(self, download=False):
+        self.perception = PerceptionEncoder(download=download)
+        self.clap = Comparator(download=download, device="cpu")
+        self.catalogue = vocabulary(download=download)
+        self.catalogue_text = None
+        self.last = None
+        self.labels = None
+        self.text = None
+
+    def encode_text(self, labels):
+        phrases = ["the sound of " + label.lower() for label in labels]
+        return self.perception.encode_text(labels), self.clap.text_features(phrases)
 
     def prepare(self, descriptions):
         import torch
@@ -94,9 +113,8 @@ class Encoders:
         import torch
 
         wave = resample_channels(channel, rate, RATE)
-        batch = self.processor.feature_extractor([wave], sampling_rate=RATE, padding=True, return_tensors="pt")
         with torch.inference_mode():
-            pe = (self.model.get_audio_embeds(**batch) @ self.text[0].T)[0].cpu().numpy()
+            pe = (self.perception.audio(wave, RATE) @ self.text[0].T)[0].cpu().numpy()
         return pe, self.clap.similarities([wave], self.text[1])[0]
 
 

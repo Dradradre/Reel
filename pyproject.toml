@@ -30,3 +30,6 @@ reel = "reel.cli:main"
 
 [tool.setuptools]
 packages = ["reel"]
+
+[tool.setuptools.package-data]
+reel = ["data/source_examples.csv"]

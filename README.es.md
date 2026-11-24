@@ -162,6 +162,8 @@ flowchart LR
 
 La primera vista MCP muestra las ráfagas de ataques en `audio.rapid_rises`. La vista detallada y `play` dan el registro completo en `audio.attacks`. Un solo tintineo puede producir varias marcas. En 56 grabaciones de prueba, Reel localizó 359 de los 431 inicios de nota anotados por personas con un margen de 50 ms. Las subidas de nivel por banda permitían localizar 215. [Mediciones por grabación](docs/benchmarks/attack-timing.json)
 
+Con `reel setup --sound-examples`, Reel compara lo que acaba de oír con 942 grabaciones de 116 fuentes y con 531 nombres de sonidos, sin pedir opciones. En 244 grabaciones reservadas para la evaluación, acertó en 71, se equivocó en 8 y dejó 165 sin identificar. [Resultados por grabación](docs/benchmarks/reference-sources.json)
+
 Con `reel setup --identify-sounds`, Reel compara las fuentes propuestas con la grabación usando PE-AV y CLAP. En 99 grabaciones, PE-AV acertó 94 veces y CLAP 85. Al retirar la opción correcta, los dos coincidieron en otra fuente 40 veces. En otras 49 grabaciones, comprobar también las fuentes fuera de la lista redujo esos errores de 16 a 0. Con la opción correcta presente, conservó 21 de los 39 aciertos compartidos. [Prueba con la fuente omitida](docs/benchmarks/source-outside-choices.json). [Resultados por grabación](docs/benchmarks/source-identity-agreement.json)
 
 ## Límites

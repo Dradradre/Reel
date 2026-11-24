@@ -108,7 +108,7 @@ Reel 也能把视频按每页 30 秒排开，从左往右读。沿任意时刻�
 
 ## 播放选项
 
-两种声音重叠时，先运行 `reel setup --layers`，再调用 `listen_layer(turn=N, start_s=2, end_s=5)`。模型会得到原声、估计最响的成分，以及从原声中减去该成分后的声音。每段都有频谱，支持音频的客户端还可接收 WAV。要听另一份独立描述，可在 `listen` 中设置 `independent_caption=true`。
+两种声音重叠时，先运行 `reel setup --layers`，再调用 `listen_layer(turn=N, start_s=2, end_s=5)`。模型会得到原声、估计最响的成分，以及从原声中减去该成分后的声音。每段都有频谱，支持音频的客户端还可接收 WAV。要听另一份独立描述，可在 `listen` 中设置 `independent_caption=true`。 [逐段录音的回答和评分](docs/benchmarks/acoustic-layers.json)
 
 要启用本地声音描述和语音识别，可在已激活的虚拟环境中运行以下命令。
 

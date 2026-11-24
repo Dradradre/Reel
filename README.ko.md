@@ -105,6 +105,14 @@ codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --ima
 | OVO-Bench 영상 644편에서 정해진 시각에 화면을 보고 답하기 | 공식 세 영역 평균 **66.08점**. 질문 시각 전에 나온 화면만 보고 3,035문항 중 2,002개를 맞혔다. [영역별 점수와 측정 조건](docs/benchmarks/ovo-full.json) |
 | 처음 보는 영상 12편에서 화면과 소리를 각각 기억해 묘사하기 | 사람 점수를 100으로 두면 **화면 78.8%, 소리 43.8%**였다. 둘을 반씩 반영하면 61.3%이고 95% 구간은 43.3~91.1%였다. [영상별 답변과 채점 자료](docs/benchmarks/track-recall.json) |
 
+실제 녹음 두 개씩을 겹쳐 만든 48개 중 37개에서 분리 후 양쪽 소리가 모두 더 선명해졌다. 원래 녹음 96개와 대조해 잰 신호 품질(SI-SDR)은 중앙값 8.5 dB 올랐다.
+
+그중 24개를 골라 로컬 GPT에 소리 이름을 물었더니 원음에서 얻은 단서로는 48개 중 8개를 맞혔고 분리한 소리와 나머지까지 살펴보자 10개를 맞혔다. 실제 현장 녹음 51구간에서는 어느 방식으로 들어도 사람이 표시한 짧은 소리를 짚은 구간이 2개였다. [녹음별 답과 채점표](docs/benchmarks/acoustic-layers.json)
+
+비상업적 연구용 원음 모델에 화면 없이 들려줄 녹음 16개를 골라 질문마다 세 사람이 남긴 답과 대조했다. 기존 경량 모델의 설명을 읽은 GPT는 64문제 중 28개에서 다수 의견과 일치했고 두 모델이 따로 들은 설명을 주자 34개를 맞혔다. 원음 모델이 질문을 받은 뒤 같은 구간을 다시 들으면 정답 37개, 오답 2개였고 25개는 모른다고 답했다.
+
+같은 질문에 다른 녹음을 들려주면 정답은 22개였다. 녹음을 자유롭게 묘사하는 과제에서는 사람이 자기 녹음을 다른 녹음과 구별하는 정도를 100으로 잡았을 때 점수가 50.2에서 42.7로 떨어졌다. [전체 응답](docs/benchmarks/acoustic-layers.json) · [점수 재계산](examples/check_acoustic_layers.py)
+
 개발에 쓰지 않은 녹음 56개에서 사람이 표시한 음의 시작점은 431개였다. 기존 재생 정보에서 소리가 커진 시각만 골랐을 때는 215개, 새 방식으로는 359개가 50ms 안에 맞았다. 놓친 시작점은 216개에서 72개로, 잘못 찍은 시각은 51개에서 45개로 줄었다.
 
 최종 MCP 화면을 받은 GPT를 따로 시험했더니 녹음 12개와 대조군 2개에서 GPT가 시각을 맞힌 음은 103개 중 84개에서 93개로 늘었고 잘못 찍은 시각은 10개에서 5개로 줄었다. 추가로 맞힌 9개는 모두 기타 연주 두 구간에서 나왔다. [사람이 표시한 녹음](docs/benchmarks/attack-timing.json), [GPT가 답한 시각](docs/benchmarks/attack-readers.json)
@@ -322,9 +330,19 @@ codex mcp add reel -- "$(command -v reel)" mcp /path/to/film.mp4 --until 8.5 --i
 
 여러 소리가 겹칠 때는 `reel setup --layers`로 MixIT를 준비한다. 재생을 멈추고 `layer 2 5 2`를 입력하면 2~5초에 녹음된 원음과 그 구간에서 두 번째로 큰 추정 성분을 받는다.
 
-Apple Silicon에서 비상업적 연구에 쓸 때는 `reel setup --audio-flamingo`로 Audio Flamingo Next 가중치 5.1 GiB를 설치할 수 있다. `REEL_AUDIO_READER=flamingo reel mcp film.mp4 --tracks sound --image-client --until 8.5`로 재생하고 8.5초에 도달하면 `listen(turn=N, start_s=0, end_s=8.5)`로 각 채널의 원음을 이어서 듣는다. 재생한 구간의 소리를 두고 질문할 수도 있다. 기본 모델은 Qwen이다. `reel setup --captions`로 설치한 뒤 `listen`에 `independent_caption=true`를 주면 다른 모델이 같은 채널을 짧게 나눠 듣는다. 두 모델은 서로의 답을 보지 않는다. 이때 질문까지 주면 원음 모델이 질문을 읽기 전에 들은 내용도 `before_question`에 남는다. 화면과 소리를 함께 읽거나 받아쓸 때도 Qwen을 쓴다.
+Apple Silicon에서는 비상업적 연구용 원음 모델인 Audio Flamingo Next를 쓸 수 있다. `reel setup --audio-flamingo`로 가중치 5.1 GiB를 설치하고 다음처럼 실행한다.
 
-겹친 소리의 이름을 모르겠다면 `listen_layer(turn=N, start_s=2, end_s=5)`로 원음과 가장 크게 잡힌 성분, 그 성분을 빼고 남은 소리를 차례로 듣는다. 분리한 성분과 나머지를 더하면 16 kHz로 변환한 원음이 된다. 한 물체에서 난 소리가 두 쪽에 걸쳐 남을 수도 있다. 다른 성분을 고를 때는 `remainder=true`를 붙이면 같은 방식으로 비교할 수 있다.
+```bash
+REEL_AUDIO_READER=flamingo reel mcp film.mp4 --tracks sound --image-client --until 8.5
+```
+
+8.5초까지 재생한 뒤 `listen(turn=N, start_s=0, end_s=8.5)`를 호출하면 모델이 각 채널의 원음을 듣는다. 같은 구간을 짧게 나눠 듣는 모델도 쓰려면 `reel setup --captions`로 설치하고 `listen`에 `independent_caption=true`를 준다. 여기에 질문을 덧붙이면 원음 모델이 질문을 받기 전에 들은 내용도 `before_question`에 남아 두 답을 비교할 수 있다.
+
+기본 모델은 Qwen이며 화면과 소리를 함께 읽거나 말을 받아쓸 때도 Qwen을 쓴다.
+
+겹친 소리의 정체가 궁금할 때 `listen_layer(turn=N, start_s=2, end_s=5)`를 호출하면 원음, 가장 크게 잡힌 성분, 그 성분을 빼고 남은 소리를 차례로 들을 수 있다. 뒤의 둘을 더하면 16 kHz로 변환한 원음이 된다. 한 물체에서 난 소리가 양쪽에 걸릴 수도 있으니 원음과 대조해 듣는다.
+
+다른 성분을 골라 같은 방식으로 비교하려면 `remainder=true`를 붙인다.
 
 MCP에서는 5초까지 재생한 뒤 `listen_layer(turn=3, start_s=2, end_s=5, layer=2)`로 들을 수 있다. 기본 채널은 1이며 오른쪽 채널을 따로 들으려면 스테레오 녹음에서 `channel=2`를 지정한다. 원음은 녹음 당시의 샘플레이트로 받고 분리본은 16 kHz로 듣는다. 한 소리가 여러 성분에 나뉘거나 다른 소리와 섞여 나올 수 있다.
 

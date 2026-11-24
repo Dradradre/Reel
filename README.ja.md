@@ -108,7 +108,7 @@ codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --ima
 
 ## 再生オプション
 
-音が重なる場面では、`reel setup --layers` を実行してから `listen_layer(turn=N, start_s=2, end_s=5)` を呼ぶと、原音、最も大きいと推定された成分、その成分を原音から引いた残りを順に確認できる。それぞれにスペクトログラムが付き、音声対応クライアントでは WAV も受け取れる。別のモデルにも同じ録音を聴かせるには、`listen` で `independent_caption=true` を指定する。
+音が重なる場面では、`reel setup --layers` を実行してから `listen_layer(turn=N, start_s=2, end_s=5)` を呼ぶと、原音、最も大きいと推定された成分、その成分を原音から引いた残りを順に確認できる。それぞれにスペクトログラムが付き、音声対応クライアントでは WAV も受け取れる。別のモデルにも同じ録音を聴かせるには、`listen` で `independent_caption=true` を指定する。 [録音ごとの回答と測定結果](docs/benchmarks/acoustic-layers.json)
 
 音の説明と文字起こしをローカルで利用するには、仮想環境で次を実行する。
 

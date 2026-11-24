@@ -1,0 +1,2743 @@
+{
+ "dataset": "John Glover et al., Modal hand-annotated onset database",
+ "dataset_sha256": "16e371e6b8cdc79b2a7d2bde2c2fff4b57ac74ff15dbb86f3be0d6c857e43e36",
+ "split": "holdout",
+ "tolerance_s": 0.05,
+ "recordings": 56,
+ "totals": {
+  "band_changes": {
+   "matched": 231,
+   "missed": 200,
+   "extra": 102,
+   "f1": 0.6047
+  },
+  "band_rises": {
+   "matched": 215,
+   "missed": 216,
+   "extra": 51,
+   "f1": 0.6169
+  },
+  "attacks": {
+   "matched": 359,
+   "missed": 72,
+   "extra": 45,
+   "f1": 0.8599
+  }
+ },
+ "rows": [
+  {
+   "recording": "bass-elec-C-lo.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "bass-elec2-E-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.09997732426303856,
+    0.31997732426303854,
+    0.4799773242630386,
+    1.1599773242630385,
+    1.5399773242630386,
+    1.7599773242630385,
+    2.1599773242630387,
+    2.8199773242630384,
+    2.9799773242630385,
+    3.1999773242630387,
+    3.5999773242630386,
+    3.7999773242630384
+   ],
+   "band_rises": [
+    0.09997732426303856,
+    0.31997732426303854,
+    1.7599773242630385,
+    2.8199773242630384,
+    3.5999773242630386
+   ],
+   "attacks": [
+    0.07204081632653062,
+    0.28816326530612246,
+    0.6403628117913832,
+    0.8244671201814059,
+    1.1686621315192744,
+    1.3447619047619048,
+    1.656938775510204,
+    1.736984126984127,
+    1.9210884353741497,
+    2.257278911564626,
+    2.4493877551020407,
+    2.793582766439909,
+    2.9856916099773243,
+    3.305873015873016,
+    3.3699092970521543,
+    3.5700226757369613
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 6,
+     "missed": 10,
+     "extra": 6,
+     "f1": 0.4286
+    },
+    "band_rises": {
+     "matched": 4,
+     "missed": 12,
+     "extra": 1,
+     "f1": 0.381
+    },
+    "attacks": {
+     "matched": 13,
+     "missed": 3,
+     "extra": 3,
+     "f1": 0.8125
+    }
+   },
+   "reference_count": 16
+  },
+  {
+   "recording": "bell-octave0.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "bell-octave1.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "child-imitate-owl.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.37997732426303854,
+    0.8999773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    0.37997732426303854,
+    0.8999773242630386
+   ],
+   "attacks": [
+    0.024013605442176872,
+    0.36020408163265305
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 1,
+     "extra": 2,
+     "f1": 0.4
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 1,
+     "extra": 2,
+     "f1": 0.4
+    },
+    "attacks": {
+     "matched": 2,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 2
+  },
+  {
+   "recording": "child-imitate-shaker-hi-up.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855
+   ],
+   "band_rises": [
+    0.05997732426303855
+   ],
+   "attacks": [
+    0.024013605442176872
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "clarinet-C-octave0-vib.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    2.5599773242630386,
+    2.7199773242630387
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    2.7199773242630387
+   ],
+   "attacks": [
+    0.048027210884353744
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 2,
+     "f1": 0.5
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "clarinet-C-octave0.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    2.0199773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    2.0199773242630386
+   ],
+   "attacks": [
+    0.03201814058956916
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "conga-muffled-1.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855
+   ],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "conga-open-1.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855
+   ],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "cymbal-hihat-foot-open.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855
+   ],
+   "band_rises": [],
+   "attacks": [
+    0.024013605442176872
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "cymbal-hihat-lick.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    1.0599773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    1.0599773242630386
+   ],
+   "attacks": [
+    0.12006802721088436,
+    0.248140589569161,
+    0.36820861678004535,
+    0.496281179138322,
+    0.6163492063492063,
+    0.744421768707483,
+    1.0325850340136054
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 7,
+     "extra": 1,
+     "f1": 0.2
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 7,
+     "extra": 1,
+     "f1": 0.2
+    },
+    "attacks": {
+     "matched": 7,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.9333
+    }
+   },
+   "reference_count": 8
+  },
+  {
+   "recording": "drum-bass-hi-1.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855
+   ],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "drum-snare-drag.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855
+   ],
+   "band_rises": [],
+   "attacks": [
+    0.05603174603174603,
+    0.12807256235827663
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 2,
+     "extra": 0,
+     "f1": 0.5
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 3,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 2,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.8
+    }
+   },
+   "reference_count": 3
+  },
+  {
+   "recording": "drum-surdo-large-lick.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.7399773242630385,
+    1.3199773242630386,
+    1.9999773242630385,
+    2.1599773242630387,
+    2.3199773242630384,
+    2.6999773242630387
+   ],
+   "band_rises": [
+    0.7399773242630385,
+    1.3199773242630386,
+    1.9999773242630385,
+    2.1599773242630387,
+    2.3199773242630384,
+    2.6999773242630387
+   ],
+   "attacks": [
+    0.5202947845804988,
+    0.7124036281179138,
+    1.2887301587301587,
+    1.4568253968253968,
+    1.9771201814058956,
+    2.1372108843537414,
+    2.3053061224489797,
+    2.673514739229025,
+    2.8336054421768706
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 6,
+     "missed": 3,
+     "extra": 1,
+     "f1": 0.75
+    },
+    "band_rises": {
+     "matched": 6,
+     "missed": 3,
+     "extra": 0,
+     "f1": 0.8
+    },
+    "attacks": {
+     "matched": 8,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.8889
+    }
+   },
+   "reference_count": 9
+  },
+  {
+   "recording": "femalevoices_aa2_A3.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.19997732426303855,
+    1.0999773242630386,
+    1.3599773242630386,
+    2.8999773242630384,
+    3.3799773242630384,
+    3.5599773242630386
+   ],
+   "band_rises": [
+    0.19997732426303855,
+    1.0999773242630386,
+    1.3599773242630386,
+    2.8999773242630384,
+    3.3799773242630384
+   ],
+   "attacks": [
+    0.19210884353741497,
+    2.6895238095238096
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 5,
+     "f1": 0.2857
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 4,
+     "f1": 0.3333
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "flugel-C.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    3.5199773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855
+   ],
+   "attacks": [
+    0.024013605442176872
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "flugel-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.23997732426303856,
+    0.9599773242630385,
+    1.1599773242630385,
+    1.4799773242630385,
+    2.3399773242630384
+   ],
+   "band_rises": [
+    1.1599773242630385,
+    1.4799773242630385
+   ],
+   "attacks": [
+    0.024013605442176872,
+    0.46426303854875284,
+    0.7524263038548753,
+    0.9285260770975057,
+    1.1366439909297053,
+    1.4408163265306122
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 4,
+     "missed": 4,
+     "extra": 1,
+     "f1": 0.6154
+    },
+    "band_rises": {
+     "matched": 2,
+     "missed": 6,
+     "extra": 0,
+     "f1": 0.4
+    },
+    "attacks": {
+     "matched": 6,
+     "missed": 2,
+     "extra": 0,
+     "f1": 0.8571
+    }
+   },
+   "reference_count": 8
+  },
+  {
+   "recording": "flute-alto-C.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    2.1199773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    2.1199773242630386
+   ],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "flute-alto-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.21997732426303854,
+    0.6599773242630386,
+    1.0799773242630386,
+    1.2599773242630385,
+    1.4599773242630385,
+    1.6599773242630385,
+    2.0799773242630386,
+    2.2399773242630387,
+    2.9199773242630385
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    0.21997732426303854,
+    0.6599773242630386,
+    1.0799773242630386,
+    1.2599773242630385,
+    1.4599773242630385,
+    1.6599773242630385,
+    2.0799773242630386,
+    2.2399773242630387,
+    2.9199773242630385
+   ],
+   "attacks": [
+    0.024013605442176872,
+    0.37621315192743765,
+    0.5042857142857143,
+    0.8324716553287982,
+    1.2246938775510203,
+    1.6249206349206349,
+    2.2172562358276644
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 9,
+     "missed": 6,
+     "extra": 1,
+     "f1": 0.72
+    },
+    "band_rises": {
+     "matched": 9,
+     "missed": 6,
+     "extra": 1,
+     "f1": 0.72
+    },
+    "attacks": {
+     "matched": 7,
+     "missed": 8,
+     "extra": 0,
+     "f1": 0.6364
+    }
+   },
+   "reference_count": 15
+  },
+  {
+   "recording": "guitar-ac-E-octave1.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "guitar-classical-E-octave1-vib.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [],
+   "band_rises": [],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "guitar-classical-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.07997732426303855,
+    0.5199773242630386,
+    0.8599773242630385,
+    1.3199773242630386,
+    1.7199773242630385
+   ],
+   "band_rises": [
+    0.07997732426303855,
+    0.5199773242630386,
+    1.7199773242630385
+   ],
+   "attacks": [
+    0.05603174603174603,
+    0.5042857142857143,
+    0.8564852607709751,
+    0.9685487528344672,
+    1.3527664399092971,
+    1.6889569160997733,
+    1.736984126984127,
+    1.8170294784580499,
+    1.9130839002267575
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 4,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.8
+    },
+    "band_rises": {
+     "matched": 2,
+     "missed": 3,
+     "extra": 1,
+     "f1": 0.5
+    },
+    "attacks": {
+     "matched": 4,
+     "missed": 1,
+     "extra": 5,
+     "f1": 0.5714
+    }
+   },
+   "reference_count": 5
+  },
+  {
+   "recording": "guitar-elec-hollow-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.31997732426303854,
+    0.5799773242630385,
+    0.7399773242630385,
+    1.2199773242630385,
+    1.8399773242630386
+   ],
+   "band_rises": [
+    0.31997732426303854,
+    0.5799773242630385,
+    0.7399773242630385,
+    1.2199773242630385
+   ],
+   "attacks": [
+    0.08804988662131519,
+    0.1600907029478458,
+    0.28816326530612246,
+    0.4322448979591837,
+    0.7043990929705215,
+    0.8324716553287982,
+    0.9685487528344672,
+    1.1926757369614513,
+    1.240702947845805,
+    1.5208616780045352,
+    1.680952380952381,
+    1.7850113378684807,
+    1.8330385487528345
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 5,
+     "missed": 10,
+     "extra": 1,
+     "f1": 0.4762
+    },
+    "band_rises": {
+     "matched": 4,
+     "missed": 11,
+     "extra": 0,
+     "f1": 0.4211
+    },
+    "attacks": {
+     "matched": 10,
+     "missed": 5,
+     "extra": 3,
+     "f1": 0.7143
+    }
+   },
+   "reference_count": 15
+  },
+  {
+   "recording": "guitar-elec-solid-dist-E-octave1-long.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    2.0599773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    2.0599773242630386
+   ],
+   "attacks": [
+    0.048027210884353744,
+    2.0251473922902496
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 2,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 2,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "guitar-elec-solid-dist-EBfifths-octave1-long.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    1.6599773242630385,
+    1.9199773242630385
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    1.6599773242630385,
+    1.9199773242630385
+   ],
+   "attacks": [
+    0.048027210884353744
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 2,
+     "f1": 0.5
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 2,
+     "f1": 0.5
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "guitar-elec-solid-dist-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.8199773242630386,
+    1.1199773242630386,
+    3.1599773242630387
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    0.8199773242630386,
+    1.1199773242630386,
+    3.1599773242630387
+   ],
+   "attacks": [
+    0.7043990929705215,
+    0.7924489795918367,
+    0.8885034013605442,
+    1.024580498866213,
+    1.1126303854875284,
+    1.2326984126984126,
+    3.1938095238095237
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 3,
+     "missed": 5,
+     "extra": 1,
+     "f1": 0.5
+    },
+    "band_rises": {
+     "matched": 3,
+     "missed": 5,
+     "extra": 1,
+     "f1": 0.5
+    },
+    "attacks": {
+     "matched": 5,
+     "missed": 3,
+     "extra": 2,
+     "f1": 0.6667
+    }
+   },
+   "reference_count": 8
+  },
+  {
+   "recording": "guitar-elec-solid-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.13997732426303855,
+    0.5999773242630385,
+    0.9399773242630386,
+    1.1399773242630384,
+    1.4799773242630385,
+    1.9799773242630385,
+    2.2199773242630387,
+    2.6999773242630387,
+    5.299977324263039
+   ],
+   "band_rises": [
+    0.13997732426303855,
+    0.5999773242630385,
+    0.9399773242630386,
+    1.1399773242630384,
+    1.4799773242630385,
+    1.9799773242630385,
+    2.2199773242630387,
+    2.6999773242630387,
+    5.299977324263039
+   ],
+   "attacks": [
+    0.024013605442176872,
+    0.12006802721088436,
+    0.24013605442176872,
+    0.5843310657596372,
+    0.9125170068027211,
+    1.2086848072562357,
+    1.544875283446712,
+    1.9451020408163264,
+    2.4173696145124715,
+    5.274988662131519
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 4,
+     "missed": 5,
+     "extra": 5,
+     "f1": 0.4444
+    },
+    "band_rises": {
+     "matched": 4,
+     "missed": 5,
+     "extra": 5,
+     "f1": 0.4444
+    },
+    "attacks": {
+     "matched": 9,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.9474
+    }
+   },
+   "reference_count": 9
+  },
+  {
+   "recording": "guitar_chord2.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.11997732426303855
+   ],
+   "band_rises": [
+    0.11997732426303855
+   ],
+   "attacks": [
+    0.10405895691609977,
+    0.17609977324263038
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "guitar_riff_cutup1.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.4199773242630386,
+    0.7799773242630386,
+    1.1599773242630385,
+    1.5399773242630386,
+    2.0399773242630386,
+    2.4199773242630385,
+    2.5999773242630386,
+    2.7799773242630383,
+    3.0599773242630386,
+    3.5599773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    0.4199773242630386,
+    0.7799773242630386,
+    1.1599773242630385,
+    1.5399773242630386,
+    2.0399773242630386,
+    2.4199773242630385,
+    2.7799773242630383,
+    3.5599773242630386
+   ],
+   "attacks": [
+    0.024013605442176872,
+    0.4002267573696145,
+    0.5282993197278911,
+    0.7524263038548753,
+    1.1366439909297053,
+    1.5208616780045352,
+    2.0251473922902496,
+    2.401360544217687,
+    2.5214285714285714,
+    2.7615646258503403,
+    3.153786848072562,
+    3.257845804988662,
+    3.53
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 9,
+     "missed": 8,
+     "extra": 2,
+     "f1": 0.6429
+    },
+    "band_rises": {
+     "matched": 8,
+     "missed": 9,
+     "extra": 1,
+     "f1": 0.6154
+    },
+    "attacks": {
+     "matched": 12,
+     "missed": 5,
+     "extra": 1,
+     "f1": 0.8
+    }
+   },
+   "reference_count": 17
+  },
+  {
+   "recording": "guitar_riff_cutup3.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.27997732426303856,
+    0.7599773242630385,
+    1.0199773242630386,
+    1.4999773242630385,
+    1.8799773242630387,
+    2.2799773242630383,
+    2.5399773242630386
+   ],
+   "band_rises": [
+    0.27997732426303856,
+    0.7599773242630385,
+    1.0199773242630386,
+    1.4999773242630385,
+    1.8799773242630387,
+    2.2799773242630383,
+    2.5399773242630386
+   ],
+   "attacks": [
+    0.248140589569161,
+    0.36820861678004535,
+    0.4882766439909297,
+    0.7364172335600907,
+    0.992562358276644,
+    1.4728344671201814,
+    1.8570521541950114,
+    2.0011337868480727,
+    2.2492743764172336,
+    2.5294331065759637
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 7,
+     "missed": 5,
+     "extra": 1,
+     "f1": 0.7
+    },
+    "band_rises": {
+     "matched": 7,
+     "missed": 5,
+     "extra": 0,
+     "f1": 0.7368
+    },
+    "attacks": {
+     "matched": 9,
+     "missed": 3,
+     "extra": 1,
+     "f1": 0.8182
+    }
+   },
+   "reference_count": 12
+  },
+  {
+   "recording": "malevoice_aa_A2.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.09997732426303856,
+    3.1999773242630387
+   ],
+   "band_rises": [
+    0.09997732426303856
+   ],
+   "attacks": [
+    0.10405895691609977
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "malevoices_oo2_C#4.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    3.2199773242630387
+   ],
+   "band_rises": [
+    0.05997732426303855
+   ],
+   "attacks": [
+    0.10405895691609977,
+    0.1520861678004535
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 2,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "metal_beat_1.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.21997732426303854,
+    0.9599773242630385,
+    1.1199773242630386,
+    1.2799773242630386,
+    1.5799773242630386
+   ],
+   "band_rises": [
+    0.21997732426303854,
+    0.9599773242630385,
+    1.1199773242630386,
+    1.2799773242630386,
+    1.5799773242630386
+   ],
+   "attacks": [
+    0.20011337868480725,
+    0.35219954648526075,
+    0.4882766439909297,
+    0.6243537414965986,
+    0.7684353741496599,
+    0.936530612244898,
+    1.0966213151927438,
+    1.2487074829931972,
+    1.3927891156462584,
+    1.5608843537414967
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 5,
+     "missed": 6,
+     "extra": 1,
+     "f1": 0.5882
+    },
+    "band_rises": {
+     "matched": 5,
+     "missed": 6,
+     "extra": 0,
+     "f1": 0.625
+    },
+    "attacks": {
+     "matched": 10,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.9524
+    }
+   },
+   "reference_count": 11
+  },
+  {
+   "recording": "metal_beat_2.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.4199773242630386,
+    1.6399773242630384
+   ],
+   "band_rises": [
+    0.4199773242630386,
+    1.6399773242630384
+   ],
+   "attacks": [
+    0.18410430839002268,
+    0.4082312925170068,
+    0.552312925170068,
+    0.6803854875283447,
+    0.7924489795918367,
+    0.9125170068027211,
+    1.0325850340136054,
+    1.1526530612244898,
+    1.296734693877551,
+    1.43281179138322,
+    1.6249206349206349
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 2,
+     "missed": 10,
+     "extra": 1,
+     "f1": 0.2667
+    },
+    "band_rises": {
+     "matched": 2,
+     "missed": 10,
+     "extra": 0,
+     "f1": 0.2857
+    },
+    "attacks": {
+     "matched": 11,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.9565
+    }
+   },
+   "reference_count": 12
+  },
+  {
+   "recording": "mix1.wav",
+   "group": "Mixed",
+   "band_changes": [
+    0.05997732426303855,
+    0.6199773242630385,
+    1.0799773242630386,
+    2.0199773242630386,
+    3.0399773242630386,
+    4.039977324263038,
+    4.599977324263039,
+    6.039977324263038,
+    7.499977324263039
+   ],
+   "band_rises": [
+    0.6199773242630385,
+    1.0799773242630386,
+    2.0199773242630386,
+    3.0399773242630386,
+    4.039977324263038,
+    4.599977324263039,
+    6.039977324263038
+   ],
+   "attacks": [
+    0.12807256235827663,
+    0.5923356009070295,
+    1.0565986394557823,
+    1.9931292517006802,
+    3.0177097505668935,
+    4.0022675736961455,
+    4.5705895691609975,
+    6.019410430839002
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 7,
+     "missed": 2,
+     "extra": 2,
+     "f1": 0.7778
+    },
+    "band_rises": {
+     "matched": 7,
+     "missed": 2,
+     "extra": 0,
+     "f1": 0.875
+    },
+    "attacks": {
+     "matched": 8,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.9412
+    }
+   },
+   "reference_count": 9
+  },
+  {
+   "recording": "mix2.wav",
+   "group": "Mixed",
+   "band_changes": [
+    0.05997732426303855,
+    0.5199773242630386,
+    2.0399773242630386,
+    2.9999773242630385,
+    3.5199773242630386,
+    4.539977324263038,
+    4.759977324263039,
+    5.719977324263039,
+    6.4399773242630385,
+    7.4399773242630385
+   ],
+   "band_rises": [
+    0.5199773242630386,
+    2.0399773242630386,
+    3.5199773242630386,
+    4.539977324263038,
+    4.759977324263039,
+    6.4399773242630385,
+    7.4399773242630385
+   ],
+   "attacks": [
+    0.496281179138322,
+    0.552312925170068,
+    2.0011337868480727,
+    3.0737414965986396,
+    3.497981859410431,
+    3.642063492063492,
+    4.0022675736961455,
+    4.506553287981859,
+    4.738684807256236,
+    5.803287981859411,
+    5.995396825396825,
+    7.404195011337868
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 2,
+     "missed": 5,
+     "extra": 8,
+     "f1": 0.2353
+    },
+    "band_rises": {
+     "matched": 2,
+     "missed": 5,
+     "extra": 5,
+     "f1": 0.2857
+    },
+    "attacks": {
+     "matched": 6,
+     "missed": 1,
+     "extra": 6,
+     "f1": 0.6316
+    }
+   },
+   "reference_count": 7
+  },
+  {
+   "recording": "mix4.wav",
+   "group": "Mixed",
+   "band_changes": [
+    0.05997732426303855,
+    0.5399773242630386,
+    1.0199773242630386,
+    1.5399773242630386,
+    2.0199773242630386,
+    3.1399773242630387,
+    4.0199773242630386,
+    5.539977324263038,
+    6.0199773242630386,
+    7.539977324263038,
+    8.97997732426304,
+    10.019977324263039,
+    11.019977324263039,
+    11.539977324263038,
+    12.039977324263038,
+    12.639977324263038,
+    12.879977324263038,
+    13.139977324263038,
+    14.019977324263039,
+    14.559977324263038,
+    15.539977324263038,
+    17.95997732426304,
+    18.99997732426304,
+    19.97997732426304,
+    21.01997732426304,
+    22.039977324263038,
+    23.059977324263038,
+    23.219977324263038,
+    23.47997732426304,
+    24.01997732426304,
+    25.51997732426304,
+    26.01997732426304,
+    27.93997732426304
+   ],
+   "band_rises": [
+    0.5399773242630386,
+    1.0199773242630386,
+    2.0199773242630386,
+    3.1399773242630387,
+    4.0199773242630386,
+    5.539977324263038,
+    6.0199773242630386,
+    8.97997732426304,
+    10.019977324263039,
+    11.019977324263039,
+    12.039977324263038,
+    12.639977324263038,
+    12.879977324263038,
+    13.139977324263038,
+    14.019977324263039,
+    14.559977324263038,
+    15.539977324263038,
+    18.99997732426304,
+    21.01997732426304,
+    22.039977324263038,
+    23.059977324263038,
+    23.219977324263038,
+    23.47997732426304,
+    24.01997732426304,
+    25.51997732426304,
+    26.01997732426304
+   ],
+   "attacks": [
+    0.5122902494331065,
+    1.0165759637188208,
+    1.9931292517006802,
+    2.0651700680272107,
+    3.113764172335601,
+    5.042857142857143,
+    5.515124716553288,
+    5.987392290249433,
+    8.957074829931972,
+    9.989659863945578,
+    11.014240362811792,
+    12.014807256235828,
+    12.607142857142858,
+    13.119433106575963,
+    13.991927437641724,
+    15.048526077097506,
+    15.512789115646259,
+    15.977052154195011,
+    18.986757369614512,
+    20.003333333333334,
+    21.02791383219955,
+    22.0124716553288,
+    22.14854875283447,
+    23.013038548752835,
+    23.24517006802721,
+    23.989591836734693,
+    25.518458049886622,
+    25.990725623582765
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 21,
+     "missed": 5,
+     "extra": 12,
+     "f1": 0.7119
+    },
+    "band_rises": {
+     "matched": 20,
+     "missed": 6,
+     "extra": 6,
+     "f1": 0.7692
+    },
+    "attacks": {
+     "matched": 23,
+     "missed": 3,
+     "extra": 5,
+     "f1": 0.8519
+    }
+   },
+   "reference_count": 26
+  },
+  {
+   "recording": "piano_B4.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.13997732426303855
+   ],
+   "band_rises": [
+    0.13997732426303855
+   ],
+   "attacks": [
+    0.12807256235827663
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "piano_G2.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855
+   ],
+   "band_rises": [
+    0.05997732426303855
+   ],
+   "attacks": [
+    0.03201814058956916
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "piano_chord.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.11997732426303855,
+    3.0399773242630386
+   ],
+   "band_rises": [
+    0.11997732426303855,
+    3.0399773242630386
+   ],
+   "attacks": [
+    0.11206349206349206
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 3,
+     "extra": 1,
+     "f1": 0.3333
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 3,
+     "extra": 1,
+     "f1": 0.3333
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 3,
+     "extra": 0,
+     "f1": 0.4
+    }
+   },
+   "reference_count": 4
+  },
+  {
+   "recording": "prep_pianoE0_2.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.11997732426303855
+   ],
+   "band_rises": [
+    0.11997732426303855
+   ],
+   "attacks": [
+    0.11206349206349206
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "prep_piano_C0_2.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.11997732426303855
+   ],
+   "band_rises": [
+    0.11997732426303855
+   ],
+   "attacks": [
+    0.09605442176870749
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "prep_piano_hit1.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.13997732426303855,
+    2.7999773242630384,
+    3.0799773242630386,
+    4.239977324263038,
+    4.799977324263039,
+    6.5199773242630386,
+    9.499977324263039
+   ],
+   "band_rises": [
+    0.13997732426303855,
+    2.7999773242630384,
+    4.239977324263038,
+    4.799977324263039,
+    6.5199773242630386
+   ],
+   "attacks": [
+    0.11206349206349206,
+    0.18410430839002268
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 7,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 5,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "sax-bari-C-lo.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    3.5799773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855
+   ],
+   "attacks": [
+    0.04002267573696145
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "sax-bari-lick.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.21997732426303854,
+    1.5599773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    1.5599773242630386
+   ],
+   "attacks": [
+    0.04002267573696145,
+    0.3281859410430839,
+    0.6643764172335601,
+    1.5608843537414967,
+    1.849047619047619,
+    2.1612244897959183
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 2,
+     "missed": 7,
+     "extra": 1,
+     "f1": 0.3333
+    },
+    "band_rises": {
+     "matched": 2,
+     "missed": 7,
+     "extra": 0,
+     "f1": 0.3636
+    },
+    "attacks": {
+     "matched": 6,
+     "missed": 3,
+     "extra": 0,
+     "f1": 0.8
+    }
+   },
+   "reference_count": 9
+  },
+  {
+   "recording": "shenai-C.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.11997732426303855,
+    3.3399773242630384
+   ],
+   "band_rises": [
+    0.11997732426303855,
+    3.3399773242630384
+   ],
+   "attacks": [
+    0.09605442176870749
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.5
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.5
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.6667
+    }
+   },
+   "reference_count": 2
+  },
+  {
+   "recording": "singing-female1-C-hi.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    3.0599773242630386
+   ],
+   "band_rises": [
+    3.0599773242630386
+   ],
+   "attacks": [],
+   "scores": {
+    "band_changes": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 0,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "tabla-lick.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.25997732426303855,
+    0.6399773242630385
+   ],
+   "band_rises": [
+    0.25997732426303855,
+    0.6399773242630385
+   ],
+   "attacks": [
+    0.24013605442176872,
+    0.3361904761904762,
+    0.4322448979591837,
+    0.5363038548752834,
+    0.6243537414965986
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 2,
+     "missed": 4,
+     "extra": 1,
+     "f1": 0.4444
+    },
+    "band_rises": {
+     "matched": 2,
+     "missed": 4,
+     "extra": 0,
+     "f1": 0.5
+    },
+    "attacks": {
+     "matched": 5,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.9091
+    }
+   },
+   "reference_count": 6
+  },
+  {
+   "recording": "techno_sequence3.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.21997732426303854,
+    0.6199773242630385,
+    0.7799773242630386,
+    0.9399773242630386,
+    1.0999773242630386,
+    1.3999773242630384,
+    1.5599773242630386,
+    1.7199773242630385,
+    1.8799773242630387,
+    2.1799773242630387,
+    2.3399773242630384,
+    2.4999773242630385,
+    2.6599773242630387,
+    2.9599773242630385,
+    3.1199773242630386,
+    3.2799773242630383,
+    3.4399773242630385,
+    3.5999773242630386,
+    3.8999773242630384,
+    4.059977324263039,
+    4.219977324263039,
+    4.379977324263039,
+    4.679977324263039,
+    4.839977324263039,
+    4.999977324263039,
+    5.159977324263038,
+    5.319977324263038,
+    5.619977324263038,
+    5.779977324263038,
+    5.9399773242630385,
+    6.099977324263039,
+    6.3999773242630384,
+    6.559977324263039,
+    6.719977324263039,
+    6.879977324263039,
+    7.179977324263039,
+    7.339977324263039,
+    7.499977324263039,
+    7.659977324263038,
+    7.959977324263039,
+    8.119977324263038,
+    8.279977324263038,
+    8.439977324263038,
+    8.599977324263039,
+    8.89997732426304,
+    9.059977324263038,
+    9.219977324263038,
+    9.379977324263038,
+    9.679977324263039,
+    9.839977324263039,
+    9.999977324263039,
+    10.15997732426304,
+    10.31997732426304,
+    10.619977324263038,
+    10.779977324263038,
+    10.939977324263038,
+    11.099977324263039,
+    11.39997732426304,
+    11.559977324263038,
+    11.719977324263038,
+    11.879977324263038,
+    12.179977324263039,
+    12.339977324263039,
+    12.499977324263039,
+    12.65997732426304,
+    12.81997732426304,
+    13.119977324263038,
+    13.279977324263038,
+    13.439977324263038,
+    13.599977324263039,
+    13.89997732426304,
+    14.059977324263038,
+    14.219977324263038,
+    14.379977324263038,
+    14.539977324263038,
+    14.839977324263039,
+    14.999977324263039,
+    15.15997732426304,
+    15.31997732426304,
+    15.619977324263038,
+    15.779977324263038,
+    15.939977324263038,
+    16.099977324263037,
+    16.399977324263038,
+    16.559977324263038,
+    16.719977324263038,
+    16.879977324263038,
+    17.039977324263038
+   ],
+   "band_rises": [
+    0.21997732426303854,
+    0.6199773242630385,
+    0.7799773242630386,
+    0.9399773242630386,
+    1.0999773242630386,
+    1.3999773242630384,
+    1.5599773242630386,
+    1.7199773242630385,
+    1.8799773242630387,
+    2.1799773242630387,
+    2.3399773242630384,
+    2.4999773242630385,
+    2.6599773242630387,
+    2.9599773242630385,
+    3.1199773242630386,
+    3.2799773242630383,
+    3.4399773242630385,
+    3.5999773242630386,
+    3.8999773242630384,
+    4.059977324263039,
+    4.219977324263039,
+    4.379977324263039,
+    4.679977324263039,
+    4.839977324263039,
+    4.999977324263039,
+    5.159977324263038,
+    5.319977324263038,
+    5.619977324263038,
+    5.779977324263038,
+    5.9399773242630385,
+    6.099977324263039,
+    6.3999773242630384,
+    6.559977324263039,
+    6.719977324263039,
+    6.879977324263039,
+    7.179977324263039,
+    7.339977324263039,
+    7.499977324263039,
+    7.659977324263038,
+    7.959977324263039,
+    8.119977324263038,
+    8.279977324263038,
+    8.439977324263038,
+    8.599977324263039,
+    8.89997732426304,
+    9.059977324263038,
+    9.219977324263038,
+    9.379977324263038,
+    9.679977324263039,
+    9.839977324263039,
+    9.999977324263039,
+    10.15997732426304,
+    10.31997732426304,
+    10.619977324263038,
+    10.779977324263038,
+    10.939977324263038,
+    11.099977324263039,
+    11.39997732426304,
+    11.559977324263038,
+    11.719977324263038,
+    11.879977324263038,
+    12.179977324263039,
+    12.339977324263039,
+    12.499977324263039,
+    12.65997732426304,
+    12.81997732426304,
+    13.119977324263038,
+    13.279977324263038,
+    13.439977324263038,
+    13.599977324263039,
+    13.89997732426304,
+    14.059977324263038,
+    14.219977324263038,
+    14.379977324263038,
+    14.539977324263038,
+    14.839977324263039,
+    14.999977324263039,
+    15.15997732426304,
+    15.31997732426304,
+    15.619977324263038,
+    15.779977324263038,
+    15.939977324263038,
+    16.099977324263037,
+    16.399977324263038,
+    16.559977324263038,
+    16.719977324263038,
+    16.879977324263038,
+    17.039977324263038
+   ],
+   "attacks": [
+    0.19210884353741497,
+    0.28816326530612246,
+    0.44024943310657594,
+    0.6003401360544217,
+    0.7524263038548753,
+    0.9125170068027211,
+    1.0646031746031746,
+    1.2246938775510203,
+    1.376780045351474,
+    1.5368707482993198,
+    1.6889569160997733,
+    1.849047619047619,
+    2.0011337868480727,
+    2.1612244897959183,
+    2.313310657596372,
+    2.4734013605442176,
+    2.6334920634920636,
+    2.785578231292517,
+    2.945668934240363,
+    3.0977551020408165,
+    3.257845804988662,
+    3.4099319727891158,
+    3.5700226757369613,
+    3.722108843537415,
+    3.8821995464852606,
+    4.034285714285715,
+    4.19437641723356,
+    4.346462585034014,
+    4.506553287981859,
+    4.658639455782313,
+    4.818730158730158,
+    4.9708163265306125,
+    5.1309070294784584,
+    5.282993197278912,
+    5.443083900226758,
+    5.603174603174603,
+    5.755260770975057,
+    5.90734693877551,
+    6.067437641723356,
+    6.227528344671202,
+    6.3796145124716555,
+    6.5397052154195014,
+    6.691791383219955,
+    6.851882086167801,
+    7.003968253968254,
+    7.1640589569161,
+    7.316145124716553,
+    7.476235827664399,
+    7.6283219954648525,
+    7.7884126984126985,
+    7.940498866213152,
+    8.100589569160999,
+    8.252675736961452,
+    8.412766439909298,
+    8.564852607709751,
+    8.724943310657597,
+    8.87702947845805,
+    9.037120181405896,
+    9.197210884353742,
+    9.349297052154196,
+    9.509387755102042,
+    9.661473922902495,
+    9.82156462585034,
+    9.973650793650794,
+    10.13374149659864,
+    10.285827664399093,
+    10.44591836734694,
+    10.598004535147393,
+    10.758095238095239,
+    10.910181405895692,
+    11.070272108843538,
+    11.222358276643991,
+    11.382448979591837,
+    11.53453514739229,
+    11.694625850340136,
+    11.84671201814059,
+    12.006802721088436,
+    12.158888888888889,
+    12.318979591836735,
+    12.471065759637188,
+    12.631156462585034,
+    12.79124716553288,
+    12.943333333333333,
+    13.10342403628118,
+    13.255510204081633,
+    13.415600907029479,
+    13.567687074829932,
+    13.727777777777778,
+    13.879863945578231,
+    14.039954648526077,
+    14.19204081632653,
+    14.352131519274376,
+    14.50421768707483,
+    14.664308390022676,
+    14.816394557823129,
+    14.976485260770975,
+    15.128571428571428,
+    15.288662131519274,
+    15.440748299319727,
+    15.600839002267573,
+    15.752925170068027,
+    15.913015873015873,
+    16.07310657596372,
+    16.225192743764172,
+    16.38528344671202,
+    16.53736961451247,
+    16.69746031746032,
+    16.84954648526077,
+    17.009637188208618
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 88,
+     "missed": 21,
+     "extra": 0,
+     "f1": 0.8934
+    },
+    "band_rises": {
+     "matched": 88,
+     "missed": 21,
+     "extra": 0,
+     "f1": 0.8934
+    },
+    "attacks": {
+     "matched": 108,
+     "missed": 1,
+     "extra": 1,
+     "f1": 0.9908
+    }
+   },
+   "reference_count": 109
+  },
+  {
+   "recording": "thisIsTheSoundOfAVocoder_edited.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.23997732426303856,
+    0.5799773242630385,
+    1.3199773242630386,
+    2.7799773242630383,
+    3.1599773242630387,
+    4.219977324263039,
+    4.639977324263039,
+    5.499977324263039,
+    5.659977324263038
+   ],
+   "band_rises": [
+    0.23997732426303856,
+    2.7799773242630383,
+    3.1599773242630387,
+    4.219977324263039,
+    4.639977324263039,
+    5.499977324263039,
+    5.659977324263038
+   ],
+   "attacks": [
+    0.22412698412698412,
+    0.5923356009070295,
+    0.6483673469387755,
+    1.3607709750566894,
+    1.464829931972789,
+    1.576893424036281,
+    1.7449886621315194,
+    1.8410430839002268,
+    2.0251473922902496,
+    2.641496598639456,
+    2.793582766439909,
+    2.929659863945578,
+    3.177800453514739,
+    3.257845804988662,
+    3.497981859410431,
+    4.19437641723356,
+    4.434512471655329,
+    4.674648526077098,
+    4.746689342403628,
+    5.443083900226758
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 5,
+     "missed": 9,
+     "extra": 4,
+     "f1": 0.4348
+    },
+    "band_rises": {
+     "matched": 4,
+     "missed": 10,
+     "extra": 3,
+     "f1": 0.381
+    },
+    "attacks": {
+     "matched": 11,
+     "missed": 3,
+     "extra": 9,
+     "f1": 0.6471
+    }
+   },
+   "reference_count": 14
+  },
+  {
+   "recording": "timbale-lick.wav",
+   "group": "Non-Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.7399773242630385,
+    0.8999773242630386,
+    1.0799773242630386,
+    1.5599773242630386
+   ],
+   "band_rises": [
+    0.7399773242630385,
+    0.8999773242630386,
+    1.0799773242630386,
+    1.5599773242630386
+   ],
+   "attacks": [
+    0.09605442176870749,
+    0.17609977324263038,
+    0.248140589569161,
+    0.3441950113378685,
+    0.4242403628117914,
+    0.5603174603174603,
+    0.7124036281179138,
+    0.8724943310657597,
+    1.04859410430839,
+    1.2006802721088434,
+    1.3607709750566894,
+    1.544875283446712
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 5,
+     "missed": 8,
+     "extra": 0,
+     "f1": 0.5556
+    },
+    "band_rises": {
+     "matched": 4,
+     "missed": 9,
+     "extra": 0,
+     "f1": 0.4706
+    },
+    "attacks": {
+     "matched": 12,
+     "missed": 1,
+     "extra": 0,
+     "f1": 0.96
+    }
+   },
+   "reference_count": 13
+  },
+  {
+   "recording": "trpt-C-lo.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    4.839977324263039
+   ],
+   "band_rises": [
+    0.05997732426303855
+   ],
+   "attacks": [
+    0.024013605442176872
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 1,
+     "f1": 0.6667
+    },
+    "band_rises": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    },
+    "attacks": {
+     "matched": 1,
+     "missed": 0,
+     "extra": 0,
+     "f1": 1.0
+    }
+   },
+   "reference_count": 1
+  },
+  {
+   "recording": "trpt-lick.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.23997732426303856,
+    0.8599773242630385,
+    1.6999773242630385,
+    2.0599773242630386
+   ],
+   "band_rises": [
+    0.05997732426303855
+   ],
+   "attacks": [
+    0.25614512471655326,
+    0.37621315192743765,
+    0.5282993197278911,
+    0.9045124716553288,
+    1.104625850340136,
+    1.296734693877551,
+    1.4728344671201814,
+    1.5848979591836734,
+    1.7049659863945579,
+    1.8250340136054422
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 2,
+     "missed": 11,
+     "extra": 3,
+     "f1": 0.2222
+    },
+    "band_rises": {
+     "matched": 0,
+     "missed": 13,
+     "extra": 1,
+     "f1": 0.0
+    },
+    "attacks": {
+     "matched": 10,
+     "missed": 3,
+     "extra": 0,
+     "f1": 0.8696
+    }
+   },
+   "reference_count": 13
+  },
+  {
+   "recording": "twangs_1.wav",
+   "group": "Pitched Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.25997732426303855,
+    0.5199773242630386,
+    0.7599773242630385,
+    1.2599773242630385,
+    1.4999773242630385,
+    1.7599773242630385
+   ],
+   "band_rises": [
+    0.25997732426303855,
+    0.5199773242630386,
+    0.7599773242630385,
+    1.2599773242630385,
+    1.4999773242630385,
+    1.7599773242630385
+   ],
+   "attacks": [
+    0.14408163265306123,
+    0.24013605442176872,
+    0.4882766439909297,
+    0.7364172335600907,
+    0.8644897959183674,
+    0.992562358276644,
+    1.240702947845805,
+    1.488843537414966,
+    1.736984126984127
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 6,
+     "missed": 4,
+     "extra": 1,
+     "f1": 0.7059
+    },
+    "band_rises": {
+     "matched": 6,
+     "missed": 4,
+     "extra": 0,
+     "f1": 0.75
+    },
+    "attacks": {
+     "matched": 8,
+     "missed": 2,
+     "extra": 1,
+     "f1": 0.8421
+    }
+   },
+   "reference_count": 10
+  },
+  {
+   "recording": "vocoder1.wav",
+   "group": "Pitched Non-Percussive",
+   "band_changes": [
+    0.05997732426303855,
+    0.25997732426303855,
+    0.5999773242630385,
+    0.9599773242630385,
+    1.3799773242630387,
+    1.9599773242630385,
+    2.3799773242630384,
+    2.6399773242630387,
+    2.8199773242630384,
+    3.4399773242630385,
+    3.7199773242630387,
+    4.299977324263039,
+    4.719977324263039,
+    5.319977324263038,
+    5.779977324263038,
+    6.079977324263038,
+    6.619977324263038,
+    7.0199773242630386,
+    7.339977324263039
+   ],
+   "band_rises": [
+    0.05997732426303855,
+    0.25997732426303855,
+    0.9599773242630385,
+    2.6399773242630387,
+    2.8199773242630384,
+    3.4399773242630385,
+    5.779977324263038,
+    6.619977324263038
+   ],
+   "attacks": [
+    0.048027210884353744,
+    0.25614512471655326,
+    0.44024943310657594,
+    0.6643764172335601,
+    1.04859410430839,
+    1.43281179138322,
+    1.6409297052154195,
+    2.0331519274376415,
+    2.4173696145124715,
+    2.5214285714285714,
+    2.617482993197279,
+    2.721541950113379,
+    2.8095918367346937,
+    3.025714285714286,
+    3.4019274376417235,
+    3.7861451247165534,
+    3.9862585034013605,
+    4.37047619047619,
+    4.762698412698413,
+    4.882766439909297,
+    5.06687074829932,
+    5.1709297052154195,
+    5.379047619047619,
+    5.747256235827664,
+    6.131473922902495,
+    6.331587301587302,
+    6.723809523809524,
+    7.1000226757369616
+   ],
+   "scores": {
+    "band_changes": {
+     "matched": 7,
+     "missed": 24,
+     "extra": 12,
+     "f1": 0.28
+    },
+    "band_rises": {
+     "matched": 6,
+     "missed": 25,
+     "extra": 2,
+     "f1": 0.3077
+    },
+    "attacks": {
+     "matched": 27,
+     "missed": 4,
+     "extra": 1,
+     "f1": 0.9153
+    }
+   },
+   "reference_count": 31
+  }
+ ]
+}

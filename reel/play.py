@@ -25,6 +25,7 @@ if __package__:
     from .config import GAZE_PY, PY
     from .live_speech import SpeechReader
     from .pitch import PitchTrace
+    from .onsets import OnsetTrace, attack_report
     from .local_reader import LocalReader
     from .action_view import action_views, missing_sequence, sound_during_pictures
     from .replay import replay
@@ -42,6 +43,7 @@ else:
     from config import GAZE_PY, PY
     from live_speech import SpeechReader
     from pitch import PitchTrace
+    from onsets import OnsetTrace, attack_report
     from local_reader import LocalReader
     from action_view import action_views, missing_sequence, sound_during_pictures
     from replay import replay
@@ -184,6 +186,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
     gaze_history = deque(maxlen=7)
     changes = SoundChanges()
     pitch = PitchTrace()
+    attacks = OnsetTrace()
     stereo = StereoHistory()
     with ExitStack() as stack:
         tagger = stack.enter_context(LocalReader([PY, str(Path(__file__).with_name("sounds.py")), "--serve"],
@@ -219,6 +222,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
             sound = []
             cues = {}
             events = []
+            attack_events = []
             span = Fraction(str(pace.seconds))
             deadline = min(limit, start + span)
             pause_reason = "interval"
@@ -261,7 +265,9 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                     sound.append(raw)
                     if count:
                         values = normalized_samples(np.frombuffer(raw, dtype=dtype).reshape(-1, channels))
-                        fresh = changes.scan_samples(values, rate, sample_boundary(position, rate))
+                        first = sample_boundary(position, rate)
+                        fresh = changes.scan_samples(values, rate, first)
+                        attack_events.extend(attacks.scan(values, rate, first))
                         if fresh:
                             cues.setdefault("sound_band_change_s", fresh[0]["time_s"])
                             events.extend(fresh)
@@ -327,6 +333,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                             packet["picture_sequence"] = sequence
                 if audio:
                     audio["band_changes"] = events
+                    audio["attacks"] = attack_report(attack_events, rate)
                 if audio and info["has_video"]:
                     times = [frame[0] for frame in shown]
                     def picture(us):

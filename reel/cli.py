@@ -63,6 +63,7 @@ def doctor():
             ("MCP picture and sound transport", has(sys.executable, "mcp.server.fastmcp"), "pip install -e '.[mcp]'"),
             ("picture, sound, memory", has(sys.executable, "cv2") and has(sys.executable, "librosa"), "pip install -e ."),
             ("recorded channel levels and timing", has(sys.executable, "soundfile") and has(sys.executable, "numpy"), "pip install -e ."),
+            ("acoustic attack timing", has(sys.executable, "scipy.ndimage"), "pip install -e ."),
             ("voices: Demucs", has(SEP_PY, "demucs"), "pip install -e '.[separate]'"),
             ("crowd: Mel-Band Roformer", has(CROWD_PY, "audio_separator"), "pip install -e '.[crowd]'"),
             ("speech: mlx-whisper (Apple GPU)", has(ASR_PY, "mlx_whisper"), "pip install -e '.[mlx]'"),

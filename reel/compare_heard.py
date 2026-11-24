@@ -7,6 +7,7 @@ if __package__:
     from .common import open_recording, sample_boundary
     from .compare_sounds import SoundMatcher
     from .pitch import PitchTrace
+    from .onsets import recorded_attacks
     from .hearing import LIVE_CONTEXT_S
     from .listen import excerpt
     from .turn_audio import released_samples
@@ -14,6 +15,7 @@ else:
     from common import open_recording, sample_boundary
     from compare_sounds import SoundMatcher
     from pitch import PitchTrace
+    from onsets import recorded_attacks
     from hearing import LIVE_CONTEXT_S
     from listen import excerpt
     from turn_audio import released_samples
@@ -50,6 +52,7 @@ def recordings(directory, reference, target):
             "rms_dbfs_by_channel": [round(float(10 * np.log10(e / count)), 1) if e else None for e in energy],
             "digital_silence_by_channel": (~active).tolist(),
             "pitch_contour": PitchTrace().read(wav, first),
+            "attacks": recorded_attacks(wav, first),
         }
     return clips
 

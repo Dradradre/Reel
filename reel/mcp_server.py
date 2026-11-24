@@ -26,6 +26,7 @@ if __package__:
     from .common import RecordedSource
     from .replay import replay
     from .pitch import PitchTrace
+    from .onsets import recorded_attacks
     from .compare_sounds import SoundMatcher
     from .compare_heard import describe_recordings, recordings, sound_similarity
     from .follow import draw_follow, follow_point, validate_anchor
@@ -55,6 +56,7 @@ else:
     from common import RecordedSource
     from replay import replay
     from pitch import PitchTrace
+    from onsets import recorded_attacks
     from compare_sounds import SoundMatcher
     from compare_heard import describe_recordings, recordings, sound_similarity
     from follow import draw_follow, follow_point, validate_anchor
@@ -300,6 +302,7 @@ class Viewing:
                                "rate_hz": scene["rate_hz"], "channels": scene["channels"], "wav_attached": native_audio,
                                "levels": scene_levels(scene),
                                "pitch_contour": PitchTrace().read(wav, scene["first_sample"]),
+                               "attacks": recorded_attacks(wav, scene["first_sample"]),
                                "band_changes": SoundChanges().scan(wav, scene["first_sample"])}
         blocks = []
         if scene.get("pages") and start_s < scene["picture_end"]:
@@ -539,7 +542,7 @@ class Viewing:
         report["audio"] = None
         if audio:
             fields = ("rate_hz", "channels", "first_sample_on_film", "sample_count", "signal", "recorded_spectrum",
-                      "band_changes", "stereo_cues", "during_pictures", "pitch_contour")
+                      "band_changes", "stereo_cues", "during_pictures", "pitch_contour", "attacks")
             if sound_estimates:
                 fields += ("source_estimates", "scene", "sound_events", "sound_identity")
             report["audio"] = {key: audio[key] for key in fields if key in audio}
@@ -706,7 +709,8 @@ class Viewing:
                 adjusted_audio = audio_block(playback) if native_audio and gain else None
             result = {**result, "start_s": start, "end_s": stop, "next_start_s": stop if stop < end else None,
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
-                      "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first)}
+                      "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first),
+                      "attacks": recorded_attacks(wav, first)}
             if verify_sounds or (describe and result.get("status") == "unavailable"):
                 # A failed question reader can still return timed, open-ended evidence from the mix.
                 # Keep its question status separate: a caption is not an answer or a transcript.

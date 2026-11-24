@@ -82,7 +82,7 @@ Reel can also lay out a film in 30-second pages. Read left to right. A vertical 
 | on screen | recognized words and numbers during the frames in which they appear | read a score or sign alongside the sound at that moment |
 | change | mean absolute RGB change between displayed frames, brightness and holds. A colour change can register at constant brightness. On MCP replay, `ask_scene(exposure_detail=true)` places the recorded peak under each consecutive picture in a short sequence. With `sync_regions`, each motion trace covers the whole requested rectangle | cuts, flashes, blackouts, a frozen picture |
 | seen again | Green marks a pixel-for-pixel match between two retained colour previews. Blue marks a similar layout across shots. Both give the earlier time. | a returning title card, two different cards with similar lettering |
-| sound | power in each frequency band on a fixed −80 to 0 dBFS scale, with changes in the sound marked. On replay, a marked interval can be read against the surrounding channel spectra. In stereo you can listen to the average or difference between the channels. | the same sound keeps its brightness across recordings and zooms. During playback you can rehear a sustained band or a brief impact alongside the original. The speech reader measures what remains in the gaps before, between and after detected voices. Playback also reports the frequency of a clearly repeating sound. |
+| sound | power in each frequency band on a fixed −80 to 0 dBFS scale, with changes in the sound marked. On replay, a marked interval can be read against the surrounding channel spectra. In stereo you can listen to the average or difference between the channels. | the same sound keeps its brightness across recordings and zooms. During playback you can rehear a sustained band or a brief impact alongside the original. The speech reader measures what remains in the gaps before, between and after detected voices. Playback also reports the frequency of a repeating sound and the times of sharp attacks in each channel. |
 | sounds like | short sound changes on the page. Live playback also gives the time, channel and frequency range of sharp rises or falls. Source estimates cover up to ten seconds in `stream.md` and four seconds per channel in `play`. First-listen descriptions can cover ten seconds. A second description can isolate the latest passage when the longer reading includes an earlier turn. A first MCP view includes available local waveform readings and supported words with or without a WAV attachment. If the waveform reader is unavailable, the local captioner gives the range it heard. The detailed MCP view can also show a phrase that began in an earlier turn. On replay, compare the one-second estimates with one continuous reading of the sound. With YAMNet installed, playback also gives possible sources in 0.975-second recording windows. On replay you can adjust the volume, compare the sources at both levels, or locate the second closest to a sound you describe. | a single impact, music underneath it, or voices in a busy room |
 | level | recorded mix level in 10 ms steps, with the typical level and strongest moment of each window in `stream.md` | a slow fade, a quiet background or a brief rise |
 | L level, R level | 10 ms levels for each recorded channel, numbered on larger layouts | a sound that is louder on one side or moves across the mix |
@@ -102,6 +102,8 @@ Reel can also lay out a film in 30-second pages. Read left to right. A vertical 
 |---|---|
 | Timed visual questions on all 644 OVO-Bench videos | **66.08** on the official three-mode average. GPT answered 2,002 of 3,035 checkpoints correctly using only pictures from before each question. [Score and protocol](docs/benchmarks/ovo-full.json) |
 | Free recall of sight and sound on 12 unfamiliar films | **78.8% for sight, 43.8% for sound** on the human-relative recall measure. Giving the two tracks equal weight yielded 61.3% (95% interval 43.3–91.1%). [Captions and scoring](docs/benchmarks/track-recall.json) |
+
+In 56 held-out recordings, 359 of 431 hand-marked note starts fell within 50 ms of a Reel attack. Using rises from the earlier band-change trace found 215. Misses fell from 216 to 72 and extra marks from 51 to 45. In a separate controlled test, Reel found 189 of 218 short sounds inserted over rain, wind, a washing machine or an engine. It added nine unmatched marks across the mixes and their background-only controls. [Annotated recordings](docs/benchmarks/attack-timing.json) · [Everyday sound mixtures](docs/benchmarks/environment-attacks.json)
 
 The recall test compares how well a description distinguishes its film from the others, with human descriptions as the reference. In one party scene, three of four listeners mentioned singing. GPT recalled applause and speech and missed the singing. [Film-by-film account (Korean)](docs/perception-check.md#화면과-녹음을-바꿔-끼운-뒤의-자유-회상)
 
@@ -224,6 +226,8 @@ reel observe reels/view-01 --t0 4 --t1 4.5    # see each frame with the audio th
 To find out what a viewer picked up from the picture or the soundtrack, start fresh sessions on the same file with `--tracks picture`, `--tracks sound` and the default `--tracks both`. Both `play` and `mcp` keep the original film clock and cutoff. Later looks and listens in each session use the selected tracks. [What people and GPT noticed in eight films](docs/perception-check.md#같은-영상을-보거나-듣거나-둘-다-했을-때)
 
 When a file has several picture or sound tracks, Reel uses the first track marked default within each type. With no marked default it takes the first eligible track. Attached cover art and thumbnail tracks are excluded from the moving picture. The same selection supplies the pictures, recording and transcript.
+
+On the first pass, `audio.attacks` marks when energy rises sharply in each recorded channel. A reader can follow two knocks in quick succession or a change of rhythm. A single jingle can leave several marks.
 
 Reel measures pitch changes in each recorded channel. A clear repeating sound leaves a series of frequency estimates in `audio.pitch_contour`, so a reader can follow a rise or fall even when the source is unclear.
 
@@ -404,6 +408,8 @@ An offscreen sound can register clearly while its source stays uncertain. Voices
 </details>
 
 ## Credits
+
+The attack detector draws on Böck and Widmer’s frequency-neighbourhood method for suppressing vibrato. John Glover and colleagues provide the Modal recordings and hand annotations, with samples credited to the OLPC sound library. The environmental mixtures use Karol Piczak’s ESC-50 recordings (CC BY-NC 3.0). [Method](https://www.cp.jku.at/research/papers/Boeck_Widmer_DAFx_2013.pdf) · [Modal database](https://github.com/johnglover/modal) · [ESC-50 credits and licence](https://github.com/karolpiczak/ESC-50/blob/master/LICENSE)
 
 <details>
 <summary>Models, datasets, authors and licences</summary>

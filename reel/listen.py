@@ -19,6 +19,7 @@ if __package__:
     from .scene_audio import inspect_scene
     from .sound_events import inspect_events, ready as events_ready
     from .pitch import PitchTrace
+    from .onsets import recorded_attacks
     from .stereo import StereoHistory
 else:
     from sound_window import sound_window, validate_mark
@@ -31,6 +32,7 @@ else:
     from scene_audio import inspect_scene
     from sound_events import inspect_events, ready as events_ready
     from pitch import PitchTrace
+    from onsets import recorded_attacks
     from stereo import StereoHistory
 
 
@@ -207,6 +209,7 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
         if cues:
             report["stereo_cues"] = cues
     report["pitch_contour"] = PitchTrace().read(wav, first_sample)
+    report["attacks"] = recorded_attacks(wav, first_sample)
     if volume:
         report.update(wav=str(playback), recorded_wav=str(original), measured_wav=str(wav), playback_gain=volume)
     if events_ready():

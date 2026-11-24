@@ -160,6 +160,8 @@ flowchart LR
 
 </details>
 
+通常の再生でも、各チャンネルで音が鋭く立ち上がった時刻を `audio.attacks` で確認できる。鍵が一度鳴っただけで複数の印が付くこともある。検証用の録音56件では、人が記録した431個の音の立ち上がりのうち、359個を50ミリ秒以内の誤差で捉えた。従来の周波数帯別の音量変化から拾えたのは215個だった。[録音ごとの結果](docs/benchmarks/attack-timing.json)
+
 `reel setup --identify-sounds` を実行すると、PE-AV と CLAP が同じチャンネルの原音を聴き、それぞれ音源の候補を選ぶ。生活音の録音99件のうち、正解は PE-AV が94件、CLAP が85件だった。正解を選択肢から外すと、40件で両者が同じ誤答を選んだ。別の49件では、選択肢の外も調べると、この誤答は16件から0件に減った。正解を戻した場合、もともと両者が正解した39件のうち21件で回答を維持した。[選択肢から正解を外した試験](docs/benchmarks/source-outside-choices.json)、[録音ごとの結果](docs/benchmarks/source-identity-agreement.json)
 
 ## わかりにくいこと

@@ -559,6 +559,9 @@ class TransportTests(unittest.TestCase):
                 self.assertEqual((reply["start_s"], reply["end_s"], reply["joint"]["question"]), (left, right, prompt))
                 levels = reply["audio"].pop("levels")
                 contour = reply["audio"].pop("pitch_contour")
+                attacks = reply["audio"].pop("attacks")
+                self.assertEqual(attacks["events"], [])
+                self.assertEqual(attacks["confirmation_delay_s"], .04)
                 self.assertEqual((contour["first_window_sample_on_film"], contour["window_count"]), (1200, 13))
                 self.assertEqual(reply["audio"], {"first_sample_on_film": first, "sample_count": last - first,
                                                   "channels": 1, "rate_hz": rate, "wav_attached": True,

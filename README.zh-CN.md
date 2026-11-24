@@ -160,6 +160,8 @@ flowchart LR
 
 </details>
 
+运行 `reel setup --identify-sounds` 后，PE-AV 和 CLAP 会分别用同一声道的原始录音比对候选声源。在 99 段环境录音中，PE-AV 答对了 94 段，CLAP 答对了 85 段。去掉正确选项后，两者有 40 次选中了同一个错误声源。[逐段结果](docs/benchmarks/source-identity-agreement.json)
+
 ## 局限
 
 听得出某个时刻有响声，并不一定能找出是什么发出的。人群盖住说话声时容易漏词。画面变化很小时，短暂的冻结也容易漏掉。对画外音、风景配乐或快速蒙太奇，画面里可用于判断音画同步的线索很少。视线位置来自模型预测。[更多实例（英语）](README.md#limits)

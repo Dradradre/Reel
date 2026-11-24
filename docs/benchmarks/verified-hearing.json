@@ -1748,6 +1748,12 @@
             "caption": "A man in an orange jacket speaks while reading from papers and walking across a gymnasium to a table.",
             "heard": "The audio readings suggested a man speaking with an echo, but I could not hear the recording directly.",
             "seen": "A man in an orange jacket reads from papers and walks across a gymnasium toward a table."
+          },
+          "moss": {
+            "turns": 3,
+            "caption": "A man in an orange jacket reads from papers and speaks while walking around a gymnasium, occasionally returning to a table.",
+            "heard": "A muffled male voice speaks with an echo, but I could not make out the words.",
+            "seen": "A man in an orange jacket reads papers and walks between the gym floor and a table."
           }
         }
       },
@@ -1768,6 +1774,12 @@
             "caption": "A person holds out a yellow toy to a small black and white dog, which moves among cables beside a red suitcase.",
             "heard": "A man was speaking, though I could not tell most of what he said.",
             "seen": "A person held a yellow toy toward a small black and white dog among cables beside a red suitcase."
+          },
+          "moss": {
+            "turns": 5,
+            "caption": "A person holds out a yellow toy to a small black and white dog, which moves among cables beside a red suitcase while people talk in the background.",
+            "heard": "People talk in the background, including a man recounting a story.",
+            "seen": "A small black and white dog moves among cables beside a red suitcase as a person holds out a yellow toy."
           }
         }
       },
@@ -1788,6 +1800,12 @@
             "caption": "A seated woman holds a small child close as people move through a lobby behind them.",
             "heard": "The audio readings suggest speech and a child crying, though I could not hear the recording directly.",
             "seen": "A seated woman holds a small child close while people move through a lobby behind them."
+          },
+          "moss": {
+            "turns": 4,
+            "caption": "A seated woman holds a small child close in a busy indoor seating area as people walk past the glass doors.",
+            "heard": "The audio readings suggest speech and a child crying, though I could not hear the recording directly.",
+            "seen": "A seated woman holds a small child close while people move near glass doors in the background."
           }
         }
       },
@@ -1807,6 +1825,12 @@
             "turns": 5,
             "caption": "Two toddlers in high chairs play with cardboard tubes, and one holds a tube up to the camera.",
             "heard": "The sound descriptions suggested a woman speaking and a baby crying, but I could not hear the audio directly.",
+            "seen": "Two toddlers sit in high chairs playing with cardboard tubes, and one holds a tube up to the camera."
+          },
+          "moss": {
+            "turns": 5,
+            "caption": "Two toddlers in high chairs play with cardboard tubes, with one holding a tube to his mouth and then up to the camera.",
+            "heard": "The audio descriptions indicated high-pitched child vocalizations, but I could not hear the recording directly.",
             "seen": "Two toddlers sit in high chairs playing with cardboard tubes, and one holds a tube up to the camera."
           }
         }
@@ -1828,6 +1852,12 @@
             "caption": "A young girl in a blue dress finds a green egg and puts it in her colorful basket in a living room.",
             "heard": "The speech reader recorded someone asking whether she found one and how many she got, followed later by a remark about an unfriendly visitor outside.",
             "seen": "A young girl in a blue dress finds a green egg and puts it in a colorful basket in a living room."
+          },
+          "moss": {
+            "turns": 3,
+            "caption": "A young girl in a blue dress finds a green egg and puts it in her colorful basket before watching a cartoon in the living room.",
+            "heard": "A child vocalizes while an adult asks whether she found one and how many she got.",
+            "seen": "A young girl in a blue dress collects a green egg in a colorful basket and looks toward a cartoon playing on the television."
           }
         }
       },
@@ -1848,6 +1878,12 @@
             "caption": "A toddler in a red hoodie watches and points at sheep behind a fence, then walks toward other visitors along the path.",
             "heard": "The audio analysis indicates a woman speaks about the sheep and asks about bunnies, with bird calls in the background.",
             "seen": "A toddler in a red hoodie watches and points at sheep behind a fence, then walks toward other visitors."
+          },
+          "moss": {
+            "turns": 6,
+            "caption": "A toddler in a red hoodie watches and waves at sheep behind a fence, then walks toward other visitors at the animal enclosure.",
+            "heard": "The audio readings indicate that a woman asks the child about the sheep and bunnies while birds call in the background.",
+            "seen": "A toddler in a red hoodie watches and waves at sheep behind a fence before walking toward other visitors."
           }
         }
       },
@@ -1868,6 +1904,12 @@
             "caption": "A young man plays an upright piano while reading sheet music in a living room.",
             "heard": "The audio analysis described piano music playing throughout the clip.",
             "seen": "A young man plays an upright piano while looking at sheet music in a living room."
+          },
+          "moss": {
+            "turns": 4,
+            "caption": "A young man plays a gentle melody on an upright piano while reading sheet music in a living room.",
+            "heard": "A gentle piano melody plays throughout the clip.",
+            "seen": "A young man sits at an upright piano and plays while looking at sheet music."
           }
         }
       },
@@ -1888,6 +1930,12 @@
             "caption": "A man in a white suit and a woman in a black outfit dance together under green lights as spectators watch and music plays.",
             "heard": "The audio analysis indicated music was playing, though I could not directly hear it.",
             "seen": "A man in a white suit and a woman in a black outfit danced together under green lights while spectators watched."
+          },
+          "moss": {
+            "turns": 5,
+            "caption": "A man in a white suit and a woman in a black outfit perform a lively partner dance on a nightclub floor as spectators watch.",
+            "heard": "The audio analysis indicated fast-paced dance music with a strong beat.",
+            "seen": "A man in a white suit and a woman in a black outfit dance together on a nightclub floor as spectators watch."
           }
         }
       },
@@ -1908,6 +1956,12 @@
             "caption": "Three dogs explore a shady yard, sniffing around before running toward the camera and gathering at the person's feet.",
             "heard": "The audio readings suggest birds chirping and dogs barking, though I could not hear the recording directly.",
             "seen": "Three dogs wander and sniff around a shady yard before approaching the camera."
+          },
+          "moss": {
+            "turns": 4,
+            "caption": "Three dogs sniff and wander around a wooded yard before running over to the camera.",
+            "heard": "I could not directly hear the audio, but the audio descriptions suggested faint outdoor animal sounds.",
+            "seen": "Three dogs wandered and sniffed around a wooded yard before approaching the camera."
           }
         }
       },
@@ -1928,6 +1982,12 @@
             "caption": "A young boy carries a bunny-shaped bag across a sunny yard and crouches beside a garden bed while a man watches nearby.",
             "heard": "The audio descriptions suggested wind and people speaking, but I could not hear the recording directly.",
             "seen": "A young boy carries a bunny-shaped bag across a sunny yard and crouches beside a garden bed while a man stands nearby."
+          },
+          "moss": {
+            "turns": 3,
+            "caption": "A young boy carries a bunny-shaped bag across a sunny yard and bends down beside a garden bed as a man watches nearby.",
+            "heard": "The audio analysis suggested indistinct background chatter and a low hum, but I could not hear the recording directly.",
+            "seen": "A young boy carries a bunny-shaped bag across a sunny yard and bends down by a garden bed while a man stands nearby."
           }
         }
       },
@@ -1948,6 +2008,12 @@
             "caption": "A man helps a toddler practice walking across a living room toward a woman holding out a lollipop, while another small child watches nearby.",
             "heard": "The audio readings suggested speech and a child laughing, but I could not hear the recording directly.",
             "seen": "A man helps a toddler practice walking across a living room toward a woman holding a lollipop, while another small child is nearby."
+          },
+          "moss": {
+            "turns": 5,
+            "caption": "In a living room, a man helps a baby practice standing and walking toward a woman while another young child plays nearby.",
+            "heard": "A child vocalizes and adults speak in the background, including a comment about getting tired.",
+            "seen": "A man helps a baby stand and move across a living room toward a woman, while another young child is nearby."
           }
         }
       },
@@ -1968,6 +2034,12 @@
             "caption": "A baby crawls across a play mat toward a water bottle and reaches it beside an older child holding a ball.",
             "heard": "Speech was detected, including someone saying the baby was going for the bottle.",
             "seen": "A baby crawls across a play mat toward a water bottle beside an older child holding a ball."
+          },
+          "moss": {
+            "turns": 4,
+            "caption": "A baby crawls across a play mat toward a water bottle, reaching for it beside an older child holding a ball.",
+            "heard": "Voices spoke in the background, including an adult encouraging the baby.",
+            "seen": "A baby crawled across a play mat toward a water bottle beside an older child holding a ball."
           }
         }
       }
@@ -1980,22 +2052,28 @@
         "human_captions": 42,
         "summary": {
           "human": {
-            "same_film_cosine": 0.4830426735260213,
-            "other_film_cosine": 0.28240633239555696,
-            "same_minus_other": 0.20063634113046436,
+            "same_film_cosine": 0.4830426708355338,
+            "other_film_cosine": 0.282406334961868,
+            "same_minus_other": 0.2006363358736658,
             "top_one_film": 0.49583333333333335
           },
           "control": {
-            "same_film_cosine": 0.3757638465613127,
-            "other_film_cosine": 0.2663020044565201,
-            "same_minus_other": 0.1094618421047926,
+            "same_film_cosine": 0.37576385860641803,
+            "other_film_cosine": 0.2663020168741544,
+            "same_minus_other": 0.10946184173226364,
             "top_one_film": 0.5013888888888889
           },
           "checked": {
-            "same_film_cosine": 0.3769667117959923,
-            "other_film_cosine": 0.24011207620302835,
-            "same_minus_other": 0.13685463559296393,
+            "same_film_cosine": 0.3769667128307952,
+            "other_film_cosine": 0.24011207496126494,
+            "same_minus_other": 0.13685463786953025,
             "top_one_film": 0.5236111111111111
+          },
+          "moss": {
+            "same_film_cosine": 0.39035444222390653,
+            "other_film_cosine": 0.26163862148920697,
+            "same_minus_other": 0.12871582073469956,
+            "top_one_film": 0.44861111111111107
           }
         },
         "by_film_columns": [
@@ -2007,7 +2085,7 @@
           "10685598604": {
             "human": [
               0.4967845231294632,
-              0.26104582473635674,
+              0.26104582101106644,
               0.75
             ],
             "control": [
@@ -2019,12 +2097,17 @@
               0.3082216754555702,
               0.2068483680486679,
               0.75
+            ],
+            "moss": [
+              0.3012007549405098,
+              0.2722789943218231,
+              0.0
             ]
           },
           "4857781123": {
             "human": [
               0.40010019143422443,
-              0.30822714666525525,
+              0.3082271565993627,
               0.0
             ],
             "control": [
@@ -2035,6 +2118,11 @@
             "checked": [
               0.299830620487531,
               0.19576583802700043,
+              0.3333333333333333
+            ],
+            "moss": [
+              0.403912087281545,
+              0.2248910516500473,
               0.3333333333333333
             ]
           },
@@ -2053,40 +2141,55 @@
               0.3759751319885254,
               0.2666991949081421,
               1.0
+            ],
+            "moss": [
+              0.3759751319885254,
+              0.2666991949081421,
+              1.0
             ]
           },
           "4760692619": {
             "human": [
-              0.44853003323078156,
-              0.34519414603710175,
+              0.44853002578020096,
+              0.34519415348768234,
               0.25
             ],
             "control": [
-              0.3268217295408249,
+              0.3268217444419861,
               0.2592105567455292,
               0.0
             ],
             "checked": [
-              0.41042932868003845,
+              0.41042934358119965,
               0.31860730051994324,
               0.25
+            ],
+            "moss": [
+              0.3429509848356247,
+              0.2956164479255676,
+              0.0
             ]
           },
           "4491342746": {
             "human": [
               0.5478276252746582,
-              0.34031317830085756,
+              0.340313184261322,
               0.2
             ],
             "control": [
-              0.4199306070804596,
-              0.33070477843284607,
+              0.4199307143688202,
+              0.33070486783981323,
               0.6
             ],
             "checked": [
               0.32587655186653136,
               0.22387322783470154,
               0.2
+            ],
+            "moss": [
+              0.41858460903167727,
+              0.28140684962272644,
+              0.8
             ]
           },
           "4447314310": {
@@ -2101,42 +2204,57 @@
               0.6666666666666666
             ],
             "checked": [
-              0.4406961401303609,
-              0.25854018330574036,
+              0.4406961103280385,
+              0.25854015350341797,
               1.0
+            ],
+            "moss": [
+              0.4512176811695099,
+              0.3216107189655304,
+              0.6666666666666666
             ]
           },
           "4571054955": {
             "human": [
               0.49218148986498517,
-              0.19163799285888672,
+              0.19163800279299417,
               0.6666666666666666
             ],
             "control": [
               0.5204106767972311,
-              0.14234910905361176,
+              0.14234913885593414,
               1.0
             ],
             "checked": [
               0.5311774611473083,
               0.16324728727340698,
               1.0
+            ],
+            "moss": [
+              0.5132265488306681,
+              0.1611664593219757,
+              1.0
             ]
           },
           "4823372280": {
             "human": [
-              0.4738902548948924,
-              0.2232376386721929,
+              0.4738902449607849,
+              0.2232376237710317,
               0.3333333333333333
             ],
             "control": [
-              0.2900390724341075,
+              0.2900390525658925,
               0.24911373853683472,
               0.0
             ],
             "checked": [
-              0.3862307667732239,
+              0.3862307866414388,
               0.20229126513004303,
+              0.0
+            ],
+            "moss": [
+              0.30687208970387775,
+              0.13600045442581177,
               0.0
             ]
           },
@@ -2147,37 +2265,47 @@
               1.0
             ],
             "control": [
-              0.48076486587524414,
-              0.24731150269508362,
+              0.48076488574345905,
+              0.247311532497406,
               1.0
             ],
             "checked": [
               0.4175284802913666,
-              0.20524267852306366,
+              0.20524269342422485,
+              1.0
+            ],
+            "moss": [
+              0.4652470449606578,
+              0.21820087730884552,
               1.0
             ]
           },
           "4491371230": {
             "human": [
-              0.2777901873923838,
-              0.2853947002440691,
+              0.2777901724912226,
+              0.2853946965187788,
               0.25
             ],
             "control": [
-              0.2993718683719635,
+              0.2993718907237053,
               0.23375454545021057,
               0.25
             ],
             "checked": [
-              0.4105064794421196,
+              0.4105064868927002,
               0.26231956481933594,
               0.75
+            ],
+            "moss": [
+              0.23983265459537506,
+              0.19905439019203186,
+              0.25
             ]
           },
           "4822859674": {
             "human": [
               0.7250882585843405,
-              0.3579088052113851,
+              0.35790881514549255,
               1.0
             ],
             "control": [
@@ -2189,12 +2317,17 @@
               0.3413096268971761,
               0.29732435941696167,
               0.0
+            ],
+            "moss": [
+              0.5128397643566132,
+              0.3800128996372223,
+              0.3333333333333333
             ]
           },
           "4598189055": {
             "human": [
               0.5068695843219757,
-              0.27348728477954865,
+              0.2734872947136561,
               0.3333333333333333
             ],
             "control": [
@@ -2206,34 +2339,48 @@
               0.27581827839215595,
               0.2805856466293335,
               0.0
+            ],
+            "moss": [
+              0.3523939549922943,
+              0.3827251195907593,
+              0.0
             ]
           }
         },
         "human_relative_description_separation": {
           "control": {
-            "human_same_minus_other": 0.20063634113046444,
-            "reader_same_minus_other": 0.1094618421047926,
-            "fraction_of_human": 0.5455733566912221,
+            "human_same_minus_other": 0.20063633587366592,
+            "reader_same_minus_other": 0.10946184173226357,
+            "fraction_of_human": 0.5455733691288506,
             "film_bootstrap_95": [
-              0.3015250162923887,
-              0.8326178813070815
+              0.30152505893827924,
+              0.8326179657513709
             ]
           },
           "checked": {
-            "human_same_minus_other": 0.20063634113046444,
-            "reader_same_minus_other": 0.13685463559296393,
-            "fraction_of_human": 0.6821029272257998,
+            "human_same_minus_other": 0.20063633587366592,
+            "reader_same_minus_other": 0.13685463786953023,
+            "fraction_of_human": 0.6821029564440565,
             "film_bootstrap_95": [
-              0.40989317935952363,
-              1.0310417565719097
+              0.40989319238458777,
+              1.0310418421916747
+            ]
+          },
+          "moss": {
+            "human_same_minus_other": 0.20063633587366592,
+            "reader_same_minus_other": 0.1287158207346996,
+            "fraction_of_human": 0.641537935659609,
+            "film_bootstrap_95": [
+              0.38701820998792,
+              0.9229813800380995
             ]
           }
         },
         "checked_minus_control": {
-          "mean_change": 0.027392793488171353,
+          "mean_change": 0.02739279613726668,
           "bootstrap_95_percent": [
-            -0.003273036388887313,
-            0.061918206626756296
+            -0.0032730388144652143,
+            0.06191820387418069
           ],
           "increased": 8,
           "decreased": 4,
@@ -2243,14 +2390,38 @@
             "4857781123": 0.12063804765542346,
             "4833887719": -0.026018470525741577,
             "4760692619": 0.0242108553647995,
-            "4491342746": 0.012777495384216297,
+            "4491342746": 0.012777477502822876,
             "4447314310": 0.04769130547841388,
-            "4571054955": -0.010131393869717953,
-            "4823372280": 0.14301416774590808,
-            "4772810451": -0.021167561411857605,
-            "4491371230": 0.08256959170103073,
+            "4571054955": -0.010131364067395565,
+            "4823372280": 0.14301420748233795,
+            "4772810451": -0.021167566378911318,
+            "4491371230": 0.08256957679986954,
             "4822859674": -0.050785839557647705,
             "4598189055": 0.005714098612467411
+          }
+        },
+        "moss_minus_control": {
+          "mean_change": 0.019253979002436,
+          "bootstrap_95_percent": [
+            -0.017577292076829416,
+            0.06411292600548928
+          ],
+          "increased": 5,
+          "decreased": 7,
+          "tied": 0,
+          "by_film": {
+            "10685598604": -0.07225032150745392,
+            "4857781123": 0.19559430082639057,
+            "4833887719": -0.026018470525741577,
+            "4760692619": -0.02027665078639984,
+            "4491342746": 0.04795191287994388,
+            "4447314310": -0.004857689142227173,
+            "4571054955": -0.026001448432604546,
+            "4823372280": 0.12994632124900818,
+            "4772810451": 0.013592814405759213,
+            "4491371230": -0.02483908087015152,
+            "4822859674": 0.038055757681528746,
+            "4598189055": -0.019849697748820005
           }
         }
       },
@@ -2261,22 +2432,28 @@
         "human_captions": 42,
         "summary": {
           "human": {
-            "same_film_cosine": 0.4654451968251831,
-            "other_film_cosine": 0.11934177421110992,
-            "same_minus_other": 0.3461034226140732,
+            "same_film_cosine": 0.46544519599734085,
+            "other_film_cosine": 0.119341774786719,
+            "same_minus_other": 0.3461034212106219,
             "top_one_film": 0.888888888888889
           },
           "control": {
-            "same_film_cosine": 0.43321057541502844,
-            "other_film_cosine": 0.1073162552784197,
-            "same_minus_other": 0.32589432013660874,
+            "same_film_cosine": 0.43321057955423997,
+            "other_film_cosine": 0.10731625640376781,
+            "same_minus_other": 0.3258943231504722,
             "top_one_film": 0.9125
           },
           "checked": {
-            "same_film_cosine": 0.44819661258823346,
-            "other_film_cosine": 0.10281715439244483,
-            "same_minus_other": 0.34537945819578864,
+            "same_film_cosine": 0.4481966150717603,
+            "other_film_cosine": 0.10281715547898784,
+            "same_minus_other": 0.34537945959277244,
             "top_one_film": 0.9791666666666666
+          },
+          "moss": {
+            "same_film_cosine": 0.44219991465409597,
+            "other_film_cosine": 0.09924198218019835,
+            "same_minus_other": 0.3429579324738976,
+            "top_one_film": 0.9291666666666667
           }
         },
         "by_film_columns": [
@@ -2288,17 +2465,22 @@
           "10685598604": {
             "human": [
               0.1774288173764944,
-              0.05212857178412378,
+              0.05212857015430927,
               0.5
             ],
             "control": [
               0.3003733679652214,
-              0.002920580795034766,
+              0.0029205793980509043,
               1.0
             ],
             "checked": [
               0.3356536775827408,
               -0.0021703720558434725,
+              1.0
+            ],
+            "moss": [
+              0.322574682533741,
+              -0.0007298266864381731,
               1.0
             ]
           },
@@ -2317,6 +2499,11 @@
               0.4478928844134013,
               0.17402328550815582,
               1.0
+            ],
+            "moss": [
+              0.4106310506661733,
+              0.15956439077854156,
+              1.0
             ]
           },
           "4833887719": {
@@ -2334,12 +2521,17 @@
               0.4138473719358444,
               0.11103248596191406,
               1.0
+            ],
+            "moss": [
+              0.38827452063560486,
+              0.102752685546875,
+              1.0
             ]
           },
           "4760692619": {
             "human": [
               0.49954424301783246,
-              0.1976777414480845,
+              0.1976777563492457,
               1.0
             ],
             "control": [
@@ -2348,6 +2540,11 @@
               1.0
             ],
             "checked": [
+              0.3506929675738017,
+              0.13936375081539154,
+              1.0
+            ],
+            "moss": [
               0.3506929675738017,
               0.13936375081539154,
               1.0
@@ -2365,15 +2562,20 @@
               1.0
             ],
             "checked": [
-              0.43836264808972675,
-              0.10632877051830292,
+              0.43836267789204914,
+              0.10632877796888351,
+              1.0
+            ],
+            "moss": [
+              0.4795933763186137,
+              0.11762919276952744,
               1.0
             ]
           },
           "4447314310": {
             "human": [
               0.38833335041999817,
-              0.13451347251733145,
+              0.1345134675502777,
               0.6666666666666666
             ],
             "control": [
@@ -2384,6 +2586,11 @@
             "checked": [
               0.5200476745764414,
               0.10063920170068741,
+              1.0
+            ],
+            "moss": [
+              0.5365517536799113,
+              0.09977778792381287,
               1.0
             ]
           },
@@ -2402,12 +2609,17 @@
               0.5718851884206136,
               0.08379959315061569,
               1.0
+            ],
+            "moss": [
+              0.6111060182253519,
+              0.06406915932893753,
+              1.0
             ]
           },
           "4823372280": {
             "human": [
               0.7739333311716715,
-              0.014493183853725592,
+              0.014493183543284735,
               1.0
             ],
             "control": [
@@ -2417,14 +2629,19 @@
             ],
             "checked": [
               0.5078107416629791,
-              0.014205614104866982,
+              0.014205616898834705,
+              1.0
+            ],
+            "moss": [
+              0.5263556838035583,
+              0.013563555665314198,
               1.0
             ]
           },
           "4772810451": {
             "human": [
               0.42806927114725113,
-              0.052167455200105906,
+              0.05216745659708977,
               1.0
             ],
             "control": [
@@ -2434,24 +2651,34 @@
             ],
             "checked": [
               0.44886670261621475,
-              0.011094752699136734,
+              0.011094755493104458,
+              1.0
+            ],
+            "moss": [
+              0.4293539524078369,
+              0.025280486792325974,
               1.0
             ]
           },
           "4491371230": {
             "human": [
-              0.4873260756333669,
-              0.1611937681833903,
+              0.48732606569925946,
+              0.16119376569986343,
               1.0
             ],
             "control": [
-              0.4859718879063924,
-              0.12439993023872375,
+              0.48597193757692975,
+              0.12439994513988495,
               1.0
             ],
             "checked": [
               0.49774495760599774,
               0.1109943613409996,
+              1.0
+            ],
+            "moss": [
+              0.4990801215171814,
+              0.11026328057050705,
               1.0
             ]
           },
@@ -2470,6 +2697,11 @@
               0.40917537212371824,
               0.17919594049453735,
               1.0
+            ],
+            "moss": [
+              0.31464825868606566,
+              0.14244331419467926,
+              0.4
             ]
           },
           "4598189055": {
@@ -2487,51 +2719,89 @@
               0.43637916445732117,
               0.20529846847057343,
               0.75
+            ],
+            "moss": [
+              0.4375365898013115,
+              0.21692600846290588,
+              0.75
             ]
           }
         },
         "human_relative_description_separation": {
           "control": {
-            "human_same_minus_other": 0.3461034226140732,
-            "reader_same_minus_other": 0.3258943201366088,
-            "fraction_of_human": 0.9416096427916611,
+            "human_same_minus_other": 0.34610342121062176,
+            "reader_same_minus_other": 0.3258943231504721,
+            "fraction_of_human": 0.9416096553178787,
             "film_bootstrap_95": [
-              0.7673936555144183,
-              1.1790243055876246
+              0.7673936730873036,
+              1.1790243068231954
             ]
           },
           "checked": {
-            "human_same_minus_other": 0.3461034226140732,
-            "reader_same_minus_other": 0.3453794581957886,
-            "fraction_of_human": 0.9979082425339323,
+            "human_same_minus_other": 0.34610342121062176,
+            "reader_same_minus_other": 0.34537945959277244,
+            "fraction_of_human": 0.9979082506167751,
             "film_bootstrap_95": [
-              0.8204497516778768,
-              1.2470835103659301
+              0.8204497580948945,
+              1.247083505767867
+            ]
+          },
+          "moss": {
+            "human_same_minus_other": 0.34610342121062176,
+            "reader_same_minus_other": 0.3429579324738976,
+            "fraction_of_human": 0.9909117086282427,
+            "film_bootstrap_95": [
+              0.8066727240918187,
+              1.2455568814197573
             ]
           }
         },
         "checked_minus_control": {
-          "mean_change": 0.019485138059179816,
+          "mean_change": 0.019485136442300346,
           "bootstrap_95_percent": [
-            -0.0027793748016443336,
-            0.046051726118053526
+            -0.002779373281777632,
+            0.0460517215827066
           ],
           "increased": 8,
           "decreased": 3,
           "tied": 1,
           "by_film": {
-            "10685598604": 0.04037126246839762,
+            "10685598604": 0.040371261071413755,
             "4857781123": 0.01612978676954907,
             "4833887719": 0.0053865984082221985,
             "4760692619": -0.03601826727390289,
-            "4491342746": 0.0028875917196273804,
+            "4491342746": 0.002887614071369171,
             "4447314310": -0.010500254730383629,
             "4571054955": 0.0,
-            "4823372280": -0.02500300683702028,
-            "4772810451": 0.07530112937092781,
-            "4491371230": 0.025178638597329495,
+            "4823372280": -0.025003009630988005,
+            "4772810451": 0.07530112657696009,
+            "4491371230": 0.02517860382795334,
             "4822859674": 0.1296180635690689,
             "4598189055": 0.010470114648342133
+          }
+        },
+        "moss_minus_control": {
+          "mean_change": 0.01706360932342552,
+          "bootstrap_95_percent": [
+            -4.576859517126889e-05,
+            0.03427242290286811
+          ],
+          "increased": 7,
+          "decreased": 4,
+          "tied": 1,
+          "by_film": {
+            "10685598604": 0.02585172065300867,
+            "4857781123": -0.006673152248064695,
+            "4833887719": -0.011906452476978302,
+            "4760692619": -0.03601826727390289,
+            "4491342746": 0.03281789769728982,
+            "4447314310": 0.006865238149960762,
+            "4571054955": 0.05895126362641645,
+            "4823372280": -0.005816006256888273,
+            "4772810451": 0.04160264506936073,
+            "4491371230": 0.02724484850962955,
+            "4822859674": 0.07184357643127443,
+            "4598189055": 0.0
           }
         }
       },
@@ -2554,9 +2824,15 @@
             "top_one_film": 0.8333333333333334
           },
           "checked": {
-            "same_film_cosine": 0.38876100894477633,
-            "other_film_cosine": 0.10708099308734138,
-            "same_minus_other": 0.28168001585743496,
+            "same_film_cosine": 0.3887610070821312,
+            "other_film_cosine": 0.10708099184557796,
+            "same_minus_other": 0.2816800152365532,
+            "top_one_film": 0.8333333333333334
+          },
+          "moss": {
+            "same_film_cosine": 0.39092159962488543,
+            "other_film_cosine": 0.11029528717820843,
+            "same_minus_other": 0.280626312446677,
             "top_one_film": 0.8333333333333334
           }
         },
@@ -2581,6 +2857,11 @@
               0.3125617404778798,
               0.01305999793112278,
               1.0
+            ],
+            "moss": [
+              0.3048989176750183,
+              0.011654939502477646,
+              1.0
             ]
           },
           "4857781123": {
@@ -2597,6 +2878,11 @@
             "checked": [
               0.4757801353931427,
               0.14438173174858093,
+              1.0
+            ],
+            "moss": [
+              0.4838846862316132,
+              0.16234137117862701,
               1.0
             ]
           },
@@ -2615,6 +2901,11 @@
               0.32382732629776,
               0.0994664877653122,
               1.0
+            ],
+            "moss": [
+              0.3285363242030144,
+              0.06942339986562729,
+              1.0
             ]
           },
           "4760692619": {
@@ -2631,6 +2922,11 @@
             "checked": [
               0.41173192113637924,
               0.16014446318149567,
+              1.0
+            ],
+            "moss": [
+              0.4521700516343117,
+              0.18182216584682465,
               1.0
             ]
           },
@@ -2649,6 +2945,11 @@
               0.35573504865169525,
               0.08267724514007568,
               1.0
+            ],
+            "moss": [
+              0.3970579281449318,
+              0.10964632034301758,
+              1.0
             ]
           },
           "4447314310": {
@@ -2665,6 +2966,11 @@
             "checked": [
               0.40527641773223877,
               0.12336314469575882,
+              1.0
+            ],
+            "moss": [
+              0.45130497217178345,
+              0.14068803191184998,
               1.0
             ]
           },
@@ -2683,6 +2989,11 @@
               0.41482891142368317,
               0.0623553991317749,
               1.0
+            ],
+            "moss": [
+              0.3725367486476898,
+              0.07746541500091553,
+              1.0
             ]
           },
           "4823372280": {
@@ -2699,6 +3010,11 @@
             "checked": [
               0.5271453559398651,
               0.03700379282236099,
+              1.0
+            ],
+            "moss": [
+              0.5670600980520248,
+              0.017912035807967186,
               1.0
             ]
           },
@@ -2717,6 +3033,11 @@
               0.3643892168998718,
               0.06172364950180054,
               1.0
+            ],
+            "moss": [
+              0.3460922658443451,
+              0.04286639392375946,
+              1.0
             ]
           },
           "4491371230": {
@@ -2734,6 +3055,11 @@
               0.24757833778858185,
               0.1188691109418869,
               0.0
+            ],
+            "moss": [
+              0.23854148387908936,
+              0.11176436394453049,
+              0.0
             ]
           },
           "4822859674": {
@@ -2748,8 +3074,13 @@
               0.0
             ],
             "checked": [
-              0.2938716635107994,
-              0.16790622472763062,
+              0.2938716411590576,
+              0.16790620982646942,
+              0.0
+            ],
+            "moss": [
+              0.20020417869091034,
+              0.18474717438220978,
               0.0
             ]
           },
@@ -2768,6 +3099,11 @@
               0.5324060320854187,
               0.21402066946029663,
               1.0
+            ],
+            "moss": [
+              0.5487715403238932,
+              0.21321183443069458,
+              1.0
             ]
           }
         },
@@ -2783,19 +3119,28 @@
           },
           "checked": {
             "human_same_minus_other": 0.3355535871226392,
-            "reader_same_minus_other": 0.28168001585743496,
-            "fraction_of_human": 0.8394486802326617,
+            "reader_same_minus_other": 0.2816800152365532,
+            "fraction_of_human": 0.839448678382341,
             "film_bootstrap_95": [
-              0.747219605016896,
-              0.9632290963903213
+              0.7472196049407045,
+              0.9632290963349154
+            ]
+          },
+          "moss": {
+            "human_same_minus_other": 0.3355535871226392,
+            "reader_same_minus_other": 0.280626312446677,
+            "fraction_of_human": 0.8363084860842593,
+            "film_bootstrap_95": [
+              0.7005956361320211,
+              0.9915678015293335
             ]
           }
         },
         "checked_minus_control": {
-          "mean_change": -0.007285179386639765,
+          "mean_change": -0.007285180007521481,
           "bootstrap_95_percent": [
             -0.01953508352550368,
-            0.0036994673664836135
+            0.0036994667456018973
           ],
           "increased": 5,
           "decreased": 6,
@@ -2811,8 +3156,32 @@
             "4823372280": -0.04054451594129205,
             "4772810451": 0.008788998425006855,
             "4491371230": 0.0008111794789631976,
-            "4822859674": 0.01906537264585495,
+            "4822859674": 0.019065365195274353,
             "4598189055": -0.005140349268913269
+          }
+        },
+        "moss_minus_control": {
+          "mean_change": -0.008338882797397673,
+          "bootstrap_95_percent": [
+            -0.028826127573265685,
+            0.009004500920353972
+          ],
+          "increased": 7,
+          "decreased": 5,
+          "tied": 0,
+          "by_film": {
+            "10685598604": -0.015258180908858776,
+            "4857781123": 0.0069281488656998125,
+            "4833887719": 0.0034564174711704254,
+            "4760692619": 0.022939033806324005,
+            "4491342746": -0.03350900858640671,
+            "4447314310": 0.025497883558273315,
+            "4571054955": -0.05740217864513397,
+            "4823372280": 0.018461983185261488,
+            "4772810451": 0.009349302947521232,
+            "4491371230": -0.0011209274331728802,
+            "4822859674": -0.09144306182861328,
+            "4598189055": 0.012033993999163273
           }
         }
       }

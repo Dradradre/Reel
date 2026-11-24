@@ -1056,3 +1056,22 @@ AVCaps에서 이전 실험에 쓰지 않은 영상 28편을 파일명 해시 순
 문이 열리기 전 8.5초까지만 본 GPT는 열쇠 소리가 있는 쪽에서만 짤랑거리는 소리를 언급했다. 열쇠를 뺀 쪽에서는 희미한 소리의 정체를 모르겠다고 답했다. 무음과 소리 트랙이 없는 영상에서도 대사를 쓰지 않았다. 8.5초 뒤만 바꾸면 그때까지 전달된 텍스트와 그림 14개가 바이트 단위로 같았다. [영상별 원문과 대조 결과](benchmarks/verified-hearing.json)
 
 공개 결과를 다시 채점하려면 AVCaps의 `test_captions.json`을 받아 `python examples/check_verified_hearing.py docs/benchmarks/verified-hearing.json test_captions.json`을 실행한다. [AVCaps 원자료](https://huggingface.co/datasets/TUT-ARG/AVCaps)
+
+## 생활음의 정체를 맞히거나 판단을 보류할 때
+
+공개된 ESC-50에서 같은 원녹음을 다시 쓰지 않고 소리 50종을 한 번씩 들었다. 같은 50개 보기를 준 예비 실험에서 PE-AV의 오디오 인코더는 46/50, CLAP은 40/50을 맞혔다. 다음에는 두 모델과 질문 방식을 고정하고 새로운 원녹음 99개로 시험했다. 종류별로 두 개씩 고르되 한 종류에는 조건에 맞는 녹음이 하나 남았다. 원음 전체 5초와 보기는 같았고 그림이나 녹음 이름은 입력하지 않았다. [Meta의 모델과 사용법](https://huggingface.co/facebook/pe-av-large), [ESC-50 원자료](https://github.com/karolpiczak/ESC-50)
+
+| 99개 녹음의 결과 | 횟수 |
+|---|---:|
+| CLAP이 맞힌 녹음 | 85 |
+| PE-AV가 맞힌 녹음 | 94 |
+| 두 모델이 같은 답을 고른 녹음 | 81 |
+| 그중 정답 | 81 |
+| 두 모델의 판단이 갈린 녹음 | 18 |
+| 정답을 보기에서 뺀 뒤에도 두 모델이 같은 오답을 고른 녹음 | 40 |
+
+정답률 차이는 9.1%포인트였다. 녹음별로 재표집한 95% 구간은 +1.0~+17.2%포인트, 소리 종류별로 묶은 구간은 −1.0~+19.2%포인트였다. 두 모델의 후보가 일치해도 원음에 그 소리가 있는지 별도로 판단해야 한다. 이 Mac에서 두 모델을 불러온 뒤 5초 녹음 하나를 비교하는 데 걸린 시간의 중앙값은 0.91초였다. [원녹음별 두 모델의 후보](benchmarks/source-identity-agreement.json)
+
+자유롭게 소리를 설명하도록 한 실험도 따로 했다. 예비 실험의 50개 녹음에서 설명 문장을 고정된 문장 인코더로 소리 이름에 대응시켰을 때 기존 CoNeTTE는 40개, CLAP으로 다시 고른 설명은 41개, 원음을 직접 듣는 MOSS-Audio-4B-Instruct는 21개가 맞았다. MOSS는 빗소리를 냉장고의 저음이라고 묘사했다. 이 모델은 제품의 기본 청취기에 넣지 않았다. 소리 이름과 문장의 유사도를 재는 방식도 사람의 직접 채점과 다를 수 있다. [자유 응답 원문](benchmarks/open-sound-identity.json), [실험 모델](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-4B-Instruct)
+
+`python examples/check_source_identity.py docs/benchmarks/source-identity-agreement.json`으로 정답 수와 두 신뢰구간을 다시 구할 수 있다. `--audio ESC-50/audio`를 붙이면 원본의 해시를 확인한 뒤 이름을 가리고 두 모델에 다시 들려준다.

@@ -40,6 +40,7 @@ if __package__:
     from .play import PlaybackPace, channel_spectrum, play
     from .region_sync import published_timing, region_views, validate_regions
     from .screen_text import read_crop
+    from .identify_sound import IdentityReader, prepared_for
     from .scene_audio import inspect_scene
     from .sound_window import sound_window, validate_mark
     from .sound_events import inspect_events
@@ -68,6 +69,7 @@ else:
     from play import PlaybackPace, channel_spectrum, play
     from region_sync import published_timing, region_views, validate_regions
     from screen_text import read_crop
+    from identify_sound import IdentityReader, prepared_for
     from scene_audio import inspect_scene
     from sound_window import sound_window, validate_mark
     from sound_events import inspect_events
@@ -206,7 +208,8 @@ def first_view_report(report):
 
 
 class Viewing:
-    def __init__(self, playback, sound, words, lang, source=None, layers=None, tracker=None, matcher=None):
+    def __init__(self, playback, sound, words, lang, source=None, layers=None, tracker=None, matcher=None, identity=None):
+        self.identity = identity
         self.matcher = matcher
         self.tracker = tracker
         self.layers = layers
@@ -538,7 +541,7 @@ class Viewing:
             fields = ("rate_hz", "channels", "first_sample_on_film", "sample_count", "signal", "recorded_spectrum",
                       "band_changes", "stereo_cues", "during_pictures", "pitch_contour")
             if sound_estimates:
-                fields += ("source_estimates", "scene", "sound_events")
+                fields += ("source_estimates", "scene", "sound_events", "sound_identity")
             report["audio"] = {key: audio[key] for key in fields if key in audio}
             if image_hearing:
                 report["audio"]["wav_attached"] = native_audio
@@ -646,7 +649,7 @@ class Viewing:
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
                alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0., locate_sounds=None,
-               verify_sounds=False):
+               verify_sounds=False, identify_sounds=None):
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -710,6 +713,11 @@ class Viewing:
                 result["scene"] = inspect_scene(original, first, stop, verify_sounds=verify_sounds)
             if sound_events:
                 result["sound_events"] = original_events
+            if identify_sounds is None and not per_second and prepared_for(alternatives or []):
+                identify_sounds = alternatives
+            if identify_sounds is not None:
+                with (self.identity.for_replay() if self.identity is not None else IdentityReader()) as identity:
+                    result["sound_identity"] = identity.read(original, start, stop, first, identify_sounds)
             if locate_sounds is not None:
                 result["sound_locations"] = locate(original, start, stop, locate_sounds, first)
             if alternatives is not None or per_second:
@@ -882,7 +890,7 @@ class TurnMedia:
 
 
 def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=False, describe_sounds=False,
-          pause_on_sound_change=False, image_client=False, tracks="both", verify_sounds=False):
+          pause_on_sound_change=False, image_client=False, tracks="both", verify_sounds=False, identify_sounds=False):
     server = FastMCP("reel", instructions="Start with view on turn 1, then request consecutive turns. "
                      "Use view_media instead if the host can read MCP resources and play a movie with its sound. "
                      "Choose continuous_seconds to follow an action or conversation through cuts. "
@@ -897,6 +905,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
     hints = types.ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
     with ExitStack() as stack:
         directory = Path(stack.enter_context(TemporaryDirectory(prefix="reel-view-")))
+        identity = stack.enter_context(IdentityReader())
         sound = stack.enter_context(SoundReader())  # Starts on the first request that needs the waveform model.
         words = stack.enter_context(SpeechReader(sound))
         playback = None
@@ -908,6 +917,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                 playback = stack.enter_context(closing(play(source, directory / "turns", until=until, step=pace.seconds,
                                                            continuous=pace.continuous, max_frames=pace.max_frames,
                                                            recording_only=pace.recording_only, verify_sounds=verify_sounds,
+                                                           identify_sounds=identify_sounds, identity_reader=identity,
                                                            max_continuous_pcm_bytes=MAX_INLINE_PCM_BYTES, tracks=tracks,
                                                            speech=speech, gaze=gaze, lang=lang, joint=joint,
                                                            describe_sounds=describe_sounds, sound_reader=sound,
@@ -919,7 +929,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                 return None
 
         layers = stack.enter_context(LayerReader())
-        reader = Viewing(next_turn, sound, words, lang, source, layers, stack.enter_context(PointReader()), layers.matcher)
+        reader = Viewing(next_turn, sound, words, lang, source, layers, stack.enter_context(PointReader()), layers.matcher, identity)
 
         media = TurnMedia(server, reader.original)
 
@@ -1025,7 +1035,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                          end_s: float | None = None, native_audio: bool = False, describe: bool = True,
                          component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False,
                          mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0,
-                         locate_sounds: list[str] | None = None, verify_sounds: bool = False):
+                         locate_sounds: list[str] | None = None, verify_sounds: bool = False,
+                         identify_sounds: list[str] | None = None):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
@@ -1042,13 +1053,15 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             The spectrum and matches use the signal before gain. native_audio includes the selected WAV.
             With verify_sounds=true, two local encoders compare candidate captions against the original mix.
             Use describe=false for this check alone. Results are possible sounds, never a transcript.
+            Provide identify_sounds with two or more source descriptions (or [] for AudioSet) to compare the
+            original channels in two audio encoders. Their top choices can disagree or both be wrong.
             Supply locate_sounds to find the second most similar to each description in the original recording.
             A suggested replay time can exist for an absent sound. A tie has no unique location.
             Set sound_events=true for short, overlapping category estimates from the original channels.
             Set describe=false to use the recording and spectrum without the local waveform reader.
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
-                                           alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds, verify_sounds)
+                                           alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds, verify_sounds, identify_sounds)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,

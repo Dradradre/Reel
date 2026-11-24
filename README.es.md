@@ -160,6 +160,8 @@ flowchart LR
 
 </details>
 
+Con `reel setup --identify-sounds`, Reel compara las fuentes propuestas con la grabación usando PE-AV y CLAP. En 99 grabaciones, PE-AV acertó 94 veces y CLAP 85. Al retirar la opción correcta, los dos coincidieron en otra fuente 40 veces. [Resultados por grabación](docs/benchmarks/source-identity-agreement.json)
+
 ## Límites
 
 Aunque se distinga cuándo ha sonado algo, puede ser difícil identificar una fuente que está fuera de campo. Es fácil perder palabras entre el ruido del público o pasar por alto una imagen congelada en un plano casi inmóvil. Una voz en off, música sobre un paisaje o un montaje rápido ofrecen pocas pistas para juzgar la sincronía. La posición de la mirada es una predicción del modelo. [Más ejemplos (en inglés)](README.md#limits)

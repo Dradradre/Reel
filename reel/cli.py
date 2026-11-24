@@ -8,15 +8,15 @@
   reel listen DIR --t0 S --t1 S [--verify-sounds] [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
-  reel match DIR --t0 S --t1 S [--per-second | --locate] ["sound description" ...]    compare descriptions with the recorded channels
+  reel match DIR --t0 S --t1 S [--per-second | --locate | --identify] ["sound description" ...]    compare descriptions with the recorded channels
   reel observe DIR --t0 S --t1 S [--joint] [--motion-point X Y] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
   reel speech TURN [--lang CODE] [--verify]               read words from a delivered audio interval
   reel follow TURN --from S --point X Y [--out NEW_DIR]    follow a pictured point through published frames
   reel look TURN --box LEFT TOP RIGHT BOTTOM     inspect a region of the published full-resolution picture
-  reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
-  reel mcp FILM [--until S] [--verify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
+  reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
+  reel mcp FILM [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
-  reel setup [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
+  reel setup [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
 """
 import shlex
 import sys as _sys, pathlib as _pl
@@ -51,6 +51,7 @@ def doctor():
         compare = False
     from unmix import PYTHON as unmix_py, ready as layers_ready
     from point_reader import PYTHON as follow_py, ready as follow_ready
+    import identify_sound
     from scene_audio import READY as captions_ready
     from localize_sound import ready as location_ready
     from sound_events import ready as events_ready
@@ -71,6 +72,7 @@ def doctor():
             ("short sound events: YAMNet", events_ready() and subprocess.run(
                 [sys.executable, str(HERE / "sound_events.py"), "--check"], capture_output=True).returncode == 0,
              "pip install -e '.[events]' and reel setup --sound-events"),
+            ("sound identity: PE-AV and CLAP", identify_sound.READY.is_file() and pathlib.Path(identify_sound.PYTHON).is_file(), "reel setup --identify-sounds"),
             ("first-listen descriptions: CoNeTTE", captions, "reel setup --captions"),
             ("waveform and optional joint picture/sound readings: Qwen3-Omni", hearing, "reel setup --describe-sounds"),
             ("overlapping sounds: MixIT separator", layers_ready() and shutil.which(unmix_py) is not None
@@ -103,6 +105,10 @@ def setup():
     if "--speech" in sys.argv:
         subprocess.run([ASR_PY, str(HERE / "live_speech.py"), "--setup"], check=True)
         print("local speech activity and transcription ready")
+    if "--identify-sounds" in sys.argv:
+        from identify_sound import prepare_environment
+        prepare_environment()
+        print("sound identity comparison ready")
     if "--captions" in sys.argv:
         from scene_audio import prepare_environment
         try:
@@ -131,7 +137,7 @@ def setup():
         from localize_sound import prepare_environment
         prepare_environment()
         print("sound location ready")
-    optional_models = {"--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
+    optional_models = {"--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
     if "--sync" not in sys.argv and optional_models.intersection(sys.argv):
         return
     if not UNISAL.exists():
@@ -173,6 +179,7 @@ def main():
         ap.add_argument("--joint", action="store_true", help="read synchronized pictures and sound at every pause")
         ap.add_argument("--gaze", action="store_true", help="include timed details selected by the visual gaze model")
         ap.add_argument("--describe-sounds", action="store_true", help="include the local waveform reader's first impression at every pause")
+        ap.add_argument("--identify-sounds", action="store_true", help="compare possible sound sources with two waveform encoders")
         ap.add_argument("--verify-sounds", action="store_true", help="compare generated sound descriptions with the recorded waveform using CLAP")
         args = ap.parse_args(sys.argv[2:])
         if args.until is not None and not 0 < args.until < float("inf"):
@@ -184,7 +191,7 @@ def main():
         from mcp_server import serve
         serve(args.source, until=args.until, tracks=args.tracks, speech=args.speech, lang=args.lang, joint=args.joint, gaze=args.gaze,
               describe_sounds=args.describe_sounds, pause_on_sound_change=args.pause_on_sound_change,
-              image_client=args.image_client, verify_sounds=args.verify_sounds)
+              image_client=args.image_client, verify_sounds=args.verify_sounds, identify_sounds=args.identify_sounds)
         return
     if cmd == "layer":
         from hearing import SoundReader
@@ -242,14 +249,20 @@ def main():
         ap.add_argument("--t0", type=float, required=True)
         ap.add_argument("--t1", type=float, required=True)
         mode = ap.add_mutually_exclusive_group()
+        mode.add_argument("--identify", action="store_true", help="rank source descriptions with PE-AV and CLAP")
         mode.add_argument("--locate", action="store_true", help="find the second most similar to each supplied description")
         mode.add_argument("--per-second", action="store_true", help="compare consecutive seconds on the film clock")
         ap.add_argument("descriptions", nargs="*")
         x = ap.parse_intermixed_args(sys.argv[2:])
         try:
-            if x.locate:
+            if x.locate or x.identify:
                 wav, start, end, first = match_excerpt(x.out, x.t0, x.t1)
-                report = locate(wav, start, end, x.descriptions, first)
+                if x.identify:
+                    from identify_sound import IdentityReader
+                    with IdentityReader() as identity:
+                        report = identity.read(wav, start, end, first, x.descriptions)
+                else:
+                    report = locate(wav, start, end, x.descriptions, first)
             else:
                 with SoundMatcher() as matcher:
                     report = matcher.inspect(x.out, x.t0, x.t1, x.descriptions, per_second=x.per_second)
@@ -326,6 +339,7 @@ def main():
         ap.add_argument("--lang", help="spoken language code (default: detect from the recording)")
         ap.add_argument("--joint", action="store_true", help="also read the pictures and their soundtrack in one local model")
         ap.add_argument("--describe-sounds", action="store_true", help="include local audio-only impressions")
+        ap.add_argument("--identify-sounds", action="store_true", help="compare possible sound sources with two waveform encoders")
         ap.add_argument("--verify-sounds", action="store_true", help="compare generated sound descriptions with the recorded waveform using CLAP")
         ap.add_argument("--media", action="store_true", help="also deliver a synchronized playable excerpt")
         ap.add_argument("--gaze", action="store_true", help="show recent fixation crops and their times alongside the full picture")
@@ -335,14 +349,17 @@ def main():
         x = ap.parse_args(sys.argv[2:])
         replay_options = argparse.ArgumentParser(add_help=False, exit_on_error=False, allow_abbrev=False)
         observation_options(replay_options)
+        from identify_sound import IdentityReader
+        identity_reader = IdentityReader()
         sound_reader = SoundReader()
         waveform = sound_reader if x.describe_sounds or x.joint else None
         playback = play(x.source, x.out, until=x.until, tracks=x.tracks, step=x.step, describe_sounds=x.describe_sounds,
-                        verify_sounds=x.verify_sounds, media=x.media, gaze=x.gaze, speech=x.speech, lang=x.lang, sound_reader=waveform, joint=x.joint,
+                        verify_sounds=x.verify_sounds, identify_sounds=x.identify_sounds, identity_reader=identity_reader,
+                        media=x.media, gaze=x.gaze, speech=x.speech, lang=x.lang, sound_reader=waveform, joint=x.joint,
                         pause_on_sound_change=x.pause_on_sound_change, continuous=x.continuous, max_frames=x.max_frames)
         try:
             original = RecordedSource(x.source)
-            with (sound_reader, SpeechReader(waveform) as speech_reader, LayerReader() as layers,
+            with (sound_reader, identity_reader, SpeechReader(waveform) as speech_reader, LayerReader() as layers,
                   closing(playback) as packets):
                 with original.reading():
                     path = next(packets, None)
@@ -404,7 +421,12 @@ def main():
                                 raise ValueError('use match START END [--per-second] ["sound description" ...]')
                             per_second = fields[3:4] == ["--per-second"]
                             descriptions = fields[4:] if per_second else fields[3:]
-                            if fields[3:4] == ["--locate"]:
+                            if fields[3:4] == ["--identify"]:
+                                from compare_sounds import match_excerpt
+                                wav, start, end, first = match_excerpt(path.parent, float(fields[1]), float(fields[2]))
+                                with identity_reader.for_replay() as identity:
+                                    result = identity.read(wav, start, end, first, fields[4:])
+                            elif fields[3:4] == ["--locate"]:
                                 from compare_sounds import match_excerpt
                                 from localize_sound import locate
                                 wav, start, end, first = match_excerpt(path.parent, float(fields[1]), float(fields[2]))
@@ -412,7 +434,7 @@ def main():
                             else:
                                 with layers.matcher.for_replay():
                                     result = layers.matcher.inspect(path.parent, float(fields[1]), float(fields[2]),
-                                                                    descriptions, per_second=per_second)
+                                                                    descriptions, per_second=per_second, identity_reader=identity_reader)
                             print(json.dumps(result, ensure_ascii=False), flush=True)
                         except (ValueError, OSError, subprocess.CalledProcessError) as error:
                             print(json.dumps({"error": str(error)}), flush=True)

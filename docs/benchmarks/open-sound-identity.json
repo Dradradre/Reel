@@ -1,0 +1,930 @@
+{
+  "protocol": "Select one previously unused Freesound original recording per ESC-50 target by SHA256 order, preferring fold 5. No source name, candidate list, context or filename supplied to either captioner. Both describe the complete unchanged mono recording. Frozen MiniLM cosine maps each free description to one of the same 50 English category names (underscores replaced by spaces). Report top-1, per-recording paired bootstrap, and independently score CLAP directly matching all labels as a prompted catalogue comparison. Only frozen resources, no threshold or prompt search on this set. This tests environmental source identification on short isolated recordings, not human hearing. Overlap with model pretraining is unknown.",
+  "source": "https://github.com/karolpiczak/ESC-50",
+  "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+  "scorer": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+  },
+  "rows": [
+    {
+      "id": "5-212454-A-0.wav",
+      "sha256": "a3f7089d31d506d7a5c80f0af79afebfdb8fd61759eab03891b01c809d210e5a",
+      "target": 0,
+      "label": "dog",
+      "closed_clap": 0,
+      "control": "a dog is barking loudly at a steady pace",
+      "checked": "a dog is barking and growling",
+      "moss": "A small dog barks rapidly and persistently in a quiet indoor space, with no other sounds present.",
+      "generation_seconds": 14.179880500014406,
+      "predictions": {
+        "control": 0,
+        "checked": 0,
+        "moss": 0,
+        "closed_clap": 0
+      }
+    },
+    {
+      "id": "5-234879-B-1.wav",
+      "sha256": "8f0a677caef84cd230aac3377a8db8a357971816e1943a5ca646289950b54024",
+      "target": 1,
+      "label": "rooster",
+      "closed_clap": 6,
+      "control": "a chicken is clucking while birds are chirping in the background",
+      "checked": "a chicken is clucking while birds chirp in the background",
+      "moss": "A rooster crows loudly in a quiet, open outdoor space, with no other sounds present.",
+      "generation_seconds": 2.4795868749788497,
+      "predictions": {
+        "control": 14,
+        "checked": 14,
+        "moss": 1,
+        "closed_clap": 6
+      }
+    },
+    {
+      "id": "5-103416-A-2.wav",
+      "sha256": "5c6603bf39c3d397db3ba6b9d985f5a5efde41c7ba67d0cb896aa0c3d8e4e8c7",
+      "target": 2,
+      "label": "pig",
+      "closed_clap": 2,
+      "control": "a large animal is making a very loud buzzing sound",
+      "checked": "a large animal is making a very loud noise",
+      "moss": "A loud, high-pitched, and sustained horse neigh is heard, indicating a single animal in an open outdoor environment with no background noise.",
+      "generation_seconds": 3.1277646660164464,
+      "predictions": {
+        "control": 14,
+        "checked": 0,
+        "moss": 3,
+        "closed_clap": 2
+      }
+    },
+    {
+      "id": "5-253085-B-3.wav",
+      "sha256": "58cc284ee85f5c019f53ffc574a4cd8b254fe27156cb859c3f10aecb266bcd47",
+      "target": 3,
+      "label": "cow",
+      "closed_clap": 3,
+      "control": "several cows are mooing and birds are chirping in the background",
+      "checked": "several cows are mooing and birds are chirping in the background",
+      "moss": "The audio features two clear, low-pitched, and resonant cow moos, each with a sustained and slightly descending pitch, set against a quiet background with no other discernible sounds.",
+      "generation_seconds": 3.854026499990141,
+      "predictions": {
+        "control": 14,
+        "checked": 14,
+        "moss": 3,
+        "closed_clap": 3
+      }
+    },
+    {
+      "id": "5-237499-A-4.wav",
+      "sha256": "208b8bb2a5ff0aa2bf3209257b2d01ded9b8a83d051cce5521f3c1e439d70025",
+      "target": 4,
+      "label": "frog",
+      "closed_clap": 4,
+      "control": "a frog is croaking with other frogs and crickets chirping in the background",
+      "checked": "a frog is croaking with other frogs and crickets chirping in the background",
+      "moss": "The audio contains a series of guttural, raspy, and wet-sounding vocalizations from a non-human source, characterized by a low, rumbling pitch and a threatening tone, with no discernible speech or environmental context.",
+      "generation_seconds": 4.085095124988584,
+      "predictions": {
+        "control": 4,
+        "checked": 4,
+        "moss": 25,
+        "closed_clap": 4
+      }
+    },
+    {
+      "id": "5-214759-B-5.wav",
+      "sha256": "973117fec97302bc329ba2c1211635f6c979cf6e7234e0e62d1a9552e6e92369",
+      "target": 5,
+      "label": "cat",
+      "closed_clap": 5,
+      "control": "a cat is meowing and making kitten meows at the same time",
+      "checked": "a cat is meowing and making kitten meows at the same time",
+      "moss": "A cat meows twice in a quiet indoor space, with clear, high-pitched vocalizations and no background noise.",
+      "generation_seconds": 3.94632245899993,
+      "predictions": {
+        "control": 5,
+        "checked": 5,
+        "moss": 5,
+        "closed_clap": 5
+      }
+    },
+    {
+      "id": "5-244315-C-6.wav",
+      "sha256": "823eb42a25daa5d073edad5243c7abe364d3f4d58059e8803024fb80c64fc6a2",
+      "target": 6,
+      "label": "hen",
+      "closed_clap": 6,
+      "control": "a chicken is clucking and flapping a rooster crowing",
+      "checked": "a chicken is clucking and chickens are making a rooster crowing and a hen is flapping",
+      "moss": "The audio features a series of loud, guttural, and raspy growls and snorts from a large animal, likely a bear, captured in a close-miked, dry recording with no background sounds.",
+      "generation_seconds": 4.674374124995666,
+      "predictions": {
+        "control": 1,
+        "checked": 1,
+        "moss": 14,
+        "closed_clap": 6
+      }
+    },
+    {
+      "id": "5-194932-A-7.wav",
+      "sha256": "1068b661c90b194c6bb0ad42c77ea65620ec5205e4e256f7fee89717d7a11fdf",
+      "target": 7,
+      "label": "insects",
+      "closed_clap": 27,
+      "control": "a bee is buzzing around a hive",
+      "checked": "a bee is buzzing around in the background and then a fly buzzes",
+      "moss": "A low, sustained, and mournful moan from a human voice is abruptly interrupted by a loud, harsh, and distorted electronic buzz.",
+      "generation_seconds": 3.071871124993777,
+      "predictions": {
+        "control": 42,
+        "checked": 7,
+        "moss": 42,
+        "closed_clap": 27
+      }
+    },
+    {
+      "id": "5-61635-A-8.wav",
+      "sha256": "7716b55d69e6f19808951698b26c612b9ef9969e49438c911da30794d58bede5",
+      "target": 8,
+      "label": "sheep",
+      "closed_clap": 3,
+      "control": "a sheep is bleating and a man is speaking in the background",
+      "checked": "a sheep is bleating and a man is speaking in the background",
+      "moss": "The audio features a series of deep, guttural, and resonant growls from a large animal, likely a bear, with no human speech or other identifiable sounds present.",
+      "generation_seconds": 3.326033916993765,
+      "predictions": {
+        "control": 8,
+        "checked": 8,
+        "moss": 25,
+        "closed_clap": 3
+      }
+    },
+    {
+      "id": "5-214869-A-9.wav",
+      "sha256": "817585632446d6220c94d1b8b75313537c127ab13d4d8d1fd93c4954bb547cce",
+      "target": 9,
+      "label": "crow",
+      "closed_clap": 9,
+      "control": "a group of crows are squawking loudly in the background",
+      "checked": "a group of crows are squawking loudly in a large flock",
+      "moss": "The audio features a loud, harsh, and raspy cawing sound produced by a crow, with no other discernible sounds present.",
+      "generation_seconds": 3.9455985840177163,
+      "predictions": {
+        "control": 9,
+        "checked": 9,
+        "moss": 9,
+        "closed_clap": 9
+      }
+    },
+    {
+      "id": "5-195710-A-10.wav",
+      "sha256": "939959e3cb6df01e3a67d47cf1b1d0429785a1906562dd143805e8fb8db909c0",
+      "target": 10,
+      "label": "rain",
+      "closed_clap": 10,
+      "control": "rain is pouring down on the roof of a house",
+      "checked": "rain is pouring down on the roof of a building",
+      "moss": "The audio features a steady, low-frequency hum from a refrigerator compressor, with no other sounds present.",
+      "generation_seconds": 2.6132837920158636,
+      "predictions": {
+        "control": 10,
+        "checked": 10,
+        "moss": 36,
+        "closed_clap": 10
+      }
+    },
+    {
+      "id": "2-132157-A-11.wav",
+      "sha256": "1925d1067111dd06970446f46a786f261efa68b121039bb5cea4f546f9600685",
+      "target": 11,
+      "label": "sea waves",
+      "closed_clap": 11,
+      "control": "water is splashing and waves are crashing against the shore",
+      "checked": "water is splashing and waves are crashing in the ocean",
+      "moss": "The audio captures the sound of a large wave crashing and receding on a shore, with no human or animal presence, only the natural movement of water.",
+      "generation_seconds": 2.398474999994505,
+      "predictions": {
+        "control": 11,
+        "checked": 11,
+        "moss": 11,
+        "closed_clap": 11
+      }
+    },
+    {
+      "id": "5-189237-A-12.wav",
+      "sha256": "41ab28c22910b7fd2834728fd4819d8a0d4a9268e5d1b8b434a5705473fb373a",
+      "target": 12,
+      "label": "crackling fire",
+      "closed_clap": 12,
+      "control": "a fire is crackling and popping as it burns",
+      "checked": "a fire is crackling and popping as it crackles",
+      "moss": "The audio features a series of sharp, high-pitched clicks from a pen being clicked repeatedly, with no other sounds present.",
+      "generation_seconds": 2.761935165995965,
+      "predictions": {
+        "control": 12,
+        "checked": 12,
+        "moss": 31,
+        "closed_clap": 12
+      }
+    },
+    {
+      "id": "5-204352-A-13.wav",
+      "sha256": "e85d36d6ed59b76c774a019ee2e74ca234aedd1cd70d7566ec20d74855d6b3ce",
+      "target": 13,
+      "label": "crickets",
+      "closed_clap": 4,
+      "control": "crickets are chirping and insects are buzzing in the night",
+      "checked": "crickets are chirping in the night with insects buzzing in the background",
+      "moss": "A high-pitched, rhythmic cricket chirping is heard in a quiet outdoor night setting, with no other sounds present.",
+      "generation_seconds": 4.535615125001641,
+      "predictions": {
+        "control": 13,
+        "checked": 13,
+        "moss": 14,
+        "closed_clap": 4
+      }
+    },
+    {
+      "id": "5-243450-A-14.wav",
+      "sha256": "2f72112be0971db0f1e92ac08ad22129a7d245cae56cc18a09ba732c3b368028",
+      "target": 14,
+      "label": "chirping birds",
+      "closed_clap": 6,
+      "control": "birds are chirping and singing in the background",
+      "checked": "birds are chirping in the trees and the water is flowing",
+      "moss": "A high-pitched, rhythmic chirping sound, likely from a cricket, is heard in a quiet, natural setting.",
+      "generation_seconds": 3.213642582995817,
+      "predictions": {
+        "control": 14,
+        "checked": 14,
+        "moss": 14,
+        "closed_clap": 6
+      }
+    },
+    {
+      "id": "5-257349-A-15.wav",
+      "sha256": "ac612f5a1373e28972001e894bb62392d22b154214a642ae986a0c9ec483036c",
+      "target": 15,
+      "label": "water drops",
+      "closed_clap": 15,
+      "control": "water is being poured from a pitcher into a container",
+      "checked": "water is being poured from a pitcher into a container",
+      "moss": "The audio features a series of sharp, high-pitched metallic clinks and rattles, likely from keys being handled or shaken, with no speech or background noise present.",
+      "generation_seconds": 4.169539624999743,
+      "predictions": {
+        "control": 17,
+        "checked": 17,
+        "moss": 33,
+        "closed_clap": 15
+      }
+    },
+    {
+      "id": "5-179496-B-16.wav",
+      "sha256": "7113369bc05fc966b3ddd86cf3d969ee6697400123282022515c8f9da8d23c2f",
+      "target": 16,
+      "label": "wind",
+      "closed_clap": 36,
+      "control": "the wind is howling and whistling loudly in the distance",
+      "checked": "the wind is howling and whistling loudly in the background",
+      "moss": "A loud, high-pitched, and sustained train horn blast fills the audio, creating a piercing and urgent sound in an open outdoor environment.",
+      "generation_seconds": 2.3714601669926196,
+      "predictions": {
+        "control": 16,
+        "checked": 16,
+        "moss": 43,
+        "closed_clap": 36
+      }
+    },
+    {
+      "id": "5-214362-A-17.wav",
+      "sha256": "13ae83addc8ce4caa6fcc79dcee48700688f93ca4f94143b4d72dc864779ebc8",
+      "target": 17,
+      "label": "pouring water",
+      "closed_clap": 29,
+      "control": "a liquid is poured into a glass jar and then pouring water into a cup",
+      "checked": "a liquid is poured into a glass jar and then pouring more into a cup",
+      "moss": "A person is pouring a carbonated beverage from a bottle into a glass, producing a continuous, effervescent fizzing sound with a steady rhythm and moderate volume.",
+      "generation_seconds": 5.655582375009544,
+      "predictions": {
+        "control": 17,
+        "checked": 17,
+        "moss": 17,
+        "closed_clap": 29
+      }
+    },
+    {
+      "id": "5-185908-A-18.wav",
+      "sha256": "ee30bbb601d160f7be7e83325f767c6a0471050964f253346e5eecafc5875914",
+      "target": 18,
+      "label": "toilet flush",
+      "closed_clap": 18,
+      "control": "a toilet is flushed and water is flushing",
+      "checked": "a toilet is flushed and water is flushing and splashing",
+      "moss": "A toilet flushes in a bathroom, producing a loud, rushing water sound with strong reverberation from hard surfaces.",
+      "generation_seconds": 3.052135542005999,
+      "predictions": {
+        "control": 18,
+        "checked": 18,
+        "moss": 18,
+        "closed_clap": 18
+      }
+    },
+    {
+      "id": "5-192191-A-19.wav",
+      "sha256": "7799d633ddf90c0120a0cf2dd7cfe2aa0ac56a2cc382f3a90b5518c87f91d67f",
+      "target": 19,
+      "label": "thunderstorm",
+      "closed_clap": 19,
+      "control": "thunder rumbles in the distance as rain pours down",
+      "checked": "thunder rumbles in the distance as rain pours down and lightning strike",
+      "moss": "The audio features a deep, resonant rumble from a thunderstorm, with no other discernible sounds present.",
+      "generation_seconds": 2.2483450419967994,
+      "predictions": {
+        "control": 19,
+        "checked": 19,
+        "moss": 19,
+        "closed_clap": 19
+      }
+    },
+    {
+      "id": "2-80482-A-20.wav",
+      "sha256": "1bc0b84be46c90e74f19f4704f488cb17a4e34686fd76bc4454007f13bf64f33",
+      "target": 20,
+      "label": "crying baby",
+      "closed_clap": 20,
+      "control": "a baby is crying for a dozen seconds",
+      "checked": "a baby is crying for a dozen seconds or attention",
+      "moss": "The audio contains a series of high-pitched, piercing cries from an infant, indicating distress, with no other sounds present.",
+      "generation_seconds": 2.1261247499787714,
+      "predictions": {
+        "control": 20,
+        "checked": 20,
+        "moss": 20,
+        "closed_clap": 20
+      }
+    },
+    {
+      "id": "5-221518-A-21.wav",
+      "sha256": "0015a35c6851eee3a03b145f6703f4980a8a34ca6a69b61324cc7c7cad8896b6",
+      "target": 21,
+      "label": "sneezing",
+      "closed_clap": 21,
+      "control": "a person coughs sniffs repeatedly and then blows their nose",
+      "checked": "a person is sneezing twice and then coughs",
+      "moss": "The audio captures a quiet indoor environment with a faint, continuous low-frequency hum, likely from an appliance, and two sharp, forceful sneezes from a person, each followed by a brief pause and a soft exhalation, with no other significant sounds present.",
+      "generation_seconds": 3.8177307919831946,
+      "predictions": {
+        "control": 24,
+        "checked": 21,
+        "moss": 21,
+        "closed_clap": 21
+      }
+    },
+    {
+      "id": "5-221567-A-22.wav",
+      "sha256": "feac82061feabf0fbad0fae318ec3ec047ebbdf2b4fda6d4bc679fee319ffcac",
+      "target": 22,
+      "label": "clapping",
+      "closed_clap": 22,
+      "control": "a crowd of people are clapping and cheering",
+      "checked": "a crowd of people cheering and clapping",
+      "moss": "A loud, chaotic crowd noise fills the space, with overlapping shouts and cheers from a large group of people, creating a dense and energetic atmosphere.",
+      "generation_seconds": 1.9292017499974463,
+      "predictions": {
+        "control": 22,
+        "checked": 22,
+        "moss": 42,
+        "closed_clap": 22
+      }
+    },
+    {
+      "id": "5-232816-A-23.wav",
+      "sha256": "551296188c0001066f4fbffb01eb89d71f6954b11728c52c9903fe63d452f1a1",
+      "target": 23,
+      "label": "breathing",
+      "closed_clap": 23,
+      "control": "a person is breathing heavily in the background while a man sniffs in the distance",
+      "checked": "a person is breathing heavily in the background while a man is whispering",
+      "moss": "The audio features a deep, rhythmic breathing pattern with a slow, steady cadence, suggesting a calm or meditative state, with no other sounds present.",
+      "generation_seconds": 2.1300057920161635,
+      "predictions": {
+        "control": 23,
+        "checked": 23,
+        "moss": 23,
+        "closed_clap": 23
+      }
+    },
+    {
+      "id": "5-208761-A-24.wav",
+      "sha256": "8cbc33a3752174636694712e59a1c597615c7c8ad44fec7d005c343ffb1ed549",
+      "target": 24,
+      "label": "coughing",
+      "closed_clap": 24,
+      "control": "a person is coughing then coughs five times",
+      "checked": "a person is coughing then coughs five times",
+      "moss": "The audio contains a series of non-speech human vocalizations, including coughing and throat clearing, with no discernible words or musical elements.",
+      "generation_seconds": 2.037117917003343,
+      "predictions": {
+        "control": 24,
+        "checked": 24,
+        "moss": 24,
+        "closed_clap": 24
+      }
+    },
+    {
+      "id": "5-243025-A-25.wav",
+      "sha256": "4479d47415b811e5459c8420a1b8a721eca414147b017fed5b5a80636762028e",
+      "target": 25,
+      "label": "footsteps",
+      "closed_clap": 25,
+      "control": "a person is walking on a gravel path at a steady pace",
+      "checked": "a person is walking on a gravel path at a steady pace",
+      "moss": "The audio features a series of sharp, percussive impacts with a metallic quality, likely produced by a mechanical or industrial source, set against a quiet background with no discernible speech or environmental cues.",
+      "generation_seconds": 4.017920790996868,
+      "predictions": {
+        "control": 25,
+        "checked": 25,
+        "moss": 43,
+        "closed_clap": 25
+      }
+    },
+    {
+      "id": "5-171118-A-26.wav",
+      "sha256": "acf4fc669f782f4b85e601fb61cddef90599416c519741428e1e62ea6228e2c2",
+      "target": 26,
+      "label": "laughing",
+      "closed_clap": 26,
+      "control": "a group of people are laughing and having a conversation",
+      "checked": "a group of people are laughing and having a conversation",
+      "moss": "A brief, high-pitched female laugh is followed by a low, muffled male voice, both set against a quiet background with a faint electronic hum.",
+      "generation_seconds": 2.015335167001467,
+      "predictions": {
+        "control": 26,
+        "checked": 26,
+        "moss": 26,
+        "closed_clap": 26
+      }
+    },
+    {
+      "id": "5-218196-B-27.wav",
+      "sha256": "2d01e3fc6147579b1afead6ca13975f1ca9c56f428c7c57f22186d985ce49d31",
+      "target": 27,
+      "label": "brushing teeth",
+      "closed_clap": 27,
+      "control": "someone is brushing their teeth with a toothbrush",
+      "checked": "a person is brushing their teeth with their mouth",
+      "moss": "A person is vigorously shaking a set of keys, producing a loud, rapid, and continuous metallic rattling sound in a quiet indoor environment.",
+      "generation_seconds": 1.9324678749835584,
+      "predictions": {
+        "control": 27,
+        "checked": 27,
+        "moss": 32,
+        "closed_clap": 27
+      }
+    },
+    {
+      "id": "5-234145-A-28.wav",
+      "sha256": "23739f0c670f2a0cf1719b47da519504dc510f929d21ef6c780499669c9a65c1",
+      "target": 28,
+      "label": "snoring",
+      "closed_clap": 28,
+      "control": "a person is snoring very loudly in the background",
+      "checked": "a person is snoring very loudly and consistently",
+      "moss": "The audio captures a quiet indoor environment with a continuous low-frequency hum from a refrigerator, accompanied by a brief, muffled human snore indicating someone is sleeping nearby.",
+      "generation_seconds": 2.2439095829904545,
+      "predictions": {
+        "control": 28,
+        "checked": 28,
+        "moss": 28,
+        "closed_clap": 28
+      }
+    },
+    {
+      "id": "5-243635-A-29.wav",
+      "sha256": "5539a0cb960e7c7ceb84a8f207835eb955fbf3bbeb63fc93022227e5054b06df",
+      "target": 29,
+      "label": "drinking sipping",
+      "closed_clap": 29,
+      "control": "a person is drinking water from a bottle",
+      "checked": "a person is drinking water from a container to make it sound",
+      "moss": "The audio contains only a low-frequency hum, with no discernible speech or other sounds.",
+      "generation_seconds": 1.348956708010519,
+      "predictions": {
+        "control": 29,
+        "checked": 17,
+        "moss": 25,
+        "closed_clap": 29
+      }
+    },
+    {
+      "id": "5-250026-B-30.wav",
+      "sha256": "bf4afd0d31614ca48977c54525fd0655c9c9df13a0f4467557c308d4f41e888b",
+      "target": 30,
+      "label": "door wood knock",
+      "closed_clap": 30,
+      "control": "a person is knocking on a door and then banging on a hard surface",
+      "checked": "a person is knocking on a door and then banging on a wooden surface",
+      "moss": "The audio features a series of sharp, percussive knocks on a hard surface, followed by a brief, high-pitched electronic tone, with no speech or ambient background sounds present.",
+      "generation_seconds": 3.4210176250198856,
+      "predictions": {
+        "control": 30,
+        "checked": 30,
+        "moss": 30,
+        "closed_clap": 30
+      }
+    },
+    {
+      "id": "5-232802-A-31.wav",
+      "sha256": "0681d1b1f9da5e388d7112324a13d469f15852feeacbef626abf844c8b33b111",
+      "target": 31,
+      "label": "mouse click",
+      "closed_clap": 31,
+      "control": "a person is typing on a typewriter and then it is wound up",
+      "checked": "typing on a keyboard",
+      "moss": "A set of keys is being shaken vigorously, producing a rapid, high-pitched metallic clinking sound in a quiet indoor environment.",
+      "generation_seconds": 2.2481673330185004,
+      "predictions": {
+        "control": 32,
+        "checked": 32,
+        "moss": 32,
+        "closed_clap": 31
+      }
+    },
+    {
+      "id": "5-223099-B-32.wav",
+      "sha256": "d247b713e188eb4185782cd0722b46db5fb0d6c5d315553a2ec96e924866f30d",
+      "target": 32,
+      "label": "keyboard typing",
+      "closed_clap": 32,
+      "control": "a person is typing on a keyboard and types on a computer",
+      "checked": "typing on keyboard",
+      "moss": "The audio features a series of sharp, percussive sounds produced by a typewriter, with no speech or background noise present.",
+      "generation_seconds": 3.3722744999977294,
+      "predictions": {
+        "control": 32,
+        "checked": 32,
+        "moss": 32,
+        "closed_clap": 32
+      }
+    },
+    {
+      "id": "5-177779-A-33.wav",
+      "sha256": "facc7f749ea82108e70e236d59ba553db5d1abc2baf6da185961d0d223d757ab",
+      "target": 33,
+      "label": "door wood creaks",
+      "closed_clap": 33,
+      "control": "a person is rocking back and forth on a creaky wooden door",
+      "checked": "a person is rocking back and forth on a creaky wooden door",
+      "moss": "The audio features a series of rapid, high-pitched clicks from a mechanical keyboard, followed by a brief silence and then a single, sharp, high-pitched electronic beep, with no background noise or speech present.",
+      "generation_seconds": 4.092375499982154,
+      "predictions": {
+        "control": 33,
+        "checked": 33,
+        "moss": 32,
+        "closed_clap": 33
+      }
+    },
+    {
+      "id": "5-221878-A-34.wav",
+      "sha256": "81e429727451050e6cfee85e9dddd72c4912d4e97856d6d69f8fe8eb0a692a9a",
+      "target": 34,
+      "label": "can opening",
+      "closed_clap": 34,
+      "control": "someone is opening and closing a lid of a container",
+      "checked": "someone is opening and closing a lid of a can",
+      "moss": "A sharp metallic click is followed by a brief, high-pitched squeak, then a soft thud, all occurring in a quiet, acoustically dry environment with no background noise or reverberation.",
+      "generation_seconds": 3.321819750010036,
+      "predictions": {
+        "control": 34,
+        "checked": 34,
+        "moss": 22,
+        "closed_clap": 34
+      }
+    },
+    {
+      "id": "5-260875-A-35.wav",
+      "sha256": "9f9b3b202a0a136b8cfe033e1acbc93f646021730df0011d4de774603970a73c",
+      "target": 35,
+      "label": "washing machine",
+      "closed_clap": 40,
+      "control": "a machine is running at a constant speed and volume",
+      "checked": "a machine is running at a constant speed and volume",
+      "moss": "The recording contains only a low-frequency hum, with no identifiable speech or other sound sources.",
+      "generation_seconds": 2.111378917004913,
+      "predictions": {
+        "control": 35,
+        "checked": 35,
+        "moss": 22,
+        "closed_clap": 40
+      }
+    },
+    {
+      "id": "5-263902-A-36.wav",
+      "sha256": "2548fc884ad1cfdbe8de0f6a13297faf674d9e486f3e7fdad8aa95092be39cea",
+      "target": 36,
+      "label": "vacuum cleaner",
+      "closed_clap": 36,
+      "control": "a vacuum cleaner is running at a constant speed",
+      "checked": "a vacuum cleaner is running at a constant speed",
+      "moss": "A loud, high-pitched mechanical whirring sound, likely from a small electric motor or fan, is heard throughout the recording.",
+      "generation_seconds": 3.0041040829964913,
+      "predictions": {
+        "control": 36,
+        "checked": 36,
+        "moss": 43,
+        "closed_clap": 36
+      }
+    },
+    {
+      "id": "5-210612-A-37.wav",
+      "sha256": "c08a0615afcfbe6b30ba536eeb3cc555d4bd25580a36f12f8b32330b83228dfb",
+      "target": 37,
+      "label": "clock alarm",
+      "closed_clap": 37,
+      "control": "an alarm is going off with a high pitch",
+      "checked": "an alarm is going off in a rhythmic fashion",
+      "moss": "A series of sharp, high-pitched metallic clinks from a set of keys being shaken in a small, quiet indoor space with hard surfaces, creating a clear and rhythmic pattern of sound.",
+      "generation_seconds": 3.6291870409913827,
+      "predictions": {
+        "control": 37,
+        "checked": 37,
+        "moss": 32,
+        "closed_clap": 37
+      }
+    },
+    {
+      "id": "5-219342-A-38.wav",
+      "sha256": "08c0a65319a5bf24b1fe37bb3ed9dcbf3f384f6185f292d8fc8a532c37b6336b",
+      "target": 38,
+      "label": "clock tick",
+      "closed_clap": 38,
+      "control": "a clock is ticking very slowly and then slows down",
+      "checked": "a clock is ticking very slowly and then slows down",
+      "moss": "The audio features a series of five sharp, metallic clicks produced by a mechanical device, followed by a sudden, loud, low-pitched electronic buzzer that dominates the end of the recording.",
+      "generation_seconds": 3.835436583001865,
+      "predictions": {
+        "control": 38,
+        "checked": 38,
+        "moss": 31,
+        "closed_clap": 38
+      }
+    },
+    {
+      "id": "5-260432-A-39.wav",
+      "sha256": "e1da0f73ebaca89112dfd6aff25d154c08961aab7eeea5ed033223d6cabfaef0",
+      "target": 39,
+      "label": "glass breaking",
+      "closed_clap": 39,
+      "control": "glass is broken by a person breaking and hitting the ground",
+      "checked": "glass being broken",
+      "moss": "A sharp, high-pitched metallic clink occurs, followed by a brief silence, then a sustained, low-frequency electronic tone.",
+      "generation_seconds": 1.8493245840072632,
+      "predictions": {
+        "control": 39,
+        "checked": 39,
+        "moss": 43,
+        "closed_clap": 39
+      }
+    },
+    {
+      "id": "5-205898-A-40.wav",
+      "sha256": "8d688e82f3ff6f075be0479c57c8a5cdffa09c2ed46dd3950f3682208b94dd21",
+      "target": 40,
+      "label": "helicopter",
+      "closed_clap": 47,
+      "control": "an airplane is flying overhead and getting ready to take off",
+      "checked": "an aircraft engine is idling",
+      "moss": "The audio features a loud, low-frequency mechanical rumble with a rhythmic clatter, resembling a train moving on tracks, accompanied by a faint, high-pitched electronic tone.",
+      "generation_seconds": 2.3293055839894805,
+      "predictions": {
+        "control": 47,
+        "checked": 44,
+        "moss": 45,
+        "closed_clap": 47
+      }
+    },
+    {
+      "id": "5-222524-A-41.wav",
+      "sha256": "0161df57f3e454993357e6a2082d895a9ec7dbeb83e730e63bde030b46837136",
+      "target": 41,
+      "label": "chainsaw",
+      "closed_clap": 41,
+      "control": "a machine is running at a constant speed and then it stops",
+      "checked": "a motor vehicle engine is running and a loud whirring sound is present",
+      "moss": "The recording captures a loud, high-pitched, and continuous mechanical sound, likely from a power tool or engine, with no human speech or other identifiable sources present.",
+      "generation_seconds": 2.1607735420111567,
+      "predictions": {
+        "control": 44,
+        "checked": 44,
+        "moss": 43,
+        "closed_clap": 41
+      }
+    },
+    {
+      "id": "5-160551-A-42.wav",
+      "sha256": "6cc7555cafe56d7ec8a9c1f672885a73601970ef0687f37a0445131bd5020650",
+      "target": 42,
+      "label": "siren",
+      "closed_clap": 42,
+      "control": "a police siren is going off while a car is driving by",
+      "checked": "emergency vehicle sirens are blaring",
+      "moss": "A siren wails with a rising and falling pitch, creating a sense of urgency, while a low rumble of a large vehicle engine and the sound of tires on pavement suggest a moving emergency vehicle.",
+      "generation_seconds": 2.5578836660133675,
+      "predictions": {
+        "control": 42,
+        "checked": 42,
+        "moss": 42,
+        "closed_clap": 42
+      }
+    },
+    {
+      "id": "5-179868-A-43.wav",
+      "sha256": "9bcfe1420d2d11be38661f2f8099633736f940f1859d49f2d5d6716c0d840ae6",
+      "target": 43,
+      "label": "car horn",
+      "closed_clap": 43,
+      "control": "people are talking in the background while a horn is blowing in the distance",
+      "checked": "a horn is triggered and a man speaks",
+      "moss": "A loud, sustained train horn sounds in an open outdoor environment, followed by a muffled male voice speaking indistinctly in the background.",
+      "generation_seconds": 2.016202083992539,
+      "predictions": {
+        "control": 43,
+        "checked": 43,
+        "moss": 43,
+        "closed_clap": 43
+      }
+    },
+    {
+      "id": "5-209992-A-44.wav",
+      "sha256": "502bb337b61dfa4080eb22b9098a2b38f975c1544933187f530a5552eb7bd32d",
+      "target": 44,
+      "label": "engine",
+      "closed_clap": 40,
+      "control": "an engine is idling while a motor is running in the background",
+      "checked": "an engine is idling while a motor is running",
+      "moss": "A loud, rhythmic metallic clatter from a moving train dominates the audio, with no other sounds present.",
+      "generation_seconds": 1.5460073330032174,
+      "predictions": {
+        "control": 44,
+        "checked": 44,
+        "moss": 45,
+        "closed_clap": 40
+      }
+    },
+    {
+      "id": "5-188945-A-45.wav",
+      "sha256": "34782cd6f035dc77737dbc4a98fcfde13feadb483cbfa16d65302e7cf1e1fbb8",
+      "target": 45,
+      "label": "train",
+      "closed_clap": 45,
+      "control": "a train is passing by on a railroad track",
+      "checked": "a train is passing by on a railroad track making a loud noise",
+      "moss": "The recording captures a powerful, continuous roar of rushing water, likely from a large waterfall or fast-moving river, with no other sounds present.",
+      "generation_seconds": 2.039221874991199,
+      "predictions": {
+        "control": 45,
+        "checked": 45,
+        "moss": 42,
+        "closed_clap": 45
+      }
+    },
+    {
+      "id": "5-188716-A-46.wav",
+      "sha256": "db92bfce468a286fe4cad679bac89e05bd8ed32e40d9edde5fe0bb157df30d85",
+      "target": 46,
+      "label": "church bells",
+      "closed_clap": 46,
+      "control": "church bells are ringing loudly in the tower",
+      "checked": "church bells are ringing loudly in a large room",
+      "moss": "A set of metallic bells is being rung in a resonant, reverberant space, producing a clear, melodic, and continuous chime.",
+      "generation_seconds": 2.1374471669842023,
+      "predictions": {
+        "control": 46,
+        "checked": 46,
+        "moss": 46,
+        "closed_clap": 46
+      }
+    },
+    {
+      "id": "5-251971-A-47.wav",
+      "sha256": "ba15a37c7fa2d183324f28930ad7eac334ac076791a2e590e6e3612ee3632b7f",
+      "target": 47,
+      "label": "airplane",
+      "closed_clap": 47,
+      "control": "an airplane is flying overhead while a plane is passing by",
+      "checked": "an airplane is flying overhead while a jet flies over",
+      "moss": "A low, rumbling engine sound is heard, followed by a sudden, loud, and high-pitched screech, likely from a vehicle braking or turning sharply.",
+      "generation_seconds": 2.15486174999387,
+      "predictions": {
+        "control": 47,
+        "checked": 47,
+        "moss": 43,
+        "closed_clap": 47
+      }
+    },
+    {
+      "id": "2-117615-C-48.wav",
+      "sha256": "e5a9aeaddae0a2e5bc5fd757607654c2883836679baeff21d44a3d2cc32dd88e",
+      "target": 48,
+      "label": "fireworks",
+      "closed_clap": 48,
+      "control": "fireworks are going off in the distance",
+      "checked": "fireworks are exploding",
+      "moss": "The audio features a single, loud, and sharp percussive sound, likely from a drum or similar instrument, with no other sounds present.",
+      "generation_seconds": 2.071023291995516,
+      "predictions": {
+        "control": 48,
+        "checked": 48,
+        "moss": 43,
+        "closed_clap": 48
+      }
+    },
+    {
+      "id": "5-250258-A-49.wav",
+      "sha256": "7885b67aab389431fc8b3799d1d6962dce6a6c76f0187a3e98d53f9008a5e7a5",
+      "target": 49,
+      "label": "hand saw",
+      "closed_clap": 49,
+      "control": "a piece of wood is being rubbed against a hard surface",
+      "checked": "a piece of wood is being sawed rhythmically",
+      "moss": "The audio features a series of sharp, high-pitched squeaks from a small animal, likely a guinea pig, producing rapid and rhythmic vocalizations in a quiet, acoustically dry environment.",
+      "generation_seconds": 3.6119299159909133,
+      "predictions": {
+        "control": 49,
+        "checked": 49,
+        "moss": 14,
+        "closed_clap": 49
+      }
+    }
+  ],
+  "correct": {
+    "control": 40,
+    "checked": 41,
+    "moss": 21,
+    "closed_clap": 40
+  },
+  "moss_minus_control": {
+    "mean_change": -0.38,
+    "bootstrap_95_percent": [
+      -0.54,
+      -0.22
+    ],
+    "increased": 3,
+    "decreased": 22,
+    "tied": 25,
+    "by_film": {
+      "5-212454-A-0.wav": 0.0,
+      "5-234879-B-1.wav": 1.0,
+      "5-103416-A-2.wav": 0.0,
+      "5-253085-B-3.wav": 1.0,
+      "5-237499-A-4.wav": -1.0,
+      "5-214759-B-5.wav": 0.0,
+      "5-244315-C-6.wav": 0.0,
+      "5-194932-A-7.wav": 0.0,
+      "5-61635-A-8.wav": -1.0,
+      "5-214869-A-9.wav": 0.0,
+      "5-195710-A-10.wav": -1.0,
+      "2-132157-A-11.wav": 0.0,
+      "5-189237-A-12.wav": -1.0,
+      "5-204352-A-13.wav": -1.0,
+      "5-243450-A-14.wav": 0.0,
+      "5-257349-A-15.wav": 0.0,
+      "5-179496-B-16.wav": -1.0,
+      "5-214362-A-17.wav": 0.0,
+      "5-185908-A-18.wav": 0.0,
+      "5-192191-A-19.wav": 0.0,
+      "2-80482-A-20.wav": 0.0,
+      "5-221518-A-21.wav": 1.0,
+      "5-221567-A-22.wav": -1.0,
+      "5-232816-A-23.wav": 0.0,
+      "5-208761-A-24.wav": 0.0,
+      "5-243025-A-25.wav": -1.0,
+      "5-171118-A-26.wav": 0.0,
+      "5-218196-B-27.wav": -1.0,
+      "5-234145-A-28.wav": 0.0,
+      "5-243635-A-29.wav": -1.0,
+      "5-250026-B-30.wav": 0.0,
+      "5-232802-A-31.wav": 0.0,
+      "5-223099-B-32.wav": 0.0,
+      "5-177779-A-33.wav": -1.0,
+      "5-221878-A-34.wav": -1.0,
+      "5-260875-A-35.wav": -1.0,
+      "5-263902-A-36.wav": -1.0,
+      "5-210612-A-37.wav": -1.0,
+      "5-219342-A-38.wav": -1.0,
+      "5-260432-A-39.wav": -1.0,
+      "5-205898-A-40.wav": 0.0,
+      "5-222524-A-41.wav": 0.0,
+      "5-160551-A-42.wav": 0.0,
+      "5-179868-A-43.wav": 0.0,
+      "5-209992-A-44.wav": -1.0,
+      "5-188945-A-45.wav": -1.0,
+      "5-188716-A-46.wav": 0.0,
+      "5-251971-A-47.wav": -1.0,
+      "2-117615-C-48.wav": -1.0,
+      "5-250258-A-49.wav": -1.0
+    }
+  },
+  "median_seconds": 2.687609479005914
+}

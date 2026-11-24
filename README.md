@@ -291,6 +291,10 @@ Run `reel setup --captions` once to enable first-listen descriptions. The next `
 
 For a second opinion on a sound, prepare `reel setup --captions --compare-sounds` and use `reel listen TURN --t0 2 --t1 5 --verify-sounds`. CoNeTTE proposes up to six descriptions. CLAP hears the same channel and selects the closest one. Add `--verify-sounds` to `play` or `mcp` to do this at every pause. On 12 unfamiliar videos the local GPT sound-description score rose from 54.6 to 68.2 on a scale where human descriptions scored 100. The interval for the paired change included zero. [Recordings, responses and scoring](docs/benchmarks/verified-hearing.json)
 
+To distinguish possible sources, run `reel setup --identify-sounds` once. From then on, `match` and MCP `listen` with two or more alternatives also report how Meta PE-AV and LAION CLAP ranked the same original channels. If their choices differ, Reel returns `unresolved`. Use `reel match TURN --t0 2 --t1 5 --identify "metal rattling" "fabric rubbing"` for the two-model report alone. With `--identify-sounds` on `play` or `mcp`, both encoders can search AudioSet at each pause. The PE-AV checkpoint download is 8.9 GB.
+
+Across 99 environmental recordings from 50 source categories, CLAP picked the labelled source 85 times and PE-AV picked it 94 times. Both picked it on all 81 recordings where they agreed. Removing the correct choice made them agree on a different source 40 times. Agreement alone cannot establish presence. [Per-recording rankings](docs/benchmarks/source-identity-agreement.json)
+
 Across 16 original filmed transitions GPT identified the second sound in 5 with the wider reading and 7 when it also received the recent one. [Listening trial](docs/listening-check.md#방금-들린-소리와-앞서-들은-소리)
 
 When sounds overlap, `reel setup --layers` prepares a local MixIT separator. At a pause, `layer 2 5 2` plays back the chosen channel’s mix from 2–5 seconds and its second-loudest estimate. In MCP, use `listen_layer(turn=3, start_s=2, end_s=5, layer=2)` after the fifth second has played. Pass `channel=2` for the second recorded channel. The mix keeps the channel’s original sample rate, while the estimate uses 16 kHz. Estimates are ranked afresh for each interval and can split one event or contain several.
@@ -433,6 +437,8 @@ for speech, [ocrmac](https://github.com/straussmaximilian/ocrmac) for Apple Visi
 [Synchformer](https://github.com/v-iashin/Synchformer) (MIT) for picture-sound sync, the [AST AudioSet model](https://huggingface.co/MIT/ast-finetuned-audioset-10-10-0.4593) (BSD-3) for sound labels, librosa, OpenCV and PyTorch.
 
 Optional sound comparison uses LAION's [CLAP HTSAT model](https://huggingface.co/laion/clap-htsat-unfused) (Apache 2.0).
+
+Source identification uses the audio and text branches of Meta’s PE-AV Large checkpoint (Apache 2.0). Environmental source labels and recordings come from Karol Piczak’s ESC-50 collection (CC BY-NC 3.0). [Model](https://huggingface.co/facebook/pe-av-large) and [dataset and licences](https://github.com/karolpiczak/ESC-50)
 
 Optional point tracking uses Google DeepMind’s online BootsTAPIR and its causal checkpoint, released under Apache-2.0. [Code and weights](https://github.com/google-deepmind/tapnet)
 

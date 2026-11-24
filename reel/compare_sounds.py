@@ -261,9 +261,17 @@ class SoundMatcher(LocalReader):
     def choose_layer(self, wavs, focus):
         return self.request({"operation": "choose_layer", "wavs": wavs, "focus": focus})
 
-    def inspect(self, out, start, end, descriptions, *, per_second=False):
+    def inspect(self, out, start, end, descriptions, *, per_second=False, identity_reader=None):
+        if __package__:
+            from .identify_sound import IdentityReader, prepared_for
+        else:
+            from identify_sound import IdentityReader, prepared_for
         wav, start, end, first = match_excerpt(out, start, end)
-        return self.read(wav, start, end, descriptions, per_second=per_second, first_sample=first)
+        report = self.read(wav, start, end, descriptions, per_second=per_second, first_sample=first)
+        if not per_second and prepared_for(descriptions):
+            with (identity_reader.for_replay() if identity_reader is not None else IdentityReader()) as identity:
+                report["sound_identity"] = identity.read(wav, start, end, first, descriptions)
+        return report
 
 
 def match_excerpt(out, start, end):

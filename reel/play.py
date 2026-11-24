@@ -18,6 +18,7 @@ from PIL import Image
 
 if __package__:
     from .attention import gaze_detail, local_change
+    from .identify_sound import IdentityReader
     from .scene_audio import READY as CAPTIONS_READY, SceneReader
     from .sound_events import EventReader, ready as events_ready
     from .sounds import AST_NAME
@@ -34,6 +35,7 @@ if __package__:
     from .frames import SHEET_COLUMNS, SHEET_ROWS, frame_sheets, native_frames, save_frame, sheet_size
 else:
     from attention import gaze_detail, local_change
+    from identify_sound import IdentityReader
     from scene_audio import READY as CAPTIONS_READY, SceneReader
     from sound_events import EventReader, ready as events_ready
     from sounds import AST_NAME
@@ -150,7 +152,8 @@ def save_sound(dest, chunks, info, wave_format, dtype):
 
 def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=False, gaze=False, speech=False,
          lang=None, sound_reader=None, joint=False, pause_on_sound_change=False, continuous=False,
-         max_continuous_pcm_bytes=None, tracks="both", max_frames=None, recording_only=False, verify_sounds=False):
+         max_continuous_pcm_bytes=None, tracks="both", max_frames=None, recording_only=False, verify_sounds=False, identify_sounds=False,
+         identity_reader=None):
     """Yield one published interval per pull. The reader sees no later intervals or source path."""
     source, out = Path(source), Path(out)
     if not math.isfinite(step) or step <= 0:
@@ -186,6 +189,9 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
         tagger = stack.enter_context(LocalReader([PY, str(Path(__file__).with_name("sounds.py")), "--serve"],
                                                  AST_NAME)) if info["has_audio"] else None
         scene = stack.enter_context(SceneReader(verify_sounds=verify_sounds)) if info["has_audio"] and CAPTIONS_READY.is_file() else None
+        identity = None
+        if identify_sounds and info["has_audio"]:
+            identity = identity_reader if identity_reader is not None else stack.enter_context(IdentityReader())
         event_reader = stack.enter_context(EventReader()) if info["has_audio"] and events_ready() else None
         reader = None
         if info["has_audio"] and (describe_sounds or joint):
@@ -352,6 +358,9 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                 shown.clear()
                 if audio and not pace.recording_only:
                     # Feed silent intervals into the same history so old sources expire on the film clock.
+                    if identity is not None:
+                        audio["sound_identity"] = identity.read(dest / audio["wav"], float(start), float(position),
+                                                               audio["first_sample_on_film"])
                     if event_reader is not None:
                         audio["sound_events"] = event_reader.read(dest / audio["wav"], audio["first_sample_on_film"], float(position))
                     if scene is not None:

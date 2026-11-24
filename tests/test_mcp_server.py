@@ -93,6 +93,26 @@ class TransportTests(unittest.TestCase):
                 reader.listen(1, None, .25, 1.1, describe=False, verify_sounds=True)
             check.assert_called_once()
 
+    def test_ordinary_alternatives_compare_the_original_when_identity_is_prepared(self):
+        reader = Viewing(iter([self.path]), None, None, None, matcher=Mock())
+        reader.advance(1, False)
+        labels = ["water falling", "paper tearing"]
+        with (patch("reel.mcp_server.prepared_for", return_value=True),
+              patch("reel.mcp_server.IdentityReader") as helper):
+            ear = helper.return_value.__enter__.return_value
+            def read(wav, start, end, first, alternatives):
+                signal, rate = sf.read(wav, dtype="int16")
+                np.testing.assert_array_equal(signal, np.arange(2000, 6000))
+                self.assertEqual((start, end, first, alternatives), (.25, .75, 2000, labels))
+                return {"status": "available", "windows": []}
+            ear.read.side_effect = read
+            reader.matcher.read.return_value = {"status": "available"}
+            reply = reader.listen(1, None, .25, .75, native_audio=False, describe=False, alternatives=labels)
+            result = json.loads(reply[0].text)
+            self.assertEqual(result["original_sound_match"]["status"], "available")
+            self.assertEqual(result["sound_identity"]["status"], "available")
+            ear.read.assert_called_once()
+
     def test_optional_text_reads_only_the_published_crop(self):
         reader = Viewing(iter([self.path]), None, None, None)
         reader.advance(1, False)

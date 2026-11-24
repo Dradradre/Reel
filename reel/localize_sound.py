@@ -132,10 +132,7 @@ def locate(wav, start, end, descriptions, first_sample=None):
                                "descriptions": descriptions, "first_sample": first_sample})
 
 
-def prepare_environment():
-    command = [PYTHON, str(Path(__file__).resolve())]
-    if ready() and subprocess.run([*command, "--check"], capture_output=True).returncode == 0:
-        return
+def prepare_runtime():
     if "REEL_LOCALIZE_PYTHON" not in os.environ:
         env = HOME / ".venv-localize"
         uv = shutil.which("uv")
@@ -149,6 +146,13 @@ def prepare_environment():
                 subprocess.run([python, "-m", "venv", str(env)], check=True)
         install = [uv, "pip", "install", "--python", PYTHON] if uv else [PYTHON, "-m", "pip", "install"]
         subprocess.run([*install, "torch==2.15.0", "transformers==5.24.0", "scipy", "soundfile", "pillow"], check=True)
+
+
+def prepare_environment():
+    command = [PYTHON, str(Path(__file__).resolve())]
+    if ready() and subprocess.run([*command, "--check"], capture_output=True).returncode == 0:
+        return
+    prepare_runtime()
     for name, checksum in FILES.items():
         fetch(f"https://huggingface.co/{MODEL}/resolve/{REVISION}/{name}", ROOT / name, checksum)
     subprocess.run([*command, "--check"], check=True)

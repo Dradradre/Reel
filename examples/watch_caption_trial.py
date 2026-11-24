@@ -40,23 +40,50 @@ def capture(source, out, verify):
     (out / "report.json").write_text(json.dumps(report))
 
 
-def blind_caption(report, image, prompt):
+def blind_reply(report, image, prompt):
     env = os.environ.copy()
     env.pop("OPENAI_API_KEY", None)
     with TemporaryDirectory() as tmp:
         dest = Path(tmp) / "answer.json"
         # Neutral paths keep the source filename and panel index away from the client.
-        attachment = Path(tmp) / "recording.png"
-        attachment.write_bytes(image.read_bytes())
+        attachments = []
+        if image is not None:
+            attachment = Path(tmp) / "recording.png"
+            attachment.write_bytes(image.read_bytes())
+            attachments = ["-i", str(attachment)]
         subprocess.run(["codex", "exec", "--ephemeral", "--ignore-user-config", "--skip-git-repo-check",
                         "--disable", "plugins", "--disable", "shell_tool", "-s", "read-only", "-C", tmp,
                         "-m", "gpt-6.1-terra", "-c", 'model_reasoning_effort="low"', "-o", str(dest),
-                        "-i", str(attachment), "-"], input=prompt + "\n" + json.dumps(report), text=True,
+                        *attachments, "-"], input=prompt + "\n" + json.dumps(report), text=True,
                        env=env, cwd=tmp, stdout=subprocess.DEVNULL, check=True, timeout=120)
-        response = json.loads(dest.read_text().strip().removeprefix("```json").removesuffix("```").strip())
-        if not isinstance(response.get("description"), str) or not response["description"].strip():
-            raise ValueError("the blind reader returned no description")
-        return response["description"]
+        return json.loads(dest.read_text().strip().removeprefix("```json").removesuffix("```").strip())
+
+
+def ask_questions(directory, items):
+    # Keep human votes, recording names and expected responses out of all three sessions.
+    questions = [{k: item[k] for k in ("question", "form")} for item in items]
+    prompt = ("Answer the questions about the recording in order. For a yes/no question, answer yes, no or "
+              "unknown if the audio evidence is insufficient. For an open question, give the shortest supported "
+              "English answer; if you cannot identify it, answer unknown. Only verified speech can establish "
+              'spoken words. Return JSON {"answers":["...", ...]}.\n' + json.dumps(questions))
+    responses = {}
+    for arm in ("before", "verified", "no_recording"):
+        report, image = {}, None
+        if arm != "no_recording":
+            image = directory / "spectrum.png"
+            report = json.loads((directory / "report.json").read_text())
+            if arm == "before":
+                del report["caption_matches"]
+            else:
+                report["caption_matches"] = json.loads((directory / "verified.json").read_text())
+        answers = blind_reply(report, image, prompt)["answers"]
+        if (not isinstance(answers, list) or len(answers) != len(questions)
+                or any(not isinstance(a, str) or not a.strip() or
+                       (q["form"] == "yes/no" and a.lower().strip(" .") not in ("yes", "no", "unknown"))
+                       for q, a in zip(questions, answers))):
+            raise ValueError("the reader did not return one supported response per question")
+        responses[arm] = answers
+        (directory / "questions.json").write_text(json.dumps({"questions": questions, "responses": responses}, indent=2))
 
 
 def main():
@@ -64,7 +91,10 @@ def main():
     parser.add_argument("recordings", type=Path, help="directory with the original Clotho-AQA audio_files.zip WAVs")
     parser.add_argument("--panel", choices=["confirmation", "unseen_uploaders"], default="unseen_uploaders")
     parser.add_argument("--out", type=Path, required=True, help="new directory for the evidence and responses")
+    parser.add_argument("--questions", action="store_true", help="also run the three Clotho-AQA listening conditions")
     args = parser.parse_args()
+    if args.questions and args.panel != "unseen_uploaders":
+        parser.error("--questions uses the unseen_uploaders panel")
     study = json.loads(BENCHMARK.read_text())
     rows = study["panels"][args.panel]
     # The original study explicitly used Audio Flamingo. Each call receives released PCM only.
@@ -94,8 +124,14 @@ def main():
                     src = wrong[n % len(wrong)]["active_channels"]
                     for j, channel in enumerate(window["active_channels"]):
                         channel["matches"] = src[j % len(src)]["matches"] if src else []
-            answers[arm] = blind_caption(report, directory / "spectrum.png", study["protocol"]["prompt"])
+            description = blind_reply(report, directory / "spectrum.png", study["protocol"]["prompt"])["description"]
+            if not isinstance(description, str) or not description.strip():
+                raise ValueError("the blind reader returned no description")
+            answers[arm] = description
             (directory / "descriptions.json").write_text(json.dumps(answers, indent=2))
+        if args.questions:
+            case = next(c for c in study["listening_questions"] if c["source_id"] == row["source_id"])
+            ask_questions(directory, case["items"])
         print(f"{i + 1}/{len(rows)}", flush=True)
 
 

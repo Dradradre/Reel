@@ -33,7 +33,7 @@
     "questions": "Asked the archived 64 listening questions in groups of four without human answers, preserving directed waveform readings and the same spectrum. Each question has three human votes. GPT could answer yes, no or unknown.",
     "verifier_control": "For each first-channel window compare the CLAP neighbours and those retrieved for the clip half a panel later against the identical original channel using PE-AV. Values count controls beaten out of 128. A retained sentence from a different recording may still describe a similar sound.",
     "waveforms": "Original per-file WAVs from Clotho-AQA v1 audio_files.zip (https://zenodo.org/records/6473207), joined to Clotho v2.1 evaluation captions by filename.",
-    "unseen_questions": "All six published Clotho-AQA questions on each of the 32 recordings from held-out uploaders, four binary and two open. Participants gave three answers per question. Baseline and verified GPT sessions see the same earlier open waveform report and original-channel spectrum. The verified arm also sees the acoustically checked caption matches. The no_recording condition receives only the questions, with permission to answer unknown. Report all abstentions. For free answers, score exact text after Unicode normalization, case folding and tokenizing punctuation; synonyms do not receive credit. The audio reader was not asked the questions in this comparison.",
+    "unseen_questions": "All six published Clotho-AQA questions on each of the 32 recordings from held-out uploaders, four binary and two open. Participants gave three answers per question. Baseline and verified GPT sessions see the same earlier open waveform report and original-channel spectrum. The verified arm also sees the acoustically checked caption matches. The no_recording condition receives only the questions, with permission to answer unknown. Report all abstentions. For free answers, score exact text after Unicode normalization, case folding and tokenizing punctuation; synonyms do not receive credit. The audio reader was not asked the questions in this comparison. These uploaders are absent from Reel’s caption index. Clotho-AQA independently assigns 22 of these recordings to training, nine to validation, and one to test. The pooled questions can occur in model training.",
     "aqa_license": "Clotho-AQA questions and answers, Samuel Lipping, Parthasaarathy Sudarsanam, Konstantinos Drossos and Tuomas Virtanen, © 2022 Tampere University, MIT. See Clotho-AQA-LICENSE.txt."
   },
   "panels": {
@@ -7266,7 +7266,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "264582",
@@ -7355,7 +7356,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "181890",
@@ -7444,7 +7446,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "126258",
@@ -7533,7 +7536,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "267265",
@@ -7622,7 +7626,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "15509",
@@ -7711,7 +7716,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "207441",
@@ -7800,7 +7806,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "107228",
@@ -7889,7 +7896,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "180963",
@@ -7978,7 +7986,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "94233",
@@ -8067,7 +8076,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "260263",
@@ -8156,7 +8166,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "361700",
@@ -8245,7 +8256,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "52288",
@@ -8334,7 +8346,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "177283",
@@ -8423,7 +8436,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "140349",
@@ -8512,7 +8526,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "335010",
@@ -8601,7 +8616,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "366528",
@@ -8690,7 +8706,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "26736",
@@ -8779,7 +8796,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "210220",
@@ -8868,7 +8886,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "346048",
@@ -8957,7 +8976,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "156847",
@@ -9046,7 +9066,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "198452",
@@ -9135,7 +9156,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "189470",
@@ -9224,7 +9246,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "118045",
@@ -9313,7 +9336,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "330653",
@@ -9402,7 +9426,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "133833",
@@ -9491,7 +9516,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "245754",
@@ -9580,7 +9606,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "123680",
@@ -9669,7 +9696,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "108850",
@@ -9758,7 +9786,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "268810",
@@ -9847,7 +9876,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "train"
     },
     {
       "source_id": "253111",
@@ -9936,7 +9966,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "validation"
     },
     {
       "source_id": "108354",
@@ -10025,7 +10056,8 @@
             "no_recording": "unknown"
           }
         }
-      ]
+      ],
+      "aqa_split": "test"
     }
   ]
 }

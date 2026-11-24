@@ -99,7 +99,7 @@ Reel can also lay out a film in 30-second pages. Read left to right. A vertical 
 
 ## Does it work?
 
-On 16 recordings with five human descriptions each, the new playback reached **43.5%** of the human reference on free sound recall (previously 42.7%, with a wide interval). GPT named a short annotated source in **3/51** field excerpts. The relative-depth reader ordered 115/127 annotated point pairs correctly. [Tests, controls and individual results](docs/event-paths.md)
+On 16 recordings with five human descriptions each, the new playback reached **43.5%** of the human reference on free sound recall (previously 42.7%, with a wide interval). GPT named a short annotated source in **3/51** field excerpts. The relative-depth reader ordered 115/127 annotated point pairs correctly. Locating the visible object responsible for a sound was harder. GPT pointed inside its human-annotated box in one of 24 films. [Tests, controls and individual results](docs/event-paths.md)
 
 On playback, GPT can keep a sound it cannot name, find it later on another recorded channel and return to the original evidence. On 96 real recordings mixed at new positions it located all 96 repeated excerpts within 50 ms. On new utterances from 14 speakers it reidentified nine voices. [Tools, controls and misses](docs/event-paths.md)
 

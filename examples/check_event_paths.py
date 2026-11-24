@@ -21,7 +21,8 @@ def source_trials(cases_path, recordings):
     from reel.recognition import RATE, channel_audio, recognize
 
     results = []
-    for case in json.loads(cases_path.read_text()):
+    cases = json.loads(cases_path.read_text())
+    for case in cases["mixtures"] if isinstance(cases, dict) else cases:
         if not case["id"].startswith("holdout"):
             continue
         sources = []
@@ -68,8 +69,13 @@ def voice_trials(directory):
     import soundfile as sf
 
     groups = {}
-    for row in json.loads((directory / "rows.json").read_text()):
-        groups.setdefault(row["speaker"], []).append(row["id"])
+    index = directory / "rows.json"
+    if index.is_file():
+        for row in json.loads(index.read_text()):
+            groups.setdefault(row["speaker"], []).append(row["id"])
+    else:
+        for row in json.loads(DATA.read_text())["voices"]:
+            groups.setdefault(row["speaker"], []).append(row["utterance"])
     # One enrollment and one independent utterance per speaker. All enrollments
     # are consumed first. Gallery labels never enter VAD, encoder or assignment.
     history = VoiceHistory(VoiceEncoder())
@@ -77,7 +83,11 @@ def voice_trials(directory):
     first = 0
     for phase in range(2):
         for sp, ids in sorted(groups.items()):
-            path = directory / (ids[phase] + ".wav")
+            utterance = ids[phase]
+            path = directory / (utterance + ".wav")
+            if not path.is_file():
+                speaker, chapter, _ = utterance.split("-")
+                path = directory / speaker / chapter / (utterance + ".flac")
             # A gap in sample numbers resets audio overlap between unrelated files.
             result = history.read(path, first)
             first += sf.info(path).frames + 1000
@@ -100,13 +110,13 @@ def voice_trials(directory):
     return rows
 
 
-def picture_trials(annotations):
+def picture_trials(annotations, videos=None):
     import cv2
     from reel.event_stream import PictureTracks
 
     rows = []
     for video, clip in json.loads(annotations.read_text()).items():
-        path = Path(clip["path"])
+        path = videos / (video + ".mp4") if videos is not None else Path(clip["path"])
         if not path.is_file():
             continue
         cap = cv2.VideoCapture(str(path))
@@ -220,7 +230,12 @@ def summary(data):
             with_exact_source=sum(any("E" in g for g in trial["grades"]) for trial in data["field"]),
         )
     if "human_trials" in data:
-        from listener_study import compare_votes
+        if __package__:
+            from .listener_study import compare_votes
+            from .check_first_impressions import relative_separation
+        else:
+            from listener_study import compare_votes
+            from check_first_impressions import relative_separation
 
         q = [q for trial in data["human_trials"] for q in trial["questions"]]
         for arm in ("current", "same_prompt_without_events"):
@@ -231,9 +246,10 @@ def summary(data):
                     for value in [row if arm == "current" else row[arm]]
                 ]
             )
-        result["human_relative_free_recall"] = data["human_caption_scores"][
-            "human_relative_description_separation"
-        ]
+        result["human_relative_free_recall"] = {
+            arm: relative_separation(data["human_caption_scores"]["by_film"], arm)
+            for arm in ("previous", "current")
+        }
     if "depth" in data:
         rows = data["depth"]
         result["depth"] = dict(
@@ -289,10 +305,11 @@ def summary(data):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--cases", type=Path)
+    ap.add_argument("--cases", type=Path, default=ROOT / "docs/benchmarks/acoustic-layers.json")
     ap.add_argument("--fsd", type=Path)
     ap.add_argument("--speech", type=Path)
     ap.add_argument("--points", type=Path)
+    ap.add_argument("--videos", type=Path)
     ap.add_argument("--output", type=Path)
     args = ap.parse_args()
     data = {}
@@ -301,7 +318,9 @@ if __name__ == "__main__":
     if args.speech:
         data["voices"] = voice_trials(args.speech)
     if args.points:
-        data["pictures"] = picture_trials(args.points)
+        data["pictures"] = picture_trials(args.points, args.videos)
+    if args.output and not data:
+        ap.error("supply a dataset to generate measurements")
     if args.output:
         args.output.write_text(json.dumps(data, separators=(",", ":"), ensure_ascii=False) + "\n")
     print(json.dumps(summary(data or json.loads(DATA.read_text())), indent=2))

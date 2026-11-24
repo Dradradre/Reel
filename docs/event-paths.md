@@ -1,5 +1,7 @@
 # Following an event through playback
 
+[한국어 사용법과 시험 결과](event-paths.ko.md)
+
 On the first pass, a reader can report “I heard a brief sound on the right” and keep that observation when a later picture suggests a cause. The four operations below use the same released film clock in a native-media client and in an image-and-text client.
 
 | Operation | Evidence the reader receives |
@@ -34,7 +36,7 @@ Install the optional voice model with `pip install -e '.[voices]'` and `reel set
 
 | Task | Result | What was tested |
 |---|---|---|
-| Find an earlier sound inside a later mixture | 96/96 top positions within 50 ms. 79 passed the strong waveform cutoff. 0/96 background controls passed. | Half-second excerpts from 96 held-out FSD50K recordings. Each target was mixed with another recording at a new position with inverted polarity and adjusted level. This tests repetition of the recorded signal. |
+| Find an earlier sound inside a later mixture | 96/96 top positions within 50 ms. 79 passed the strong waveform cutoff. The top match passed on 0/96 background controls. | Half-second excerpts from 96 held-out FSD50K recordings. Each target was mixed with another recording at a new position with inverted polarity and adjusted level. This tests repetition of the recorded signal. |
 | Recognize an anonymous voice on a different utterance | 9/14 correct unique voice matches, 2 without an assignment | Two LibriSpeech test-clean utterances per speaker. All 14 speakers enrolled before the independent second utterances. A split profile counts as a miss. |
 | Follow a human-annotated visible point | 142/574 points had an automatic landmark within 0.08 normalized screen units initially. 126/142 were near the point after 29 frames, versus 119/142 holding the initial landmark still. | 18 videos with point annotations. Both methods used the same automatically proposed starting points. 133/142 tracks remained visible. |
 | Same scene with and without a key sound | With the cue, local GPT described a click and metallic rattle. Without it, GPT reported steady hiss. On silence it reported silence. | Sound alone through 8.5 seconds. Changing later footage produced identical evidence bytes. The matching control reused the answer. The image-and-text GPT received spectra and an Audio Flamingo waveform reading. |
@@ -84,3 +86,20 @@ The model report file is a JSON list. Each entry gives `panel`, `trial`, `phase`
 A local timing measurement found a region in three of 24 clips with a visible, annotated sound source. None of the three region centres fell inside the human box. It also proposed a region in one of 24 clips where the annotated source was hidden. Shifting the audio by 480 ms produced one proposal across the 48 clips, again outside the human box. These measurements remain in the event index for inspection. First-pass attention omits the proposed regions.
 
 Use `inspect_event(turn=N, event_id=ID, sense="binding")` to review the independent sound impression and spectrum before the complete picture at the event endpoint. The response identifies which interval the waveform reader heard and which exposure the client received. Record an uncertain or offscreen interpretation when the evidence is ambiguous. The `sync_regions` argument of `ask_scene` lets the reader compare competing movements over time. [Perception Test source-visibility annotations](https://github.com/google-deepmind/perception_test)
+
+
+To rerun the signal and voice trials from the original dataset releases, point the commands below at the FSD50K evaluation WAV directory, the extracted LibriSpeech `test-clean` directory or the DA-2K archive. The scripts use the published trial roster.
+
+```sh
+python examples/check_event_paths.py --fsd /path/to/FSD50K.eval_audio
+python examples/check_event_paths.py --speech /path/to/LibriSpeech/test-clean
+python examples/check_picture_depth.py /path/to/DA-2K.zip
+```
+
+## Matched pictures, swapped recordings and playback cost
+
+On the same 48 held-out films, a fresh local GPT received the independent sound impression and spectrum plus the recorded picture. It placed a point inside the human box in 1/24 visible-source clips. When the annotated source was offscreen, GPT selected a visible point in 0/24, explicitly reported an unseen source in 4 and left 20 unresolved. Keeping each picture and swapping in the sound evidence of another annotated class produced 0/24 points inside the original visible-source box and 0/24 visible guesses on hidden-source clips. A frame can contain another plausible source. These scores concern the annotated sound. The reader received no event label or candidate boxes.
+
+On the door control, changing only the future left all 204 exposed picture timestamps, decoded picture sheets, PCM and 171 measured observations identical through 8.5 seconds. Removing the cue changed the PCM and observations while preserving the pictures.
+
+On this Mac, publishing the first eight seconds of the demo took a median 1.15 s before the event index and 1.53 s with it across three runs per version. The first two-second turn took 0.27 s and 0.32 s respectively. These timings cover the movie-only path with semantic readers disabled.

@@ -1,11 +1,11 @@
-<a href="assets/door-demo.mp4">
+<a href="https://cdn.jsdelivr.net/gh/Dradradre/Reel@e9b9a19225546c9d1658f7309d7abe28f8673212/assets/door-demo.mp4">
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/door-at-cutoff.png">
   <img src="assets/door-playback.gif" width="100%" alt="Reel. Same door, different answer. A makes GPT mention jingling. B leaves the sound unidentified. Click to hear both recordings and see the recorded answers.">
 </picture>
 </a>
 
-**[▶ Hear A, then B · 18 seconds](assets/door-demo.mp4)**
+**[▶ Hear A, then B · 18 seconds](https://cdn.jsdelivr.net/gh/Dradradre/Reel@e9b9a19225546c9d1658f7309d7abe28f8673212/assets/door-demo.mp4)**
 
 [한국어](README.ko.md)  |  [Try your film](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md)
 

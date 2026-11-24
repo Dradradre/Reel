@@ -1,11 +1,11 @@
-<a href="assets/door-demo.mp4">
+<a href="https://cdn.jsdelivr.net/gh/Dradradre/Reel@e9b9a19225546c9d1658f7309d7abe28f8673212/assets/door-demo.mp4">
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/door-at-cutoff.png">
   <img src="assets/door-playback.gif" width="100%" alt="Reel. 같은 문을 보여줬지만 GPT는 A에서 짤랑거림을 짚고 B에서는 무엇이 낸 소리인지 모르겠다고 했다. 누르면 두 녹음과 실제 답변을 함께 볼 수 있다.">
 </picture>
 </a>
 
-**[▶ A와 B 직접 듣기 (18초)](assets/door-demo.mp4)**
+**[▶ A와 B 직접 듣기 (18초)](https://cdn.jsdelivr.net/gh/Dradradre/Reel@e9b9a19225546c9d1658f7309d7abe28f8673212/assets/door-demo.mp4)**
 
 [English](README.md)  |  [내 영상으로 시작하기](#빠른-시작)  |  [측정 결과](#시험-결과)  |  [읽기 안내서](docs/READING.md)
 

@@ -6,10 +6,26 @@ from unittest.mock import Mock
 import numpy as np
 import soundfile as sf
 
-from reel.scene_audio import SceneHistory
+from reel.scene_audio import CLAP_RATE, SceneHistory, rank_captions
 
 
 class SceneAudioTests(unittest.TestCase):
+    def test_waveform_selects_among_distinct_captions_and_stable_ties(self):
+        matcher = Mock()
+        matcher.similarities.return_value = np.array([[.1, .4, .4]])
+        pcm = np.linspace(-.2, .2, 128, dtype=np.float32)
+        report = rank_captions(matcher, pcm, CLAP_RATE, ["one", "two", "one", "three"])
+        matcher.text_features.assert_called_once_with(["one", "two", "three"])
+        signals, text = matcher.similarities.call_args.args
+        np.testing.assert_array_equal(signals, [pcm])
+        self.assertIs(text, matcher.text_features.return_value)
+        self.assertEqual(report["impression"], "two")
+        self.assertEqual(report["caption_check"]["candidates"], 3)
+        for scores in ([[np.nan]], [[]]):
+            matcher.similarities.return_value = np.asarray(scores)
+            with self.assertRaisesRegex(ValueError, "similarity"):
+                rank_captions(matcher, pcm, CLAP_RATE, ["one"])
+
     def test_context_crosses_pauses_but_stops_at_discontinuities(self):
         describe = Mock(side_effect=lambda channels, rate: ["a sound"] * len(channels))
         ear = SceneHistory(describe)

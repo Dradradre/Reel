@@ -74,6 +74,25 @@ class TransportTests(unittest.TestCase):
             self.assertEqual(json.loads(reply[0].text)["sound_events"]["windows_evaluated"], 0)
             classify.assert_called_once()
 
+    def test_caption_verification_receives_only_the_original_released_samples(self):
+        reader = Viewing(iter([self.path]), None, None, None)
+        reader.advance(1, False)
+
+        def describe(wav, first, end, *, verify_sounds):
+            self.assertTrue(verify_sounds)
+            self.assertEqual((first, end), (2000, .75))
+            samples, rate = sf.read(wav, dtype="int16")
+            self.assertEqual(rate, 8000)
+            np.testing.assert_array_equal(samples, np.arange(2000, 6000))
+            return {"status": "available", "windows": []}
+
+        with patch("reel.mcp_server.inspect_scene", side_effect=describe) as check:
+            reply = reader.listen(1, None, .25, .75, describe=False, gain_db=6., verify_sounds=True)
+            self.assertEqual(json.loads(reply[0].text)["scene"]["status"], "available")
+            with self.assertRaisesRegex(ValueError, "within the time viewed"):
+                reader.listen(1, None, .25, 1.1, describe=False, verify_sounds=True)
+            check.assert_called_once()
+
     def test_optional_text_reads_only_the_published_crop(self):
         reader = Viewing(iter([self.path]), None, None, None)
         reader.advance(1, False)

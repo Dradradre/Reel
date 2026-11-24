@@ -5,7 +5,7 @@
   reel zoom DIR --t0 S --t1 S
   reel frame DIR --at S     save the full frame on display at S
   reel frame DIR --t0 S --t1 S     read every frame displayed in the interval
-  reel listen DIR --t0 S --t1 S [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
+  reel listen DIR --t0 S --t1 S [--verify-sounds] [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second | --locate] ["sound description" ...]    compare descriptions with the recorded channels
@@ -13,8 +13,8 @@
   reel speech TURN [--lang CODE] [--verify]               read words from a delivered audio interval
   reel follow TURN --from S --point X Y [--out NEW_DIR]    follow a pictured point through published frames
   reel look TURN --box LEFT TOP RIGHT BOTTOM     inspect a region of the published full-resolution picture
-  reel play FILM --out NEW_DIR [--until S] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
-  reel mcp FILM [--until S] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
+  reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
+  reel mcp FILM [--until S] [--verify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
   reel setup [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
 """
@@ -173,6 +173,7 @@ def main():
         ap.add_argument("--joint", action="store_true", help="read synchronized pictures and sound at every pause")
         ap.add_argument("--gaze", action="store_true", help="include timed details selected by the visual gaze model")
         ap.add_argument("--describe-sounds", action="store_true", help="include the local waveform reader's first impression at every pause")
+        ap.add_argument("--verify-sounds", action="store_true", help="compare generated sound descriptions with the recorded waveform using CLAP")
         args = ap.parse_args(sys.argv[2:])
         if args.until is not None and not 0 < args.until < float("inf"):
             ap.error("--until must be a finite positive number of seconds")
@@ -183,7 +184,7 @@ def main():
         from mcp_server import serve
         serve(args.source, until=args.until, tracks=args.tracks, speech=args.speech, lang=args.lang, joint=args.joint, gaze=args.gaze,
               describe_sounds=args.describe_sounds, pause_on_sound_change=args.pause_on_sound_change,
-              image_client=args.image_client)
+              image_client=args.image_client, verify_sounds=args.verify_sounds)
         return
     if cmd == "layer":
         from hearing import SoundReader
@@ -325,6 +326,7 @@ def main():
         ap.add_argument("--lang", help="spoken language code (default: detect from the recording)")
         ap.add_argument("--joint", action="store_true", help="also read the pictures and their soundtrack in one local model")
         ap.add_argument("--describe-sounds", action="store_true", help="include local audio-only impressions")
+        ap.add_argument("--verify-sounds", action="store_true", help="compare generated sound descriptions with the recorded waveform using CLAP")
         ap.add_argument("--media", action="store_true", help="also deliver a synchronized playable excerpt")
         ap.add_argument("--gaze", action="store_true", help="show recent fixation crops and their times alongside the full picture")
         ap.add_argument("--step", type=float, default=2., help="maximum seconds before waiting (default 2)")
@@ -336,7 +338,7 @@ def main():
         sound_reader = SoundReader()
         waveform = sound_reader if x.describe_sounds or x.joint else None
         playback = play(x.source, x.out, until=x.until, tracks=x.tracks, step=x.step, describe_sounds=x.describe_sounds,
-                        media=x.media, gaze=x.gaze, speech=x.speech, lang=x.lang, sound_reader=waveform, joint=x.joint,
+                        verify_sounds=x.verify_sounds, media=x.media, gaze=x.gaze, speech=x.speech, lang=x.lang, sound_reader=waveform, joint=x.joint,
                         pause_on_sound_change=x.pause_on_sound_change, continuous=x.continuous, max_frames=x.max_frames)
         try:
             original = RecordedSource(x.source)
@@ -519,6 +521,7 @@ def main():
             ap.add_argument("--gain-db", type=float, default=0., help="adjust replay volume equally across channels")
             ap.add_argument("--component", choices=COMPONENTS, default="mix", help="listen to the mix or a filtered component")
             ap.add_argument("--describe-sounds", action="store_true", help="describe the bounded waveform locally")
+            ap.add_argument("--verify-sounds", action="store_true", help="compare generated sound descriptions with the recorded waveform using CLAP")
             ap.add_argument("--question", help="ask the local waveform model about the recorded sound")
             ap.add_argument("--compare-sounds", action="store_true", help="also rank sound descriptions with local CLAP")
         else:
@@ -537,7 +540,8 @@ def main():
             else:
                 from listen import inspect_sound
                 data = inspect_sound(x.out, x.t0, x.t1, compare_sounds=x.compare_sounds, describe_sounds=x.describe_sounds,
-                                     question=x.question, component=x.component, mark_sound=x.mark_sound, gain_db=x.gain_db)
+                                     question=x.question, component=x.component, mark_sound=x.mark_sound, gain_db=x.gain_db,
+                                     verify_sounds=x.verify_sounds)
             print(json.dumps(data, ensure_ascii=False, indent=2))
         except (ValueError, OSError, subprocess.CalledProcessError) as error:
             ap.error(str(error))

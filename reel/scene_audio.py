@@ -17,11 +17,13 @@ from urllib.request import urlopen
 import numpy as np
 
 if __package__:
-    from .common import open_recording, sample_boundary
+    from .common import open_recording, resample_channels, sample_boundary
+    from .compare_sounds import CLAP_NAME, RATE as CLAP_RATE, Comparator
     from .config import CAPTION_PY, HOME, MODELS
     from .local_reader import LocalReader
 else:
-    from common import open_recording, sample_boundary
+    from common import open_recording, resample_channels, sample_boundary
+    from compare_sounds import CLAP_NAME, RATE as CLAP_RATE, Comparator
     from config import CAPTION_PY, HOME, MODELS
     from local_reader import LocalReader
 
@@ -137,7 +139,7 @@ class SceneHistory:
                 groups[same].append(int(i) + 1)
         notes = self.describe(signals, rate)
         return {"start_s": (end_sample - len(samples)) / rate, "end_s": min(end_s, end_sample / rate),
-                "channels": [{"channels": group, "impression": note}
+                "channels": [{"channels": group, **(note if isinstance(note, dict) else {"impression": note})}
                              for group, note in zip(groups, notes, strict=True)]}
 
     def read(self, wav, first_sample, end_s):
@@ -188,23 +190,46 @@ class SceneHistory:
 
 
 class SceneReader(LocalReader):
-    def __init__(self):
-        super().__init__([CAPTION_PY, str(Path(__file__).resolve()), "--serve"], MODEL)
+    def __init__(self, *, verify_sounds=False):
+        command = [CAPTION_PY, str(Path(__file__).resolve()), "--serve"]
+        if verify_sounds:
+            command.append("--verify-sounds")
+        super().__init__(command, MODEL)
 
     def read(self, wav, first_sample, end_s):
         return self.request({"wav": str(Path(wav).resolve()), "first_sample": first_sample, "end_s": end_s})
 
 
-def inspect_scene(wav, first_sample, end_s):
+def inspect_scene(wav, first_sample, end_s, *, verify_sounds=False):
     if not READY.is_file():
         return {"status": "not_prepared", "model": MODEL, "setup": "reel setup --captions"}
-    with SceneReader() as reader:
+    with SceneReader(verify_sounds=verify_sounds) as reader:
         return reader.read(wav, first_sample, end_s)
 
 
+def rank_captions(matcher, signal, rate, candidates):
+    """Compare captions against one actual channel, preserving beam order on a tie."""
+    candidates = list(dict.fromkeys(candidates))
+    if not candidates:
+        raise ValueError("no generated sound descriptions")
+    audio = resample_channels(signal[:, None], rate, CLAP_RATE)[:, 0]
+    scores = matcher.similarities([audio], matcher.text_features(candidates))[0]
+    if len(scores) != len(candidates) or not np.all(np.isfinite(scores)):
+        raise ValueError("invalid audio-text similarity scores")
+    best = int(np.argmax(scores))
+    return {"impression": candidates[best], "caption_check": {
+        "status": "compared", "model": CLAP_NAME, "candidates": len(candidates),
+        "cosine": round(float(scores[best]), 4),
+        "basis": "Closest generated description to this channel's waveform. The score is not a probability. "
+                 "This comparison supplies no words to quote."}}
+
+
 class Captioner:
-    def __init__(self):
+    def __init__(self, *, verify_sounds=False):
         self.model = None
+        self.verify_sounds = verify_sounds
+        self.matcher = None
+        self.match_error = None
 
     def __call__(self, signals, rate):
         import torch
@@ -212,11 +237,35 @@ class Captioner:
             self.model = load_model()
         batch = torch.from_numpy(np.stack(signals)).unsqueeze(1)
         with torch.inference_mode():
-            return self.model(batch, sr=rate)["cands"]
+            if not self.verify_sounds:
+                return self.model(batch, sr=rate)["cands"]
+            if self.matcher is None and self.match_error is None:
+                try:
+                    # The caption worker uses a separate PyTorch with limited MPS operators.
+                    self.matcher = Comparator(device="cpu")
+                except (ImportError, OSError, RuntimeError, ValueError) as error:
+                    self.match_error = str(error)
+            if self.match_error is not None:
+                return [self.unchecked(text, self.match_error) for text in self.model(batch, sr=rate)["cands"]]
+            encoded = self.model.preprocessor(batch, rate)
+            options = {"x_shapes": encoded["audio_shape"], "preprocess": False, "beam_size": 3}
+            original = self.model(encoded["audio"], task="clotho", **options)
+            try:
+                alternative = self.model(encoded["audio"], task="audiocaps", **options)
+                return [rank_captions(self.matcher, signal, rate, first + second)
+                        for signal, first, second in zip(signals, original["mult_cands"],
+                                                         alternative["mult_cands"], strict=True)]
+            except (OSError, RuntimeError, ValueError) as error:
+                return [self.unchecked(text, str(error)) for text in original["cands"]]
+
+    @staticmethod
+    def unchecked(text, reason):
+        return {"impression": text, "caption_check": {"status": "unavailable", "model": CLAP_NAME,
+                                                       "reason": reason, "setup": "reel setup --compare-sounds"}}
 
 
-def serve():
-    captioner = Captioner()
+def serve(verify_sounds=False):
+    captioner = Captioner(verify_sounds=verify_sounds)
     reader = SceneHistory(captioner)
     for line in sys.stdin:
         try:
@@ -232,9 +281,10 @@ if __name__ == "__main__":
     mode = parser.add_mutually_exclusive_group(required=True)
     for flag in ("--serve", "--check", "--setup"):
         mode.add_argument(flag, action="store_true")
+    parser.add_argument("--verify-sounds", action="store_true")
     args = parser.parse_args()
     if args.serve:
-        serve()
+        serve(args.verify_sounds)
     elif args.setup:
         setup()
     else:

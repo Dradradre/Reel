@@ -1,0 +1,2853 @@
+{
+  "control_revision": "3383aef",
+  "dataset": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+  "captions_sha256": "162185e4adefaac50d0be361550f3477650bbdf5c24b0b8a04fdd338bd8ad126",
+  "selection": "SHA256 order salted with reel-acoustic-confirmation-v1/. Eight development clips, then 20 confirmation clips. At least three distinct audio references and 4–75 seconds. Previously published or locally panelled IDs excluded. Model pretraining overlap unknown.",
+  "development_ids": [
+    "4573118187",
+    "10717276603",
+    "4528442941",
+    "4888273655",
+    "4599618003",
+    "4510506060",
+    "10211516755",
+    "4405101727"
+  ],
+  "upstream": {
+    "protocol": "Eight-second turns. Each turn uses its recent windows if available, otherwise its wider windows. Equal weight per distinct active channel group and window within each clip, then equal weight per clip. Sentence cosine against own human references minus average other film references. Relative to held-out human separation.",
+    "films": [
+      {
+        "id": "10685598604",
+        "sha256": "1adfe7b5f4b86059e4e4aa7c413942042397488fdca07e64c2d8f3e590751d6d",
+        "duration_s": 22.022022,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is speaking over an intercom in a large room",
+                "checked": "a man is speaking over an intercom in a large room"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a man is speaking over an intercom in a large room",
+                "checked": "a man is speaking over an intercom in a large room"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is giving a speech with a loud echo in the background",
+                "checked": "a man is giving a speech with a loud echo"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a man is giving a speech with a loud echo in the background",
+                "checked": "a man is giving a speech with a loud echo"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 22.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is giving a speech over a loud speaker",
+                "checked": "a man is giving a speech over a loudspeaker"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a man is giving a speech over a loud speaker",
+                "checked": "a man is giving a speech over a loudspeaker"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4857781123",
+        "sha256": "7efa1c240e4382725ac98184b9f304154451c0d79f09dc4ed5aaa8528e9274ca",
+        "duration_s": 36.780385,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is speaking while others are talking in the background",
+                "checked": "a man is speaking while others are in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a person is walking on a hard surface at a steady pace",
+                "checked": "a small motor vehicle engine running"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is speaking while others are talking in the background",
+                "checked": "a man is speaking while others are in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a person is using a wrench on a piece of paper",
+                "checked": "a person is using a wrench on a piece of paper"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is speaking while birds are chirping in the background",
+                "checked": "a man is speaking while birds are chirping in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a person is walking on a hard surface at a steady pace",
+                "checked": "a small motor vehicle engine running"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 32.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is speaking while others are talking in the background",
+                "checked": "a man is speaking while others are in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a person is walking on a hard surface at a steady pace",
+                "checked": "a small motor vehicle engine running"
+              }
+            ]
+          },
+          {
+            "start_s": 32.0,
+            "end_s": 36.78038548752834,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is talking and laughing with other people in the background",
+                "checked": "a man is speaking and laughing with other people"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a person is using a wrench on a piece of paper",
+                "checked": "a person is using a wrench on a piece of paper"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4833887719",
+        "sha256": "25d1430b54f5be71bfc1fd0f071e621a0918ac12b39b8d0ed66fd8e885c51b06",
+        "duration_s": 27.028005,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a woman is speaking while a baby cries in the background",
+                "checked": "a woman speaking followed by a baby crying and a man talking"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a baby is crying and a child is speaking in the background",
+                "checked": "a baby is crying and a child is speaking in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a baby is crying and a child is speaking in the background",
+                "checked": "a baby is crying and a child is speaking in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 27.028004535147392,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a baby is crying and laughing with people talking in the background",
+                "checked": "a baby cries and people laugh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4760692619",
+        "sha256": "38ab27825e448a230ce7bbeff314f6578475c861f99976e2fe02f49267e2520a",
+        "duration_s": 33.041973,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a baby is crying and a child is speaking in the background",
+                "checked": "a baby is crying and a woman is speaking"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a child is speaking while music plays in the background",
+                "checked": "a woman speaking with music playing in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a child is speaking while a baby is crying in the background",
+                "checked": "a child is speaking while a baby is crying in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 32.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a child is speaking while a baby is crying in the background",
+                "checked": "a child is speaking while a baby cries in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 23.041972789115647,
+            "end_s": 33.04197278911565,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a child is speaking and a baby is crying in the background",
+                "checked": "a baby cries and a woman speaks"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4491342746",
+        "sha256": "925b293cadfc1fbb6ad85c64f45e3c7e66323d91e0ecd4cd6420eb8190923cc1",
+        "duration_s": 23.359252,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a baby is crying and a woman is speaking in the background",
+                "checked": "a woman and a child are speaking and a baby cries"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a baby is crying and a woman is speaking in the background",
+                "checked": "a woman and a child are speaking"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "children are talking and laughing in the background",
+                "checked": "a young girl speaks and a child laughs"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "children are laughing and talking to each other",
+                "checked": "children are laughing and talking to each other in a room"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 23.35925170068027,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "people are talking in the background while dishes are being moved",
+                "checked": "a woman speaking with dishes clanging in the background and a man talking"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "people are talking in the background while dishes are being moved",
+                "checked": "a woman speaking with dishes clanging in the background and a man talking"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4447314310",
+        "sha256": "4cbaa536dd324c9ef8349f78ed3b832b715443d1fc12df2d3c84d3e486d16f67",
+        "duration_s": 42.817574,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a woman is speaking while birds are chirping in the background",
+                "checked": "birds are chirping and a woman is speaking"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a woman is speaking while birds are chirping in the background",
+                "checked": "birds are chirping and a woman is speaking"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "birds are chirping and children are talking in the background",
+                "checked": "birds are chirping and a woman is speaking"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "birds are chirping and children are talking in the background",
+                "checked": "birds are chirping and a woman is speaking"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "children are talking and laughing while birds are chirping in the background",
+                "checked": "a child is speaking while a bird is chirping in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "children are talking and laughing while birds are chirping in the background",
+                "checked": "a child is speaking while a bird is chirping in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 32.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "birds are chirping and children are talking in the background",
+                "checked": "birds are chirping and a woman is speaking"
+              }
+            ]
+          },
+          {
+            "start_s": 32.0,
+            "end_s": 40.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a woman is speaking while birds are chirping in the background",
+                "checked": "a woman is speaking while birds are chirping in the background and a dog barks"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a woman is speaking while birds are chirping in the background",
+                "checked": "a woman is speaking while birds are chirping in the background and a dog barks"
+              }
+            ]
+          },
+          {
+            "start_s": 40.0,
+            "end_s": 42.817573696145125,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "birds are chirping and children are talking in the background",
+                "checked": "birds are chirping and people are talking and laughing"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4571054955",
+        "sha256": "11e5ba255620352ea98a4f9972789975a7d04e8c283a48d855ef6ba6910df2cf",
+        "duration_s": 30.023379,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a piano is playing a song in the background",
+                "checked": "a piano is playing a song in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "music is playing in the background and a person is singing",
+                "checked": "music is playing in the background as a person sings"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "music is playing and a person is walking on a hard surface",
+                "checked": "music is playing and a person is walking on a piano"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "music is playing and a person is walking on a hard surface",
+                "checked": "music is playing and a person is walking on a piano"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 30.023378684807255,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "music is playing in the background and a person is singing",
+                "checked": "music is playing in the background as a person sings"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4823372280",
+        "sha256": "4fda162d68ea9d495d3b04bc6d86672c94307a8264002a3bc7a606ba81d32a2e",
+        "duration_s": 33.808231,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a large group of people are talking to each other",
+                "checked": "music is playing and people are talking"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a large group of people are talking to each other",
+                "checked": "music is playing and a man is singing"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a crowd of people are talking and a man is singing",
+                "checked": "a crowd of people are talking and a man is singing"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 32.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a crowd of people are talking and music is playing",
+                "checked": "a crowd of people are talking to each other while music is playing"
+              }
+            ]
+          },
+          {
+            "start_s": 23.808231292517007,
+            "end_s": 33.80823129251701,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a crowd of people are talking to each other while music plays in the background",
+                "checked": "a crowd of people are talking to each other while music is playing"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4772810451",
+        "sha256": "ad8bae592079510c5e86aee3df24e87c5b8cdef8d3564b383e7e8abb7d0208aa",
+        "duration_s": 29.698299,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "birds are chirping in the background and a dog is barking in the distance",
+                "checked": "birds are chirping in the background and a dog is barking in the distance"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "birds are chirping in the background and a dog is barking in the distance",
+                "checked": "birds are chirping in the background and a dog is barking in the distance"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a bird is chirping in the background while a person is walking",
+                "checked": "a bird is chirping in the background and a faint hum of a dog"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a dog is barking and yelping in the background",
+                "checked": "a dog is panting and a cat is purring"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 29.69829931972789,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a dog is barking and yelping in the background",
+                "checked": "a dog is barking and panting while a person is walking in the background"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4491371230",
+        "sha256": "080ae9c07e1ef4e115028aa13bebe99f01877630e7c3b7fe9d7ab8bac3f3cff5",
+        "duration_s": 21.292676,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "people are talking in the background while a woman is speaking",
+                "checked": "wind blowing and people speaking"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "people are talking in the background while a woman is speaking",
+                "checked": "wind blowing and people speaking"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "children are talking and playing in the wind",
+                "checked": "wind blowing and children speaking"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "children are talking and playing in the wind",
+                "checked": "wind blowing and children speaking"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 21.292675736961453,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "children and adults are talking and laughing in the background",
+                "checked": "wind blowing and children speaking"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "children and adults are talking and laughing in the background",
+                "checked": "wind blowing and children speaking"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4822859674",
+        "sha256": "d6c444797982db867d124b6f4f1e641404578dd3872ff3a5d00ae6914fc3d5da",
+        "duration_s": 35.944467,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "children are laughing and talking in the background",
+                "checked": "a young child is speaking and laughing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "children are laughing and talking in the background",
+                "checked": "a young child is speaking and laughing"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a child is speaking and a baby is crying in the background",
+                "checked": "a woman is speaking and a baby is crying"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a woman is speaking while a child is singing in the background",
+                "checked": "a woman speaks and a child laughs"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a woman is speaking while a child is singing in the background",
+                "checked": "a woman speaks and a child laughs"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 32.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a woman is speaking while dishes are being moved around in the background",
+                "checked": "a woman is speaking while dishes are being moved around in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a woman is speaking while dishes are being moved around in the background",
+                "checked": "a woman is speaking while dishes are being moved around in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 32.0,
+            "end_s": 35.94446712018141,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a woman is speaking and a child is talking in the background",
+                "checked": "a woman speaking followed by a child laughing"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4598189055",
+        "sha256": "61ad9f482a6d1744e6d09faacc19e29f3d61351ae44bde29ead02b81d6306ad6",
+        "duration_s": 29.55898,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a man is speaking and then he is breathing",
+                "checked": "a man is speaking and a woman is laughing"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a child is speaking and then a baby is laughing",
+                "checked": "a woman speaks and then a child laughs"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a woman is speaking while a child is singing in the background",
+                "checked": "a woman is speaking while a child is singing"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 29.558979591836735,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a woman is laughing and talking while another person laughs",
+                "checked": "a woman is laughing and talking while another person is coughing and giggling"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "10576728026",
+        "sha256": "5c3a5a5a351fea112466d81e2f87fe72ab81ee4eda2e72397a0fbed37a3ac5e4",
+        "duration_s": 24.751995,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people chant together in unison",
+                "checked": "a group of people chant together in unison"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people chant together in unison",
+                "checked": "a group of people chant together in unison"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people are chanting and clapping",
+                "checked": "a group of people are chanting and clapping"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people are chanting and clapping",
+                "checked": "a group of people are chanting and clapping"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people are talking and laughing with each other",
+                "checked": "a group of people are shouting and cheering"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people are talking and laughing with each other",
+                "checked": "a group of people are shouting and cheering"
+              }
+            ]
+          },
+          {
+            "start_s": 14.751995464852607,
+            "end_s": 24.75199546485261,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people are shouting and cheering while a crowd cheers",
+                "checked": "a group of people are shouting and cheering"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people are shouting and cheering while a crowd cheers",
+                "checked": "a group of people are shouting and cheering"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4848160422",
+        "sha256": "12d686da33933dd44fd227c83107a17cc683e49788a1e87173152b7ecdb8e9d1",
+        "duration_s": 28.165782,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "the wind is blowing and a train is passing by",
+                "checked": "the wind is blowing and a train is passing by"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "the wind is blowing and a train is passing by",
+                "checked": "the wind is blowing and a train is moving on the tracks"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "the wind is blowing and a train is passing by",
+                "checked": "a train is moving on the tracks and the wind is blowing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a subway train is passing by on the tracks",
+                "checked": "a train is passing by on the tracks and the wheels are squealing"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "the wind is blowing and a car is driving by",
+                "checked": "the wind is blowing and a car is driving by"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "the wind is blowing and cars are passing by in the background",
+                "checked": "the wind is blowing and cars are driving by"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 28.16578231292517,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "the wind is blowing and the rain is falling",
+                "checked": "the wind is blowing and a car is driving by"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "the wind is blowing and a car is driving by",
+                "checked": "the wind is blowing and cars are driving by"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "10735513724",
+        "sha256": "888f77c66b6fd52c6a07716f4892cc63ac5bebf3f10ace764fa881a858d1c8d2",
+        "duration_s": 30.363991,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a child is speaking and a baby is crying",
+                "checked": "a child is speaking and a baby is babbling"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a child is speaking and a baby is crying",
+                "checked": "a child is speaking and a baby is babbling"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a child is speaking and a baby is crying in the background",
+                "checked": "a child is speaking and a cat is meowing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a child is speaking and a dog is barking in the background",
+                "checked": "a child is speaking and a cat is meowing"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a baby is crying and a child is speaking in the background",
+                "checked": "a baby cries and a child speaks"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a baby is crying and a child is speaking in the background",
+                "checked": "a baby cries and a child speaks"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 30.363673469387756,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a baby is crying and a man is speaking in the background",
+                "checked": "a baby cries and a woman speaks"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a baby is crying and a man is speaking in the background",
+                "checked": "a baby cries and a woman speaks"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "11162473963",
+        "sha256": "b7df59bbb9c222717267c991dc91b831a74d09b345c2ec75b5f80b2ae2f37573",
+        "duration_s": 44.16,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a woman is speaking while a car is driving by",
+                "checked": "a woman is speaking while a car is driving by"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a woman is speaking while a car is driving by",
+                "checked": "a woman is speaking while a car is driving by"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a child is laughing and talking while waves are crashing in the background",
+                "checked": "a child is laughing and talking while waves are crashing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a child is laughing and talking while waves are crashing in the background",
+                "checked": "a child is laughing and talking while waves are crashing"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "children are talking and playing in the wind",
+                "checked": "a young girl speaks and then a child laughs"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "children are talking and playing in the wind",
+                "checked": "a young girl speaking and splashing water"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 32.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a child is screaming while waves are crashing in the background",
+                "checked": "a child is screaming while waves are crashing in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a child is screaming while waves are crashing in the background",
+                "checked": "a child is screaming while waves are crashing in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 32.0,
+            "end_s": 40.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a baby cries and a child laughs while a woman speaks in the background",
+                "checked": "a baby cries and a child laughs and speaks"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a baby is crying and a child is speaking in the background",
+                "checked": "a baby cries and a child speaks"
+              }
+            ]
+          },
+          {
+            "start_s": 40.0,
+            "end_s": 44.16,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a child is speaking and laughing while waves are crashing in the background",
+                "checked": "a child is speaking and laughing while waves are crashing in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a child is speaking and laughing while waves are crashing in the background",
+                "checked": "a child is speaking and laughing while waves are crashing in the background"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4891273513",
+        "sha256": "10c24bfc5b51613bebbdaf2bfd99fccc167d654b19a71b5305cc3834303d5f51",
+        "duration_s": 29.4661,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people are laughing and having a conversation",
+                "checked": "a woman is speaking and laughing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people are laughing and talking",
+                "checked": "a woman is speaking and laughing"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people are laughing and talking in the background",
+                "checked": "a woman is speaking and laughing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people are laughing and talking in the background",
+                "checked": "a woman is speaking and laughing"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people are laughing and talking",
+                "checked": "a woman is giving a speech and people are laughing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people are laughing and talking",
+                "checked": "a woman is giving a speech and a crowd laughs"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 29.46609977324263,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a woman is giving a speech while a group of people are talking in the background",
+                "checked": "a woman is giving a speech while a group of people are talking in the background"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a woman is giving a speech while a group of people are talking in the background",
+                "checked": "a woman is giving a speech while a group of people are talking in the background"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4715646346",
+        "sha256": "15d3cf18aca7f979626e087b12f81277ff988bcf800cff188643f42f7abd9905",
+        "duration_s": 30.557438,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a man is speaking while others are talking in the background",
+                "checked": "a man is speaking while others are talking in the background and a ball is bouncing"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a man is speaking while someone is walking in the background",
+                "checked": "a man is speaking and a door is being opened and closed"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "people are talking in the background while a man is speaking",
+                "checked": "a man is speaking and a door is being opened and closed"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a man is speaking while a door is being opened and closed",
+                "checked": "a man is speaking while a door opens and closes"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "a group of people are talking in the background",
+                "checked": "a man is speaking while a crowd of people talk"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "a group of people are having a conversation with each other",
+                "checked": "a group of people are having a conversation with each other"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 30.557437641723357,
+            "channels": [
+              {
+                "channels": [
+                  1
+                ],
+                "control": "people are talking in the background while dishes are being moved",
+                "checked": "a man is speaking while a door is being opened and closed"
+              },
+              {
+                "channels": [
+                  2
+                ],
+                "control": "people are talking in the background while dishes are being moved",
+                "checked": "a man is speaking and a door is being opened and closed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4755578412",
+        "sha256": "70d0e745bfc81e473bbb2bd28e8ac9e22b21bf21cace395b782706af026b3283",
+        "duration_s": 31.555896,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a crowd of people are talking in the background",
+                "checked": "a crowd of people are talking in a crowded restaurant"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a group of people are talking in a restaurant",
+                "checked": "a group of people are talking and dishes are being moved around"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 24.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a group of people are talking in a restaurant",
+                "checked": "a group of people are talking and dishes are being moved around"
+              }
+            ]
+          },
+          {
+            "start_s": 24.0,
+            "end_s": 31.555895691609976,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a crowd of people are talking in the background",
+                "checked": "a crowd of people are talking and clinking"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4647070508",
+        "sha256": "58c3b0653c3217ceaa1ad0d6fc1c0005d479de642c5788238ad9b49c4be342ee",
+        "duration_s": 21.060476,
+        "windows": [
+          {
+            "start_s": 0.0,
+            "end_s": 8.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "a child is singing a song while a woman sings in the background",
+                "checked": "a child is singing a song while a woman sings in the background"
+              }
+            ]
+          },
+          {
+            "start_s": 8.0,
+            "end_s": 16.0,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "kids are playing and children are talking to each other",
+                "checked": "kids are playing and children are talking in a gym"
+              }
+            ]
+          },
+          {
+            "start_s": 16.0,
+            "end_s": 21.06047619047619,
+            "channels": [
+              {
+                "channels": [
+                  1,
+                  2
+                ],
+                "control": "children are playing a song and a child is singing",
+                "checked": "children are playing a song while a woman is singing"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "result": {
+      "before": [
+        0.29609312613805133,
+        0.14661523662507533,
+        0.21618305146694183,
+        0.1727211892604828,
+        0.09126210709412892,
+        0.11528891324996948,
+        0.3384477853775024,
+        0.06120157837867737,
+        0.2868803381919861,
+        0.023034781217575073,
+        0.14921830967068672,
+        0.08212191238999367,
+        -0.005960393697023392,
+        0.283339842222631,
+        0.02603989467024803,
+        0.11570088316996892,
+        0.3299303166568279,
+        0.21296563744544983,
+        0.2100997045636177,
+        0.31688349445660907
+      ],
+      "after": [
+        0.29385576645533246,
+        0.12371672093868255,
+        0.21225888282060623,
+        0.14197857975959777,
+        0.09541686872641246,
+        0.1889267385005951,
+        0.3450823545455933,
+        0.23692790865898133,
+        0.29506444931030273,
+        0.14110760887463888,
+        0.16264016553759575,
+        0.17932550609111786,
+        -0.0014003291726112366,
+        0.2625952772796154,
+        0.03764694929122925,
+        0.11857490117351215,
+        0.3074270747601986,
+        0.18628127686679363,
+        0.17253022640943527,
+        0.29695457716782886
+      ],
+      "human": [
+        0.2558121085166931,
+        0.09587087482213974,
+        0.207074373960495,
+        0.12337717413902283,
+        0.23099854588508606,
+        0.17390970885753632,
+        0.3010199964046478,
+        0.242082878947258,
+        0.2945155203342438,
+        0.008971534669399261,
+        0.38763427734375,
+        0.23178495466709137,
+        0.3612377941608429,
+        0.20480895042419434,
+        0.27871620655059814,
+        0.22189392149448395,
+        0.2869005501270294,
+        0.24380329251289368,
+        0.08498873561620712,
+        0.4485591650009155
+      ],
+      "change": {
+        "mean_change": 0.016442189772302912,
+        "bootstrap_95_percent": [
+          -0.004956874550242601,
+          0.042533163527104366
+        ],
+        "increased": 11,
+        "decreased": 9,
+        "tied": 0,
+        "by_film": {
+          "10685598604": -0.0022373596827188758,
+          "4857781123": -0.022898515686392784,
+          "4833887719": -0.003924168646335602,
+          "4760692619": -0.030742609500885032,
+          "4491342746": 0.004154761632283538,
+          "4447314310": 0.07363782525062562,
+          "4571054955": 0.006634569168090854,
+          "4823372280": 0.17572633028030396,
+          "4772810451": 0.008184111118316628,
+          "4491371230": 0.11807282765706381,
+          "4822859674": 0.013421855866909027,
+          "4598189055": 0.09720359370112419,
+          "10576728026": 0.004560064524412155,
+          "4848160422": -0.020744564943015575,
+          "10735513724": 0.011607054620981216,
+          "11162473963": 0.0028740180035432272,
+          "4891273513": -0.022503241896629333,
+          "4715646346": -0.026684360578656197,
+          "4755578412": -0.037569478154182434,
+          "4647070508": -0.019928917288780212
+        }
+      }
+    }
+  },
+  "reader": {
+    "model": "Local signed-in Codex gpt-6.1-terra. Fresh session per film and arm. No raw audio blocks to GPT. Open-ended recall after viewing all turns, eight seconds per turn. Output images and time bounds matched byte-for-byte. For the first comparison baseline first on even indices, reranking first on odd indices. MOSS sessions were run later when included.",
+    "films": [
+      {
+        "id": "10685598604",
+        "sha256": "1adfe7b5f4b86059e4e4aa7c413942042397488fdca07e64c2d8f3e590751d6d",
+        "end_s": 22.02202202202202,
+        "turns": 3,
+        "replies": {
+          "control": {
+            "turns": 3,
+            "caption": "A man in an orange jacket reads from papers and speaks in a gym, occasionally walking over to a table.",
+            "heard": "The audio analysis suggested a man speaking with an echo, but I could not hear the recording directly.",
+            "seen": "A man in an orange jacket reads from papers and walks to a table in a gym."
+          },
+          "checked": {
+            "turns": 3,
+            "caption": "A man in an orange jacket speaks while reading from papers and walking across a gymnasium to a table.",
+            "heard": "The audio readings suggested a man speaking with an echo, but I could not hear the recording directly.",
+            "seen": "A man in an orange jacket reads from papers and walks across a gymnasium toward a table."
+          }
+        }
+      },
+      {
+        "id": "4857781123",
+        "sha256": "7efa1c240e4382725ac98184b9f304154451c0d79f09dc4ed5aaa8528e9274ca",
+        "end_s": 36.78038548752834,
+        "turns": 5,
+        "replies": {
+          "control": {
+            "turns": 5,
+            "caption": "A person holds a yellow toy out toward a small black and white dog that moves among cables beside a red suitcase.",
+            "heard": "I could not directly hear the audio, but the sound analysis indicated speech.",
+            "seen": "A person holds a yellow toy toward a small black and white dog among cables beside a red suitcase."
+          },
+          "checked": {
+            "turns": 5,
+            "caption": "A person holds out a yellow toy to a small black and white dog, which moves among cables beside a red suitcase.",
+            "heard": "A man was speaking, though I could not tell most of what he said.",
+            "seen": "A person held a yellow toy toward a small black and white dog among cables beside a red suitcase."
+          }
+        }
+      },
+      {
+        "id": "4833887719",
+        "sha256": "25d1430b54f5be71bfc1fd0f071e621a0918ac12b39b8d0ed66fd8e885c51b06",
+        "end_s": 27.028004535147392,
+        "turns": 4,
+        "replies": {
+          "control": {
+            "turns": 4,
+            "caption": "A seated woman holds a small child close in a public seating area as people pass by the glass doors.",
+            "heard": "An audio reader suggested a baby crying and people talking, but I could not hear the recording directly.",
+            "seen": "A seated woman holds a small child close while people pass through a public seating area."
+          },
+          "checked": {
+            "turns": 4,
+            "caption": "A seated woman holds a small child close as people move through a lobby behind them.",
+            "heard": "The audio readings suggest speech and a child crying, though I could not hear the recording directly.",
+            "seen": "A seated woman holds a small child close while people move through a lobby behind them."
+          }
+        }
+      },
+      {
+        "id": "4760692619",
+        "sha256": "38ab27825e448a230ce7bbeff314f6578475c861f99976e2fe02f49267e2520a",
+        "end_s": 33.04197278911565,
+        "turns": 5,
+        "replies": {
+          "control": {
+            "turns": 5,
+            "caption": "Two toddlers in high chairs play with cardboard tubes, one holding a tube to his mouth and then pointing it at the camera.",
+            "heard": "The audio analysis suggested child speech and crying, but I could not hear the recording directly.",
+            "seen": "Two toddlers in high chairs play with cardboard tubes, and one holds a tube up to the camera."
+          },
+          "checked": {
+            "turns": 5,
+            "caption": "Two toddlers in high chairs play with cardboard tubes, and one holds a tube up to the camera.",
+            "heard": "The sound descriptions suggested a woman speaking and a baby crying, but I could not hear the audio directly.",
+            "seen": "Two toddlers sit in high chairs playing with cardboard tubes, and one holds a tube up to the camera."
+          }
+        }
+      },
+      {
+        "id": "4491342746",
+        "sha256": "925b293cadfc1fbb6ad85c64f45e3c7e66323d91e0ecd4cd6420eb8190923cc1",
+        "end_s": 23.35925170068027,
+        "turns": 3,
+        "replies": {
+          "control": {
+            "turns": 3,
+            "caption": "A little girl in a blue dress finds a green egg and puts it in her colorful basket while a cartoon plays on the television.",
+            "heard": "The audio descriptions suggest people speaking and a child vocalizing, with someone asking whether she found one and how many she got.",
+            "seen": "A little girl in a blue dress picks up a green egg and puts it in a colorful basket in a living room while a cartoon plays on television."
+          },
+          "checked": {
+            "turns": 3,
+            "caption": "A young girl in a blue dress finds a green egg and puts it in her colorful basket in a living room.",
+            "heard": "The speech reader recorded someone asking whether she found one and how many she got, followed later by a remark about an unfriendly visitor outside.",
+            "seen": "A young girl in a blue dress finds a green egg and puts it in a colorful basket in a living room."
+          }
+        }
+      },
+      {
+        "id": "4447314310",
+        "sha256": "4cbaa536dd324c9ef8349f78ed3b832b715443d1fc12df2d3c84d3e486d16f67",
+        "end_s": 42.817573696145125,
+        "turns": 6,
+        "replies": {
+          "control": {
+            "turns": 6,
+            "caption": "A toddler in a red sweater watches and points at sheep behind a fence, then walks along the path toward other visitors.",
+            "heard": "The speech reader reported a woman asking the child about the sheep and bunnies, while an audio captioner detected birds in the background.",
+            "seen": "A toddler in a red sweater watches and points at sheep behind a fence, then walks toward other visitors."
+          },
+          "checked": {
+            "turns": 6,
+            "caption": "A toddler in a red hoodie watches and points at sheep behind a fence, then walks toward other visitors along the path.",
+            "heard": "The audio analysis indicates a woman speaks about the sheep and asks about bunnies, with bird calls in the background.",
+            "seen": "A toddler in a red hoodie watches and points at sheep behind a fence, then walks toward other visitors."
+          }
+        }
+      },
+      {
+        "id": "4571054955",
+        "sha256": "11e5ba255620352ea98a4f9972789975a7d04e8c283a48d855ef6ba6910df2cf",
+        "end_s": 30.023378684807255,
+        "turns": 4,
+        "replies": {
+          "control": {
+            "turns": 4,
+            "caption": "A young man plays an upright piano while reading sheet music in a living room.",
+            "heard": "The audio analysis described piano music playing.",
+            "seen": "A young man plays an upright piano while looking at sheet music in a living room."
+          },
+          "checked": {
+            "turns": 4,
+            "caption": "A young man plays an upright piano while reading sheet music in a living room.",
+            "heard": "The audio analysis described piano music playing throughout the clip.",
+            "seen": "A young man plays an upright piano while looking at sheet music in a living room."
+          }
+        }
+      },
+      {
+        "id": "4823372280",
+        "sha256": "4fda162d68ea9d495d3b04bc6d86672c94307a8264002a3bc7a606ba81d32a2e",
+        "end_s": 33.80823129251701,
+        "turns": 5,
+        "replies": {
+          "control": {
+            "turns": 5,
+            "caption": "A man in a white suit and a woman in a black outfit dance together under green lights as an audience watches.",
+            "heard": "I could not directly hear the audio, though the audio analysis suggested music and people talking.",
+            "seen": "A man in a white suit and a woman in a black outfit danced together under green lights while an audience watched."
+          },
+          "checked": {
+            "turns": 5,
+            "caption": "A man in a white suit and a woman in a black outfit dance together under green lights as spectators watch and music plays.",
+            "heard": "The audio analysis indicated music was playing, though I could not directly hear it.",
+            "seen": "A man in a white suit and a woman in a black outfit danced together under green lights while spectators watched."
+          }
+        }
+      },
+      {
+        "id": "4772810451",
+        "sha256": "ad8bae592079510c5e86aee3df24e87c5b8cdef8d3564b383e7e8abb7d0208aa",
+        "end_s": 29.69829931972789,
+        "turns": 4,
+        "replies": {
+          "control": {
+            "turns": 4,
+            "caption": "Three dogs wander and sniff around a shady yard before running over to the camera, where one jumps up to greet the person filming.",
+            "heard": "The audio descriptions suggested birds chirping and a dog barking in the background, though I could not hear the recording directly.",
+            "seen": "Three dogs wander and sniff around a shady yard, then approach the camera, and one jumps up toward the person filming."
+          },
+          "checked": {
+            "turns": 4,
+            "caption": "Three dogs explore a shady yard, sniffing around before running toward the camera and gathering at the person's feet.",
+            "heard": "The audio readings suggest birds chirping and dogs barking, though I could not hear the recording directly.",
+            "seen": "Three dogs wander and sniff around a shady yard before approaching the camera."
+          }
+        }
+      },
+      {
+        "id": "4491371230",
+        "sha256": "080ae9c07e1ef4e115028aa13bebe99f01877630e7c3b7fe9d7ab8bac3f3cff5",
+        "end_s": 21.292675736961453,
+        "turns": 3,
+        "replies": {
+          "control": {
+            "turns": 3,
+            "caption": "A young boy carries a bunny-shaped bag across a sunny yard and bends down beside a garden bed while an adult watches.",
+            "heard": "The audio analysis suggested people talking, but I could not hear the recording directly.",
+            "seen": "A young boy carries a bunny-shaped bag across a yard and bends down beside a garden bed while an adult stands nearby."
+          },
+          "checked": {
+            "turns": 3,
+            "caption": "A young boy carries a bunny-shaped bag across a sunny yard and crouches beside a garden bed while a man watches nearby.",
+            "heard": "The audio descriptions suggested wind and people speaking, but I could not hear the recording directly.",
+            "seen": "A young boy carries a bunny-shaped bag across a sunny yard and crouches beside a garden bed while a man stands nearby."
+          }
+        }
+      },
+      {
+        "id": "4822859674",
+        "sha256": "d6c444797982db867d124b6f4f1e641404578dd3872ff3a5d00ae6914fc3d5da",
+        "end_s": 35.94446712018141,
+        "turns": 5,
+        "replies": {
+          "control": {
+            "turns": 5,
+            "caption": "A man helps a toddler practice walking across a living room toward a woman holding a treat, while another toddler watches nearby.",
+            "heard": "The audio descriptions indicated people talking and children vocalizing, but I could not hear the recording directly.",
+            "seen": "A man helps a toddler practice walking across a living room toward a woman, while another toddler is nearby."
+          },
+          "checked": {
+            "turns": 5,
+            "caption": "A man helps a toddler practice walking across a living room toward a woman holding out a lollipop, while another small child watches nearby.",
+            "heard": "The audio readings suggested speech and a child laughing, but I could not hear the recording directly.",
+            "seen": "A man helps a toddler practice walking across a living room toward a woman holding a lollipop, while another small child is nearby."
+          }
+        }
+      },
+      {
+        "id": "4598189055",
+        "sha256": "61ad9f482a6d1744e6d09faacc19e29f3d61351ae44bde29ead02b81d6306ad6",
+        "end_s": 29.558979591836735,
+        "turns": 4,
+        "replies": {
+          "control": {
+            "turns": 4,
+            "caption": "A baby crawls across a play mat toward a water bottle and reaches for it beside an older child holding a ball.",
+            "heard": "The audio readings indicated people speaking, with a possible sound of laughter.",
+            "seen": "A baby crawled across a play mat toward a water bottle beside an older child holding a ball."
+          },
+          "checked": {
+            "turns": 4,
+            "caption": "A baby crawls across a play mat toward a water bottle and reaches it beside an older child holding a ball.",
+            "heard": "Speech was detected, including someone saying the baby was going for the bottle.",
+            "seen": "A baby crawls across a play mat toward a water bottle beside an older child holding a ball."
+          }
+        }
+      }
+    ],
+    "scores": {
+      "heard": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "films": 12,
+        "human_captions": 42,
+        "summary": {
+          "human": {
+            "same_film_cosine": 0.4830426735260213,
+            "other_film_cosine": 0.28240633239555696,
+            "same_minus_other": 0.20063634113046436,
+            "top_one_film": 0.49583333333333335
+          },
+          "control": {
+            "same_film_cosine": 0.3757638465613127,
+            "other_film_cosine": 0.2663020044565201,
+            "same_minus_other": 0.1094618421047926,
+            "top_one_film": 0.5013888888888889
+          },
+          "checked": {
+            "same_film_cosine": 0.3769667117959923,
+            "other_film_cosine": 0.24011207620302835,
+            "same_minus_other": 0.13685463559296393,
+            "top_one_film": 0.5236111111111111
+          }
+        },
+        "by_film_columns": [
+          "same_film_cosine",
+          "other_film_cosine",
+          "top_one_film"
+        ],
+        "by_film": {
+          "10685598604": {
+            "human": [
+              0.4967845231294632,
+              0.26104582473635674,
+              0.75
+            ],
+            "control": [
+              0.31499607115983963,
+              0.21382398903369904,
+              0.75
+            ],
+            "checked": [
+              0.3082216754555702,
+              0.2068483680486679,
+              0.75
+            ]
+          },
+          "4857781123": {
+            "human": [
+              0.40010019143422443,
+              0.30822714666525525,
+              0.0
+            ],
+            "control": [
+              0.2541428655385971,
+              0.27071613073349,
+              0.0
+            ],
+            "checked": [
+              0.299830620487531,
+              0.19576583802700043,
+              0.3333333333333333
+            ]
+          },
+          "4833887719": {
+            "human": [
+              0.5317754372954369,
+              0.3322329446673393,
+              0.5
+            ],
+            "control": [
+              0.42350539565086365,
+              0.28821098804473877,
+              0.75
+            ],
+            "checked": [
+              0.3759751319885254,
+              0.2666991949081421,
+              1.0
+            ]
+          },
+          "4760692619": {
+            "human": [
+              0.44853003323078156,
+              0.34519414603710175,
+              0.25
+            ],
+            "control": [
+              0.3268217295408249,
+              0.2592105567455292,
+              0.0
+            ],
+            "checked": [
+              0.41042932868003845,
+              0.31860730051994324,
+              0.25
+            ]
+          },
+          "4491342746": {
+            "human": [
+              0.5478276252746582,
+              0.34031317830085756,
+              0.2
+            ],
+            "control": [
+              0.4199306070804596,
+              0.33070477843284607,
+              0.6
+            ],
+            "checked": [
+              0.32587655186653136,
+              0.22387322783470154,
+              0.2
+            ]
+          },
+          "4447314310": {
+            "human": [
+              0.43355310956637066,
+              0.29018110036849976,
+              0.6666666666666666
+            ],
+            "control": [
+              0.43057841062545776,
+              0.2961137592792511,
+              0.6666666666666666
+            ],
+            "checked": [
+              0.4406961401303609,
+              0.25854018330574036,
+              1.0
+            ]
+          },
+          "4571054955": {
+            "human": [
+              0.49218148986498517,
+              0.19163799285888672,
+              0.6666666666666666
+            ],
+            "control": [
+              0.5204106767972311,
+              0.14234910905361176,
+              1.0
+            ],
+            "checked": [
+              0.5311774611473083,
+              0.16324728727340698,
+              1.0
+            ]
+          },
+          "4823372280": {
+            "human": [
+              0.4738902548948924,
+              0.2232376386721929,
+              0.3333333333333333
+            ],
+            "control": [
+              0.2900390724341075,
+              0.24911373853683472,
+              0.0
+            ],
+            "checked": [
+              0.3862307667732239,
+              0.20229126513004303,
+              0.0
+            ]
+          },
+          "4772810451": {
+            "human": [
+              0.4621213873227437,
+              0.18001522620519003,
+              1.0
+            ],
+            "control": [
+              0.48076486587524414,
+              0.24731150269508362,
+              1.0
+            ],
+            "checked": [
+              0.4175284802913666,
+              0.20524267852306366,
+              1.0
+            ]
+          },
+          "4491371230": {
+            "human": [
+              0.2777901873923838,
+              0.2853947002440691,
+              0.25
+            ],
+            "control": [
+              0.2993718683719635,
+              0.23375454545021057,
+              0.25
+            ],
+            "checked": [
+              0.4105064794421196,
+              0.26231956481933594,
+              0.75
+            ]
+          },
+          "4822859674": {
+            "human": [
+              0.7250882585843405,
+              0.3579088052113851,
+              1.0
+            ],
+            "control": [
+              0.41866036256154376,
+              0.32388925552368164,
+              1.0
+            ],
+            "checked": [
+              0.3413096268971761,
+              0.29732435941696167,
+              0.0
+            ]
+          },
+          "4598189055": {
+            "human": [
+              0.5068695843219757,
+              0.27348728477954865,
+              0.3333333333333333
+            ],
+            "control": [
+              0.32994423309961957,
+              0.3404256999492645,
+              0.0
+            ],
+            "checked": [
+              0.27581827839215595,
+              0.2805856466293335,
+              0.0
+            ]
+          }
+        },
+        "human_relative_description_separation": {
+          "control": {
+            "human_same_minus_other": 0.20063634113046444,
+            "reader_same_minus_other": 0.1094618421047926,
+            "fraction_of_human": 0.5455733566912221,
+            "film_bootstrap_95": [
+              0.3015250162923887,
+              0.8326178813070815
+            ]
+          },
+          "checked": {
+            "human_same_minus_other": 0.20063634113046444,
+            "reader_same_minus_other": 0.13685463559296393,
+            "fraction_of_human": 0.6821029272257998,
+            "film_bootstrap_95": [
+              0.40989317935952363,
+              1.0310417565719097
+            ]
+          }
+        },
+        "checked_minus_control": {
+          "mean_change": 0.027392793488171353,
+          "bootstrap_95_percent": [
+            -0.003273036388887313,
+            0.061918206626756296
+          ],
+          "increased": 8,
+          "decreased": 4,
+          "tied": 0,
+          "by_film": {
+            "10685598604": 0.00020122528076171875,
+            "4857781123": 0.12063804765542346,
+            "4833887719": -0.026018470525741577,
+            "4760692619": 0.0242108553647995,
+            "4491342746": 0.012777495384216297,
+            "4447314310": 0.04769130547841388,
+            "4571054955": -0.010131393869717953,
+            "4823372280": 0.14301416774590808,
+            "4772810451": -0.021167561411857605,
+            "4491371230": 0.08256959170103073,
+            "4822859674": -0.050785839557647705,
+            "4598189055": 0.005714098612467411
+          }
+        }
+      },
+      "seen": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "films": 12,
+        "human_captions": 42,
+        "summary": {
+          "human": {
+            "same_film_cosine": 0.4654451968251831,
+            "other_film_cosine": 0.11934177421110992,
+            "same_minus_other": 0.3461034226140732,
+            "top_one_film": 0.888888888888889
+          },
+          "control": {
+            "same_film_cosine": 0.43321057541502844,
+            "other_film_cosine": 0.1073162552784197,
+            "same_minus_other": 0.32589432013660874,
+            "top_one_film": 0.9125
+          },
+          "checked": {
+            "same_film_cosine": 0.44819661258823346,
+            "other_film_cosine": 0.10281715439244483,
+            "same_minus_other": 0.34537945819578864,
+            "top_one_film": 0.9791666666666666
+          }
+        },
+        "by_film_columns": [
+          "same_film_cosine",
+          "other_film_cosine",
+          "top_one_film"
+        ],
+        "by_film": {
+          "10685598604": {
+            "human": [
+              0.1774288173764944,
+              0.05212857178412378,
+              0.5
+            ],
+            "control": [
+              0.3003733679652214,
+              0.002920580795034766,
+              1.0
+            ],
+            "checked": [
+              0.3356536775827408,
+              -0.0021703720558434725,
+              1.0
+            ]
+          },
+          "4857781123": {
+            "human": [
+              0.5291748344898224,
+              0.11318185180425644,
+              1.0
+            ],
+            "control": [
+              0.4257182478904724,
+              0.167978435754776,
+              1.0
+            ],
+            "checked": [
+              0.4478928844134013,
+              0.17402328550815582,
+              1.0
+            ]
+          },
+          "4833887719": {
+            "human": [
+              0.38221806287765503,
+              0.13197498861700296,
+              0.75
+            ],
+            "control": [
+              0.3919975012540817,
+              0.09456921368837357,
+              1.0
+            ],
+            "checked": [
+              0.4138473719358444,
+              0.11103248596191406,
+              1.0
+            ]
+          },
+          "4760692619": {
+            "human": [
+              0.49954424301783246,
+              0.1976777414480845,
+              1.0
+            ],
+            "control": [
+              0.40423766771952313,
+              0.15689018368721008,
+              1.0
+            ],
+            "checked": [
+              0.3506929675738017,
+              0.13936375081539154,
+              1.0
+            ]
+          },
+          "4491342746": {
+            "human": [
+              0.5224628249804179,
+              0.1297300929824511,
+              1.0
+            ],
+            "control": [
+              0.473658819993337,
+              0.14451253414154053,
+              1.0
+            ],
+            "checked": [
+              0.43836264808972675,
+              0.10632877051830292,
+              1.0
+            ]
+          },
+          "4447314310": {
+            "human": [
+              0.38833335041999817,
+              0.13451347251733145,
+              0.6666666666666666
+            ],
+            "control": [
+              0.5315489967664083,
+              0.10164026916027069,
+              1.0
+            ],
+            "checked": [
+              0.5200476745764414,
+              0.10063920170068741,
+              1.0
+            ]
+          },
+          "4571054955": {
+            "human": [
+              0.5105180144309998,
+              0.0935552567243576,
+              1.0
+            ],
+            "control": [
+              0.5718851884206136,
+              0.08379959315061569,
+              1.0
+            ],
+            "checked": [
+              0.5718851884206136,
+              0.08379959315061569,
+              1.0
+            ]
+          },
+          "4823372280": {
+            "human": [
+              0.7739333311716715,
+              0.014493183853725592,
+              1.0
+            ],
+            "control": [
+              0.5257355372111002,
+              0.007127402815967798,
+              1.0
+            ],
+            "checked": [
+              0.5078107416629791,
+              0.014205614104866982,
+              1.0
+            ]
+          },
+          "4772810451": {
+            "human": [
+              0.42806927114725113,
+              0.052167455200105906,
+              1.0
+            ],
+            "control": [
+              0.3983502686023712,
+              0.03587944805622101,
+              1.0
+            ],
+            "checked": [
+              0.44886670261621475,
+              0.011094752699136734,
+              1.0
+            ]
+          },
+          "4491371230": {
+            "human": [
+              0.4873260756333669,
+              0.1611937681833903,
+              1.0
+            ],
+            "control": [
+              0.4859718879063924,
+              0.12439993023872375,
+              1.0
+            ],
+            "checked": [
+              0.49774495760599774,
+              0.1109943613409996,
+              1.0
+            ]
+          },
+          "4822859674": {
+            "human": [
+              0.4695822298526764,
+              0.17820102870464324,
+              1.0
+            ],
+            "control": [
+              0.25151283144950864,
+              0.15115146338939667,
+              0.2
+            ],
+            "checked": [
+              0.40917537212371824,
+              0.17919594049453735,
+              1.0
+            ]
+          },
+          "4598189055": {
+            "human": [
+              0.41675130650401115,
+              0.1732838787138462,
+              0.75
+            ],
+            "control": [
+              0.4375365898013115,
+              0.21692600846290588,
+              0.75
+            ],
+            "checked": [
+              0.43637916445732117,
+              0.20529846847057343,
+              0.75
+            ]
+          }
+        },
+        "human_relative_description_separation": {
+          "control": {
+            "human_same_minus_other": 0.3461034226140732,
+            "reader_same_minus_other": 0.3258943201366088,
+            "fraction_of_human": 0.9416096427916611,
+            "film_bootstrap_95": [
+              0.7673936555144183,
+              1.1790243055876246
+            ]
+          },
+          "checked": {
+            "human_same_minus_other": 0.3461034226140732,
+            "reader_same_minus_other": 0.3453794581957886,
+            "fraction_of_human": 0.9979082425339323,
+            "film_bootstrap_95": [
+              0.8204497516778768,
+              1.2470835103659301
+            ]
+          }
+        },
+        "checked_minus_control": {
+          "mean_change": 0.019485138059179816,
+          "bootstrap_95_percent": [
+            -0.0027793748016443336,
+            0.046051726118053526
+          ],
+          "increased": 8,
+          "decreased": 3,
+          "tied": 1,
+          "by_film": {
+            "10685598604": 0.04037126246839762,
+            "4857781123": 0.01612978676954907,
+            "4833887719": 0.0053865984082221985,
+            "4760692619": -0.03601826727390289,
+            "4491342746": 0.0028875917196273804,
+            "4447314310": -0.010500254730383629,
+            "4571054955": 0.0,
+            "4823372280": -0.02500300683702028,
+            "4772810451": 0.07530112937092781,
+            "4491371230": 0.025178638597329495,
+            "4822859674": 0.1296180635690689,
+            "4598189055": 0.010470114648342133
+          }
+        }
+      },
+      "caption": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "films": 12,
+        "human_captions": 47,
+        "summary": {
+          "human": {
+            "same_film_cosine": 0.46232163074115906,
+            "other_film_cosine": 0.12676804361851987,
+            "same_minus_other": 0.33555358712263916,
+            "top_one_film": 0.8375
+          },
+          "control": {
+            "same_film_cosine": 0.3965173304908805,
+            "other_film_cosine": 0.10755213524680585,
+            "same_minus_other": 0.28896519524407466,
+            "top_one_film": 0.8333333333333334
+          },
+          "checked": {
+            "same_film_cosine": 0.38876100894477633,
+            "other_film_cosine": 0.10708099308734138,
+            "same_minus_other": 0.28168001585743496,
+            "top_one_film": 0.8333333333333334
+          }
+        },
+        "by_film_columns": [
+          "same_film_cosine",
+          "other_film_cosine",
+          "top_one_film"
+        ],
+        "by_film": {
+          "10685598604": {
+            "human": [
+              0.31787695984045666,
+              0.08977722562849522,
+              1.0
+            ],
+            "control": [
+              0.3138778805732727,
+              0.005375721491873264,
+              1.0
+            ],
+            "checked": [
+              0.3125617404778798,
+              0.01305999793112278,
+              1.0
+            ]
+          },
+          "4857781123": {
+            "human": [
+              0.514253294467926,
+              0.13039113953709602,
+              0.8
+            ],
+            "control": [
+              0.4617310523986816,
+              0.14711588621139526,
+              1.0
+            ],
+            "checked": [
+              0.4757801353931427,
+              0.14438173174858093,
+              1.0
+            ]
+          },
+          "4833887719": {
+            "human": [
+              0.33368372172117233,
+              0.1301189884543419,
+              0.5
+            ],
+            "control": [
+              0.3177257180213928,
+              0.06206921115517616,
+              1.0
+            ],
+            "checked": [
+              0.32382732629776,
+              0.0994664877653122,
+              1.0
+            ]
+          },
+          "4760692619": {
+            "human": [
+              0.483810730278492,
+              0.19974323734641075,
+              1.0
+            ],
+            "control": [
+              0.43607114255428314,
+              0.18866229057312012,
+              1.0
+            ],
+            "checked": [
+              0.41173192113637924,
+              0.16014446318149567,
+              1.0
+            ]
+          },
+          "4491342746": {
+            "human": [
+              0.4489861875772476,
+              0.1103562954813242,
+              1.0
+            ],
+            "control": [
+              0.45207615196704865,
+              0.13115553557872772,
+              1.0
+            ],
+            "checked": [
+              0.35573504865169525,
+              0.08267724514007568,
+              1.0
+            ]
+          },
+          "4447314310": {
+            "human": [
+              0.4735984653234482,
+              0.15156123600900173,
+              1.0
+            ],
+            "control": [
+              0.4105900228023529,
+              0.12547096610069275,
+              1.0
+            ],
+            "checked": [
+              0.40527641773223877,
+              0.12336314469575882,
+              1.0
+            ]
+          },
+          "4571054955": {
+            "human": [
+              0.6445794254541397,
+              0.10054983012378216,
+              1.0
+            ],
+            "control": [
+              0.41482891142368317,
+              0.0623553991317749,
+              1.0
+            ],
+            "checked": [
+              0.41482891142368317,
+              0.0623553991317749,
+              1.0
+            ]
+          },
+          "4823372280": {
+            "human": [
+              0.6121195405721664,
+              0.02263118850532919,
+              1.0
+            ],
+            "control": [
+              0.5369912534952164,
+              0.006305174436420202,
+              1.0
+            ],
+            "checked": [
+              0.5271453559398651,
+              0.03700379282236099,
+              1.0
+            ]
+          },
+          "4772810451": {
+            "human": [
+              0.6325313210487366,
+              0.11732152253389358,
+              1.0
+            ],
+            "control": [
+              0.35372825264930724,
+              0.05985168367624283,
+              1.0
+            ],
+            "checked": [
+              0.3643892168998718,
+              0.06172364950180054,
+              1.0
+            ]
+          },
+          "4491371230": {
+            "human": [
+              0.23755991458892822,
+              0.1526379113396009,
+              0.0
+            ],
+            "control": [
+              0.2553291420141856,
+              0.12743109464645386,
+              0.0
+            ],
+            "checked": [
+              0.24757833778858185,
+              0.1188691109418869,
+              0.0
+            ]
+          },
+          "4822859674": {
+            "human": [
+              0.31992437690496445,
+              0.148007370531559,
+              0.75
+            ],
+            "control": [
+              0.26973097026348114,
+              0.1628309041261673,
+              0.0
+            ],
+            "checked": [
+              0.2938716635107994,
+              0.16790622472763062,
+              0.0
+            ]
+          },
+          "4598189055": {
+            "human": [
+              0.5289356311162313,
+              0.1681205779314041,
+              1.0
+            ],
+            "control": [
+              0.5355274677276611,
+              0.2120017558336258,
+              1.0
+            ],
+            "checked": [
+              0.5324060320854187,
+              0.21402066946029663,
+              1.0
+            ]
+          }
+        },
+        "human_relative_description_separation": {
+          "control": {
+            "human_same_minus_other": 0.3355535871226392,
+            "reader_same_minus_other": 0.28896519524407466,
+            "fraction_of_human": 0.8611596070897097,
+            "film_bootstrap_95": [
+              0.7540808763523374,
+              0.9988286558075987
+            ]
+          },
+          "checked": {
+            "human_same_minus_other": 0.3355535871226392,
+            "reader_same_minus_other": 0.28168001585743496,
+            "fraction_of_human": 0.8394486802326617,
+            "film_bootstrap_95": [
+              0.747219605016896,
+              0.9632290963903213
+            ]
+          }
+        },
+        "checked_minus_control": {
+          "mean_change": -0.007285179386639765,
+          "bootstrap_95_percent": [
+            -0.01953508352550368,
+            0.0036994673664836135
+          ],
+          "increased": 5,
+          "decreased": 6,
+          "tied": 1,
+          "by_film": {
+            "10685598604": -0.009000416534642397,
+            "4857781123": 0.01678323745727539,
+            "4833887719": -0.031295668333768845,
+            "4760692619": 0.0041786059737205505,
+            "4491342746": -0.047862812876701355,
+            "4447314310": -0.0032057836651802063,
+            "4571054955": 0.0,
+            "4823372280": -0.04054451594129205,
+            "4772810451": 0.008788998425006855,
+            "4491371230": 0.0008111794789631976,
+            "4822859674": 0.01906537264585495,
+            "4598189055": -0.005140349268913269
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "until_s": 8.5,
+    "identical_future_swap": true,
+    "identical_blocks": 14,
+    "overrun_rejected": true,
+    "checked": {
+      "A": {
+        "turns": 2,
+        "caption": "A closed brown door remains still in a plain room as a brief jingling sound is heard.",
+        "heard": "A brief jingling sound was described by the audio reader, but I could not hear it directly.",
+        "seen": "A closed brown door stood against a plain wall."
+      },
+      "B": {
+        "turns": 2,
+        "caption": "A simple animation shows a closed brown door with a golden knob against a beige wall.",
+        "heard": "I could not tell what the faint background noise was.",
+        "seen": "A closed brown door with a golden knob stands against a beige wall."
+      },
+      "silent": {
+        "turns": 2,
+        "caption": "A closed brown door stands motionless against a plain wall in a silent animation.",
+        "heard": "I heard no sound.",
+        "seen": "A closed brown door stood motionless against a plain wall."
+      },
+      "picture": {
+        "turns": 2,
+        "caption": "A simple animated brown door remains closed against a beige wall.",
+        "heard": "I could not tell what was heard.",
+        "seen": "A simple brown door remained closed against a beige wall."
+      }
+    }
+  }
+}

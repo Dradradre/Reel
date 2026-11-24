@@ -40,6 +40,7 @@ if __package__:
     from .play import PlaybackPace, channel_spectrum, play
     from .region_sync import published_timing, region_views, validate_regions
     from .screen_text import read_crop
+    from .scene_audio import inspect_scene
     from .sound_window import sound_window, validate_mark
     from .sound_events import inspect_events
     from .sound_glimpses import SoundChanges
@@ -67,6 +68,7 @@ else:
     from play import PlaybackPace, channel_spectrum, play
     from region_sync import published_timing, region_views, validate_regions
     from screen_text import read_crop
+    from scene_audio import inspect_scene
     from sound_window import sound_window, validate_mark
     from sound_events import inspect_events
     from sound_glimpses import SoundChanges
@@ -643,7 +645,8 @@ class Viewing:
                 image_block(Path(detail["file"]))]
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
-               alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0., locate_sounds=None):
+               alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0., locate_sounds=None,
+               verify_sounds=False):
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -701,6 +704,10 @@ class Viewing:
             result = {**result, "start_s": start, "end_s": stop, "next_start_s": stop if stop < end else None,
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first)}
+            if verify_sounds or (describe and result.get("status") == "unavailable"):
+                # A failed question reader can still return timed, open-ended evidence from the mix.
+                # Keep its question status separate: a caption is not an answer or a transcript.
+                result["scene"] = inspect_scene(original, first, stop, verify_sounds=verify_sounds)
             if sound_events:
                 result["sound_events"] = original_events
             if locate_sounds is not None:
@@ -875,7 +882,7 @@ class TurnMedia:
 
 
 def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=False, describe_sounds=False,
-          pause_on_sound_change=False, image_client=False, tracks="both"):
+          pause_on_sound_change=False, image_client=False, tracks="both", verify_sounds=False):
     server = FastMCP("reel", instructions="Start with view on turn 1, then request consecutive turns. "
                      "Use view_media instead if the host can read MCP resources and play a movie with its sound. "
                      "Choose continuous_seconds to follow an action or conversation through cuts. "
@@ -900,7 +907,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             if playback is None:
                 playback = stack.enter_context(closing(play(source, directory / "turns", until=until, step=pace.seconds,
                                                            continuous=pace.continuous, max_frames=pace.max_frames,
-                                                           recording_only=pace.recording_only,
+                                                           recording_only=pace.recording_only, verify_sounds=verify_sounds,
                                                            max_continuous_pcm_bytes=MAX_INLINE_PCM_BYTES, tracks=tracks,
                                                            speech=speech, gaze=gaze, lang=lang, joint=joint,
                                                            describe_sounds=describe_sounds, sound_reader=sound,
@@ -1018,7 +1025,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                          end_s: float | None = None, native_audio: bool = False, describe: bool = True,
                          component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False,
                          mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0,
-                         locate_sounds: list[str] | None = None):
+                         locate_sounds: list[str] | None = None, verify_sounds: bool = False):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
@@ -1033,13 +1040,15 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             Set gain_db to adjust replay volume equally across channels. The WAV and local description use this gain.
             With sound_events=true, compare playback_sound_events at that volume with the original sound_events.
             The spectrum and matches use the signal before gain. native_audio includes the selected WAV.
+            With verify_sounds=true, two local encoders compare candidate captions against the original mix.
+            Use describe=false for this check alone. Results are possible sounds, never a transcript.
             Supply locate_sounds to find the second most similar to each description in the original recording.
             A suggested replay time can exist for an absent sound. A tie has no unique location.
             Set sound_events=true for short, overlapping category estimates from the original channels.
             Set describe=false to use the recording and spectrum without the local waveform reader.
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
-                                           alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds)
+                                           alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds, verify_sounds)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,

@@ -292,6 +292,8 @@ codex mcp add reel -- "$(command -v reel)" mcp /path/to/film.mp4 --until 8.5 --i
 
 `reel setup --captions`를 한 번 실행하면 다음 재생부터 `audio.scene`에 방금 들린 소리를 묘사한 짧은 문장이 나온다. 처음 2초가 모이면 시작하고 직전 최대 10초까지 함께 듣는다. 소리가 바뀌었다면 `windows`와 `recent_windows`의 시각을 보고 어느 설명이 방금 들은 부분에 해당하는지 확인한다. uv나 Python 3.10이 설치돼 있으면 setup이 소리 묘사에 쓸 환경을 따로 만든다. 잡음을 빗소리로, 일정한 음을 기계음으로 추측할 수 있으니 채널별 실측값과 함께 읽는다. [현장 녹음을 들은 사람들과 비교한 결과](docs/listening-check.md#선택지-없이-현장-녹음을-들었을-때)
 
+애매한 소리를 다시 들으려면 `reel setup --captions --compare-sounds`로 모델을 준비하고 `reel listen TURN --t0 2 --t1 5 --verify-sounds`를 실행한다. CoNeTTE가 낸 설명 최대 여섯 개를 CLAP이 같은 채널의 원음과 대조해서 하나를 고른다. `play`나 `mcp`에 `--verify-sounds`를 붙이면 재생할 때마다 대조한다. 처음 보는 영상 12편에서 사람의 설명을 100점으로 잡았을 때 로컬 GPT의 소리 설명은 54.6점에서 68.2점으로 올랐다. 개선 폭의 신뢰구간에는 0이 들어갔다. [영상별 답변과 채점 결과](docs/benchmarks/verified-hearing.json)
+
 실제 촬영한 영상 16편에서 두 번째 소리를 맞힌 경우는 긴 설명만 받았을 때 5편, 최근 설명도 받았을 때 7편이었다. [소리가 바뀐 구간의 청취 결과](docs/listening-check.md#방금-들린-소리와-앞서-들은-소리)
 
 여러 소리가 겹칠 때는 `reel setup --layers`로 MixIT를 준비한다. 재생을 멈추고 `layer 2 5 2`를 입력하면 2~5초에 녹음된 원음과 그 구간에서 두 번째로 큰 추정 성분을 받는다.

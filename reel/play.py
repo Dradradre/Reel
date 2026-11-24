@@ -150,7 +150,7 @@ def save_sound(dest, chunks, info, wave_format, dtype):
 
 def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=False, gaze=False, speech=False,
          lang=None, sound_reader=None, joint=False, pause_on_sound_change=False, continuous=False,
-         max_continuous_pcm_bytes=None, tracks="both", max_frames=None, recording_only=False):
+         max_continuous_pcm_bytes=None, tracks="both", max_frames=None, recording_only=False, verify_sounds=False):
     """Yield one published interval per pull. The reader sees no later intervals or source path."""
     source, out = Path(source), Path(out)
     if not math.isfinite(step) or step <= 0:
@@ -185,7 +185,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
     with ExitStack() as stack:
         tagger = stack.enter_context(LocalReader([PY, str(Path(__file__).with_name("sounds.py")), "--serve"],
                                                  AST_NAME)) if info["has_audio"] else None
-        scene = stack.enter_context(SceneReader()) if info["has_audio"] and CAPTIONS_READY.is_file() else None
+        scene = stack.enter_context(SceneReader(verify_sounds=verify_sounds)) if info["has_audio"] and CAPTIONS_READY.is_file() else None
         event_reader = stack.enter_context(EventReader()) if info["has_audio"] and events_ready() else None
         reader = None
         if info["has_audio"] and (describe_sounds or joint):

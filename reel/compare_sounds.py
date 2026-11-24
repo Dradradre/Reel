@@ -66,12 +66,12 @@ def nearest_labels(labels, scores):
 
 
 class Comparator:
-    def __init__(self, download=False):
+    def __init__(self, download=False, *, device=None):
         import torch
         from transformers import ClapModel, ClapProcessor
         options = cache_options(CLAP_NAME, download)
         self.references = None
-        self.device = "mps" if torch.backends.mps.is_available() else "cpu"
+        self.device = device or ("mps" if torch.backends.mps.is_available() else "cpu")
         self.proc = ClapProcessor.from_pretrained(CLAP_NAME, **options)
         self.model = ClapModel.from_pretrained(CLAP_NAME, **options).eval().to(self.device)
 

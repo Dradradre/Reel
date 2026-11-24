@@ -1,0 +1,887 @@
+{
+  "reader": "gpt-6.1-terra using signed-in Codex",
+  "before": "fc7ac82",
+  "with_examples": "e8f0960",
+  "first_playback_tags": {
+    "protocol": "Use unchanged Reel PlaybackSounds(AST) and EventHistory(YAMNet) on exactly the same first four seconds. A hit means the human leaf label appears in the union of returned names. Other cues, captions, and GPT reasoning are excluded from this comparison. Multiple names may be reported per clip.",
+    "clips": 244,
+    "existing_correct_available": 84,
+    "combined_correct_available": 121,
+    "new_correct_names": 37,
+    "new_incorrect_names": 6
+  },
+  "isolated_sources": {
+    "prompt": "What made the most distinctive sound in this recording? Name the single most specific sound source you can support, in a few English words. If you can describe its character but cannot identify the source, answer \"unknown\". Give only JSON {\"source\":\"...\"}.",
+    "selection": "From the 244 held-out recordings, take distinct leaf classes, 16 with references and 6 without. Sort by SHA256(local-gpt-first-source/ID), use durations 1.45 to 7.5s, shuffle by SHA256(shuffleID). No target names in filenames, inputs or prompts.",
+    "protocol": "One first view, original full recording up to 7.5s. Identical images, local speech, caption, AST and YAMNet outputs. Compare without vs with recorded-example evidence from released samples. The answerer received visualized evidence on anonymous image-and-text MCP playback with no native WAV. The optional 30B waveform helper was disabled in both arms. New signed-in gpt-6.1-terra session for each answer with shell and plugins disabled. One run per arm. Identical-input replies may differ.",
+    "rubric": "Compare the answer with the human source label, taking accepted synonyms, paraphrases, or equivalent sound actions as exact. \"unknown\" is unknown. If the answer names only a parent or a plausible subtype of the labeled source for which the extra specificity cannot be verified, record compatible. Record wrong for a distinct incompatible physical source/action. Extra details around a correct source may be unverified without invalidating recognition of that source. Judge each pair once, unaware of arm. Evaluate the class label, not other sounds that might be present.",
+    "grading": "A separate fresh local gpt-6.1-terra session graded unique lowercase label-answer pairs in hash-shuffled order, without arm information. No manual overrides.",
+    "scores": {
+      "before": {
+        "exact": 10,
+        "wrong": 3,
+        "unknown": 5,
+        "compatible": 4
+      },
+      "after": {
+        "exact": 10,
+        "wrong": 4,
+        "unknown": 4,
+        "compatible": 4
+      }
+    },
+    "trials": [
+      {
+        "id": "268865",
+        "label": "Car passing by",
+        "seconds": 3.5,
+        "before": {
+          "answer": "a passing car",
+          "grade": "exact",
+          "reason": "A passing car matches the label."
+        },
+        "after": {
+          "answer": "a passing car",
+          "grade": "exact",
+          "reason": "A passing car matches the label."
+        },
+        "new_matches": [
+          "Car passing by"
+        ]
+      },
+      {
+        "id": "25295",
+        "label": "Applause",
+        "seconds": 3.848662131519274,
+        "before": {
+          "answer": "a crowd clapping",
+          "grade": "exact",
+          "reason": "A crowd clapping is applause."
+        },
+        "after": {
+          "answer": "a crowd clapping",
+          "grade": "exact",
+          "reason": "A crowd clapping is applause."
+        },
+        "new_matches": [
+          "Applause"
+        ]
+      },
+      {
+        "id": "138049",
+        "label": "Typewriter",
+        "seconds": 7.131428571428572,
+        "before": {
+          "answer": "computer keyboard",
+          "grade": "wrong",
+          "reason": "A computer keyboard is a different source from a typewriter."
+        },
+        "after": {
+          "answer": "computer keyboard typing",
+          "grade": "wrong",
+          "reason": "A computer keyboard is a different source from a typewriter."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "36956",
+        "label": "Fart",
+        "seconds": 2.7283673469387755,
+        "before": {
+          "answer": "farting",
+          "grade": "exact",
+          "reason": "Farting matches the label."
+        },
+        "after": {
+          "answer": "farting",
+          "grade": "exact",
+          "reason": "Farting matches the label."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "429539",
+        "label": "Tabla",
+        "seconds": 3.966938775510204,
+        "before": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "after": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "386748",
+        "label": "Dishes, pots, and pans",
+        "seconds": 7.292018140589569,
+        "before": {
+          "answer": "Dishes being placed on a table",
+          "grade": "exact",
+          "reason": "The answer identifies dishes, with an additional action."
+        },
+        "after": {
+          "answer": "dishes being placed on a table",
+          "grade": "exact",
+          "reason": "The answer identifies dishes, with an additional action."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "347150",
+        "label": "Writing",
+        "seconds": 3.6833560090702946,
+        "before": {
+          "answer": "writing on paper",
+          "grade": "exact",
+          "reason": "Writing on paper matches the labeled action."
+        },
+        "after": {
+          "answer": "Writing on paper",
+          "grade": "exact",
+          "reason": "Writing on paper matches the labeled action."
+        },
+        "new_matches": [
+          "Writing"
+        ]
+      },
+      {
+        "id": "148748",
+        "label": "Piano",
+        "seconds": 7.0,
+        "before": {
+          "answer": "tuning fork",
+          "grade": "wrong",
+          "reason": "A tuning fork is a different source from a piano."
+        },
+        "after": {
+          "answer": "tuning fork",
+          "grade": "wrong",
+          "reason": "A tuning fork is a different source from a piano."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "341070",
+        "label": "Shatter",
+        "seconds": 3.3893877551020406,
+        "before": {
+          "answer": "glass shattering",
+          "grade": "exact",
+          "reason": "Glass shattering matches the labeled action."
+        },
+        "after": {
+          "answer": "glass shattering",
+          "grade": "exact",
+          "reason": "Glass shattering matches the labeled action."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "409197",
+        "label": "Chuckle, chortle",
+        "seconds": 2.079954648526077,
+        "before": {
+          "answer": "person laughing",
+          "grade": "compatible",
+          "reason": "Chuckle is a type of laughter."
+        },
+        "after": {
+          "answer": "a person laughing",
+          "grade": "compatible",
+          "reason": "Chuckle is a type of laughter."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "50156",
+        "label": "Screaming",
+        "seconds": 3.7594784580498866,
+        "before": {
+          "answer": "a person screaming",
+          "grade": "exact",
+          "reason": "A person screaming matches the labeled action."
+        },
+        "after": {
+          "answer": "a person screaming",
+          "grade": "exact",
+          "reason": "A person screaming matches the labeled action."
+        },
+        "new_matches": [
+          "Screaming"
+        ]
+      },
+      {
+        "id": "377776",
+        "label": "Scratching (performance technique)",
+        "seconds": 2.6205895691609977,
+        "before": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "after": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "new_matches": [
+          "Whoosh, swoosh, swish"
+        ]
+      },
+      {
+        "id": "317101",
+        "label": "Tambourine",
+        "seconds": 6.857165532879819,
+        "before": {
+          "answer": "tambourine",
+          "grade": "exact",
+          "reason": "The answer names the labeled instrument."
+        },
+        "after": {
+          "answer": "tambourine",
+          "grade": "exact",
+          "reason": "The answer names the labeled instrument."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "148935",
+        "label": "Rattle (instrument)",
+        "seconds": 1.6472789115646258,
+        "before": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "after": {
+          "answer": "rattle",
+          "grade": "exact",
+          "reason": "Rattle names the labeled instrument."
+        },
+        "new_matches": [
+          "Rattle (instrument)"
+        ]
+      },
+      {
+        "id": "184372",
+        "label": "Coin (dropping)",
+        "seconds": 4.357437641723356,
+        "before": {
+          "answer": "coins dropping",
+          "grade": "exact",
+          "reason": "Coins dropping matches the labeled action."
+        },
+        "after": {
+          "answer": "Coins dropping",
+          "grade": "exact",
+          "reason": "Coins dropping matches the labeled action."
+        },
+        "new_matches": [
+          "Coin (dropping)",
+          "Coin (dropping)"
+        ]
+      },
+      {
+        "id": "154463",
+        "label": "Knock",
+        "seconds": 6.381383219954649,
+        "before": {
+          "answer": "Knocking on a door",
+          "grade": "exact",
+          "reason": "Knocking on a door matches the labeled action."
+        },
+        "after": {
+          "answer": "Fingers tapping on a wooden table",
+          "grade": "compatible",
+          "reason": "Tapping on a table could be a form of knocking."
+        },
+        "new_matches": [
+          "Knock"
+        ]
+      },
+      {
+        "id": "131323",
+        "label": "Crushing",
+        "seconds": 1.7072789115646259,
+        "before": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "after": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "328857",
+        "label": "Wind instrument, woodwind instrument",
+        "seconds": 3.593922902494331,
+        "before": {
+          "answer": "flute",
+          "grade": "compatible",
+          "reason": "A flute is a type of woodwind instrument."
+        },
+        "after": {
+          "answer": "flute",
+          "grade": "compatible",
+          "reason": "A flute is a type of woodwind instrument."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "278138",
+        "label": "Screech",
+        "seconds": 3.957687074829932,
+        "before": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "after": {
+          "answer": "unknown",
+          "grade": "unknown",
+          "reason": "The answer is unknown."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "146291",
+        "label": "Child speech, kid speaking",
+        "seconds": 1.5130839002267573,
+        "before": {
+          "answer": "a person speaking",
+          "grade": "compatible",
+          "reason": "A child speaking is a person speaking, but the answer does not identify a child."
+        },
+        "after": {
+          "answer": "human voice",
+          "grade": "compatible",
+          "reason": "A child's speech is a human voice, but the answer does not identify a child."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "218839",
+        "label": "Microwave oven",
+        "seconds": 1.5412244897959184,
+        "before": {
+          "answer": "alarm clock",
+          "grade": "wrong",
+          "reason": "An alarm clock is a different source from a microwave oven."
+        },
+        "after": {
+          "answer": "alarm clock",
+          "grade": "wrong",
+          "reason": "An alarm clock is a different source from a microwave oven."
+        },
+        "new_matches": []
+      },
+      {
+        "id": "207781",
+        "label": "Fill (with liquid)",
+        "seconds": 2.8328344671201813,
+        "before": {
+          "answer": "water being poured",
+          "grade": "compatible",
+          "reason": "Pouring water can fill a container, though filling is not specified."
+        },
+        "after": {
+          "answer": "water dripping",
+          "grade": "wrong",
+          "reason": "Water dripping is a distinct action from filling with liquid."
+        },
+        "new_matches": []
+      }
+    ]
+  },
+  "moving_films": {
+    "source": "https://huggingface.co/datasets/TUT-ARG/AVCaps",
+    "attribution": "AVCaps, Sudarsanam, Martín Morató, Hakala and Virtanen. CC BY-NC 4.0 research release.",
+    "selection": "Eight cached films not present in earlier published Reel reports, ordered by SHA256(reference-source-av-frozen/+ID). Required a human audio panel and full duration between 1.5 and 22 seconds. At least three sound-only reference captions per film.",
+    "protocol": "Three sequential views per anonymous film through a staged MCP server under the same signed-in GPT model as the isolated sound panel. Free picture-and-sound impression then separate sound and picture recall. Exact same released images and existing reports in both arms, with example matches added only after. No native WAV or 30B question reader. Compare each heard response with the human audio-only captions using the existing first-impression scorer. Wide uncertainty with eight films.",
+    "summary": {
+      "human": {
+        "same_film_cosine": 0.3715360226264844,
+        "other_film_cosine": 0.1989264021627605,
+        "same_minus_other": 0.17260962046372388,
+        "top_one_film": 0.46458333333333335
+      },
+      "before": {
+        "same_film_cosine": 0.38283519788334774,
+        "other_film_cosine": 0.21236466988921165,
+        "same_minus_other": 0.1704705279941361,
+        "top_one_film": 0.4583333333333333
+      },
+      "after": {
+        "same_film_cosine": 0.3941589926679929,
+        "other_film_cosine": 0.20992260053753853,
+        "same_minus_other": 0.1842363921304544,
+        "top_one_film": 0.4583333333333333
+      }
+    },
+    "paired": {
+      "mean_change": 0.01132379478464525,
+      "bootstrap_95_percent": [
+        -0.020206534614165612,
+        0.04750658567684393
+      ],
+      "increased": 3,
+      "decreased": 5,
+      "tied": 0,
+      "by_film": {
+        "10095741516": 0.11330111622810368,
+        "10429632423": 0.05010777215162915,
+        "4784365267": -0.00026186307271325315,
+        "4553174386": 0.033826092878977476,
+        "4603486590": -0.027801834046840668,
+        "4762946272": -0.054487839341163635,
+        "10636949046": -0.017287150025367737,
+        "4692611470": -0.006805936495463016
+      }
+    },
+    "details": [
+      {
+        "id": "10095741516",
+        "seconds": 20.589002,
+        "human_caption_count": 5,
+        "human_caption_sha256": "79576b2eb5da5a1378b6488bdb612919e9ca34045502d0b5d471c7acf23ce1d8",
+        "before": {
+          "turns": 3,
+          "caption": "A man plays with a laughing toddler at a dining table while another child drinks and a second man sits nearby.",
+          "heard": "I could not directly hear the audio, but the sound readings suggested people talking with music in the background.",
+          "seen": "A man plays with a laughing toddler at a dining table while another child drinks and a second man sits nearby."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "A man playfully bounces a smiling toddler at a dining table while another child eats and a seated man watches, with music playing in the background.",
+          "heard": "The audio descriptions indicated people talking with music in the background.",
+          "seen": "A man playfully bounces a smiling toddler at a dining table while another child eats and a seated man watches."
+        },
+        "matches": []
+      },
+      {
+        "id": "10429632423",
+        "seconds": 20.02002,
+        "human_caption_count": 3,
+        "human_caption_sha256": "ab46bca4c03120d1313ac8ec5c4dc33793dc1d9a56bef538a3431f42a4248416",
+        "before": {
+          "turns": 3,
+          "caption": "A group of helmeted cyclists ride along a sunny, tree-lined road, some carrying bags on their bikes.",
+          "heard": "The audio descriptions indicated wind and brief speech, but I could not hear the recording directly.",
+          "seen": "A group of helmeted cyclists ride along a sunny, tree-lined road, some carrying bags on their bicycles."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "A group of helmeted cyclists rides along a sunny, tree-lined road, some carrying bags on their bicycles.",
+          "heard": "The audio description suggested wind and a person speaking, but I could not hear the recording directly.",
+          "seen": "A group of helmeted cyclists rides along a sunny, tree-lined road, some carrying bags on their bicycles."
+        },
+        "matches": [
+          {
+            "turn": 2,
+            "windows": [
+              {
+                "start_s": 8.0,
+                "end_s": 12.0,
+                "channels": [
+                  {
+                    "channels": [
+                      1
+                    ],
+                    "name": "Waves, surf",
+                    "text_similarity": 0.2546,
+                    "reference_similarity": 0.6684
+                  },
+                  {
+                    "channels": [
+                      2
+                    ],
+                    "name": "Waves, surf",
+                    "text_similarity": 0.254,
+                    "reference_similarity": 0.6688
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4784365267",
+        "seconds": 21.733855,
+        "human_caption_count": 3,
+        "human_caption_sha256": "f498304af3427464fa02969ff3e130fbaed5c59d30ffc0c56c57d4f616264d10",
+        "before": {
+          "turns": 3,
+          "caption": "A tabby cat drinks from a running bathroom faucet, briefly looking at the camera before returning to the water.",
+          "heard": "The audio description suggested running water, but I could not hear it directly.",
+          "seen": "A tabby cat drinks from a running bathroom faucet, briefly looking at the camera before returning to the water."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "A tabby cat drinks from a running bathroom faucet, briefly looking at the camera before returning to the water.",
+          "heard": "The audio description indicated running water, though I could not hear it directly.",
+          "seen": "A tabby cat drinks from a bathroom faucet, briefly looking at the camera before returning to the water."
+        },
+        "matches": [
+          {
+            "turn": 1,
+            "windows": [
+              {
+                "start_s": 0.0,
+                "end_s": 4.0,
+                "channels": [
+                  {
+                    "channels": [
+                      1,
+                      2
+                    ],
+                    "name": "Water tap, faucet",
+                    "text_similarity": 0.2207,
+                    "reference_similarity": 0.8099
+                  }
+                ]
+              },
+              {
+                "start_s": 4.0,
+                "end_s": 8.0,
+                "channels": [
+                  {
+                    "channels": [
+                      1,
+                      2
+                    ],
+                    "name": "Water tap, faucet",
+                    "text_similarity": 0.2365,
+                    "reference_similarity": 0.7533
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn": 3,
+            "windows": [
+              {
+                "start_s": 16.0,
+                "end_s": 20.0,
+                "channels": [
+                  {
+                    "channels": [
+                      1,
+                      2
+                    ],
+                    "name": "Water tap, faucet",
+                    "text_similarity": 0.2252,
+                    "reference_similarity": 0.8188
+                  }
+                ]
+              },
+              {
+                "start_s": 17.73385487528345,
+                "end_s": 21.73385487528345,
+                "channels": [
+                  {
+                    "channels": [
+                      1,
+                      2
+                    ],
+                    "name": "Water tap, faucet",
+                    "text_similarity": 0.2191,
+                    "reference_similarity": 0.8448
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4553174386",
+        "seconds": 20.921156,
+        "human_caption_count": 3,
+        "human_caption_sha256": "0858fee0055d7d6e5cbf359a2b5aff5c9d5cdef28d13c42b33f35eb30baf01b1",
+        "before": {
+          "turns": 3,
+          "caption": "A helmeted child scoots a small balance bike across a sunny driveway, then turns it around near another child as an adult offers encouragement.",
+          "heard": "An adult speaks, saying to use their legs, practice, and turn around to go downhill again.",
+          "seen": "A helmeted child scoots a small balance bike across a sunny driveway and turns it around near another child."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "A helmeted child scoots a small balance bike across a driveway, then stops near another child as an adult offers encouragement.",
+          "heard": "A man speaks, telling the child to use their legs, practice, and turn around to go downhill again.",
+          "seen": "A helmeted child scoots a small balance bike across a driveway and stops near another child."
+        },
+        "matches": []
+      },
+      {
+        "id": "4603486590",
+        "seconds": 20.549637,
+        "human_caption_count": 4,
+        "human_caption_sha256": "d917e8b6d1bd4d49dca4e73c781f5de0a00e30d28a438d2bb036a8d2e03f8e44",
+        "before": {
+          "turns": 3,
+          "caption": "A woman dances onstage as a band plays music on fiddle, banjo, upright bass, and percussion before an audience.",
+          "heard": "The audio analysis indicated instrumental music, though I could not directly hear it.",
+          "seen": "A woman dances onstage while musicians play fiddle, banjo, upright bass, and percussion in front of an audience."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "A woman dances onstage as musicians play fiddle, banjo, upright bass, and percussion before an audience.",
+          "heard": "The audio analysis indicated music, though I could not listen to the recording directly.",
+          "seen": "A woman dances onstage alongside musicians playing fiddle, banjo, upright bass, and percussion before an audience."
+        },
+        "matches": []
+      },
+      {
+        "id": "4762946272",
+        "seconds": 21.617778,
+        "human_caption_count": 3,
+        "human_caption_sha256": "461e1fc50161368a9c44d464618bae3cbb07bef7a128069890257d0572a1fa01",
+        "before": {
+          "turns": 3,
+          "caption": "A woman helps a young child measure and empty ingredients into a mixing bowl in the kitchen.",
+          "heard": "A woman speaks, asking the child to hold something over the bowl and get it all out, with possible dish noises in the background.",
+          "seen": "A woman helps a young child empty ingredients from a measuring spoon into a mixing bowl in a kitchen."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "A woman guides a young child as he pours an ingredient from a blue measuring spoon into a mixing bowl in the kitchen.",
+          "heard": "A speech reader reported that the woman said, “Hold it over the bowl for me,” and encouraged the child to get it all out.",
+          "seen": "A woman guides a young child as he empties a blue measuring spoon into a mixing bowl in the kitchen."
+        },
+        "matches": []
+      },
+      {
+        "id": "10636949046",
+        "seconds": 20.781995,
+        "human_caption_count": 4,
+        "human_caption_sha256": "170e1ec7557fb6bba1eb67c4bb3dc973160fa4572522cedb0bceba81cff50486",
+        "before": {
+          "turns": 3,
+          "caption": "A young boy talks animatedly and gestures at an outdoor picnic table before the camera turns to a woman sitting nearby.",
+          "heard": "The audio readings indicated speech and suggested background conversation, but I could not listen to the recording directly.",
+          "seen": "A young boy talks and gestures at an outdoor picnic table before the camera turns to a woman nearby."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "A young boy talks animatedly and gestures at an outdoor dining table before the camera turns to a woman sitting nearby.",
+          "heard": "The audio analysis indicated speech and background conversation, but I could not hear the recording directly.",
+          "seen": "A young boy gestures and talks at an outdoor dining table before the camera turns to a woman nearby."
+        },
+        "matches": []
+      },
+      {
+        "id": "4692611470",
+        "seconds": 21.548095,
+        "human_caption_count": 3,
+        "human_caption_sha256": "f0058c85ec9d9a39dc83be199c9bf80cbe774a91780a0d37b0807c6523751cb7",
+        "before": {
+          "turns": 3,
+          "caption": "Two boys entertain a baby at a kitchen table by playing with a hat and a small soccer ball.",
+          "heard": "The audio analysis suggested a child speaking and laughing, with a baby crying in the background, though I could not hear it directly.",
+          "seen": "Two boys play with a hat and a small soccer ball near a baby seated at a kitchen table."
+        },
+        "after": {
+          "turns": 3,
+          "caption": "Two boys entertain a baby at a kitchen table, waving a hat and tossing a small soccer ball as the baby smiles and reaches out.",
+          "heard": "The audio descriptions indicated children talking and laughing, with possible baby cries, but I could not hear the recording directly.",
+          "seen": "Two boys play with a hat and a small soccer ball near a baby seated at a kitchen table."
+        },
+        "matches": []
+      }
+    ]
+  },
+  "door": {
+    "protocol": "Same closed door up to --until 8.5 seconds in two MCP turns. A has the metal jingle, B retains the background, C has the same prefix as A with a different future. Compare the released text and every attached picture by SHA-256. Exact listen past 8.5 rejected; all checks completed. Silence replaces every sound sample. Picture-only omits the audio track.",
+    "identical_prefix_A_C": true,
+    "source": "examples/make_door_trial.py",
+    "prompt": "Describe what you heard before playback stopped. If you heard a distinct brief sound, describe its character and name a source only if you can identify it. Give any intelligible words only if the recording supports them. Answer in a single English sentence.",
+    "responses": {
+      "A": "A brief series of light metallic jingles and rattles breaks the quiet, with no intelligible speech.",
+      "B": "A faint, steady fan-like hiss continues until playback stops, with no intelligible speech.",
+      "silent": "There was silence throughout, with no audible sounds or speech.",
+      "picture": "I can’t determine what was heard because no audio was provided."
+    },
+    "prefix_hashes": {
+      "A": {
+        "hashes": [
+          "e30b41ca99adad54fb41f9e04179056d8ea5efc11bf410480648bd5267a7239a",
+          "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+          "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+          "0868d159b01e655588c259e1176b91cc9145b85faf08bd354c483b928d98de39",
+          "444d91834018d956584fac53cdc196d6ab9189303200b757b61a8d3c30314904",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "4bcfe5841a8f4ca3531c34e10027951b6424e7b7df746c9e33380e3a93a2d475",
+          "02a44455cc9cb72be3def5edea96545e2d26c758aab69ffcabcc7d2fb207e769",
+          "9e8ecb21cc33c68e611abfe7a7262e5209b249450271596921532df4b167195e",
+          "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+          "cad59eaf32a59d8a4846518c74273ef006fa96a5dfe7e9a64880e762cc3d2ec8",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "49a6bf37e1b88c0317a8adbdc372ef069283fd23e850c50967b1d5cc464d45fe",
+          "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+        ],
+        "charts_per_turn": [
+          1,
+          1
+        ],
+        "turns": 2,
+        "end_s": 8.5
+      },
+      "C": {
+        "hashes": [
+          "e30b41ca99adad54fb41f9e04179056d8ea5efc11bf410480648bd5267a7239a",
+          "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+          "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+          "0868d159b01e655588c259e1176b91cc9145b85faf08bd354c483b928d98de39",
+          "444d91834018d956584fac53cdc196d6ab9189303200b757b61a8d3c30314904",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "4bcfe5841a8f4ca3531c34e10027951b6424e7b7df746c9e33380e3a93a2d475",
+          "02a44455cc9cb72be3def5edea96545e2d26c758aab69ffcabcc7d2fb207e769",
+          "9e8ecb21cc33c68e611abfe7a7262e5209b249450271596921532df4b167195e",
+          "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+          "cad59eaf32a59d8a4846518c74273ef006fa96a5dfe7e9a64880e762cc3d2ec8",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "49a6bf37e1b88c0317a8adbdc372ef069283fd23e850c50967b1d5cc464d45fe",
+          "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+        ],
+        "charts_per_turn": [
+          1,
+          1
+        ],
+        "turns": 2,
+        "end_s": 8.5
+      },
+      "B": {
+        "hashes": [
+          "498c38c0aa05184b48eb381a520b2d324d3103eed2b45fa11b7198cfe3e37c2e",
+          "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+          "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+          "d3b8ad564b6491ffc284ac118fca0249b44ad8581333d9ae03d4ecccde7bf48a",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "d0a78e3dbc9ddfaf727dc3d8ec967cf431b35fb48836d576fc5e0a4710c9e112",
+          "d5ef0f8549e5a541362b73e6d04306c6f6beaa42a04c2845d1f9b01cdbf3b8c3",
+          "71cfb358d97685669be4f3d60cc331140ba31c8f9b87d20d2aef1b8d5eb19b60",
+          "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "af349e60c813c596d3240dd209dfd044f427f440531a60974b741f57c734f00d",
+          "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+        ],
+        "charts_per_turn": [
+          1,
+          1
+        ],
+        "turns": 2,
+        "end_s": 8.5
+      },
+      "silent": {
+        "hashes": [
+          "7dbc5a48980fb4e51754e406804d14e3a721838352ee31965468d844ed95a962",
+          "abf29132af3d8711dec2bc49293383bcc1c2ea0e03ec13737dba9dc147969d8f",
+          "d1f2cd46c7b83c4bfb48e84264cf9f6fcfe882d66721ea3da9551135fbff1183",
+          "9212f57f6dcc2f005c94c6e792369e0eba07c19fa505c35bfcf7aa04e6f86be2",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "c6f1c15d87fe14890a8dbb5797570e6fe366de9e43d29a6936eb0af5ec698097",
+          "357e79fd70431b0f60cad3d9fb2c5879d5b9107f870e328fead768eef56e8060",
+          "606763c6f07da800c9731fffb39a92c7acda7b809597ee44cc85962c845058c2",
+          "11cfe1a9a46f6a766252ed0392d37b58e449415f143bd298df3ec9def42647fd",
+          "bbe81c6c4dca0300c1f4429f61ea7f6a02c2d506170ce62779df760d760bb37a",
+          "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+        ],
+        "charts_per_turn": [
+          0,
+          0
+        ],
+        "turns": 2,
+        "end_s": 8.5
+      },
+      "picture": {
+        "hashes": [
+          "459e2df1c1fa8895140fd37817cac3069b25a56242a5ea7d668807d1762f227c",
+          "c81505d483b73f2a3eac4f129b20c1ba8498e862fee9142fe5ec0de3ff44ea0d",
+          "33f43523aeb0e57b7ae51de0d6dde732899057b6a92cf1e20df8cdaccb9e5a93",
+          "a1d7771138da4f2ad5b83123adea1a00b9f8611650217f7dc1c7971fb9a48a63",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "34e00e8707907ce70feb56efed57b28e160f9cd53b5f4f5e78894b764d4214f1",
+          "87400b24d2c2c14118847108909075cbdc4c969d8a1b754197935680bbdb3bd3",
+          "f4477e9af854079480d37da3109511bb032075b1959db05734cc293a7202e373",
+          "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+          "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+        ],
+        "charts_per_turn": [
+          0,
+          0
+        ],
+        "turns": 2,
+        "end_s": 8.499
+      }
+    },
+    "uncued": {
+      "A": {
+        "turns": 2,
+        "caption": "A closed brown door remains still against a plain wall as a faint jingling and rattling sound is heard.",
+        "heard": "The audio description reported a faint jingling and rattling sound, though I could not hear it directly.",
+        "seen": "A closed brown door remains still against a plain wall."
+      },
+      "B": {
+        "turns": 2,
+        "caption": "A simple illustration shows a closed brown door in a beige wall above a dark floor.",
+        "heard": "I could not hear the audio directly, though an audio description suggested a steady fan-like sound.",
+        "seen": "A closed brown door stood in a beige wall above a dark floor."
+      },
+      "silent": {
+        "turns": 2,
+        "caption": "A closed brown door remains still against a plain wall in a silent animation.",
+        "heard": "I heard no sound.",
+        "seen": "A closed brown door remained still against a plain wall."
+      },
+      "picture": {
+        "turns": 2,
+        "caption": "A closed brown door stands motionless in a plain beige wall.",
+        "heard": "I could not tell what sounds were present.",
+        "seen": "A closed brown door stood motionless in a plain beige wall."
+      }
+    }
+  },
+  "local_cost": {
+    "protocol": "Apple M4 Pro, hosted helper only, original mono clips in the isolated panel order capped at the first four seconds. One resident process, one request per clip. Cold refers to a new process with cached weights. Peak RSS is the summed resident set of the benchmark process and descendants, not an estimate of hardware minimum or additional memory per video.",
+    "peak_rss_kib": 7425216,
+    "clips": 22,
+    "cold_first_s": 2.984,
+    "warm_median_s": 0.588,
+    "warm_max_s": 0.661,
+    "seconds": [
+      2.984,
+      0.649,
+      0.661,
+      0.469,
+      0.643,
+      0.634,
+      0.588,
+      0.65,
+      0.55,
+      0.37,
+      0.6,
+      0.465,
+      0.654,
+      0.332,
+      0.659,
+      0.649,
+      0.327,
+      0.563,
+      0.629,
+      0.303,
+      0.306,
+      0.492
+    ]
+  }
+}

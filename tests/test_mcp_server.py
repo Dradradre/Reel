@@ -990,6 +990,8 @@ class TransportTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 reader.listen(1, None, .25, .75, alternatives=choices)
             plain = reader.listen(2, None, .25, .75, describe=False)
+            missing = reader.listen(2, None, .25, .75, describe=False, source_examples=True)
+            self.assertEqual(json.loads(missing[0].text)["source_examples"]["status"], "not_prepared")
             self.assertNotIn("original_sound_match", json.loads(plain[0].text))
             factory.assert_not_called()
             reply = reader.listen(2, None, .25, .75, True, False, "percussive", choices)

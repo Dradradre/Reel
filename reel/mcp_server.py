@@ -678,7 +678,7 @@ class Viewing:
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
                alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0., locate_sounds=None,
-               verify_sounds=False, identify_sounds=None):
+               verify_sounds=False, identify_sounds=None, source_examples=False):
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -737,9 +737,11 @@ class Viewing:
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first),
                       "attacks": recorded_attacks(wav, first)}
-            if describe and self.examples is not None:
+            if (describe or source_examples) and self.examples is not None:
                 with self.examples.for_replay() as examples:
                     result["source_examples"] = examples.read(original, first, stop, isolated=True)
+            elif source_examples:
+                result["source_examples"] = {"status": "not_prepared", "setup": "reel setup --sound-examples"}
             if verify_sounds or (describe and result.get("status") == "unavailable"):
                 # A failed question reader can still return timed, open-ended evidence from the mix.
                 # Keep its question status separate: a caption is not an answer or a transcript.
@@ -1070,7 +1072,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                          component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False,
                          mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0,
                          locate_sounds: list[str] | None = None, verify_sounds: bool = False,
-                         identify_sounds: list[str] | None = None):
+                         identify_sounds: list[str] | None = None, source_examples: bool = False):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
@@ -1092,10 +1094,13 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             Supply locate_sounds to find the second most similar to each description in the original recording.
             A suggested replay time can exist for an absent sound. A tie has no unique location.
             Set sound_events=true for short, overlapping category estimates from the original channels.
+            Set source_examples=true and describe=false to name sources from recorded examples without providing
+            alternatives or running the caption reader. An empty match leaves the source open.
             Set describe=false to use the recording and spectrum without the local waveform reader.
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
-                                           alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds, verify_sounds, identify_sounds)
+                                           alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds,
+                                           verify_sounds, identify_sounds, source_examples)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,

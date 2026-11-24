@@ -304,9 +304,11 @@ codex mcp add reel -- "$(command -v reel)" mcp /path/to/film.mp4 --until 8.5 --i
 
 애매한 소리를 다시 들으려면 `reel setup --captions --compare-sounds`로 모델을 준비하고 `reel listen TURN --t0 2 --t1 5 --verify-sounds`를 실행한다. CoNeTTE가 낸 설명 최대 여섯 개를 CLAP이 같은 채널의 원음과 대조해서 하나를 고른다. `play`나 `mcp`에 `--verify-sounds`를 붙이면 재생할 때마다 대조한다. 처음 보는 영상 12편에서 사람의 설명을 100점으로 잡았을 때 로컬 GPT의 소리 설명은 54.6점에서 68.2점으로 올랐다. 개선 폭의 신뢰구간에는 0이 들어갔다. [영상별 답변과 채점 결과](docs/benchmarks/verified-hearing.json)
 
-`reel setup --sound-examples`를 실행하면 첫 재생부터 소리의 출처를 짚을 수 있다. 채널마다 방금 들은 소리를 116종의 실제 녹음 942개, 소리 이름 531개와 각각 비교한다. 두 결과가 같은 출처를 가리키면 이름과 시각을 보여 준다. 처음 설치할 때 PE-AV 가중치가 없으면 8.3 GiB를 받는다. CC0 녹음 약 665 MiB를 처리해 색인을 만든 뒤에는 오프라인으로 듣는다.
+`reel setup --sound-examples`를 실행하면 첫 재생부터 소리의 출처를 짚을 수 있다. 채널마다 방금 들은 소리를 116종의 실제 녹음 942개, 소리 이름 531개와 각각 비교한다. 두 결과가 같은 출처를 가리키면 이름과 시각을 보여 준다. 더 짧게 다시 들으려면 `listen(turn=2, start_s=1, end_s=2.5, source_examples=true, describe=false)`로 구간을 고른다. 처음 설치할 때 PE-AV 가중치가 없으면 8.3 GiB를 받는다. CC0 녹음 약 665 MiB를 처리해 색인을 만든 뒤에는 오프라인으로 듣는다.
 
 판별 기준을 정할 때 쓰지 않은 녹음 244개에서 출처를 79번 짚었다. 사람이 붙인 이름과 일치한 건 71개였고 8개는 틀렸다. 나머지 165개는 이름을 붙이지 않았다. 참조 녹음이 없는 종류에 속한 49개도 모두 여기에 들어간다. 녹음마다 처음 4초만 들려줬고 정답은 녹음 전체에 붙은 이름이다. [녹음별 결과와 측정 방법](docs/benchmarks/reference-sources.json)
+
+같은 244개에서 기존 재생이 보여 준 소리 후보에 정답이 들어 있던 녹음은 84개였다. 새 인식을 더하자 121개가 됐고 틀린 이름도 6개 더 나왔다. 별도로 녹음 22개를 처음부터 끝까지 들려줬을 때 GPT의 정답은 전후 모두 10개였다. 전에는 모르겠다고 했던 딸랑이는 맞혔고 타자기는 여전히 컴퓨터 키보드로 들었다. 실사 영상 8편에서 GPT와 사람이 소리를 묘사한 문장의 유사도 변화는 +0.011이었다(95% 구간 −0.020~+0.048). [GPT의 실제 답과 대조 실험](docs/benchmarks/reference-source-listeners.json)
 
 `reel setup --identify-sounds`를 한 번 실행하면 소리 이름을 두 개 이상 주고 다시 들을 때 Meta의 PE-AV와 LAION의 CLAP이 원음의 같은 채널을 각각 듣는다. 두 모델의 답이 갈리거나 둘 다 보기 밖의 소리를 더 가깝게 평가하면 `unresolved`로 표시한다. 예를 들어 `reel match TURN --t0 2 --t1 5 --identify "metal rattling" "fabric rubbing"`으로 금속이 달그락거리는 소리와 천이 스치는 소리를 대조할 수 있다. `play`나 `mcp`에 `--identify-sounds`를 붙이면 재생 중에도 AudioSet에서 후보를 찾는다. PE-AV 모델을 받을 때 8.9GB가 필요하다.
 

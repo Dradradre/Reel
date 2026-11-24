@@ -106,15 +106,20 @@ class TransportTests(unittest.TestCase):
 
     def test_replay_can_keep_independent_captions_alongside_a_successful_waveform_read(self):
         ear = Mock()
-        ear.read.return_value = {"status": "available", "model": "waveform", "windows": []}
+        ear.read.side_effect = [{"status": "available", "model": "waveform", "windows": [w]}
+                                for w in ("open", "asked")]
         reader = Viewing(iter([self.path]), ear, None, None)
         reader.advance(1, False, False)
         with patch("reel.mcp_server.inspect_scene", return_value={"model": "captioner"}) as caption:
             response = reader.listen(1, "What changed?", .25, .75, independent_caption=True)
         report = json.loads(response[0].text)
         self.assertEqual((report["model"], report["scene"]["model"]), ("waveform", "captioner"))
-        path = ear.read.call_args.args[0]
-        self.assertEqual(ear.read.call_args.kwargs["question"], "What changed?")
+        self.assertEqual((report["before_question"]["windows"], report["windows"]), (["open"], ["asked"]))
+        open_read, asked_read = ear.read.call_args_list
+        path = open_read.args[0]
+        self.assertEqual(open_read.args, asked_read.args)
+        self.assertNotIn("question", open_read.kwargs)
+        self.assertEqual(asked_read.kwargs["question"], "What changed?")
         caption.assert_called_once_with(path, 2000, .75, verify_sounds=False)
 
     def test_ordinary_alternatives_compare_the_original_when_identity_is_prepared(self):

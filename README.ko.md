@@ -322,7 +322,7 @@ codex mcp add reel -- "$(command -v reel)" mcp /path/to/film.mp4 --until 8.5 --i
 
 여러 소리가 겹칠 때는 `reel setup --layers`로 MixIT를 준비한다. 재생을 멈추고 `layer 2 5 2`를 입력하면 2~5초에 녹음된 원음과 그 구간에서 두 번째로 큰 추정 성분을 받는다.
 
-Apple Silicon에서 비상업적 연구에 쓸 때는 `reel setup --audio-flamingo`로 Audio Flamingo Next 가중치 5.1 GiB를 설치할 수 있다. `REEL_AUDIO_READER=flamingo reel mcp film.mp4 --tracks sound --image-client --until 8.5`로 재생하고 8.5초에 도달하면 `listen(turn=N, start_s=0, end_s=8.5)`로 각 채널의 원음을 이어서 듣는다. 재생한 구간의 소리를 두고 질문할 수도 있다. 기본 모델은 Qwen이다. `reel setup --captions`로 설치한 뒤 `listen`에 `independent_caption=true`를 주면 다른 모델이 같은 채널을 짧게 나눠 듣는다. 두 모델은 서로의 답을 보지 않는다. 화면과 소리를 함께 읽거나 받아쓸 때도 Qwen을 쓴다.
+Apple Silicon에서 비상업적 연구에 쓸 때는 `reel setup --audio-flamingo`로 Audio Flamingo Next 가중치 5.1 GiB를 설치할 수 있다. `REEL_AUDIO_READER=flamingo reel mcp film.mp4 --tracks sound --image-client --until 8.5`로 재생하고 8.5초에 도달하면 `listen(turn=N, start_s=0, end_s=8.5)`로 각 채널의 원음을 이어서 듣는다. 재생한 구간의 소리를 두고 질문할 수도 있다. 기본 모델은 Qwen이다. `reel setup --captions`로 설치한 뒤 `listen`에 `independent_caption=true`를 주면 다른 모델이 같은 채널을 짧게 나눠 듣는다. 두 모델은 서로의 답을 보지 않는다. 이때 질문까지 주면 원음 모델이 질문을 읽기 전에 들은 내용도 `before_question`에 남는다. 화면과 소리를 함께 읽거나 받아쓸 때도 Qwen을 쓴다.
 
 겹친 소리의 이름을 모르겠다면 `listen_layer(turn=N, start_s=2, end_s=5)`로 원음과 가장 크게 잡힌 성분, 그 성분을 빼고 남은 소리를 차례로 듣는다. 분리한 성분과 나머지를 더하면 16 kHz로 변환한 원음이 된다. 한 물체에서 난 소리가 두 쪽에 걸쳐 남을 수도 있다. 다른 성분을 고를 때는 `remainder=true`를 붙이면 같은 방식으로 비교할 수 있다.
 

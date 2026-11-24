@@ -734,7 +734,13 @@ class Viewing:
                 if describe:
                     with self.sound_session(replay=True) as sound:
                         comparison = {"mix_wav": original, "component": component} if focus else {}
+                        if independent_caption and question is not None:
+                            # Hear the recording before suggesting an interpretation. Each call
+                            # gets a new acoustic history and the same bounded PCM.
+                            first_impression = sound.read(playback, start, stop, **comparison)
                         result = sound.read(playback, start, stop, question=question, **comparison)
+                        if independent_caption and question is not None:
+                            result = {**result, "before_question": first_impression}
                 if gain:
                     result["playback_gain"] = gain
                     if sound_events:
@@ -1098,7 +1104,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             With sound_events=true, compare playback_sound_events at that volume with the original sound_events.
             The spectrum and matches use the signal before gain. native_audio includes the selected WAV.
             Set independent_caption=true for a separate reading of the original channels in shorter windows.
-            It hears no question or first reader answer. Compare their timing before accepting a source.
+            It hears no question or first reader answer. With a question, before_question also contains the
+            waveform reader’s first impression of the same samples before it received the question.
             With verify_sounds=true, two local encoders compare candidate captions against the original mix.
             Use describe=false for this check alone. Results are possible sounds, never a transcript.
             Provide identify_sounds with two or more source descriptions (or [] for AudioSet) to compare the

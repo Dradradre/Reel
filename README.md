@@ -7,7 +7,9 @@
 
 **[▶ Hear A, then B · 18 seconds](https://cdn.jsdelivr.net/gh/Dradradre/Reel@e9b9a19225546c9d1658f7309d7abe28f8673212/assets/door-demo.mp4)**
 
-[한국어](README.ko.md)  |  [Try your film](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md)
+**English** | [한국어](README.ko.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [Español](README.es.md)
+
+[Try your film](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md)
 
 # Eyes and ears for a language model
 

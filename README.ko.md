@@ -7,7 +7,9 @@
 
 **[▶ A와 B 직접 듣기 (18초)](https://cdn.jsdelivr.net/gh/Dradradre/Reel@e9b9a19225546c9d1658f7309d7abe28f8673212/assets/door-demo.mp4)**
 
-[English](README.md)  |  [내 영상으로 시작하기](#빠른-시작)  |  [측정 결과](#시험-결과)  |  [읽기 안내서](docs/READING.md)
+[English](README.md) | **한국어** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [Español](README.es.md)
+
+[내 영상으로 시작하기](#빠른-시작)  |  [측정 결과](#시험-결과)  |  [읽기 안내서](docs/READING.md)
 
 # 언어 모델의 눈과 귀
 

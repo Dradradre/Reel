@@ -1,29 +1,37 @@
+<a href="assets/door-demo.mp4">
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/door-at-cutoff.png">
-  <img src="assets/door-playback.gif" width="100%" alt="Reel. The same closed door stays on screen for 8.5 seconds. Recording A has a burst of sound starting at four seconds. Recording B stays low.">
+  <img src="assets/door-playback.gif" width="100%" alt="Reel. Same door, different answer. A makes GPT mention jingling. B leaves the sound unidentified. Click to hear both recordings and see the recorded answers.">
 </picture>
+</a>
 
-[한국어](README.ko.md)  |  [Quickstart](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md)
+**[▶ Hear A, then B · 18 seconds](assets/door-demo.mp4)**
+
+[한국어](README.ko.md)  |  [Try your film](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md)
 
 # Eyes and ears for a language model
 
-Reel lets a model watch a film one moment at a time. At each pause it gets the pictures and the sound recorded alongside them. It can look closer at a face, replay a sound from offscreen, or keep watching. Set `--until 8.5` and every replay stays inside those first 8.5 seconds.
+Give your agent a film. Let it watch, listen, look closer and replay what caught its attention. Reel delivers pictures and recorded sound on the same clock through MCP. Set `--until 8.5` and every observation stays inside the first 8.5 seconds.
 
 ## Before the door opens
 
-A closed door. A gold knob. **The first 204 frames are identical in A and B.** The two traces above come from their recordings, drawn at the same scale. We stopped both films before the door moved and asked GPT what it had seen and heard.
+**Same 204 frames. Different recordings. Different answers.** We stopped both films at 8.5 seconds, while the door was still closed.
 
-<details>
-<summary><strong>Open the two answers</strong></summary>
-
-| Recording | What GPT said about the sound |
+| A · keys in the recording | B · room tone only |
 |---|---|
-| A | “The audio analysis suggested a brief jingling or rattling sound, though I could not hear it directly.” |
-| B | “I could not tell what was making the faint background sound.” |
+| “The audio analysis suggested a brief jingling or rattling sound, though I could not hear it directly.” | “I could not tell what was making the faint background sound.” |
 
-Both answers describe a closed brown door with a gold knob. A contains a recording of keys starting at four seconds. B contains only the same room tone. In this run local Codex GPT received pictures and a local listener’s reading of the audio. It picked up the rattle and left its source open. [Recorded answers](docs/benchmarks/short-listening-turns.json) · [Hear the original keys, Joao_Janz (CC0)](https://freesound.org/people/Joao_Janz/sounds/485110/) · [Recreate both films](docs/door-trial.md#재현)
+In this run local Codex GPT received pictures and a local audio model’s reading of the recording. The video plays both complete 8.5-second excerpts at the same gain and displays the recorded answers. A contains keys from 4.0 to 6.73 seconds. GPT describes a rattle and leaves its source open. [Full responses](docs/benchmarks/short-listening-turns.json) · [Recreate the trial](docs/door-trial.md#재현) · [Key recording by Joao_Janz, CC0](https://freesound.org/people/Joao_Janz/sounds/485110/)
 
-</details>
+## Try it on an edit
+
+> Watch this cut. Find any moment where the picture stops while the sound carries on. Give me the time range and replay it.
+
+In the generated demo, the picture holds from **00:38 to 00:41** while the recording continues. Reel’s change trace and sound trace put both events on the same clock. The stills below show the approach, the hold and the return to motion.
+
+![The generated demo at 37.5, 38, 40 and 41 seconds. The middle two pictures hold while sound continues.](assets/freeze-replay.png)
+
+After watching that interval, the agent can call `observe(start_s=38, end_s=41)` to inspect its frames alongside the original audio. You can also ask about a subtitle, a repeated sound or a movement between two shots. [Demo source and planted timings](examples/make_demo.py) · [Replay tools](docs/READING.md#watching-a-little-at-a-time)
 
 ## Quickstart
 

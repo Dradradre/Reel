@@ -18,11 +18,22 @@ import numpy as np
 import soundfile as sf
 
 if find_spec("mcp"):
-    from reel.mcp_server import Viewing
+    from reel.mcp_server import Viewing, first_view_report
 
 
 @unittest.skipUnless(find_spec("mcp"), "MCP extra is not installed")
 class TransportTests(unittest.TestCase):
+    def test_first_view_groups_attacks_without_treating_a_missing_peak_as_silence(self):
+        report = dict(status="view", turn=1, start_s=0, end_s=1,
+                      audio={"signal": "nonzero", "attacks": {"events": []}})
+        self.assertEqual(first_view_report(report)["audio"], {"signal": "nonzero"})
+        events = [{"channels": [1, 2, 3], "time_s": .1}, {"channels": [1, 3], "time_s": .3}]
+        report["audio"]["attacks"]["events"] = events
+        compact = first_view_report(report)["audio"]["attacks"]
+        self.assertEqual(compact["by_channel"], [{"channels": [1, 3], "count": 2, "times_s": [.1, .3]},
+                                                 {"channels": [2], "count": 1, "times_s": [.1]}])
+        self.assertEqual(report["audio"]["attacks"]["events"], events)
+
     def setUp(self):
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)

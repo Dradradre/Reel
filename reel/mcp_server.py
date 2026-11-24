@@ -195,12 +195,26 @@ def first_view_report(report):
         result["speech"] = report["speech"]
     if report.get("audio"):
         audio = {}
+        events = report["audio"].get("attacks", {}).get("events", [])
+        if events:
+            times_by_channel = {}
+            for event in events:
+                for channel in event["channels"]:
+                    times_by_channel.setdefault(channel, []).append(event["time_s"])
+            shared = {}
+            for channel, times in sorted(times_by_channel.items()):
+                shared.setdefault(tuple(times), []).append(channel)
+            audio["attacks"] = {
+                "basis": "Sharp rises measured in the recording. One sound can produce several. "
+                         "Times are in film seconds and counts are per channel.",
+                "by_channel": [{"channels": channels, "count": len(times), "times_s": list(times)}
+                               for times, channels in shared.items()]}
         if "sound_events" in report["audio"]:
             audio["sound_events"] = report["audio"]["sound_events"]
         stereo = report["audio"].get("stereo_cues")
         if stereo and stereo.get("pairs") and stereo.get("windows"):
             audio["stereo_summary"] = summarize_stereo(stereo)
-        audio.update({k: v for k, v in report["audio"].items() if k not in ("band_changes", "stereo_cues")})
+        audio.update({k: v for k, v in report["audio"].items() if k not in ("band_changes", "stereo_cues", "attacks")})
         if "band_changes" in report["audio"]:
             audio["band_change_times_s"] = list(dict.fromkeys(c["time_s"] for c in report["audio"]["band_changes"]))
         result["audio"] = audio

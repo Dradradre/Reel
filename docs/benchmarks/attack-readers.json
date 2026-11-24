@@ -1,0 +1,1241 @@
+{
+ "reader": "gpt-6.1-terra",
+ "music_prompt": "The attached image and the following film-clock measurements describe the same short recording. How many distinct note attacks or percussive strikes can you distinguish during it? A sustained sound counts once if its start is audible. Continuous background noise counts as zero. Give your best single integer estimate in JSON as {\"count\":integer}.\n",
+ "everyday_prompt": "The attached image and the following film-clock measurements describe the same short recording. How many short foreground sounds stand out over the background? Count each distinct burst once. Continuous background sound counts as zero. Give your best single integer estimate in JSON as {\"count\":integer}.\n",
+ "protocol": [
+  "Each reading ran in a fresh signed-in local Codex session, reasoning effort low, shell and plugins disabled, with no API key. Native audio was off. The model got the anonymous first MCP view from an image client, including its images and measurements. The large Qwen waveform helper was off in both arms. The lightweight caption and speech paths stayed enabled.",
+  "The two arms used the same captured report and identical images. The before arm removed only audio.attacks. The prompt, images and other fields stayed the same. The reader did not get filenames, references or another session’s answers. Each panel shuffled presentation order using random.Random(104721).",
+  "Music tested the original timestamp list. Three clips in each of four reference-count strata (1 or fewer, 2–5, 6–12, over 12) were selected by SHA256(reel-blind-timing-v1/ + recording) from the 56 Modal holdouts and cut at 3.5 s, plus two controls. Everyday-first used ten mixtures and two background-only controls. Its responses informed a change to the compact presentation only.",
+  "Everyday-confirmation used 14 different ESC-50 original recordings, ten further foreground mixtures and two unmodified backgrounds. The compact field lists confirmed times and their count by channel. With no confirmed peaks the field is omitted. Repeated runs of the same input can yield different counts.",
+  "Absolute error is the sum of absolute count differences. Overcount and undercount refer to clip totals. The exploratory 95% interval resamples clips as pairs. Shared backgrounds and single model responses limit generalization."
+ ],
+ "music": {
+  "rows": [
+   {
+    "id": 0,
+    "recording": "drum-snare-drag.wav",
+    "reference": 3,
+    "seconds": 1.2617913832199545,
+    "before": 3,
+    "after": 3,
+    "supplied_attack_times_s": [
+     0.05603174603174603,
+     0.12807256235827663
+    ],
+    "report_sha256": "54d9cfa1da5504f9fac4609b2b5a8c8dc6191027009b5286b31947cfb0a7f29a",
+    "images_sha256": [
+     "75488176d3b37faaa32b98577eafb38199322ef506092f6d235e023a4e89211a"
+    ]
+   },
+   {
+    "id": 1,
+    "recording": "thisIsTheSoundOfAVocoder_edited.wav",
+    "reference": 10,
+    "seconds": 3.5,
+    "before": 5,
+    "after": 12,
+    "supplied_attack_times_s": [
+     0.22412698412698412,
+     0.5923356009070295,
+     0.6483673469387755,
+     1.3607709750566894,
+     1.464829931972789,
+     1.576893424036281,
+     1.7449886621315194,
+     1.8410430839002268,
+     2.0251473922902496,
+     2.641496598639456,
+     2.793582766439909,
+     2.929659863945578,
+     3.177800453514739,
+     3.257845804988662
+    ],
+    "report_sha256": "9a78a19ca7f819d8118aa72ca618d0d126a9d50b141e8b36e8e0bc124170e5a2",
+    "images_sha256": [
+     "191371d2d8db3673c33eda2252407e9ec46c7d325a05978eb88fea6146a1ffce"
+    ]
+   },
+   {
+    "id": 2,
+    "recording": "guitar_riff_cutup1.wav",
+    "reference": 16,
+    "seconds": 3.5,
+    "before": 11,
+    "after": 12,
+    "supplied_attack_times_s": [
+     0.024013605442176872,
+     0.4002267573696145,
+     0.5282993197278911,
+     0.7524263038548753,
+     1.1366439909297053,
+     1.5208616780045352,
+     2.0251473922902496,
+     2.401360544217687,
+     2.5214285714285714,
+     2.7615646258503403,
+     3.153786848072562,
+     3.257845804988662
+    ],
+    "report_sha256": "6f6da29ba0b677cd14c39c4aab544e57da3248197b782b80be8b945b396a10b5",
+    "images_sha256": [
+     "090f999a42395821485cdc0a4646e165676862e1707a3c725313f85460ed1ac1"
+    ]
+   },
+   {
+    "id": 3,
+    "recording": "sax-bari-lick.wav",
+    "reference": 9,
+    "seconds": 2.8028344671201815,
+    "before": 10,
+    "after": 6,
+    "supplied_attack_times_s": [
+     0.04002267573696145,
+     0.3281859410430839,
+     0.6643764172335601,
+     1.5608843537414967,
+     1.849047619047619,
+     2.1612244897959183
+    ],
+    "report_sha256": "5f6045ad6416a1ef73ce66ea7251ef5507f7bc64485446d79dc0f24029d2a570",
+    "images_sha256": [
+     "59c96c869e113d1db0143df14e8218d53f5b2f8618d3a239df4b64cde5e96110"
+    ]
+   },
+   {
+    "id": 4,
+    "recording": "guitar_chord2.wav",
+    "reference": 1,
+    "seconds": 3.5,
+    "before": 1,
+    "after": 1,
+    "supplied_attack_times_s": [
+     0.10405895691609977,
+     0.17609977324263038
+    ],
+    "report_sha256": "16ea637954e4fc56b045f4746a6f69162ded0972511d99e8024d05dc15469c00",
+    "images_sha256": [
+     "ed9161090195d967478a4b392fc43f442a4c7e0ae254ca93fa359f92bc98dc87"
+    ]
+   },
+   {
+    "id": 5,
+    "recording": "timbale-lick.wav",
+    "reference": 13,
+    "seconds": 3.5,
+    "before": 13,
+    "after": 13,
+    "supplied_attack_times_s": [
+     0.09605442176870749,
+     0.17609977324263038,
+     0.248140589569161,
+     0.3441950113378685,
+     0.4242403628117914,
+     0.5603174603174603,
+     0.7124036281179138,
+     0.8724943310657597,
+     1.04859410430839,
+     1.2006802721088434,
+     1.3607709750566894,
+     1.544875283446712
+    ],
+    "report_sha256": "37aa01b957849a9dbc22f475351e6b6fa6c5c4f445e9fb4d99a1e13723b927e3",
+    "images_sha256": [
+     "39be51a3da233a5a6ef2c39f8fbbea2bba35e417eb184327aa5a0a863cddcdb4"
+    ]
+   },
+   {
+    "id": 6,
+    "recording": "steady_room_noise",
+    "reference": 0,
+    "seconds": 2.0,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "889c77d7c8e2214d0249bbd323668534b221f77d5ab3876f7e84aafda5d8bd69",
+    "images_sha256": [
+     "48a45622810a1b01b9b5d8521f21a11edc9200c43d63d0c0bed717866d7f6919"
+    ]
+   },
+   {
+    "id": 7,
+    "recording": "mix2.wav",
+    "reference": 4,
+    "seconds": 3.5,
+    "before": 3,
+    "after": 2,
+    "supplied_attack_times_s": [
+     0.496281179138322,
+     0.552312925170068,
+     2.0011337868480727,
+     3.0737414965986396
+    ],
+    "report_sha256": "a484fe45fe7a60848dbec36ef14e76f6c7ac6e88f04544c6e630454821f53c97",
+    "images_sha256": [
+     "11921ad9b4164544f2d2c76edc25589d580f51370be088f6f298dbc2da1ceb2e"
+    ]
+   },
+   {
+    "id": 8,
+    "recording": "vocoder1.wav",
+    "reference": 17,
+    "seconds": 3.5,
+    "before": 12,
+    "after": 15,
+    "supplied_attack_times_s": [
+     0.048027210884353744,
+     0.25614512471655326,
+     0.44024943310657594,
+     0.6643764172335601,
+     1.04859410430839,
+     1.43281179138322,
+     1.6409297052154195,
+     2.0331519274376415,
+     2.4173696145124715,
+     2.5214285714285714,
+     2.617482993197279,
+     2.721541950113379,
+     2.8095918367346937,
+     3.025714285714286,
+     3.4019274376417235
+    ],
+    "report_sha256": "7656be12fc5b2d3751b1f81700f628b4e81c5c2522678e5b92b6d5c537c9deef",
+    "images_sha256": [
+     "36a003383f2c00a18bacc65951ed32368c6788a6a3c7df339a768215e615bab1"
+    ]
+   },
+   {
+    "id": 9,
+    "recording": "guitar-elec-solid-lick.wav",
+    "reference": 9,
+    "seconds": 3.5,
+    "before": 8,
+    "after": 9,
+    "supplied_attack_times_s": [
+     0.024013605442176872,
+     0.12006802721088436,
+     0.24013605442176872,
+     0.5843310657596372,
+     0.9125170068027211,
+     1.2086848072562357,
+     1.544875283446712,
+     1.9451020408163264,
+     2.4173696145124715
+    ],
+    "report_sha256": "c894c22b78968635eae3a3989d3ef6b43b04e9ad1096fc4c514d229875b524c5",
+    "images_sha256": [
+     "e78c62fe73e1ba0ce9212cdfa4c1c40dbcd6c3671d1acf10f94308b3b9d40e6f"
+    ]
+   },
+   {
+    "id": 10,
+    "recording": "piano_G2.wav",
+    "reference": 1,
+    "seconds": 3.5,
+    "before": 1,
+    "after": 1,
+    "supplied_attack_times_s": [
+     0.03201814058956916
+    ],
+    "report_sha256": "5dff40d8f5cf0d48a451d8eecaf2e91aeb2d0328842457a5bf93fe360b7fe543",
+    "images_sha256": [
+     "a0b8997efff2af83f035589fec101458e518c751cb7c9a5422e123f1e9c92a59"
+    ]
+   },
+   {
+    "id": 11,
+    "recording": "piano_chord.wav",
+    "reference": 4,
+    "seconds": 3.5,
+    "before": 1,
+    "after": 1,
+    "supplied_attack_times_s": [
+     0.11206349206349206
+    ],
+    "report_sha256": "ca41c0192e67ec8a4bc5633664982c87c5927a55bd4dead1318e60b8b3e12529",
+    "images_sha256": [
+     "ac75e41154acd6695dae9ec34764f2ab2d7ec592b746238d1129cc3f3ecee799"
+    ]
+   },
+   {
+    "id": 12,
+    "recording": "flute-alto-C.wav",
+    "reference": 1,
+    "seconds": 2.3065532879818593,
+    "before": 1,
+    "after": 1,
+    "supplied_attack_times_s": [],
+    "report_sha256": "c5d3f68f99a0cad3162a00e37b6dee5b5a2769fc6498537f297481a4cac27b7c",
+    "images_sha256": [
+     "2d8f358c50cb21530f7b6ac79bc56cea38c6761c79a6b0bc8044dc53332d204b"
+    ]
+   },
+   {
+    "id": 13,
+    "recording": "silence",
+    "reference": 0,
+    "seconds": 2.0,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "371b7026d27fee35b29690a32c7e03f57244cc6a10b4472949eead3e0f7154aa",
+    "images_sha256": [
+     "690f82eff66d1c201e29d5b78a1e1675c44a55af2d2eb87ce26f0a1a9c93c3e4"
+    ]
+   }
+  ],
+  "scores": {
+   "before": {
+    "exact": 7,
+    "absolute_error": 21,
+    "overcount": 1,
+    "undercount": 20
+   },
+   "after": {
+    "exact": 8,
+    "absolute_error": 16,
+    "overcount": 2,
+    "undercount": 14
+   },
+   "paired": {
+    "better": 4,
+    "worse": 2,
+    "tied": 8,
+    "clips": 14,
+    "mean_absolute_error_change_95pct_bootstrap": [
+     -1.071,
+     0.286
+    ]
+   }
+  }
+ },
+ "everyday_first": {
+  "rows": [
+   {
+    "id": 0,
+    "reference": 3,
+    "seconds": 2.0,
+    "mixture": 75,
+    "source": "coughing",
+    "background": "wind",
+    "snr_db": 6,
+    "added": true,
+    "before": 3,
+    "after": 3,
+    "supplied_attack_times_s": [
+     0.25614512471655326,
+     0.45625850340136054,
+     0.6163492063492063
+    ],
+    "report_sha256": "4556b362eff9a01b3f21982f87c5727daf6ce5430fdfde4662d8193b5f1fe09c",
+    "images_sha256": [
+     "056c2bcf20ced796fbf44261edb11d60a5d26a84f58c3b4efc33694d0ee6afbd"
+    ]
+   },
+   {
+    "id": 1,
+    "reference": 6,
+    "seconds": 2.0,
+    "mixture": 33,
+    "source": "footsteps",
+    "background": "wind",
+    "snr_db": 0,
+    "added": true,
+    "before": 6,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "3de825d683e98cc0b337a7c7c9f6d67436aa27b84f89a1ec0ba45270c361a588",
+    "images_sha256": [
+     "a256ca6b009b75dd1b5e9798f6030624776bcc59579aaf89e7124bf394894242"
+    ]
+   },
+   {
+    "id": 2,
+    "reference": 0,
+    "seconds": 2.0,
+    "mixture": 0,
+    "source": "can_opening",
+    "background": "washing_machine",
+    "snr_db": 0,
+    "added": false,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "ba6537867fe03c75b165d36256b7036355392ba3415b3c4761c255c3820eab92",
+    "images_sha256": [
+     "80fba7ba6db2c96ed768d9999be3ccf98123a6d11161d58329abef40bd76e909"
+    ]
+   },
+   {
+    "id": 3,
+    "reference": 6,
+    "seconds": 2.0,
+    "mixture": 21,
+    "source": "clock_tick",
+    "background": "engine",
+    "snr_db": 12,
+    "added": true,
+    "before": 6,
+    "after": 6,
+    "supplied_attack_times_s": [
+     0.20011337868480725,
+     0.29616780045351476,
+     0.38421768707482995,
+     0.496281179138322,
+     0.5843310657596372,
+     0.6803854875283447
+    ],
+    "report_sha256": "83aab8a25a35044341592d0d29eaf618b0548c3556aee04b4c6c66e0f1e774f3",
+    "images_sha256": [
+     "91fc35c6d0dadc455c134958d21c889843dd6fc89a40fb2b8a23dbcb4fa3580e"
+    ]
+   },
+   {
+    "id": 4,
+    "reference": 5,
+    "seconds": 2.0,
+    "mixture": 43,
+    "source": "glass_breaking",
+    "background": "rain",
+    "snr_db": 6,
+    "added": true,
+    "before": 2,
+    "after": 5,
+    "supplied_attack_times_s": [
+     0.21612244897959185,
+     0.35219954648526075,
+     0.5282993197278911,
+     0.6163492063492063,
+     0.6963945578231292
+    ],
+    "report_sha256": "1482de96472eb697bc902adcb47ef86fcdea9b66feceb9cb53d3d6abc7db5770",
+    "images_sha256": [
+     "f689f041e9bfa34e1fc38724d16f8708e2ad6cb4442b0b1b5167f6b825035359"
+    ]
+   },
+   {
+    "id": 5,
+    "reference": 4,
+    "seconds": 2.0,
+    "mixture": 31,
+    "source": "door_wood_knock",
+    "background": "rain",
+    "snr_db": 18,
+    "added": true,
+    "before": 4,
+    "after": 4,
+    "supplied_attack_times_s": [
+     0.248140589569161,
+     0.4242403628117914,
+     0.608344671201814,
+     0.7604308390022676
+    ],
+    "report_sha256": "f0834f667132ec12afc28eb396e28954722d98e16c410b57824fe1546710296f",
+    "images_sha256": [
+     "08a19b778aed70708dcfd90ad531f67c6a9421237936bc5fbe77de4ca89284ee"
+    ]
+   },
+   {
+    "id": 6,
+    "reference": 5,
+    "seconds": 2.0,
+    "mixture": 1,
+    "source": "can_opening",
+    "background": "washing_machine",
+    "snr_db": 0,
+    "added": true,
+    "before": 5,
+    "after": 5,
+    "supplied_attack_times_s": [
+     0.28015873015873016,
+     0.36820861678004535,
+     0.5122902494331065,
+     0.688390022675737,
+     0.8724943310657597
+    ],
+    "report_sha256": "8043c9b25d81e0f5fabd0e1d8804a6e91e35cec86a6a5c0b872b72e6a469ab6b",
+    "images_sha256": [
+     "cd131bc6e94330ab0edf2ca0fed3a950e372366311deef0ab1f4c7441a53e4d4"
+    ]
+   },
+   {
+    "id": 7,
+    "reference": 5,
+    "seconds": 2.0,
+    "mixture": 63,
+    "source": "mouse_click",
+    "background": "rain",
+    "snr_db": 18,
+    "added": true,
+    "before": 5,
+    "after": 5,
+    "supplied_attack_times_s": [
+     0.28816326530612246,
+     0.44024943310657594,
+     0.5683219954648526,
+     0.6803854875283447,
+     0.8244671201814059
+    ],
+    "report_sha256": "bff7808e106d61887926537fe10c736b20acc28994d5c8c25032f93673467854",
+    "images_sha256": [
+     "c950add53c5b8e1db3dd59e8199091de5ee5981a51c1dbe65aebf3ff5c5d2de5"
+    ]
+   },
+   {
+    "id": 8,
+    "reference": 4,
+    "seconds": 2.0,
+    "mixture": 65,
+    "source": "water_drops",
+    "background": "washing_machine",
+    "snr_db": 0,
+    "added": true,
+    "before": 3,
+    "after": 4,
+    "supplied_attack_times_s": [
+     0.24013605442176872,
+     0.38421768707482995,
+     0.5122902494331065,
+     0.7043990929705215
+    ],
+    "report_sha256": "25c50d0acc60f230b525a5213e850ce91ca95349f403b81947d2a33edf6fca73",
+    "images_sha256": [
+     "0e9a31239f53b217a3da6e0bb351973bc22760d382a212d84cd91ad02bfa43e1"
+    ]
+   },
+   {
+    "id": 9,
+    "reference": 0,
+    "seconds": 2.0,
+    "mixture": 30,
+    "source": "door_wood_knock",
+    "background": "rain",
+    "snr_db": 18,
+    "added": false,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "00c5dad8e8a49e2aee1f5488745f44534b03ede6facd968df7b5195b74ce424f",
+    "images_sha256": [
+     "092163701cb519bd76b13722793454a27ae91de2f831768650db7a118318b3fe"
+    ]
+   },
+   {
+    "id": 10,
+    "reference": 8,
+    "seconds": 2.0,
+    "mixture": 53,
+    "source": "keyboard_typing",
+    "background": "washing_machine",
+    "snr_db": 12,
+    "added": true,
+    "before": 8,
+    "after": 8,
+    "supplied_attack_times_s": [
+     0.28015873015873016,
+     0.4002267573696145,
+     0.5603174603174603,
+     0.7284126984126984,
+     0.8885034013605442,
+     0.9765532879818594,
+     1.1606575963718821,
+     1.3527664399092971
+    ],
+    "report_sha256": "e69193f52a34f8f1116a29602e378492bca0b05d704ff99ed0f2d7b2ce945003",
+    "images_sha256": [
+     "b5d43b15fee9bf0b0e8dc0b3bf3921cb11208e20a32a03f190142d0b4890f748"
+    ]
+   },
+   {
+    "id": 11,
+    "reference": 7,
+    "seconds": 2.0,
+    "mixture": 11,
+    "source": "clapping",
+    "background": "rain",
+    "snr_db": 6,
+    "added": true,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [
+     0.28816326530612246,
+     0.4002267573696145,
+     0.5923356009070295,
+     0.7284126984126984,
+     0.8965079365079365,
+     1.0726077097505669,
+     1.216689342403628
+    ],
+    "report_sha256": "3236f02143dcf88d89ca0841644daa13557fe6c1a5a236e8841ddc92954bad9f",
+    "images_sha256": [
+     "8ad6b807bd243f498c2848029865ac301ea6cd64edf913a8cb4489d244a60b9e"
+    ]
+   }
+  ],
+  "scores": {
+   "before": {
+    "exact": 9,
+    "absolute_error": 11,
+    "overcount": 0,
+    "undercount": 11
+   },
+   "after": {
+    "exact": 10,
+    "absolute_error": 13,
+    "overcount": 0,
+    "undercount": 13
+   },
+   "paired": {
+    "better": 2,
+    "worse": 1,
+    "tied": 9,
+    "clips": 12,
+    "mean_absolute_error_change_95pct_bootstrap": [
+     -0.75,
+     1.417
+    ]
+   }
+  },
+  "inputs": [
+   {
+    "recording": "1-69165-A-34.wav",
+    "category": "can_opening",
+    "sha256": "03eb42cf470d82385d60cbc5b946b4f4d8fa1c378835996930162d80e1580071"
+   },
+   {
+    "recording": "4-189832-A-22.wav",
+    "category": "clapping",
+    "sha256": "18ae26ef98e957692b8ee2ba4405adfd99f864ad589470501c90bf10193bd123"
+   },
+   {
+    "recording": "2-88724-A-38.wav",
+    "category": "clock_tick",
+    "sha256": "ba63b4175b60e54464f7bbec4b91f1f9345323221fe48655dc31c48be72312d6"
+   },
+   {
+    "recording": "1-101336-A-30.wav",
+    "category": "door_wood_knock",
+    "sha256": "e738266e395e378102f74e0920b05ff5937543788420d5b2a6b8d3df8bdb3910"
+   },
+   {
+    "recording": "3-94343-A-25.wav",
+    "category": "footsteps",
+    "sha256": "975e559e9ac1a97093a4b9bc61344bf15b1ce4b4f76a88a6cf8184c197e9e634"
+   },
+   {
+    "recording": "3-203373-A-39.wav",
+    "category": "glass_breaking",
+    "sha256": "beb0605537f3fe20e98b54f19f20842d92b7a95f9408dee41e620a8955b33111"
+   },
+   {
+    "recording": "3-155570-A-32.wav",
+    "category": "keyboard_typing",
+    "sha256": "d9a50c67926f09ea4f9b1530182634ebf958f4cb17508ab1c2d3e89d93a73b37"
+   },
+   {
+    "recording": "5-223103-A-31.wav",
+    "category": "mouse_click",
+    "sha256": "e5a00c7f09302123faf9f94ba731413b8025566cdb818785169045e0248980c4"
+   },
+   {
+    "recording": "3-160119-A-15.wav",
+    "category": "water_drops",
+    "sha256": "28c8678f97375100236a78fb738110aab8e571400a5c707fdcf5c49e0247e31f"
+   },
+   {
+    "recording": "1-30830-A-24.wav",
+    "category": "coughing",
+    "sha256": "e0374e3191067ad9a63df3ae9157e0ca44a36f4f1fa7586982609565683f6a13"
+   },
+   {
+    "recording": "1-50060-A-10.wav",
+    "category": "rain",
+    "sha256": "cc8119be878eafdc69f7408dad614493a238174372eebf75e4c8314d1bb9807d"
+   },
+   {
+    "recording": "5-157204-A-16.wav",
+    "category": "wind",
+    "sha256": "5334617e6eb886d8dbdb1c19dedeb9a0e033e2d9448ce9ad409061db6f9324f6"
+   },
+   {
+    "recording": "1-23996-B-35.wav",
+    "category": "washing_machine",
+    "sha256": "ca674e8520adea211f45e60eb86ae13f1be91e976afb82427ad61cb814142a2f"
+   },
+   {
+    "recording": "1-18527-A-44.wav",
+    "category": "engine",
+    "sha256": "83eb3e6065246fd87d1acbbe414aa5bfb7c2081a57c188713cdc017819ffc38f"
+   }
+  ],
+  "all_80_mixes_and_controls": {
+   "band_changes": {
+    "matched": 66,
+    "missed": 152,
+    "extra": 127,
+    "f1": 0.3212
+   },
+   "band_rises": {
+    "matched": 66,
+    "missed": 152,
+    "extra": 108,
+    "f1": 0.3367
+   },
+   "attacks": {
+    "matched": 189,
+    "missed": 29,
+    "extra": 9,
+    "f1": 0.9087
+   }
+  },
+  "background_only_marks": {
+   "rain": 5,
+   "engine": 0,
+   "washing_machine": 0,
+   "wind": 0
+  }
+ },
+ "everyday_confirmation": {
+  "rows": [
+   {
+    "id": 0,
+    "reference": 5,
+    "seconds": 2.0,
+    "mixture": 27,
+    "source": "keyboard_typing",
+    "background": "wind",
+    "snr_db": 6,
+    "added": true,
+    "before": 5,
+    "after": 5,
+    "supplied_attack_times_s": [
+     0.21612244897959185,
+     0.3281859410430839,
+     0.47226757369614514,
+     0.5923356009070295,
+     0.800453514739229
+    ],
+    "report_sha256": "0d530fd1897cfe688adecbf3d0e1cb6346ac8e791438d4c0e9613d13af3a1356",
+    "images_sha256": [
+     "3589f0d7b1676fc42a2c4b6d62fbee719db63a209a4352d540ee6b353020c53d"
+    ]
+   },
+   {
+    "id": 1,
+    "reference": 5,
+    "seconds": 2.0,
+    "mixture": 17,
+    "source": "mouse_click",
+    "background": "rain",
+    "snr_db": 0,
+    "added": true,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [
+     0.22412698412698412,
+     0.3201814058956916,
+     0.44825396825396824,
+     0.496281179138322,
+     0.6323582766439909,
+     0.7684353741496599,
+     0.9685487528344672,
+     1.0565986394557823,
+     1.5048526077097506,
+     1.6089115646258503,
+     1.8570521541950114
+    ],
+    "report_sha256": "4704786587d6e7d52198e610578890835f00b3a4960fde2ce0abb01f19d1fe6c",
+    "images_sha256": [
+     "16885660c8806e041843008055a0612521ec9b0abf644c19aacf06903ad0ff19"
+    ]
+   },
+   {
+    "id": 2,
+    "reference": 5,
+    "seconds": 2.0,
+    "mixture": 59,
+    "source": "clock_tick",
+    "background": "wind",
+    "snr_db": 6,
+    "added": true,
+    "before": 5,
+    "after": 5,
+    "supplied_attack_times_s": [
+     0.28015873015873016,
+     0.36820861678004535,
+     0.5443083900226757,
+     0.6403628117913832,
+     0.800453514739229
+    ],
+    "report_sha256": "bf0611a684d6b5ead8cf098f69e4882f9cff1b9dfdd1645f4cb931d5b0bf05eb",
+    "images_sha256": [
+     "2e70a724b3c646e91563e6ba4d9b900e2069c95ee44a2f9226375e7362d36b2a"
+    ]
+   },
+   {
+    "id": 3,
+    "reference": 0,
+    "seconds": 2.0,
+    "mixture": 56,
+    "source": "clock_tick",
+    "background": "washing_machine",
+    "snr_db": 0,
+    "added": false,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "c4736d494d016866d7903204a06e2c5e68a9df5b9d6e348419901531eccfe80e",
+    "images_sha256": [
+     "58fec158f957f2606a55ebaebcfb0d93d449a3902c67c587c740d139657faecf"
+    ]
+   },
+   {
+    "id": 4,
+    "reference": 4,
+    "seconds": 2.0,
+    "mixture": 5,
+    "source": "coughing",
+    "background": "engine",
+    "snr_db": 12,
+    "added": true,
+    "before": 4,
+    "after": 4,
+    "supplied_attack_times_s": [
+     0.1600907029478458,
+     0.23213151927437642,
+     0.35219954648526075,
+     0.5042857142857143,
+     0.7043990929705215,
+     0.9685487528344672,
+     1.2086848072562357,
+     1.464829931972789,
+     1.7529931972789117
+    ],
+    "report_sha256": "6bf7856dd49b353f9a8a27531d19b92f7e9db08b6910d193b6ab9183c2c72aa9",
+    "images_sha256": [
+     "e0861ca5056f48c6787b8e3aae689e5820271a3071695d1f7ea2be939a07933f"
+    ]
+   },
+   {
+    "id": 5,
+    "reference": 4,
+    "seconds": 2.0,
+    "mixture": 37,
+    "source": "glass_breaking",
+    "background": "rain",
+    "snr_db": 12,
+    "added": true,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [
+     0.23213151927437642,
+     0.44825396825396824,
+     0.5363038548752834,
+     0.688390022675737,
+     1.2727210884353741,
+     1.5528798185941044,
+     1.7449886621315194,
+     1.8330385487528345
+    ],
+    "report_sha256": "aecfcd98fccdcc836187ecd04c73acb11ea94fe2f21c0ad733273acb2120d847",
+    "images_sha256": [
+     "65d57dff94a56d9722c9b4cae5aa0ae449e8aa9f88841753919bebcc49156dd3"
+    ]
+   },
+   {
+    "id": 6,
+    "reference": 4,
+    "seconds": 2.0,
+    "mixture": 79,
+    "source": "can_opening",
+    "background": "rain",
+    "snr_db": 18,
+    "added": true,
+    "before": 3,
+    "after": 7,
+    "supplied_attack_times_s": [
+     0.24013605442176872,
+     0.35219954648526075,
+     0.45625850340136054,
+     0.6563718820861678,
+     1.4007936507936507,
+     1.6489342403628118,
+     1.9130839002267575
+    ],
+    "report_sha256": "c8865247da169da407128816023e787a7a4609913d2d0cb2736fc489e2707ceb",
+    "images_sha256": [
+     "db35c234721f49444448fb83e992aafdef279258615447138990a5f2286a0fea"
+    ]
+   },
+   {
+    "id": 7,
+    "reference": 7,
+    "seconds": 2.0,
+    "mixture": 15,
+    "source": "water_drops",
+    "background": "washing_machine",
+    "snr_db": 18,
+    "added": true,
+    "before": 7,
+    "after": 7,
+    "supplied_attack_times_s": [
+     0.26414965986394556,
+     0.47226757369614514,
+     0.6163492063492063,
+     0.7684353741496599,
+     0.8804988662131519,
+     1.0325850340136054,
+     1.216689342403628
+    ],
+    "report_sha256": "1d3c28a8ae0eb5ee88d677482537ffca018769392f8d92f1ddfbca0f44d415f5",
+    "images_sha256": [
+     "eb78dcf23b3a196d396d822cc67eedbda822d77f3373ba09dd3066fe9afb2896"
+    ]
+   },
+   {
+    "id": 8,
+    "reference": 7,
+    "seconds": 2.0,
+    "mixture": 47,
+    "source": "footsteps",
+    "background": "engine",
+    "snr_db": 18,
+    "added": true,
+    "before": 7,
+    "after": 7,
+    "supplied_attack_times_s": [
+     0.22412698412698412,
+     0.39222222222222225,
+     0.48027210884353744,
+     0.6403628117913832,
+     0.8564852607709751,
+     1.0085714285714287,
+     1.104625850340136
+    ],
+    "report_sha256": "eeca6194926779e30c998a52aad3d2aa56732726414f3a1afff4c037dd348309",
+    "images_sha256": [
+     "3d300e1a7c591eaaa9b7b0de6f4c4e69a0daa030c42acf5492d40eabdc662db6"
+    ]
+   },
+   {
+    "id": 9,
+    "reference": 3,
+    "seconds": 2.0,
+    "mixture": 69,
+    "source": "clapping",
+    "background": "engine",
+    "snr_db": 12,
+    "added": true,
+    "before": 3,
+    "after": 3,
+    "supplied_attack_times_s": [
+     0.28816326530612246,
+     0.4242403628117914,
+     0.5923356009070295,
+     1.0726077097505669,
+     1.3127437641723356,
+     1.544875283446712
+    ],
+    "report_sha256": "f2a4e869b1d60ac91c87debda40e04d0859e9be1faf7165d66e95d7a8cfdbf95",
+    "images_sha256": [
+     "0cf251254c0d973de29c679f0655036d467d5fbdeaf1cd8d7831bda689e1a292"
+    ]
+   },
+   {
+    "id": 10,
+    "reference": 0,
+    "seconds": 2.0,
+    "mixture": 18,
+    "source": "mouse_click",
+    "background": "washing_machine",
+    "snr_db": 6,
+    "added": false,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "36169c8ebf047eab576391fac3444c145ea859965a74b1c81a92ec274c96ad43",
+    "images_sha256": [
+     "32b0606b38f7cd6fcea8b4825ac993b73b181ef21d328b53080bc45b2738009c"
+    ]
+   },
+   {
+    "id": 11,
+    "reference": 8,
+    "seconds": 2.0,
+    "mixture": 49,
+    "source": "door_wood_knock",
+    "background": "wind",
+    "snr_db": 0,
+    "added": true,
+    "before": 0,
+    "after": 0,
+    "supplied_attack_times_s": [],
+    "report_sha256": "1a3b93079a72a565946ba8026e5fd5057eecbbefe83604bc57b38b2f680142bc",
+    "images_sha256": [
+     "b3fde22d847cbf1d1a280f19b7b05b1f5c725a8fc727fb84ca2477854a4f4106"
+    ]
+   }
+  ],
+  "scores": {
+   "before": {
+    "exact": 8,
+    "absolute_error": 18,
+    "overcount": 0,
+    "undercount": 18
+   },
+   "after": {
+    "exact": 8,
+    "absolute_error": 20,
+    "overcount": 3,
+    "undercount": 17
+   },
+   "paired": {
+    "better": 0,
+    "worse": 1,
+    "tied": 11,
+    "clips": 12,
+    "mean_absolute_error_change_95pct_bootstrap": [
+     0.0,
+     0.5
+    ]
+   }
+  },
+  "inputs": [
+   {
+    "recording": "4-201988-A-44.wav",
+    "category": "engine",
+    "sha256": "6e42b414c1b9a63712d74475f21afefc6553aa446c46b0b03ad8de40e061a3c0"
+   },
+   {
+    "recording": "3-151269-A-35.wav",
+    "category": "washing_machine",
+    "sha256": "a36007dc9716a76d7aedbd05afa4a99c72cacaccb442eccb2dda4cb74f3849db"
+   },
+   {
+    "recording": "3-134699-B-16.wav",
+    "category": "wind",
+    "sha256": "4836977a0362e609b42dcc47811190268da98d573cecc7a8a4270db979ecea54"
+   },
+   {
+    "recording": "5-203739-A-10.wav",
+    "category": "rain",
+    "sha256": "226ca7d5b50f0b45fed093765ac1eb3d243812c7940cec7c7d696aa65e67f447"
+   },
+   {
+    "recording": "3-151213-A-24.wav",
+    "category": "coughing",
+    "sha256": "36a0a9a4ac42558cf3836d94e834fe376eb21a80d8f74349f98441a6cabfac50"
+   },
+   {
+    "recording": "4-168155-A-15.wav",
+    "category": "water_drops",
+    "sha256": "2cd2ad18953fa15ac00e34417479f1021d9f01afdfc193aeaa486c1a3473313e"
+   },
+   {
+    "recording": "4-195305-A-31.wav",
+    "category": "mouse_click",
+    "sha256": "f9b5643fb1c14e0927d00bca35e34d8ea1dc7cc92606f6210a1c753407c4efbc"
+   },
+   {
+    "recording": "2-99796-A-32.wav",
+    "category": "keyboard_typing",
+    "sha256": "31bdd426e490ee983bb2643cf5b02cb36aaa194eb0acced143671ea16c30934e"
+   },
+   {
+    "recording": "2-250710-A-39.wav",
+    "category": "glass_breaking",
+    "sha256": "ca0b7286ded500bd1f1928ef96ad5c35704bec66a790181afeb17ec7d995dbac"
+   },
+   {
+    "recording": "3-94344-A-25.wav",
+    "category": "footsteps",
+    "sha256": "3cc287735d092ad54971f68131d02130b80e9a728fdd4b1aede9f7623c6bf7b7"
+   },
+   {
+    "recording": "5-256512-A-30.wav",
+    "category": "door_wood_knock",
+    "sha256": "df74f2bee45f36c528a27035f0a8b50c71b833a6e7c8c39f42a0f4448f968dbf"
+   },
+   {
+    "recording": "2-141584-A-38.wav",
+    "category": "clock_tick",
+    "sha256": "b87b57fe9099b0eaf893274145d5237d2da3228dd9b641f473273dcd6759f3a3"
+   },
+   {
+    "recording": "3-149465-A-22.wav",
+    "category": "clapping",
+    "sha256": "ee4fb4e272d455fba80256516334d4842a3d3206f3653fd5e3f37c42e1372bf1"
+   },
+   {
+    "recording": "4-216349-A-34.wav",
+    "category": "can_opening",
+    "sha256": "59ad6294e91d66a73ed8cba1c90b61abe5f46900b0e73fe15357b1018e58114b"
+   }
+  ],
+  "all_80_mixes_and_controls": {
+   "band_changes": {
+    "matched": 56,
+    "missed": 162,
+    "extra": 178,
+    "f1": 0.2478
+   },
+   "band_rises": {
+    "matched": 56,
+    "missed": 162,
+    "extra": 140,
+    "f1": 0.2705
+   },
+   "attacks": {
+    "matched": 202,
+    "missed": 16,
+    "extra": 212,
+    "f1": 0.6392
+   }
+  },
+  "background_only_marks": {
+   "rain": 60,
+   "engine": 78,
+   "washing_machine": 0,
+   "wind": 0
+  }
+ },
+ "door": {
+  "until_s": 8.5,
+  "protocol": "Current compact MCP view, fresh signed-in sessions, no Qwen helper. A and C are byte-identical across all returned text and image blocks before the cutoff, with different futures. A listen extending past the cutoff was rejected. Only A and B were read by GPT.",
+  "answers": {
+   "A": {
+    "turns": 2,
+    "caption": "A closed brown door remains still against a plain wall while a brief jingling and rattling sound is heard.",
+    "heard": "A sound reading described brief jingling and rattling, possibly from keys.",
+    "seen": "A closed brown door remained still against a plain wall."
+   },
+   "B": {
+    "turns": 2,
+    "caption": "A simple animation shows a closed brown door in a beige wall.",
+    "heard": "I could not tell what was making the faint background sound.",
+    "seen": "A closed brown door sits in a beige wall above a dark floor."
+   }
+  },
+  "hashes": {
+   "A": {
+    "hashes": [
+     "64f53a35dd087ca3500a670025a68cd6ab1cdc3df718093a62d213edc745889f",
+     "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+     "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+     "0868d159b01e655588c259e1176b91cc9145b85faf08bd354c483b928d98de39",
+     "444d91834018d956584fac53cdc196d6ab9189303200b757b61a8d3c30314904",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "4bcfe5841a8f4ca3531c34e10027951b6424e7b7df746c9e33380e3a93a2d475",
+     "2de7e128dcad412ffa0e77e0893b08303a4a2284fb710dc577702b3715a3828c",
+     "9e8ecb21cc33c68e611abfe7a7262e5209b249450271596921532df4b167195e",
+     "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+     "cad59eaf32a59d8a4846518c74273ef006fa96a5dfe7e9a64880e762cc3d2ec8",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "49a6bf37e1b88c0317a8adbdc372ef069283fd23e850c50967b1d5cc464d45fe",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     1,
+     1
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "C": {
+    "hashes": [
+     "64f53a35dd087ca3500a670025a68cd6ab1cdc3df718093a62d213edc745889f",
+     "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+     "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+     "0868d159b01e655588c259e1176b91cc9145b85faf08bd354c483b928d98de39",
+     "444d91834018d956584fac53cdc196d6ab9189303200b757b61a8d3c30314904",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "4bcfe5841a8f4ca3531c34e10027951b6424e7b7df746c9e33380e3a93a2d475",
+     "2de7e128dcad412ffa0e77e0893b08303a4a2284fb710dc577702b3715a3828c",
+     "9e8ecb21cc33c68e611abfe7a7262e5209b249450271596921532df4b167195e",
+     "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+     "cad59eaf32a59d8a4846518c74273ef006fa96a5dfe7e9a64880e762cc3d2ec8",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "49a6bf37e1b88c0317a8adbdc372ef069283fd23e850c50967b1d5cc464d45fe",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     1,
+     1
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "B": {
+    "hashes": [
+     "e97aadbb43ca7c5fa16f23b0be7f55664f3c32bfb0714e623d7cf1e18e55dd79",
+     "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+     "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+     "d3b8ad564b6491ffc284ac118fca0249b44ad8581333d9ae03d4ecccde7bf48a",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "d0a78e3dbc9ddfaf727dc3d8ec967cf431b35fb48836d576fc5e0a4710c9e112",
+     "ab0c308ab9528dceb7d7289e6c82ca2d6293c92c992f3979aa716cdc47113798",
+     "71cfb358d97685669be4f3d60cc331140ba31c8f9b87d20d2aef1b8d5eb19b60",
+     "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "af349e60c813c596d3240dd209dfd044f427f440531a60974b741f57c734f00d",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     1,
+     1
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "silent": {
+    "hashes": [
+     "7dbc5a48980fb4e51754e406804d14e3a721838352ee31965468d844ed95a962",
+     "abf29132af3d8711dec2bc49293383bcc1c2ea0e03ec13737dba9dc147969d8f",
+     "d1f2cd46c7b83c4bfb48e84264cf9f6fcfe882d66721ea3da9551135fbff1183",
+     "9212f57f6dcc2f005c94c6e792369e0eba07c19fa505c35bfcf7aa04e6f86be2",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "c6f1c15d87fe14890a8dbb5797570e6fe366de9e43d29a6936eb0af5ec698097",
+     "357e79fd70431b0f60cad3d9fb2c5879d5b9107f870e328fead768eef56e8060",
+     "606763c6f07da800c9731fffb39a92c7acda7b809597ee44cc85962c845058c2",
+     "11cfe1a9a46f6a766252ed0392d37b58e449415f143bd298df3ec9def42647fd",
+     "bbe81c6c4dca0300c1f4429f61ea7f6a02c2d506170ce62779df760d760bb37a",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     0,
+     0
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "picture": {
+    "hashes": [
+     "459e2df1c1fa8895140fd37817cac3069b25a56242a5ea7d668807d1762f227c",
+     "c81505d483b73f2a3eac4f129b20c1ba8498e862fee9142fe5ec0de3ff44ea0d",
+     "33f43523aeb0e57b7ae51de0d6dde732899057b6a92cf1e20df8cdaccb9e5a93",
+     "a1d7771138da4f2ad5b83123adea1a00b9f8611650217f7dc1c7971fb9a48a63",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "34e00e8707907ce70feb56efed57b28e160f9cd53b5f4f5e78894b764d4214f1",
+     "87400b24d2c2c14118847108909075cbdc4c969d8a1b754197935680bbdb3bd3",
+     "f4477e9af854079480d37da3109511bb032075b1959db05734cc293a7202e373",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     0,
+     0
+    ],
+    "turns": 2,
+    "end_s": 8.499
+   }
+  }
+ },
+ "runtime": {
+  "channels": 2,
+  "rate_hz": 48000,
+  "block_s": 0.1,
+  "samples": 500,
+  "median_ms": 0.388,
+  "p95_ms": 0.436,
+  "scope": "onset detector only, 100 initial warmup blocks, M4 Pro"
+ }
+}

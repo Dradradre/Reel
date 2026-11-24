@@ -108,6 +108,8 @@ Se introdujeron errores de montaje en una selección de 26 vídeos de distintos 
 
 ## Opciones de reproducción
 
+Si se superponen dos sonidos, prepara el separador con `reel setup --layers` y llama a `listen_layer(turn=N, start_s=2, end_s=5)`. Recibirás la grabación original, el componente de mayor nivel estimado y lo que queda al restarlo del original. Cada señal tiene su espectrograma y los clientes con audio también pueden recibir los tres WAV. Para que un segundo modelo describa la grabación por separado, usa `independent_caption=true` en `listen`.
+
 Para activar la descripción local del sonido y el reconocimiento del habla, ejecuta estos comandos en el entorno virtual activo.
 
 ```bash

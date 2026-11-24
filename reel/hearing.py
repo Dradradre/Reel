@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import argparse
-from contextlib import redirect_stdout
+from contextlib import nullcontext, redirect_stdout
 import json
 import math
 import os
@@ -16,12 +16,12 @@ import numpy as np
 if __package__:
     from .joint import ANALYSIS_SAMPLES, RATE, encoder_waveform
     from .local_reader import LocalReader
-    from .common import open_recording
+    from .common import open_recording, sample_boundary
     from .config import HEAR_ENV, HEAR_PY, MODELS
 else:
     from joint import ANALYSIS_SAMPLES, RATE, encoder_waveform
     from local_reader import LocalReader
-    from common import open_recording
+    from common import open_recording, sample_boundary
     from config import HEAR_ENV, HEAR_PY, MODELS
 
 MODEL = "mlx-community/Qwen3-Omni-30B-A3B-Instruct-8bit"
@@ -65,9 +65,12 @@ def weights(download=False):
     raise OSError("local audio model missing; run reel setup --describe-sounds")
 
 
-def load_encoder_audio(wav):
+def load_encoder_audio(wav, start=None, end=None):
     with open_recording(wav) as recording:
-        return encoder_waveform(recording.read(dtype="float32", always_2d=True), recording.samplerate)
+        count = -1
+        if start is not None:
+            count = max(0, sample_boundary(end, recording.samplerate) - sample_boundary(start, recording.samplerate))
+        return encoder_waveform(recording.read(count, dtype="float32", always_2d=True), recording.samplerate)
 
 
 def measured_spectrum(samples, rate):
@@ -264,17 +267,18 @@ class WaveListener:
 
 
 class ListeningHistory:
-    def __init__(self, describe):
+    def __init__(self, describe, model=MODEL):
+        self.model = model
         self.describe = describe
         self.previous = None
         self.end = None
         self.start = None
 
     def read(self, wav, start, end, remember, question=None, mix_wav=None, component="mix"):
-        signal = load_encoder_audio(mix_wav or wav)
+        signal = load_encoder_audio(mix_wav or wav, start, end)
         focus = None
         if mix_wav is not None:
-            focus = load_encoder_audio(wav)
+            focus = load_encoder_audio(wav, start, end)
             if focus.shape != signal.shape or remember:
                 raise ValueError("compare two recordings of the same released interval")
         if not len(signal):
@@ -353,7 +357,7 @@ class ListeningHistory:
         self.start = previous_start if remember else None
         self.end = end if remember else None
         return {**({"question": question} if question is not None else {}),
-                "status": "available", "model": MODEL, "encoder_rate_hz": RATE,
+                "status": "available", "model": self.model, "encoder_rate_hz": RATE,
                 "basis": ("The reader heard the filtered channel and the same original channel together. "
                           "Its description and measured profile refer to the original. " if focus is not None else "")
                          + "Audio-only model impressions over the stated windows. Source guesses are fallible. "
@@ -368,6 +372,35 @@ class ListeningHistory:
 class SoundReader(LocalReader):
     def __init__(self):
         super().__init__([HEAR_PY, str(Path(__file__).resolve()), "--serve"], MODEL)
+        if __package__:
+            from . import flamingo
+        else:
+            import flamingo
+        self.waveform = None
+        backend = os.environ.get("REEL_AUDIO_READER", "qwen")
+        if backend not in ("qwen", "flamingo"):
+            raise ValueError("REEL_AUDIO_READER must be qwen or flamingo")
+        if backend == "flamingo":
+            self.waveform = LocalReader([sys.executable, str(Path(flamingo.__file__).resolve()), "--serve"], flamingo.MODEL)
+
+    def for_replay(self):
+        if self.waveform is not None and self.waveform.process is not None:
+            return nullcontext(self)
+        return super().for_replay()
+
+    def close(self):
+        if self.waveform is not None:
+            self.waveform.close()
+        super().close()
+
+    def request(self, job):
+        if self.waveform is not None and self.process is None and not job.get("operation") and not job.get("mix_wav"):
+            return self.waveform.request(job)
+        # Qwen handles joint, transcription and paired-waveform operations. Retire
+        # the audio-only worker before loading the larger model in this session.
+        if self.waveform is not None:
+            self.waveform.close()
+        return super().request(job)
 
     def transcribe(self, samples):
         """Read one private 16 kHz mono window, without a picture or proposed words."""

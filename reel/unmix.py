@@ -188,8 +188,10 @@ class LayerReader(LocalReader):
         self.matcher.__exit__(*args)
         super().__exit__(*args)
 
-    def inspect(self, directory, start, end, channel, layer=None, focus=None):
-        if (layer is None) == (focus is None) or (focus is not None and not focus.strip()):
+    def inspect(self, directory, start, end, channel, layer=None, focus=None, remainder=False):
+        if layer is None and focus is None:
+            layer, remainder = 1, True
+        if (layer is not None and focus is not None) or (focus is not None and not focus.strip()):
             raise ValueError("choose one layer rank or describe a sound to focus on")
         if not 0 <= start < end or end - start > MAX_SECONDS or channel < 1 or (layer is not None and not 1 <= layer <= 8):
             raise ValueError(f"choose a channel, layer 1 to 8 and a film interval of at most {MAX_SECONDS} seconds")
@@ -220,6 +222,18 @@ class LayerReader(LocalReader):
                 response["selected_layer"] = rank
                 if rank:
                     response["layer_wav"] = candidates[rank - 1]
+        if remainder and response.get("layer_wav"):
+            # Subtract at the separator's sample rate and scale, before restoring the native mix.
+            import soundfile as sf
+            mix, mix_rate = sf.read(response["mix_wav"], dtype="float32")
+            part, part_rate = sf.read(response["layer_wav"], dtype="float32")
+            if mix_rate != RATE or part_rate != RATE or mix.ndim != 1 or mix.shape != part.shape:
+                raise ValueError("separator outputs must cover the same mono samples")
+            remaining = mix - part
+            response.update(remainder_wav=save_wav(wav.parent, remaining), remainder_rms_dbfs=level(remaining),
+                            remainder_basis="The 16 kHz channel minus the selected estimate at its original scale. "
+                                            "Compare what remains with the full-band recording. A single source "
+                                            "can be audible in both parts, and a part can contain several sources.")
         # The matcher needs equal bandwidth for a fair comparison. The client gets the native
         # channel even if separation or matching is unavailable.
         response["mix_wav"] = original_channel(wav, channel, info)
@@ -232,12 +246,12 @@ class LayerReader(LocalReader):
 def describe_layer(sound, result):
     """Read the original channel independently of the separator's guess."""
     if result["status"] == "available":
-        for name, key in (("mix", "mix_wav"), ("estimate", "layer_wav")):
+        for name, key in (("mix", "mix_wav"), ("estimate", "layer_wav"), ("remainder", "remainder_wav")):
             if key not in result:
                 continue
             reading = sound.read(result[key], result["start_s"], result["end_s"])
             if reading.get("status") == "available":
-                # Both clips cover the same interval and contain a single channel.
+                # These readings cover the same interval and contain a single channel.
                 # Return the words first so a client can read them within a small text budget.
                 observations = [{k: channel[k] for k in ("impression", "digital_silence", "measured_profile") if k in channel}
                                 for window in reading["windows"] for channel in window["channels"]]

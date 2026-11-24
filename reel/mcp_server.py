@@ -686,7 +686,7 @@ class Viewing:
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
                alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0., locate_sounds=None,
-               verify_sounds=False, identify_sounds=None, source_examples=False):
+               verify_sounds=False, identify_sounds=None, source_examples=False, independent_caption=False):
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -751,7 +751,7 @@ class Viewing:
                     result["source_examples"] = examples.read(original, first, stop, isolated=True)
             elif source_examples:
                 result["source_examples"] = {"status": "not_prepared", "setup": "reel setup --sound-examples"}
-            if verify_sounds or (describe and result.get("status") == "unavailable"):
+            if independent_caption or verify_sounds or (describe and result.get("status") == "unavailable"):
                 # A failed question reader can still return timed, open-ended evidence from the mix.
                 # Keep its question status separate: a caption is not an answer or a transcript.
                 result["scene"] = inspect_scene(original, first, stop, verify_sounds=verify_sounds)
@@ -787,7 +787,7 @@ class Viewing:
             blocks.append(adjusted_audio or audio_block(wav))
         return [text_block(result), *blocks]
 
-    def listen_layer(self, turn, start_s, end_s, channel, layer, native_audio, describe, focus=None):
+    def listen_layer(self, turn, start_s, end_s, channel, layer, native_audio, describe, focus=None, remainder=False):
         with self.lock:
             directory, packet = self.published(turn)
             if not 0 <= start_s < end_s <= packet["end_s"]:
@@ -795,23 +795,23 @@ class Viewing:
             if not packet.get("audio"):
                 return [text_block({"status": "no_audio"})]
             with (nullcontext(self.layers) if self.layers is not None else LayerReader()) as layers:
-                result = layers.inspect(directory, start_s, end_s, channel, layer, focus)
-            wavs = [Path(result[k]) for k in ("mix_wav", "layer_wav") if k in result]
+                result = layers.inspect(directory, start_s, end_s, channel, layer, focus, remainder)
+            wavs = [Path(result[k]) for k in ("mix_wav", "layer_wav", "remainder_wav") if k in result]
             if native_audio and sum(w.stat().st_size for w in wavs) > MAX_INLINE_PCM_BYTES:
-                raise ValueError("the native mix and estimate exceed the inline limit; shorten the range or disable native_audio")
+                raise ValueError("the requested recordings exceed the inline limit; shorten the range or disable native_audio")
             if describe:
                 with self.sound_session(replay=True) as sound:
                     describe_layer(sound, result)
         blocks, paths, order = [], [], []
         with TemporaryDirectory() as tmp:
-            for name in ("mix", "layer"):
+            for name in ("mix", "layer", "remainder"):
                 if wav := result.pop(name + "_wav", None):
                     paths.append(Path(wav))
                     order.append(name)
                     png = Path(tmp) / (name + ".png")
                     channel_spectrum(wav, png, 1)
                     blocks.append(image_block(png))
-        readings = {k: result.pop(k) for k in ("mix_reading", "estimate_reading") if k in result}
+        readings = {k: result.pop(k) for k in ("mix_reading", "estimate_reading", "remainder_reading") if k in result}
         result = {**readings, **result, "images_in_order": order, "wavs_in_order": order if native_audio else []}
         if native_audio:
             blocks.extend(audio_block(path) for path in paths)
@@ -1081,7 +1081,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                          component: Component = "mix", alternatives: list[str] | None = None, per_second: bool = False,
                          mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0,
                          locate_sounds: list[str] | None = None, verify_sounds: bool = False,
-                         identify_sounds: list[str] | None = None, source_examples: bool = False):
+                         identify_sounds: list[str] | None = None, source_examples: bool = False,
+                         independent_caption: bool = False):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
@@ -1096,6 +1097,8 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             Set gain_db to adjust replay volume equally across channels. The WAV and local description use this gain.
             With sound_events=true, compare playback_sound_events at that volume with the original sound_events.
             The spectrum and matches use the signal before gain. native_audio includes the selected WAV.
+            Set independent_caption=true for a separate reading of the original channels in shorter windows.
+            It hears no question or first reader answer. Compare their timing before accepting a source.
             With verify_sounds=true, two local encoders compare candidate captions against the original mix.
             Use describe=false for this check alone. Results are possible sounds, never a transcript.
             Provide identify_sounds with two or more source descriptions (or [] for AudioSet) to compare the
@@ -1109,7 +1112,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
                                            alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds,
-                                           verify_sounds, identify_sounds, source_examples)
+                                           verify_sounds, identify_sounds, source_examples, independent_caption)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,
@@ -1127,14 +1130,15 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
 
         @server.tool(annotations=hints, structured_output=False)
         async def listen_layer(turn: int, start_s: float, end_s: float, layer: int | None = None,
-                               focus: str | None = None, channel: int = 1, native_audio: bool = not image_client, describe: bool = True):
-            """Listen to a mix and one estimated sound within it over up to ten already heard seconds.
-            Choose a recorded channel (1-based) and layer 1–8, ranked loudest first for this interval.
-            Or omit layer and use focus to seek a sound in your own words with local CLAP. It can
-            select the mix (0). A match does not establish presence. Layer 2 can expose a quieter sound. An estimate can contain artifacts or several
-            sources. Both spectra, each layer's level, and optionally both WAVs and local readings are returned.
-            Check words against heard_words. The optional separator is prepared with reel setup --layers."""
-            return await asyncio.to_thread(reader.listen_layer, turn, start_s, end_s, channel, layer, native_audio, describe, focus)
+                               focus: str | None = None, channel: int = 1, native_audio: bool = not image_client,
+                               describe: bool = True, remainder: bool = False):
+            """Rehear overlapping sounds in one recorded channel for up to ten released seconds.
+            With no rank or focus, compare the mix, its strongest estimated layer and what remains when it is removed.
+            Choose a layer from 1 to 8 (loudest first) or use focus to seek a sound with CLAP. Set remainder=true
+            to compare the remaining signal for that selection too. A focus may select the mix (0).
+            Each returned waveform has a spectrum and optionally a local reading. Estimates can contain artifacts.
+            One source can occur in both parts. Use heard_words for speech. Prepare with reel setup --layers."""
+            return await asyncio.to_thread(reader.listen_layer, turn, start_s, end_s, channel, layer, native_audio, describe, focus, remainder)
 
         @server.tool(annotations=hints, structured_output=False)
         async def heard_words(turn: int, lang: str | None = None, start_s: float | None = None, end_s: float | None = None):

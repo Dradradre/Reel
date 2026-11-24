@@ -83,6 +83,25 @@ class LayerTests(unittest.TestCase):
         self.assertTrue(Path(unavailable["mix_wav"]).is_file())
         self.assertIsNone(unavailable["selected_layer"])
 
+    @unittest.skipUnless(find_spec("mcp"), "MCP runtime not installed")
+    def test_unprompted_split_keeps_both_parts_on_the_released_clock(self):
+        from reel.mcp_server import Viewing
+        layers = LayerReader()
+        net = Mock()
+        net.separate.side_effect = lambda mix: np.stack([mix * (8 - i) / 9 for i in range(8)])
+        layers.request = Mock(side_effect=lambda job: listen_layer(lambda: net, **job))
+        viewer = Viewing(iter(()), None, None, None, layers=layers)
+        viewer.paths.extend(self.paths)
+        result = viewer.listen_layer(2, .75, 1.25, 2, None, True, False)
+        report = json.loads(result[0].text)
+        self.assertEqual(report["selected_layer"], 1)
+        self.assertEqual(report["wavs_in_order"], ["mix", "layer", "remainder"])
+        decoded = [sf.read(io.BytesIO(base64.b64decode(b.data)), dtype="float32") for b in result[-3:]]
+        self.assertTrue(all(rate == 16000 and len(pcm) == 8000 for pcm, rate in decoded))
+        np.testing.assert_allclose(decoded[1][0] + decoded[2][0], decoded[0][0], atol=1e-7)
+        with self.assertRaises(ValueError):
+            viewer.listen_layer(1, .75, 1.25, 2, None, True, False)
+
     def test_full_band_original_survives_omitting_the_estimate(self):
         rate = 48000
         signal = np.zeros((rate, 2), dtype=np.int32)

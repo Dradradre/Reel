@@ -119,8 +119,31 @@ class WaveformTests(unittest.TestCase):
         noise = np.random.default_rng(41).normal(0, .01, len(t))
         self.assertTrue(all(r['band_power_fraction'] < .04 for r in spectrum_profile(noise, 0, 1)))
 
+    def test_optional_waveform_reader_and_model_lifetime(self):
+        with patch.dict('os.environ', REEL_AUDIO_READER='flamingo'), SoundReader() as reader:
+            with patch.object(reader.waveform, 'request', return_value={'model': 'alternate'}) as request:
+                self.assertEqual(reader.read('clip.wav', 0, 1, question='What changed?')['model'], 'alternate')
+                self.assertEqual(request.call_args.args[0]['question'], 'What changed?')
+                with patch.object(reader.waveform, 'close') as close, patch('reel.local_reader.LocalReader.request') as legacy:
+                    reader.transcribe('speech.npy')
+                    close.assert_called_once()
+                    self.assertEqual(legacy.call_args.args[0]['operation'], 'transcribe')
+
+    def test_clip_before_resampling_even_if_the_wav_contains_a_future_impulse(self):
+        from reel.hearing import load_encoder_audio
+        with tempfile.TemporaryDirectory() as tmp:
+            wav = Path(tmp) / 'source.wav'
+            for value in (0., .9):
+                pcm = np.zeros(44100, dtype=np.float32)
+                pcm[22050:] = value
+                sf.write(wav, pcm, 44100, subtype='FLOAT')
+                heard = load_encoder_audio(wav, 3., 3.5)
+                self.assertEqual(heard.shape, (8000, 1))
+                self.assertFalse(np.any(heard))
+
     def test_missing_helper_returns_an_explicit_unavailable_result(self):
-        with tempfile.TemporaryDirectory() as tmp, patch('reel.hearing.HEAR_PY', str(Path(tmp) / 'missing')):
+        with (tempfile.TemporaryDirectory() as tmp, patch.dict('os.environ', REEL_AUDIO_READER='qwen'),
+              patch('reel.hearing.HEAR_PY', str(Path(tmp) / 'missing'))):
             with SoundReader() as reader:
                 result = reader.read('recording.wav', 0, 1)
                 self.assertEqual(result['status'], 'unavailable')

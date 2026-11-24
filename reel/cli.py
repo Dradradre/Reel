@@ -6,7 +6,7 @@
   reel frame DIR --at S     save the full frame on display at S
   reel frame DIR --t0 S --t1 S     read every frame displayed in the interval
   reel listen DIR --t0 S --t1 S [--verify-sounds] [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
-  reel layer DIR --t0 START --t1 END (--layer RANK | --focus TEXT) [--channel N] [--describe-sounds]
+  reel layer DIR --t0 START --t1 END [--layer RANK | --focus TEXT] [--remainder] [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second | --locate | --identify] ["sound description" ...]    compare descriptions with the recorded channels
   reel observe DIR --t0 S --t1 S [--joint] [--motion-point X Y] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
@@ -16,7 +16,7 @@
   reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
   reel mcp FILM [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
-  reel setup [--sound-examples] [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
+  reel setup [--audio-flamingo] [--sound-examples] [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
 """
 import shlex
 import sys as _sys, pathlib as _pl
@@ -52,6 +52,7 @@ def doctor():
     from unmix import PYTHON as unmix_py, ready as layers_ready
     from point_reader import PYTHON as follow_py, ready as follow_ready
     import identify_sound
+    from flamingo import ready as flamingo_ready
     from source_examples import ready as examples_ready
     from scene_audio import READY as captions_ready
     from localize_sound import ready as location_ready
@@ -76,6 +77,7 @@ def doctor():
              "pip install -e '.[events]' and reel setup --sound-events"),
             ("recognize sources from reference recordings", examples_ready(), "reel setup --sound-examples"),
             ("sound identity: PE-AV and CLAP", identify_sound.READY.is_file() and pathlib.Path(identify_sound.PYTHON).is_file(), "reel setup --identify-sounds"),
+            ("audio-only waveform descriptions: Audio Flamingo Next", flamingo_ready(), "reel setup --audio-flamingo"),
             ("first-listen descriptions: CoNeTTE", captions, "reel setup --captions"),
             ("waveform and optional joint picture/sound readings: Qwen3-Omni", hearing, "reel setup --describe-sounds"),
             ("overlapping sounds: MixIT separator", layers_ready() and shutil.which(unmix_py) is not None
@@ -101,6 +103,10 @@ def setup():
         from point_reader import prepare_environment
         prepare_environment()
         print("online picture point tracking ready")
+    if "--audio-flamingo" in sys.argv:
+        from flamingo import setup as setup_flamingo
+        setup_flamingo()
+        print("Audio Flamingo Next ready for noncommercial waveform listening")
     if "--layers" in sys.argv:
         from unmix import prepare_environment
         prepare_environment()
@@ -144,7 +150,7 @@ def setup():
         from localize_sound import prepare_environment
         prepare_environment()
         print("sound location ready")
-    optional_models = {"--sound-examples", "--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
+    optional_models = {"--audio-flamingo", "--sound-examples", "--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
     if "--sync" not in sys.argv and optional_models.intersection(sys.argv):
         return
     if not UNISAL.exists():
@@ -207,7 +213,8 @@ def main():
         ap.add_argument("out", help="a published turn or saved reel")
         ap.add_argument("--t0", type=float, required=True)
         ap.add_argument("--t1", type=float, required=True)
-        selection = ap.add_mutually_exclusive_group(required=True)
+        selection = ap.add_mutually_exclusive_group()
+        ap.add_argument("--remainder", action="store_true", help="also hear the channel minus the selected estimate")
         selection.add_argument("--layer", type=int, choices=range(1, 9))
         selection.add_argument("--focus", help="listen for a sound described in your own words using local CLAP")
         ap.add_argument("--channel", type=int, default=1)
@@ -215,7 +222,7 @@ def main():
         x = ap.parse_args(sys.argv[2:])
         try:
             with LayerReader() as layers, SoundReader() as sound:
-                result = layers.inspect(x.out, x.t0, x.t1, x.channel, x.layer, x.focus)
+                result = layers.inspect(x.out, x.t0, x.t1, x.channel, x.layer, x.focus, x.remainder)
                 if x.describe_sounds:
                     describe_layer(sound, result)
             print(json.dumps(result, ensure_ascii=False, indent=2))
@@ -380,15 +387,15 @@ def main():
                     if command[:1] == ["layer"]:
                         try:
                             fields = shlex.split(line)
-                            if len(fields) not in (4, 5):
-                                raise ValueError('use layer START END RANK|"SOUND DESCRIPTION" [CHANNEL]')
+                            if len(fields) not in (3, 4, 5):
+                                raise ValueError('use layer START END [RANK|"SOUND DESCRIPTION" [CHANNEL]]')
                             channel = int(fields[4]) if len(fields) == 5 else 1
                             try:
-                                rank = int(fields[3])
+                                rank = int(fields[3]) if len(fields) >= 4 else None
                             except ValueError:
                                 rank = None
                             result = layers.inspect(path.parent, float(fields[1]), float(fields[2]), channel,
-                                                    rank, fields[3] if rank is None else None)
+                                                    rank, fields[3] if len(fields) >= 4 and rank is None else None)
                             with sound_reader.for_replay():
                                 describe_layer(sound_reader, result)
                             print(json.dumps(result, ensure_ascii=False), flush=True)
@@ -527,7 +534,7 @@ def main():
                         continue
                     if not command or command[0] != "next" or len(command) > 2:
                         ap.error("enter next, next SECONDS, joint SECONDS, observe START END, look [--at SECONDS] LEFT TOP RIGHT BOTTOM, "
-                                 "listen [--component mix|harmonic|percussive|mid|side] [--gain-db DB] [QUESTION], match START END DESCRIPTION, compare-heard [--similarity] START END START END, layer START END RANK [CHANNEL], speech [LANG], or quit")
+                                 "listen [--component mix|harmonic|percussive|mid|side] [--gain-db DB] [QUESTION], match START END DESCRIPTION, compare-heard [--similarity] START END START END, layer START END [RANK [CHANNEL]], speech [LANG], or quit")
                     duration = float(command[1]) if len(command) == 2 else None
                     try:
                         with original.reading():

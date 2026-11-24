@@ -85,7 +85,7 @@ codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --ima
 | change | 연속한 두 화면의 RGB 픽셀 차이와 밝기를 잰다. 밝기가 같아도 색이나 무늬가 바뀐 순간은 흰 선으로 보인다. MCP에서 `ask_scene(exposure_detail=true)`로 짧은 동작을 다시 보면 각 프레임 아래에 그동안 녹음된 최대 음량이 나온다. `sync_regions`로 영역을 고르면 사각형 전체의 움직임을 볼 수 있다 | 컷, 번쩍임, 암전, 멈춘 화면 |
 | seen again | 저장한 컬러 축소 화면의 모든 픽셀이 같으면 초록색, 다른 컷에서 화면 배치가 닮으면 파란색으로 표시하고 앞선 시각을 적는다 | 다시 나온 연도 카드, 글자만 바뀐 카드 |
 | sound | 주파수 대역마다 소리의 세기를 −80~0 dBFS 눈금으로 표시한다. 다시 들을 때는 표시한 구간의 앞뒤를 비교하거나, 스테레오 채널의 평균이나 차이를 들을 수 있다. | 다른 영상이나 확대 화면에서도 같은 소리는 같은 밝기로 보인다. 재생 중에는 길게 이어지는 음이나 짧게 치는 소리를 골라 원음과 대조할 수 있다. 목소리가 끊기는 구간에는 채널별로 남은 소리의 크기도 나온다. 재생할 때는 반복이 뚜렷한 소리의 추정 주파수와 채널별로 소리가 치고 올라온 시각도 나온다 |
-| sounds like | 페이지에는 소리가 갑자기 변하는 시점이 나온다. 재생 중에는 어느 채널의 어떤 주파수 대역이 얼마나 커지거나 작아졌는지도 표시한다. `stream.md`에는 최대 10초, `play`에는 채널별로 최대 4초 동안 들린 소리 후보가 나온다. 문장으로 묘사할 때는 최대 10초를 듣는다. 그 안에서 잠깐 두드러진 소리는 따로 다시 듣는다. 앞 구간의 소리가 섞이면 최근 구간만 들은 설명도 시각과 함께 나온다. MCP에서는 WAV 첨부 여부와 관계없이 첫 재생부터 로컬 청취기의 설명과 두 번의 받아쓰기에서 일치한 단어도 읽을 수 있다. 원음을 해석하는 모델을 쓸 수 없으면 다른 모델이 들은 구간과 모델 이름을 보여준다. 상세 보기에서 앞 구간까지 들은 설명과 이번 구간의 시작 시각을 확인할 수 있다. 다시 들을 때는 초마다 나온 소리 후보와 원음을 이어서 비교한 결과를 함께 볼 수 있다. YAMNet을 설치하면 0.975초 길이의 녹음에서 들린 소리 후보를 볼 수 있고 다시 들을 때 볼륨을 바꿔 두 음량에서 나온 후보도 대조할 수 있다. 소리를 말로 묘사하고 가장 비슷한 1초로 돌아갈 수도 있다. | 짧은 타격음, 그 뒤에 깔린 음악, 북적이는 방에서 들리는 말소리 참조 녹음을 설치하면 처음 듣는 소리도 비슷한 녹음과 대조해 이름을 붙인다. |
+| sounds like | 페이지에는 소리가 갑자기 변하는 시점이 나온다. 재생 중에는 어느 채널의 어떤 주파수 대역이 얼마나 커지거나 작아졌는지도 표시한다. `stream.md`에는 최대 10초, `play`에는 채널별로 최대 4초 동안 들린 소리 후보가 나온다. 문장으로 묘사할 때는 최대 10초를 듣는다. 그 안에서 잠깐 두드러진 소리는 따로 다시 듣는다. 리플레이에서는 소리 하나를 분리한 뒤 어떤 소리가 남는지도 들을 수 있다. 앞 구간의 소리가 섞이면 최근 구간만 들은 설명도 시각과 함께 나온다. MCP에서는 WAV 첨부 여부와 관계없이 첫 재생부터 로컬 청취기의 설명과 두 번의 받아쓰기에서 일치한 단어도 읽을 수 있다. 원음을 해석하는 모델을 쓸 수 없으면 다른 모델이 들은 구간과 모델 이름을 보여준다. 상세 보기에서 앞 구간까지 들은 설명과 이번 구간의 시작 시각을 확인할 수 있다. 다시 들을 때는 초마다 나온 소리 후보와 원음을 이어서 비교한 결과를 함께 볼 수 있다. YAMNet을 설치하면 0.975초 길이의 녹음에서 들린 소리 후보를 볼 수 있고 다시 들을 때 볼륨을 바꿔 두 음량에서 나온 후보도 대조할 수 있다. 소리를 말로 묘사하고 가장 비슷한 1초로 돌아갈 수도 있다. | 짧은 타격음, 그 뒤에 깔린 음악, 북적이는 방에서 들리는 말소리 참조 녹음을 설치하면 처음 듣는 소리도 비슷한 녹음과 대조해 이름을 붙인다. |
 | level | 10ms마다 잰 전체 음량. 장면별 텍스트에는 구간별 중앙값과 가장 큰 순간의 음량 및 시각을 기록 | 서서히 줄어드는 소리, 조용한 배경에서 짧게 튀는 소리 |
 | L level, R level | 채널별로 표시한 10ms 단위 음량. 채널이 셋 이상이면 번호로 표시 | 소리가 한쪽에만 있는지, 왼쪽에서 오른쪽으로 옮겨 가는지 |
 | 1 early, 2 early | 같은 파형이 어느 채널에 먼저 도달했는지 0.25초 단위로 표시 | 양쪽 음량이 같아도 한쪽 귀에서 먼저 들릴 수 있다. 빈 구간은 시간차를 판별하기 어려운 곳이다. |
@@ -322,6 +322,10 @@ codex mcp add reel -- "$(command -v reel)" mcp /path/to/film.mp4 --until 8.5 --i
 
 여러 소리가 겹칠 때는 `reel setup --layers`로 MixIT를 준비한다. 재생을 멈추고 `layer 2 5 2`를 입력하면 2~5초에 녹음된 원음과 그 구간에서 두 번째로 큰 추정 성분을 받는다.
 
+Apple Silicon에서 비상업적 연구에 쓸 때는 `reel setup --audio-flamingo`로 Audio Flamingo Next 가중치 5.1 GiB를 설치할 수 있다. `REEL_AUDIO_READER=flamingo reel mcp film.mp4 --tracks sound --image-client --until 8.5`로 재생하고 8.5초에 도달하면 `listen(turn=N, start_s=0, end_s=8.5)`로 각 채널의 원음을 이어서 듣는다. 재생한 구간의 소리를 두고 질문할 수도 있다. 기본 모델은 Qwen이다. `reel setup --captions`로 설치한 뒤 `listen`에 `independent_caption=true`를 주면 다른 모델이 같은 채널을 짧게 나눠 듣는다. 두 모델은 서로의 답을 보지 않는다. 화면과 소리를 함께 읽거나 받아쓸 때도 Qwen을 쓴다.
+
+겹친 소리의 이름을 모르겠다면 `listen_layer(turn=N, start_s=2, end_s=5)`로 원음과 가장 크게 잡힌 성분, 그 성분을 빼고 남은 소리를 차례로 듣는다. 분리한 성분과 나머지를 더하면 16 kHz로 변환한 원음이 된다. 한 물체에서 난 소리가 두 쪽에 걸쳐 남을 수도 있다. 다른 성분을 고를 때는 `remainder=true`를 붙이면 같은 방식으로 비교할 수 있다.
+
 MCP에서는 5초까지 재생한 뒤 `listen_layer(turn=3, start_s=2, end_s=5, layer=2)`로 들을 수 있다. 기본 채널은 1이며 오른쪽 채널을 따로 들으려면 스테레오 녹음에서 `channel=2`를 지정한다. 원음은 녹음 당시의 샘플레이트로 받고 분리본은 16 kHz로 듣는다. 한 소리가 여러 성분에 나뉘거나 다른 소리와 섞여 나올 수 있다.
 
 찾고 싶은 소리를 말로 지정할 수도 있다. `reel setup --compare-sounds`로 CLAP를 준비한 뒤 MCP에서 번호 대신 `focus="a distant voice"`를 주면 원음과 여덟 성분 중 그 설명에 가장 가까운 녹음을 고른다. 원음이 선택될 수도 있다. 파형을 듣고 묘사하는 모델에는 검색어를 주지 않는다. 오디오를 받는 클라이언트는 WAV를, 이미지를 받는 클라이언트는 스펙트럼과 녹음별 설명을 받을 수 있다. [생활음을 겹쳐서 들은 결과](docs/listening-check.md#겹친-생활음을-하나씩-다시-들었을-때)
@@ -483,6 +487,8 @@ flowchart LR
 겹친 소리를 다시 들을 때는 Google Research가 YFCC100M으로 학습한 MixIT 모델을 쓴다. 연구진이 배포한 가중치의 라이선스는 Apache-2.0이다. [모델과 라이선스](https://github.com/google-research/sound-separation/tree/master/models/neurips2020_mixit#yfcc100m-model-checkpoint)
 
 청취 비교 실험에는 Google의 Gemma 4 E4B-IT를 mlx-community가 4비트로 변환한 모델도 썼다. 원본 모델의 라이선스는 Apache-2.0이다. [Google 모델 카드](https://huggingface.co/google/gemma-4-E4B-it), [MLX 변환본](https://huggingface.co/mlx-community/gemma-4-e4b-it-4bit)
+
+NVIDIA Audio Flamingo Next에는 비상업적 이용을 위한 NVIDIA OneWay Noncommercial License가 적용된다. 연구용 설치 명령은 audio.cpp의 Q4_K 변환본과 macOS 실행 라이브러리를 따로 받는다. [NVIDIA 모델과 이용 조건](https://huggingface.co/nvidia/audio-flamingo-next-hf), [GGUF 변환본](https://huggingface.co/audio-cpp/Audio-Flamingo-GGUF), [audio.cpp 배포본](https://github.com/0xShug0/audio.cpp/releases/tag/v0.9.6)
 
 선택형 원음 묘사는 Qwen 팀의 Qwen3-Omni와 mlx-community의 8비트 MLX 변환본을 쓴다. 모델 카드의 라이선스는 Apache-2.0이다. [원본 모델](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct), [MLX 가중치](https://huggingface.co/mlx-community/Qwen3-Omni-30B-A3B-Instruct-8bit)
 - 그 밖에 librosa, OpenCV, PyTorch

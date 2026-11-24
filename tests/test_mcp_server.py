@@ -104,6 +104,19 @@ class TransportTests(unittest.TestCase):
                 reader.listen(1, None, .25, 1.1, describe=False, verify_sounds=True)
             check.assert_called_once()
 
+    def test_replay_can_keep_independent_captions_alongside_a_successful_waveform_read(self):
+        ear = Mock()
+        ear.read.return_value = {"status": "available", "model": "waveform", "windows": []}
+        reader = Viewing(iter([self.path]), ear, None, None)
+        reader.advance(1, False, False)
+        with patch("reel.mcp_server.inspect_scene", return_value={"model": "captioner"}) as caption:
+            response = reader.listen(1, "What changed?", .25, .75, independent_caption=True)
+        report = json.loads(response[0].text)
+        self.assertEqual((report["model"], report["scene"]["model"]), ("waveform", "captioner"))
+        path = ear.read.call_args.args[0]
+        self.assertEqual(ear.read.call_args.kwargs["question"], "What changed?")
+        caption.assert_called_once_with(path, 2000, .75, verify_sounds=False)
+
     def test_ordinary_alternatives_compare_the_original_when_identity_is_prepared(self):
         reader = Viewing(iter([self.path]), None, None, None, matcher=Mock())
         reader.advance(1, False)

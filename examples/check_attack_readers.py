@@ -13,8 +13,10 @@ from tempfile import TemporaryDirectory
 import numpy as np
 
 if __package__:
+    from .check_attack_timing import score
     from .check_environment_attacks import mixtures
 else:
+    from check_attack_timing import score
     from check_environment_attacks import mixtures
 
 
@@ -23,13 +25,44 @@ def scores(rows):
     for arm in ("before", "after"):
         error = np.array([r[arm] - r["reference"] for r in rows])
         totals[arm] = dict(exact=int((error == 0).sum()), absolute_error=int(abs(error).sum()),
-                           overcount=int(error.clip(min=0).sum()), undercount=int((-error).clip(min=0).sum()))
+                           overcount=int(np.maximum(error, 0).sum()), undercount=int(np.maximum(-error, 0).sum()))
     change = np.array([abs(r["after"] - r["reference"]) - abs(r["before"] - r["reference"]) for r in rows])
     rng = np.random.default_rng(48129)
     draws = rng.choice(change, size=(10000, len(rows))).mean(axis=1)
     totals["paired"] = dict(better=int((change < 0).sum()), worse=int((change > 0).sum()),
                             tied=int((change == 0).sum()), clips=len(rows),
                             mean_absolute_error_change_95pct_bootstrap=np.percentile(draws, [2.5, 97.5]).round(3).tolist())
+    return totals
+
+
+def timing_totals(rows):
+    totals = {}
+    for arm in ("before", "after"):
+        counts = {key: sum(r["scores"][arm][key] for r in rows) for key in ("matched", "missed", "extra")}
+        hits = counts["matched"]
+        totals[arm] = dict(counts, f1=round(2 * hits / (2 * hits + counts["missed"] + counts["extra"]), 4))
+    return totals
+
+
+def verify_timing(panel, modal=None):
+    if modal is not None:
+        import h5py
+
+        with h5py.File(modal) as db:
+            for row in panel["rows"]:
+                name = row["recording"]
+                reference = []
+                if name not in ("silence", "steady_room_noise"):
+                    clip = db[name]
+                    rate = int(clip.attrs["sampling_rate"])
+                    stop = round(row["seconds"] * rate)
+                    reference = sorted(int(t) / rate for t in clip.attrs["onsets"] if t < stop)
+                for arm in ("before", "after"):
+                    if score(reference, row[arm], panel["tolerance_s"]) != row["scores"][arm]:
+                        raise ValueError(f"{name}: {arm} timing differs from the supplied Modal annotation")
+    totals = timing_totals(panel["rows"])
+    if totals != panel["totals"]:
+        raise ValueError("timing totals differ from the per-recording scores")
     return totals
 
 
@@ -105,6 +138,7 @@ def repeat(report, audio_dir):
             stimulus = dict(observation, audio=dict(observation["audio"]))
             if arm == "before":
                 stimulus["audio"].pop("attacks", None)
+                stimulus["audio"].pop("rapid_rises", None)
             cases[i][arm] = ask(report["reader"], report["everyday_prompt"], stimulus, images)
     return dict(rows=cases, scores=scores(cases))
 
@@ -113,14 +147,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("report", type=Path)
     parser.add_argument("--repeat-with", type=Path, metavar="ESC_AUDIO_DIR")
+    parser.add_argument("--modal", type=Path, help="verify timestamp matches against the original Modal HDF5")
     args = parser.parse_args()
     report = json.loads(args.report.read_text())
     if args.repeat_with:
         print(json.dumps(repeat(report, args.repeat_with), indent=2))
     else:
-        for name in ("music", "everyday_first", "everyday_confirmation"):
+        for name in ("music", "everyday_first", "everyday_confirmation", "rapid_environment"):
             panel = report[name]
             actual = scores(panel["rows"])
             if actual != panel["scores"]:
                 raise ValueError(f"{name}: published totals differ from reader responses")
             print(name, json.dumps(actual))
+        for name in ("music_timing", "rapid_timing"):
+            print(name, json.dumps(verify_timing(report[name], args.modal)))

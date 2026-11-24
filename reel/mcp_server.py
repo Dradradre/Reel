@@ -195,20 +195,26 @@ def first_view_report(report):
         result["speech"] = report["speech"]
     if report.get("audio"):
         audio = {}
-        events = report["audio"].get("attacks", {}).get("events", [])
-        if events:
-            times_by_channel = {}
-            for event in events:
-                for channel in event["channels"]:
-                    times_by_channel.setdefault(channel, []).append(event["time_s"])
-            shared = {}
-            for channel, times in sorted(times_by_channel.items()):
-                shared.setdefault(tuple(times), []).append(channel)
-            audio["attacks"] = {
-                "basis": "Sharp rises measured in the recording. One sound can produce several. "
-                         "Times are in film seconds and counts are per channel.",
-                "by_channel": [{"channels": channels, "count": len(times), "times_s": list(times)}
-                               for times, channels in shared.items()]}
+        # The broad-band change trace waits 160 ms to rearm. Highlight a run of
+        # three or more closer peaks without suggesting a total for the recording.
+        times_by_channel = {}
+        for event in report["audio"].get("attacks", {}).get("events", []):
+            for channel in event["channels"]:
+                times_by_channel.setdefault(channel, []).append(event["time_s"])
+        shared = {}
+        for channel, times in sorted(times_by_channel.items()):
+            start = 0
+            for end in range(1, len(times) + 1):
+                if end < len(times) and times[end] - times[end - 1] < .16:
+                    continue
+                if end - start >= 3:
+                    shared.setdefault(tuple(times[start:end]), []).append(channel)
+                start = end
+        if shared:
+            audio["rapid_rises"] = {
+                "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. "
+                         "Background activity can also produce a run.",
+                "runs": [{"channels": channels, "times_s": list(times)} for times, channels in sorted(shared.items())]}
         if "sound_events" in report["audio"]:
             audio["sound_events"] = report["audio"]["sound_events"]
         stereo = report["audio"].get("stereo_cues")

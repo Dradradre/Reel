@@ -1237,5 +1237,1482 @@
   "median_ms": 0.388,
   "p95_ms": 0.436,
   "scope": "onset detector only, 100 initial warmup blocks, M4 Pro"
+ },
+ "music_timing": {
+  "prompt": "The attached image and the following film-clock measurements describe the same short recording. At what times do distinct notes or percussive strikes start? Give your best estimates in seconds from the start, in order, as JSON {\"times_s\":[...]}. If no individual attacks stand out, give an empty list.\n",
+  "selection": "Excluded all recordings used for the earlier GPT count trial. Selected the first two per reference-count stratum by SHA256(reel-timing-localization-v1/ + recording), cropped at 3.5 s, and added the same two zero-attack controls. Each arm used the intermediate compact MCP presentation, with only audio.attacks removed in the before arm. Ranked by name hash, without using the detectors’ matches or the readers’ responses.",
+  "tolerance_s": 0.05,
+  "rows": [
+   {
+    "id": 0,
+    "recording": "guitar-classical-E-octave1-vib.wav",
+    "reference": 1,
+    "seconds": 3.5,
+    "before": [
+     0.0
+    ],
+    "after": [
+     0.0
+    ],
+    "scores": {
+     "before": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "83a805e85fc516f49e6fddeff3b8021dafa41df4016fb738e10a47fd1df13352",
+    "images_sha256": [
+     "65723fc17db4d5c8cdc8e4ab86c7352e0f9939c20c7a3f8ccdc1ed1438ffdc6f"
+    ]
+   },
+   {
+    "id": 1,
+    "recording": "flute-alto-lick.wav",
+    "reference": 15,
+    "seconds": 3.0741496598639455,
+    "before": [
+     0.06,
+     0.22,
+     0.4,
+     0.66,
+     0.95,
+     1.08,
+     1.26,
+     1.46,
+     1.66,
+     1.82,
+     1.98,
+     2.08,
+     2.24
+    ],
+    "after": [
+     0.02,
+     0.38,
+     0.5,
+     0.83,
+     1.22,
+     1.62,
+     2.22
+    ],
+    "scores": {
+     "before": {
+      "matched": 13,
+      "missed": 2,
+      "extra": 0
+     },
+     "after": {
+      "matched": 7,
+      "missed": 8,
+      "extra": 0
+     }
+    },
+    "report_sha256": "5683391e3cadc2f1fa19aa0015bdff4508633fd8cca09d3fbff8b9eb08f22c51",
+    "images_sha256": [
+     "cce25d853d71750c2c3c37275e01aa65643f18ba70db69d229c1dd50f75981a9"
+    ]
+   },
+   {
+    "id": 2,
+    "recording": "flugel-C.wav",
+    "reference": 1,
+    "seconds": 3.5,
+    "before": [
+     0.06
+    ],
+    "after": [
+     0.024
+    ],
+    "scores": {
+     "before": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "633cbc5404023bba61e90d7323d73af5dad162de958fb97b698ffd1e109295d7",
+    "images_sha256": [
+     "cb5175bb24784d858c77cbfc099aec42b90ab93b30d968b7b58b1fec25d25e37"
+    ]
+   },
+   {
+    "id": 3,
+    "recording": "trpt-lick.wav",
+    "reference": 13,
+    "seconds": 2.2083673469387755,
+    "before": [
+     0.0,
+     0.25,
+     0.38,
+     0.54,
+     0.71,
+     0.91,
+     1.12,
+     1.3,
+     1.48,
+     1.59,
+     1.7,
+     1.82
+    ],
+    "after": [
+     0.0,
+     0.256,
+     0.376,
+     0.528,
+     0.704,
+     0.905,
+     1.105,
+     1.297,
+     1.473,
+     1.585,
+     1.705,
+     1.825
+    ],
+    "scores": {
+     "before": {
+      "matched": 12,
+      "missed": 1,
+      "extra": 0
+     },
+     "after": {
+      "matched": 12,
+      "missed": 1,
+      "extra": 0
+     }
+    },
+    "report_sha256": "0b809e3e2958830a5ced3567ca3800d1ca2563e1d2edbbc99bb388b4a0bcbd49",
+    "images_sha256": [
+     "7b2ed151c1f6aafcd35eb3f1fdac5687b1df55f882cd914ecc765a68de1dfeeb"
+    ]
+   },
+   {
+    "id": 4,
+    "recording": "guitar-classical-lick.wav",
+    "reference": 5,
+    "seconds": 3.5,
+    "before": [
+     0.08,
+     0.52,
+     0.86,
+     0.98,
+     1.36,
+     1.72,
+     1.92
+    ],
+    "after": [
+     0.056,
+     0.504,
+     0.856,
+     0.969,
+     1.353,
+     1.689,
+     1.737,
+     1.817,
+     1.913
+    ],
+    "scores": {
+     "before": {
+      "matched": 4,
+      "missed": 1,
+      "extra": 3
+     },
+     "after": {
+      "matched": 4,
+      "missed": 1,
+      "extra": 5
+     }
+    },
+    "report_sha256": "45276207b1d640bf6f190cddc8ce26c9e0ac9b20005b85e0a707077fd1f49ad5",
+    "images_sha256": [
+     "d094ae9e2cc18fc6728ea683bfbfbd832b82a3554ebfd6e65139ed669e3b23d5"
+    ]
+   },
+   {
+    "id": 5,
+    "recording": "steady_room_noise",
+    "reference": 0,
+    "seconds": 2.0,
+    "before": [],
+    "after": [],
+    "scores": {
+     "before": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "3229372c4e832deb6662b27e4d6c76a5f663cbe66538ef87deb17d2fa73be42e",
+    "images_sha256": [
+     "48a45622810a1b01b9b5d8521f21a11edc9200c43d63d0c0bed717866d7f6919"
+    ]
+   },
+   {
+    "id": 6,
+    "recording": "silence",
+    "reference": 0,
+    "seconds": 2.0,
+    "before": [],
+    "after": [],
+    "scores": {
+     "before": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "87599d3a1608e241e62d67f5983d7027c48cc9aa3d9c2781b048176980ca541e",
+    "images_sha256": [
+     "690f82eff66d1c201e29d5b78a1e1675c44a55af2d2eb87ce26f0a1a9c93c3e4"
+    ]
+   },
+   {
+    "id": 7,
+    "recording": "mix1.wav",
+    "reference": 6,
+    "seconds": 3.5,
+    "before": [
+     0.06,
+     0.62,
+     1.08,
+     2.02,
+     3.04
+    ],
+    "after": [
+     0.13,
+     0.59,
+     1.06,
+     1.99,
+     3.02
+    ],
+    "scores": {
+     "before": {
+      "matched": 4,
+      "missed": 2,
+      "extra": 1
+     },
+     "after": {
+      "matched": 5,
+      "missed": 1,
+      "extra": 0
+     }
+    },
+    "report_sha256": "a5a667bb1f73a7de9b921db807a3a6728ff1af8727cae655d6faba83b1e7b16d",
+    "images_sha256": [
+     "dec566246364f0c0f236ec08d626fb6c4551c822f647b724fbcb4bc5e07b6396"
+    ]
+   },
+   {
+    "id": 8,
+    "recording": "drum-surdo-large-lick.wav",
+    "reference": 9,
+    "seconds": 3.5,
+    "before": [
+     0.0,
+     0.53,
+     0.72,
+     1.3,
+     1.46,
+     1.98,
+     2.15,
+     2.32,
+     2.68,
+     2.84
+    ],
+    "after": [
+     0.0,
+     0.52,
+     0.71,
+     1.29,
+     1.46,
+     1.98,
+     2.14,
+     2.31,
+     2.67,
+     2.83
+    ],
+    "scores": {
+     "before": {
+      "matched": 9,
+      "missed": 0,
+      "extra": 1
+     },
+     "after": {
+      "matched": 9,
+      "missed": 0,
+      "extra": 1
+     }
+    },
+    "report_sha256": "801df17f140cc0765dc412baa28747a1b6ebd9effcb7ce2cc210e264c285d2bd",
+    "images_sha256": [
+     "61951945186158f85d6683e8c57d6bc684ca8544e546677b4425ce67aa469b9b"
+    ]
+   },
+   {
+    "id": 9,
+    "recording": "shenai-C.wav",
+    "reference": 2,
+    "seconds": 3.3916326530612246,
+    "before": [
+     0.0
+    ],
+    "after": [
+     0.096
+    ],
+    "scores": {
+     "before": {
+      "matched": 1,
+      "missed": 1,
+      "extra": 0
+     },
+     "after": {
+      "matched": 1,
+      "missed": 1,
+      "extra": 0
+     }
+    },
+    "report_sha256": "f976f4516f3e6f3a6595c2c889997fbf0696714aedc16af8d2cfac6b04193e32",
+    "images_sha256": [
+     "8132cea3057dbe42c1b39189c09f3ca3b8d7bfbd6239d0b6e3d13b58d8ad9ced"
+    ]
+   }
+  ],
+  "totals": {
+   "before": {
+    "matched": 45,
+    "missed": 7,
+    "extra": 5,
+    "f1": 0.8824
+   },
+   "after": {
+    "matched": 40,
+    "missed": 12,
+    "extra": 6,
+    "f1": 0.8163
+   }
+  }
+ },
+ "rapid_timing": {
+  "prompt": "The attached image and the following film-clock measurements describe the same short recording. At what times do distinct notes or percussive strikes start? Give your best estimates in seconds from the start, in order, as JSON {\"times_s\":[...]}. If no individual attacks stand out, give an empty list.\n",
+  "selection": "All music recordings are disjoint from both prior GPT panels. In the original Modal annotations, a dense excerpt contains at least three consecutive note starts with gaps under 160 ms within 3.5 s. Up to eight dense and four sparse clips were selected by SHA256(reel-rapid-presentation-confirm/ + recording) before looking at either detector output. Two zero-attack controls were added. Both arms ran independently, including cases with identical inputs. The only intervention was the rapid_rises field.",
+  "tolerance_s": 0.05,
+  "rows": [
+   {
+    "id": 0,
+    "recording": "bell-octave1.wav",
+    "reference": 1,
+    "seconds": 1.998798185941043,
+    "before": [
+     0.0
+    ],
+    "after": [
+     0.0
+    ],
+    "rapid_rises": [],
+    "scores": {
+     "before": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "44121c1fcec9ffa77ac67129341ebf46ab84c716acda0a98cb4f112d0f19b030",
+    "images_sha256": [
+     "a1ce0b5174a8fa6d48ed863cb4df2cd39019239cbcbece129016c8af448e41c1"
+    ]
+   },
+   {
+    "id": 1,
+    "recording": "guitar_riff_cutup3.wav",
+    "reference": 12,
+    "seconds": 2.995374149659864,
+    "before": [
+     0.06,
+     0.28,
+     0.76,
+     1.02,
+     1.5,
+     1.88,
+     2.28,
+     2.54
+    ],
+    "after": [
+     0.06,
+     0.28,
+     0.76,
+     1.02,
+     1.5,
+     1.88,
+     2.28,
+     2.54
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.248140589569161,
+       0.36820861678004535,
+       0.4882766439909297
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 7,
+      "missed": 5,
+      "extra": 1
+     },
+     "after": {
+      "matched": 7,
+      "missed": 5,
+      "extra": 1
+     }
+    },
+    "report_sha256": "3a4db9e53b55a7b67308ed296968c5e915e45b37edb9b092fe8ea6055c0f812d",
+    "images_sha256": [
+     "1cf4d463b290ef10f83dc828eabd5657ce3072236339c831db584127b0d32ef6"
+    ]
+   },
+   {
+    "id": 2,
+    "recording": "techno_sequence3.wav",
+    "reference": 22,
+    "seconds": 3.5,
+    "before": [
+     0.2,
+     0.3,
+     0.46,
+     0.62,
+     0.78,
+     0.94,
+     1.1,
+     1.25,
+     1.4,
+     1.56,
+     1.72,
+     1.88,
+     2.03,
+     2.18,
+     2.34,
+     2.5,
+     2.66,
+     2.81,
+     2.96,
+     3.12,
+     3.28,
+     3.44
+    ],
+    "after": [
+     0.2,
+     0.3,
+     0.45,
+     0.61,
+     0.77,
+     0.93,
+     1.09,
+     1.25,
+     1.4,
+     1.56,
+     1.72,
+     1.88,
+     2.03,
+     2.19,
+     2.35,
+     2.5,
+     2.66,
+     2.82,
+     2.98,
+     3.13,
+     3.29,
+     3.45
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.19210884353741497,
+       0.28816326530612246,
+       0.44024943310657594
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 22,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 22,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "5250c1066e97c3c9da987363d53c6b04e16574fbce4f1812b69c41c607273bf3",
+    "images_sha256": [
+     "b213dfe0caa20e5f376972201b8a28cf002ece723368ab2f5d56711730a0c4db"
+    ]
+   },
+   {
+    "id": 3,
+    "recording": "metal_beat_1.wav",
+    "reference": 11,
+    "seconds": 1.9339002267573697,
+    "before": [
+     0.0,
+     0.21,
+     0.36,
+     0.49,
+     0.63,
+     0.78,
+     0.94,
+     1.1,
+     1.25,
+     1.4,
+     1.57
+    ],
+    "after": [
+     0.0,
+     0.21,
+     0.36,
+     0.49,
+     0.63,
+     0.78,
+     0.95,
+     1.11,
+     1.25,
+     1.4,
+     1.57
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.20011337868480725,
+       0.35219954648526075,
+       0.4882766439909297,
+       0.6243537414965986,
+       0.7684353741496599
+      ]
+     },
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       1.0966213151927438,
+       1.2487074829931972,
+       1.3927891156462584
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 11,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 11,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "e271a6f0db228ba34dea6314f0df675b99298febcca5e039a72b5f04220bd907",
+    "images_sha256": [
+     "d94c9bacf50a47fb1ee30c4eeae84026dc1ab67eef39d00c802715306ef37068"
+    ]
+   },
+   {
+    "id": 4,
+    "recording": "guitar-elec-hollow-lick.wav",
+    "reference": 15,
+    "seconds": 2.3653061224489798,
+    "before": [
+     0.0,
+     0.13,
+     0.27,
+     0.4,
+     0.53,
+     0.66,
+     0.79,
+     0.92,
+     1.05,
+     1.18,
+     1.31,
+     1.44,
+     1.57,
+     1.7,
+     1.83,
+     1.96
+    ],
+    "after": [
+     0.0,
+     0.15,
+     0.29,
+     0.43,
+     0.57,
+     0.7,
+     0.83,
+     0.97,
+     1.1,
+     1.23,
+     1.37,
+     1.5,
+     1.63,
+     1.76,
+     1.9,
+     2.03
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.08804988662131519,
+       0.1600907029478458,
+       0.28816326530612246,
+       0.4322448979591837
+      ]
+     },
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.7043990929705215,
+       0.8324716553287982,
+       0.9685487528344672
+      ]
+     },
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       1.680952380952381,
+       1.7850113378684807,
+       1.8330385487528345
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 7,
+      "missed": 8,
+      "extra": 9
+     },
+     "after": {
+      "matched": 13,
+      "missed": 2,
+      "extra": 3
+     }
+    },
+    "report_sha256": "7a2e01224d4950e5111bd27e1350e959fc99308c7f1b873e88f740fac4275e70",
+    "images_sha256": [
+     "b4635b1575be08726d455120e37a2fa9c983b71bf8a421959d65cf8685f9d285"
+    ]
+   },
+   {
+    "id": 5,
+    "recording": "guitar-elec-solid-dist-lick.wav",
+    "reference": 8,
+    "seconds": 3.2709297052154196,
+    "before": [
+     0.06,
+     0.82,
+     1.12
+    ],
+    "after": [
+     0.06,
+     0.7,
+     0.79,
+     0.89,
+     1.02,
+     1.11,
+     1.23
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.7043990929705215,
+       0.7924489795918367,
+       0.8885034013605442,
+       1.024580498866213,
+       1.1126303854875284,
+       1.2326984126984126
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 3,
+      "missed": 5,
+      "extra": 0
+     },
+     "after": {
+      "matched": 6,
+      "missed": 2,
+      "extra": 1
+     }
+    },
+    "report_sha256": "fc686009003fc4d0d8cc909379a148e3688277df78ae2e0f2bbb7047d37620b4",
+    "images_sha256": [
+     "19402ee639ba49c124c618eec926dc88834aa64a2b6ba8a75d70a082222ef15d"
+    ]
+   },
+   {
+    "id": 6,
+    "recording": "silence",
+    "reference": 0,
+    "seconds": 2.0,
+    "before": [],
+    "after": [],
+    "rapid_rises": [],
+    "scores": {
+     "before": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "87599d3a1608e241e62d67f5983d7027c48cc9aa3d9c2781b048176980ca541e",
+    "images_sha256": [
+     "690f82eff66d1c201e29d5b78a1e1675c44a55af2d2eb87ce26f0a1a9c93c3e4"
+    ]
+   },
+   {
+    "id": 7,
+    "recording": "twangs_1.wav",
+    "reference": 10,
+    "seconds": 2.0965079365079364,
+    "before": [
+     0.0,
+     0.25,
+     0.5,
+     0.75,
+     0.875,
+     1.0,
+     1.25,
+     1.5,
+     1.75
+    ],
+    "after": [
+     0.0,
+     0.25,
+     0.5,
+     0.75,
+     0.875,
+     1.0,
+     1.25,
+     1.5,
+     1.75
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.7364172335600907,
+       0.8644897959183674,
+       0.992562358276644
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 9,
+      "missed": 1,
+      "extra": 0
+     },
+     "after": {
+      "matched": 9,
+      "missed": 1,
+      "extra": 0
+     }
+    },
+    "report_sha256": "9db1bf71de4bc2625a6f16c56d63ee6166a82d4494a3066bd4beaed63095af5d",
+    "images_sha256": [
+     "fa9a607c58436c7937eabc811ca56c1e3594d3fa9b7ef1c2391d93663c48047d"
+    ]
+   },
+   {
+    "id": 8,
+    "recording": "cymbal-hihat-lick.wav",
+    "reference": 8,
+    "seconds": 1.2716780045351475,
+    "before": [
+     0.0,
+     0.125,
+     0.26,
+     0.375,
+     0.505,
+     0.625,
+     0.755,
+     1.04
+    ],
+    "after": [
+     0.0,
+     0.12,
+     0.248,
+     0.368,
+     0.496,
+     0.616,
+     0.744,
+     1.03
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.12006802721088436,
+       0.248140589569161,
+       0.36820861678004535,
+       0.496281179138322,
+       0.6163492063492063,
+       0.744421768707483
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 8,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 8,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "9a93a051f70b3cdccd77d3ecb708744e4d6f112a1d0d989730fc29ee22f1f914",
+    "images_sha256": [
+     "abc281ef632409bfdb9cfb27959ee990ba6b3d1d14bf086107cb6589b5d8c5b3"
+    ]
+   },
+   {
+    "id": 9,
+    "recording": "steady_room_noise",
+    "reference": 0,
+    "seconds": 2.0,
+    "before": [],
+    "after": [],
+    "rapid_rises": [],
+    "scores": {
+     "before": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 0,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "f2c7cf7815b832589b5007082265a4411c4238d4458dc16ae7d719dbb2e13306",
+    "images_sha256": [
+     "48a45622810a1b01b9b5d8521f21a11edc9200c43d63d0c0bed717866d7f6919"
+    ]
+   },
+   {
+    "id": 10,
+    "recording": "tabla-lick.wav",
+    "reference": 6,
+    "seconds": 2.628843537414966,
+    "before": [
+     0.0,
+     0.26,
+     0.35,
+     0.45,
+     0.55,
+     0.64
+    ],
+    "after": [
+     0.0,
+     0.24,
+     0.336,
+     0.432,
+     0.536,
+     0.624
+    ],
+    "rapid_rises": [
+     {
+      "channels": [
+       1
+      ],
+      "times_s": [
+       0.24013605442176872,
+       0.3361904761904762,
+       0.4322448979591837,
+       0.5363038548752834,
+       0.6243537414965986
+      ]
+     }
+    ],
+    "scores": {
+     "before": {
+      "matched": 6,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 6,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "0cb396e0aec7c77929b05f1d73258251368bc684d55a0238d8487d53df8f6211",
+    "images_sha256": [
+     "16ec5e19fddfaad99207e5de0906871af8bbfcac085a2fd16d2ec9388a392acd"
+    ]
+   },
+   {
+    "id": 11,
+    "recording": "flugel-lick.wav",
+    "reference": 8,
+    "seconds": 2.3942630385487527,
+    "before": [
+     0.0,
+     0.22,
+     0.48,
+     0.76,
+     0.94,
+     1.14,
+     1.29,
+     1.47
+    ],
+    "after": [
+     0.0,
+     0.21,
+     0.47,
+     0.76,
+     0.95,
+     1.14,
+     1.3,
+     1.47
+    ],
+    "rapid_rises": [],
+    "scores": {
+     "before": {
+      "matched": 8,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 8,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "745f406cfff1c2aaec16d20cf27e0a6ac65b00f5a9d74664b7e60d7c747bf10d",
+    "images_sha256": [
+     "8fc2baec9abcb9389b345e4690a0b6666902f04e8c8e60828fe4ca9073d63ba4"
+    ]
+   },
+   {
+    "id": 12,
+    "recording": "femalevoices_aa2_A3.wav",
+    "reference": 1,
+    "seconds": 3.5,
+    "before": [
+     0.2
+    ],
+    "after": [
+     0.2
+    ],
+    "rapid_rises": [],
+    "scores": {
+     "before": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "1d312329e966e847a23655140da2328f1bbb0650b4714cea6cfd2bb5f7f58b83",
+    "images_sha256": [
+     "f5117dceb9f28977d3ffba1104e24139faa1ea795928841ce6d6a357e128ede2"
+    ]
+   },
+   {
+    "id": 13,
+    "recording": "guitar-elec-solid-dist-EBfifths-octave1-long.wav",
+    "reference": 1,
+    "seconds": 1.9205442176870748,
+    "before": [
+     0.06
+    ],
+    "after": [
+     0.06
+    ],
+    "rapid_rises": [],
+    "scores": {
+     "before": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     },
+     "after": {
+      "matched": 1,
+      "missed": 0,
+      "extra": 0
+     }
+    },
+    "report_sha256": "3b69251c7a7e09d571dd156d94db48249de8e759403b400399529a684ee463a5",
+    "images_sha256": [
+     "336dc33bf09d92338588c0cdb95c1b2045a32459b6dad91e2174a3622b80c1d5"
+    ]
+   }
+  ],
+  "totals": {
+   "before": {
+    "matched": 84,
+    "missed": 19,
+    "extra": 10,
+    "f1": 0.8528
+   },
+   "after": {
+    "matched": 93,
+    "missed": 10,
+    "extra": 5,
+    "f1": 0.9254
+   }
+  },
+  "totals_on_changed_inputs": {
+   "before": {
+    "matched": 73,
+    "missed": 19,
+    "extra": 10,
+    "f1": 0.8343
+   },
+   "after": {
+    "matched": 82,
+    "missed": 10,
+    "extra": 5,
+    "f1": 0.9162
+   }
+  }
+ },
+ "rapid_environment": {
+  "rows": [
+   {
+    "id": 0,
+    "mixture": 27,
+    "reference": 5,
+    "before": 5,
+    "after": 5,
+    "new_evidence": {
+     "rapid_rises": {
+      "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. Background activity can also produce a run.",
+      "runs": [
+       {
+        "channels": [
+         1
+        ],
+        "times_s": [
+         0.21612244897959185,
+         0.3281859410430839,
+         0.47226757369614514,
+         0.5923356009070295
+        ]
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": 1,
+    "mixture": 17,
+    "reference": 5,
+    "before": 0,
+    "after": 0,
+    "new_evidence": {
+     "rapid_rises": {
+      "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. Background activity can also produce a run.",
+      "runs": [
+       {
+        "channels": [
+         1
+        ],
+        "times_s": [
+         0.22412698412698412,
+         0.3201814058956916,
+         0.44825396825396824,
+         0.496281179138322,
+         0.6323582766439909,
+         0.7684353741496599
+        ]
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": 2,
+    "mixture": 59,
+    "reference": 5,
+    "before": 5,
+    "after": 5,
+    "new_evidence": {}
+   },
+   {
+    "id": 3,
+    "mixture": 56,
+    "reference": 0,
+    "before": 0,
+    "after": 0,
+    "new_evidence": {}
+   },
+   {
+    "id": 4,
+    "mixture": 5,
+    "reference": 4,
+    "before": 4,
+    "after": 4,
+    "new_evidence": {
+     "rapid_rises": {
+      "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. Background activity can also produce a run.",
+      "runs": [
+       {
+        "channels": [
+         1
+        ],
+        "times_s": [
+         0.1600907029478458,
+         0.23213151927437642,
+         0.35219954648526075,
+         0.5042857142857143
+        ]
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": 5,
+    "mixture": 37,
+    "reference": 4,
+    "before": 0,
+    "after": 4,
+    "new_evidence": {
+     "rapid_rises": {
+      "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. Background activity can also produce a run.",
+      "runs": [
+       {
+        "channels": [
+         1
+        ],
+        "times_s": [
+         0.44825396825396824,
+         0.5363038548752834,
+         0.688390022675737
+        ]
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": 6,
+    "mixture": 79,
+    "reference": 4,
+    "before": 3,
+    "after": 4,
+    "new_evidence": {
+     "rapid_rises": {
+      "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. Background activity can also produce a run.",
+      "runs": [
+       {
+        "channels": [
+         1
+        ],
+        "times_s": [
+         0.24013605442176872,
+         0.35219954648526075,
+         0.45625850340136054
+        ]
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": 7,
+    "mixture": 15,
+    "reference": 7,
+    "before": 7,
+    "after": 7,
+    "new_evidence": {
+     "rapid_rises": {
+      "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. Background activity can also produce a run.",
+      "runs": [
+       {
+        "channels": [
+         1
+        ],
+        "times_s": [
+         0.47226757369614514,
+         0.6163492063492063,
+         0.7684353741496599,
+         0.8804988662131519,
+         1.0325850340136054
+        ]
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": 8,
+    "mixture": 47,
+    "reference": 7,
+    "before": 7,
+    "after": 7,
+    "new_evidence": {
+     "rapid_rises": {
+      "basis": "Film times of closely spaced rises within a channel. Each group covers a short run. Background activity can also produce a run.",
+      "runs": [
+       {
+        "channels": [
+         1
+        ],
+        "times_s": [
+         0.8564852607709751,
+         1.0085714285714287,
+         1.104625850340136
+        ]
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": 9,
+    "mixture": 69,
+    "reference": 3,
+    "before": 3,
+    "after": 3,
+    "new_evidence": {}
+   },
+   {
+    "id": 10,
+    "mixture": 18,
+    "reference": 0,
+    "before": 0,
+    "after": 0,
+    "new_evidence": {}
+   },
+   {
+    "id": 11,
+    "mixture": 49,
+    "reference": 8,
+    "before": 0,
+    "after": 0,
+    "new_evidence": {}
+   }
+  ],
+  "protocol": "Previously captured independent environmental panel. Identical inputs reuse their baseline answer. For changed inputs the production formatter grouped the original mono timestamps, then a fresh session saw the new field, the original images, the original remaining fields and the original count question.",
+  "scores": {
+   "before": {
+    "exact": 8,
+    "absolute_error": 18,
+    "overcount": 0,
+    "undercount": 18
+   },
+   "after": {
+    "exact": 10,
+    "absolute_error": 13,
+    "overcount": 0,
+    "undercount": 13
+   },
+   "paired": {
+    "better": 2,
+    "worse": 0,
+    "tied": 10,
+    "clips": 12,
+    "mean_absolute_error_change_95pct_bootstrap": [
+     -1.167,
+     0.0
+    ]
+   }
+  }
+ },
+ "door_rapid": {
+  "until_s": 8.5,
+  "answers": {
+   "A": {
+    "turns": 2,
+    "caption": "A closed brown door remains still against a plain wall while a brief jingling sound is heard.",
+    "heard": "The sound description reported a brief jingling and rattling, though I could not hear it directly.",
+    "seen": "A closed brown door remained still against a plain wall."
+   },
+   "B": {
+    "turns": 2,
+    "caption": "A simple illustration shows a closed brown door with a gold knob against a beige wall.",
+    "heard": "I could not directly hear the audio, though the sound description suggested a faint, steady fan-like noise.",
+    "seen": "A closed brown door with a gold knob stood against a beige wall."
+   }
+  },
+  "hashes": {
+   "A": {
+    "hashes": [
+     "e8ef53f560f34f12e2606f05bc5b5a6cda968e3431dcb1326bf2021973fc8ead",
+     "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+     "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+     "0868d159b01e655588c259e1176b91cc9145b85faf08bd354c483b928d98de39",
+     "444d91834018d956584fac53cdc196d6ab9189303200b757b61a8d3c30314904",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "4bcfe5841a8f4ca3531c34e10027951b6424e7b7df746c9e33380e3a93a2d475",
+     "c61de2506072cb840ce23eea96da816c45be0965508c9c8ca84b060821125d28",
+     "9e8ecb21cc33c68e611abfe7a7262e5209b249450271596921532df4b167195e",
+     "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+     "cad59eaf32a59d8a4846518c74273ef006fa96a5dfe7e9a64880e762cc3d2ec8",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "49a6bf37e1b88c0317a8adbdc372ef069283fd23e850c50967b1d5cc464d45fe",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     1,
+     1
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "C": {
+    "hashes": [
+     "e8ef53f560f34f12e2606f05bc5b5a6cda968e3431dcb1326bf2021973fc8ead",
+     "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+     "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+     "0868d159b01e655588c259e1176b91cc9145b85faf08bd354c483b928d98de39",
+     "444d91834018d956584fac53cdc196d6ab9189303200b757b61a8d3c30314904",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "4bcfe5841a8f4ca3531c34e10027951b6424e7b7df746c9e33380e3a93a2d475",
+     "c61de2506072cb840ce23eea96da816c45be0965508c9c8ca84b060821125d28",
+     "9e8ecb21cc33c68e611abfe7a7262e5209b249450271596921532df4b167195e",
+     "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+     "cad59eaf32a59d8a4846518c74273ef006fa96a5dfe7e9a64880e762cc3d2ec8",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "49a6bf37e1b88c0317a8adbdc372ef069283fd23e850c50967b1d5cc464d45fe",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     1,
+     1
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "B": {
+    "hashes": [
+     "e97aadbb43ca7c5fa16f23b0be7f55664f3c32bfb0714e623d7cf1e18e55dd79",
+     "b0afa97f5e1ffb81644a92c5cd5ec7f1f979ebbc2cb19c7b464f904620094c25",
+     "608329c35a573b05ab4266797c8a65cc5cddbdb5e92152a317c483642f1d09b1",
+     "d3b8ad564b6491ffc284ac118fca0249b44ad8581333d9ae03d4ecccde7bf48a",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "d0a78e3dbc9ddfaf727dc3d8ec967cf431b35fb48836d576fc5e0a4710c9e112",
+     "ab0c308ab9528dceb7d7289e6c82ca2d6293c92c992f3979aa716cdc47113798",
+     "71cfb358d97685669be4f3d60cc331140ba31c8f9b87d20d2aef1b8d5eb19b60",
+     "032ea85dae871db47508c32f46ed899ed4d4131176181a33b4d328fb8166d8a4",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "af349e60c813c596d3240dd209dfd044f427f440531a60974b741f57c734f00d",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     1,
+     1
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "silent": {
+    "hashes": [
+     "7dbc5a48980fb4e51754e406804d14e3a721838352ee31965468d844ed95a962",
+     "abf29132af3d8711dec2bc49293383bcc1c2ea0e03ec13737dba9dc147969d8f",
+     "d1f2cd46c7b83c4bfb48e84264cf9f6fcfe882d66721ea3da9551135fbff1183",
+     "9212f57f6dcc2f005c94c6e792369e0eba07c19fa505c35bfcf7aa04e6f86be2",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "c6f1c15d87fe14890a8dbb5797570e6fe366de9e43d29a6936eb0af5ec698097",
+     "357e79fd70431b0f60cad3d9fb2c5879d5b9107f870e328fead768eef56e8060",
+     "606763c6f07da800c9731fffb39a92c7acda7b809597ee44cc85962c845058c2",
+     "11cfe1a9a46f6a766252ed0392d37b58e449415f143bd298df3ec9def42647fd",
+     "bbe81c6c4dca0300c1f4429f61ea7f6a02c2d506170ce62779df760d760bb37a",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     0,
+     0
+    ],
+    "turns": 2,
+    "end_s": 8.5
+   },
+   "picture": {
+    "hashes": [
+     "459e2df1c1fa8895140fd37817cac3069b25a56242a5ea7d668807d1762f227c",
+     "c81505d483b73f2a3eac4f129b20c1ba8498e862fee9142fe5ec0de3ff44ea0d",
+     "33f43523aeb0e57b7ae51de0d6dde732899057b6a92cf1e20df8cdaccb9e5a93",
+     "a1d7771138da4f2ad5b83123adea1a00b9f8611650217f7dc1c7971fb9a48a63",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "34e00e8707907ce70feb56efed57b28e160f9cd53b5f4f5e78894b764d4214f1",
+     "87400b24d2c2c14118847108909075cbdc4c969d8a1b754197935680bbdb3bd3",
+     "f4477e9af854079480d37da3109511bb032075b1959db05734cc293a7202e373",
+     "5691518efce47646746df8dfd76ddca3fd935a949a2f22e6dfc4a45ffd3a432b",
+     "3ef942b988f3263591ee2d8f5bdf897fdd7e16f403a1391ea5ebec0d699b54a6"
+    ],
+    "charts_per_turn": [
+     0,
+     0
+    ],
+    "turns": 2,
+    "end_s": 8.499
+   }
+  }
  }
 }

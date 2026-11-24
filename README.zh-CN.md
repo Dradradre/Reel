@@ -160,7 +160,7 @@ flowchart LR
 
 </details>
 
-正常播放时，`audio.attacks` 会标出各声道中声音突然增强的时刻。钥匙响一次，就可能留下好几个标记。在 56 段测试录音中，人工标出了 431 个音符的起音时刻。按 50 毫秒的容差计算，Reel 找到了 359 个，原先根据各频段音量上升的标记能找到 215 个。[逐段测试结果](docs/benchmarks/attack-timing.json)
+首次用 MCP 播放时，`audio.rapid_rises` 会标出短时间内接连出现的起音。详细视图和 `play` 的 `audio.attacks` 会列出各声道检测到的所有起音时刻。钥匙响一次，就可能留下好几个标记。在 56 段测试录音中，人工标出了 431 个音符的起音时刻。按 50 毫秒的容差计算，Reel 找到了 359 个，原先根据各频段音量上升的标记能找到 215 个。[逐段测试结果](docs/benchmarks/attack-timing.json)
 
 运行 `reel setup --identify-sounds` 后，PE-AV 和 CLAP 会分别用同一声道的原始录音比对候选声源。在 99 段环境录音中，PE-AV 答对了 94 段，CLAP 答对了 85 段。去掉正确选项后，两者有 40 次选中了同一个错误声源。在另外 49 段录音中，同时比对选项之外的声音后，这类误报从 16 次降到 0 次。放回正确选项时，原有的 39 次一致答对中保留了 21 次。[移除正确选项的实验](docs/benchmarks/source-outside-choices.json)，[逐段结果](docs/benchmarks/source-identity-agreement.json)
 

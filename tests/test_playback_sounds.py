@@ -130,6 +130,25 @@ class PlaybackSoundTests(unittest.TestCase):
         self.assertTrue(np.any(spans[0][1]))
         self.assertFalse(np.any(spans[1][1]))
 
+    def test_sound_after_cutoff_never_enters_either_matching_scale(self):
+        matcher = Comparator.__new__(Comparator)
+        matcher.references = (["click"], object())
+        matcher.similarities = Mock(side_effect=AssertionError("the encoder heard the unreleased click"))
+        rate, first = 44100, 17
+        cutoff = (first + 11026.5) / rate
+        pcm = np.zeros((3 * rate, 2), dtype=np.int16)
+        pcm[11027:, 1] = 24000
+        with tempfile.TemporaryDirectory() as tmp, patch.dict("sys.modules", {"torch": Mock()}):
+            wav = Path(tmp) / "long.wav"
+            sf.write(wav, pcm, rate)
+            for detailed in (True, False):
+                report = matcher.match(wav, first / rate, cutoff, [], detailed, first_sample=first)
+                for window in report["windows"] + report.get("continuous_windows", []):
+                    self.assertEqual(window["wav_samples"], [0, 11027])
+                    self.assertEqual(window["end_s"], cutoff)
+                    self.assertTrue(all(ch["reference_neighbours"] == [] for ch in window["channels"]))
+        matcher.similarities.assert_not_called()
+
     def test_recording_similarity_keeps_channel_order_and_silent_channels(self):
         matcher = Comparator.__new__(Comparator)
         features = []

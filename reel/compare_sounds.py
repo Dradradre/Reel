@@ -8,12 +8,12 @@ import sys
 import numpy as np
 
 if __package__:
-    from .common import audio_blocks, open_recording, probe, read_audio, resample_channels, sample_boundary
+    from .common import open_recording, read_audio, resample_channels, sample_boundary
     from .config import COMPARE_PY, MODELS
     from .local_reader import LocalReader
     from .sounds import AST_NAME
 else:
-    from common import audio_blocks, open_recording, probe, read_audio, resample_channels, sample_boundary
+    from common import open_recording, read_audio, resample_channels, sample_boundary
     from config import COMPARE_PY, MODELS
     from local_reader import LocalReader
     from sounds import AST_NAME
@@ -41,24 +41,15 @@ def native_windows(wav, start, end, first_sample, seconds):
     with open_recording(wav) as recording:
         rate = recording.samplerate
         origin = sample_boundary(start, rate) if first_sample is None else first_sample
+        available = min(len(recording), max(0, sample_boundary(end, rate) - origin))
         offset = 0
-        for pcm in recording.blocks(blocksize=seconds * rate, dtype="float32", always_2d=True):
+        while offset < available:
+            pcm = recording.read(min(seconds * rate, available - offset), dtype="float32", always_2d=True)
             stop = offset + len(pcm)
             stamp = {"start_s": min(end, (origin + offset) / rate),
                      "end_s": min(end, (origin + stop) / rate), "wav_samples": [offset, stop]}
             yield stamp, resample_channels(pcm, rate, RATE)
             offset = stop
-
-
-def match_windows(wav, start, end, per_second, first_sample):
-    if per_second:
-        yield from native_windows(wav, start, end, first_sample, 1)
-        return
-    rate = probe(wav)["audio_rate"]
-    origin = sample_boundary(start, rate) / rate
-    for index, block in enumerate(audio_blocks(wav, RATE, 10 * RATE)):
-        left = origin + index * 10
-        yield {"start_s": min(end, left), "end_s": min(end, left + len(block) / RATE)}, block
 
 
 def nearest_labels(labels, scores):
@@ -234,8 +225,9 @@ class Comparator:
                     rows[i]["reference_neighbours"] = nearest_labels(labels, background)
             return {**stamp, "channels": rows}
 
+        width = 1 if per_second else WINDOW_SECONDS
         windows = [compare(stamp, block, "repeatpad")
-                   for stamp, block in match_windows(wav, start, end, per_second, first_sample)]
+                   for stamp, block in native_windows(wav, start, end, first_sample, width)]
         basis = ("Audio-only cosine similarities, in the supplied text order. Empty scores mean no signal "
                  "at the encoder rate. Reference neighbours are the closest of 527 independent AudioSet labels "
                  "on the same scale. All suggestions, including the neighbours, can be poor. Use a relative "
@@ -264,7 +256,9 @@ class SoundMatcher(LocalReader):
             raise ValueError("each supplied sound description must contain text")
         job = {"wav": str(Path(wav).resolve()), "start": start, "end": end, "descriptions": list(descriptions)}
         if per_second:
-            job.update(per_second=True, first_sample=first_sample)
+            job["per_second"] = True
+        if first_sample is not None:
+            job["first_sample"] = first_sample
         return self.request(job)
 
     def compare_recordings(self, reference, target, alternatives=None):

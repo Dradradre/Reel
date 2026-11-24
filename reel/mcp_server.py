@@ -1005,7 +1005,9 @@ class Viewing:
             if locate_sounds is not None:
                 result["sound_locations"] = locate(original, start, stop, locate_sounds, first)
             if alternatives is not None or per_second:
-                options = {"per_second": True, "first_sample": first} if per_second else {}
+                options = {"first_sample": first}
+                if per_second:
+                    options["per_second"] = True
                 with self.match_session() as matcher:
                     result["original_sound_match"] = matcher.read(original, start, stop, alternatives or [], **options)
                     if focus and result["original_sound_match"].get("status") == "available":

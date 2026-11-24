@@ -993,8 +993,9 @@ class TransportTests(unittest.TestCase):
         reader.advance(2, False)
         attempts = []
 
-        def compare(wav, start, end, descriptions):
+        def compare(wav, start, end, descriptions, *, first_sample):
             samples, sr = sf.read(wav, dtype="int16")
+            self.assertEqual(first_sample, round(start * rate))
             expected = stereo[round(start * rate):round(end * rate)]
             self.assertEqual(sr, rate)
             np.testing.assert_array_equal(samples, expected)

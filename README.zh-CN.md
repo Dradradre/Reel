@@ -164,6 +164,8 @@ flowchart LR
 
 运行 `reel setup --sound-examples` 后，首次播放就会把听到的声音与 116 类声源的 942 段真实录音及 531 个声音名称比对，无需提供选项。在 244 段留作测试的录音中，71 段识别正确，8 段识别错误，165 段未给出名称。[逐段结果](docs/benchmarks/reference-sources.json)
 
+遇到与背景明显不同的声音，Reel 会重听那一小段原始录音。只在短片段里出现的声源名称还需由另一个音频模型核对。即使认不出声源，回放时也能查看时间、声道、电平和频段。
+
 在这 244 段录音中，已有候选名称包含正确声源的录音从 84 段增至 121 段，另增了 6 个错误名称。让 GPT 自由回答时，22 段录音在改动前后各答对 10 段。[逐条回答与对照实验](docs/benchmarks/reference-source-listeners.json)
 
 运行 `reel setup --identify-sounds` 后，PE-AV 和 CLAP 会分别用同一声道的原始录音比对候选声源。在 99 段环境录音中，PE-AV 答对了 94 段，CLAP 答对了 85 段。去掉正确选项后，两者有 40 次选中了同一个错误声源。在另外 49 段录音中，同时比对选项之外的声音后，这类误报从 16 次降到 0 次。放回正确选项时，原有的 39 次一致答对中保留了 21 次。[移除正确选项的实验](docs/benchmarks/source-outside-choices.json)，[逐段结果](docs/benchmarks/source-identity-agreement.json)

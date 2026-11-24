@@ -14,22 +14,24 @@ import tempfile
 import numpy as np
 
 if __package__:
-    from .common import open_recording, sample_boundary
-    from .compare_sounds import vocabulary
+    from .common import open_recording, resample_channels, sample_boundary
+    from .compare_sounds import CLAP_NAME, Comparator, vocabulary
     from .config import MODELS
     from .identify_sound import HOP_SAMPLES, MODEL, PerceptionEncoder, RATE, REVISION
     from .local_reader import LocalReader
     from .localize_sound import PYTHON, prepare_runtime
     from .scene_audio import digest, fetch
+    from .sound_focus import FocusHistory
     from .sound_events import active_channels
 else:
-    from common import open_recording, sample_boundary
-    from compare_sounds import vocabulary
+    from common import open_recording, resample_channels, sample_boundary
+    from compare_sounds import CLAP_NAME, Comparator, vocabulary
     from config import MODELS
     from identify_sound import HOP_SAMPLES, MODEL, PerceptionEncoder, RATE, REVISION
     from local_reader import LocalReader
     from localize_sound import PYTHON, prepare_runtime
     from scene_audio import digest, fetch
+    from sound_focus import FocusHistory
     from sound_events import active_channels
 
 MANIFEST = Path(__file__).with_name("data") / "source_examples.csv"
@@ -127,20 +129,61 @@ class SourceIndex:
         return {"name": self.names[word], "text_similarity": round(float(text[word]), 4),
                 "reference_similarity": round(float(examples[word]), 4)}
 
+    def corroborated(self, text, examples, acoustic_text):
+        # All names compete in both text catalogues, including those without example recordings.
+        # Give tied scores the least favourable rank in the tie.
+        if (not np.isfinite(text).all() or not np.isfinite(acoustic_text).all()
+                or not np.all(np.isfinite(examples) | np.isneginf(examples))):
+            return None
+        ranks = [len(row) - np.searchsorted(np.sort(row), row) for row in (text, examples, acoustic_text)]
+        product = np.prod(ranks, axis=0)
+        supported = np.flatnonzero(np.isfinite(examples))
+        if len(supported) < 2:
+            return None
+        best, runner_up = supported[np.argsort(product[supported], kind="stable")[:2]]
+        if (max(rank[best] for rank in ranks) > 3 or product[runner_up] <= 8 * product[best]
+                or text[best] < .10 or examples[best] < .55 or acoustic_text[best] < .25):
+            return None
+        return {"name": self.names[best], "text_similarity": round(float(text[best]), 4),
+                "reference_similarity": round(float(examples[best]), 4),
+                "corroborating_model": CLAP_NAME, "corroborating_cosine": round(float(acoustic_text[best]), 4)}
+
+
+class FocusMatcher:
+    """Use cached CLAP weights for additional short-window names; the ordinary reader works alone."""
+    def __init__(self):
+        self.model = self.text = None
+        self.unavailable = False
+
+    def scores(self, signal, rate, names):
+        if self.unavailable:
+            return None
+        try:
+            if self.model is None:
+                self.model = Comparator(device="cpu")
+                self.text = self.model.text_features(["the sound of " + name.lower() for name in names])
+            return self.model.similarities([resample_channels(signal, rate, RATE)], self.text)[0]
+        except (ImportError, OSError, RuntimeError, ValueError):
+            self.unavailable = True
+            self.model = self.text = None
+            return None
+
 
 class SourceHistory:
-    def __init__(self, identify):
+    def __init__(self, identify, identify_focus=None):
         self.identify = identify
+        self.identify_focus = identify_focus
         self.tail = None
         self.format = self.end = None
 
     def read(self, wav, first_sample, end_s):
-        windows = []
+        windows, focused = [], []
         with open_recording(wav) as recording:
             rate, channels = recording.samplerate, recording.channels
             available = min(len(recording), max(0, sample_boundary(end_s, rate) - first_sample))
             if (self.end, self.format) != (first_sample, (rate, channels)):
                 self.tail = np.empty((0, channels), dtype=np.float32)
+                self.focus = FocusHistory()
             self.format = rate, channels
             while recording.tell() < available:
                 fresh = recording.read(min(SECONDS * rate, available - recording.tell()), dtype="float32", always_2d=True)
@@ -153,13 +196,27 @@ class SourceHistory:
                         active = [i for i in ids if np.any(fresh[:, i - 1])]
                         if active and (result := self.identify(signal, rate)):
                             groups.append(dict(channels=active, **result))
+                for channels_seen, waveform, left, right in self.focus.passages(self.tail, rate, start, stop - len(fresh)):
+                    wide_name = next((g["name"] for g in groups if channels_seen[0] in g["channels"]), None)
+                    if self.identify_focus is None:
+                        result = self.identify(waveform[left:right], rate)
+                        if result and result["name"] != wide_name:
+                            result = None
+                    else:
+                        try:
+                            result = self.identify_focus(waveform[left:right], rate, wide_name)
+                        except (OSError, RuntimeError, ValueError):
+                            continue  # Keep the valid whole-window reading if the extra pass fails.
+                    if result:
+                        focused.append({"start_s": (start + left) / rate, "end_s": min(end_s, (start + right) / rate),
+                                        "channels": [dict(channels=channels_seen, **result)]})
                 if groups:
                     windows.append(dict(start_s=start / rate, end_s=min(end_s, stop / rate), channels=groups))
             self.end = first_sample + available
-        return {"status": "available", "windows": windows, "model": MODEL,
+        return {"status": "available", "windows": windows, **({"focused_windows": focused} if focused else {}), "model": MODEL,
                 "basis": "Estimated source names from the released channel. Reference clips and source text "
                          "are compared with the recorded sound. A match can describe an earlier part of its "
-                         "window. Missing matches leave the source open. Speech labels supply no words."}
+                         "window. A focused window was also heard separately at its recorded level. Missing matches leave the source open. Speech labels supply no words."}
 
 
 class SourceReader(LocalReader):
@@ -181,16 +238,30 @@ def serve():
             encoder.audio_only()
         return index.identify(waveform_vector(encoder, samples, rate))
 
-    history = SourceHistory(identify)
+    verifier = FocusMatcher()
+
+    def identify_focus(samples, rate, wide_name):
+        # The whole interval was scored first, so the encoder and index are already resident.
+        text, examples = index.scores(waveform_vector(encoder, samples, rate))
+        narrow = index.match(text, examples)
+        if narrow and narrow["name"] == wide_name:
+            return narrow
+        # If the first two rankings share no top-three name, a third vote cannot accept a match.
+        if not np.any((text >= np.partition(text, -3)[-3]) & (examples >= np.partition(examples, -3)[-3])):
+            return None
+        other = verifier.scores(samples, rate, index.names)
+        return index.corroborated(text, examples, other) if other is not None else None
+
+    history = SourceHistory(identify, identify_focus)
     for line in sys.stdin:
         try:
             request = json.loads(line)
-            active = SourceHistory(identify) if request.pop("isolated", False) else history
+            active = SourceHistory(identify, identify_focus) if request.pop("isolated", False) else history
             with redirect_stdout(sys.stderr):
                 result = active.read(**request)
         except Exception as error:
             result = {"status": "unavailable", "reason": str(error), "startup_failure": encoder is None or index is None}
-            history = SourceHistory(identify)
+            history = SourceHistory(identify, identify_focus)
         print(json.dumps(result), flush=True)
 
 
@@ -206,5 +277,7 @@ if __name__ == "__main__":
     mode.add_argument("--serve", action="store_true")
     if parser.parse_args().setup:
         setup(os.environ.get("REEL_FSD50K_AUDIO"))
+        # Existing installations can still use their original index while this download is pending.
+        Comparator(download=True, device="cpu")
     else:
         serve()

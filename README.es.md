@@ -164,6 +164,8 @@ La primera vista MCP muestra las ráfagas de ataques en `audio.rapid_rises`. La 
 
 Con `reel setup --sound-examples`, Reel compara lo que acaba de oír con 942 grabaciones de 116 fuentes y con 531 nombres de sonidos, sin pedir opciones. En 244 grabaciones reservadas para la evaluación, acertó en 71, se equivocó en 8 y dejó 165 sin identificar. [Resultados por grabación](docs/benchmarks/reference-sources.json)
 
+Reel vuelve a escuchar el fragmento que sobresale del fondo. Si aparece un nombre nuevo en ese fragmento, lo contrasta con otro modelo de audio. Aunque la fuente quede sin identificar, se pueden consultar el intervalo, el canal, el nivel y la banda de frecuencias.
+
 En esas 244 grabaciones, el nombre correcto aparecía entre las etiquetas de 84 clips antes del cambio y de 121 después. Se añadieron también seis nombres incorrectos. En las respuestas libres de GPT, los aciertos fueron 10 de 22 en ambas versiones. [Respuestas y controles](docs/benchmarks/reference-source-listeners.json)
 
 Con `reel setup --identify-sounds`, Reel compara las fuentes propuestas con la grabación usando PE-AV y CLAP. En 99 grabaciones, PE-AV acertó 94 veces y CLAP 85. Al retirar la opción correcta, los dos coincidieron en otra fuente 40 veces. En otras 49 grabaciones, comprobar también las fuentes fuera de la lista redujo esos errores de 16 a 0. Con la opción correcta presente, conservó 21 de los 39 aciertos compartidos. [Prueba con la fuente omitida](docs/benchmarks/source-outside-choices.json). [Resultados por grabación](docs/benchmarks/source-identity-agreement.json)

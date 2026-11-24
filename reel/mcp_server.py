@@ -26,6 +26,7 @@ if __package__:
     from .common import RecordedSource
     from .replay import replay
     from .pitch import PitchTrace
+    from .sound_focus import contrast_measurements
     from .source_examples import SourceReader, ready as source_examples_ready
     from .onsets import recorded_attacks
     from .compare_sounds import SoundMatcher
@@ -57,6 +58,7 @@ else:
     from common import RecordedSource
     from replay import replay
     from pitch import PitchTrace
+    from sound_focus import contrast_measurements
     from source_examples import SourceReader, ready as source_examples_ready
     from onsets import recorded_attacks
     from compare_sounds import SoundMatcher
@@ -218,8 +220,14 @@ def first_view_report(report):
                          "Background activity can also produce a run.",
                 "runs": [{"channels": channels, "times_s": list(times)} for times, channels in sorted(shared.items())]}
         matches = report["audio"].get("source_examples", {})
-        if matches.get("windows"):
+        if matches.get("windows") or matches.get("focused_windows"):
             audio["source_examples"] = matches
+        focused = report["audio"].get("scene", {}).get("focused_windows")
+        if focused:
+            audio["focused_listening"] = {"basis": "A local audio captioner reheard each named interval on its own. "
+                                          "contrast_s is the part that stood out acoustically. Surrounding sounds can "
+                                          "also contribute to the impression. Speech impressions supply no words.",
+                                          "windows": focused}
         if "sound_events" in report["audio"]:
             audio["sound_events"] = report["audio"]["sound_events"]
         stereo = report["audio"].get("stereo_cues")
@@ -737,6 +745,7 @@ class Viewing:
                       "rate_hz": rate, "channels": track["channels"], "first_sample_on_film": first,
                       "samples_per_channel": last - first, "pitch_contour": PitchTrace().read(wav, first),
                       "attacks": recorded_attacks(wav, first)}
+            result["acoustic_contrast"] = contrast_measurements(original, first, stop)
             if (describe or source_examples) and self.examples is not None:
                 with self.examples.for_replay() as examples:
                     result["source_examples"] = examples.read(original, first, stop, isolated=True)

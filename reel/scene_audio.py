@@ -20,11 +20,13 @@ if __package__:
     from .common import open_recording, resample_channels, sample_boundary
     from .compare_sounds import CLAP_NAME, RATE as CLAP_RATE, Comparator
     from .config import CAPTION_PY, HOME, MODELS
+    from .sound_focus import FocusHistory
     from .local_reader import LocalReader
 else:
     from common import open_recording, resample_channels, sample_boundary
     from compare_sounds import CLAP_NAME, RATE as CLAP_RATE, Comparator
     from config import CAPTION_PY, HOME, MODELS
+    from sound_focus import FocusHistory
     from local_reader import LocalReader
 
 MODEL = "Labbeti/conette"
@@ -142,14 +144,37 @@ class SceneHistory:
                 "channels": [{"channels": group, **(note if isinstance(note, dict) else {"impression": note})}
                              for group, note in zip(groups, notes, strict=True)]}
 
+    def _focused(self, context, rate, cursor, fresh_size, end_s, recent):
+        origin = cursor - len(context)
+        for channels, waveform, left, right in self.focus.passages(context, rate, origin, cursor - fresh_size):
+            # Give the captioner two real seconds when the distinctive sound is shorter.
+            size = max(right - left, MIN_SECONDS * rate)
+            if size >= len(context):
+                continue
+            offset = max(0, min((left + right - size) // 2, len(context) - size))
+            start, end = (origin + offset) / rate, min(end_s, (origin + offset + size) / rate)
+            same = next((ch for w in reversed(recent) if (w["start_s"], w["end_s"]) == (start, end)
+                         for ch in w["channels"] if channels[0] in ch["channels"]), None)
+            if same is not None:
+                note = {k: v for k, v in same.items() if k != "channels"}
+            else:
+                try:
+                    note, = self.describe([waveform[offset:offset + size]], rate)
+                except (OSError, RuntimeError, ValueError):
+                    continue
+            yield {"start_s": start, "end_s": end,
+                   "contrast_s": [(origin + left) / rate, min(end_s, (origin + right) / rate)],
+                   "channels": [dict(channels=channels, **(note if isinstance(note, dict) else {"impression": note}))]}
+
     def read(self, wav, first_sample, end_s):
-        windows, recent = [], []
+        windows, recent, focused = [], [], []
         with open_recording(wav) as recording:
             rate = recording.samplerate
             if (self.next_sample != first_sample or self.rate != rate or self.tail is None
                     or recording.channels != self.tail.shape[1]):
                 self.tail = np.empty((0, recording.channels), dtype=np.float32)
                 self.last_recent_end = first_sample
+                self.focus = FocusHistory()
             self.rate = rate
             cursor = first_sample
             available = min(len(recording), max(0, sample_boundary(end_s, rate) - first_sample))
@@ -182,8 +207,11 @@ class SceneHistory:
                                    "status": "unavailable", "channels": []}
                     recent.append(reading)
                     self.last_recent_end = cursor
+                focused.extend(self._focused(context, rate, cursor, len(block), end_s, recent))
             self.next_sample = cursor
         report = {"status": "available", "model": MODEL, "basis": BASIS, "windows": windows}
+        if focused:
+            report["focused_windows"] = focused
         if recent:
             report["recent_windows"] = recent
         return report

@@ -25,6 +25,22 @@ class ReferenceSourceTests(unittest.TestCase):
             self.assertIsNone(index.match(np.array([.2, .15, 0.]), np.array([.22, .15, -np.inf])))
             self.assertIsNone(index.match(np.array([.2, .2, 0.]), np.array([.6, .3, -np.inf])))
 
+    def test_new_excerpt_name_needs_agreement_across_three_rankings(self):
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "index.npz"
+            names = ["bell", "water", "plane", "cloth", "door", "unknown"]
+            np.savez(path, names=names, text=np.eye(6), vectors=np.eye(6), name_ids=np.arange(6))
+            index = SourceIndex(path)
+            words = np.array([.32, .33, .23, .11, .10, .01])
+            refs = np.array([.79, .29, .41, .55, .35, -np.inf])
+            clap = np.array([.55, .11, .20, .26, .30, .29])
+            self.assertEqual(index.corroborated(words, refs, clap)["name"], "bell")
+            for competing in (words, np.zeros(6), np.full(6, np.nan)):
+                self.assertIsNone(index.corroborated(competing, competing, competing))
+            self.assertIsNone(index.corroborated(words, refs, clap[::-1]))
+            self.assertIsNone(index.corroborated(words, np.full(6, -np.inf), clap))
+            self.assertIsNone(index.corroborated(words, refs * .5, clap))
+
     def test_cutoff_layout_silence_and_discontinuous_replay(self):
         rate = 8000
         calls = []

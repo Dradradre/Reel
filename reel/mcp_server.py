@@ -40,7 +40,7 @@ if __package__:
     from .follow import draw_follow, follow_point, validate_anchor
     from .point_reader import PointReader
     from .frames import SHEET_COLUMNS, SHEET_ROWS, frames_from_sheets
-    from .hearing import SoundReader, WINDOW_S
+    from .hearing import SoundReader, WINDOW_S, validate_question_control
     from .joint import CONTEXT_SECONDS, legacy_picture_size, published_scene, read_published_scene, scene_levels
     from .localize_sound import locate
     from .live_speech import SpeechReader
@@ -78,7 +78,7 @@ else:
     from follow import draw_follow, follow_point, validate_anchor
     from point_reader import PointReader
     from frames import SHEET_COLUMNS, SHEET_ROWS, frames_from_sheets
-    from hearing import SoundReader, WINDOW_S
+    from hearing import SoundReader, WINDOW_S, validate_question_control
     from joint import CONTEXT_SECONDS, legacy_picture_size, published_scene, read_published_scene, scene_levels
     from localize_sound import locate
     from live_speech import SpeechReader
@@ -922,7 +922,8 @@ class Viewing:
 
     def listen(self, turn, question, start_s=None, end_s=None, native_audio=False, describe=True, component="mix",
                alternatives=None, per_second=False, mark_sound=None, sound_events=False, gain_db=0., locate_sounds=None,
-               verify_sounds=False, identify_sounds=None, source_examples=False, independent_caption=False, reference_captions=None):
+               verify_sounds=False, identify_sounds=None, source_examples=False, independent_caption=False, reference_captions=None, question_control=False):
+        validate_question_control(question, question_control)
         with self.lock:
             directory, packet = self.published(turn)
             end = packet["end_s"] if end_s is None else end_s
@@ -974,6 +975,8 @@ class Viewing:
                             # Hear the recording before suggesting an interpretation. Each call
                             # gets a new acoustic history and the same bounded PCM.
                             first_impression = sound.read(playback, start, stop, **comparison)
+                        if question_control:
+                            comparison["question_control"] = True
                         result = sound.read(playback, start, stop, question=question, **comparison)
                         if independent_caption and question is not None:
                             result = {**result, "before_question": first_impression}
@@ -1432,7 +1435,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
                          mark_sound: list[float] | None = None, sound_events: bool = False, gain_db: float = 0,
                          locate_sounds: list[str] | None = None, verify_sounds: bool = False,
                          identify_sounds: list[str] | None = None, source_examples: bool = False,
-                         independent_caption: bool = False, reference_captions: bool | None = None):
+                         independent_caption: bool = False, reference_captions: bool | None = None, question_control: bool = False):
             """Rehear this turn or a film-time range already heard by this turn. Listening can cross pauses.
             A time range includes a channel spectrum. On replays up to eight seconds long, mark_sound=[from_s,to_s]
             marks that part on the original mix. When sounds overlap, choose component="harmonic"
@@ -1447,6 +1450,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             Set gain_db to adjust replay volume equally across channels. The WAV and local description use this gain.
             With sound_events=true, compare playback_sound_events at that volume with the original sound_events.
             The spectrum and matches use the signal before gain. native_audio includes the selected WAV.
+            Set question_control=true with a question to withhold waveform answers repeated on same-duration silence.
             Set reference_captions=true to retrieve human descriptions of other recordings with similar sound.
             With verify_sounds=true, PE-AV also checks each retrieved caption on the original channel.
             Independent listening includes installed caption matches unless reference_captions=false.
@@ -1466,7 +1470,7 @@ def serve(source, *, until=None, speech=False, lang=None, joint=False, gaze=Fals
             The local reader can answer a question. Continue from next_start_s if set, keeping the same end_s."""
             return await asyncio.to_thread(reader.deliver, reader.listen, turn, question, start_s, end_s, native_audio, describe, component,
                                            alternatives, per_second, mark_sound, sound_events, gain_db, locate_sounds,
-                                           verify_sounds, identify_sounds, source_examples, independent_caption, reference_captions)
+                                           verify_sounds, identify_sounds, source_examples, independent_caption, reference_captions, question_control)
 
         @server.tool(annotations=hints, structured_output=False)
         async def compare_heard(turn: int, reference: list[float], target: list[float], question: str | None = None,

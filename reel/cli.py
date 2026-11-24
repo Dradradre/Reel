@@ -5,7 +5,7 @@
   reel zoom DIR --t0 S --t1 S
   reel frame DIR --at S     save the full frame on display at S
   reel frame DIR --t0 S --t1 S     read every frame displayed in the interval
-  reel listen DIR --t0 S --t1 S [--reference-captions] [--verify-sounds] [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
+  reel listen DIR --t0 S --t1 S [--question-control] [--reference-captions] [--verify-sounds] [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END [--layer RANK | --focus TEXT] [--remainder] [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second | --locate | --identify] ["sound description" ...]    compare descriptions with the recorded channels
@@ -621,6 +621,7 @@ def main():
             ap.add_argument("--verify-sounds", action="store_true", help="compare generated sound descriptions with the recorded waveform using CLAP")
             ap.add_argument("--question", help="ask the local waveform model about the recorded sound")
             ap.add_argument("--compare-sounds", action="store_true", help="also rank sound descriptions with local CLAP")
+            ap.add_argument("--question-control", action="store_true", help="withhold answers repeated on same-duration silence")
             ap.add_argument("--reference-captions", action="store_true", help="find human descriptions of other, acoustically similar recordings")
         else:
             observation_options(ap)
@@ -639,7 +640,7 @@ def main():
                 from listen import inspect_sound
                 data = inspect_sound(x.out, x.t0, x.t1, compare_sounds=x.compare_sounds, describe_sounds=x.describe_sounds,
                                      question=x.question, component=x.component, mark_sound=x.mark_sound, gain_db=x.gain_db,
-                                     verify_sounds=x.verify_sounds, reference_captions=x.reference_captions)
+                                     verify_sounds=x.verify_sounds, reference_captions=x.reference_captions, question_control=x.question_control)
             print(json.dumps(data, ensure_ascii=False, indent=2))
         except (ValueError, OSError, subprocess.CalledProcessError) as error:
             ap.error(str(error))

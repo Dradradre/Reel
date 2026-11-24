@@ -13,7 +13,7 @@ if __package__:
     from .audio_focus import focus_recording, playback_volume
     from .common import audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary
     from .turn_audio import released_samples
-    from .hearing import SoundReader, WINDOW_S
+    from .hearing import SoundReader, WINDOW_S, validate_question_control
     from .config import COMPARE_PY
     from .sounds import AudioTagger, SOURCE_SCORE
     from .caption_matches import inspect_matches
@@ -29,7 +29,7 @@ else:
     from audio_focus import focus_recording, playback_volume
     from common import audio_timeline, pcm_codec, probe, read_audio, reel_source, sample_boundary
     from turn_audio import released_samples
-    from hearing import SoundReader, WINDOW_S
+    from hearing import SoundReader, WINDOW_S, validate_question_control
     from config import COMPARE_PY
     from sounds import AudioTagger, SOURCE_SCORE
     from caption_matches import inspect_matches
@@ -75,10 +75,11 @@ def _slice_audio(source, out, t0, t1):
 
 
 def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_sounds=False, question=None,
-                  component="mix", mark_sound=None, gain_db=0., verify_sounds=False, reference_captions=False):
+                  component="mix", mark_sound=None, gain_db=0., verify_sounds=False, reference_captions=False, question_control=False):
     out = Path(out)
     packet = out / "view.json"
     validate_mark(start, end, mark_sound)
+    validate_question_control(question, question_control)
     if packet.is_file():
         selected_range = start is not None or end is not None
         across_turns = mark_sound is not None or question is not None or (selected_range and (component != "mix" or gain_db != 0 or verify_sounds or reference_captions))
@@ -94,13 +95,15 @@ def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_s
         wav, start, end, first, _ = released_samples(out, start, end, WINDOW_S)
         return listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
                                   question=question, component=component, first_sample=first, mark_sound=mark_sound,
-                                  turn_directory=out, gain_db=gain_db, verify_sounds=verify_sounds, reference_captions=reference_captions)
+                                  turn_directory=out, gain_db=gain_db, verify_sounds=verify_sounds, reference_captions=reference_captions,
+                                  question_control=question_control)
     if start is None or end is None:
         raise ValueError("specify --t0 and --t1 when listening to an existing reel")
     wav = excerpt(out, start, end)
     evidence = listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
                                   question=question, component=component, mark_sound=mark_sound, gain_db=gain_db,
-                                  verify_sounds=verify_sounds, reference_captions=reference_captions)
+                                  verify_sounds=verify_sounds, reference_captions=reference_captions,
+                                  question_control=question_control)
     meta = json.loads((Path(out) / "meta.json").read_text())
     words = [w for w in meta.get("speech_with_gain", [])
              if start <= w["context_start_s"] and w["context_end_s"] <= end
@@ -143,7 +146,7 @@ def level_changes(signal, rate, origin, end):
 
 
 def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds=False, question=None,
-                       component="mix", first_sample=None, mark_sound=None, turn_directory=None, gain_db=0., verify_sounds=False, reference_captions=False):
+                       component="mix", first_sample=None, mark_sound=None, turn_directory=None, gain_db=0., verify_sounds=False, reference_captions=False, question_control=False):
     """Describe only this WAV using local measurements and cached AudioSet weights."""
     rate = 16000
     original = Path(wav)
@@ -248,5 +251,7 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
     if describe_sounds or question is not None:
         with SoundReader() as reader:
             comparison = {"mix_wav": original, "component": component} if focus else {}
+            if question_control:
+                comparison["question_control"] = True
             report["sound_descriptions"] = reader.read(playback, start, end, question=question, **comparison)
     return report

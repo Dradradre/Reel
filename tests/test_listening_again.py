@@ -63,6 +63,45 @@ class ListeningAgainTests(unittest.TestCase):
         self.assertEqual(right["channels"], [2, 3])
         self.assertEqual(right["answer"], "steady")
 
+    def test_question_control_withholds_repeated_answer_and_preserves_channels(self):
+        pcm = np.ones((8000, 4), np.float32)
+        pcm[:, 1] = -.5
+        pcm[:, 3] = 0
+        heard = []
+
+        def answer(signal, question):
+            heard.append((signal.copy(), question))
+            return "ＹＥＳ！" if signal[0] > 0 else "no" if signal[0] < 0 else "Yes."
+
+        with patch("reel.hearing.load_encoder_audio", return_value=pcm):
+            report = ListeningHistory(answer).read("original.wav", 4, 4.5, False, question="Was it audible?",
+                                                   question_control=True)
+        a, b, silent = report["windows"][0]["channels"]
+        self.assertEqual((a["channels"], a["answer_on_silence"]), ([1, 3], "unchanged"))
+        self.assertNotIn("answer", a)
+        self.assertEqual((b["answer"], b["answer_on_silence"]), ("no", "different"))
+        self.assertEqual(silent, {"channels": [4], "digital_silence": True})
+        self.assertEqual(len(heard), 3)
+        self.assertEqual(len(set(prompt for _, prompt in heard)), 1)
+        np.testing.assert_array_equal(heard[1][0], np.zeros(8000))
+        with self.assertRaisesRegex(ValueError, "requires a listening question"):
+            ListeningHistory(answer).read("absent.wav", 4, 4.5, False, question_control=True)
+
+    def test_question_control_mutes_both_recordings_for_a_focused_comparison(self):
+        from unittest.mock import Mock
+        ear = Mock()
+        ear.compare.side_effect = ["short rattle", "unknown"]
+        pcm = np.ones((1600, 1), np.float32)
+        with patch("reel.hearing.load_encoder_audio", side_effect=[pcm, pcm / 2]):
+            report = ListeningHistory(ear).read("focus", 2, 2.1, False, question="What changed?",
+                                                mix_wav="mix", component="mid", question_control=True)
+        raw, silence = [c.args for c in ear.compare.call_args_list]
+        np.testing.assert_array_equal(raw[0], pcm[:, 0] / 2)
+        np.testing.assert_array_equal(raw[1], pcm[:, 0])
+        self.assertTrue(all(not np.any(channel) for channel in silence[:2]))
+        self.assertEqual(raw[2:], silence[2:])
+        self.assertEqual(report["windows"][0]["channels"][0]["answer"], "short rattle")
+
     def test_each_audio_question_keeps_the_film_time_of_its_own_window(self):
         signal = np.full((32000, 1), .15, dtype=np.float32)
         questions = []

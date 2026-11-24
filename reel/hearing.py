@@ -10,6 +10,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import unicodedata
 
 import numpy as np
 
@@ -266,6 +267,16 @@ class WaveListener:
                              temperature=0., max_tokens=96, verbose=False).text.strip()
 
 
+def answer_key(text):
+    """Compare surface answers across scripts without losing signs, digits or internal punctuation."""
+    return " ".join(unicodedata.normalize("NFKC", text).casefold().split()).rstrip(".!?。！？").strip()
+
+
+def validate_question_control(question, enabled):
+    if enabled and (not isinstance(question, str) or not question.strip()):
+        raise ValueError("the silence comparison requires a listening question")
+
+
 class ListeningHistory:
     def __init__(self, describe, model=MODEL):
         self.model = model
@@ -274,7 +285,8 @@ class ListeningHistory:
         self.end = None
         self.start = None
 
-    def read(self, wav, start, end, remember, question=None, mix_wav=None, component="mix"):
+    def read(self, wav, start, end, remember, question=None, mix_wav=None, component="mix", question_control=False):
+        validate_question_control(question, question_control)
         signal = load_encoder_audio(mix_wav or wav, start, end)
         focus = None
         if mix_wav is not None:
@@ -311,6 +323,7 @@ class ListeningHistory:
                 # Describe the newly heard silence while keeping the preceding sound in memory.
                 observed, left = current, current_start
             channels = []
+            silent_answer = None
             for i, channel in enumerate(observed.T):
                 # Duplicated channels carry one signal. Opposite-polarity or independent
                 # channels reach the encoder separately, without cancellation in a downmix.
@@ -337,12 +350,24 @@ class ListeningHistory:
                                           f"{right:.6f} s. Its first sample is at elapsed time zero. "
                                           f"Use the film clock for times unless the listener asks for elapsed time.\n"
                                           f"Listener question: {question}")
+                        if question_control:
+                            timed_question += ("\nUse yes or no for a yes/no question, otherwise a short phrase. "
+                                               "If the recording gives insufficient evidence, answer unknown.")
                         args = (timed_question,)
                     key = "answer" if question is not None else "impression"
                     if focused is None:
                         row[key] = self.describe(channel, *args)
                     else:
                         row[key] = self.describe.compare(focused[:, i], channel, component, *args)
+                    if question_control:
+                        if silent_answer is None:
+                            silence = np.zeros_like(channel)
+                            silent_answer = (self.describe(silence, *args) if focused is None else
+                                             self.describe.compare(silence, silence, component, *args))
+                        unchanged = answer_key(row[key]) == answer_key(silent_answer)
+                        row["answer_on_silence"] = "unchanged" if unchanged else "different"
+                        if unchanged:
+                            del row[key]
                 if not row["digital_silence"]:
                     row["measured_profile"] = spectrum_profile(channel, left, right)
                 channels.append(row)
@@ -357,6 +382,9 @@ class ListeningHistory:
         self.start = previous_start if remember else None
         self.end = end if remember else None
         return {**({"question": question} if question is not None else {}),
+                **({"question_control": "The same question and time span were also given to the model with every "
+                    "sample set to zero. Answers repeated on silence are withheld. Different wording alone can "
+                    "pass this comparison. Use the speech evidence for quotable words."} if question_control else {}),
                 "status": "available", "model": self.model, "encoder_rate_hz": RATE,
                 "basis": ("The reader heard the filtered channel and the same original channel together. "
                           "Its description and measured profile refer to the original. " if focus is not None else "")
@@ -406,8 +434,11 @@ class SoundReader(LocalReader):
         """Read one private 16 kHz mono window, without a picture or proposed words."""
         return self.request({"operation": "transcribe", "samples": str(Path(samples).resolve())})
 
-    def read(self, wav, start, end, *, remember=False, question=None, mix_wav=None, component="mix"):
+    def read(self, wav, start, end, *, remember=False, question=None, mix_wav=None, component="mix", question_control=False):
+        validate_question_control(question, question_control)
         job = {"wav": str(Path(wav).resolve()), "start": start, "end": end, "remember": remember}
+        if question_control:
+            job["question_control"] = True
         if mix_wav is not None:
             job.update(mix_wav=str(Path(mix_wav).resolve()), component=component)
         if question is not None:

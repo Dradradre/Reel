@@ -123,6 +123,8 @@ reel setup --speech --describe-sounds
 
 Por defecto, el reproductor de terminal solo espera al reconocimiento del habla cuando se lo pides. Con `--speech` espera en cada tramo. En una prueba con 32 fragmentos, la mediana en el Mac utilizado fue de 9,5 segundos por solicitud de reconocimiento. [Condiciones de la medición (en coreano)](docs/listening-check.md#같은-사진에서-화자가-설명하는-곳이-달라질-때)
 
+Para comprobar si la pregunta sugiere la respuesta, usa `listen(turn=2, question="What starts clicking?", question_control=true)`. El modelo de audio responde primero con la grabación y después con un silencio de la misma duración. Si repite la respuesta, Reel la oculta. Aunque la respuesta cambie, el modelo puede confundir la fuente del sonido. [Resultados por pregunta](docs/benchmarks/caption-matches.json)
+
 <details>
 <summary>Escuchar solo el audio, generar páginas o examinar un instante</summary>
 

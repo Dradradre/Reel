@@ -34,7 +34,8 @@
     "verifier_control": "For each first-channel window compare the CLAP neighbours and those retrieved for the clip half a panel later against the identical original channel using PE-AV. Values count controls beaten out of 128. A retained sentence from a different recording may still describe a similar sound.",
     "waveforms": "Original per-file WAVs from Clotho-AQA v1 audio_files.zip (https://zenodo.org/records/6473207), joined to Clotho v2.1 evaluation captions by filename.",
     "unseen_questions": "All six published Clotho-AQA questions on each of the 32 recordings from held-out uploaders, four binary and two open. Participants gave three answers per question. Baseline and verified GPT sessions see the same earlier open waveform report and original-channel spectrum. The verified arm also sees the acoustically checked caption matches. The no_recording condition receives only the questions, with permission to answer unknown. Report all abstentions. For free answers, score exact text after Unicode normalization, case folding and tokenizing punctuation; synonyms do not receive credit. The audio reader was not asked the questions in this comparison. These uploaders are absent from Reel’s caption index. Clotho-AQA independently assigns 22 of these recordings to training, nine to validation, and one to test. The pooled questions can occur in model training.",
-    "aqa_license": "Clotho-AQA questions and answers, Samuel Lipping, Parthasaarathy Sudarsanam, Konstantinos Drossos and Tuomas Virtanen, © 2022 Tampere University, MIT. See Clotho-AQA-LICENSE.txt."
+    "aqa_license": "Clotho-AQA questions and answers, Samuel Lipping, Parthasaarathy Sudarsanam, Konstantinos Drossos and Tuomas Virtanen, © 2022 Tampere University, MIT. See Clotho-AQA-LICENSE.txt.",
+    "official_qa_test": "Six published Clotho-AQA questions on each of 16 distinct recordings from the official AQA test split and the Clotho v2.1 caption evaluation split. None occur in earlier Reel panels or its source-reference bank. Select by SHA-256 of reel-official-aqa-test-20261125/ plus filename, prefer previously unused uploaders and skip duplicate uploaders, development captions and previously tested filenames. Three uploaders were absent from both the library and earlier panels; all 16 recordings and their human caption sets were disjoint from the search library. The listener never sees source names or human answers. Four questions per recording are binary and two open, with three published human answers each. Direct comparisons still use the same blind local GPT, target report, checked descriptions and spectrum. waveform_question adds separate Audio Flamingo Next answers from the original release for each question. question_control also asks a matched-duration silent waveform and withholds exact normalized repeats; its short-answer instruction differs from ordinary replay. The difference between those two arms includes the change in prompt. short_question uses the identical short-format prompt without withholding anything. Its differing answers were reused from the paired run and its withheld answers were regenerated from the original recording with the identical prompt. For the experimental MiDasheng alternatives, direct adds its original-channel answer, silent substitutes a same-duration silent reading while retaining all the original Reel evidence, and control withholds matched answers. MiDasheng supplied only the first recorded channel. Each arm was run independently. No assumption about the audio encoders’ broader pretraining. Channel controls are counted once per distinct recorded waveform for each question. An unchanged report can withhold a correct answer. Agreement does not certify the inferred source."
   },
   "panels": {
     "replication": [
@@ -7193,7 +7194,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7207,7 +7209,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7221,7 +7224,8 @@
           "answers": {
             "before": "unknown",
             "verified": "radio",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "radio"
           }
         },
         {
@@ -7235,7 +7239,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -7249,7 +7254,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7263,7 +7269,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         }
       ],
@@ -7283,7 +7290,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7297,7 +7305,8 @@
           "answers": {
             "before": "unknown",
             "verified": "wet",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "wet"
           }
         },
         {
@@ -7311,7 +7320,8 @@
           "answers": {
             "before": "once",
             "verified": "once",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "two"
           }
         },
         {
@@ -7325,7 +7335,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7339,7 +7350,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -7353,7 +7365,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -7373,7 +7386,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7387,7 +7401,8 @@
           "answers": {
             "before": "Dripping steadily",
             "verified": "Dripping",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "dripping"
           }
         },
         {
@@ -7401,7 +7416,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7415,7 +7431,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -7429,7 +7446,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7443,7 +7461,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         }
       ],
@@ -7463,7 +7482,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7477,7 +7497,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7491,7 +7512,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7505,7 +7527,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "coffee"
           }
         },
         {
@@ -7519,7 +7542,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7533,7 +7557,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "two"
           }
         }
       ],
@@ -7553,7 +7578,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7567,7 +7593,8 @@
           "answers": {
             "before": "unknown",
             "verified": "seagulls",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "seagulls"
           }
         },
         {
@@ -7581,7 +7608,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7595,7 +7623,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7609,7 +7638,8 @@
           "answers": {
             "before": "unknown",
             "verified": "loud",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "loud"
           }
         },
         {
@@ -7623,7 +7653,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -7643,7 +7674,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7657,7 +7689,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "one"
           }
         },
         {
@@ -7671,7 +7704,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7685,7 +7719,8 @@
           "answers": {
             "before": "no",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7699,7 +7734,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7713,7 +7749,8 @@
           "answers": {
             "before": "A passing train",
             "verified": "A train rumbling",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "train"
           }
         }
       ],
@@ -7733,7 +7770,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -7747,7 +7785,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7761,7 +7800,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7775,7 +7815,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7789,7 +7830,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -7803,7 +7845,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         }
       ],
@@ -7823,7 +7866,8 @@
           "answers": {
             "before": "An engine",
             "verified": "A motorcycle engine",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "An engine"
           }
         },
         {
@@ -7837,7 +7881,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7851,7 +7896,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7865,7 +7911,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -7879,7 +7926,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7893,7 +7941,8 @@
           "answers": {
             "before": "Idling",
             "verified": "Idling",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "Starting and revving"
           }
         }
       ],
@@ -7913,7 +7962,8 @@
           "answers": {
             "before": "unknown",
             "verified": "snow",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "snow"
           }
         },
         {
@@ -7927,7 +7977,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7941,7 +7992,8 @@
           "answers": {
             "before": "unknown",
             "verified": "one",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "one"
           }
         },
         {
@@ -7955,7 +8007,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -7969,7 +8022,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -7983,7 +8037,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -8003,7 +8058,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8017,7 +8073,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8031,7 +8088,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8045,7 +8103,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "walking"
           }
         },
         {
@@ -8059,7 +8118,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8073,7 +8133,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "one"
           }
         }
       ],
@@ -8093,7 +8154,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8107,7 +8169,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8121,7 +8184,8 @@
           "answers": {
             "before": "water",
             "verified": "water",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "water"
           }
         },
         {
@@ -8135,7 +8199,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8149,7 +8214,8 @@
           "answers": {
             "before": "water",
             "verified": "water",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "water"
           }
         },
         {
@@ -8163,7 +8229,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -8183,7 +8250,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8197,7 +8265,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8211,7 +8280,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8225,7 +8295,8 @@
           "answers": {
             "before": "rain",
             "verified": "rain",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "rain"
           }
         },
         {
@@ -8239,7 +8310,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8253,7 +8325,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -8273,7 +8346,8 @@
           "answers": {
             "before": "5",
             "verified": "4",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "twenty"
           }
         },
         {
@@ -8287,7 +8361,8 @@
           "answers": {
             "before": "5",
             "verified": "5",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "twenty-nine"
           }
         },
         {
@@ -8301,7 +8376,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8315,7 +8391,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8329,7 +8406,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8343,7 +8421,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -8363,7 +8442,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8377,7 +8457,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8391,7 +8472,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8405,7 +8487,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8419,7 +8502,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8433,7 +8517,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -8453,7 +8538,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8467,7 +8553,8 @@
           "answers": {
             "before": "unknown",
             "verified": "one",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8481,7 +8568,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8495,7 +8583,8 @@
           "answers": {
             "before": "unknown",
             "verified": "helicopter",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "helicopter"
           }
         },
         {
@@ -8509,7 +8598,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8523,7 +8613,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -8543,7 +8634,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8557,7 +8649,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "a bird"
           }
         },
         {
@@ -8571,7 +8664,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "leaves"
           }
         },
         {
@@ -8585,7 +8679,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8599,7 +8694,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8613,7 +8709,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -8633,7 +8730,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "two"
           }
         },
         {
@@ -8647,7 +8745,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8661,7 +8760,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8675,7 +8775,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8689,7 +8790,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8703,7 +8805,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -8723,7 +8826,8 @@
           "answers": {
             "before": "sheep",
             "verified": "goat",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "goat"
           }
         },
         {
@@ -8737,7 +8841,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8751,7 +8856,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8765,7 +8871,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8779,7 +8886,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8793,7 +8901,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         }
       ],
@@ -8813,7 +8922,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8827,7 +8937,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8841,7 +8952,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -8855,7 +8967,8 @@
           "answers": {
             "before": "wind",
             "verified": "wind",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "wind"
           }
         },
         {
@@ -8869,7 +8982,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8883,7 +8997,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -8903,7 +9018,8 @@
           "answers": {
             "before": "A machine",
             "verified": "A machine",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "A machine"
           }
         },
         {
@@ -8917,7 +9033,8 @@
           "answers": {
             "before": "Whirring",
             "verified": "Running",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "Running"
           }
         },
         {
@@ -8931,7 +9048,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -8945,7 +9063,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8959,7 +9078,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -8973,7 +9093,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -8993,7 +9114,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9007,7 +9129,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9021,7 +9144,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -9035,7 +9159,8 @@
           "answers": {
             "before": "feet",
             "verified": "feet",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "feet"
           }
         },
         {
@@ -9049,7 +9174,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9063,7 +9189,8 @@
           "answers": {
             "before": "a hard surface",
             "verified": "gravel",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "gravel"
           }
         }
       ],
@@ -9083,7 +9210,8 @@
           "answers": {
             "before": "unknown",
             "verified": "Breathing",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "Breathing"
           }
         },
         {
@@ -9097,7 +9225,8 @@
           "answers": {
             "before": "one",
             "verified": "one",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "One"
           }
         },
         {
@@ -9111,7 +9240,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9125,7 +9255,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9139,7 +9270,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9153,7 +9285,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -9173,7 +9306,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9187,7 +9321,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "drums"
           }
         },
         {
@@ -9201,7 +9336,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9215,7 +9351,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9229,7 +9366,8 @@
           "answers": {
             "before": "bird",
             "verified": "bird",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "bird"
           }
         },
         {
@@ -9243,7 +9381,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -9263,7 +9402,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9277,7 +9417,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9291,7 +9432,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9305,7 +9447,8 @@
           "answers": {
             "before": "gravel",
             "verified": "gravel",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "gravel"
           }
         },
         {
@@ -9319,7 +9462,8 @@
           "answers": {
             "before": "footsteps crunching on gravel",
             "verified": "Footsteps crunching on gravel",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "crunching footsteps"
           }
         },
         {
@@ -9333,7 +9477,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -9353,7 +9498,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9367,7 +9513,8 @@
           "answers": {
             "before": "5",
             "verified": "5",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "five"
           }
         },
         {
@@ -9381,7 +9528,8 @@
           "answers": {
             "before": "metal",
             "verified": "metal",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "metal"
           }
         },
         {
@@ -9395,7 +9543,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9409,7 +9558,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9423,7 +9573,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -9443,7 +9594,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9457,7 +9609,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9471,7 +9624,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9485,7 +9639,8 @@
           "answers": {
             "before": "unknown",
             "verified": "excited",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "cheerful and excited"
           }
         },
         {
@@ -9499,7 +9654,8 @@
           "answers": {
             "before": "unknown",
             "verified": "cheering",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "applause"
           }
         },
         {
@@ -9513,7 +9669,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -9533,7 +9690,8 @@
           "answers": {
             "before": "unknown",
             "verified": "10",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "eleven"
           }
         },
         {
@@ -9547,7 +9705,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9561,7 +9720,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9575,7 +9735,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9589,7 +9750,8 @@
           "answers": {
             "before": "unknown",
             "verified": "third",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "third"
           }
         },
         {
@@ -9603,7 +9765,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -9623,7 +9786,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9637,7 +9801,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9651,7 +9816,8 @@
           "answers": {
             "before": "disposing of waste",
             "verified": "Disposing of human waste",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "A toilet"
           }
         },
         {
@@ -9665,7 +9831,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9679,7 +9846,8 @@
           "answers": {
             "before": "a toilet",
             "verified": "A toilet",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "A toilet"
           }
         },
         {
@@ -9693,7 +9861,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -9713,7 +9882,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "twice"
           }
         },
         {
@@ -9727,7 +9897,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "twenty"
           }
         },
         {
@@ -9741,7 +9912,8 @@
           "answers": {
             "before": "unknown",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9755,7 +9927,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9769,7 +9942,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9783,7 +9957,8 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -9803,7 +9978,8 @@
           "answers": {
             "before": "clock",
             "verified": "Clock",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "clock"
           }
         },
         {
@@ -9817,7 +9993,8 @@
           "answers": {
             "before": "16",
             "verified": "16",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "16"
           }
         },
         {
@@ -9831,7 +10008,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "unknown"
           }
         },
         {
@@ -9845,7 +10023,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9859,7 +10038,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9873,7 +10053,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         }
       ],
@@ -9893,7 +10074,8 @@
           "answers": {
             "before": "1",
             "verified": "1",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "one"
           }
         },
         {
@@ -9907,7 +10089,8 @@
           "answers": {
             "before": "cat",
             "verified": "cat",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "cat"
           }
         },
         {
@@ -9921,7 +10104,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -9935,7 +10119,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9949,7 +10134,8 @@
           "answers": {
             "before": "yes",
             "verified": "yes",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -9963,7 +10149,8 @@
           "answers": {
             "before": "no",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
@@ -9983,7 +10170,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "one"
           }
         },
         {
@@ -9997,7 +10185,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "sigh"
           }
         },
         {
@@ -10011,7 +10200,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -10025,7 +10215,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         },
         {
@@ -10039,7 +10230,8 @@
           "answers": {
             "before": "unknown",
             "verified": "unknown",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "yes"
           }
         },
         {
@@ -10053,11 +10245,3685 @@
           "answers": {
             "before": "unknown",
             "verified": "no",
-            "no_recording": "unknown"
+            "no_recording": "unknown",
+            "experimental_direct": "no"
           }
         }
       ],
       "aqa_split": "test"
     }
-  ]
+  ],
+  "official_qa_test": [
+    {
+      "file": "London Overground train (interior) approaches Victoria Station.wav",
+      "source_id": "152584",
+      "recording_sha256": "7a56fe32449b73479407d3fcce82f02b3877df97d1508bf9bdebb32c6244c688",
+      "aqa_split": "test",
+      "uploader": "kerouac21",
+      "uploader_outside_reference_and_prior_panels": true,
+      "items": [
+        {
+          "question": "What is this mode of transportation traveling on?",
+          "form": "open",
+          "votes": [
+            "train",
+            "tracks",
+            "train"
+          ],
+          "answers": {
+            "before": "Tracks",
+            "verified": "Tracks",
+            "no_recording": "unknown",
+            "experimental_direct": "Rails",
+            "experimental_silent": "tracks",
+            "experimental_control": "Rails",
+            "waveform_question": "Tracks",
+            "short_question": "tracks",
+            "question_control": "tracks"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Are any announcements playing?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is the train empty?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Are the people currently in transit?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "What are the people on the train doing?",
+          "form": "open",
+          "votes": [
+            "talking",
+            "talking",
+            "talking"
+          ],
+          "answers": {
+            "before": "Talking",
+            "verified": "Talking",
+            "no_recording": "unknown",
+            "experimental_direct": "Talking",
+            "experimental_silent": "talking",
+            "experimental_control": "Talking",
+            "waveform_question": "Talking",
+            "short_question": "talking",
+            "question_control": "talking"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Are there any people on the train?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "Toilet Shuffling.wav",
+      "source_id": "349360",
+      "recording_sha256": "0b8086b48a6d063c4bb179c71be7caedbf5b00ede5146cef6a33a3a89466082f",
+      "aqa_split": "test",
+      "uploader": "MaGs_007",
+      "uploader_outside_reference_and_prior_panels": true,
+      "items": [
+        {
+          "question": "Is this in a bathroom?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What object was just used?",
+          "form": "open",
+          "votes": [
+            "toilet",
+            "toilet",
+            "closet"
+          ],
+          "answers": {
+            "before": "toilet",
+            "verified": "toilet",
+            "no_recording": "unknown",
+            "experimental_direct": "toilet",
+            "experimental_silent": "toilet",
+            "experimental_control": "toilet",
+            "waveform_question": "A toilet",
+            "short_question": "toilet",
+            "question_control": "toilet"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What is the water doing?",
+          "form": "open",
+          "votes": [
+            "draining",
+            "spilling",
+            "flushing"
+          ],
+          "answers": {
+            "before": "flushing",
+            "verified": "flushing",
+            "no_recording": "unknown",
+            "experimental_direct": "flushing",
+            "experimental_silent": "flushing",
+            "experimental_control": "flushing",
+            "waveform_question": "Flushing",
+            "short_question": "flowing",
+            "question_control": "flushing"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is there someone swimming?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is someone speaking?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is there water?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "Boiling a cup of water.wav",
+      "source_id": "159383",
+      "recording_sha256": "2363746feeb17950cde6201807b1eb4016cd234bc3482e8d496c65bfab58776c",
+      "aqa_split": "test",
+      "uploader": "shogunalley",
+      "uploader_outside_reference_and_prior_panels": true,
+      "items": [
+        {
+          "question": "Does the final sound part come from a liquid?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "What process needs to occur to the liquid, in order for it to make that sound?",
+          "form": "open",
+          "votes": [
+            "boiling",
+            "boiling",
+            "water"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "Boiling",
+            "experimental_silent": "boiling",
+            "experimental_control": "boiling",
+            "waveform_question": "boil",
+            "short_question": "boil",
+            "question_control": "Boiling"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is the liquid hot?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What does the liquid do inside the container?",
+          "form": "open",
+          "votes": [
+            "drain",
+            "pour",
+            "dropping"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "It boils",
+            "experimental_silent": "bubbles",
+            "experimental_control": "bubbles",
+            "waveform_question": "boils",
+            "short_question": "boils",
+            "question_control": "It boils"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Does the sound stay the same and constant from start to finish?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is a wolf howling?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "Parking Garage - Ambiance, Electrical Hum 1.wav",
+      "source_id": "187288",
+      "recording_sha256": "1a7c0b62510e351016d67d266bd51a7ea96671e6cf04376c695293141aada5aa",
+      "aqa_split": "test",
+      "uploader": "HazMattt",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "What is the sound that heard called?",
+          "form": "open",
+          "votes": [
+            "buzzing",
+            "buzzing",
+            "electricity"
+          ],
+          "answers": {
+            "before": "waterfall",
+            "verified": "Static",
+            "no_recording": "unknown",
+            "experimental_direct": "Static",
+            "experimental_silent": "Static",
+            "experimental_control": "Static",
+            "waveform_question": "static",
+            "short_question": "Static",
+            "question_control": "Static"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Are vehicles present?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Are children laughing?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "How many times does the buzzing pause?",
+          "form": "open",
+          "votes": [
+            "zero",
+            "one",
+            "zero"
+          ],
+          "answers": {
+            "before": "zero",
+            "verified": "0",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "0",
+            "waveform_question": "zero",
+            "short_question": "0",
+            "question_control": "zero"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is the sound constant?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is a child crying about being hungry?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "Brushing teeth.wav",
+      "source_id": "271450",
+      "recording_sha256": "4976b589f52abbe515cc589286f9ede11954a6e2a0abc6677e9e08b1972af9d2",
+      "aqa_split": "test",
+      "uploader": "bdunis4",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Is the person near a sink?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "unknown",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What does the person spit out?",
+          "form": "open",
+          "votes": [
+            "liquid",
+            "liquid",
+            "liquid"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "toothpaste",
+            "experimental_silent": "unknown",
+            "experimental_control": "toothpaste",
+            "waveform_question": "toothpaste",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is the person taking a bath?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "unknown",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Do they flush the toilet?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What was the person cleaning?",
+          "form": "open",
+          "votes": [
+            "teeth",
+            "teeth",
+            "teeth"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "teeth",
+            "experimental_silent": "unknown",
+            "experimental_control": "teeth",
+            "waveform_question": "teeth",
+            "short_question": "teeth",
+            "question_control": "teeth"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is someone brushing their teeth?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "unknown",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "door.of.bar.raining2.wav",
+      "source_id": "16211",
+      "recording_sha256": "535cab1a35770077b8ca31e6773ec5121b9ac6559430600821b2c747a944f7d2",
+      "aqa_split": "test",
+      "uploader": "andriala",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Arte men and women heard talking?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "unknown",
+            "experimental_control": "yes",
+            "waveform_question": "unknown",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What is heard over over talking crowd?",
+          "form": "open",
+          "votes": [
+            "sounds",
+            "rain",
+            "rain"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "a humming machine",
+            "experimental_silent": "humming",
+            "experimental_control": "unknown",
+            "waveform_question": "water flowing",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Are people talking?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is this animal noises?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "What living mammal is making the sounds?",
+          "form": "open",
+          "votes": [
+            "human",
+            "human",
+            "man"
+          ],
+          "answers": {
+            "before": "humans",
+            "verified": "people",
+            "no_recording": "unknown",
+            "experimental_direct": "humans",
+            "experimental_silent": "people",
+            "experimental_control": "humans",
+            "waveform_question": "people",
+            "short_question": "people",
+            "question_control": "people"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is a train sounding it's whistle?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "foley footsteps - raw.wav",
+      "source_id": "248171",
+      "recording_sha256": "331d746c180913e8797d1a25bea252a7057c6d44c1e1b07ab0702988dd41e63f",
+      "aqa_split": "test",
+      "uploader": "breyenkatz",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Are there multiple people present?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "what animal makes a sound at the end?",
+          "form": "open",
+          "votes": [
+            "human",
+            "bird",
+            "none"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "cat",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is the person speaking a male?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Are the animals loud?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Where is he?",
+          "form": "open",
+          "votes": [
+            "office",
+            "office",
+            "office"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "a large indoor space",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is the recording device being moved at the start?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "yes",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "BulletJuneEdited192012.wav",
+      "source_id": "158738",
+      "recording_sha256": "abf8a9bb76983a753aeaf0a7e47ea99907b70a479af2db7cc2504a4aebc24445",
+      "aqa_split": "test",
+      "uploader": "Calcuttan",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Is there an animal present?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Does this sound get quieter as the clip goes on?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "no",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "no",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "How many times does the machine rev up at the start of the clip?",
+          "form": "open",
+          "votes": [
+            "two",
+            "one",
+            "one"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "two",
+            "experimental_silent": "twice",
+            "experimental_control": "two",
+            "waveform_question": "one",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is this a sound that is typically heard indoors?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Was the sound recorded outside?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What is making the sound?",
+          "form": "open",
+          "votes": [
+            "engine",
+            "exhaust",
+            "motorbike"
+          ],
+          "answers": {
+            "before": "motorcycle engine",
+            "verified": "motorcycle engine",
+            "no_recording": "unknown",
+            "experimental_direct": "motorcycle",
+            "experimental_silent": "a motorcycle engine",
+            "experimental_control": "motorcycle",
+            "waveform_question": "a motorcycle engine",
+            "short_question": "a motorcycle engine",
+            "question_control": "motorcycle engine"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "Waterfalls_00216.wav",
+      "source_id": "69240",
+      "recording_sha256": "00e521c7979a153c79a8c3f2e51b41110cc594bd7d76d68e8bd51c11b5661767",
+      "aqa_split": "test",
+      "uploader": "14all41",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Is there a sound of animals?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Does the spraying sound stay steady?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "How many distortions can be heard in the spraying sound?",
+          "form": "open",
+          "votes": [
+            "one",
+            "five",
+            "one"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "two",
+            "experimental_silent": "two",
+            "experimental_control": "unknown",
+            "waveform_question": "two",
+            "short_question": "none",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is the spraying sound loud?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is there a car?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "what is making the hiss sound?",
+          "form": "open",
+          "votes": [
+            "rain",
+            "water",
+            "waterfall"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "water",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "water",
+            "experimental_control": "water",
+            "waveform_question": "waterfall",
+            "short_question": "unknown",
+            "question_control": "water"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "md1trk33-34.wav",
+      "source_id": "123468",
+      "recording_sha256": "fcb1c02fd676ceb840ed18f685bfb9a26ca5754072301bbf6969245f65feec39",
+      "aqa_split": "test",
+      "uploader": "alienistcog",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Are the hinges squeaking?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Does squeak get louder as time goes on?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "no",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What rectangular object that opens and closes are the hinges likely attached to?",
+          "form": "open",
+          "votes": [
+            "door",
+            "door",
+            "cabinet"
+          ],
+          "answers": {
+            "before": "door",
+            "verified": "door",
+            "no_recording": "unknown",
+            "experimental_direct": "door",
+            "experimental_silent": "door",
+            "experimental_control": "door",
+            "waveform_question": "door",
+            "short_question": "door",
+            "question_control": "door"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "To what does the hinges need?",
+          "form": "open",
+          "votes": [
+            "oil",
+            "wd-40",
+            "oil"
+          ],
+          "answers": {
+            "before": "lubrication",
+            "verified": "lubrication",
+            "no_recording": "unknown",
+            "experimental_direct": "lubrication",
+            "experimental_silent": "lubrication",
+            "experimental_control": "lubrication",
+            "waveform_question": "oil",
+            "short_question": "oil",
+            "question_control": "oil"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is there a quick fix to remedy this sound?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is this a musical stringed instrument?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "27 hn_birdspecking.wav",
+      "source_id": "71970",
+      "recording_sha256": "529d5e0d79153e21260b6e094cbca23572821efee45daf6be4dca8955b75fc08",
+      "aqa_split": "test",
+      "uploader": "cmusounddesign",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Is there a water fountain in the background ?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What type of animal is making noise in the background ?",
+          "form": "open",
+          "votes": [
+            "ducks",
+            "duck",
+            "pig"
+          ],
+          "answers": {
+            "before": "insects",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "bird",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is a bus honking?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is someone using a logging machine ?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "What weather condition can be heard in the recording?",
+          "form": "open",
+          "votes": [
+            "rain",
+            "rain",
+            "rain"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "rain",
+            "no_recording": "unknown",
+            "experimental_direct": "rain",
+            "experimental_silent": "rain",
+            "experimental_control": "rain",
+            "waveform_question": "rain",
+            "short_question": "rain",
+            "question_control": "rain"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is an animal growling?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "restaurant wood floor.wav",
+      "source_id": "179601",
+      "recording_sha256": "46aa6e938b08f087a6c996a520f24e7baa34fa44e92e1d35397ec861cb2178fc",
+      "aqa_split": "test",
+      "uploader": "cognito perceptu",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Can eating utensils be heard clinking against plates?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "unknown",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "What type of business is this?",
+          "form": "open",
+          "votes": [
+            "restaurant",
+            "restaurant",
+            "restaurant"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "restaurant",
+            "no_recording": "unknown",
+            "experimental_direct": "restaurant",
+            "experimental_silent": "restaurant",
+            "experimental_control": "restaurant",
+            "waveform_question": "restaurant",
+            "short_question": "restaurant",
+            "question_control": "restaurant"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "what are the people continuously doing?",
+          "form": "open",
+          "votes": [
+            "talking",
+            "speaking",
+            "talking"
+          ],
+          "answers": {
+            "before": "talking",
+            "verified": "talking",
+            "no_recording": "unknown",
+            "experimental_direct": "talking to each other",
+            "experimental_silent": "talking",
+            "experimental_control": "talking",
+            "waveform_question": "talking",
+            "short_question": "talking",
+            "question_control": "talking"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "are the people yelling at the top of their lungs?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "are many people present?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is this someone's' house?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "unknown",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "down stars running 3.wav",
+      "source_id": "339351",
+      "recording_sha256": "5eafe4ca93692455a852b3d8eeea344de8b60ca3038cc69e798f6cf4067f3419",
+      "aqa_split": "test",
+      "uploader": "afmediaarmstrong",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "What kind of noise is it?",
+          "form": "open",
+          "votes": [
+            "steps",
+            "water",
+            "walking"
+          ],
+          "answers": {
+            "before": "Footsteps and a door closing",
+            "verified": "Footsteps",
+            "no_recording": "unknown",
+            "experimental_direct": "Footsteps and a door closing",
+            "experimental_silent": "Footsteps",
+            "experimental_control": "Footsteps and a door closing",
+            "waveform_question": "Footsteps",
+            "short_question": "Footsteps",
+            "question_control": "Footsteps"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is this a voice?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is it soft?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Does a person sigh?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "What final action is the person doing at the very end of the sound?",
+          "form": "open",
+          "votes": [
+            "stomping",
+            "stomping",
+            "stomping"
+          ],
+          "answers": {
+            "before": "closing a door",
+            "verified": "Closing a door",
+            "no_recording": "unknown",
+            "experimental_direct": "Closing a door",
+            "experimental_silent": "Closing a door",
+            "experimental_control": "closing a door",
+            "waveform_question": "Closing a door",
+            "short_question": "Closing a door",
+            "question_control": "Closing a door"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is a person swimming?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "20091217.18.chains.wav",
+      "source_id": "86956",
+      "recording_sha256": "da93c91dca46b254cea179b41578ebbe5d36eefa2b74a7b0bda169468d958539",
+      "aqa_split": "test",
+      "uploader": "dobroide",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Does the primary sound come from an object coming into contact with another object?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "What material is the object being manipulated made out of?",
+          "form": "open",
+          "votes": [
+            "metal",
+            "metal",
+            "metal"
+          ],
+          "answers": {
+            "before": "metal",
+            "verified": "metal",
+            "no_recording": "unknown",
+            "experimental_direct": "metal",
+            "experimental_silent": "metal",
+            "experimental_control": "metal",
+            "waveform_question": "metal",
+            "short_question": "metal",
+            "question_control": "metal"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "How many times can the clinking sound be heard?",
+          "form": "open",
+          "votes": [
+            "six",
+            "eight",
+            "eight"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "three",
+            "experimental_silent": "two",
+            "experimental_control": "three",
+            "waveform_question": "three",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Does a police car drive past?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "unknown",
+            "experimental_control": "no",
+            "waveform_question": "unknown",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is a metal object dropped?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "unknown",
+            "experimental_control": "yes",
+            "waveform_question": "unknown",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is there only one single type of noise that can be heard?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "RadioFan.wav",
+      "source_id": "62519",
+      "recording_sha256": "3781ef441b418e9478da8c07c557f540d7117863383f601985f4b4fee32572ea",
+      "aqa_split": "test",
+      "uploader": "bsumusictech",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Does the sound occur in nature?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "unknown",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "What is being played in this clip?",
+          "form": "open",
+          "votes": [
+            "tv",
+            "music",
+            "tv"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "television",
+            "experimental_silent": "unknown",
+            "experimental_control": "television",
+            "waveform_question": "A radio broadcast",
+            "short_question": "a radio",
+            "question_control": "A radio broadcast"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Does a car honk?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "How many different voices are there?",
+          "form": "open",
+          "votes": [
+            "three",
+            "dog",
+            "four"
+          ],
+          "answers": {
+            "before": "two",
+            "verified": "two",
+            "no_recording": "unknown",
+            "experimental_direct": "two",
+            "experimental_silent": "unknown",
+            "experimental_control": "two",
+            "waveform_question": "unknown",
+            "short_question": "two",
+            "question_control": "two"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Can more than one voice be heard?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        },
+        {
+          "question": "Is the radio on?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "Clatter.wav",
+      "source_id": "204363",
+      "recording_sha256": "347a1234c490312ca7f58b3ee51d171b7d371c5c8e7d947fb4307fa637dd24d9",
+      "aqa_split": "test",
+      "uploader": "SoundsExciting",
+      "uploader_outside_reference_and_prior_panels": false,
+      "items": [
+        {
+          "question": "Is there a tapping sound?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Who's making the sound?",
+          "form": "open",
+          "votes": [
+            "person",
+            "person",
+            "object"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "unknown",
+            "experimental_silent": "unknown",
+            "experimental_control": "unknown",
+            "waveform_question": "unknown",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is there a time that the tapping gets quieter?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown",
+            "experimental_direct": "yes",
+            "experimental_silent": "yes",
+            "experimental_control": "yes",
+            "waveform_question": "yes",
+            "short_question": "yes",
+            "question_control": "yes"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "How many times is there a pause of more than 1 second between the tapping sounds?",
+          "form": "open",
+          "votes": [
+            "nothing",
+            "good",
+            "one"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown",
+            "experimental_direct": "one",
+            "experimental_silent": "unknown",
+            "experimental_control": "one",
+            "waveform_question": "unknown",
+            "short_question": "unknown",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is there a voice?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "unknown",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "unknown"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "unchanged"
+            }
+          ]
+        },
+        {
+          "question": "Is the tapping at a steady beat?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown",
+            "experimental_direct": "no",
+            "experimental_silent": "no",
+            "experimental_control": "no",
+            "waveform_question": "no",
+            "short_question": "no",
+            "question_control": "no"
+          },
+          "channel_controls": [
+            {
+              "channels": [
+                1
+              ],
+              "state": "different"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "experimental_question_reader": {
+    "model": "mispeech/midashenglm-7b-1021-gguf",
+    "model_revision": "52bee4098bf98d08e48d2270f9d12c7fffd9d401",
+    "runtime_revision": "255ab173ffd0ddb8d4ddc9dcfa3fff353bff50d3",
+    "quantization": "backbone-Q4_K_M and mmproj-f32",
+    "question_suffix": " Answer with a short phrase based on the sounds.",
+    "decoding": {
+      "temperature": 0,
+      "context": 2048,
+      "max_tokens": 36
+    },
+    "source": "https://huggingface.co/mispeech/midashenglm-7b-1021-gguf",
+    "training_note": "The authors list Clotho-AQA among training sources in their technical report. Split membership matters. No global training-set disjointness is established.",
+    "technical_report": "https://arxiv.org/abs/2508.03983",
+    "field": [
+      {
+        "id": "field-a029-96",
+        "labels": [
+          "Water tap, faucet"
+        ],
+        "claims": [
+          "Running water"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a029-68",
+        "labels": [
+          "Water tap, faucet"
+        ],
+        "claims": [
+          "Metallic clank"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a029-120",
+        "labels": [
+          "Cutlery, silverware",
+          "Water tap, faucet"
+        ],
+        "claims": [
+          "humming",
+          "metallic clatter"
+        ],
+        "grades": [
+          [
+            "O",
+            "P"
+          ],
+          [
+            "O",
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a029-176",
+        "labels": [
+          "Drawer open or close"
+        ],
+        "claims": [
+          "metallic clank"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a029-148",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "humming"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a029-108",
+        "labels": [
+          "Cutlery, silverware"
+        ],
+        "claims": [
+          "tapping"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a029-12",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Metallic object clanging"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a029-104",
+        "labels": [
+          "Cupboard open or close",
+          "Cutlery, silverware"
+        ],
+        "claims": [
+          "Metallic clank"
+        ],
+        "grades": [
+          [
+            "P"
+          ],
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-116",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Metallic clank",
+          "Dull thud"
+        ],
+        "grades": [
+          [
+            "P",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-12",
+        "labels": [
+          "Dishes, pots, and pans",
+          "Drawer open or close"
+        ],
+        "claims": [
+          "metallic click"
+        ],
+        "grades": [
+          [
+            "P"
+          ],
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-48",
+        "labels": [
+          "Drawer open or close"
+        ],
+        "claims": [
+          "electrical hum",
+          "static"
+        ],
+        "grades": [
+          [
+            "O",
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-152",
+        "labels": [
+          "Drawer open or close"
+        ],
+        "claims": [
+          "Door opening and closing"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-160",
+        "labels": [
+          "Cupboard open or close"
+        ],
+        "claims": [
+          "click"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-148",
+        "labels": [
+          "Drawer open or close"
+        ],
+        "claims": [
+          "metallic clank"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-140",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Footsteps on a wooden floor"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a033-132",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Dishes clattering"
+        ],
+        "grades": [
+          [
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-160",
+        "labels": [
+          "Cupboard open or close"
+        ],
+        "claims": [
+          "metallic clank"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-164",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Metallic clank"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-132",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "metallic clank"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-36",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Door closing",
+          "People talking"
+        ],
+        "grades": [
+          [
+            "O",
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-156",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "metallic clink",
+          "scraping"
+        ],
+        "grades": [
+          [
+            "P",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-148",
+        "labels": [
+          "Cupboard open or close"
+        ],
+        "claims": [
+          "Gas stove burner being turned off"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-176",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "metallic click"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a035-0",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Water faucet running"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-64",
+        "labels": [
+          "Crumpling, crinkling"
+        ],
+        "claims": [
+          "door opening and closing"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-4",
+        "labels": [
+          "Walk, footsteps"
+        ],
+        "claims": [
+          "heavy furniture being moved and dropped"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-144",
+        "labels": [
+          "Walk, footsteps"
+        ],
+        "claims": [
+          "click",
+          "thud"
+        ],
+        "grades": [
+          [
+            "P",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-132",
+        "labels": [
+          "Walk, footsteps"
+        ],
+        "claims": [
+          "metallic clank",
+          "muffled thud"
+        ],
+        "grades": [
+          [
+            "O",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-68",
+        "labels": [
+          "Crumpling, crinkling"
+        ],
+        "claims": [
+          "man speaking",
+          "buzzing"
+        ],
+        "grades": [
+          [
+            "O",
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-8",
+        "labels": [
+          "Walk, footsteps"
+        ],
+        "claims": [
+          "Metallic click"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-148",
+        "labels": [
+          "Drawer open or close"
+        ],
+        "claims": [
+          "metallic impact"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a037-28",
+        "labels": [
+          "Cupboard open or close"
+        ],
+        "claims": [
+          "metallic click",
+          "low thud"
+        ],
+        "grades": [
+          [
+            "P",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-b043-72",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Dishes clanking"
+        ],
+        "grades": [
+          [
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "field-b043-272",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Running water",
+          "Metallic clattering"
+        ],
+        "grades": [
+          [
+            "O",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-b043-268",
+        "labels": [
+          "Walk, footsteps"
+        ],
+        "claims": [],
+        "grades": [
+          []
+        ]
+      },
+      {
+        "id": "field-b043-180",
+        "labels": [
+          "Cupboard open or close"
+        ],
+        "claims": [
+          "metallic clank",
+          "dull thud"
+        ],
+        "grades": [
+          [
+            "P",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-b043-48",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "running water"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-b043-76",
+        "labels": [
+          "Dishes, pots, and pans"
+        ],
+        "claims": [
+          "Metallic clicking and scraping"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-b043-156",
+        "labels": [
+          "Drawer open or close"
+        ],
+        "claims": [
+          "door opening"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-b043-8",
+        "labels": [
+          "Tap"
+        ],
+        "claims": [
+          "An object being dropped onto a hard surface"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-a008-116",
+        "labels": [
+          "Wind"
+        ],
+        "claims": [
+          "Bird chirping"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-a009-188",
+        "labels": [
+          "Wind"
+        ],
+        "claims": [
+          "bird chirping",
+          "buzzing"
+        ],
+        "grades": [
+          [
+            "O",
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-b005-32",
+        "labels": [
+          "Cough"
+        ],
+        "claims": [
+          "coughing"
+        ],
+        "grades": [
+          [
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "field-b005-12",
+        "labels": [
+          "Cough"
+        ],
+        "claims": [
+          "birds chirping"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-b005-4",
+        "labels": [
+          "Cough"
+        ],
+        "claims": [],
+        "grades": [
+          []
+        ]
+      },
+      {
+        "id": "field-b005-8",
+        "labels": [
+          "Cough"
+        ],
+        "claims": [
+          "bird chirping"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-b005-92",
+        "labels": [
+          "Wind"
+        ],
+        "claims": [
+          "bird chirping"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      },
+      {
+        "id": "field-b006-164",
+        "labels": [
+          "Car passing by"
+        ],
+        "claims": [
+          "Car passing by"
+        ],
+        "grades": [
+          [
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "field-b006-196",
+        "labels": [
+          "Car passing by"
+        ],
+        "claims": [
+          "Wind blowing",
+          "Vehicle passing"
+        ],
+        "grades": [
+          [
+            "O",
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-b006-124",
+        "labels": [
+          "Car passing by"
+        ],
+        "claims": [
+          "Vehicle engine rumbling"
+        ],
+        "grades": [
+          [
+            "P"
+          ]
+        ]
+      },
+      {
+        "id": "field-b008-12",
+        "labels": [
+          "Walk, footsteps"
+        ],
+        "claims": [
+          "bird chirping"
+        ],
+        "grades": [
+          [
+            "O"
+          ]
+        ]
+      }
+    ]
+  },
+  "door_question_control": {
+    "A": {
+      "answer": "A brief, light metallic jingling and rattling sound stands out against faint background noise.",
+      "input_sha256": "7ea42e2d582a0b481fc62add75ddf9e857bc8dc213b86b6322653d57dff0c84a",
+      "cutoff": 8.5,
+      "beyond_cutoff_rejected": true,
+      "channel_comparisons": [
+        {
+          "channels": [
+            1
+          ],
+          "digital_silence": false,
+          "answer_on_silence": "unchanged"
+        }
+      ]
+    },
+    "B": {
+      "answer": "A faint, steady static-like hiss is audible, with no distinct brief sound or intelligible words.",
+      "input_sha256": "7b6f8d8b393a1b23527e7c3446c52ed5e4b4a00c8e10df3982d92863c162897d",
+      "cutoff": 8.5,
+      "beyond_cutoff_rejected": true,
+      "channel_comparisons": [
+        {
+          "channels": [
+            1
+          ],
+          "digital_silence": false,
+          "answer_on_silence": "unchanged"
+        }
+      ]
+    },
+    "C": {
+      "answer": "A brief, light metallic jingling and rattling sound stands out against faint background noise.",
+      "input_sha256": "7ea42e2d582a0b481fc62add75ddf9e857bc8dc213b86b6322653d57dff0c84a",
+      "cutoff": 8.5,
+      "beyond_cutoff_rejected": true,
+      "channel_comparisons": [
+        {
+          "channels": [
+            1
+          ],
+          "digital_silence": false,
+          "answer_on_silence": "unchanged"
+        }
+      ]
+    },
+    "silent": {
+      "answer": "No sound or intelligible speech is audible before playback stops.",
+      "input_sha256": "522a72ec560fabc1c99271230505143f6387765fc45ef4fbaf133b32e767635a",
+      "cutoff": 8.5,
+      "beyond_cutoff_rejected": true,
+      "channel_comparisons": [
+        {
+          "channels": [
+            1
+          ],
+          "digital_silence": true
+        }
+      ]
+    }
+  }
 }

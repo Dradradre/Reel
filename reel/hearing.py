@@ -267,6 +267,10 @@ class WaveListener:
                              temperature=0., max_tokens=96, verbose=False).text.strip()
 
 
+CONTROL_PROMPT = ("\nUse yes or no for a yes/no question, otherwise a short phrase. "
+                  "If the recording gives insufficient evidence, answer unknown.")
+
+
 def answer_key(text):
     """Compare surface answers across scripts without losing signs, digits or internal punctuation."""
     return " ".join(unicodedata.normalize("NFKC", text).casefold().split()).rstrip(".!?。！？").strip()
@@ -351,8 +355,7 @@ class ListeningHistory:
                                           f"Use the film clock for times unless the listener asks for elapsed time.\n"
                                           f"Listener question: {question}")
                         if question_control:
-                            timed_question += ("\nUse yes or no for a yes/no question, otherwise a short phrase. "
-                                               "If the recording gives insufficient evidence, answer unknown.")
+                            timed_question += CONTROL_PROMPT
                         args = (timed_question,)
                     key = "answer" if question is not None else "impression"
                     if focused is None:

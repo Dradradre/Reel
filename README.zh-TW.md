@@ -123,6 +123,8 @@ reel setup --speech --describe-sounds
 
 終端播放器預設在收到語音辨識請求時才等待結果，開啟 `--speech` 後每個區間都會等待。在一次包含 32 個區間的測試中，測試用 Mac 上每次辨識請求的耗時中位數為 9.5 秒。[測試記錄（韓語）](docs/listening-check.md#같은-사진에서-화자가-설명하는-곳이-달라질-때)
 
+若要檢查問題本身是否暗示了答案，可以呼叫 `listen(turn=2, question="What starts clicking?", question_control=true)`。本機音訊模型會先聽原始錄音，再聽一段等長的靜音。兩次回答相同時，Reel 會隱去該回答。回答不同仍可能認錯聲源。[逐題測試結果](docs/benchmarks/caption-matches.json)
+
 <details>
 <summary>只聽聲音、產生頁面或檢查某一秒</summary>
 

@@ -123,6 +123,8 @@ reel setup --speech --describe-sounds
 
 端末のプレーヤーは通常、音声認識を要求したときだけ結果を待つ。`--speech` を付けると各区間で待つ。32区間で測った際、使用した Mac での認識時間の中央値は1リクエスト当たり9.5秒だった。[測定条件（韓国語）](docs/listening-check.md#같은-사진에서-화자가-설명하는-곳이-달라질-때)
 
+質問の言い方に答えが左右されるかを確かめるには、`listen(turn=2, question="What starts clicking?", question_control=true)` を呼び出す。音声モデルに元の録音と同じ長さの無音を順に聞かせ、両方で同じ答えが返れば、その答えを伏せる。答えが変わっても音源を取り違えることはある。[質問ごとの結果](docs/benchmarks/caption-matches.json)
+
 <details>
 <summary>音だけを聴く、ページを作る、指定した区間を見直す</summary>
 

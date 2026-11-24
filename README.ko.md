@@ -351,6 +351,10 @@ codex mcp add reel -- "$(command -v reel)" mcp /path/to/film.mp4 --until 8.5 --i
 
 이 녹음에 딸린 질문 128개에 PE-AV 검증을 쓰자 정답이 55개에서 77개로 늘었다. 모른다는 답은 66개에서 42개로 줄었고 오답은 7개에서 9개로 늘었다. [점수 계산 코드](examples/check_caption_matches.py)
 
+Clotho-AQA 공식 시험용 녹음에서 16개를 따로 골랐다. 예 또는 아니요로 답하는 질문 64개에서 로컬 GPT는 첫 설명과 스펙트럼을 보고 30개를 맞혔다. 원음과 대조한 검색 결과를 더하면 36개, 질문마다 원음을 다시 들려주면 50개를 맞혔다.
+
+양쪽에 짧게 답하라고 지시하고 무음 대조를 켜자 오답은 11개에서 5개로 줄었다. 정답도 48개에서 42개로 줄고 모른다는 답은 5개에서 17개로 늘었다. [질문별 응답과 사람 세 명의 답](docs/benchmarks/caption-matches.json)
+
 Apple Silicon에서는 비상업적 연구용 원음 모델인 Audio Flamingo Next를 쓸 수 있다. `reel setup --audio-flamingo`로 가중치 5.1 GiB를 설치하고 다음처럼 실행한다.
 
 ```bash

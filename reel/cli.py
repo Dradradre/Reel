@@ -5,7 +5,7 @@
   reel zoom DIR --t0 S --t1 S
   reel frame DIR --at S     save the full frame on display at S
   reel frame DIR --t0 S --t1 S     read every frame displayed in the interval
-  reel listen DIR --t0 S --t1 S [--verify-sounds] [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
+  reel listen DIR --t0 S --t1 S [--reference-captions] [--verify-sounds] [--gain-db DB] [--compare-sounds] [--describe-sounds] [--question TEXT]    inspect the recorded sound locally
   reel layer DIR --t0 START --t1 END [--layer RANK | --focus TEXT] [--remainder] [--channel N] [--describe-sounds]
   reel compare-heard DIR --reference START END --target START END [--similarity] [--alternatives DESCRIPTION ...] [--question TEXT]
   reel match DIR --t0 S --t1 S [--per-second | --locate | --identify] ["sound description" ...]    compare descriptions with the recorded channels
@@ -18,7 +18,7 @@
   reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--voices] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
   reel mcp FILM [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--voices] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
-  reel setup [--depth] [--voices] [--audio-flamingo] [--sound-examples] [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
+  reel setup [--caption-matches] [--depth] [--voices] [--audio-flamingo] [--sound-examples] [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
 """
 import shlex
 import sys as _sys, pathlib as _pl
@@ -56,6 +56,7 @@ def doctor():
     import identify_sound
     from depth import PYTHON as depth_python
     from voices import PYTHON as voice_python
+    from caption_matches import ready as caption_matches_ready
     from flamingo import ready as flamingo_ready
     from source_examples import ready as examples_ready
     from scene_audio import READY as captions_ready
@@ -88,6 +89,7 @@ def doctor():
             ("recognize sources from reference recordings", examples_ready(), "reel setup --sound-examples"),
             ("sound identity: PE-AV and CLAP", identify_sound.READY.is_file() and pathlib.Path(identify_sound.PYTHON).is_file(), "reel setup --identify-sounds"),
             ("audio-only waveform descriptions: Audio Flamingo Next", flamingo_ready(), "reel setup --audio-flamingo"),
+            ("similar human descriptions: Clotho development", caption_matches_ready(), "reel setup --caption-matches"),
             ("first-listen descriptions: CoNeTTE", captions, "reel setup --captions"),
             ("waveform and optional joint picture/sound readings: Qwen3-Omni", hearing, "reel setup --describe-sounds"),
             ("overlapping sounds: MixIT separator", layers_ready() and shutil.which(unmix_py) is not None
@@ -121,6 +123,9 @@ def setup():
         from point_reader import prepare_environment
         prepare_environment()
         print("online picture point tracking ready")
+    if "--caption-matches" in sys.argv:
+        subprocess.run([COMPARE_PY, str(HERE / "caption_matches.py"), "--setup"], check=True)
+        print("Clotho development caption matches ready for noncommercial experiments")
     if "--audio-flamingo" in sys.argv:
         from flamingo import setup as setup_flamingo
         setup_flamingo()
@@ -168,7 +173,7 @@ def setup():
         from localize_sound import prepare_environment
         prepare_environment()
         print("sound location ready")
-    optional_models = {"--depth", "--voices", "--audio-flamingo", "--sound-examples", "--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
+    optional_models = {"--caption-matches", "--depth", "--voices", "--audio-flamingo", "--sound-examples", "--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
     if "--sync" not in sys.argv and optional_models.intersection(sys.argv):
         return
     if not UNISAL.exists():
@@ -616,6 +621,7 @@ def main():
             ap.add_argument("--verify-sounds", action="store_true", help="compare generated sound descriptions with the recorded waveform using CLAP")
             ap.add_argument("--question", help="ask the local waveform model about the recorded sound")
             ap.add_argument("--compare-sounds", action="store_true", help="also rank sound descriptions with local CLAP")
+            ap.add_argument("--reference-captions", action="store_true", help="find human descriptions of other, acoustically similar recordings")
         else:
             observation_options(ap)
             ap.add_argument("--question", help="ask the local audio reader about exactly this interval")
@@ -633,7 +639,7 @@ def main():
                 from listen import inspect_sound
                 data = inspect_sound(x.out, x.t0, x.t1, compare_sounds=x.compare_sounds, describe_sounds=x.describe_sounds,
                                      question=x.question, component=x.component, mark_sound=x.mark_sound, gain_db=x.gain_db,
-                                     verify_sounds=x.verify_sounds)
+                                     verify_sounds=x.verify_sounds, reference_captions=x.reference_captions)
             print(json.dumps(data, ensure_ascii=False, indent=2))
         except (ValueError, OSError, subprocess.CalledProcessError) as error:
             ap.error(str(error))

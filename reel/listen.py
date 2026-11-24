@@ -16,6 +16,7 @@ if __package__:
     from .hearing import SoundReader, WINDOW_S
     from .config import COMPARE_PY
     from .sounds import AudioTagger, SOURCE_SCORE
+    from .caption_matches import inspect_matches
     from .scene_audio import inspect_scene
     from .sound_events import inspect_events, ready as events_ready
     from .pitch import PitchTrace
@@ -31,6 +32,7 @@ else:
     from hearing import SoundReader, WINDOW_S
     from config import COMPARE_PY
     from sounds import AudioTagger, SOURCE_SCORE
+    from caption_matches import inspect_matches
     from scene_audio import inspect_scene
     from sound_events import inspect_events, ready as events_ready
     from pitch import PitchTrace
@@ -73,13 +75,13 @@ def _slice_audio(source, out, t0, t1):
 
 
 def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_sounds=False, question=None,
-                  component="mix", mark_sound=None, gain_db=0., verify_sounds=False):
+                  component="mix", mark_sound=None, gain_db=0., verify_sounds=False, reference_captions=False):
     out = Path(out)
     packet = out / "view.json"
     validate_mark(start, end, mark_sound)
     if packet.is_file():
         selected_range = start is not None or end is not None
-        across_turns = mark_sound is not None or question is not None or (selected_range and (component != "mix" or gain_db != 0 or verify_sounds))
+        across_turns = mark_sound is not None or question is not None or (selected_range and (component != "mix" or gain_db != 0 or verify_sounds or reference_captions))
         if not across_turns:
             view = json.loads(packet.read_text())
             if view.get("schema") != "reel.play.v1" or not view.get("audio"):
@@ -92,13 +94,13 @@ def inspect_sound(out, start=None, end=None, *, compare_sounds=False, describe_s
         wav, start, end, first, _ = released_samples(out, start, end, WINDOW_S)
         return listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
                                   question=question, component=component, first_sample=first, mark_sound=mark_sound,
-                                  turn_directory=out, gain_db=gain_db, verify_sounds=verify_sounds)
+                                  turn_directory=out, gain_db=gain_db, verify_sounds=verify_sounds, reference_captions=reference_captions)
     if start is None or end is None:
         raise ValueError("specify --t0 and --t1 when listening to an existing reel")
     wav = excerpt(out, start, end)
     evidence = listening_evidence(wav, start, end, compare_sounds=compare_sounds, describe_sounds=describe_sounds,
                                   question=question, component=component, mark_sound=mark_sound, gain_db=gain_db,
-                                  verify_sounds=verify_sounds)
+                                  verify_sounds=verify_sounds, reference_captions=reference_captions)
     meta = json.loads((Path(out) / "meta.json").read_text())
     words = [w for w in meta.get("speech_with_gain", [])
              if start <= w["context_start_s"] and w["context_end_s"] <= end
@@ -141,7 +143,7 @@ def level_changes(signal, rate, origin, end):
 
 
 def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds=False, question=None,
-                       component="mix", first_sample=None, mark_sound=None, turn_directory=None, gain_db=0., verify_sounds=False):
+                       component="mix", first_sample=None, mark_sound=None, turn_directory=None, gain_db=0., verify_sounds=False, reference_captions=False):
     """Describe only this WAV using local measurements and cached AudioSet weights."""
     rate = 16000
     original = Path(wav)
@@ -225,6 +227,8 @@ def listening_evidence(wav, start, end, *, compare_sounds=False, describe_sounds
     if source_examples_ready():
         with SourceReader() as examples:
             report["source_examples"] = examples.read(original, first_sample, end, isolated=True)
+    if reference_captions:
+        report["caption_matches"] = inspect_matches(original, start, end, first_sample, verify=verify_sounds)
     report["scene"] = inspect_scene(original, first_sample, end, verify_sounds=verify_sounds)
     if focus:
         report["scene_basis"] = "The scene reader heard the original mix."

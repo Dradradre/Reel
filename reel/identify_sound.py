@@ -55,8 +55,10 @@ class PerceptionEncoder:
         self.model.text_model.config.output_hidden_states = True
 
     def encode_text(self, labels):
+        return self.encode_captions(["the sound of " + label.lower() for label in labels])
+
+    def encode_captions(self, phrases):
         import torch
-        phrases = ["the sound of " + label.lower() for label in labels]
         parts = []
         with torch.inference_mode():
             for start in range(0, len(phrases), 8):

@@ -188,10 +188,10 @@ class LayerReader(LocalReader):
         self.matcher.__exit__(*args)
         super().__exit__(*args)
 
-    def inspect(self, directory, start, end, channel, layer=None, focus=None, remainder=False):
-        if layer is None and focus is None:
+    def inspect(self, directory, start, end, channel, layer=None, focus=None, remainder=False, reference=None, reference_channel=1):
+        if layer is None and focus is None and reference is None:
             layer, remainder = 1, True
-        if (layer is not None and focus is not None) or (focus is not None and not focus.strip()):
+        if sum(x is not None for x in (layer, focus, reference)) > 1 or (focus is not None and not focus.strip()):
             raise ValueError("choose one layer rank or describe a sound to focus on")
         if not 0 <= start < end or end - start > MAX_SECONDS or channel < 1 or (layer is not None and not 1 <= layer <= 8):
             raise ValueError(f"choose a channel, layer 1 to 8 and a film interval of at most {MAX_SECONDS} seconds")
@@ -213,9 +213,25 @@ class LayerReader(LocalReader):
             raise ValueError(f"choose one of the {info['audio_channels']} recorded channels")
         if first is None:
             first = sample_boundary(start, info["audio_rate"])
+        reference_wav = None
+        if reference is not None:
+            if len(reference) != 2 or not 0 <= reference[0] < reference[1] <= start or reference[1]-reference[0] > MAX_SECONDS:
+                raise ValueError("give an earlier reference interval of at most ten seconds ending before the target")
+            if (Path(directory) / "view.json").is_file():
+                ref, *_ = released_samples(directory, *reference, MAX_SECONDS)
+            else:
+                ref = excerpt(directory, *reference)
+            ref_info = probe(ref)
+            if not 1 <= reference_channel <= ref_info["audio_channels"]:
+                raise ValueError("choose an existing reference channel")
+            reference_wav = original_channel(ref, reference_channel, ref_info)
         response = self.request({"wav": str(wav.resolve()), "channel": channel, "layer": layer})
         if candidates := response.pop("candidate_wavs", None):
-            selection = self.matcher.choose_layer([response["mix_wav"], *candidates], focus)
+            wavs = [response["mix_wav"], *candidates]
+            selection = (self.matcher.choose_by_example(wavs, reference_wav) if reference_wav else
+                         self.matcher.choose_layer(wavs, focus))
+            if reference_wav:
+                response["reference"] = {"interval_s": reference, "channel": reference_channel}
             response["selection"] = selection
             if selection["status"] == "available":
                 rank = selection["selected"]

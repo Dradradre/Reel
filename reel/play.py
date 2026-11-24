@@ -28,6 +28,8 @@ if __package__:
     from .source_examples import SourceReader, ready as source_examples_ready
     from .onsets import OnsetTrace, attack_report
     from .local_reader import LocalReader
+    from .voices import VoiceReader
+    from .event_stream import EventStream
     from .action_view import action_views, missing_sequence, sound_during_pictures
     from .replay import replay
     from .sound_glimpses import SoundChanges, sound_glimpses
@@ -47,6 +49,8 @@ else:
     from source_examples import SourceReader, ready as source_examples_ready
     from onsets import OnsetTrace, attack_report
     from local_reader import LocalReader
+    from voices import VoiceReader
+    from event_stream import EventStream
     from action_view import action_views, missing_sequence, sound_during_pictures
     from replay import replay
     from sound_glimpses import SoundChanges, sound_glimpses
@@ -157,7 +161,7 @@ def save_sound(dest, chunks, info, wave_format, dtype):
 def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=False, gaze=False, speech=False,
          lang=None, sound_reader=None, joint=False, pause_on_sound_change=False, continuous=False,
          max_continuous_pcm_bytes=None, tracks="both", max_frames=None, recording_only=False, verify_sounds=False, identify_sounds=False,
-         identity_reader=None, example_reader=None):
+         identity_reader=None, example_reader=None, voices=False):
     """Yield one published interval per pull. The reader sees no later intervals or source path."""
     source, out = Path(source), Path(out)
     if not math.isfinite(step) or step <= 0:
@@ -189,6 +193,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
     changes = SoundChanges()
     pitch = PitchTrace()
     attacks = OnsetTrace()
+    event_stream = EventStream()
     stereo = StereoHistory()
     with ExitStack() as stack:
         tagger = stack.enter_context(LocalReader([PY, str(Path(__file__).with_name("sounds.py")), "--serve"],
@@ -204,6 +209,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
         reader = None
         if info["has_audio"] and (describe_sounds or joint):
             reader = sound_reader if sound_reader is not None else stack.enter_context(SoundReader())
+        voice = stack.enter_context(VoiceReader()) if voices and info["has_audio"] else None
         words = stack.enter_context(SpeechReader(reader or sound_reader)) if speech and info["has_audio"] else None
         eye = stack.enter_context(LocalReader([GAZE_PY, str(Path(__file__).with_name("gaze.py")), "--serve"],
                                               "UNISAL/DHF1K")) if gaze and info["has_video"] else None
@@ -367,6 +373,7 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                             dest / audio["wav"], audio["first_sample_on_film"], times, selected, min(position, picture_stop))
                 # From here on readers use published sheets and WAVs. Keep only the carried
                 # picture and decoder lookahead while waiting for the viewer's next action.
+                landmarks = event_stream.read(dest, packet, shown, (w, h) if shown else None, serial)
                 shown.clear()
                 if audio and not pace.recording_only:
                     # Feed silent intervals into the same history so old sources expire on the film clock.
@@ -415,6 +422,10 @@ def play(source, out, *, until=None, step=2.0, describe_sounds=False, media=Fals
                     packet["joint_command"] = "joint SECONDS [QUESTION] (up to 8, including previous turns)"
                 if describe_sounds and reader is not None and audio is not None and not pace.recording_only:
                     packet["sound_descriptions"] = reader.read(dest / audio["wav"], float(start), float(position), remember=True)
+                if voice is not None and audio and not pace.recording_only:
+                    packet["voices"] = voice.request({"wav": str((dest / audio["wav"]).resolve()),
+                                                      "first": audio["first_sample_on_film"]})
+                packet["observations"] = event_stream.publish(landmarks, packet, serial)
                 (dest / "view.json").write_text(json.dumps(packet, ensure_ascii=False))
                 dest.rename(out / name)
             requested = yield out / name / "view.json"

@@ -186,6 +186,25 @@ class Comparator:
                                     "Use them to check whether either description fits what you heard.")
         return comparison
 
+    def choose_by_example(self, wavs, reference):
+        ref = read_audio(reference, RATE, channels=1)[:, 0]
+        if not np.any(ref):
+            return {"status": "silent_reference", "selected": None}
+        sample = self.audio_features([ref], "pad")[0]
+        scores = []
+        for wav in wavs:
+            signal = read_audio(wav, RATE, channels=1)[:, 0]
+            score = float((self.audio_features([signal], "pad")[0] @ sample).item()) if np.any(signal) else None
+            scores.append(score)
+        active = [i for i, s in enumerate(scores) if s is not None]
+        if not active:
+            return {"status": "no_signal_at_encoder_rate", "selected": None}
+        ordered = sorted(active, key=lambda i: -scores[i])
+        tied = len(ordered) > 1 and scores[ordered[0]] - scores[ordered[1]] < 1e-5
+        return {"status": "available", "selected": 0 if tied else ordered[0], "tied": tied, "model": CLAP_NAME,
+                "cosines_mix_then_layers": scores, "basis": "Closest waveform embedding to the earlier recorded "
+                "channel. A different event can sound similar and the reference source can be absent."}
+
     def choose_layer(self, wavs, focus):
         signals = [read_audio(wav, RATE, channels=1)[:, 0] for wav in wavs]
         active = [i for i, signal in enumerate(signals) if np.any(signal)]
@@ -258,6 +277,9 @@ class SoundMatcher(LocalReader):
             job["alternatives"] = list(alternatives)
         return self.request(job)
 
+    def choose_by_example(self, wavs, reference):
+        return self.request({"operation": "choose_by_example", "wavs": wavs, "reference": str(reference)})
+
     def choose_layer(self, wavs, focus):
         return self.request({"operation": "choose_layer", "wavs": wavs, "focus": focus})
 
@@ -318,6 +340,8 @@ def serve():
                 operation = job.pop("operation", None)
                 if operation == "compare_recordings":
                     result = model.compare_recordings(**job)
+                elif operation == "choose_by_example":
+                    result = model.choose_by_example(**job)
                 elif operation == "choose_layer":
                     result = model.choose_layer(**job)
                 else:

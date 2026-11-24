@@ -77,6 +77,7 @@ Reel can also lay out a film in 30-second pages. Read left to right. A vertical 
 |---|---|---|
 | frames over time | selected whole frames at their recorded presentation times. A frame can stay up across a long pause between updates. Bounded snapshots retain the brightness range of footage tagged as full range. Reel maps tagged PQ and HLG pictures to sRGB with a colour-managed FFmpeg build | See who and what share the screen. During playback, extra timestamped frames can reveal a brief local change. A pair of times and a box let you inspect its original pixels with `look`. [Reading trial](docs/perception-check.md#잠깐-나타난-글자를-다시-읽을-때) |
 | motion point (playback) | the pixels along two fixed lines through a point, from every displayed frame | see how many times something crosses a line and in which direction with `view(motion_point=[x,y])` |
+| event memory (playback) | timed sound components, visible details, voice matches and dated reader reports | follow a rattle across a pause, inspect its channel and revise a guess after the door opens |
 | follow (playback) | the point you selected in an earlier picture, followed through each released frame | compare the selected detail with the last picture in which the tracker located it |
 | subject | where the person the film is about appears, and whether the eye is predicted to land on them | the film losing its subject |
 | on screen | recognized words and numbers during the frames in which they appear | read a score or sign alongside the sound at that moment |
@@ -97,6 +98,8 @@ Reel can also lay out a film in 30-second pages. Read left to right. A vertical 
 </details>
 
 ## Does it work?
+
+On playback, GPT can keep a sound it cannot name, find it later on another recorded channel and return to the original evidence. On 96 real recordings mixed at new positions it located all 96 repeated excerpts within 50 ms. On new utterances from 14 speakers it reidentified nine voices. [Tools, controls and misses](docs/event-paths.md)
 
 | Trial | Result with local GPT |
 |---|---|
@@ -428,6 +431,8 @@ An offscreen sound can register clearly while its source stays uncertain. Voices
 </details>
 
 ## Credits
+
+Anonymous voice embeddings use WeSpeaker’s VoxCeleb ResNet34 (Apache 2.0). The voice trial uses LibriSpeech test-clean recordings (CC BY 4.0). [WeSpeaker](https://huggingface.co/Wespeaker/wespeaker-voxceleb-resnet34) · [LibriSpeech](https://www.openslr.org/12/)
 
 NVIDIA Audio Flamingo Next uses the NVIDIA OneWay Noncommercial License. The research setup downloads the audio.cpp Q4_K conversion and pinned macOS runtime separately. [NVIDIA model and terms](https://huggingface.co/nvidia/audio-flamingo-next-hf), [GGUF conversion](https://huggingface.co/audio-cpp/Audio-Flamingo-GGUF), [audio.cpp release](https://github.com/0xShug0/audio.cpp/releases/tag/v0.9.6)
 

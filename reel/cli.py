@@ -11,12 +11,13 @@
   reel match DIR --t0 S --t1 S [--per-second | --locate | --identify] ["sound description" ...]    compare descriptions with the recorded channels
   reel observe DIR --t0 S --t1 S [--joint] [--motion-point X Y] [--focus LEFT TOP RIGHT BOTTOM] [--question TEXT] [--media] [--sync-region LEFT TOP RIGHT BOTTOM]     read each displayed picture with its matching sound
   reel speech TURN [--lang CODE] [--verify]               read words from a delivered audio interval
+  reel events DIR [--turn N] [--track ID] [--after EVENT]    read released observations
   reel follow TURN --from S --point X Y [--out NEW_DIR]    follow a pictured point through published frames
   reel look TURN --box LEFT TOP RIGHT BOTTOM     inspect a region of the published full-resolution picture
-  reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
-  reel mcp FILM [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
+  reel play FILM --out NEW_DIR [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--step S] [--continuous] [--max-frames N] [--pause-on-sound-change] [--speech] [--voices] [--lang CODE] [--gaze] [--media] [--joint] [--describe-sounds]     enter next to advance one interval
+  reel mcp FILM [--until S] [--verify-sounds] [--identify-sounds] [--tracks both|picture|sound] [--image-client] [--pause-on-sound-change] [--speech] [--voices] [--lang CODE] [--gaze] [--describe-sounds] [--joint]    serve pictures, sound and text over MCP stdio
   reel doctor            which senses are available on this machine
-  reel setup [--audio-flamingo] [--sound-examples] [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
+  reel setup [--voices] [--audio-flamingo] [--sound-examples] [--identify-sounds] [--follow] [--sync] [--layers] [--speech] [--captions] [--sound-labels] [--sound-events] [--compare-sounds] [--describe-sounds] [--locate-sounds]    fetch models for the selected senses
 """
 import shlex
 import sys as _sys, pathlib as _pl
@@ -52,6 +53,7 @@ def doctor():
     from unmix import PYTHON as unmix_py, ready as layers_ready
     from point_reader import PYTHON as follow_py, ready as follow_ready
     import identify_sound
+    from voices import PYTHON as voice_python
     from flamingo import ready as flamingo_ready
     from source_examples import ready as examples_ready
     from scene_audio import READY as captions_ready
@@ -66,6 +68,9 @@ def doctor():
             ("picture, sound, memory", has(sys.executable, "cv2") and has(sys.executable, "librosa"), "pip install -e ."),
             ("recorded channel levels and timing", has(sys.executable, "soundfile") and has(sys.executable, "numpy"), "pip install -e ."),
             ("acoustic attack timing", has(sys.executable, "scipy.ndimage"), "pip install -e ."),
+            ("anonymous voice continuity: WeSpeaker", shutil.which(voice_python) is not None and subprocess.run(
+                [voice_python, str(HERE / "voices.py"), "--check"], capture_output=True).returncode == 0,
+             "pip install -e '.[voices]' and reel setup --voices"),
             ("voices: Demucs", has(SEP_PY, "demucs"), "pip install -e '.[separate]'"),
             ("crowd: Mel-Band Roformer", has(CROWD_PY, "audio_separator"), "pip install -e '.[crowd]'"),
             ("speech: mlx-whisper (Apple GPU)", has(ASR_PY, "mlx_whisper"), "pip install -e '.[mlx]'"),
@@ -99,6 +104,10 @@ def doctor():
 
 def setup():
     HOME.mkdir(parents=True, exist_ok=True)
+    if "--voices" in sys.argv:
+        from voices import PYTHON as voice_python
+        subprocess.run([voice_python, str(HERE / "voices.py"), "--setup"], check=True)
+        print("voice continuity ready")
     if "--follow" in sys.argv:
         from point_reader import prepare_environment
         prepare_environment()
@@ -150,7 +159,7 @@ def setup():
         from localize_sound import prepare_environment
         prepare_environment()
         print("sound location ready")
-    optional_models = {"--audio-flamingo", "--sound-examples", "--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
+    optional_models = {"--voices", "--audio-flamingo", "--sound-examples", "--identify-sounds", "--locate-sounds", "--follow", "--layers", "--speech", "--captions", "--sound-events", "--sound-labels", "--describe-sounds", "--compare-sounds"}
     if "--sync" not in sys.argv and optional_models.intersection(sys.argv):
         return
     if not UNISAL.exists():
@@ -174,6 +183,24 @@ def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
         print(__doc__); return
     cmd = sys.argv[1]
+    if cmd == "events":
+        from event_memory import EventMemory
+        ap = argparse.ArgumentParser(prog="reel events", description="Read anonymous landmarks in published playback turns.")
+        ap.add_argument("directory", type=pathlib.Path)
+        ap.add_argument("--turn", type=int)
+        ap.add_argument("--first-turn", type=int, default=1)
+        ap.add_argument("--track")
+        ap.add_argument("--after")
+        ap.add_argument("--limit", type=int, default=32)
+        args = ap.parse_args(sys.argv[2:])
+        paths = sorted(args.directory.glob("turn_*/view.json"), key=lambda p: int(p.parent.name[5:]))
+        try:
+            data = EventMemory(paths).recall(len(paths) if args.turn is None else args.turn,
+                                             args.first_turn, args.track, args.after, args.limit)
+        except ValueError as error:
+            ap.error(str(error))
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+        return
     if cmd == "doctor":
         doctor(); return
     if cmd == "setup":
@@ -187,6 +214,7 @@ def main():
         ap.add_argument("--image-client", action="store_true",
                         help="deliver local waveform descriptions and supported words with images; attach WAV on request")
         ap.add_argument("--pause-on-sound-change", action="store_true", help="also pause when recorded frequency bands change")
+        ap.add_argument("--voices", action="store_true", help="track anonymous voice resemblance in speech-active channels")
         ap.add_argument("--speech", action="store_true", help="include the local speech evidence at every pause")
         ap.add_argument("--lang", help="language hint for the speech reader")
         ap.add_argument("--joint", action="store_true", help="read synchronized pictures and sound at every pause")
@@ -202,7 +230,7 @@ def main():
         if importlib.util.find_spec("mcp") is None:
             ap.error("install the MCP transport with pip install -e '.[mcp]'")
         from mcp_server import serve
-        serve(args.source, until=args.until, tracks=args.tracks, speech=args.speech, lang=args.lang, joint=args.joint, gaze=args.gaze,
+        serve(args.source, until=args.until, tracks=args.tracks, speech=args.speech, voices=args.voices, lang=args.lang, joint=args.joint, gaze=args.gaze,
               describe_sounds=args.describe_sounds, pause_on_sound_change=args.pause_on_sound_change,
               image_client=args.image_client, verify_sounds=args.verify_sounds, identify_sounds=args.identify_sounds)
         return
@@ -215,6 +243,8 @@ def main():
         ap.add_argument("--t1", type=float, required=True)
         selection = ap.add_mutually_exclusive_group()
         ap.add_argument("--remainder", action="store_true", help="also hear the channel minus the selected estimate")
+        selection.add_argument("--reference", nargs=2, type=float, metavar=("START","END"), help="match an earlier recording")
+        ap.add_argument("--reference-channel", type=int, default=1)
         selection.add_argument("--layer", type=int, choices=range(1, 9))
         selection.add_argument("--focus", help="listen for a sound described in your own words using local CLAP")
         ap.add_argument("--channel", type=int, default=1)
@@ -222,7 +252,7 @@ def main():
         x = ap.parse_args(sys.argv[2:])
         try:
             with LayerReader() as layers, SoundReader() as sound:
-                result = layers.inspect(x.out, x.t0, x.t1, x.channel, x.layer, x.focus, x.remainder)
+                result = layers.inspect(x.out, x.t0, x.t1, x.channel, x.layer, x.focus, x.remainder, x.reference, x.reference_channel)
                 if x.describe_sounds:
                     describe_layer(sound, result)
             print(json.dumps(result, ensure_ascii=False, indent=2))
@@ -349,6 +379,7 @@ def main():
                         help="present the selected tracks on the original film clock")
         ap.add_argument("--until", type=float, help="stop before this time on the source clock")
         ap.add_argument("--pause-on-sound-change", action="store_true", help="also pause when recorded frequency bands change")
+        ap.add_argument("--voices", action="store_true", help="track anonymous voice resemblance in speech-active channels")
         ap.add_argument("--speech", action="store_true", help="include recognized words automatically at each pause")
         ap.add_argument("--lang", help="spoken language code (default: detect from the recording)")
         ap.add_argument("--joint", action="store_true", help="also read the pictures and their soundtrack in one local model")
@@ -367,7 +398,7 @@ def main():
         identity_reader = IdentityReader()
         sound_reader = SoundReader()
         waveform = sound_reader if x.describe_sounds or x.joint else None
-        playback = play(x.source, x.out, until=x.until, tracks=x.tracks, step=x.step, describe_sounds=x.describe_sounds,
+        playback = play(x.source, x.out, until=x.until, tracks=x.tracks, voices=x.voices, step=x.step, describe_sounds=x.describe_sounds,
                         verify_sounds=x.verify_sounds, identify_sounds=x.identify_sounds, identity_reader=identity_reader,
                         media=x.media, gaze=x.gaze, speech=x.speech, lang=x.lang, sound_reader=waveform, joint=x.joint,
                         pause_on_sound_change=x.pause_on_sound_change, continuous=x.continuous, max_frames=x.max_frames)

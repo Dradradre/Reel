@@ -1,5 +1,8 @@
 # Watching a film through its reel
 
+During playback, keep a sound or picture detail by the event ID in the first view. Use `recall_events` to follow its track, `inspect_event` to return to the recorded evidence and `remember_event` to save your first or revised interpretation. A measured motion/sound coincidence supplies a place and time to inspect. Report a source, words or a cause only to the extent supported by what reached your client. [Worked examples and measured limits](event-paths.md)
+
+
 `reel watch` gives an image-and-text reader 30-second pages and a line for each shot in `stream.md`. Read them in
 time order. A frame shows one moment. A sound label is an estimate. You can describe a change even when its source
 is unclear. A reader with audio input can also play the bounded WAV from `reel listen`.

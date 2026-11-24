@@ -9,9 +9,11 @@
 
 [English](README.md) | [한국어](README.ko.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | **Español**
 
-[Prueba con tu vídeo](#primeros-pasos) | [Resultados](#resultados) | [Guía de lectura en inglés](docs/READING.md)
+[Prueba con tu vídeo](#primeros-pasos) | [Resultados](#resultados) | [Guía de lectura en inglés](docs/READING.md) | [Análisis de vídeo con Codex (inglés)](docs/video-analysis-mcp.md)
 
-# Ojos y oídos para un modelo de lenguaje
+# Reel: comprensión de vídeo para agentes de IA
+
+Reel es una herramienta de código abierto para comprender vídeo y audio y un servidor del Protocolo de Contexto del Modelo (MCP) para agentes de IA y grandes modelos de lenguaje (LLM).
 
 Dale un vídeo al modelo. Puede seguir viéndolo, acercarse a un detalle o volver a escuchar algo que le llamó la atención. Reel le entrega por MCP las imágenes y el sonido grabado en ese mismo instante. Si fijas `--until 8.5`, incluso al retroceder solo tendrá acceso a los primeros 8,5 segundos.
 

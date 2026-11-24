@@ -9,9 +9,11 @@
 
 **English** | [한국어](README.ko.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [Español](README.es.md)
 
-[Try your film](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md)
+[Try your film](#quickstart)  |  [Measurements](#does-it-work)  |  [Reading guide](docs/READING.md) | [Video analysis with Codex](docs/video-analysis-mcp.md)
 
-# Eyes and ears for a language model
+# Reel: Video Understanding for AI Agents
+
+Reel is an open-source video and audio understanding tool and Model Context Protocol (MCP) server for AI agents and large language models (LLMs).
 
 Give your agent a film. Let it watch, listen, look closer and replay what caught its attention. Reel delivers pictures and recorded sound on the same clock through MCP. Set `--until 8.5` and every observation stays inside the first 8.5 seconds.
 

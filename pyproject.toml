@@ -5,11 +5,18 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "reel"
 version = "0.1.0"
-description = "Turn a film into pages a language model can watch front to back: picture, sound, speech, crowd and memory on one time axis."
+description = "Video and audio understanding for AI agents through MCP, with synchronized frames, sound and replay."
 readme = "README.md"
+keywords = ["video-understanding", "video-analysis", "audio-analysis", "multimodal", "ai-agents", "llm", "mcp", "model-context-protocol", "video-quality", "apple-silicon"]
 requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = ["numpy", "opencv-python-headless", "pillow", "librosa", "scipy", "soundfile", "matplotlib"]
+
+[project.urls]
+Homepage = "https://github.com/Dradradre/Reel"
+Repository = "https://github.com/Dradradre/Reel"
+Documentation = "https://github.com/Dradradre/Reel/blob/main/docs/video-analysis-mcp.md"
+Issues = "https://github.com/Dradradre/Reel/issues"
 
 [project.optional-dependencies]
 depth = ["torch", "torchvision", "transformers>=4.44,<4.46"]

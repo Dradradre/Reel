@@ -4,6 +4,8 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+import re
+import unicodedata
 
 import numpy as np
 
@@ -46,6 +48,27 @@ def rescore(rows, captions):
             np.testing.assert_allclose(actual, row["caption_scores"][name], atol=2e-6)
 
 
+def answer_text(s):
+    return " ".join(re.findall(r"\w+(?:'\w+)?", unicodedata.normalize("NFKC", s).casefold()))
+
+
+def listening_answers(cases):
+    result = {}
+    for form in ("yes/no", "open"):
+        rows = [q for case in cases for q in case["items"] if q["form"] == form]
+        votes = [[answer_text(v) for v in q["votes"]] for q in rows]
+        pairs = sum(a == b for group in votes for i, a in enumerate(group) for b in group[i + 1:])
+        counts = {"questions": len(rows), "human_pair_agreements": pairs, "human_pairs": 3 * len(rows),
+                  "questions_with_a_majority": sum(len(set(group)) < 3 for group in votes)}
+        for arm in ("before", "verified", "no_recording"):
+            answers = [answer_text(q["answers"][arm]) for q in rows]
+            hits = [group.count(a) for group, a in zip(votes, answers, strict=True)]
+            counts[arm] = {"individual_agreements": sum(hits), "majority_agreements": sum(h >= 2 for h in hits),
+                           "unknown": answers.count("unknown")}
+        result[form] = counts
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--captions", type=Path, help="Clotho v2.1 evaluation caption CSV")
@@ -65,6 +88,7 @@ def main():
     for arm in ("before", "reference", "swapped"):
         hits = sum(q["votes"].count(q[arm]) >= 2 for q in questions)
         print(f"Listening questions {arm}: agrees with majority on {hits}/{len(questions)}")
+    print("Unseen uploaders listening questions", json.dumps(listening_answers(data["listening_questions"]), indent=2))
     for name, rows in data["verifier_control"].items():
         for arm in ("matched_counts", "swapped_counts"):
             counts = [k for row in rows for k in row[arm]]

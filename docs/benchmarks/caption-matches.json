@@ -32,7 +32,9 @@
     "unseen_uploaders": "32 additional evaluation recordings, all from different uploaders absent from the development library and the three earlier panels. No evaluation reference sentence in this panel occurs verbatim in the development set. Same complete release, spectra and fresh GPT protocol as confirmation. In the verified arm PE-AV reads the actual PCM again; only retrieved sentences beating at least 125 of 128 fixed comparison sentences enter its evidence. The original waveform report and all other observations stay the same.",
     "questions": "Asked the archived 64 listening questions in groups of four without human answers, preserving directed waveform readings and the same spectrum. Each question has three human votes. GPT could answer yes, no or unknown.",
     "verifier_control": "For each first-channel window compare the CLAP neighbours and those retrieved for the clip half a panel later against the identical original channel using PE-AV. Values count controls beaten out of 128. A retained sentence from a different recording may still describe a similar sound.",
-    "waveforms": "Original per-file WAVs from Clotho-AQA v1 audio_files.zip (https://zenodo.org/records/6473207), joined to Clotho v2.1 evaluation captions by filename."
+    "waveforms": "Original per-file WAVs from Clotho-AQA v1 audio_files.zip (https://zenodo.org/records/6473207), joined to Clotho v2.1 evaluation captions by filename.",
+    "unseen_questions": "All six published Clotho-AQA questions on each of the 32 recordings from held-out uploaders, four binary and two open. Participants gave three answers per question. Baseline and verified GPT sessions see the same earlier open waveform report and original-channel spectrum. The verified arm also sees the acoustically checked caption matches. The no_recording condition receives only the questions, with permission to answer unknown. Report all abstentions. For free answers, score exact text after Unicode normalization, case folding and tokenizing punctuation; synonyms do not receive credit. The audio reader was not asked the questions in this comparison.",
+    "aqa_license": "Clotho-AQA questions and answers, Samuel Lipping, Parthasaarathy Sudarsanam, Konstantinos Drossos and Tuomas Virtanen, © 2022 Tampere University, MIT. See Clotho-AQA-LICENSE.txt."
   },
   "panels": {
     "replication": [
@@ -7175,5 +7177,2855 @@
         ]
       }
     ]
-  }
+  },
+  "listening_questions": [
+    {
+      "source_id": "167260",
+      "items": [
+        {
+          "question": "Is a person running?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there static?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is the object that is being used?",
+          "form": "open",
+          "votes": [
+            "radio",
+            "radio",
+            "radio"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "radio",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many times are the stations changed?",
+          "form": "open",
+          "votes": [
+            "eight",
+            "ten",
+            "four"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone changing stations in the radio?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the person tapping loudly on the radio?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "264582",
+      "items": [
+        {
+          "question": "Is precipitation occurring?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What condition would someone be in if there were caught outside?",
+          "form": "open",
+          "votes": [
+            "wet",
+            "rain",
+            "wet"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "wet",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many times does it thunder?",
+          "form": "open",
+          "votes": [
+            "two",
+            "two",
+            "two"
+          ],
+          "answers": {
+            "before": "once",
+            "verified": "once",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the rain steady?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is it very windy?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is water audible because someone is showering?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "181890",
+      "items": [
+        {
+          "question": "Is it loud?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is the water doing?",
+          "form": "open",
+          "votes": [
+            "dripping",
+            "pouring",
+            "dripping"
+          ],
+          "answers": {
+            "before": "Dripping steadily",
+            "verified": "Dripping",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does someone flush the toilet?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What direction is the water coming from?",
+          "form": "open",
+          "votes": [
+            "up",
+            "up",
+            "up"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there water?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the water being poured slowly?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "126258",
+      "items": [
+        {
+          "question": "Is something being blended?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is something being scratched?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Can liquid be heard?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is being blended?",
+          "form": "open",
+          "votes": [
+            "water",
+            "ice",
+            "liquid"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a man cussing?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many different speeds does the motor move at after the sucking sound finishes?",
+          "form": "open",
+          "votes": [
+            "two",
+            "two",
+            "five"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "267265",
+      "items": [
+        {
+          "question": "Is the sound high pitched?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What makes this sort of noise?",
+          "form": "open",
+          "votes": [
+            "duck",
+            "ducks",
+            "baby"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "seagulls",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this a musical sound?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the sound repetitive?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How loud is this noise?",
+          "form": "open",
+          "votes": [
+            "louder",
+            "loud",
+            "very"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "loud",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this a household object?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "15509",
+      "items": [
+        {
+          "question": "Is there static?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many different people can be heard talking inside the train ?",
+          "form": "open",
+          "votes": [
+            "one",
+            "two",
+            "three"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this a soft sound?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there birds chirping ?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone talking inside a train ?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is this?",
+          "form": "open",
+          "votes": [
+            "rollercoaster",
+            "airplane",
+            "subway"
+          ],
+          "answers": {
+            "before": "A passing train",
+            "verified": "A train rumbling",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "207441",
+      "items": [
+        {
+          "question": "what is making the rubbing sound?",
+          "form": "open",
+          "votes": [
+            "paper",
+            "paper",
+            "vehicle"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "are cars in motion outside?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "is there a car crash?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone making a speech?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What fluid powers the vehicles in the background?",
+          "form": "open",
+          "votes": [
+            "gasoline",
+            "gas",
+            "gas"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the abrasive sound made manually by a person?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "107228",
+      "items": [
+        {
+          "question": "What can be heard running?",
+          "form": "open",
+          "votes": [
+            "motorcycle",
+            "chainsaw",
+            "exhaust"
+          ],
+          "answers": {
+            "before": "An engine",
+            "verified": "A motorcycle engine",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this sound caused by nature?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Can something be heard revving up at the start of this clip?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Would this noise occur without a decision make by a human?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there an idling engine?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is the motor doing?",
+          "form": "open",
+          "votes": [
+            "start",
+            "start",
+            "start"
+          ],
+          "answers": {
+            "before": "Idling",
+            "verified": "Idling",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "180963",
+      "items": [
+        {
+          "question": "What is the person walking through or over?",
+          "form": "open",
+          "votes": [
+            "snow",
+            "snow",
+            "plastic"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "snow",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone walking outside?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many people are walking through snow?",
+          "form": "open",
+          "votes": [
+            "two",
+            "one",
+            "one"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "one",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Can animal calls be heard?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does the person stop walking and then start again?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there any short high pitched sounds, like someone running a fingernail over canvas?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "94233",
+      "items": [
+        {
+          "question": "Does this take place in a building?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are cats meowing?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone opening a door?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What activity involving the feet and legs can be heard?",
+          "form": "open",
+          "votes": [
+            "walking",
+            "walking",
+            "walking"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the person running out of the room?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many steps does the person take?",
+          "form": "open",
+          "votes": [
+            "six",
+            "four",
+            "seven"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "260263",
+      "items": [
+        {
+          "question": "Can more that a dozen people be heard?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does the movement get more gentle as time moves on?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is the person moving in?",
+          "form": "open",
+          "votes": [
+            "swimming",
+            "water",
+            "water"
+          ],
+          "answers": {
+            "before": "water",
+            "verified": "water",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone sloshing water around?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What can be heard being moved?",
+          "form": "open",
+          "votes": [
+            "water",
+            "water",
+            "water"
+          ],
+          "answers": {
+            "before": "water",
+            "verified": "water",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there many people there?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "361700",
+      "items": [
+        {
+          "question": "Does this sound come from water?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What type of animal can be heard?",
+          "form": "open",
+          "votes": [
+            "human",
+            "bird",
+            "lion"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this near a waterfall?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is making the consistent sound?",
+          "form": "open",
+          "votes": [
+            "rain",
+            "rain",
+            "rain"
+          ],
+          "answers": {
+            "before": "rain",
+            "verified": "rain",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Can water be heard flowing down river?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this a sound typical of a sunny warm day?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "52288",
+      "items": [
+        {
+          "question": "How many large creaks are there?",
+          "form": "open",
+          "votes": [
+            "four",
+            "four",
+            "four"
+          ],
+          "answers": {
+            "before": "5",
+            "verified": "4",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many creak sounds are there?",
+          "form": "open",
+          "votes": [
+            "seven",
+            "interested",
+            "four"
+          ],
+          "answers": {
+            "before": "5",
+            "verified": "5",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are the creaks more frequent at the beginning?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the first creak the shortest?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Do the creaks gradually sound faster?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a crisp packet squeezed?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "177283",
+      "items": [
+        {
+          "question": "What material is being tapped on?",
+          "form": "open",
+          "votes": [
+            "plastic",
+            "wood",
+            "xylophone"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there multiple instruments?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many times does the wooden figure croak?",
+          "form": "open",
+          "votes": [
+            "six",
+            "six",
+            "five"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone tapping on a wooden figure?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a child giggling?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone singing?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "140349",
+      "items": [
+        {
+          "question": "Does the motor increase in RPM towards the end?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many vehicles are heard?",
+          "form": "open",
+          "votes": [
+            "two",
+            "two",
+            "two"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "one",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are bids chirping?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What type of vehicle is heard?",
+          "form": "open",
+          "votes": [
+            "motorcycle",
+            "motorcycle",
+            "motorcycle"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "helicopter",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this in an indoor location?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a motor running?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "335010",
+      "items": [
+        {
+          "question": "Is someone speaking?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is squealing in the background?",
+          "form": "open",
+          "votes": [
+            "bird",
+            "none",
+            "birds"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is crunching on the ground?",
+          "form": "open",
+          "votes": [
+            "feet",
+            "shoes",
+            "leaves"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there animal noises?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this loud?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there a rustling sound?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "366528",
+      "items": [
+        {
+          "question": "How many beeps occur?",
+          "form": "open",
+          "votes": [
+            "two",
+            "two",
+            "two"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there people talking?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Do the beeps occur after the machinery sounds?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the beeping constant as time goes on?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many people's footsteps can be heard?",
+          "form": "open",
+          "votes": [
+            "two",
+            "one",
+            "four"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is machinery moving?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "26736",
+      "items": [
+        {
+          "question": "What animal is making the noise?",
+          "form": "open",
+          "votes": [
+            "sheep",
+            "goat",
+            "sheep"
+          ],
+          "answers": {
+            "before": "sheep",
+            "verified": "goat",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there a cat hissing?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is it a car horn?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this in the countryside?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are children playing a game?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many times does the sheep baa?",
+          "form": "open",
+          "votes": [
+            "ten",
+            "nine",
+            "eleven"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "210220",
+      "items": [
+        {
+          "question": "Is it constant?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is water splashing on the ground ?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many times did a vehicle pass by in the tunnel ?",
+          "form": "open",
+          "votes": [
+            "four",
+            "three",
+            "three"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is making the noise?",
+          "form": "open",
+          "votes": [
+            "wind",
+            "fan",
+            "wind"
+          ],
+          "answers": {
+            "before": "wind",
+            "verified": "wind",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Did a vehicle pass by in a tunnel ?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is it a person?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "346048",
+      "items": [
+        {
+          "question": "what is making the screeching noise?",
+          "form": "open",
+          "votes": [
+            "breaks",
+            "machine",
+            "machine"
+          ],
+          "answers": {
+            "before": "A machine",
+            "verified": "A machine",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is the machine doing?",
+          "form": "open",
+          "votes": [
+            "whirring",
+            "whirring",
+            "screeching"
+          ],
+          "answers": {
+            "before": "Whirring",
+            "verified": "Running",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Can a clanking sound be heard?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "is the screech coming from nature?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does a person speak?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the machine making a screeching noise?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "156847",
+      "items": [
+        {
+          "question": "Does the running slow to a walk?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the person motionless?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there any animals near the runner?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What part of the body is hitting the ground?",
+          "form": "open",
+          "votes": [
+            "dog",
+            "feet",
+            "foot"
+          ],
+          "answers": {
+            "before": "feet",
+            "verified": "feet",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this outdoors?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "what does it sound like the person is running on?",
+          "form": "open",
+          "votes": [
+            "gravel",
+            "pavement",
+            "dirt"
+          ],
+          "answers": {
+            "before": "a hard surface",
+            "verified": "gravel",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "198452",
+      "items": [
+        {
+          "question": "During what activity does this sound occur?",
+          "form": "open",
+          "votes": [
+            "sleeping",
+            "blow",
+            "driving"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "Breathing",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many people are making the sound?",
+          "form": "open",
+          "votes": [
+            "one",
+            "one",
+            "one"
+          ],
+          "answers": {
+            "before": "one",
+            "verified": "one",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a mammal breathing?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the sound coming from a non-living thing?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the breathing regular?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does this sound involve air movement?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "189470",
+      "items": [
+        {
+          "question": "Are there birds cooing?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What instrument is being played in the background?",
+          "form": "open",
+          "votes": [
+            "drums",
+            "drum",
+            "none"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a lion growling?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does a man say a word?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What animal is chirping?",
+          "form": "open",
+          "votes": [
+            "bird",
+            "bird",
+            "bird"
+          ],
+          "answers": {
+            "before": "bird",
+            "verified": "bird",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there more than one sound?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "118045",
+      "items": [
+        {
+          "question": "Is there someone moving around?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone riding a bike?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there a crunching sound?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is being stepped on?",
+          "form": "open",
+          "votes": [
+            "rocks",
+            "gravel",
+            "ice"
+          ],
+          "answers": {
+            "before": "gravel",
+            "verified": "gravel",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What does it sound like?",
+          "form": "open",
+          "votes": [
+            "walking",
+            "footsteps",
+            "walking"
+          ],
+          "answers": {
+            "before": "footsteps crunching on gravel",
+            "verified": "Footsteps crunching on gravel",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is someone talking?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "330653",
+      "items": [
+        {
+          "question": "Is there a glass breaking?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many ringing sounds are there?",
+          "form": "open",
+          "votes": [
+            "five",
+            "interested",
+            "five"
+          ],
+          "answers": {
+            "before": "5",
+            "verified": "5",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What material is the object that is getting hit?",
+          "form": "open",
+          "votes": [
+            "metal",
+            "configuration",
+            "metal"
+          ],
+          "answers": {
+            "before": "metal",
+            "verified": "metal",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there a cow making noise?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does the item being hit reverberate?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the ringing different in tone?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "133833",
+      "items": [
+        {
+          "question": "Is one person home alone?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is music accompanying the song?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this a well-attended event?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What mood is being portrayed from the mammals?",
+          "form": "open",
+          "votes": [
+            "happy",
+            "excitement",
+            "happy"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "excited",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is heard briefly towards the end of the song?",
+          "form": "open",
+          "votes": [
+            "prayer",
+            "clapping",
+            "singing"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "cheering",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is more than one person talking?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "245754",
+      "items": [
+        {
+          "question": "How many times is there a thud?",
+          "form": "open",
+          "votes": [
+            "ten",
+            "three",
+            "five"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "10",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does someone scream?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is something being scraped?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there something metallic?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Which thud is the softest?",
+          "form": "open",
+          "votes": [
+            "first",
+            "first",
+            "first"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "third",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a dog barking?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "123680",
+      "items": [
+        {
+          "question": "Is something activated?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the object in the recording wet?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is the item that flushing normally used for?",
+          "form": "open",
+          "votes": [
+            "toilet",
+            "toilet",
+            "closet"
+          ],
+          "answers": {
+            "before": "disposing of waste",
+            "verified": "Disposing of human waste",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Are there children screaming?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What is being flushed?",
+          "form": "open",
+          "votes": [
+            "toilet",
+            "toilet",
+            "stone"
+          ],
+          "answers": {
+            "before": "a toilet",
+            "verified": "A toilet",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this in a jungle?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "108850",
+      "items": [
+        {
+          "question": "how many times does the creak happen?",
+          "form": "open",
+          "votes": [
+            "twice",
+            "two",
+            "five"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many steps can be heard?",
+          "form": "open",
+          "votes": [
+            "sixteen",
+            "seven",
+            "nine"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "does an item creak?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there some whirring in the end?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Does the person cause any high pitched noises to occur?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "does a person talk?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "268810",
+      "items": [
+        {
+          "question": "What object is this?",
+          "form": "open",
+          "votes": [
+            "clock",
+            "clock",
+            "watch"
+          ],
+          "answers": {
+            "before": "clock",
+            "verified": "Clock",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "How many times does the clock tick?",
+          "form": "open",
+          "votes": [
+            "sixteen",
+            "sixteen",
+            "fifteen"
+          ],
+          "answers": {
+            "before": "16",
+            "verified": "16",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this outside?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the sound quiet?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this a bird making the noise?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the same sound repeated?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "no"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "253111",
+      "items": [
+        {
+          "question": "How many animals are there?",
+          "form": "open",
+          "votes": [
+            "two",
+            "four",
+            "three"
+          ],
+          "answers": {
+            "before": "1",
+            "verified": "1",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What animal is heard here?",
+          "form": "open",
+          "votes": [
+            "cat",
+            "cat",
+            "cat"
+          ],
+          "answers": {
+            "before": "cat",
+            "verified": "cat",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is this a dog?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the animal purring?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there a meowing?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "yes",
+            "verified": "yes",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is a dog barking?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "no",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "108354",
+      "items": [
+        {
+          "question": "How many knocks can be heard?",
+          "form": "open",
+          "votes": [
+            "one",
+            "one",
+            "five"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "What noise does the man make?",
+          "form": "open",
+          "votes": [
+            "cutter",
+            "eating",
+            "bang"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is the person making music?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there a loud thud?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there only one person making noise?",
+          "form": "yes/no",
+          "votes": [
+            "yes",
+            "yes",
+            "yes"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "unknown",
+            "no_recording": "unknown"
+          }
+        },
+        {
+          "question": "Is there ballroom music?",
+          "form": "yes/no",
+          "votes": [
+            "no",
+            "no",
+            "no"
+          ],
+          "answers": {
+            "before": "unknown",
+            "verified": "no",
+            "no_recording": "unknown"
+          }
+        }
+      ]
+    }
+  ]
 }

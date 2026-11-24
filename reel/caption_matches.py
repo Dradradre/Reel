@@ -62,14 +62,17 @@ def setup():
     for name, digest in FILES.items():
         fetch(f"{DATASET}/files/{name}", ROOT / name, digest)
     captions, _ = caption_rows(ROOT / CSV)
+    # The weights and corpus live in separate caches and either can have been removed.
+    model = Comparator(download=True, revision=REVISION)
     if ready():
         try:
-            CaptionIndex()
+            index = CaptionIndex()
+            if not np.isfinite(index.vectors).all():
+                raise ValueError("nonfinite caption index")
         except (OSError, ValueError):
             pass  # Replace an incomplete index only after its replacement has been built.
         else:
             return
-    model = Comparator(download=True, revision=REVISION)
     with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
         dest = Path(tmp) / "vectors.npy"
         vectors = None

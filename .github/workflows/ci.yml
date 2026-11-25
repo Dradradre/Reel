@@ -11,7 +11,7 @@ permissions:
 jobs:
   test:
     # Reel targets Apple Silicon, so the suite runs on an arm64 macOS runner.
-    runs-on: macos-14
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -32,7 +32,7 @@ jobs:
 
   package:
     # The published wheel must work outside the repository: install it into a clean environment and start the CLI.
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

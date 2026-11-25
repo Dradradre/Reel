@@ -47,4 +47,5 @@ jobs:
           /tmp/clean/bin/reel --help | head -3
           /tmp/clean/bin/reel-mcp --help | head -3
       - name: README carries the MCP Registry ownership marker
-        run: grep -q "mcp-name: $(jq -r .name server.json)" README.md
+        run: |
+          grep -q "mcp-name: $(jq -r .name server.json)" README.md

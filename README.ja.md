@@ -11,6 +11,11 @@
 
 [手元の動画で試す](#クイックスタート) | [測定結果](#測定結果) | [読み方ガイド（英語）](docs/READING.md) | [Codex で動画を分析する（英語）](docs/video-analysis-mcp.md)
 
+[![PyPI](https://img.shields.io/pypi/v/reel-mcp?style=flat-square&color=3572A5)](https://pypi.org/project/reel-mcp/)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Dradradre/Reel/ci.yml?branch=main&style=flat-square&label=tests)](https://github.com/Dradradre/Reel/actions/workflows/ci.yml)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.Dradradre%2Freel-5CC8FF?style=flat-square)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Dradradre/reel)
+[![License: MIT](https://img.shields.io/badge/license-MIT-3DDC97?style=flat-square)](LICENSE)
+
 # Reel：AI エージェントのための動画理解ツール
 
 Reel は AI エージェントや大規模言語モデル（LLM）のためのオープンソース動画・音声理解ツールで、Model Context Protocol（MCP）サーバーとして動作する。
@@ -42,23 +47,22 @@ Reel は AI エージェントや大規模言語モデル（LLM）のための�
 Apple シリコン搭載の Mac、FFmpeg、Python 3.11 以降が必要。`film.mp4` を手元の動画のパスに置き換えて実行する。
 
 ```bash
-git clone https://github.com/Dradradre/Reel.git && cd Reel
-python3 -m venv .venv && source .venv/bin/activate
-python -m pip install -e '.[mcp]'
+pipx install reel-mcp
 reel play film.mp4 --out reels/first-view --until 8.5
 ```
 
 再生が一時停止するたびに、その区間の保存先が表示される。`next` で次へ進み、`quit` で終了する。最初から見直すときは新しい出力先を指定する。
 
-**モデルと一緒に見る。** Reel は Model Context Protocol（MCP）経由で映像を渡す。ログイン済みの Codex CLI で試すには、仮想環境を有効にしたままローカルサーバーを登録し、新しいチャットを開く。
+**モデルと一緒に見る。** Reel は Model Context Protocol（MCP）経由で映像を渡す。ローカルサーバーを登録し、新しいチャットを開く。
 
 ```bash
-codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --image-client
+claude mcp add reel -- reel-mcp "$PWD/film.mp4" --until 8.5 --image-client   # Claude Code
+codex mcp add reel -- reel-mcp "$PWD/film.mp4" --until 8.5 --image-client    # Codex CLI
 ```
 
 > Reel でこの動画を見て。何が見えて、どんな音が聞こえた？
 
-ほかの MCP クライアントでは、stdio サーバーの起動コマンドに `reel mcp /absolute/path/to/film.mp4 --until 8.5` を指定する。音声入力に対応するクライアントには元のチャンネル構成の WAV を渡せる。画像とテキストを読むクライアントは、画面や音量、周波数の測定値を受け取る。追加のローカルモデルを導入すれば、音の説明や時刻付きの文字起こしも読める。波形を聴いて説明するモデルは約39 GB。[再生オプション](#再生オプション)
+ほかの MCP クライアントでは、stdio サーバーの起動コマンドに `uvx reel-mcp /absolute/path/to/film.mp4 --until 8.5` を指定する。音声入力に対応するクライアントには元のチャンネル構成の WAV を渡せる。画像とテキストを読むクライアントは、画面や音量、周波数の測定値を受け取る。追加のローカルモデルを導入すれば、音の説明や時刻付きの文字起こしも読める。波形を聴いて説明するモデルは約39 GB。[再生オプション](#再生オプション)
 
 ## 映像と音を同じ時間軸で読む
 
@@ -106,7 +110,7 @@ codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --ima
 <details>
 <summary>ブラインド試験での見落としと誤検出</summary>
 
-さまざまなジャンルの動画26本に編集上の乱れを加え、各ラウンドで1本は元のままにした。モデルには正解を知らせていない。コードを固定した第5ラウンドでは17件中12件を検出。暗転3件とエコー3件はすべて捉えた一方、唯一の静止箇所を見落とした。チェスの動画では、低い持続音を突然の音量上昇と誤って判断した。[過去の全ラウンドと観察記録（英語）](README.md#does-it-work)
+さまざまなジャンルの動画26本に編集上の乱れを加え、各ラウンドで1本は元のままにした。モデルには正解を知らせていない。コードを固定した第5ラウンドでは17件中12件を検出。暗転3件とエコー3件はすべて捉えた一方、唯一の静止箇所を見落とした。チェスの動画では、低い持続音を突然の音量上昇と誤って判断した。[過去の全ラウンドと観察記録（英語）](docs/results.md)
 
 </details>
 
@@ -140,7 +144,7 @@ reel observe reels/pages --t0 4 --t1 4.5
 
 同じファイルで新しいセッションを開き、`--tracks picture`、`--tracks sound`、既定の `--tracks both` を切り替えると、映像のみ、音のみ、両方で何に気づくかを比べられる。どのモードも元の時刻と停止位置を保つ。
 
-`reel watch` は順に読めるページを作る。`reel frame` は指定時刻の画面を取り出し、`reel observe` はその区間に表示された各フレームと、表示中に再生された音声サンプルを対応付ける。`reel doctor` で利用可能な機能を確認できる。[コマンドと追加モデルの詳細（英語）](README.md#playback-options)
+`reel watch` は順に読めるページを作る。`reel frame` は指定時刻の画面を取り出し、`reel observe` はその区間に表示された各フレームと、表示中に再生された音声サンプルを対応付ける。`reel doctor` で利用可能な機能を確認できる。[コマンドと追加モデルの詳細（英語）](docs/playback-options.md)
 
 </details>
 
@@ -186,7 +190,7 @@ MCP の最初の表示では、短い間に続く音の立ち上がりが `audio
 
 ## クレジット
 
-鍵の録音は Joao_Janz が CC0 で公開。ページ例の楽曲は Kevin MacLeod の「Crypto」（CC BY 4.0）、ナレーションは macOS の `say` で作成した。Reel は音声認識に Whisper、音源分離に Demucs、視線予測に UNISAL、映像と音のずれの推定に Synchformer を用いる。モデルの重み、データセット、元の動画にはそれぞれの利用条件がある。[作者、データセット、ライセンス一覧（英語）](README.md#credits)
+鍵の録音は Joao_Janz が CC0 で公開。ページ例の楽曲は Kevin MacLeod の「Crypto」（CC BY 4.0）、ナレーションは macOS の `say` で作成した。Reel は音声認識に Whisper、音源分離に Demucs、視線予測に UNISAL、映像と音のずれの推定に Synchformer を用いる。モデルの重み、データセット、元の動画にはそれぞれの利用条件がある。[作者、データセット、ライセンス一覧（英語）](docs/credits.md)
 
 <details>
 <summary>このページで使うモデルとデータ</summary>

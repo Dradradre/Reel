@@ -11,6 +11,11 @@
 
 [用自己的影片試試](#快速開始) | [查看測試結果](#測試結果) | [閱讀指南（英語）](docs/READING.md) | [使用 Codex 分析影片（英語）](docs/video-analysis-mcp.md)
 
+[![PyPI](https://img.shields.io/pypi/v/reel-mcp?style=flat-square&color=3572A5)](https://pypi.org/project/reel-mcp/)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Dradradre/Reel/ci.yml?branch=main&style=flat-square&label=tests)](https://github.com/Dradradre/Reel/actions/workflows/ci.yml)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.Dradradre%2Freel-5CC8FF?style=flat-square)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Dradradre/reel)
+[![License: MIT](https://img.shields.io/badge/license-MIT-3DDC97?style=flat-square)](LICENSE)
+
 # Reel：AI 代理的影片理解工具
 
 Reel 是一個開源影片與音訊理解工具，透過模型上下文協定（MCP）讓 AI 代理和大型語言模型（LLM）分析影片。
@@ -42,23 +47,22 @@ Reel 是一個開源影片與音訊理解工具，透過模型上下文協定（
 需要配備 Apple 晶片的 Mac、FFmpeg 和 Python 3.11 或更高版本。將 `film.mp4` 換成自己的影片路徑。
 
 ```bash
-git clone https://github.com/Dradradre/Reel.git && cd Reel
-python3 -m venv .venv && source .venv/bin/activate
-python -m pip install -e '.[mcp]'
+pipx install reel-mcp
 reel play film.mp4 --out reels/first-view --until 8.5
 ```
 
 播放器每次暫停時都會輸出剛剛播放的區間所對應的目錄。輸入 `next` 繼續，輸入 `quit` 離開。重新觀看時請使用新的輸出目錄。
 
-**和模型一起看。** Reel 透過模型上下文協定（MCP）提供影片。如果已經登入 Codex CLI，在已啟用的虛擬環境中註冊本機伺服器，然後開啟新的對話。
+**和模型一起看。** Reel 透過模型上下文協定（MCP）提供影片。註冊本機伺服器，然後開啟新的對話。
 
 ```bash
-codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --image-client
+claude mcp add reel -- reel-mcp "$PWD/film.mp4" --until 8.5 --image-client   # Claude Code
+codex mcp add reel -- reel-mcp "$PWD/film.mp4" --until 8.5 --image-client    # Codex CLI
 ```
 
 > 用 Reel 看看這段影片。你看見了什麼，又聽見了什麼？
 
-其他 MCP 用戶端可以用 `reel mcp /absolute/path/to/film.mp4 --until 8.5` 啟動 stdio 伺服器。支援音訊輸入的用戶端可以透過 WAV 接收原始聲道。接收影像和文字的用戶端可以讀取畫面、音量和頻譜。安裝選用的本機模型後，還能獲得聲音描述和帶時間戳記的轉錄。用於描述原始波形的模型約為 39 GB。[播放選項](#播放選項)
+其他 MCP 用戶端可以用 `uvx reel-mcp /absolute/path/to/film.mp4 --until 8.5` 啟動 stdio 伺服器。支援音訊輸入的用戶端可以透過 WAV 接收原始聲道。接收影像和文字的用戶端可以讀取畫面、音量和頻譜。安裝選用的本機模型後，還能獲得聲音描述和帶時間戳記的轉錄。用於描述原始波形的模型約為 39 GB。[播放選項](#播放選項)
 
 ## 畫面和聲音共用一條時間軸
 
@@ -106,7 +110,7 @@ Reel 也能把影片按每頁 30 秒排開，從左往右讀。沿任意時刻�
 <details>
 <summary>盲測、漏檢和誤報</summary>
 
-研究者在 26 段不同題材的影片裡植入剪輯問題，每輪留一段原片作對照。模型事先看不到答案。第五輪固定了程式碼，模型發現 17 處問題中的 12 處。3 處黑畫面和 3 處回聲都被發現，唯一一處畫面凍結卻漏掉了。模型還曾把西洋棋影片裡的一陣嗡嗡聲誤判為音量驟升。[各輪實驗與原始記錄（英語）](README.md#does-it-work)
+研究者在 26 段不同題材的影片裡植入剪輯問題，每輪留一段原片作對照。模型事先看不到答案。第五輪固定了程式碼，模型發現 17 處問題中的 12 處。3 處黑畫面和 3 處回聲都被發現，唯一一處畫面凍結卻漏掉了。模型還曾把西洋棋影片裡的一陣嗡嗡聲誤判為音量驟升。[各輪實驗與原始記錄（英語）](docs/results.md)
 
 </details>
 
@@ -140,7 +144,7 @@ reel observe reels/pages --t0 4 --t1 4.5
 
 用同一個檔案分別啟動新工作階段，用 `--tracks picture`、`--tracks sound` 或預設的 `--tracks both` 比較僅看畫面、僅聽聲音和視聽結合時能發現什麼。三種模式都保留原始時間戳記和截止時間。
 
-`reel watch` 產生可按順序閱讀的頁面。`reel frame` 可以取出某一刻的畫面，`reel observe` 將指定區間的畫面與各幀顯示時播放的音訊樣本配對。用 `reel doctor` 查看這台電腦上可用的功能。[所有指令和選用模型（英語）](README.md#playback-options)
+`reel watch` 產生可按順序閱讀的頁面。`reel frame` 可以取出某一刻的畫面，`reel observe` 將指定區間的畫面與各幀顯示時播放的音訊樣本配對。用 `reel doctor` 查看這台電腦上可用的功能。[所有指令和選用模型（英語）](docs/playback-options.md)
 
 </details>
 
@@ -186,7 +190,7 @@ flowchart LR
 
 ## 致謝
 
-鑰匙錄音由 Joao_Janz 以 CC0 發佈。頁面範例使用 Kevin MacLeod 的《Crypto》（CC BY 4.0）和 macOS `say` 產生的旁白。Reel 使用 Whisper 辨識語音、Demucs 分離音軌、UNISAL 預測視線、Synchformer 比較音畫時差。模型權重、資料集和原始影片各有授權條款。[作者、資料來源及完整授權清單（英語）](README.md#credits)
+鑰匙錄音由 Joao_Janz 以 CC0 發佈。頁面範例使用 Kevin MacLeod 的《Crypto》（CC BY 4.0）和 macOS `say` 產生的旁白。Reel 使用 Whisper 辨識語音、Demucs 分離音軌、UNISAL 預測視線、Synchformer 比較音畫時差。模型權重、資料集和原始影片各有授權條款。[作者、資料來源及完整授權清單（英語）](docs/credits.md)
 
 <details>
 <summary>本頁提及的模型與資料來源</summary>

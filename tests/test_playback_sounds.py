@@ -1,3 +1,4 @@
+from importlib.util import find_spec
 from pathlib import Path
 import tempfile
 import unittest
@@ -84,6 +85,7 @@ class PlaybackSoundTests(unittest.TestCase):
         self.assertEqual(window["channels"][1]["reference_neighbours"], [])
         self.assertEqual([ch["cosines"] for ch in window["channels"]], [[.3, .18, -.1], [], [.1, .16, .37]])
 
+    @unittest.skipUnless(find_spec("torch"), "CLAP matching needs the optional torch extra")
     def test_per_second_slices_native_channels_before_resampling(self):
         rate = 44100
         first = 100

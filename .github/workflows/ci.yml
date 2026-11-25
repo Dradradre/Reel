@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # Reel targets Apple Silicon, so the suite runs on an arm64 macOS runner.
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: FFmpeg
+        run: brew install ffmpeg
+      - name: Install
+        run: python -m pip install -e .
+      - name: Compile
+        run: python -m compileall -q reel
+      - name: Test
+        run: python -m unittest discover -s tests
+
+  package:
+    # The published wheel must work outside the repository: install it into a clean environment and start the CLI.
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install build && python -m build
+      - name: Install the wheel in a clean venv and run both commands
+        run: |
+          python -m venv /tmp/clean
+          /tmp/clean/bin/pip install dist/*.whl
+          cd /tmp
+          /tmp/clean/bin/reel --help | head -3
+          /tmp/clean/bin/reel-mcp --help | head -3
+      - name: README carries the MCP Registry ownership marker
+        run: |
+          grep -q "mcp-name: $(jq -r .name server.json)" README.md

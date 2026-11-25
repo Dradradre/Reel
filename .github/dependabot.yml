@@ -4,6 +4,13 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    # These upper bounds are deliberate. mcp 2.x renames FastMCP, which reel/mcp_server.py uses, and the
+    # depth, tags and sync models were checked against transformers below 4.46.
+    ignore:
+      - dependency-name: mcp
+        versions: ['>=2']
+      - dependency-name: transformers
+        versions: ['>=4.46']
     groups:
       python:
         patterns: ['*']

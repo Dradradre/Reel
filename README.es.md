@@ -11,6 +11,11 @@
 
 [Prueba con tu vídeo](#primeros-pasos) | [Resultados](#resultados) | [Guía de lectura en inglés](docs/READING.md) | [Análisis de vídeo con Codex (inglés)](docs/video-analysis-mcp.md)
 
+[![PyPI](https://img.shields.io/pypi/v/reel-mcp?style=flat-square&color=3572A5)](https://pypi.org/project/reel-mcp/)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Dradradre/Reel/ci.yml?branch=main&style=flat-square&label=tests)](https://github.com/Dradradre/Reel/actions/workflows/ci.yml)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.Dradradre%2Freel-5CC8FF?style=flat-square)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Dradradre/reel)
+[![License: MIT](https://img.shields.io/badge/license-MIT-3DDC97?style=flat-square)](LICENSE)
+
 # Reel: comprensión de vídeo para agentes de IA
 
 Reel es una herramienta de código abierto para comprender vídeo y audio y un servidor del Protocolo de Contexto del Modelo (MCP) para agentes de IA y grandes modelos de lenguaje (LLM).
@@ -42,23 +47,22 @@ Una vez visto el tramo, el modelo puede llamar a `observe(start_s=38, end_s=41)`
 Necesitas un Mac con chip de Apple, FFmpeg y Python 3.11 o posterior. Sustituye `film.mp4` por la ruta a tu vídeo.
 
 ```bash
-git clone https://github.com/Dradradre/Reel.git && cd Reel
-python3 -m venv .venv && source .venv/bin/activate
-python -m pip install -e '.[mcp]'
+pipx install reel-mcp
 reel play film.mp4 --out reels/first-view --until 8.5
 ```
 
 Cada vez que se detiene, el reproductor muestra la ruta del directorio donde ha guardado ese tramo. Escribe `next` para avanzar o `quit` para salir. Para volver a ver el vídeo desde el principio, utiliza otro directorio de salida.
 
-**Ver el vídeo con un modelo.** Reel entrega el vídeo mediante el protocolo MCP (Model Context Protocol). Si ya has iniciado sesión en Codex CLI, registra el servidor local desde el entorno virtual activo y abre un chat nuevo.
+**Ver el vídeo con un modelo.** Reel entrega el vídeo mediante el protocolo MCP (Model Context Protocol). Registra el servidor local y abre un chat nuevo.
 
 ```bash
-codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --image-client
+claude mcp add reel -- reel-mcp "$PWD/film.mp4" --until 8.5 --image-client   # Claude Code
+codex mcp add reel -- reel-mcp "$PWD/film.mp4" --until 8.5 --image-client    # Codex CLI
 ```
 
 > Mira el vídeo con Reel. ¿Qué has visto y qué has oído?
 
-Para otros clientes MCP, usa `reel mcp /absolute/path/to/film.mp4 --until 8.5` como comando del servidor stdio. Los clientes que admiten audio pueden recibir un WAV con los canales originales. Los que leen imágenes y texto reciben los fotogramas y mediciones como el nivel y el espectro. Hay modelos locales opcionales que describen el sonido y transcriben las palabras con sus tiempos. El modelo que escucha la forma de onda ocupa unos 39 GB. [Opciones de reproducción](#opciones-de-reproducción)
+Para otros clientes MCP, usa `uvx reel-mcp /absolute/path/to/film.mp4 --until 8.5` como comando del servidor stdio. Los clientes que admiten audio pueden recibir un WAV con los canales originales. Los que leen imágenes y texto reciben los fotogramas y mediciones como el nivel y el espectro. Hay modelos locales opcionales que describen el sonido y transcriben las palabras con sus tiempos. El modelo que escucha la forma de onda ocupa unos 39 GB. [Opciones de reproducción](#opciones-de-reproducción)
 
 ## Imagen y sonido en la misma escala de tiempo
 
@@ -106,7 +110,7 @@ La prueba de recuerdo mide hasta qué punto una descripción permite distinguir 
 <details>
 <summary>Pruebas a ciegas, fallos y falsas alarmas</summary>
 
-Se introdujeron errores de montaje en una selección de 26 vídeos de distintos géneros y se dejó intacto uno por ronda. El modelo desconocía la solución. En la quinta ronda, con el código ya fijado, encontró 12 de los 17 errores. Detectó los tres cortes a negro y los tres ecos, pero se le escapó la única imagen congelada. También confundió un zumbido en una retransmisión de ajedrez con una subida repentina de volumen. [Rondas anteriores y observaciones (en inglés)](README.md#does-it-work)
+Se introdujeron errores de montaje en una selección de 26 vídeos de distintos géneros y se dejó intacto uno por ronda. El modelo desconocía la solución. En la quinta ronda, con el código ya fijado, encontró 12 de los 17 errores. Detectó los tres cortes a negro y los tres ecos, pero se le escapó la única imagen congelada. También confundió un zumbido en una retransmisión de ajedrez con una subida repentina de volumen. [Rondas anteriores y observaciones (en inglés)](docs/results.md)
 
 </details>
 
@@ -140,7 +144,7 @@ reel observe reels/pages --t0 4 --t1 4.5
 
 Abre sesiones nuevas con el mismo archivo y selecciona `--tracks picture`, `--tracks sound` o la opción predeterminada `--tracks both` para comparar qué se percibe al ver, al escuchar o al hacer ambas cosas. Las tres opciones conservan los tiempos y el punto de corte originales.
 
-`reel watch` genera las páginas para leerlas en orden. Con `reel frame` se recupera la imagen de un instante concreto. `reel observe` empareja cada fotograma del intervalo con las muestras de audio que sonaron mientras se mostraba. Ejecuta `reel doctor` para ver qué funciones tienes disponibles. [Todos los comandos y modelos opcionales (en inglés)](README.md#playback-options)
+`reel watch` genera las páginas para leerlas en orden. Con `reel frame` se recupera la imagen de un instante concreto. `reel observe` empareja cada fotograma del intervalo con las muestras de audio que sonaron mientras se mostraba. Ejecuta `reel doctor` para ver qué funciones tienes disponibles. [Todos los comandos y modelos opcionales (en inglés)](docs/playback-options.md)
 
 </details>
 
@@ -186,7 +190,7 @@ Aunque se distinga cuándo ha sonado algo, puede ser difícil identificar una fu
 
 ## Créditos
 
-Joao_Janz publicó la grabación de las llaves bajo CC0. Las páginas de ejemplo usan «Crypto», de Kevin MacLeod (CC BY 4.0), y una narración creada con `say` de macOS. Reel utiliza Whisper para reconocer el habla, Demucs para separar pistas, UNISAL para estimar dónde se dirige la mirada y Synchformer para medir el desfase entre imagen y sonido. Los pesos de cada modelo, los conjuntos de datos y los vídeos originales tienen sus propias licencias. [Autores, fuentes y licencias (en inglés)](README.md#credits)
+Joao_Janz publicó la grabación de las llaves bajo CC0. Las páginas de ejemplo usan «Crypto», de Kevin MacLeod (CC BY 4.0), y una narración creada con `say` de macOS. Reel utiliza Whisper para reconocer el habla, Demucs para separar pistas, UNISAL para estimar dónde se dirige la mirada y Synchformer para medir el desfase entre imagen y sonido. Los pesos de cada modelo, los conjuntos de datos y los vídeos originales tienen sus propias licencias. [Autores, fuentes y licencias (en inglés)](docs/credits.md)
 
 <details>
 <summary>Modelos y datos citados en esta página</summary>

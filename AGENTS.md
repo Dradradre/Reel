@@ -24,7 +24,10 @@ helps beyond that cue.
 - `reel/common.py`: ffmpeg decode, fonts, drawing helpers.
 - `docs/READING.md`: how a reader goes through a reel, lane by lane. It is part of the product, not a side note.
 - `examples/make_demo.py`: builds a 70-second demo with six planted faults from nothing copyrighted.
-- `assets/`: the two README images.
+- `assets/`: the README images and the door demo.
+- `docs/results.md`, `docs/playback-options.md`, `docs/credits.md` (and their `.ko.md` twins): the full measurements,
+  commands and credits. The READMEs carry a short version of each and link here.
+- `server.json`: the MCP Registry entry (`io.github.Dradradre/reel`), published with each release.
 
 ## Setup and run
 
@@ -64,14 +67,15 @@ A ten-minute film takes about ten minutes on an M4 Pro with sync on. Run long bu
 - Each helper stays a separate process with its own Python (see `config.py`), so a heavy model can live in its own
   environment. Keep the CLI usable when an optional sense is missing: skip that lane and say so, do not crash.
   `reel doctor` lists every sense; add new ones there.
-- New model or dataset: check its licence first and add it to Credits in both READMEs. Weights download into
+- New model or dataset: check its licence first and add it to `docs/credits.md` and `docs/credits.ko.md`. Weights download into
   `~/.cache/reel` through `reel setup`; never commit weights.
 - Do not commit reels, demo output, stems, videos or caches (`reels/`, `examples/out/`, `*.mp4` are ignored). Use only
   media you are allowed to share in examples.
 
 ## Results in the README
 
-The "Does it work?" tables are measured with blind readers: a fresh model gets only `docs/READING.md` and the reel,
+The full results live in `docs/results.md` and `docs/results.ko.md`; the "Does it work?" table in each README is a
+summary of them and must use the same numbers. The tables are measured with blind readers: a fresh model gets only `docs/READING.md` and the reel,
 never the answer key. Keep that protocol for any new numbers:
 
 - Plant faults with a script, keep the key out of the reader's reach, include one untouched video per round.
@@ -84,4 +88,13 @@ never the answer key. Keep that protocol for any new numbers:
 - English README and docs: plain sentences, concrete examples, no marketing words.
 - `README.ko.md` and any Korean text: natural Korean, no AI-style patterns (middle dots, em dashes, "A가 아니라 B"
   frames, sentence-ending headings). If the korean-anti-slop-writing skill is available, lint with it.
-- Keep `README.md` and `README.ko.md` in step: same sections, same numbers.
+- Keep `README.md` and `README.ko.md` in step: same sections, same numbers. The same goes for each `docs/*.md` page
+  and its `.ko.md` twin.
+
+## Releasing
+
+The PyPI package is `reel-mcp` (the name `reel` belongs to another project); it installs the `reel` and `reel-mcp`
+commands, and `reel-mcp FILM` is `reel mcp FILM`. To release, bump `version` in `pyproject.toml` and both versions in
+`server.json`, then push a `vX.Y.Z` tag. `.github/workflows/release.yml` publishes to PyPI through Trusted Publishing
+and then to the MCP Registry through GitHub OIDC; no token is stored. `README.md` must keep the
+`mcp-name: io.github.Dradradre/reel` comment, which the registry reads from PyPI to confirm ownership.

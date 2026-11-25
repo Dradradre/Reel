@@ -6,15 +6,13 @@ This guide uses Codex CLI on an Apple Silicon Mac. It also explains what an imag
 
 ## Install Reel on macOS
 
-Install FFmpeg and Python 3.11 or later, then clone Reel and install the MCP extra:
+Install FFmpeg (`brew install ffmpeg`) and Python 3.11 or later, then install Reel from PyPI:
 
 ```bash
-git clone https://github.com/Dradradre/Reel.git
-cd Reel
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[mcp]'
+pipx install reel-mcp
 ```
+
+To work from a clone instead, run `python -m pip install -e .` in a virtual environment.
 
 Place a video in the working directory as `film.mp4`, or substitute its actual path. To check playback without an MCP client, run:
 
@@ -26,10 +24,10 @@ Type `next` to advance or `quit` to finish. Choose a fresh output directory for 
 
 ## Give Codex a video to watch
 
-With the virtual environment active and Codex CLI signed in, register the local MCP server:
+With Codex CLI signed in, register the local MCP server:
 
 ```bash
-codex mcp add reel -- "$(command -v reel)" mcp "$PWD/film.mp4" --until 8.5 --image-client
+codex mcp add reel -- reel-mcp "$PWD/film.mp4" --until 8.5 --image-client
 ```
 
 Start a new Codex chat and ask:

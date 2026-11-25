@@ -26,7 +26,7 @@ classifiers = [
 ]
 # The MCP transport is the point of the reel-mcp package, so it is a core dependency.
 # The `mcp` extra stays so existing `pip install -e '.[mcp]'` commands keep working.
-dependencies = ["numpy", "opencv-python-headless", "pillow", "librosa", "scipy", "soundfile", "matplotlib", "mcp>=1.20,<2"]
+dependencies = ["numpy", "opencv-python-headless", "pillow", "librosa", "scipy", "soundfile", "matplotlib", "mcp>=1.20,<3"]
 
 [project.urls]
 Homepage = "https://github.com/Dradradre/Reel"
@@ -35,8 +35,8 @@ Documentation = "https://github.com/Dradradre/Reel/blob/main/docs/video-analysis
 Issues = "https://github.com/Dradradre/Reel/issues"
 
 [project.optional-dependencies]
-depth = ["torch", "torchvision", "transformers>=4.44,<4.46"]
-mcp = ["mcp>=1.20,<2"]
+depth = ["torch", "torchvision", "transformers>=4.44,<5.25"]
+mcp = ["mcp>=1.20,<3"]
 separate = ["demucs", "torch", "torchaudio"]
 crowd = ["audio-separator"]
 mlx = ["mlx-whisper", "faster-whisper"]
@@ -46,9 +46,9 @@ events = ["ai-edge-litert==2.4.0"]
 hearing = ["mlx-vlm==0.8.0"]
 ocr = ["ocrmac"]
 gaze = ["torch"]
-tags = ["torch", "transformers>=4.40,<4.46"]
-sync = ["torch", "torchvision", "torchaudio", "omegaconf", "einops", "timm", "transformers>=4.40,<4.46", "requests", "scikit-learn"]
-all = ["kaldi-native-fbank>=1.21,<2", "onnxruntime>=1.18,<2", "ai-edge-litert==2.4.0", "demucs", "torch", "torchaudio", "audio-separator", "mlx-whisper", "faster-whisper", "ocrmac", "transformers>=4.44,<4.46", "torchvision", "omegaconf", "einops", "timm", "requests", "scikit-learn"]
+tags = ["torch", "transformers>=4.40,<5.25"]
+sync = ["torch", "torchvision", "torchaudio", "omegaconf", "einops", "timm", "transformers>=4.40,<5.25", "requests", "scikit-learn"]
+all = ["kaldi-native-fbank>=1.21,<2", "onnxruntime>=1.18,<2", "ai-edge-litert==2.4.0", "demucs", "torch", "torchaudio", "audio-separator", "mlx-whisper", "faster-whisper", "ocrmac", "transformers>=4.44,<5.25", "torchvision", "omegaconf", "einops", "timm", "requests", "scikit-learn"]
 
 [project.scripts]
 reel = "reel.cli:main"

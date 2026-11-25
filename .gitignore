@@ -6,3 +6,6 @@ examples/out/
 *.mp4
 !assets/*.mp4
 .DS_Store
+dist/
+build/
+*.egg-info/

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Dradradre/reel",
+  "title": "Reel",
+  "description": "Video understanding for AI agents: watch, listen and replay a film's frames and sound on one clock.",
+  "repository": {
+    "url": "https://github.com/Dradradre/Reel",
+    "source": "github"
+  },
+  "websiteUrl": "https://dradradre.github.io/Reel/",
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "reel-mcp",
+      "version": "0.1.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "valueHint": "film",
+          "description": "Absolute path to the video (or saved reel directory) to serve",
+          "isRequired": true
+        },
+        {
+          "type": "named",
+          "name": "--until",
+          "description": "Stop every observation at this many seconds into the film",
+          "isRequired": false
+        },
+        {
+          "type": "named",
+          "name": "--image-client",
+          "description": "Send local waveform descriptions with images, for clients that cannot take audio",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}
